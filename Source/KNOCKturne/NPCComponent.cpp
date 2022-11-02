@@ -33,7 +33,4 @@ void UNPCComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 	// ...
 }
 
-void UNPCComponent::SetCanInteraction(bool Flag) {
-	CanInteraction = Flag;
-}
 

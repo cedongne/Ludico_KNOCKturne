@@ -57,10 +57,12 @@ void APeppy::Tick(float DeltaTime)
 
 void APeppy::MoveForward(float Value) {
 	if ((Controller != nullptr) && (Value != 0.0f)) {
+		/* Move input mouse with keyboard
 		if (isMove) {
 			GetMovementComponent()->StopMovementImmediately();
 			isMove = false;
 		}
+		*/
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
@@ -71,10 +73,12 @@ void APeppy::MoveForward(float Value) {
 
 void APeppy::MoveRight(float Value) {
 	if ((Controller != nullptr) && (Value != 0.0f)) {
+		/* Move input mouse with keyboard
 		if (isMove) {
 			GetMovementComponent()->StopMovementImmediately();
 			isMove = false;
 		}
+		*/
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
@@ -83,10 +87,12 @@ void APeppy::MoveRight(float Value) {
 	}
 }
 
+/*
+* Move input mouse with keyboard
 void APeppy::SetDestination() {
 	isMove = true;
 }
-
+*/
 
 void APeppy::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	if (OtherActor && (OtherActor != this) && OtherComp) {
@@ -131,6 +137,8 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis("Move Forward / Backward", this, &APeppy::MoveForward);
 	PlayerInputComponent->BindAxis("Move Right / Left", this, &APeppy::MoveRight);
+	/* Move input mouse with keyboard
 	PlayerInputComponent->BindAction("SetDestination", IE_Pressed, this, &APeppy::SetDestination);
+	*/
 }
 
