@@ -30,7 +30,9 @@ private:
 	void MoveForward(float value);
 	void MoveRight(float value);
 
+	/* Move input mouse with keyboard
 	void SetDestination();
+	*/
 
 	void CheckInteraction();
 

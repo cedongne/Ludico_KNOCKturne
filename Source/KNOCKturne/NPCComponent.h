@@ -27,9 +27,4 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction;
-
-public:
-	UFUNCTION()
-	void SetCanInteraction(bool Flag);
-		
 };
