@@ -14,4 +14,6 @@ class KNOCKTURNE_API APeppyController : public APlayerController
 {
 	GENERATED_BODY()
 	
+public:
+	APeppyController();
 };
