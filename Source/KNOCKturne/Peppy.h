@@ -15,26 +15,17 @@ public:
 	// Sets default values for this character's properties
 	APeppy();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+	USpringArmComponent* SpringArm;
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+	UCameraComponent* Camera;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interaction)
+	UCapsuleComponent* InteractionCollider;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-private:
-	void MoveForward(float value);
-	void MoveRight(float value);
-
-	/* Move input mouse with keyboard
-	void SetDestination();
-	*/
-
-	void CheckInteraction();
+	// Time Threshold to know if it was a short press
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	float ShortPressThreshold;
 
 	UFUNCTION()
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -42,16 +33,31 @@ private:
 	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 protected:
-	bool isMove;
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
-public:
-	UPROPERTY(VisibleAnywhere, Category = Camera)
-	USpringArmComponent* SpringArm;
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, Category = Camera)
-	UCameraComponent* Camera;
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interaction)
-	UCapsuleComponent* InteractionCollider;
+	void MoveForward(float value);
+	void MoveRight(float value);
+	void Slide();
 
+	void CheckInteraction();
+
+	/* Move input mouse with keyboard
+	void SetDestination();
+	*/
+
+
+
+private:
+	APlayerController* PeppyController;
+
+	bool IsMove;
+
+	float FollowTime;
 };

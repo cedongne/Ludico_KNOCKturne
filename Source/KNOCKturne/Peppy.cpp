@@ -34,7 +34,9 @@ APeppy::APeppy()
 	InteractionCollider->SetCapsuleHalfHeight(48.0f);
 
 
-	isMove = false;
+	IsMove = false;
+
+	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
 }
 
@@ -140,5 +142,18 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	/* Move input mouse with keyboard
 	PlayerInputComponent->BindAction("SetDestination", IE_Pressed, this, &APeppy::SetDestination);
 	*/
+
+	InputComponent->BindAction("Sliding", EInputEvent::IE_Pressed, this, &APeppy::Slide);
 }
 
+
+void APeppy::Slide() {
+	if (FollowTime <= ShortPressThreshold) {
+		FVector HitLocation = FVector::ZeroVector;
+		FHitResult Hit;
+		PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+		HitLocation = Hit.Location;
+
+		
+	}
+}
