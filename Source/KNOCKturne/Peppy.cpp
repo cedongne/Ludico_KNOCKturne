@@ -163,7 +163,7 @@ void APeppy::SlideAction() {
 			IsSlide = true;
 			CanSlide = false;
 
-			LeftSlideCooltime = 3.0f;
+			LeftSlideCooltime = SlideCooldown;
 
 			FVector HitLocation = FVector::ZeroVector;
 			FHitResult Hit;
