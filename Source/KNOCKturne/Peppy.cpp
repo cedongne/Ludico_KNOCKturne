@@ -154,6 +154,12 @@ void APeppy::Slide() {
 		PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
 		HitLocation = Hit.Location;
 
+		FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
+		GetCapsuleComponent()->SetWorldRotation(RotateDegree);
+//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+
+		FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
+		LaunchCharacter(Direction * 3000, false, true);
 		
 	}
 }
