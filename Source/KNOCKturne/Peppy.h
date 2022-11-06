@@ -44,7 +44,8 @@ protected:
 
 	void MoveForward(float value);
 	void MoveRight(float value);
-	void Slide();
+	void SlideAction();
+	void SlideHandling(float DeltaTime);
 
 	void CheckInteraction();
 
@@ -58,6 +59,12 @@ private:
 	APlayerController* PeppyController;
 
 	bool IsMove;
+	bool IsSlide;
+
+	bool CanSlide;
+
+	float SlideCooldown;
+	float LeftSlideCooltime;
 
 	float FollowTime;
 };
