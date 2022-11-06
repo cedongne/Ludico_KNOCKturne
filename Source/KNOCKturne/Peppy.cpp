@@ -34,7 +34,9 @@ APeppy::APeppy()
 	InteractionCollider->SetCapsuleHalfHeight(48.0f);
 
 
-	isMove = false;
+	IsMove = false;
+
+	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
 }
 
@@ -140,5 +142,24 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	/* Move input mouse with keyboard
 	PlayerInputComponent->BindAction("SetDestination", IE_Pressed, this, &APeppy::SetDestination);
 	*/
+
+	InputComponent->BindAction("Sliding", EInputEvent::IE_Pressed, this, &APeppy::Slide);
 }
 
+
+void APeppy::Slide() {
+	if (FollowTime <= ShortPressThreshold) {
+		FVector HitLocation = FVector::ZeroVector;
+		FHitResult Hit;
+		PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+		HitLocation = Hit.Location;
+
+		FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
+		GetCapsuleComponent()->SetWorldRotation(RotateDegree);
+//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+
+		FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
+		LaunchCharacter(Direction * 3000, false, true);
+		
+	}
+}

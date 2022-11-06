@@ -6,9 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "PeppyController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class KNOCKTURNE_API APeppyController : public APlayerController
 {
