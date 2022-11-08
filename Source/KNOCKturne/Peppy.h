@@ -15,7 +15,6 @@ public:
 	// Sets default values for this character's properties
 	APeppy();
 
-
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -23,6 +22,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interaction)
 	UCapsuleComponent* InteractionCollider;
 
+	UPROPERTY(VisibleAnywhere, Category = Stat)
+	class UPeppyStatComponent* PeppyStat;
+	
 	// Time Threshold to know if it was a short press
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	float ShortPressThreshold;

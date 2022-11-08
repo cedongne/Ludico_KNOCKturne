@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Peppy.h"
+#include "PeppyStatComponent.h"
 
 // Sets default values
 APeppy::APeppy()
@@ -35,6 +36,8 @@ APeppy::APeppy()
 
 	
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
+
+	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
 
 	// Initialize variables
 	IsMove = false;
