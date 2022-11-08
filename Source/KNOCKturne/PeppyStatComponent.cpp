@@ -33,6 +33,14 @@ void UPeppyStatComponent::InitializeComponent() {
 void UPeppyStatComponent::SetDefaultStat() {
 	auto PeppyStatDataInstance = Cast<UPeppyStatDataInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	CurrentStatData = PeppyStatDataInstance->GetPeppyStatData("Init");
-	CurrentHP = 100;
+	CurrentHP = CurrentStatData->MaxHP;
 }
 
+void UPeppyStatComponent::GetDamaged(float Damage) {
+	NTCHECK(CurrentStatData != nullptr);
+	CurrentHP = FMath::Clamp<float>(CurrentHP - Damage, 0.0f, CurrentStatData->MaxHP);
+	if (CurrentHP < 0.0f) {
+		OnHPIsZero.Broadcast();
+	}
+
+}

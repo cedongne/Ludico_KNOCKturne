@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "Components/ActorComponent.h"
 #include "PeppyStatComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnHPIsZeroDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UPeppyStatComponent : public UActorComponent
@@ -17,6 +18,9 @@ public:
 	UPeppyStatComponent();
 
 	void SetDefaultStat();
+	void GetDamaged(float Damage);
+
+	FOnHPIsZeroDelegate OnHPIsZero;
 
 protected:
 	// Called when the game starts

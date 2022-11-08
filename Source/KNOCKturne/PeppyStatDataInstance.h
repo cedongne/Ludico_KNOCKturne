@@ -12,12 +12,12 @@ struct FPeppyStatData : public FTableRowBase {
 	GENERATED_BODY()
 	
 public:
-	FPeppyStatData() : Health(100), Energy(50), SlidingCooldown(3), DamageDecrease(0), Turn(50) {}
+	FPeppyStatData() : MaxHP(100), MaxEP(50), SlidingCooldown(3), DamageDecrease(0), Turn(50) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Health;
+	int32 MaxHP;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Energy;
+	int32 MaxEP;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 SlidingCooldown;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")

@@ -66,6 +66,15 @@ void APeppy::Tick(float DeltaTime)
 	SlideHandling(DeltaTime);
 }
 
+void APeppy::PostInitializeComponents() {
+	Super::PostInitializeComponents();
+
+	PeppyStat->OnHPIsZero.AddLambda([this]() ->void {
+		NTLOG(Warning, TEXT("OnHPIsZero"));
+		SetActorEnableCollision(false);
+		});
+}
+
 void APeppy::MoveForward(float Value) {
 	if ((Controller != nullptr) && (Value != 0.0f)) {
 		/* Move input mouse with keyboard

@@ -3,4 +3,5 @@
 #include "KNOCKturne.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, KNOCKturne, "KNOCKturne" );
+DEFINE_LOG_CATEGORY(KNOCKturne);
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultModuleImpl, KNOCKturne, "KNOCKturne");
