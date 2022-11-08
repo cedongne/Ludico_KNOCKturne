@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Peppy.h"
+#include "PeppyStatComponent.h"
 
 // Sets default values
 APeppy::APeppy()
@@ -36,6 +37,8 @@ APeppy::APeppy()
 	
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
+	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
+
 	// Initialize variables
 	IsMove = false;
 	IsSlide = false;
@@ -61,6 +64,15 @@ void APeppy::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	SlideHandling(DeltaTime);
+}
+
+void APeppy::PostInitializeComponents() {
+	Super::PostInitializeComponents();
+
+	PeppyStat->OnHPIsZero.AddLambda([this]() ->void {
+		NTLOG(Warning, TEXT("OnHPIsZero"));
+		SetActorEnableCollision(false);
+		});
 }
 
 void APeppy::MoveForward(float Value) {
