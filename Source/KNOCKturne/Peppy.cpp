@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Peppy.h"
+#include "PeppyStatComponent.h"
 
 // Sets default values
 APeppy::APeppy()
@@ -33,11 +34,18 @@ APeppy::APeppy()
 	InteractionCollider->SetCapsuleRadius(96.0f);
 	InteractionCollider->SetCapsuleHalfHeight(48.0f);
 
-
-	IsMove = false;
-
+	
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
+	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
+
+	// Initialize variables
+	IsMove = false;
+	IsSlide = false;
+
+	CanSlide = true;
+
+	SlideCooldown = 3.0f;
 }
 
 // Called when the game starts or when spawned
@@ -55,6 +63,16 @@ void APeppy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	SlideHandling(DeltaTime);
+}
+
+void APeppy::PostInitializeComponents() {
+	Super::PostInitializeComponents();
+
+	PeppyStat->OnHPIsZero.AddLambda([this]() ->void {
+		NTLOG(Warning, TEXT("OnHPIsZero"));
+		SetActorEnableCollision(false);
+		});
 }
 
 void APeppy::MoveForward(float Value) {
@@ -65,11 +83,13 @@ void APeppy::MoveForward(float Value) {
 			isMove = false;
 		}
 		*/
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		if (!IsSlide) {
+			const FRotator Rotation = Controller->GetControlRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+			AddMovementInput(Direction, Value);
+		}
 	}
 }
 
@@ -81,11 +101,13 @@ void APeppy::MoveRight(float Value) {
 			isMove = false;
 		}
 		*/
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		if (!IsSlide) {
+			const FRotator Rotation = Controller->GetControlRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		AddMovementInput(Direction, Value);
+			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+			AddMovementInput(Direction, Value);
+		}
 	}
 }
 
@@ -143,23 +165,48 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SetDestination", IE_Pressed, this, &APeppy::SetDestination);
 	*/
 
-	InputComponent->BindAction("Sliding", EInputEvent::IE_Pressed, this, &APeppy::Slide);
+	InputComponent->BindAction("Sliding", EInputEvent::IE_Pressed, this, &APeppy::SlideAction);
 }
 
 
-void APeppy::Slide() {
-	if (FollowTime <= ShortPressThreshold) {
-		FVector HitLocation = FVector::ZeroVector;
-		FHitResult Hit;
-		PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
-		HitLocation = Hit.Location;
+void APeppy::SlideAction() {
+	if (CanSlide) {
+		if (FollowTime <= ShortPressThreshold) {
+			IsSlide = true;
+			CanSlide = false;
 
-		FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
-		GetCapsuleComponent()->SetWorldRotation(RotateDegree);
-//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+			LeftSlideCooltime = SlideCooldown;
 
-		FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
-		LaunchCharacter(Direction * 3000, false, true);
-		
+			FVector HitLocation = FVector::ZeroVector;
+			FHitResult Hit;
+			PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+			HitLocation = Hit.Location;
+
+			FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
+			GetCapsuleComponent()->SetWorldRotation(RotateDegree);
+			//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+
+			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
+			LaunchCharacter(Direction * 3000, false, true);
+
+		}
+	}
+}
+
+void APeppy::SlideHandling(float DeltaTime) {
+	if (LeftSlideCooltime > 0.0f) {
+		FVector velocity = GetMovementComponent()->Velocity;
+		float CurMoveVelocity = sqrt((velocity.X * velocity.X) + (velocity.Y * velocity.Y));
+		if (CurMoveVelocity > 600.0f) {
+			IsSlide = true;
+		}
+		else {
+			IsSlide = false;
+		}
+		LeftSlideCooltime -= DeltaTime;
+	}
+	else {
+		LeftSlideCooltime = 0.0f;
+		CanSlide = true;
 	}
 }
