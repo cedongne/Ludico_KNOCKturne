@@ -18,6 +18,6 @@ class KNOCKTURNE_API AHubWorldLevelScriptActor : public ALevelScriptActor
 public:
 	AHubWorldLevelScriptActor();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Manager")
-	UDialogueManager* DialogueManager;
+//	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Manager")
+//	UDialogueManager* DialogueManager;
 };

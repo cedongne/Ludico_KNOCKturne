@@ -4,5 +4,5 @@
 #include "HubWorldLevelScriptActor.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
-	DialogueManager = CreateDefaultSubobject<UDialogueManager>(TEXT("DialogueManager"));
+//	DialogueManager = CreateDefaultSubobject<UDialogueManager>(TEXT("DialogueManager"));
 }
