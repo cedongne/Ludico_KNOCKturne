@@ -5,8 +5,6 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Engine/GameInstance.h"
-
-#include "DialogueManager.h"
 #include "PeppyStatDataInstance.generated.h"
 
 USTRUCT(BlueprintType)
@@ -39,9 +37,6 @@ public:
 	virtual void Init() override;
 
 	FPeppyStatData* GetPeppyStatData(FString DataType);
-
-//	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-//	UDialogueManager* DialogueManager;
 
 private:
 	UPROPERTY()
