@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
-#include "DialogueManager.h"
+#include "DialogueTableComponent.h"
 #include "HubWorldLevelScriptActor.generated.h"
 
 /**
@@ -18,6 +18,8 @@ class KNOCKTURNE_API AHubWorldLevelScriptActor : public ALevelScriptActor
 public:
 	AHubWorldLevelScriptActor();
 
+	UPROPERTY(VisibleAnywhere, Category = "Manager")
+	UDialogueTableComponent* DialogueTableComponent;
 //	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Manager")
 //	UDialogueManager* DialogueManager;
 };

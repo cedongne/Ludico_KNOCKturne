@@ -40,8 +40,8 @@ public:
 
 	FPeppyStatData* GetPeppyStatData(FString DataType);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	UDialogueManager* DialogueManager;
+//	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+//	UDialogueManager* DialogueManager;
 
 private:
 	UPROPERTY()

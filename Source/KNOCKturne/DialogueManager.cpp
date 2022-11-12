@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+/*
 #include "DialogueManager.h"
 
 UDialogueManager::UDialogueManager() {
@@ -14,3 +14,5 @@ UDialogueManager::UDialogueManager() {
 FDialogueData* UDialogueManager::GetPrologueDialogueData(FString RowID) {
 	return PrologueDialogueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
 }
+
+*/
