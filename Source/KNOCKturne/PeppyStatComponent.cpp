@@ -12,6 +12,7 @@ UPeppyStatComponent::UPeppyStatComponent()
 
 	// It makes call InitializeComponent() method
 	bWantsInitializeComponent = true;
+	CurrentHP = 0;
 }
 
 
@@ -28,12 +29,17 @@ void UPeppyStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
 
 	SetDefaultStat();
+//	NTLOG(Warning, TEXT("%lf"), CurrentHP);
 }
 
 void UPeppyStatComponent::SetDefaultStat() {
 	auto PeppyStatDataInstance = Cast<UPeppyStatDataInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	NTCHECK(PeppyStatDataInstance != nullptr);
 	CurrentStatData = PeppyStatDataInstance->GetPeppyStatData("Init");
-	CurrentHP = CurrentStatData->MaxHP;
+	if (CurrentStatData != nullptr) {
+		NTLOG(Warning, TEXT("%d"), CurrentStatData->MaxHP);
+	}
+//	CurrentHP = CurrentStatData->MaxHP;
 }
 
 void UPeppyStatComponent::GetDamaged(float Damage) {

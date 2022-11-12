@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Engine/GameInstance.h"
 #include "PeppyStatDataInstance.generated.h"
