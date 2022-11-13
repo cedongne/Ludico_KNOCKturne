@@ -134,6 +134,7 @@ void APeppy::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActo
 	}
 }
 
+/*
 void APeppy::CheckInteraction() {
 	FHitResult HitResult;
 	FCollisionQueryParams Params(NAME_None, false, this);
@@ -152,6 +153,7 @@ void APeppy::CheckInteraction() {
 		}
 	}
 }
+*/
 
 // Called to bind functionality to input
 void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
