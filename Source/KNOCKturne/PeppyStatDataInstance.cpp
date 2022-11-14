@@ -14,6 +14,7 @@ UPeppyStatDataInstance::UPeppyStatDataInstance() {
 	NTCHECK(DT_PEPPYSTATTABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATTABLE.Object;
 	NTCHECK(PeppyStatDataTable->GetRowMap().Num() > 0);
+
 }
 
 FPeppyStatData* UPeppyStatDataInstance::GetPeppyStatData(FString DataType) {

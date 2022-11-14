@@ -4,25 +4,32 @@
 #include "DialogueTableComponent.h"
 
 UDialogueTableComponent::UDialogueTableComponent() {
-	NTLOG(Warning, TEXT("UDialogueTableComponent is created."));
+	FString DialogueStringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
+
+	//Load StringTable
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_DIALOGUETABLE(*DialogueStringTablePath);
+	NTCHECK(DT_DIALOGUETABLE.Succeeded());
+
+	StringTable = DT_DIALOGUETABLE.Object;
 }
 
-// Sets default values for this component's properties
 UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 
-	// ...
 }
-
 
 void UDialogueTableComponent::LoadDialogueTable(FString TablePath) {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 }
 
-FDialogueData* UDialogueTableComponent::GetData(FString RowID) {
+FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
 	return DialogueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
 }
 
+FString UDialogueTableComponent::GetString(FDialogueData* DataRow) {
+	return StringTable->FindRow<FDialogueString>(*(DataRow->StringID), TEXT(""))->KOR;
+
+}

@@ -12,7 +12,7 @@ struct FDialogueData : public FTableRowBase {
 	GENERATED_BODY()
 
 public:
-	FDialogueData() : GroupCode("-1"), CharacterStringID("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
+	FDialogueData() : GroupCode("-1"), CharacterStringID("-1"), Type(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString GroupCode;
@@ -21,13 +21,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 Type;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString Image1ID;
+	FString ImageLID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString Image2ID;
+	FString ImageRID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString CutSceneID;
+	FString CutSID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString StringID;
+};
+
+USTRUCT(BlueprintType)
+struct FDialogueString : public FTableRowBase{
+	GENERATED_BODY()
+	
+public:
+	FDialogueString() : KOR("") {}
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "String")
+	FString KOR;
 };
 
 UCLASS( ClassGroup=(DataTableComponent), meta=(BlueprintSpawnableComponent) )
@@ -35,15 +46,18 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* DialogueTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* StringTable;
+
+public:
 	UDialogueTableComponent();
 	UDialogueTableComponent(FString TablePath);
 
 	void LoadDialogueTable(FString TablePath);
 
-	FDialogueData* GetData(FString RowID);
-
-	UPROPERTY()
-	class UDataTable* DialogueTable;		
+	FDialogueData* GetDialogueTableRow(FString RowID);
+	FString GetString(FDialogueData* DataRow);
 };
