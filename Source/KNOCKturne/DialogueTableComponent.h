@@ -52,7 +52,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* StringTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
-	bool isEndedDialogueRows;
+	bool IsEndedDialogueRows;
 
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
