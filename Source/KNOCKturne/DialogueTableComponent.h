@@ -51,6 +51,12 @@ protected:
 	class UDataTable* DialogueTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* StringTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
+	bool isEndedDialogueRows;
+
+	TArray<FDialogueData*> DialogueRows;
+	int32 DialogueRowsSize;
+	int32 CurrentRow;
 
 public:
 	UDialogueTableComponent();
@@ -60,4 +66,17 @@ public:
 
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);
+
+	UFUNCTION(BlueprintCallable)
+	FString GetStringOnBP(FDialogueData DataRow);
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetDialogueTableRowSize();
+
+	UFUNCTION(BlueprintCallable)
+	FDialogueData GetNextRowDialogueTable();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetDialogueRowPointer();
+
 };
