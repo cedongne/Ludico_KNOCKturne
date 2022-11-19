@@ -26,6 +26,7 @@ UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 void UDialogueTableComponent::LoadDialogueTable(FString TablePath) {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
+	NTCHECK(DialogueTable == nullptr);
 
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
 	NTLOG_S(Warning);
