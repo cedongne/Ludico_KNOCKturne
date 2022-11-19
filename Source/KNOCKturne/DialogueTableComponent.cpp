@@ -12,7 +12,7 @@ UDialogueTableComponent::UDialogueTableComponent() {
 
 	StringTable = DT_DIALOGUETABLE.Object;
 
-	isEndedDialogueRows = false;
+	IsEndedDialogueRows = false;
 	CurrentRow = 0;
 }
 
@@ -50,12 +50,12 @@ int32 UDialogueTableComponent::GetDialogueTableRowSize() {
 
 FDialogueData UDialogueTableComponent::GetNextRowDialogueTable() {
 	if (++CurrentRow == DialogueRows.Num() - 1) {
-		isEndedDialogueRows = true;
+		IsEndedDialogueRows = true;
 	}
 	return *DialogueRows[CurrentRow];
 }
 
 void UDialogueTableComponent::ResetDialogueRowPointer() {
-	isEndedDialogueRows = false;
+	IsEndedDialogueRows = false;
 	CurrentRow = 0;
 }
