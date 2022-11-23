@@ -21,11 +21,3 @@ void UNPCComponent::BeginPlay()
 	// ...
 	
 }
-
-
-void UNPCComponent::SetInteractionPopupWidget(TSubclassOf<UUserWidget> NewWidget) {
-	InteractionPopupWidget = CreateWidget(GetWorld(), NewWidget);
-	NTCHECK(InteractionPopupWidget != nullptr) {
-		InteractionPopupWidget->AddToViewport();
-	}
-}

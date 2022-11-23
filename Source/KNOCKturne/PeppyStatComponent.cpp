@@ -2,7 +2,7 @@
 
 
 #include "PeppyStatComponent.h"
-#include "PeppyStatDataInstance.h"
+#include "KNOCKturneGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -33,7 +33,7 @@ void UPeppyStatComponent::InitializeComponent() {
 }
 
 void UPeppyStatComponent::SetDefaultStat() {
-	auto PeppyStatDataInstance = Cast<UPeppyStatDataInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	auto PeppyStatDataInstance = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	NTCHECK(PeppyStatDataInstance != nullptr);
 	CurrentStatData = PeppyStatDataInstance->GetPeppyStatData("Init");
 	if (CurrentStatData != nullptr) {
