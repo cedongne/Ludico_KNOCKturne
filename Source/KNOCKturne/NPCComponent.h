@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "Components/ActorComponent.h"
 #include "NPCComponent.generated.h"
 
@@ -27,4 +27,11 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction;
+
+
+	UFUNCTION(BlueprintCallable, Category = "UMG")
+	void SetInteractionPopupWidget(TSubclassOf<UUserWidget> NewWidgetClass);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG")
+	class UUserWidget* InteractionPopupWidget;
 };

@@ -2,13 +2,11 @@
 
 
 #include "NPCComponent.h"
+#include "Blueprint/UserWidget.h"
 
 // Sets default values for this component's properties
 UNPCComponent::UNPCComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
 
 	CanInteraction = false;
 	// ...
@@ -25,12 +23,9 @@ void UNPCComponent::BeginPlay()
 }
 
 
-// Called every frame
-void UNPCComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+void UNPCComponent::SetInteractionPopupWidget(TSubclassOf<UUserWidget> NewWidget) {
+	InteractionPopupWidget = CreateWidget(GetWorld(), NewWidget);
+	NTCHECK(InteractionPopupWidget != nullptr) {
+		InteractionPopupWidget->AddToViewport();
+	}
 }
-
-
