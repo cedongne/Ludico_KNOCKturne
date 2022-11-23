@@ -4,38 +4,39 @@
 #include "DialogueTableComponent.h"
 
 UDialogueTableComponent::UDialogueTableComponent() {
-	NTLOG(Warning, TEXT("UDialogueTableComponent is created."));
+	FString DialogueStringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
+
+	//Load StringTable
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_DIALOGUETABLE(*DialogueStringTablePath);
+	NTCHECK(DT_DIALOGUETABLE.Succeeded());
+
+	StringTable = DT_DIALOGUETABLE.Object;
+
+	IsEndedDialogueRows = false;
+	CurrentRow = 0;
 }
 
-// Sets default values for this component's properties
 UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 
-	// ...
 }
-
 
 void UDialogueTableComponent::LoadDialogueTable(FString TablePath) {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
-<<<<<<< Updated upstream
-=======
 	NTCHECK(DialogueTable == nullptr);
 	NTLOG_S(Warning);
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
 	NTCHECK(DialogueRows.IsValidIndex(0));
 	NTLOG_S(Warning);
->>>>>>> Stashed changes
 }
 
-FDialogueData* UDialogueTableComponent::GetData(FString RowID) {
+FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
 	return DialogueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
 }
 
-<<<<<<< Updated upstream
-=======
 FString UDialogueTableComponent::GetString(FDialogueData* DataRow) {
 	return StringTable->FindRow<FDialogueString>(*(DataRow->StringID), TEXT(""))->KOR;
 }
@@ -60,4 +61,3 @@ void UDialogueTableComponent::ResetDialogueRowPointer() {
 	IsEndedDialogueRows = false;
 	CurrentRow = 0;
 }
->>>>>>> Stashed changes
