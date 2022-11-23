@@ -35,3 +35,10 @@ void ANPC::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ANPC::SetCanInteraction_Implementation() {
+
+}
+
+void ANPC::SetCannotInteraction_Implementation() {
+
+}

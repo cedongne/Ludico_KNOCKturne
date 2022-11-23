@@ -29,4 +29,12 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHoverMouse;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetCanInteraction();
+	virtual void SetCanInteraction_Implementation();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetCannotInteraction();
+	virtual void SetCannotInteraction_Implementation();
 };
