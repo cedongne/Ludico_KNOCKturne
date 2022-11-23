@@ -5,7 +5,7 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Engine/GameInstance.h"
-#include "PeppyStatDataInstance.generated.h"
+#include "KNOCKturneGameInstance.generated.h"
 
 USTRUCT(BlueprintType)
 struct FPeppyStatData : public FTableRowBase {
@@ -27,18 +27,22 @@ public:
 };
 
 UCLASS()
-class KNOCKTURNE_API UPeppyStatDataInstance : public UGameInstance
+class KNOCKTURNE_API UKNOCKturneGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	
 public:
-	UPeppyStatDataInstance();
+	UKNOCKturneGameInstance();
 
 	virtual void Init() override;
 
-	FPeppyStatData* GetPeppyStatData(FString DataType);
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
+	FPeppyStatData CurPeppyStat;
 
+	FPeppyStatData* GetPeppyStatData(FString DataType);
+	
 private:
+
 	UPROPERTY()
 	class UDataTable* PeppyStatDataTable;
 };
