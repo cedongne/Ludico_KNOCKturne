@@ -2,8 +2,9 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "GameFramework/Pawn.h"
+#include "Components/WidgetComponent.h"
 #include "NPC.generated.h"
 
 UCLASS()

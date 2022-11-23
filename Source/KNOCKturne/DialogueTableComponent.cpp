@@ -27,8 +27,9 @@ void UDialogueTableComponent::LoadDialogueTable(FString TablePath) {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 	NTCHECK(DialogueTable == nullptr);
-
+	NTLOG_S(Warning);
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
+	NTCHECK(DialogueRows.IsValidIndex(0));
 	NTLOG_S(Warning);
 }
 
@@ -53,7 +54,7 @@ FDialogueData UDialogueTableComponent::GetNextRowDialogueTable() {
 	if (++CurrentRow == DialogueRows.Num() - 1) {
 		IsEndedDialogueRows = true;
 	}
-	return *DialogueRows[CurrentRow];
+	return *(DialogueRows[CurrentRow]);
 }
 
 void UDialogueTableComponent::ResetDialogueRowPointer() {
