@@ -71,9 +71,6 @@ public:
 	FString GetStringOnBP(FDialogueData DataRow);
 
 	UFUNCTION(BlueprintCallable)
-	int32 GetDialogueTableRowSize();
-
-	UFUNCTION(BlueprintCallable)
 	FDialogueData GetNextRowDialogueTable();
 
 	UFUNCTION(BlueprintCallable)
