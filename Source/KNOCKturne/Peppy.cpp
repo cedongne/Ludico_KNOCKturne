@@ -21,7 +21,7 @@ APeppy::APeppy()
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
 
-	SpringArm->TargetArmLength = 1200.0f;
+	SpringArm->TargetArmLength = 600.0f;
 	SpringArm->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
 	SpringArm->bUsePawnControlRotation = false;
 	SpringArm->bInheritPitch = false;
@@ -46,6 +46,7 @@ APeppy::APeppy()
 	CanSlide = true;
 
 	SlideCooldown = 3.0f;
+	MoveSpeed = 1.0f;
 }
 
 // Called when the game starts or when spawned
