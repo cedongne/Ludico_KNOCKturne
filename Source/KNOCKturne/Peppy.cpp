@@ -21,7 +21,7 @@ APeppy::APeppy()
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
 
-	SpringArm->TargetArmLength = 1200.0f;
+	SpringArm->TargetArmLength = 600.0f;
 	SpringArm->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
 	SpringArm->bUsePawnControlRotation = false;
 	SpringArm->bInheritPitch = false;
@@ -88,7 +88,7 @@ void APeppy::MoveForward(float Value) {
 			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-			AddMovementInput(Direction, Value);
+			AddMovementInput(Direction * 0.5f, Value);
 		}
 	}
 }
@@ -106,7 +106,7 @@ void APeppy::MoveRight(float Value) {
 			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-			AddMovementInput(Direction, Value);
+			AddMovementInput(Direction * 0.5f, Value);
 		}
 	}
 }
