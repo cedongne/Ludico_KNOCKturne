@@ -46,6 +46,7 @@ APeppy::APeppy()
 	CanSlide = true;
 
 	SlideCooldown = 3.0f;
+	MoveSpeed = 1.0f;
 }
 
 // Called when the game starts or when spawned
@@ -88,7 +89,7 @@ void APeppy::MoveForward(float Value) {
 			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-			AddMovementInput(Direction * 0.5f, Value);
+			AddMovementInput(Direction, Value);
 		}
 	}
 }
@@ -106,7 +107,7 @@ void APeppy::MoveRight(float Value) {
 			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-			AddMovementInput(Direction * 0.5f, Value);
+			AddMovementInput(Direction, Value);
 		}
 	}
 }

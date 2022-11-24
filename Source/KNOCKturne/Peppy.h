@@ -67,4 +67,7 @@ private:
 	float LeftSlideCooltime;
 
 	float FollowTime;
+
+	const float WEIGHTMOVESPEED = 0.5f;
+	float MoveSpeed;
 };
