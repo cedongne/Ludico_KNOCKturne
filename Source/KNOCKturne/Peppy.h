@@ -49,12 +49,6 @@ protected:
 
 	void CheckInteraction();
 
-	/* Move input mouse with keyboard
-	void SetDestination();
-	*/
-
-
-
 private:
 	APlayerController* PeppyController;
 
@@ -64,6 +58,7 @@ private:
 	bool CanSlide;
 
 	float SlideCooldown;
+	UPROPERTY(Transient, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
 	float LeftSlideCooltime;
 
 	float FollowTime;

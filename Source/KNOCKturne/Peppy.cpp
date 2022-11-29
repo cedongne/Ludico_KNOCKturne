@@ -135,27 +135,6 @@ void APeppy::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActo
 	}
 }
 
-/*
-void APeppy::CheckInteraction() {
-	FHitResult HitResult;
-	FCollisionQueryParams Params(NAME_None, false, this);
-	bool bResult = GetWorld()->SweepSingleByChannel(
-		HitResult,
-		GetActorLocation(),
-		GetActorLocation(),
-		FQuat::Identity,
-		ECollisionChannel::ECC_GameTraceChannel1,
-		FCollisionShape::MakeSphere(100.f),
-		Params
-	);
-
-	if (bResult) {
-		if (HitResult.GetActor()) {
-		}
-	}
-}
-*/
-
 // Called to bind functionality to input
 void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -197,7 +176,7 @@ void APeppy::SlideAction() {
 }
 
 void APeppy::SlideHandling(float DeltaTime) {
-	if (LeftSlideCooltime > 0.0f) {
+	if (LeftSlideCooltime - DeltaTime > 0.0f) {
 		FVector velocity = GetMovementComponent()->Velocity;
 		float CurMoveVelocity = sqrt((velocity.X * velocity.X) + (velocity.Y * velocity.Y));
 		if (CurMoveVelocity > 600.0f) {

@@ -37,9 +37,16 @@ void UPeppyStatComponent::SetDefaultStat() {
 	NTCHECK(PeppyStatDataInstance != nullptr);
 	CurrentStatData = PeppyStatDataInstance->GetPeppyStatData("Init");
 	if (CurrentStatData != nullptr) {
-		NTLOG(Warning, TEXT("%d"), CurrentStatData->MaxHP);
+		NTLOG(Warning, TEXT("%d %d"), CurrentStatData->MaxHP, CurrentStatData->MaxEP);
 	}
-//	CurrentHP = CurrentStatData->MaxHP;
+
+	MaxHP = CurrentStatData->MaxHP;
+	CurrentHP = CurrentStatData->MaxHP;
+	MaxEP = CurrentStatData->MaxEP;
+	CurrentEP = CurrentStatData->MaxEP;
+	SlidingCooldown = CurrentStatData->SlidingCooldown;
+	LeftSlidingCooltime = CurrentStatData->SlidingCooldown;
+	DamageDecrease = CurrentStatData->DamageDecrease;
 }
 
 void UPeppyStatComponent::GetDamaged(float Damage) {
