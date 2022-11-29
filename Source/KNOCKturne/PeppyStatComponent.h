@@ -31,6 +31,18 @@ protected:
 private:
 	struct FPeppyStatData* CurrentStatData = nullptr;
 
-	UPROPERTY(Transient, VisibleInstanceOnly, Category = Stat, Meta = (AllowPrivateAccess = true))
-	float CurrentHP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 MaxHP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 CurrentHP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 MaxEP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 CurrentEP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	float SlidingCooldown;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	float LeftSlidingCooltime;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 DamageDecrease;
 };
