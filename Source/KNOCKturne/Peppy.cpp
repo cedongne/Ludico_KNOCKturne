@@ -34,7 +34,6 @@ APeppy::APeppy()
 	InteractionCollider->SetCapsuleRadius(96.0f);
 	InteractionCollider->SetCapsuleHalfHeight(48.0f);
 
-	
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
 	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
@@ -47,6 +46,10 @@ APeppy::APeppy()
 
 	SlideCooldown = 3.0f;
 	MoveSpeed = 1.0f;
+
+	SlidingSpeed = 1300;
+	MoveSpeed = 430.0f;
+	GetCharacterMovement()->MaxWalkSpeed = MoveSpeed;
 }
 
 // Called when the game starts or when spawned
@@ -169,7 +172,7 @@ void APeppy::SlideAction() {
 			//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
 
 			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
-			LaunchCharacter(Direction * 3000, false, true);
+			LaunchCharacter(Direction * SlidingSpeed, false, true);
 
 		}
 	}

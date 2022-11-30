@@ -64,5 +64,10 @@ private:
 	float FollowTime;
 
 	const float WEIGHTMOVESPEED = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	int32 SlidingSpeed;
+
+	UPROPERTY(EditAnywhere)
 	float MoveSpeed;
 };
