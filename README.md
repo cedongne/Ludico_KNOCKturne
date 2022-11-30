@@ -5,7 +5,7 @@ BRIDGE Ludico KNOCKturne
 
 ## 작업 전 세팅 순서
 
-1. 구글 드라이브 `6.애셋` 폴더의 [Asset update list](https://docs.google.com/document/d/1PziVtROK4QsmJsS0x15uAJ6OJQofx3iciw8dAzj-0HQ/edit) 문서에서  업데이트된 애셋이 있는지 확인 후 필요한 애셋을 다운로드 받아 자신 프로젝트에 임포트한다.
+1. 구글 드라이브 `Assets` 폴더의 [Asset update list](https://docs.google.com/document/d/1PziVtROK4QsmJsS0x15uAJ6OJQofx3iciw8dAzj-0HQ/edit) 문서에서 업데이트된 에셋이 있는지 확인 후 필요한 셋을 다운로드 받아 자신 프로젝트에 임포트한다.
 2. 깃허브 데스크탑에서 Fetch 내용이 있는지 확인한다.
 3. 깃허브 데스크탑의 Current Branch를 자신의 것으로 세팅한다.
 4. 엔진을 키고 `Ctrl + Alt + F11`을 눌러 라이브 코딩을 실행해 스크립트를 업데이트한다.
