@@ -15,9 +15,9 @@ public:
 	// Sets default values for this character's properties
 	APeppy();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, Category = Camera)
 	USpringArmComponent* SpringArm;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
+	UPROPERTY(VisibleAnywhere, Category = Camera)
 	UCameraComponent* Camera;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interaction)
 	UCapsuleComponent* InteractionCollider;
@@ -28,8 +28,6 @@ public:
 	// Time Threshold to know if it was a short press
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	float ShortPressThreshold;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Flag)
-	bool CanMove;
 
 	UFUNCTION()
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -54,6 +52,7 @@ protected:
 private:
 	APlayerController* PeppyController;
 
+	bool IsMove;
 	bool IsSlide;
 
 	bool CanSlide;

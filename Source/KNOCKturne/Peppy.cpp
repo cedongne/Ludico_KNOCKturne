@@ -39,7 +39,7 @@ APeppy::APeppy()
 	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
 
 	// Initialize variables
-	CanMove = true;
+	IsMove = false;
 	IsSlide = false;
 
 	CanSlide = true;
@@ -80,41 +80,37 @@ void APeppy::PostInitializeComponents() {
 }
 
 void APeppy::MoveForward(float Value) {
-	if (CanMove) {
-		if ((Controller != nullptr) && (Value != 0.0f)) {
-			/* Move input mouse with keyboard
-			if (isMove) {
-				GetMovementComponent()->StopMovementImmediately();
-				isMove = false;
-			}
-			*/
-			if (!IsSlide) {
-				const FRotator Rotation = Controller->GetControlRotation();
-				const FRotator YawRotation(0, Rotation.Yaw, 0);
+	if ((Controller != nullptr) && (Value != 0.0f)) {
+		/* Move input mouse with keyboard
+		if (isMove) {
+			GetMovementComponent()->StopMovementImmediately();
+			isMove = false;
+		}
+		*/
+		if (!IsSlide) {
+			const FRotator Rotation = Controller->GetControlRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-				const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-				AddMovementInput(Direction, Value);
-			}
+			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+			AddMovementInput(Direction, Value);
 		}
 	}
 }
 
 void APeppy::MoveRight(float Value) {
-	if (CanMove) {
-		if ((Controller != nullptr) && (Value != 0.0f)) {
-			/* Move input mouse with keyboard
-			if (isMove) {
-				GetMovementComponent()->StopMovementImmediately();
-				isMove = false;
-			}
-			*/
-			if (!IsSlide) {
-				const FRotator Rotation = Controller->GetControlRotation();
-				const FRotator YawRotation(0, Rotation.Yaw, 0);
+	if ((Controller != nullptr) && (Value != 0.0f)) {
+		/* Move input mouse with keyboard
+		if (isMove) {
+			GetMovementComponent()->StopMovementImmediately();
+			isMove = false;
+		}
+		*/
+		if (!IsSlide) {
+			const FRotator Rotation = Controller->GetControlRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-				const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-				AddMovementInput(Direction, Value);
-			}
+			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+			AddMovementInput(Direction, Value);
 		}
 	}
 }
