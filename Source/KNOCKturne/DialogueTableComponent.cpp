@@ -5,7 +5,6 @@
 
 UDialogueTableComponent::UDialogueTableComponent() {
 	FString DialogueStringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
-
 	//Load StringTable
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_DIALOGUETABLE(*DialogueStringTablePath);
 	NTCHECK(DT_DIALOGUETABLE.Succeeded());
