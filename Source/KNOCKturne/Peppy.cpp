@@ -159,6 +159,7 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 void APeppy::SlideAction() {
+	NTLOG_S(Warning);
 	if (CanSlide) {
 		if (FollowTime <= ShortPressThreshold) {
 			IsSlide = true;
@@ -173,7 +174,7 @@ void APeppy::SlideAction() {
 
 			FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
 			GetCapsuleComponent()->SetWorldRotation(RotateDegree);
-			//		UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+					UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
 
 			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
 			LaunchCharacter(Direction * SlidingSpeed, false, true);
