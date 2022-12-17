@@ -165,6 +165,7 @@ void APeppy::SlideAction() {
 			IsSlide = true;
 			CanSlide = false;
 
+			GetCharacterMovement()->Velocity = FVector(0.0f, 0.0f, 0.0f);
 			LeftSlideCooltime = SlideCooldown;
 
 			FVector HitLocation = FVector::ZeroVector;
@@ -174,7 +175,7 @@ void APeppy::SlideAction() {
 
 			FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
 			GetCapsuleComponent()->SetWorldRotation(RotateDegree);
-					UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
+//			UE_LOG(LogTemp, Warning, TEXT("%lf %lf %lf, %lf %lf %lf"), HitLocation.X, HitLocation.Y, HitLocation.Z, GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z);
 
 			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
 			LaunchCharacter(Direction * SlidingSpeed, false, true);
@@ -187,7 +188,7 @@ void APeppy::SlideHandling(float DeltaTime) {
 	if (LeftSlideCooltime - DeltaTime > 0.0f) {
 		FVector velocity = GetMovementComponent()->Velocity;
 		float CurMoveVelocity = sqrt((velocity.X * velocity.X) + (velocity.Y * velocity.Y));
-		if (CurMoveVelocity > 600.0f) {
+		if (CurMoveVelocity > MoveSpeed) {
 			IsSlide = true;
 		}
 		else {
