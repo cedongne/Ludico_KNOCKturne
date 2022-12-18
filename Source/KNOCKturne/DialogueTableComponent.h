@@ -10,7 +10,7 @@
 USTRUCT(BlueprintType)
 struct FDialogueData : public FTableRowBase {
 	GENERATED_BODY()
-
+		
 public:
 	FDialogueData() : GroupCode("-1"), CharacterStringID("-1"), Type(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1") {}
 
