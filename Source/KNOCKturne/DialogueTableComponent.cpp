@@ -35,7 +35,6 @@ void UDialogueTableComponent::LoadDialogueTable(FString TablePath) {
 	}
 }
 
-
 FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
 	return DialogueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
 }
