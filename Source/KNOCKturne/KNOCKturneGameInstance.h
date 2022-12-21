@@ -40,6 +40,9 @@ public:
 	FPeppyStatData CurPeppyStat;
 
 	FPeppyStatData* GetPeppyStatData(FString DataType);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
+	FTransform PeppyTransform;
 	
 private:
 

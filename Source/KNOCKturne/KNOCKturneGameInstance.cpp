@@ -6,6 +6,7 @@
 void UKNOCKturneGameInstance::Init() {
 	Super::Init();
 	NTLOG_S(Warning);
+	PeppyTransform.SetLocation(FVector(933.0f, 993.0f, 104.287613f));
 }
 
 UKNOCKturneGameInstance::UKNOCKturneGameInstance() {
