@@ -30,32 +30,32 @@ public:
 	FString StringID;
 };
 
-USTRUCT(BlueprintType)
-struct FNPCConversation : public FTableRowBase {
-	GENERATED_BODY()
-
-public:
-	FNPCConversation() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), StartType("-1"), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString EpisodeGroupCode;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CharacterGroupCode;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString StartType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CharacterName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		int32 Type;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString Image1ID;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString Image2ID;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CutSceneID;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString StringID;
-};
+//USTRUCT(BlueprintType)
+//struct FNPCConversation : public FTableRowBase {
+//	GENERATED_BODY()
+//
+//public:
+//	FNPCConversation() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), StartType(-1), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
+//
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString EpisodeGroupCode;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString CharacterGroupCode;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		int32 StartType;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString CharacterName;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		int32 Type;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString Image1ID;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString Image2ID;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString CutSceneID;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//		FString StringID;
+//};
 
 USTRUCT(BlueprintType)
 struct FDialogueString : public FTableRowBase{
