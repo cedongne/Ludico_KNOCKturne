@@ -35,7 +35,7 @@ struct FNPCConversation : public FTableRowBase {
 	GENERATED_BODY()
 
 public:
-	FNPCConversation() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), StartType("-1"), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1"), NextDialogID("-1") {}
+	FNPCConversation() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), StartType("-1"), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		FString EpisodeGroupCode;
@@ -55,8 +55,6 @@ public:
 		FString CutSceneID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		FString StringID;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString NextDialogID;
 };
 
 USTRUCT(BlueprintType)
