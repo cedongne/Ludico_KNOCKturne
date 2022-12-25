@@ -86,13 +86,14 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* DialogueTable;
+	class UDataTable* DialogueTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* StringTable;
+	class UDataTable* StringTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* DialogueNpcTable;
+	class UDataTable* DialogueNpcTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* StartIndexTable;
+	class UDataTable* StartIndexTable;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
 		bool IsEndedDialogueRows;
 
@@ -108,6 +109,7 @@ public:
 
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);
+
 
 	UFUNCTION(BlueprintCallable)
 		FString GetStringOnBP(FDialogueData DataRow);
