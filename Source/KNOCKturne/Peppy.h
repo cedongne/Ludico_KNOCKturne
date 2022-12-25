@@ -22,7 +22,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Interaction)
 	UCapsuleComponent* InteractionCollider;
 
-	UPROPERTY(VisibleAnywhere, Category = Stat)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UPeppyStatComponent* PeppyStat;
 	
 	// Time Threshold to know if it was a short press
