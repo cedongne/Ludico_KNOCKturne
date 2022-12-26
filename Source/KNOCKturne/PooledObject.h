@@ -5,6 +5,7 @@
 #include "PooledObject.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPooledObjectDespawn, APooledObject*, PoolActor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPooledObjectTouchDespawn, APooledObject*, PoolActor);
 
 UCLASS()
 class KNOCKTURNE_API APooledObject : public AActor
@@ -16,9 +17,12 @@ public:
 	APooledObject();
 
 	FOnPooledObjectDespawn OnPooledObjectDespawn;
+	FOnPooledObjectTouchDespawn OnPooledObjectTouchDespawn;
 
 	UFUNCTION(BlueprintCallable, Category = "PooledObject")
 	void Deactivate();
+	UFUNCTION(BlueprintCallable, Category = "PooledObject")
+	void TouchDeactivate();
 
 	void SetActive(bool IsActive);
 	void SetLifeSpan(float LifeTime);

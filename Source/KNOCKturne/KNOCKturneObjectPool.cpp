@@ -26,6 +26,7 @@ void UKNOCKturneObjectPool::BeginPlay()
 					PoolableActor->SetActive(false);
 					PoolableActor->SetPoolIndex(count);
 					PoolableActor->OnPooledObjectDespawn.AddDynamic(this, &UKNOCKturneObjectPool::OnPooledObjectDespawn);
+					PoolableActor->OnPooledObjectTouchDespawn.AddDynamic(this, &UKNOCKturneObjectPool::OnPooledObjectTouchDespawn);
 					ObjectPool.Add(PoolableActor);
 				}
 			}
@@ -34,12 +35,27 @@ void UKNOCKturneObjectPool::BeginPlay()
 }
 
 APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
+	if (FirstIndex == LastIndex) {
+		if (ObjectPool[FirstIndex]->IsActive()) {
+			NTLOG(Warning, TEXT("Object pool is full"));
+			return NULL;
+		}
+	}
+
+	LastIndex = (LastIndex + 1) % PoolSize;
+	ObjectPool[LastIndex]->SetActive(true);
+	return ObjectPool[LastIndex];
+}
+
+/*
+APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
 	for (APooledObject* PoolableActor : ObjectPool) {
 		if (PoolableActor != nullptr && !PoolableActor->IsActive()) {
 			PoolableActor->TeleportTo(FVector(0, 0, 0), FRotator(0, 0, 0));
 			PoolableActor->SetLifeSpan(true);
 			SpawnedPoolIndexes.Add(PoolableActor->GetPoolIndex());
 
+			NTLOG(Warning, TEXT("Object spawned"));
 			return PoolableActor;
 		}
 	}
@@ -62,7 +78,16 @@ APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
 	}
 	return nullptr;
 }
+*/
+
 
 void UKNOCKturneObjectPool::OnPooledObjectDespawn(APooledObject* PoolActor) {
-	SpawnedPoolIndexes.Remove((PoolActor->GetPoolIndex()));
+	ObjectPool[FirstIndex]->SetActive(false);
+	ObjectPool[FirstIndex]->TeleportTo(FVector(0, 0, 0), FRotator(0, 0, 0));
+	FirstIndex = (FirstIndex + 1) % PoolSize;
+}
+
+void UKNOCKturneObjectPool::OnPooledObjectTouchDespawn(APooledObject* PoolActor) {
+	PoolActor->SetActive(false);
+	PoolActor->SetActorEnableCollision(false);
 }

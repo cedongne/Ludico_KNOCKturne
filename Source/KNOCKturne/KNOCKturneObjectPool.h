@@ -19,6 +19,8 @@ public:
 	APooledObject* SpawnPooledObject();
 	UFUNCTION()
 	void OnPooledObjectDespawn(APooledObject* PoolActor);
+	UFUNCTION()
+	void OnPooledObjectTouchDespawn(APooledObject* PoolActor);
 
 	UPROPERTY(EditAnywhere, Category = "ObjectPool")
 	TSubclassOf<class APooledObject> PooledObjectSubclass;
@@ -33,4 +35,7 @@ protected:
 
 	TArray<APooledObject*> ObjectPool;
 	TArray<int> SpawnedPoolIndexes;
+
+	int FirstIndex = 0;
+	int LastIndex = 0;
 };

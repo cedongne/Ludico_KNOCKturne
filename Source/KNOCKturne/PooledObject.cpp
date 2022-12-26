@@ -33,6 +33,11 @@ void APooledObject::Deactivate()
 	OnPooledObjectDespawn.Broadcast(this);
 }
 
+void APooledObject::TouchDeactivate() {
+//	SetActive(false);
+	OnPooledObjectTouchDespawn.Broadcast(this);
+}
+
 bool APooledObject::IsActive()
 {
 	return Active;
