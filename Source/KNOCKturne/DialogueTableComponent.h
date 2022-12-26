@@ -31,30 +31,41 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FNPCConversation : public FTableRowBase {
+struct FDialogueNpc : public FTableRowBase {
 	GENERATED_BODY()
 
 public:
-	FNPCConversation() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), StartType("-1"), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
+	FDialogueNpc() : EpisodeGroupCode("-1"), CharacterGroupCode("-1"), DialogueType(-1), CharacterName("-1"), Type(-1), Image1ID("-1"), Image2ID("-1"), CutSceneID("-1"), StringID("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString EpisodeGroupCode;
+	FString EpisodeGroupCode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CharacterGroupCode;
+	FString CharacterGroupCode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString StartType;
+	int32 DialogueType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CharacterName;
+	FString CharacterName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		int32 Type;
+	int32 Type;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString Image1ID;
+	FString Image1ID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString Image2ID;
+	FString Image2ID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString CutSceneID;
+	FString CutSceneID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		FString StringID;
+	FString StringID;
+};
+
+USTRUCT(BlueprintType)
+struct FStartIndex : public FTableRowBase {
+	GENERATED_BODY()
+
+public:
+	FStartIndex() : StringIndex(0) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 StringIndex;
 };
 
 USTRUCT(BlueprintType)
@@ -68,7 +79,7 @@ public:
 	FString KOR;
 };
 
-UCLASS( ClassGroup=(DataTableComponent), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (DataTableComponent), meta = (BlueprintSpawnableComponent))
 class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -78,8 +89,13 @@ protected:
 	class UDataTable* DialogueTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* StringTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* DialogueNpcTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* StartIndexTable;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
-	bool IsEndedDialogueRows;
+		bool IsEndedDialogueRows;
 
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
@@ -94,12 +110,13 @@ public:
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);
 
-	UFUNCTION(BlueprintCallable)
-	FString GetStringOnBP(FDialogueData DataRow);
 
 	UFUNCTION(BlueprintCallable)
-	FDialogueData GetNextRowDialogueTable();
+		FString GetStringOnBP(FDialogueData DataRow);
 
 	UFUNCTION(BlueprintCallable)
-	void ResetDialogueRowPointer();
+		FDialogueData GetNextRowDialogueTable();
+
+	UFUNCTION(BlueprintCallable)
+		void ResetDialogueRowPointer();
 };

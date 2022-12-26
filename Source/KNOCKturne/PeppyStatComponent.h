@@ -18,7 +18,6 @@ public:
 	UPeppyStatComponent();
 
 	void SetDefaultStat();
-	void GetDamaged(float Damage);
 
 	FOnHPIsZeroDelegate OnHPIsZero;
 
@@ -28,8 +27,19 @@ protected:
 
 	virtual void InitializeComponent() override;
 
+	UFUNCTION(BlueprintCallable)
+	void GetDamaged(float Value);
+	UFUNCTION(BlueprintCallable)
+	void Heal(float Value);
+	UFUNCTION(BlueprintCallable)
+	void GainEnergy(float Value);
+	UFUNCTION(BlueprintCallable)
+	void SpendEnergy(float Value);
+
 private:
-	struct FPeppyStatData* CurrentStatData = nullptr;
+	struct FPeppyStatData* CurStatData = nullptr;
+	FPeppyStatData* MinStatData = nullptr;
+	FPeppyStatData* MaxStatData = nullptr;
 
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
 	int32 MaxHP;
