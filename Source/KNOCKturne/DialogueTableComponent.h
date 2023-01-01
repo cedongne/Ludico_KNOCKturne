@@ -79,6 +79,13 @@ public:
 	FString KOR;
 };
 
+
+struct ADialogueTables {
+	FString Dialogue_Npc = TEXT("/Game/Assets/DataTable/Dialogue_Npc.Dialogue_Npc");
+	FString Dialogue_Prologue = TEXT("/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue");
+};
+
+
 UCLASS(ClassGroup = (DataTableComponent), meta = (BlueprintSpawnableComponent))
 class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 {
@@ -89,13 +96,17 @@ protected:
 	class UDataTable* DialogueTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* StringTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* StartIndexTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* DialogueNpcTable;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-	class UDataTable* StartIndexTable;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
-		bool IsEndedDialogueRows;
+	bool IsEndedDialogueRows;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<FString, FString> Dialogues;
+
+	ADialogueTables DialogueTables;
+
 
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
@@ -105,18 +116,22 @@ public:
 	UDialogueTableComponent();
 	UDialogueTableComponent(FString TablePath);
 
-	void LoadDialogueTable(FString TablePath);
-
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);
 
 
 	UFUNCTION(BlueprintCallable)
-		FString GetStringOnBP(FDialogueData DataRow);
+	void LoadDialogueTable(FString TableName);
 
 	UFUNCTION(BlueprintCallable)
-		FDialogueData GetNextRowDialogueTable();
+	FString GetStringOnBP(FDialogueData DataRow);
 
 	UFUNCTION(BlueprintCallable)
-		void ResetDialogueRowPointer();
+	FDialogueData GetNextRowDialogueTable();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetDialogueRowPointer();
+
+	UFUNCTION(BlueprintCallable)
+	int GetCurrentRow();
 };

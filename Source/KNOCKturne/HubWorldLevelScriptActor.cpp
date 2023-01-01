@@ -4,13 +4,8 @@
 #include "HubWorldLevelScriptActor.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
-	/*
-	NTLOG(Warning, TEXT("Hubworld Level Script"));
-
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
-	DialogueTableComponent->LoadDialogueTable("/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue");
-	NTLOG(Warning, TEXT("DialogueTable is loaded"));
-	*/
+//	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
 }
 
 void AHubWorldLevelScriptActor::BeginPlay() {
