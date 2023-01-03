@@ -103,7 +103,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
 	bool IsEndedDialogueRows;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TMap<FString, FString> Dialogues;
+	TMap<FString, FString> DialogueMap;
 
 	ADialogueTables DialogueTables;
 

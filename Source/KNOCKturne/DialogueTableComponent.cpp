@@ -39,16 +39,16 @@ void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 	if (DialogueTable != nullptr) {
-		NTLOG_S(Warning);
+		NTLOG(Warning, TEXT("DialogueTable is not null"));
 	}
 
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
 	if (DialogueRows.Num() != 0) {
-		NTLOG(Warning, TEXT("%d"), DialogueRows.Num());
+		NTLOG(Warning, TEXT("RowNum is %d"), DialogueRows.Num());
 	}
 
 	CurrentRow = StartIndexTableRow->StringIndex - 1;
-	NTLOG(Warning, TEXT("%d"), CurrentRow);
+	NTLOG(Warning, TEXT("CurrentRow is %d"), CurrentRow);
 }
 
 FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
