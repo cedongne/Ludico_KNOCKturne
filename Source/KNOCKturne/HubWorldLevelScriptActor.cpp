@@ -5,7 +5,7 @@
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
-//	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
+	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 }
 
 void AHubWorldLevelScriptActor::BeginPlay() {
