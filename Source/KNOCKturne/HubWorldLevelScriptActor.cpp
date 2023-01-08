@@ -5,7 +5,11 @@
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
+<<<<<<< Updated upstream
 	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
+=======
+//	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
+>>>>>>> Stashed changes
 }
 
 void AHubWorldLevelScriptActor::BeginPlay() {

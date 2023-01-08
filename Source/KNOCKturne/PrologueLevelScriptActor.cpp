@@ -5,5 +5,5 @@
 
 APrologueLevelScriptActor::APrologueLevelScriptActor() {
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueTableComponent"));
-	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
+//	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 }

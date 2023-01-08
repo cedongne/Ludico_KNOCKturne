@@ -2,53 +2,30 @@
 
 
 #include "DialogueTableComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "KNOCKturneGameInstance.h"
 
 UDialogueTableComponent::UDialogueTableComponent() {
-	FString DialogueStringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
-	FString DialogueStartIndexTablePath = TEXT("/Game/Assets/DataTable/StartIndexTable.StartIndexTable");
-	//Load StringTable
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_DIALOGUETABLE(*DialogueStringTablePath);
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_STARTINDEXTABLE(*DialogueStartIndexTablePath);
-	NTCHECK(DT_DIALOGUETABLE.Succeeded());
-	NTCHECK(DT_STARTINDEXTABLE.Succeeded());
-
-	StringTable = DT_DIALOGUETABLE.Object;
-	StartIndexTable = DT_STARTINDEXTABLE.Object;
-
 	IsEndedDialogueRows = false;
 	CurrentRow = -1;
 }
 
 UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 {
+	IsEndedDialogueRows = false;
+	CurrentRow = -1;
+
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
 }
 
+void UDialogueTableComponent::BeginPlay() {
+	Super::BeginPlay();
+	DialogueManager = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->DialogueManagerComponent;
+}
+
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
-	FStartIndex* StartIndexTableRow = StartIndexTable->FindRow<FStartIndex>(*TableName, TEXT(""));
-
-	FString TablePath = "";
-	if (TableName == "Dialogue_Npc") {
-		TablePath = DialogueTables.Dialogue_Npc;
-	}
-	else if (TableName == "Dialogue_Prologue") {
-		TablePath = DialogueTables.Dialogue_Prologue;
-	}
-
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
-	DialogueTable = DT_TABLE.Object;
-	if (DialogueTable != nullptr) {
-		NTLOG(Warning, TEXT("DialogueTable is not null"));
-	}
-
-	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
-	if (DialogueRows.Num() != 0) {
-		NTLOG(Warning, TEXT("RowNum is %d"), DialogueRows.Num());
-	}
-
-	CurrentRow = StartIndexTableRow->StringIndex - 1;
-	NTLOG(Warning, TEXT("CurrentRow is %d"), CurrentRow);
+	DialogueTable = DialogueManager->LoadDialogueTable(TableName, CurrentRow);
 }
 
 FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
@@ -56,12 +33,12 @@ FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
 }
 
 FString UDialogueTableComponent::GetString(FDialogueData* DataRow) {
-	return StringTable->FindRow<FDialogueString>(*(DataRow->StringID), TEXT(""))->KOR;
+	return DialogueManager->GetStringTable()->FindRow<FDialogueString>(*(DataRow->StringID), TEXT(""))->KOR;
 }
 
 FString UDialogueTableComponent::GetStringOnBP(FDialogueData DataRow) {
 	NTLOG(Warning, TEXT("%d"), CurrentRow);
-	return StringTable->FindRow<FDialogueString>(*(DataRow.StringID), TEXT(""))->KOR;
+	return DialogueManager->GetStringTable()->FindRow<FDialogueString>(*(DataRow.StringID), TEXT(""))->KOR;
 }
 
 FDialogueData UDialogueTableComponent::GetNextRowDialogueTable() {
