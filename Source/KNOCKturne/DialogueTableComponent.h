@@ -5,6 +5,7 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Components/ActorComponent.h"
+#include "DialogueManagerComponent.h"
 #include "DialogueTableComponent.generated.h"
 
 USTRUCT(BlueprintType)
@@ -40,6 +41,15 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+		class UDataTable* StringTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+		class UDataTable* StartIndexTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TMap<FString, FString> DialogueMap;
+	TArray<FDialogueString*> DialogueStrings;
+
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* DialogueTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
