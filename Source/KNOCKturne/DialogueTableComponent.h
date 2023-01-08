@@ -50,10 +50,7 @@ protected:
 	TArray<FDialogueString*> DialogueStrings;
 
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-	class UDataTable* DialogueTable;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-	class UDataTable* DialogueNpcTable;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
 	bool IsEndedDialogueRows;
 
@@ -65,11 +62,16 @@ protected:
 	class UDialogueManagerComponent* DialogueManager;
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+		class UDataTable* DialoguePrologueTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+		class UDataTable* DialogueNpcTable;
+
 	virtual void BeginPlay() override;
 	UDialogueTableComponent();
 	UDialogueTableComponent(FString TablePath);
 
-	void LoadDialogueTable(FString TableName);
+	void LoadDialogueTable(UDataTable* DataTable, FString TableName);
 
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);
