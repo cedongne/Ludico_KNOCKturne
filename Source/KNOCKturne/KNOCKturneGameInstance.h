@@ -45,8 +45,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
 	FTransform PeppyTransform;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Manager")
-	UDialogueManagerComponent* DialogueManagerComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Manager)
+	class UDialogueManagerComponent* DialogueManagerComponent;
 	
 private:
 

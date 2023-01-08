@@ -16,14 +16,12 @@ UDialogueManagerComponent::UDialogueManagerComponent()
 
 	StringTable = DT_STRINGTABLE.Object;
 	StartIndexTable = DT_STARTINDEXTABLE.Object;
-	NTCHECK(StringTable != nullptr);
-	NTCHECK(StartIndexTable != nullptr);
 	DialogueMap.Add({ "Dialogue_Prologue", "/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue" });
 	DialogueMap.Add({ "Dialogue_Npc", "/Game/Assets/DataTable/Dialogue_Npc.Dialogue_Npc" });
 
 	NTLOG_S(Warning);
-//	FString temp = "Dialogue_Prologue";
-//	NTLOG(Warning, TEXT("%d"), StringTable->FindRow<FStartIndex>(*temp, TEXT(""))->StringIndex);
+	FString temp = "Dialogue_Prologue";
+	StringTable->FindRow<FStartIndex>(*temp, TEXT(""))->StringIndex;
 }
 
 UDataTable* UDialogueManagerComponent::GetStringTable() {

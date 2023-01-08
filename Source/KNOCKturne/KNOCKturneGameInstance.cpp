@@ -2,13 +2,15 @@
 
 
 #include "KNOCKturneGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 void UKNOCKturneGameInstance::Init() {
 	Super::Init();
 	NTLOG_S(Warning);
 	PeppyTransform.SetLocation(FVector(933.0f, 993.0f, 104.287613f));
+	auto GameInstance = UGameplayStatics::GetGameInstance(GetWorld());
 
-	DialogueManagerComponent = CreateDefaultSubobject<UDialogueManagerComponent>(TEXT("DialogueManagerComponent"));
+//	DialogueManagerComponent = CreateDefaultSubobject<UDialogueManagerComponent>(TEXT("DialogueManagerComponent"));
 }
 
 UKNOCKturneGameInstance::UKNOCKturneGameInstance() {
