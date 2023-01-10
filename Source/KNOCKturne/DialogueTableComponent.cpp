@@ -90,3 +90,7 @@ void UDialogueTableComponent::ResetDialogueRowPointer() {
 int UDialogueTableComponent::GetCurrentRow() {
 	return CurrentRow;
 }
+
+int UDialogueTableComponent::GetRowSize() {
+	return DialogueRows.Num() - 1;
+}

@@ -85,4 +85,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetCurrentRow();
+
+	UFUNCTION(BlueprintCallable)
+	int GetRowSize();
 };
