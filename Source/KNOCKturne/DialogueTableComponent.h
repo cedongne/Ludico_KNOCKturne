@@ -63,15 +63,13 @@ protected:
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* DialoguePrologueTable;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
-		class UDataTable* DialogueNpcTable;
+	class UDataTable* DialogueTable;
 
 	virtual void BeginPlay() override;
 	UDialogueTableComponent();
 	UDialogueTableComponent(FString TablePath);
 
-	void LoadDialogueTable(UDataTable* DataTable, FString TableName);
+	void LoadDialogueTable(FString TableName);
 
 	FDialogueData* GetDialogueTableRow(FString RowID);
 	FString GetString(FDialogueData* DataRow);

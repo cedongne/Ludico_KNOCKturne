@@ -18,9 +18,14 @@ class KNOCKTURNE_API AHubWorldLevelScriptActor : public ALevelScriptActor
 public:
 	AHubWorldLevelScriptActor();
 
+	
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Manager")
 	UDialogueTableComponent* DialogueTableComponent;
 
 protected:
 	virtual void BeginPlay() override;
+
+	class UKNOCKturneGameInstance* GameInstance;
+	class UDialogueSubsystem* DialogueSubsystem;
 };

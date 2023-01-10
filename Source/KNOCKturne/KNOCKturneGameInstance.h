@@ -6,7 +6,6 @@
 #include "Engine/DataTable.h"
 #include "Engine/GameInstance.h"
 #include "DialogueManagerComponent.h"
-#include "DialogueManager.h"
 #include "KNOCKturneGameInstance.generated.h"
 
 USTRUCT(BlueprintType)
@@ -48,8 +47,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Manager)
 	class UDialogueManagerComponent* DialogueManagerComponent;
-//	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Manager)
-//	class UDialogueManager* DialogueManager;
 	
 private:
 

@@ -4,6 +4,7 @@
 #include "DialogueTableComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "KNOCKturneGameInstance.h"
+#include "Engine/GameInstance.h"
 
 UDialogueTableComponent::UDialogueTableComponent() {
 	FString StringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
@@ -29,7 +30,7 @@ UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 	CurrentRow = -1;
 
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
-	DialoguePrologueTable = DT_TABLE.Object;
+	DialogueTable = DT_TABLE.Object;
 }
 
 void UDialogueTableComponent::BeginPlay() {
@@ -37,7 +38,7 @@ void UDialogueTableComponent::BeginPlay() {
 	DialogueManager = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->DialogueManagerComponent;
 }
 
-void UDialogueTableComponent::LoadDialogueTable(UDataTable* DataTable, FString TableName) {
+void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
 //	DialogueTable = DialogueManager->LoadDialogueTable(TableName, CurrentRow);
 
 	FStartIndex* StartIndexTableRow = StartIndexTable->FindRow<FStartIndex>(*TableName, TEXT(""));
@@ -45,12 +46,13 @@ void UDialogueTableComponent::LoadDialogueTable(UDataTable* DataTable, FString T
 	FString TablePath = DialogueMap[TableName];
 
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
-	DataTable = DT_TABLE.Object;
-	if (DataTable != nullptr) {
+	DialogueTable = DT_TABLE.Object;
+	if (DialogueTable != nullptr) {
 		NTLOG(Warning, TEXT("DialogueTable is not null"));
 	}
 	StringTable->GetAllRows<FDialogueString>("GetAllRows", DialogueStrings);
-	DataTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
+	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
+	
 
 	CurrentRow = StartIndexTableRow->StringIndex - 1;
 	NTLOG(Warning, TEXT("CurrentRow is %d"), CurrentRow);
@@ -58,7 +60,7 @@ void UDialogueTableComponent::LoadDialogueTable(UDataTable* DataTable, FString T
 }
 
 FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
-	return DialoguePrologueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
+	return DialogueTable->FindRow<FDialogueData>(*RowID, TEXT(""));
 }
 
 FString UDialogueTableComponent::GetString(FDialogueData* DataRow) {
