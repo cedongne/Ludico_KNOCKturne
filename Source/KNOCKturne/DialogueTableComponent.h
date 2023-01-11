@@ -84,6 +84,9 @@ public:
 	void ResetDialogueRowPointer();
 
 	UFUNCTION(BlueprintCallable)
+	void SetCurrentRow(int rowNum);
+
+	UFUNCTION(BlueprintCallable)
 	int GetCurrentRow();
 
 	UFUNCTION(BlueprintCallable)

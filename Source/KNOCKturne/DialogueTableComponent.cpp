@@ -87,6 +87,10 @@ void UDialogueTableComponent::ResetDialogueRowPointer() {
 	CurrentRow = -1;
 }
 
+void UDialogueTableComponent::SetCurrentRow(int rowNum) {
+	CurrentRow = rowNum;
+}
+
 int UDialogueTableComponent::GetCurrentRow() {
 	return CurrentRow;
 }
