@@ -98,3 +98,26 @@ int UDialogueTableComponent::GetCurrentRow() {
 int UDialogueTableComponent::GetRowSize() {
 	return DialogueRows.Num() - 1;
 }
+
+void UDialogueTableComponent::GetRandomTalkIndex() {
+	for (int i = 0; i < DialogueRows.Num(); i++)
+	{
+		if (DialogueRows[i]->DialogueGroupCode == Episode ||
+			DialogueRows[i]->DialogueGroupCode == "Default")
+		{
+			if (DialogueRows[i]->CharacterGroupCode == NpcName &&
+				DialogueRows[i]->DialogueType == "1")
+			{
+				// 조건을 충족하는 인덱스만 StartRandomNpcTalk에 추가
+				StartRandomNpcTalk.Add(i);
+			}
+		}
+	}
+	// 0 ~ StartRandomNpcTalk 크기 - 1사이의 숫자를 랜덤으로 
+	int random = rand() % StartRandomNpcTalk.Num();
+	SetCurrentRow(StartRandomNpcTalk[random]);
+}
+
+void UDialogueTableComponent::EmptyTArray() {
+	StartRandomNpcTalk.Empty();
+}

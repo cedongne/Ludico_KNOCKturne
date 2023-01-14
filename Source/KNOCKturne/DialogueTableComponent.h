@@ -61,6 +61,8 @@ protected:
 	UPROPERTY()
 	class UDialogueManagerComponent* DialogueManager;
 
+	TArray<int32> StartRandomNpcTalk;
+
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* DialogueTable;
@@ -91,4 +93,16 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetRowSize();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString NpcName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString Episode = "Episode1";
+
+	UFUNCTION(BlueprintCallable)
+	void GetRandomTalkIndex();
+
+	UFUNCTION(BlueprintCallable)
+	void EmptyTArray();
 };
