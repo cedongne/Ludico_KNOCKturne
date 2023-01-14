@@ -6,6 +6,8 @@
 #include "KNOCKturneGameInstance.h"
 #include "Engine/GameInstance.h"
 
+#include "DialogueManagerSystem.h"
+
 UDialogueTableComponent::UDialogueTableComponent() {
 	FString StringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
 	FString DialogueStartIndexTablePath = TEXT("/Game/Assets/DataTable/StartIndexTable.StartIndexTable");
@@ -35,7 +37,6 @@ UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 
 void UDialogueTableComponent::BeginPlay() {
 	Super::BeginPlay();
-	DialogueManager = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()))->DialogueManagerComponent;
 }
 
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {

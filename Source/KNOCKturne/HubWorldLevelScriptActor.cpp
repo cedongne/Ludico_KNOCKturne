@@ -3,7 +3,6 @@
 
 #include "HubWorldLevelScriptActor.h"
 #include "Engine/GameInstance.h"
-#include "DialogueSubsystem.h"
 #include "KNOCKturneGameInstance.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {

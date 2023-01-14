@@ -5,15 +5,15 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Components/ActorComponent.h"
-#include "DialogueManagerComponent.h"
+#include "DialogueManagerSystem.h"
 #include "DialogueTableComponent.generated.h"
 
 USTRUCT(BlueprintType)
 struct FDialogueData : public FTableRowBase {
 	GENERATED_BODY()
 		
-public:
-	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType("-1"), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1") {}
+	
+	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType("-1"), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1"), Direction(1) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString DialogueGroupCode;
@@ -33,7 +33,10 @@ public:
 	FString CutSID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString StringID;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Direction;
 };
+
 
 UCLASS(ClassGroup = (DataTableComponent), meta = (BlueprintSpawnableComponent))
 class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
@@ -57,9 +60,6 @@ protected:
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
 	int32 CurrentRow;
-
-	UPROPERTY()
-	class UDialogueManagerComponent* DialogueManager;
 
 	TArray<int32> StartRandomNpcTalk;
 
