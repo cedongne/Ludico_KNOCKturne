@@ -7,7 +7,6 @@
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
-	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 
 //	GameInstance = GetGameInstance<UKNOCKturneGameInstance>();
 //	DialogueSubsystem = GameInstance->GetSubsystem<UDialogueSubsystem>();
@@ -18,5 +17,6 @@ AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 void AHubWorldLevelScriptActor::BeginPlay() {
 	Super::BeginPlay();
 
+	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 	NTLOG_S(Warning);
 }

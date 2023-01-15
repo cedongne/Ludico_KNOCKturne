@@ -34,6 +34,21 @@ class KNOCKTURNE_API UDialogueManagerSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* StringTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* StartIndexTable;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<FString, FString> DialogueMap;
+	TArray<FDialogueString*> DialogueStrings;
+	
 public:
+	UDialogueManagerSystem();
+
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+
+	UDataTable* LoadDialogueTable(FString TableName, int& Index);
+
+	UDataTable* GetStringTable();
 };
