@@ -45,7 +45,6 @@ public:
 	FTransform PeppyTransform;
 	
 private:
-
 	UPROPERTY()
 	class UDataTable* PeppyStatDataTable;
 };

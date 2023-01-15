@@ -14,6 +14,7 @@ UDialogueManagerSystem::UDialogueManagerSystem() {
 
 	StringTable = DT_STRINGTABLE.Object;
 	StartIndexTable = DT_STARTINDEXTABLE.Object;
+
 	DialogueMap.Add(TEXT("Dialogue_Prologue"), TEXT("/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue"));
 	DialogueMap.Add(TEXT("Dialogue_Npc"), TEXT("/Game/Assets/DataTable/Dialogue_Npc.Dialogue_Npc"));
 }
@@ -31,7 +32,6 @@ UDataTable* UDialogueManagerSystem::LoadDialogueTable(FString TableName, int& In
 	Index = (StartIndexTable->FindRow<FStartIndex>(*TableName, TEXT(""))->StringIndex) - 1;
 
 	return LoadObject<UDataTable>(NULL, *DialoguePath, NULL, LOAD_None, NULL);
-//	return LoadClass<UDataTable>(NULL, *DialoguePath)->GetDefaultObject<UDataTable>();
 }
 
 UDataTable* UDialogueManagerSystem::GetStringTable() {

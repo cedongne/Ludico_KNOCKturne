@@ -57,7 +57,6 @@ public:
 	class UDataTable* DialogueTable;
 	class UDialogueManagerSystem* DialogueManager;
 
-
 	virtual void BeginPlay() override;
 	UDialogueTableComponent();
 	UDialogueTableComponent(FString TablePath);

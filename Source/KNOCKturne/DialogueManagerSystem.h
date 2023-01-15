@@ -15,7 +15,7 @@ public:
 	FStartIndex() : StringIndex(0) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-		int32 StringIndex;
+	int32 StringIndex;
 };
 
 USTRUCT(BlueprintType)
@@ -26,7 +26,7 @@ public:
 	FDialogueString() : KOR("") {}
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "String")
-		FString KOR;
+	FString KOR;
 };
 
 UCLASS()
