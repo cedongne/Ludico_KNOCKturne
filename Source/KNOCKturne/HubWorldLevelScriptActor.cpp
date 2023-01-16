@@ -3,20 +3,15 @@
 
 #include "HubWorldLevelScriptActor.h"
 #include "Engine/GameInstance.h"
-#include "KNOCKturneGameInstance.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
-
-//	GameInstance = GetGameInstance<UKNOCKturneGameInstance>();
-//	DialogueSubsystem = GameInstance->GetSubsystem<UDialogueSubsystem>();
-//	DialogueSubsystem->Test();
-
+	PrologueDialogueComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueMananger"));
 }
 
 void AHubWorldLevelScriptActor::BeginPlay() {
 	Super::BeginPlay();
 
-	DialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
-	NTLOG_S(Warning);
+	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
+	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
 }
