@@ -92,9 +92,13 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 	}
 	// 0 ~ StartRandomNpcTalk 크기 - 1사이의 숫자를 랜덤으로 
 	int random = rand() % StartRandomNpcTalk.Num();
-	SetCurrentRow(StartRandomNpcTalk[random]);
+	SetCurrentRow(StartRandomNpcTalk[random] - 1);
 }
 
 void UDialogueTableComponent::EmptyTArray() {
 	StartRandomNpcTalk.Empty();
+}
+
+FString UDialogueTableComponent::GetDialogueType(int rowNum) {
+	return DialogueRows[rowNum]->DialogueType;
 }

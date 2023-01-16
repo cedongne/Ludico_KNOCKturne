@@ -95,4 +95,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EmptyTArray();
+
+	UFUNCTION(BlueprintCallable)
+	FString GetDialogueType(int rowNum);
 };
