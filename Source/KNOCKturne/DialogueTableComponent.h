@@ -97,5 +97,8 @@ public:
 	void EmptyTArray();
 
 	UFUNCTION(BlueprintCallable)
-	FString GetDialogueType(int rowNum);
+	bool NextDialogueTypeIs1();
+
+	UFUNCTION(BlueprintCallable)
+	FString GetCurrentDialogueType();
 };

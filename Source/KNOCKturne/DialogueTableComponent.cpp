@@ -85,12 +85,12 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 			if (DialogueRows[i]->CharacterGroupCode == NpcName &&
 				DialogueRows[i]->DialogueType == "1")
 			{
-				// Á¶°ÇÀ» ÃæÁ·ÇÏ´Â ÀÎµ¦½º¸¸ StartRandomNpcTalk¿¡ Ãß°¡
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ StartRandomNpcTalkï¿½ï¿½ ï¿½ß°ï¿½
 				StartRandomNpcTalk.Add(i);
 			}
 		}
 	}
-	// 0 ~ StartRandomNpcTalk Å©±â - 1»çÀÌÀÇ ¼ýÀÚ¸¦ ·£´ýÀ¸·Î 
+	// 0 ~ StartRandomNpcTalk Å©ï¿½ï¿½ - 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	int random = rand() % StartRandomNpcTalk.Num();
 	SetCurrentRow(StartRandomNpcTalk[random] - 1);
 }
@@ -99,6 +99,14 @@ void UDialogueTableComponent::EmptyTArray() {
 	StartRandomNpcTalk.Empty();
 }
 
-FString UDialogueTableComponent::GetDialogueType(int rowNum) {
-	return DialogueRows[rowNum]->DialogueType;
+bool UDialogueTableComponent::NextDialogueTypeIs1() {
+	if (DialogueRows[CurrentRow + 1]->DialogueType == "1")
+		return true;
+	else
+		return false;
+}
+
+FString UDialogueTableComponent::GetCurrentDialogueType()
+{
+	return DialogueRows[CurrentRow]->DialogueType;
 }
