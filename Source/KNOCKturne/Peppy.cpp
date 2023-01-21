@@ -48,7 +48,9 @@ APeppy::APeppy()
 
 	SlidingSpeed = 1300;
 
-	GetCharacterMovement()->MaxWalkSpeed = StandardMaxWalkSpeed * MoveSpeed;
+	CurWalkSpeed = StandardMaxWalkSpeed * MoveSpeed;
+
+	GetCharacterMovement()->MaxWalkSpeed = CurWalkSpeed;
 }
 
 // Called when the game starts or when spawned
@@ -187,7 +189,7 @@ void APeppy::SlideHandling(float DeltaTime) {
 	if (LeftSlideCooltime - DeltaTime > 0.0f) {
 		FVector velocity = GetMovementComponent()->Velocity;
 		float CurMoveVelocity = sqrt((velocity.X * velocity.X) + (velocity.Y * velocity.Y));
-		if (CurMoveVelocity > MoveSpeed) {
+		if (CurMoveVelocity > CurWalkSpeed) {
 			IsSlide = true;
 		}
 		else {

@@ -74,4 +74,5 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 5;
+	float CurWalkSpeed;
 };
