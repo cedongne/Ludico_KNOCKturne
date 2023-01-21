@@ -45,11 +45,10 @@ APeppy::APeppy()
 	CanSlide = true;
 
 	SlideCooldown = 3.0f;
-	MoveSpeed = 1.0f;
 
 	SlidingSpeed = 1300;
-	MoveSpeed = 430.0f;
-	GetCharacterMovement()->MaxWalkSpeed = MoveSpeed;
+
+	GetCharacterMovement()->MaxWalkSpeed = StandardMaxWalkSpeed * MoveSpeed;
 }
 
 // Called when the game starts or when spawned

@@ -69,6 +69,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	int32 SlidingSpeed;
 
+	// 페피가 배틀 필드에서 끝에서 끝까지 이동하는 데 10초가 걸리는 속도
+	const float StandardMaxWalkSpeed = 93.0f;
+
 	UPROPERTY(EditAnywhere)
-	float MoveSpeed;
+	float MoveSpeed = 5;
 };
