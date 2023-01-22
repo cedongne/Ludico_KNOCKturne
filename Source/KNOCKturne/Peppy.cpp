@@ -180,7 +180,6 @@ void APeppy::SlideAction() {
 
 			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
 			LaunchCharacter(Direction * SlidingSpeed, false, true);
-
 		}
 	}
 }

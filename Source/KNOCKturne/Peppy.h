@@ -46,6 +46,7 @@ protected:
 
 	void MoveForward(float value);
 	void MoveRight(float value);
+
 	void SlideAction();
 	void SlideHandling(float DeltaTime);
 
