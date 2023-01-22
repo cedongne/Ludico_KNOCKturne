@@ -110,3 +110,8 @@ FString UDialogueTableComponent::GetCurrentDialogueType()
 {
 	return DialogueRows[CurrentRow]->DialogueType;
 }
+
+void UDialogueTableComponent::SkipDialogue() {
+	while (++CurrentRow != DialogueRows.Num() - 1);
+	IsEndedDialogueRows = true;
+}

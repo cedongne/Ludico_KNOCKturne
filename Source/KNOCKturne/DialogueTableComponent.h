@@ -101,4 +101,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FString GetCurrentDialogueType();
+
+	UFUNCTION(BlueprintCallable)
+	void SkipDialogue();
 };
