@@ -104,4 +104,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SkipDialogue();
+
+	UFUNCTION(BlueprintCallable)
+	void SetIsEndedDialogueRows(bool tf);
 };
