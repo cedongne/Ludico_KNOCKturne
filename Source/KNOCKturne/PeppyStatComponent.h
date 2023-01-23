@@ -18,8 +18,10 @@ public:
 	UPeppyStatComponent();
 
 	void SetDefaultStat();
-
 	FOnHPIsZeroDelegate OnHPIsZero;
+
+	int32 GetCurrentHp();
+	void ChangeCurrentHp(int32 Value);
 
 protected:
 	// Called when the game starts

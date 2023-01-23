@@ -79,3 +79,11 @@ void UPeppyStatComponent::SpendEnergy(float Value) {
 	CurrentEP = FMath::Clamp<float>(CurrentEP - Value, MinStatData->MaxEP, MaxStatData->MaxEP);
 	NTLOG(Warning, TEXT("Spend energy %lf"), Value);
 }
+
+int32 UPeppyStatComponent::GetCurrentHp() {
+	return CurrentHP;
+}
+
+void UPeppyStatComponent::ChangeCurrentHp(int32 Value) {
+	CurrentHP += Value;
+}

@@ -115,3 +115,7 @@ void UDialogueTableComponent::SkipDialogue() {
 	while (++CurrentRow != DialogueRows.Num() - 1);
 	IsEndedDialogueRows = true;
 }
+
+void UDialogueTableComponent::SetIsEndedDialogueRows(bool tf) {
+	IsEndedDialogueRows = tf;
+}
