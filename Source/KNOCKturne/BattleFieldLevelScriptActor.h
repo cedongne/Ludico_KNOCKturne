@@ -4,7 +4,6 @@
 
 #include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
-#include "BattleTableComponent.h"
 #include "BattleFieldLevelScriptActor.generated.h"
 
 /**

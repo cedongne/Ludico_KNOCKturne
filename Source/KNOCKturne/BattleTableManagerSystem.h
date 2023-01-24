@@ -4,17 +4,18 @@
 
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
-#include "Components/ActorComponent.h"
-#include "BattleTableComponent.generated.h"
+#include "Subsystems/GameInstanceSubsystem.h"
+#include "BattleTableManagerSystem.generated.h"
+
 
 USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
 	GENERATED_BODY()
-	
+
 	FBossSkillData() : SkillStance("Default"), SkillCoolTurn(0), SprayEnergy(0), SkillDelayTime(0.0f), SkillCastTime(0.0f), ObjectSpeed(0.0f),
-						SkillIndex_1(0), Probability_1(0.0f), SkillTarget_1(-1), Value_1_N(0), Value_1_M(0), Value_1_T(0), BuffCode_1("-1"),
-						SkillIndex_2(0), Probability_2(0.0f), SkillTarget_2(-1), Value_2_N(0), Value_2_M(0), Value_2_T(0), BuffCode_2("-1") {}
-	
+		SkillIndex_1(0), Probability_1(0.0f), SkillTarget_1(-1), Value_1_N(0), Value_1_M(0), Value_1_T(0), BuffCode_1("-1"),
+		SkillIndex_2(0), Probability_2(0.0f), SkillTarget_2(-1), Value_2_N(0), Value_2_M(0), Value_2_T(0), BuffCode_2("-1") {}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillStance;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -57,15 +58,13 @@ struct FBossSkillData : public FTableRowBase {
 	FString BuffCode_2;
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class KNOCKTURNE_API UBattleTableComponent : public UActorComponent
+UCLASS()
+class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
-
-public:	
-	UBattleTableComponent();
 	
+	UBattleTableManagerSystem();
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* BossSkillTable;
-
 };

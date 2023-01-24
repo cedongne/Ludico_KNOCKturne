@@ -2,9 +2,10 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "GameFramework/Actor.h"
-#include "BattleTableComponent.h"
+#include "BattleTableManagerSystem.h"
+
 #include "BossSkillActor.generated.h"
 
 UCLASS()
@@ -17,17 +18,25 @@ public:
 	ABossSkillActor();
 
 protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool IsHitPlayer = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool IsInitialized = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stat")
+	class UBattleTableManagerSystem* BattleTableManager;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat")
 	struct FBossSkillData SkillData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
+	UStaticMeshComponent* SkillHitArea;
 
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetSkillData(FBossSkillData NewSkillData);
+	UFUNCTION(BlueprintCallable)
+	void SetSkillDataWithName(FString SkillName);
 
 	UFUNCTION(BlueprintCallable)
 	void HitPlayer();

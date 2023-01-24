@@ -3,7 +3,6 @@
 #pragma once
 
 #include "KNOCKturne.h"
-#include "BattleTableComponent.h"
 #include "Components/ActorComponent.h"
 #include "BossBattleSystemComponent.generated.h"
 
@@ -17,16 +16,14 @@ public:
 	// Sets default values for this component's properties
 	UBossBattleSystemComponent();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
-	UBattleTableComponent* BattleTableComponent;
-	
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
 	TArray<FString> BossSkillList;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
 	TMap<FString, UClass*> BossSkillMap;
 
 protected:
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable)
 	void SpawnRandomSkill();
 };

@@ -7,8 +7,17 @@
 // Sets default values for this component's properties
 UBossBattleSystemComponent::UBossBattleSystemComponent()
 {
-	BattleTableComponent = CreateDefaultSubobject<UBattleTableComponent>(TEXT("BATTLE_TABLE_COMPONENT"));
+	BossSkillList.Add("SweptGarden");
+	BossSkillMap.Add("SweptGarden", Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("/Game/Blueprints/Skills/Boss/Ep1/BP_SweptGarden2.BP_SweptGarden2_C"))));
+	NTLOG(Warning, TEXT("%d"), BossSkillList.Num());
 }
 
 void UBossBattleSystemComponent::SpawnRandomSkill() {
+}
+
+void UBossBattleSystemComponent::BeginPlay() {
+	Super::BeginPlay();
+
+	BossSkillList.Add("SweptGarden");
+	BossSkillMap.Add("SweptGarden", Cast<UClass>(StaticLoadObject(UClass::StaticClass(), NULL, TEXT("/Game/Blueprints/Skills/Boss/Ep1/BP_SweptGarden2.BP_SweptGarden2_C"))));
 }
