@@ -32,4 +32,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnFoothold();
+
+	UFUNCTION(BlueprintCallable)
+	void SetTimerUnvisibleHitArea();
 };

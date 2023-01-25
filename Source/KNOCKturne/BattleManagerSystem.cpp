@@ -27,3 +27,14 @@ void UBattleManagerSystem::SpawnFoothold() {
 //	Cast<ABattleFoothold>(FootholdObject)->SetFoothold();
 //	NTLOG(Warning, TEXT("%d"), Cast<ABattleFoothold>(FootholdObject)->data);
 }
+
+void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
+	FTimerHandle FlagUnsetTimer;
+	float UnsetTime = 8.0f;
+
+	GetWorld()->GetTimerManager().SetTimer(FlagUnsetTimer, FTimerDelegate::CreateLambda([&]()
+		{
+			VisibleBossSkillHitArea = false;
+			GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
+		}), UnsetTime, false);
+}
