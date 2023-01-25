@@ -12,10 +12,12 @@ USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
 	GENERATED_BODY()
 
-	FBossSkillData() : SkillStance("Default"), SkillCoolTurn(0), SprayEnergy(0), SkillDelayTime(0.0f), SkillCastTime(0.0f), ObjectSpeed(0.0f),
+	FBossSkillData() : BossSkillID("-1"), SkillStance("Default"), SkillCoolTurn(0), SprayEnergy(0), SkillDelayTime(0.0f), SkillCastTime(0.0f), ObjectSpeed(0.0f),
 		SkillIndex_1(0), Probability_1(0.0f), SkillTarget_1(-1), Value_1_N(0), Value_1_M(0), Value_1_T(0), BuffCode_1("-1"),
 		SkillIndex_2(0), Probability_2(0.0f), SkillTarget_2(-1), Value_2_N(0), Value_2_M(0), Value_2_T(0), BuffCode_2("-1") {}
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossSkillID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillStance;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
