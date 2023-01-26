@@ -107,4 +107,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetIsEndedDialogueRows(bool tf);
+
+	UFUNCTION(BlueprintCallable)
+	FString RandomLoadingText();
 };

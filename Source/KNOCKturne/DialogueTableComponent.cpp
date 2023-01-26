@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "KNOCKturneGameInstance.h"
 #include "Engine/GameInstance.h"
+#include <string>
 
 
 UDialogueTableComponent::UDialogueTableComponent() {
@@ -118,4 +119,10 @@ void UDialogueTableComponent::SkipDialogue() {
 
 void UDialogueTableComponent::SetIsEndedDialogueRows(bool tf) {
 	IsEndedDialogueRows = tf;
+}
+
+FString UDialogueTableComponent::RandomLoadingText() {
+	int random = rand() % 12 + 1;
+	FString stringID = "Loading_String_" + FString::FromInt(random);
+	return DialogueManager->GetStringTable()->FindRow<FDialogueString>(FName(*stringID), TEXT(""))->KOR;
 }

@@ -3,6 +3,7 @@
 
 #include "KNOCKturneGameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include "DialogueTableComponent.h"
 
 void UKNOCKturneGameInstance::Init() {
 	Super::Init();
