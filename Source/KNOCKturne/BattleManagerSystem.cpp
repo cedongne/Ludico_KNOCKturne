@@ -29,12 +29,12 @@ void UBattleManagerSystem::SpawnFoothold() {
 }
 
 void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
+	GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
 	FTimerHandle FlagUnsetTimer;
 	float UnsetTime = 8.0f;
 
 	GetWorld()->GetTimerManager().SetTimer(FlagUnsetTimer, FTimerDelegate::CreateLambda([&]()
 		{
 			VisibleBossSkillHitArea = false;
-			GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
 		}), UnsetTime, false);
 }

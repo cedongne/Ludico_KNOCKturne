@@ -52,10 +52,11 @@ protected:
 
 	void CheckInteraction();
 
-private:
 	APlayerController* PeppyController;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool IsSlide;
+private:
 
 	bool CanSlide;
 
