@@ -37,3 +37,9 @@ UDataTable* UDialogueManagerSystem::LoadDialogueTable(FString TableName, int& In
 UDataTable* UDialogueManagerSystem::GetStringTable() {
 	return StringTable;
 }
+
+FString UDialogueManagerSystem::GetString2(int index) {
+	TArray<FDialogueString*> StringRows;
+	StringTable->GetAllRows<FDialogueString>("GetAllRows", StringRows);
+	return StringRows[index]->KOR;
+}

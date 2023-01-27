@@ -122,7 +122,6 @@ void UDialogueTableComponent::SetIsEndedDialogueRows(bool tf) {
 }
 
 FString UDialogueTableComponent::RandomLoadingText() {
-	int random = rand() % 12 + 1;
-	FString stringID = "Loading_String_" + FString::FromInt(random);
-	return DialogueManager->GetStringTable()->FindRow<FDialogueString>(FName(*stringID), TEXT(""))->KOR;
+	int random = rand() % 12 + 66;
+	return DialogueManager->GetString2(random);
 }
