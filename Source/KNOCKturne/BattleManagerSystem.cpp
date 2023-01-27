@@ -29,8 +29,8 @@ void UBattleManagerSystem::SpawnFoothold() {
 }
 
 void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
-	GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
 	FTimerHandle FlagUnsetTimer;
+	GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
 	float UnsetTime = 8.0f;
 
 	GetWorld()->GetTimerManager().SetTimer(FlagUnsetTimer, FTimerDelegate::CreateLambda([&]()
