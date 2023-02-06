@@ -15,6 +15,9 @@ void ABossSkillActor::BeginPlay() {
 	Super::BeginPlay();
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManager = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+
+//	FBossSkillData* TempSkillData = BattleTableManager->BossSkillTable->FindRow<FBossSkillData>(*(GetClass()->GetName()), TEXT(""));
+//	SkillData = *TempSkillData;
 }
 
 void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
@@ -28,6 +31,5 @@ void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
 }
 void ABossSkillActor::HitPlayer() {
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-	UPeppyStatComponent* PeppyStatComponent = Peppy->PeppyStat;
-	PeppyStatComponent->ChangeCurrentHp(-SkillData.Value_1_N);
+	Peppy->PeppyHit(SkillData.Value_1_N);
 }

@@ -36,6 +36,8 @@ public:
 	UFUNCTION()
 	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	void PeppyHit(float Damage);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -71,7 +73,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	int32 SlidingSpeed;
 
-	// ÆäÇÇ°¡ ¹èÆ² ÇÊµå¿¡¼­ ³¡¿¡¼­ ³¡±îÁö ÀÌµ¿ÇÏ´Â µ¥ 10ÃÊ°¡ °É¸®´Â ¼Óµµ
+	// ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½Æ² ï¿½Êµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ 10ï¿½Ê°ï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 	const float StandardMaxWalkSpeed = 93.0f;
 
 	UPROPERTY(EditAnywhere)
