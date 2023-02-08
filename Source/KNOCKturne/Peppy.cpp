@@ -41,6 +41,7 @@ APeppy::APeppy()
 	// Initialize variables
 	CanMove = true;
 	IsSlide = false;
+	IsHit = false;
 
 	CanSlide = true;
 

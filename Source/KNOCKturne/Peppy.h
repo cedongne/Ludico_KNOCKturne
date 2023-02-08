@@ -58,6 +58,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool IsSlide;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool IsHit;
 private:
 
 	bool CanSlide;
