@@ -40,4 +40,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void HitPlayer();
+
+	UFUNCTION(BlueprintCallable)
+	FVector GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaTime);
 };
