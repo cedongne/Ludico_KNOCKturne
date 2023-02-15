@@ -101,8 +101,13 @@ void UDialogueTableComponent::EmptyTArray() {
 }
 
 bool UDialogueTableComponent::NextDialogueTypeIs1() {
-	if (DialogueRows[CurrentRow + 1]->DialogueType == "1")
-		return true;
+	if ((CurrentRow + 1) < DialogueRows.Num() && DialogueRows[CurrentRow + 1] != NULL)
+	{
+		if (DialogueRows[CurrentRow + 1]->DialogueType == "1")
+			return true;
+		else
+			return false;
+	}
 	else
 		return false;
 }
