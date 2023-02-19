@@ -35,6 +35,7 @@ void UKNOCKturneObjectPool::BeginPlay()
 }
 
 APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
+	NTLOG(Warning, TEXT("%d"), LastIndex);
 	if (FirstIndex == LastIndex) {
 		if (ObjectPool[FirstIndex]->IsActive()) {
 			NTLOG(Warning, TEXT("Object pool is full"));
@@ -80,6 +81,12 @@ APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
 }
 */
 
+void UKNOCKturneObjectPool::DeactivateAllSpawnedObject() {
+	for (int index = 0; index < PoolSize; index++) {
+		ObjectPool[index]->SetActive(false);
+		ObjectPool[index]->SetActorLocation(FVector::Zero());
+	}
+}
 
 void UKNOCKturneObjectPool::OnPooledObjectDespawn(APooledObject* PoolActor) {
 	ObjectPool[FirstIndex]->SetActive(false);

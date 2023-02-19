@@ -17,6 +17,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ObjectPool")
 	APooledObject* SpawnPooledObject();
+	UFUNCTION(BlueprintCallable, Category = "ObjectPool")
+	void DeactivateAllSpawnedObject();
 	UFUNCTION()
 	void OnPooledObjectDespawn(APooledObject* PoolActor);
 	UFUNCTION()

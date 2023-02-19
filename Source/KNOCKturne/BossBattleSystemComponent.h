@@ -6,6 +6,18 @@
 #include "Components/ActorComponent.h"
 #include "BossBattleSystemComponent.generated.h"
 
+USTRUCT()
+struct FBossSkillSpawningData {
+	GENERATED_BODY()
+	
+public:
+	FBossSkillSpawningData(UClass* _SkillObjectClass, TArray<FVector> _SkillTransform);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Data")
+	UClass* SkillObjectClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Data")
+	TArray<FVector> SkillTransform;
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UBossBattleSystemComponent : public UActorComponent
@@ -19,7 +31,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
 	TArray<FString> BossSkillList;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
-	TMap<FString, UClass*> BossSkillMap;
+	TMap<FString, FBossSkillSpawningData> BossSkillMap;
 
 protected:
 	virtual void BeginPlay() override;
