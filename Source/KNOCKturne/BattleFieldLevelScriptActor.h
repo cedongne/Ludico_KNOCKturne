@@ -17,4 +17,9 @@ class KNOCKTURNE_API ABattleFieldLevelScriptActor : public ALevelScriptActor
 public:
 	ABattleFieldLevelScriptActor();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
+	UDialogueTableComponent* DialogueTableComponent;
+
+protected:
+	virtual void BeginPlay() override;
 };
