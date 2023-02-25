@@ -17,6 +17,7 @@ UDialogueManagerSystem::UDialogueManagerSystem() {
 
 	DialogueMap.Add(TEXT("Dialogue_Prologue"), TEXT("/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue"));
 	DialogueMap.Add(TEXT("Dialogue_Npc"), TEXT("/Game/Assets/DataTable/Dialogue_Npc.Dialogue_Npc"));
+	DialogueMap.Add(TEXT("Dialogue_EP1_Battle"), TEXT("/Game/Assets/DataTable/Ep1BossSkillTable.Ep1BossSkillTable"));
 }
 
 void UDialogueManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {

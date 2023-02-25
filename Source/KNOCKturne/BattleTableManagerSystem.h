@@ -60,6 +60,19 @@ struct FBossSkillData : public FTableRowBase {
 	FString BuffCode_2;
 };
 
+USTRUCT(BlueprintType)
+struct FBossSkillSpawnData {
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	UClass* SkillObjectClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TArray<FTransform> SkillTransform;
+
+	static FBossSkillSpawnData SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms);
+};
+
 UCLASS()
 class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 {
@@ -69,4 +82,9 @@ class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* BossSkillTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
+
+private:
+	void SetBossSkillSpawnDataTable();
 };

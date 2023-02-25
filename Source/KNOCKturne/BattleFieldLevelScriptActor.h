@@ -4,6 +4,7 @@
 
 #include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
+#include "DialogueTableComponent.h"
 #include "BattleFieldLevelScriptActor.generated.h"
 
 /**
@@ -18,7 +19,7 @@ public:
 	ABattleFieldLevelScriptActor();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
-	UDialogueTableComponent* DialogueTableComponent;
+	class UDialogueTableComponent* DialogueTableComponent;
 
 protected:
 	virtual void BeginPlay() override;
