@@ -87,4 +87,5 @@ public:
 
 private:
 	void SetBossSkillSpawnDataTable();
+	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
 };
