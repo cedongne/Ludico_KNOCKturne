@@ -18,10 +18,19 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TArray<FVector> TempSpawnLocation;
 	TArray<FRotator> TempSpawnRotation;
 
+	// 언리얼 에디터 상에선 로테이터가	Roll, Pitch, Yaw
+	// C++ 스크립트 상에선 로테이터가		Pitch, Yaw, Roll	순이라는 것을 유의할 것.
+
 	TempSpawnLocation.Empty();
 	TempSpawnRotation.Empty();
 	TempSpawnLocation.Push(FVector(800.0f, 330.0f, -85.0f));
-	TempSpawnRotation.Push(FRotator::ZeroRotator);
+	TempSpawnRotation.Push(FRotator(0.0f, 0.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(1180.0f, 810.0f, -85.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 90.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(710.0f, 1220.0f, -85.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 180.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(310.0f, 740.0f, -85.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
 	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
