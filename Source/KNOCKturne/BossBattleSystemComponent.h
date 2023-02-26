@@ -21,8 +21,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
 	TArray<FString> BossSkillList;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
-	TMap<FString, FBossSkillSpawnData> BossSkillMap;
 
 protected:
 	virtual void BeginPlay() override;
