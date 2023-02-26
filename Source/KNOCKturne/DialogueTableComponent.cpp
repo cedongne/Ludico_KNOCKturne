@@ -12,13 +12,13 @@
 
 UDialogueTableComponent::UDialogueTableComponent() {
 	IsEndedDialogueRows = false;
-	CurrentRow = -1;
+	CurrentRowIndex = -1;
 }
 
 UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 {
 	IsEndedDialogueRows = false;
-	CurrentRow = -1;
+	CurrentRowIndex = -1;
 
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
@@ -32,11 +32,11 @@ void UDialogueTableComponent::BeginPlay() {
 }
 
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
-	DialogueTable = DialogueManager->LoadDialogueTable(TableName, CurrentRow);
+	DialogueTable = DialogueManager->LoadDialogueTable(TableName, StartRowIndex);
+	CurrentRowIndex = StartRowIndex;
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
 
-	NTLOG(Warning, TEXT("CurrentRow is %d"), CurrentRow);
-	NTLOG(Warning, TEXT("DialogueSize is %d"), DialogueRows.Num());
+	NTLOG(Warning, TEXT("[%s] CurrentRow : %d, DialogueRows.Num() : %d"), *TableName, CurrentRowIndex, DialogueRows.Num());
 }
 
 FDialogueData* UDialogueTableComponent::GetDialogueTableRow(FString RowID) {
@@ -48,29 +48,29 @@ FString UDialogueTableComponent::GetString(FDialogueData* DataRow) {
 }
 
 FString UDialogueTableComponent::GetStringOnBP(FDialogueData DataRow) {
-	NTLOG(Warning, TEXT("%d"), CurrentRow);
+	NTLOG(Warning, TEXT("%d"), CurrentRowIndex);
 	return DialogueManager->GetStringTable()->FindRow<FDialogueString>(*(DataRow.StringID), TEXT(""))->KOR;
 }
 
 FDialogueData UDialogueTableComponent::GetNextRowDialogueTable() {
-	if (++CurrentRow == DialogueRows.Num() - 1) {
+	if (++CurrentRowIndex >= DialogueRows.Num() - 1) {
 		IsEndedDialogueRows = true;
 		NTLOG(Warning, TEXT("End"));
 	}
-	return *(DialogueRows[CurrentRow]);
+	return *(DialogueRows[CurrentRowIndex]);
 }
 
 void UDialogueTableComponent::ResetDialogueRowPointer() {
 	IsEndedDialogueRows = false;
-	CurrentRow = -1;
+	CurrentRowIndex = StartRowIndex;
 }
 
 void UDialogueTableComponent::SetCurrentRow(int rowNum) {
-	CurrentRow = rowNum;
+	CurrentRowIndex = rowNum;
 }
 
 int UDialogueTableComponent::GetCurrentRow() {
-	return CurrentRow;
+	return CurrentRowIndex;
 }
 
 int UDialogueTableComponent::GetRowSize() {
@@ -101,9 +101,9 @@ void UDialogueTableComponent::EmptyTArray() {
 }
 
 bool UDialogueTableComponent::NextDialogueTypeIs1() {
-	if ((CurrentRow + 1) < DialogueRows.Num() && DialogueRows[CurrentRow + 1] != NULL)
+	if ((CurrentRowIndex + 1) < DialogueRows.Num() && DialogueRows[CurrentRowIndex + 1] != NULL)
 	{
-		if (DialogueRows[CurrentRow + 1]->DialogueType == "1")
+		if (DialogueRows[CurrentRowIndex + 1]->DialogueType == "1")
 			return true;
 		else
 			return false;
@@ -114,11 +114,11 @@ bool UDialogueTableComponent::NextDialogueTypeIs1() {
 
 FString UDialogueTableComponent::GetCurrentDialogueType()
 {
-	return DialogueRows[CurrentRow]->DialogueType;
+	return DialogueRows[CurrentRowIndex]->DialogueType;
 }
 
 void UDialogueTableComponent::SkipDialogue() {
-	while (++CurrentRow != DialogueRows.Num() - 1);
+	CurrentRowIndex = StartRowIndex + DialogueRows.Num() - 1;
 	IsEndedDialogueRows = true;
 }
 

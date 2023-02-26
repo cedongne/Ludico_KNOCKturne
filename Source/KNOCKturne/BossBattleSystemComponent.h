@@ -23,7 +23,6 @@ public:
 	TArray<FString> BossSkillList;
 
 protected:
-	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnRandomSkill();

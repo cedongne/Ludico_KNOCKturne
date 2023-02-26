@@ -48,7 +48,8 @@ protected:
 
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
-	int32 CurrentRow;
+	int32 CurrentRowIndex;
+	int32 StartRowIndex;
 
 	TArray<int32> StartRandomNpcTalk;
 

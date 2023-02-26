@@ -8,14 +8,7 @@
 UBossBattleSystemComponent::UBossBattleSystemComponent()
 {
 	BossSkillList.Add("SweptGarden");
-	NTLOG(Warning, TEXT("%d"), BossSkillList.Num());
 }
 
 void UBossBattleSystemComponent::SpawnRandomSkill() {
-}
-
-void UBossBattleSystemComponent::BeginPlay() {
-	Super::BeginPlay();
-
-	BossSkillList.Add("SweptGarden");
 }

@@ -27,9 +27,8 @@ void UDialogueManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 }
 
 UDataTable* UDialogueManagerSystem::LoadDialogueTable(FString TableName, int& Index) {
-	NTLOG(Warning, TEXT("%s"), *TableName);
 	FString DialoguePath = DialogueMap[TableName];
-	NTLOG(Warning, TEXT("%s"), *DialoguePath);
+	NTLOG(Warning, TEXT("Loaded Table : %s"), *DialoguePath);
 	Index = (StartIndexTable->FindRow<FStartIndex>(*TableName, TEXT(""))->StringIndex) - 1;
 
 	return LoadObject<UDataTable>(NULL, *DialoguePath, NULL, LOAD_None, NULL);
