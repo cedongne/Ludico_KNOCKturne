@@ -10,15 +10,6 @@
 // Sets default values
 ABossSkillActor::ABossSkillActor()
 {
-	static ConstructorHelpers::FObjectFinder<UDataTable> DataTableAsset(TEXT("DataTable'/Game/DataTables/MyDataTable.MyDataTable'"));
-
-	
-	if (DataTableAsset.Succeeded())
-	{
-		
-		// Set the DataTable asset reference
-		UDataTable* MyDataTable = DataTableAsset.Object;
-	}
 }
 
 void ABossSkillActor::BeginPlay() {
@@ -26,14 +17,22 @@ void ABossSkillActor::BeginPlay() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManager = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 
+//	BattleTableManager->BattleTableInitDelegate.AddUFunction(this, FName("InitSkillData"));
+
 //	FBossSkillData* TempSkillData = BattleTableManager->BossSkillTable->FindRow<FBossSkillData>(*(GetClass()->GetName()), TEXT(""));
 //	SkillData = *TempSkillData;	// 포인터 타입의 FBossSkillData 구조체 변수를 값 타입의 FBossSkillData 변수에 포인터 연산으로 저장하는 것이 불가능함.
 								// = 연산자의 정의가 되어 있지 않다는 에러.
 }
 
+void ABossSkillActor::InitSkillData(FBossSkillData NewSkillData) {
+	SkillData = NewSkillData;
+	IsInitialized = true;
+}
+
 void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	SkillData = NewSkillData;
 	IsInitialized = true;
+	NTLOG(Warning, TEXT("Data set"));
 }
 
 void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
