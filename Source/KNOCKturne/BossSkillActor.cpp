@@ -4,11 +4,21 @@
 #include "BossSkillActor.h"
 #include "Peppy.h"
 #include "PeppyStatComponent.h"
+#include "Engine/DataTable.h"
 #include "BattleTableManagerSystem.h"
 
 // Sets default values
 ABossSkillActor::ABossSkillActor()
 {
+	static ConstructorHelpers::FObjectFinder<UDataTable> DataTableAsset(TEXT("DataTable'/Game/DataTables/MyDataTable.MyDataTable'"));
+
+	
+	if (DataTableAsset.Succeeded())
+	{
+		
+		// Set the DataTable asset reference
+		UDataTable* MyDataTable = DataTableAsset.Object;
+	}
 }
 
 void ABossSkillActor::BeginPlay() {
@@ -31,6 +41,7 @@ void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
 	IsInitialized = true;
 }
 void ABossSkillActor::HitPlayer() {
+	NTLOG(Warning, TEXT("%d"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 	Peppy->PeppyHit(SkillData.Value_1_N);
 }

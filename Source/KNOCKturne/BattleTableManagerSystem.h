@@ -7,6 +7,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BattleTableManagerSystem.generated.h"
 
+//DECLARE_MULTICAST_DELEGATE
 
 USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
