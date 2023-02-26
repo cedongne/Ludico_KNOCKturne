@@ -51,6 +51,7 @@ public:
 	UDataTable* LoadDialogueTable(FString TableName, int& Index);
 
 	UDataTable* GetStringTable();
+	UDataTable* GetStartIndexTable();
 
 	FString GetString2(int index);
 };

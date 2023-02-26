@@ -9,6 +9,8 @@
 #include "Engine/GameInstance.h"
 #include <string>
 
+#define LOADING_STRING_NUM 12
+
 
 UDialogueTableComponent::UDialogueTableComponent() {
 	IsEndedDialogueRows = false;
@@ -127,6 +129,6 @@ void UDialogueTableComponent::SetIsEndedDialogueRows(bool tf) {
 }
 
 FString UDialogueTableComponent::RandomLoadingText() {
-	int random = rand() % 12 + 66;
+	int random = rand() % LOADING_STRING_NUM + DialogueManager->GetStartIndexTable()->FindRow<FStartIndex>(TEXT("Loading_String"), TEXT(""))->StringIndex;
 	return DialogueManager->GetString2(random);
 }

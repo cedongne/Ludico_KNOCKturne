@@ -38,6 +38,10 @@ UDataTable* UDialogueManagerSystem::GetStringTable() {
 	return StringTable;
 }
 
+UDataTable* UDialogueManagerSystem::GetStartIndexTable() {
+	return StartIndexTable;
+}
+
 FString UDialogueManagerSystem::GetString2(int index) {
 	TArray<FDialogueString*> StringRows;
 	StringTable->GetAllRows<FDialogueString>("GetAllRows", StringRows);
