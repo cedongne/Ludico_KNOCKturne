@@ -7,7 +7,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BattleTableManagerSystem.generated.h"
 
-//DECLARE_MULTICAST_DELEGATE
+DECLARE_MULTICAST_DELEGATE(FBattleTableInitDelegate);
 
 USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
@@ -81,6 +81,8 @@ class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 	
 	UBattleTableManagerSystem();
 public:
+	FBattleTableInitDelegate BattleTableInitDelegate;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* BossSkillTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")

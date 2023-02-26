@@ -33,6 +33,9 @@ protected:
 	UStaticMeshComponent* SkillHitArea;
 
 public:
+	UFUNCTION()
+	void InitSkillData(FBossSkillData NewSkillData);
+
 	UFUNCTION(BlueprintCallable)
 	void SetSkillData(FBossSkillData NewSkillData);
 	UFUNCTION(BlueprintCallable)
