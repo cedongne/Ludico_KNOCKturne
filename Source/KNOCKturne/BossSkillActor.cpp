@@ -32,7 +32,7 @@ void ABossSkillActor::InitSkillData(FBossSkillData NewSkillData) {
 void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	SkillData = NewSkillData;
 	IsInitialized = true;
-	NTLOG(Warning, TEXT("Data set"));
+	NTLOG(Warning, TEXT("Data set %lf"), SkillData.Value_1_N);
 }
 
 void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
@@ -40,7 +40,7 @@ void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
 	IsInitialized = true;
 }
 void ABossSkillActor::HitPlayer() {
-	NTLOG(Warning, TEXT("%d"), SkillData.Value_1_N);
+	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 	Peppy->PeppyHit(SkillData.Value_1_N);
 }
