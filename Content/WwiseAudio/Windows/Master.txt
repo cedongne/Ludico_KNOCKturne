@@ -1,6 +1,0 @@
-Event	ID	Name			Wwise Object Path	Notes
-	3698188426	Test_BGM			\MUS\Test_BGM	
-
-In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	830225814	BGM_Battle1_136bpm4_4	E:\GameDev\[Ludico] KNOCKTurne\Sound\0. Wwise bulid\KNOCKTurne\.cache\Windows\SFX\BGM_Battle1_136bpm4_4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\BGM_Battle1_136bpm4_4\BGM_Battle1_136bpm4_4		27394116
-
