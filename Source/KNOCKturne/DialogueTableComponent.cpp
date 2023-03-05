@@ -35,6 +35,7 @@ void UDialogueTableComponent::BeginPlay() {
 
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
 	DialogueTable = DialogueManager->LoadDialogueTable(TableName, StartRowIndex);
+	StartRowIndex = -1;
 	CurrentRowIndex = StartRowIndex;
 	DialogueTable->GetAllRows<FDialogueData>("GetAllRows", DialogueRows);
 
