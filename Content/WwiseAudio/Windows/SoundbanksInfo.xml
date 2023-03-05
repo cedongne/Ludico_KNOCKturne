@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="12" SoundbankVersion="140">
+	<RootPaths>
+		<ProjectRoot>E:\GameDev\[Ludico] KNOCKTurne\Sound\0. Wwise bulid\KNOCKTurne\</ProjectRoot>
+		<SourceFilesRoot>E:\GameDev\[Ludico] KNOCKTurne\Sound\0. Wwise bulid\KNOCKTurne\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\WwiseAudio\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>E:\GameDev\[Ludico] KNOCKTurne\Sound\0. Wwise bulid\KNOCKTurne\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" GUID="{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}" Language="SFX" Hash="702052793">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="4056684167" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="3748393227">
+			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
+			<ShortName>Master</ShortName>
+			<Path>Master.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3698188426" Name="Test_BGM" ObjectPath="\Events\MUS\Test_BGM" GUID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}" DurationType="OneShot" DurationMin="155.295074" DurationMax="155.295074">
+					<IncludedMemoryFiles>
+						<File Id="830225814" Language="SFX">
+							<ShortName>BGM_Battle1_136bpm4_4.wav</ShortName>
+							<Path>SFX\BGM_Battle1_136bpm4_4_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+			</IncludedEvents>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>
