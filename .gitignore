@@ -76,3 +76,7 @@ DerivedDataCache/*
 # Assets
 
 Content/Assets/*
+
+# wwise
+
+Content/WwiseAudio/Windows/*
