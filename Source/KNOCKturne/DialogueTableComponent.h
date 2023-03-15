@@ -12,7 +12,7 @@ struct FDialogueData : public FTableRowBase {
 	GENERATED_BODY()
 		
 	
-	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType("-1"), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1"), Direction(1) {}
+	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType("-1"), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1"), Direction("1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString DialogueGroupCode;
@@ -33,7 +33,7 @@ struct FDialogueData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString StringID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Direction;
+	FString Direction;
 };
 
 
