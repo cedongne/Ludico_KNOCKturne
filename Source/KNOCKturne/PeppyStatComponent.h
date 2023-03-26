@@ -20,8 +20,8 @@ public:
 	void SetDefaultStat();
 	FOnHPIsZeroDelegate OnHPIsZero;
 
-	int32 GetCurrentHp();
-	void ChangeCurrentHp(int32 Value);
+	int32 GetCurrentEP();
+	void ChangeCurrentEP(int32 Value);
 
 protected:
 	// Called when the game starts
@@ -43,18 +43,28 @@ private:
 	FPeppyStatData* MinStatData = nullptr;
 	FPeppyStatData* MaxStatData = nullptr;
 
-	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
-	int32 MaxHP;
-	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
-	int32 CurrentHP;
-	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
-	int32 MaxEP;
+
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
 	int32 CurrentEP;
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
-	float SlidingCooldown;
+	int32 MaxEP;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 DefenseDamage;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 AttackDamage;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	float Avd;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 Turn;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 CurrentEnergy;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 MaxEnergy;
+	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
+	int32 SlidingCooldown;
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
 	float LeftSlidingCooltime;
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))
-	int32 DamageDecrease;
+	float speed;
+
 };

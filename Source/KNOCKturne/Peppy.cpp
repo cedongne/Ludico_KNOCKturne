@@ -204,5 +204,5 @@ void APeppy::SlideHandling(float DeltaTime) {
 }
 
 void APeppy::PeppyHit(float Damage) {
-	PeppyStat->ChangeCurrentHp(-Damage);
+	PeppyStat->ChangeCurrentEP(-Damage);
 }

@@ -3,11 +3,69 @@
 #pragma once
 
 #include "KNOCKturne.h"
+
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+
 #include "BattleTableManagerSystem.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FBattleTableInitDelegate);
+
+USTRUCT()
+struct FCommonStatData : public FTableRowBase {
+	GENERATED_BODY()
+
+	public:
+	FCommonStatData() : EP(0), MaxEP(0), DefenseDamage(0), AttackDamage(0), Avd(0.0f), Turn(0) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 EP;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 MaxEP;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 DefenseDamage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 AttackDamage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Avd;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Turn;
+};
+
+USTRUCT(BlueprintType)
+struct FPeppyStatData : public FCommonStatData {
+	GENERATED_BODY()
+
+	public:
+	FPeppyStatData() : Energy(0), MaxEnergy(0), SlidingCooldown(3), speed(0.0f) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Energy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 MaxEnergy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SlidingCooldown;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float speed;
+};
+
+USTRUCT()
+struct FBossStatData : public FCommonStatData {
+	GENERATED_BODY()
+
+	FBossStatData() : BossMinDelay(0.0f), BossMaxDelay(0.0f), BossStanceCode("-1"), BossInitStance("-1"), BossEnergyDrop(0) {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float BossMinDelay;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float BossMaxDelay;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossStanceCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossInitStance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 BossEnergyDrop;
+};
 
 USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
@@ -65,7 +123,7 @@ USTRUCT(BlueprintType)
 struct FBossSkillSpawnData {
 	GENERATED_BODY()
 
-public:
+	public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	UClass* SkillObjectClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -81,6 +139,7 @@ class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 	
 	UBattleTableManagerSystem();
 public:
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	FBattleTableInitDelegate BattleTableInitDelegate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
@@ -88,7 +147,21 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
+	UFUNCTION(BlueprintCallable)
+	void OperationSkillData(FBossSkillData SkillIndex);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
+	FPeppyStatData CurPeppyStat;
+
+	FPeppyStatData* GetPeppyStatData(FString DataType);
 private:
 	void SetBossSkillSpawnDataTable();
 	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
+
+	UPROPERTY()
+	class UDataTable* PeppyStatDataTable;
+	UPROPERTY()
+	class UDataTable* BossStatDataTable;
+
+	class UKNOCKturneGameInstance* GameInstance;
 };

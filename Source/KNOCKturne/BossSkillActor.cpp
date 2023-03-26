@@ -6,6 +6,7 @@
 #include "PeppyStatComponent.h"
 #include "Engine/DataTable.h"
 #include "BattleTableManagerSystem.h"
+#include "KNOCKturneGameInstance.h"
 
 // Sets default values
 ABossSkillActor::ABossSkillActor()
@@ -43,6 +44,8 @@ void ABossSkillActor::HitPlayer() {
 	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 	Peppy->PeppyHit(SkillData.Value_1_N);
+
+	BattleTableManager->OperationSkillData(SkillData);
 }
 
 FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaTime) {

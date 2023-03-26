@@ -12,17 +12,4 @@ void UKNOCKturneGameInstance::Init() {
 }
 
 UKNOCKturneGameInstance::UKNOCKturneGameInstance() {
-	FString PeppyStatDataPath = TEXT("/Game/Assets/DataTable/PeppyStat.PeppyStat");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSTATDATATABLE(*PeppyStatDataPath);
-
-	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
-	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
-	NTCHECK(PeppyStatDataTable->IsValidLowLevel());
-
-	CurPeppyStat = *GetPeppyStatData("Init");
-	NTLOG(Warning, TEXT("%d"), CurPeppyStat.MaxHP);
-}
-
-FPeppyStatData* UKNOCKturneGameInstance::GetPeppyStatData(FString DataType) {
-	return PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));
 }

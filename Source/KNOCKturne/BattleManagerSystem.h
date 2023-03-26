@@ -3,12 +3,15 @@
 #pragma once
 
 #include "KNOCKturne.h"
+#include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BattleManagerSystem.generated.h"
 
 /**
  * 
  */
+
+
 UCLASS()
 class KNOCKTURNE_API UBattleManagerSystem : public UGameInstanceSubsystem
 {
@@ -27,6 +30,7 @@ protected:
 	UClass* FootholdClass;
 	TSubclassOf<AActor> FootholdSubclass;
 	AActor* FootholdObject;
+
 public:
 	void InitializeFootholdObject();
 

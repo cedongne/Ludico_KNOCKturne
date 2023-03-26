@@ -2,7 +2,11 @@
 
 
 #include "BattleTableManagerSystem.h"
-#include "Kismet/KismetMathLibrary.h"
+#include "BossSkillActor.h"
+
+void UBattleTableManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
+	Super::Initialize(Collection);
+}
 
 UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	FString BossSkilTablePath = TEXT("/Game/Assets/DataTable/Ep1BossSkillTable.Ep1BossSkillTable");
@@ -12,15 +16,30 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	BossSkillTable = DT_BOSSKILLTABLE.Object;
 
 	SetBossSkillSpawnDataTable();
+
+	FString PeppyStatDataPath = TEXT("/Game/Assets/DataTable/PeppyStatTable.PeppyStatTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSTATDATATABLE(*PeppyStatDataPath);
+
+	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
+	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
+
+	auto InitPeppyStatData = GetPeppyStatData("Init");
+	if (InitPeppyStatData == nullptr) {
+		NTLOG(Warning, TEXT("Load fail"));
+	}
+	else {
+		CurPeppyStat = *GetPeppyStatData("Init");
+	}
 }
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TArray<FVector> TempSpawnLocation;
-	TArray<FRotator> TempSpawnRotation;
-
 	// 언리얼 에디터 상에선 로테이터가	Roll, Pitch, Yaw
 	// C++ 스크립트 상에선 로테이터가		Pitch, Yaw, Roll	순이라는 것을 유의할 것.
+	TArray<FRotator> TempSpawnRotation;
 
+
+	/// SweptGarden
 	TempSpawnLocation.Empty();
 	TempSpawnRotation.Empty();
 	TempSpawnLocation.Push(FVector(800.0f, 330.0f, -85.0f));
@@ -40,6 +59,8 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	);
 
 	// Note : 혹시 얕은 복사로 인해 TempSpawnLocation과 TempSpawnRotation 객체가 초기화되면서 문제가 발생하는지에 대한 이슈 관리가 필요함.
+
+
 }
 
 FBossSkillSpawnData FBossSkillSpawnData::SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms) {
@@ -76,4 +97,25 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 	BossSkillSpawnDataMap.Add("SweptGarden", FBossSkillSpawnData::SetBossSkillSpawnData(TempSkillObjectClass, TempSkillTransform));
 
 	NTLOG(Warning, TEXT("Skill is loaded"));
+}
+
+void UBattleTableManagerSystem::OperationSkillData(FBossSkillData SkillIndex) {
+	FCommonStatData* TargetStatData;
+
+	int32 SkillIndexes[2] = { SkillIndex.SkillIndex_1, SkillIndex.SkillIndex_2 };
+	int32 SkillTargets[2] = { SkillIndex.SkillTarget_1, SkillIndex.SkillTarget_2 };
+
+	for (int count = 0; count < 2; count++) {
+		if (SkillTargets[count] == 0) {
+			TargetStatData = &CurPeppyStat;
+		}
+	}
+
+}
+FPeppyStatData* UBattleTableManagerSystem::GetPeppyStatData(FString DataType) {
+	FPeppyStatData* statData = PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));
+	if (statData == nullptr) {
+		return nullptr;
+	}
+	return statData;
 }

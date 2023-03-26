@@ -2,7 +2,9 @@
 
 
 #include "PeppyStatComponent.h"
+#include "BattleTableManagerSystem.h"
 #include "KNOCKturneGameInstance.h"
+
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -12,7 +14,7 @@ UPeppyStatComponent::UPeppyStatComponent()
 
 	// It makes call InitializeComponent() method
 	bWantsInitializeComponent = true;
-	CurrentHP = 0;
+	CurrentEP = 0;
 }
 
 
@@ -29,32 +31,36 @@ void UPeppyStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
 
 	SetDefaultStat();
-//	NTLOG(Warning, TEXT("%lf"), CurrentHP);
+//	NTLOG(Warning, TEXT("%lf"), CurrentEP);
 }
 
 void UPeppyStatComponent::SetDefaultStat() {
-	auto PeppyStatDataInstance = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	NTCHECK(PeppyStatDataInstance != nullptr);
+	auto KNOCKturneGameInstance = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	NTCHECK(KNOCKturneGameInstance != nullptr);
+	auto BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	NTCHECK(BattleTableManagerSystem != nullptr);
 	
-	CurStatData = PeppyStatDataInstance->GetPeppyStatData("Init");
-	MinStatData = PeppyStatDataInstance->GetPeppyStatData("Min");
-	MaxStatData = PeppyStatDataInstance->GetPeppyStatData("Max");
+	CurStatData = BattleTableManagerSystem->GetPeppyStatData("Init");
+	MinStatData = BattleTableManagerSystem->GetPeppyStatData("Min");
+	MaxStatData = BattleTableManagerSystem->GetPeppyStatData("Max");
 
 	NTCHECK(CurStatData != nullptr);
+	NTCHECK(MinStatData != nullptr);
+	NTCHECK(MaxStatData != nullptr);
 
-	MaxHP = CurStatData->MaxHP;
-	CurrentHP = CurStatData->MaxHP;
 	MaxEP = CurStatData->MaxEP;
 	CurrentEP = CurStatData->MaxEP;
+	MaxEnergy = CurStatData->MaxEnergy;
+	CurrentEnergy = CurStatData->MaxEnergy;
 	SlidingCooldown = CurStatData->SlidingCooldown;
 	LeftSlidingCooltime = CurStatData->SlidingCooldown;
-	DamageDecrease = CurStatData->DamageDecrease;
+	DefenseDamage = CurStatData->DefenseDamage;
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
 	NTCHECK(CurStatData != nullptr);
-	CurrentHP = FMath::Clamp<float>(CurrentHP - Value, MinStatData->MaxHP, MaxStatData->MaxHP);
-	if (CurrentHP == MinStatData->MaxHP) {
+	CurrentEP = FMath::Clamp<float>(CurrentEP - Value, MinStatData->MaxEP, MaxStatData->MaxEP);
+	if (CurrentEP == MinStatData->MaxEP) {
 		OnHPIsZero.Broadcast();
 	}
 	NTLOG(Warning, TEXT("Spend HP %lf"), Value);
@@ -62,7 +68,7 @@ void UPeppyStatComponent::GetDamaged(float Value) {
 
 void UPeppyStatComponent::Heal(float Value) {
 	NTCHECK(CurStatData != nullptr);
-	CurrentHP = FMath::Clamp<float>(CurrentHP + Value, MinStatData->MaxHP, MaxStatData->MaxHP);
+	CurrentEP = FMath::Clamp<float>(CurrentEP + Value, MinStatData->MaxEP, MaxStatData->MaxEP);
 	NTLOG(Warning, TEXT("Gain HP %lf"), Value);
 }
 
@@ -80,10 +86,10 @@ void UPeppyStatComponent::SpendEnergy(float Value) {
 	NTLOG(Warning, TEXT("Spend energy %lf"), Value);
 }
 
-int32 UPeppyStatComponent::GetCurrentHp() {
-	return CurrentHP;
+int32 UPeppyStatComponent::GetCurrentEP() {
+	return CurrentEP;
 }
 
-void UPeppyStatComponent::ChangeCurrentHp(int32 Value) {
-	CurrentHP += Value;
+void UPeppyStatComponent::ChangeCurrentEP(int32 Value) {
+	CurrentEP += Value;
 }
