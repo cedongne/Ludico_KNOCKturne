@@ -89,12 +89,10 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 			if (DialogueRows[i]->CharacterGroupCode == NpcName &&
 				DialogueRows[i]->DialogueType == "1")
 			{
-				// ������ �����ϴ� �ε����� StartRandomNpcTalk�� �߰�
 				StartRandomNpcTalk.Add(i);
 			}
 		}
 	}
-	// 0 ~ StartRandomNpcTalk ũ�� - 1������ ���ڸ� �������� 
 	int random = rand() % StartRandomNpcTalk.Num();
 	SetCurrentRow(StartRandomNpcTalk[random] - 1);
 }
