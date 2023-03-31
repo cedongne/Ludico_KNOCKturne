@@ -150,18 +150,24 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OperationSkillData(FBossSkillData SkillIndex);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
-	FPeppyStatData CurPeppyStat;
 
 	FPeppyStatData* GetPeppyStatData(FString DataType);
+	UFUNCTION(BlueprintCallable)
+	FPeppyStatData GetCurPeppyStat_BP();
+	UFUNCTION(BlueprintCallable)
+	FBossStatData GetCurBossStat_BP();
 private:
-	void SetBossSkillSpawnDataTable();
-	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
+	class UKNOCKturneGameInstance* GameInstance;
 
 	UPROPERTY()
 	class UDataTable* PeppyStatDataTable;
 	UPROPERTY()
 	class UDataTable* BossStatDataTable;
 
-	class UKNOCKturneGameInstance* GameInstance;
+	FPeppyStatData CurPeppyStat;
+	FBossStatData CurBossStat;
+
+	void SetBossSkillSpawnDataTable();
+	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
+
 };

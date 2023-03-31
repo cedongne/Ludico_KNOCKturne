@@ -109,6 +109,10 @@ void UBattleTableManagerSystem::OperationSkillData(FBossSkillData SkillIndex) {
 		if (SkillTargets[count] == 0) {
 			TargetStatData = &CurPeppyStat;
 		}
+		else if (SkillTargets[count] == 1) {
+//			TargetStatData = &curboss
+		}
+		NTLOG(Warning, TEXT("Set"));
 	}
 
 }
@@ -118,4 +122,12 @@ FPeppyStatData* UBattleTableManagerSystem::GetPeppyStatData(FString DataType) {
 		return nullptr;
 	}
 	return statData;
+}
+
+FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStat_BP() {
+	return CurPeppyStat;
+}
+
+FBossStatData UBattleTableManagerSystem::GetCurBossStat_BP() {
+	return CurBossStat;
 }
