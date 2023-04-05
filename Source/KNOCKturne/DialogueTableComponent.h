@@ -12,14 +12,14 @@ struct FDialogueData : public FTableRowBase {
 	GENERATED_BODY()
 		
 	
-	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType("-1"), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1"), Direction("1") {}
+	FDialogueData() : DialogueGroupCode("-1"), CharacterGroupCode("-1"), DialogueType(0), CharacterStringID("-1"), SpeakType(-1), ImageLID("-1"), ImageRID("-1"), CutSID("-1"), StringID("-1"), Direction("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString DialogueGroupCode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString CharacterGroupCode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString DialogueType;
+	int32 DialogueType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString CharacterStringID;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -101,7 +101,7 @@ public:
 	bool NextDialogueTypeIs1();
 
 	UFUNCTION(BlueprintCallable)
-	FString GetCurrentDialogueType();
+	int32 GetCurrentDialogueType();
 
 	UFUNCTION(BlueprintCallable)
 	void SkipDialogue();

@@ -87,7 +87,7 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 			DialogueRows[i]->DialogueGroupCode == "Default")
 		{
 			if (DialogueRows[i]->CharacterGroupCode == NpcName &&
-				DialogueRows[i]->DialogueType == "1")
+				DialogueRows[i]->DialogueType == 1)
 			{
 				StartRandomNpcTalk.Add(i);
 			}
@@ -104,7 +104,7 @@ void UDialogueTableComponent::EmptyTArray() {
 bool UDialogueTableComponent::NextDialogueTypeIs1() {
 	if ((CurrentRowIndex + 1) < DialogueRows.Num() && DialogueRows[CurrentRowIndex + 1] != NULL)
 	{
-		if (DialogueRows[CurrentRowIndex + 1]->DialogueType == "1")
+		if (DialogueRows[CurrentRowIndex + 1]->DialogueType == 1)
 			return true;
 		else
 			return false;
@@ -113,7 +113,7 @@ bool UDialogueTableComponent::NextDialogueTypeIs1() {
 		return false;
 }
 
-FString UDialogueTableComponent::GetCurrentDialogueType()
+int32 UDialogueTableComponent::GetCurrentDialogueType()
 {
 	return DialogueRows[CurrentRowIndex]->DialogueType;
 }

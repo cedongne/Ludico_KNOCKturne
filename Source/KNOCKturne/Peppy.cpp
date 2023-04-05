@@ -172,8 +172,14 @@ void APeppy::SlideAction() {
 
 			FVector HitLocation = FVector::ZeroVector;
 			FHitResult Hit;
-			PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
-			HitLocation = Hit.Location;
+			bool ExistHitResult = PeppyController->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+			if (ExistHitResult) {
+				HitLocation = Hit.Location;
+			}
+			else {
+				NTLOG(Warning, TEXT("HitResult load failed."));
+				return;
+			}
 
 			FRotator RotateDegree = FRotator(0.0f, (HitLocation - GetActorLocation()).Rotation().Yaw, 0.0f);
 			GetCapsuleComponent()->SetWorldRotation(RotateDegree);
