@@ -144,13 +144,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* BossSkillTable;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
-	UFUNCTION(BlueprintCallable)
-	void OperationSkillData(FBossSkillData SkillIndex);
-
-
+public:
 	FPeppyStatData* GetPeppyStatData(FString DataType);
 	UFUNCTION(BlueprintCallable)
 	FPeppyStatData GetCurPeppyStat_BP();
@@ -169,5 +167,14 @@ private:
 
 	void SetBossSkillSpawnDataTable();
 	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
+
+public:
+	/* Skill System */
+	UFUNCTION(BlueprintCallable)
+	void ApplySkillStatData(FBossSkillData SkillIndex);
+
+private:
+	void OperateSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData);
+	/****************/
 
 };

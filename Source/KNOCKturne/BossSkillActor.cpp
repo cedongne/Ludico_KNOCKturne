@@ -45,7 +45,7 @@ void ABossSkillActor::HitPlayer() {
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 	Peppy->PeppyHit(SkillData.Value_1_N);
 
-	BattleTableManager->OperationSkillData(SkillData);
+	BattleTableManager->ApplySkillStatData(SkillData);
 }
 
 FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaTime) {

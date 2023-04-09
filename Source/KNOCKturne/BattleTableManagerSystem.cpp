@@ -99,23 +99,40 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 	NTLOG(Warning, TEXT("Skill is loaded"));
 }
 
-void UBattleTableManagerSystem::OperationSkillData(FBossSkillData SkillIndex) {
-	FCommonStatData* TargetStatData;
 
-	int32 SkillIndexes[2] = { SkillIndex.SkillIndex_1, SkillIndex.SkillIndex_2 };
-	int32 SkillTargets[2] = { SkillIndex.SkillTarget_1, SkillIndex.SkillTarget_2 };
+void UBattleTableManagerSystem::ApplySkillStatData(FBossSkillData SkillData) {
+	FCommonStatData* TargetStatData = nullptr;
 
-	for (int count = 0; count < 2; count++) {
-		if (SkillTargets[count] == 0) {
+	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
+	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
+
+	for (int IndexCount = 0; IndexCount < 2; IndexCount++) {
+		if (SkillTargets[IndexCount] == 0) {
 			TargetStatData = &CurPeppyStat;
 		}
-		else if (SkillTargets[count] == 1) {
-//			TargetStatData = &curboss
+		else if (SkillTargets[IndexCount] == 1) {
+			TargetStatData = &CurPeppyStat;
+			//			TargetStatData = &curboss
 		}
-		NTLOG(Warning, TEXT("Set"));
-	}
+		else {
+			NTLOG(Warning, TEXT("Target set fail : SkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
+			return;
+		}
 
+		OperateSkillByIndex(SkillIndexes[IndexCount], TargetStatData, &SkillData);
+	}
 }
+
+void UBattleTableManagerSystem::OperateSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData) {
+	switch (SkillIndex) {
+	/*
+		11 단순 공격 : Target의 EP를 즉시 N만큼 깎음.
+	*/
+	case 11:
+		TargetStatData->EP -= SkillData->Value_1_N;
+	}
+}
+
 FPeppyStatData* UBattleTableManagerSystem::GetPeppyStatData(FString DataType) {
 	FPeppyStatData* statData = PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));
 	if (statData == nullptr) {
