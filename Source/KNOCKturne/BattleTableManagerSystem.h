@@ -49,6 +49,89 @@ struct FPeppyStatData : public FCommonStatData {
 	float speed;
 };
 
+USTRUCT(BlueprintType)
+struct FPeppySkillData : public FTableRowBase {
+	GENERATED_BODY()
+
+	FPeppySkillData() : SkillId("-1"), SkillGroupCode("Default"), SkillAcquire("1"), Cost(0), SkillStance("Default"), SkillCoolTurn(0), 
+		SkillIndex_1(0), Probability_1(0.0f), SkillTarget_1(-1), Value_1_N(0), Value_1_M(0), Value_1_T(0), BuffCode_1("-1"),
+		SkillIndex_2(0), Probability_2(0.0f), SkillTarget_2(-1), Value_2_N(0), Value_2_M(0), Value_2_T(0), BuffCode_2("-1"),
+		SkillIndex_3(0), Probability_3(0.0f), SkillTarget_3(-1), Value_3_N(0), Value_3_M(0), Value_3_T(0), BuffCode_3("-1"),
+		SkillAnimation("-1"), SkillEffect("-1"), SkillSound("-1"), BossEffect("-1"), BossAnimationDelay("-1"), BossSound("-1"), SkillIcon("-1"), SkillDescript{}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillGroupCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillAcquire;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillStance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Cost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillCoolTurn;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillIndex_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Probability_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillTarget_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_1_N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_1_M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_1_T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffCode_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillIndex_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Probability_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillTarget_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_2_N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_2_M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_2_T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffCode_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillIndex_3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Probability_3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SkillTarget_3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_3_N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_3_M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value_3_T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffCode_3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillAnimation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossAnimationDelay;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BossSound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SkillDescript;
+};
+
+
 USTRUCT()
 struct FBossStatData : public FCommonStatData {
 	GENERATED_BODY()
