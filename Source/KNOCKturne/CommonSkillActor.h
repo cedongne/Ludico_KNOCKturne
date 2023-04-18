@@ -19,8 +19,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
+	bool IsHitPlayer = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
+	bool IsInitialized = false;
+
+	class UBattleTableManagerSystem* BattleTableManager;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
+	UStaticMeshComponent* SkillHitArea;
 
 };

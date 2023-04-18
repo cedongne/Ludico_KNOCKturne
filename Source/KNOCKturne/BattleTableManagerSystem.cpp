@@ -12,14 +12,16 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	FString BossSkilTablePath = TEXT("/Game/Assets/DataTable/Ep1BossSkillTable.Ep1BossSkillTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSKILLTABLE(*BossSkilTablePath);
 	NTCHECK(DT_BOSSKILLTABLE.Succeeded());
-
 	BossSkillTable = DT_BOSSKILLTABLE.Object;
-
 	SetBossSkillSpawnDataTable();
+
+	FString PeppySkilTablePath = TEXT("/Game/Assets/DataTable/PeppySkillTable.PeppySkillTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSKILLTABLE(*PeppySkilTablePath);
+	NTCHECK(DT_PEPPYSKILLTABLE.Succeeded());
+	PeppySkillTable = DT_PEPPYSKILLTABLE.Object;
 
 	FString PeppyStatDataPath = TEXT("/Game/Assets/DataTable/PeppyStatTable.PeppyStatTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSTATDATATABLE(*PeppyStatDataPath);
-
 	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
 
@@ -139,6 +141,10 @@ FPeppyStatData* UBattleTableManagerSystem::GetPeppyStatData(FString DataType) {
 		return nullptr;
 	}
 	return statData;
+}
+
+UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
+	return PeppySkillTable;
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStat_BP() {

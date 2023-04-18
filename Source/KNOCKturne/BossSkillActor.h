@@ -4,12 +4,14 @@
 
 #include "KNOCKturne.h"
 #include "GameFramework/Actor.h"
+
 #include "BattleTableManagerSystem.h"
+#include "CommonSkillActor.h"
 
 #include "BossSkillActor.generated.h"
 
 UCLASS()
-class KNOCKTURNE_API ABossSkillActor : public AActor
+class KNOCKTURNE_API ABossSkillActor : public ACommonSkillActor
 {
 	GENERATED_BODY()
 	
@@ -20,22 +22,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
-	bool IsHitPlayer = false;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
-	bool IsInitialized = false;
-
-	class UBattleTableManagerSystem* BattleTableManager;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat")
 	struct FBossSkillData SkillData;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
-	UStaticMeshComponent* SkillHitArea;
-
 public:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void InitSkillData(FBossSkillData NewSkillData);
-
 	UFUNCTION(BlueprintCallable)
 	void SetSkillData(FBossSkillData NewSkillData);
 	UFUNCTION(BlueprintCallable)

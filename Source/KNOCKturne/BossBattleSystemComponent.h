@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 
 #include "BossSkillActor.h"
+#include "BattleTableManagerSystem.h"
 
 #include "BossBattleSystemComponent.generated.h"
 
@@ -21,6 +22,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
 	TArray<FString> BossSkillList;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataStructure")
+	TArray<FPeppySkillData> PeppySkillList;
 
 protected:
 
