@@ -93,8 +93,11 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 			}
 		}
 	}
-	int random = rand() % StartRandomNpcTalk.Num();
-	SetCurrentRow(StartRandomNpcTalk[random] - 1);
+	if (StartRandomNpcTalk.Num() != 0)
+	{
+		int random = rand() % StartRandomNpcTalk.Num();
+		SetCurrentRow(StartRandomNpcTalk[random] - 1);
+	}
 }
 
 void UDialogueTableComponent::EmptyTArray() {
