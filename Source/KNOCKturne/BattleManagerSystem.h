@@ -32,6 +32,9 @@ protected:
 	AActor* FootholdObject;
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 LeftCurTurnTime;
+
 	void InitializeFootholdObject();
 
 	UFUNCTION(BlueprintCallable)

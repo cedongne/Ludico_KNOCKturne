@@ -4,6 +4,9 @@
 
 #include "KNOCKturne.h"
 #include "Components/ActorComponent.h"
+
+#include "BattleTableManagerSystem.h"
+
 #include "PeppyStatComponent.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnHPIsZeroDelegate);
@@ -39,9 +42,9 @@ protected:
 	void SpendEnergy(float Value);
 
 private:
-	struct FPeppyStatData* CurStatData = nullptr;
-	FPeppyStatData* MinStatData = nullptr;
-	FPeppyStatData* MaxStatData = nullptr;
+	FPeppyStatData CurStatData;
+	FPeppyStatData MinStatData;
+	FPeppyStatData MaxStatData;
 
 
 	UPROPERTY(Transient, VisibleInstanceOnly, BlueprintReadWrite, Category = Stat, Meta = (AllowPrivateAccess = true))

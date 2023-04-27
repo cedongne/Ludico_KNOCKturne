@@ -15,6 +15,11 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	BossSkillTable = DT_BOSSKILLTABLE.Object;
 	SetBossSkillSpawnDataTable();
 
+	FString BossStatDataPath = TEXT("/Game/Assets/DataTable/BossStatTable.BossStatTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSSTATDATATABLE(*BossStatDataPath);
+	NTCHECK(DT_BOSSSTATDATATABLE.Succeeded());
+	BossStatDataTable = DT_BOSSSTATDATATABLE.Object;
+
 	FString PeppySkilTablePath = TEXT("/Game/Assets/DataTable/PeppySkillTable.PeppySkillTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSKILLTABLE(*PeppySkilTablePath);
 	NTCHECK(DT_PEPPYSKILLTABLE.Succeeded());
@@ -25,13 +30,8 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
 
-	auto InitPeppyStatData = GetPeppyStatData("Init");
-	if (InitPeppyStatData == nullptr) {
-		NTLOG(Warning, TEXT("Load fail"));
-	}
-	else {
-		CurPeppyStat = *GetPeppyStatData("Init");
-	}
+	CurPeppyStat = GetPeppyStatDataOnTable("Init");
+	CurBossStat = GetBossStatDataOnTable("Episode1_SadnessQueen_Init");
 }
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
@@ -135,22 +135,32 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 SkillIndex, FCommonSta
 	}
 }
 
-FPeppyStatData* UBattleTableManagerSystem::GetPeppyStatData(FString DataType) {
+FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
 	FPeppyStatData* statData = PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));
 	if (statData == nullptr) {
-		return nullptr;
+		NTLOG(Warning, TEXT("Load fail"));
+		return FPeppyStatData::FPeppyStatData();
 	}
-	return statData;
+	return *statData;
+}
+
+FBossStatData UBattleTableManagerSystem::GetBossStatDataOnTable(FString DataType) {
+	FBossStatData* statData = BossStatDataTable->FindRow<FBossStatData>(*DataType, TEXT(""));
+	if (statData == nullptr) {
+		NTLOG(Warning, TEXT("Load fail"));
+		return FBossStatData::FBossStatData();
+	}
+	return *statData;
 }
 
 UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
 }
 
-FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStat_BP() {
+FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStat() {
 	return CurPeppyStat;
 }
 
-FBossStatData UBattleTableManagerSystem::GetCurBossStat_BP() {
+FBossStatData UBattleTableManagerSystem::GetCurBossStat() {
 	return CurBossStat;
 }

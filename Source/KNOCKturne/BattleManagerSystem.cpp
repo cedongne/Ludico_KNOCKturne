@@ -7,6 +7,8 @@
 
 UBattleManagerSystem::UBattleManagerSystem() {
 	InitializeFootholdObject();
+
+	LeftCurTurnTime = 0;
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {

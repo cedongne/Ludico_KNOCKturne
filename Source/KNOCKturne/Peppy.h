@@ -36,8 +36,6 @@ public:
 	UFUNCTION()
 	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	void PeppyHit(float Damage);
-
 protected:
 	virtual void BeginPlay() override;
 

@@ -3,7 +3,6 @@
 
 #include "BossSkillActor.h"
 #include "Peppy.h"
-#include "PeppyStatComponent.h"
 #include "Engine/DataTable.h"
 #include "BattleTableManagerSystem.h"
 #include "KNOCKturneGameInstance.h"
@@ -36,7 +35,6 @@ void ABossSkillActor::SetSkillDataWithName(FString SkillName) {
 void ABossSkillActor::HitPlayer() {
 	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-	Peppy->PeppyHit(SkillData.Value_1_N);
 
 	BattleTableManager->ApplySkillStatData(SkillData);
 }

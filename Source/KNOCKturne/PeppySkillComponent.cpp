@@ -50,13 +50,9 @@ void UPeppySkillComponent::AddCanUsePeppySkillWithLevelName(FString LevelName) {
 		NTLOG(Error, TEXT("Failed to load PeppySkillTable"));
 		return;
 	}
-	else {
-		NTLOG(Warning, TEXT("PeppySkillTable number of rows is %d"), PeppySkillRows.Num());
-	}
 
 	while (SkillTableIndex < PeppySkillRows.Num() && PeppySkillRows[SkillTableIndex]->SkillGroupCode == LevelName) {
 		CanUsePeppySkillList.Add(*PeppySkillRows[SkillTableIndex]);
-		NTLOG(Warning, TEXT("%s"), *CanUsePeppySkillList[SkillTableIndex].SkillId);
 		SkillTableIndex++;
 	}
 }

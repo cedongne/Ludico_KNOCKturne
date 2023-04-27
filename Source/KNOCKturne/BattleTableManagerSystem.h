@@ -242,12 +242,14 @@ public:
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
 public:
-	FPeppyStatData* GetPeppyStatData(FString DataType);
 	UDataTable* GetPeppySkillTable();
+
+	FPeppyStatData GetPeppyStatDataOnTable(FString DataType);
+	FBossStatData GetBossStatDataOnTable(FString DataType);
 	UFUNCTION(BlueprintCallable)
-	FPeppyStatData GetCurPeppyStat_BP();
+	FPeppyStatData GetCurPeppyStat();
 	UFUNCTION(BlueprintCallable)
-	FBossStatData GetCurBossStat_BP();
+	FBossStatData GetCurBossStat();
 
 private:
 	class UKNOCKturneGameInstance* GameInstance;
