@@ -2,8 +2,11 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "GameFramework/Actor.h"
+
+#include "BattleTableManagerSystem.h"
+
 #include "CommonSkillActor.generated.h"
 
 UCLASS()

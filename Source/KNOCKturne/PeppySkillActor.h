@@ -1,0 +1,27 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CommonSkillActor.h"
+#include "PeppySkillActor.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class KNOCKTURNE_API APeppySkillActor : public ACommonSkillActor
+{
+	GENERATED_BODY()
+	
+public:
+	APeppySkillActor();
+
+protected:
+	virtual void BeginPlay() override;
+
+	FPeppySkillData SkillData;
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void LoadSkillDataFromDataTable();
+};

@@ -2,7 +2,6 @@
 
 
 #include "CommonSkillActor.h"
-#include "BattleTableManagerSystem.h"
 #include "KNOCKturneGameInstance.h"
 
 // Sets default values
