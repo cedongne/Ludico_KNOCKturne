@@ -4,6 +4,9 @@
 #include "BattleTableManagerSystem.h"
 #include "BossSkillActor.h"
 
+#define TARGET_PEPPY 0
+#define TARGET_BOSS 1
+
 void UBattleTableManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 	Super::Initialize(Collection);
 }
@@ -109,12 +112,11 @@ void UBattleTableManagerSystem::ApplySkillStatData(FBossSkillData SkillData) {
 	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
 
 	for (int IndexCount = 0; IndexCount < 2; IndexCount++) {
-		if (SkillTargets[IndexCount] == 0) {
+		if (SkillTargets[IndexCount] == TARGET_PEPPY) {
 			TargetStatData = &CurPeppyStat;
 		}
-		else if (SkillTargets[IndexCount] == 1) {
-			TargetStatData = &CurPeppyStat;
-			//			TargetStatData = &curboss
+		else if (SkillTargets[IndexCount] == TARGET_BOSS) {
+			TargetStatData = &CurBossStat;
 		}
 		else {
 			NTLOG(Warning, TEXT("Target set fail : SkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
