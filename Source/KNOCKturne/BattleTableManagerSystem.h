@@ -246,10 +246,14 @@ public:
 
 	FPeppyStatData GetPeppyStatDataOnTable(FString DataType);
 	FBossStatData GetBossStatDataOnTable(FString DataType);
+
 	UFUNCTION(BlueprintCallable)
-	FPeppyStatData GetCurPeppyStat();
+	FPeppyStatData GetCurPeppyStatReadOnly();
 	UFUNCTION(BlueprintCallable)
-	FBossStatData GetCurBossStat();
+	FBossStatData GetCurBossStatReadOnly();
+
+	FPeppyStatData* GetCurPeppyStatRef();
+	FBossStatData* GetCurBossStatRef();
 
 private:
 	class UKNOCKturneGameInstance* GameInstance;
@@ -268,10 +272,13 @@ private:
 public:
 	/* Skill System */
 	UFUNCTION(BlueprintCallable)
-	void ApplySkillStatData(FBossSkillData SkillIndex);
+	void UseBossSkill(FBossSkillData SkillData);
+	UFUNCTION(BlueprintCallable)
+	void UsePeppySkill(FPeppySkillData SkillData);
 
 private:
-	void OperateSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData);
+	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData);
+	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FPeppySkillData* SkillData);
 	/****************/
 
 };

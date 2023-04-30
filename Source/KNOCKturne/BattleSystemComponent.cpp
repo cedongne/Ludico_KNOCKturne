@@ -34,12 +34,12 @@ void UBattleSystemComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 
 void UBattleSystemComponent::StartBossTurn() {
-	int32 BossTurn = BattleTableManager->GetCurBossStat().Turn;
+	int32 BossTurn = BattleTableManager->GetCurBossStatReadOnly().Turn;
 	LeftCurrentTurnTime = BossTurn;
 }
 
 void UBattleSystemComponent::StartPeppyTurn() {
-	int32 PeppyTurn = BattleTableManager->GetCurPeppyStat().Turn;
+	int32 PeppyTurn = BattleTableManager->GetCurPeppyStatReadOnly().Turn;
 	LeftCurrentTurnTime = PeppyTurn;
 }
 

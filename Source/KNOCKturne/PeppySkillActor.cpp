@@ -10,10 +10,14 @@ void APeppySkillActor::BeginPlay() {
 	Super::BeginPlay();
 
 	LoadSkillDataFromDataTable();
+	UseSkill();
 }
 
 void APeppySkillActor::LoadSkillDataFromDataTable() {
 	FString BlueprintClassName = GetClass()->GetFName().ToString();
 	SkillData = *(BattleTableManager->GetPeppySkillTable()->FindRow<FPeppySkillData>(*BlueprintClassName, TEXT("Fail to load PeppySkillData")));
-	NTLOG(Warning, TEXT("%s"), *(SkillData.SkillId));
+}
+
+void APeppySkillActor::UseSkill() {
+	BattleTableManager->UsePeppySkill(SkillData);
 }

@@ -22,13 +22,11 @@ UDialogueManagerSystem::UDialogueManagerSystem() {
 
 void UDialogueManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 	Super::Initialize(Collection);
-
-	NTLOG(Warning, TEXT("Test"));
 }
 
 UDataTable* UDialogueManagerSystem::LoadDialogueTable(FString TableName, int& Index) {
 	FString DialoguePath = DialogueMap[TableName];
-	NTLOG(Warning, TEXT("Loaded Table : %s"), *DialoguePath);
+//	NTLOG(Warning, TEXT("Loaded Table : %s"), *DialoguePath);
 	Index = (StartIndexTable->FindRow<FStartIndex>(*TableName, TEXT(""))->StringIndex) - 1;
 
 	return LoadObject<UDataTable>(NULL, *DialoguePath, NULL, LOAD_None, NULL);

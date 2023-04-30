@@ -42,13 +42,10 @@ APeppy::APeppy()
 	CanMove = true;
 	IsSlide = false;
 	IsHit = false;
-
 	CanSlide = true;
 
 	SlideCooldown = 3.0f;
-
 	SlidingSpeed = 1300;
-
 	CurWalkSpeed = StandardMaxWalkSpeed * MoveSpeed;
 
 	GetCharacterMovement()->MaxWalkSpeed = CurWalkSpeed;
@@ -57,7 +54,6 @@ APeppy::APeppy()
 void APeppy::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
@@ -102,23 +98,6 @@ void APeppy::MoveRight(float Value) {
 				const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 				AddMovementInput(Direction, Value);
 			}
-		}
-	}
-}
-
-
-void APeppy::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	if (OtherActor && (OtherActor != this) && OtherComp) {
-		if (OtherActor->ActorHasTag("NPC")) {
-			UE_LOG(LogTemp, Warning, TEXT("NPC overlapped"));
-		}
-	}
-}
-
-void APeppy::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) {
-	if (OtherActor && (OtherActor != this) && OtherComp) {
-		if (OtherActor->ActorHasTag("NPC")) {
-			UE_LOG(LogTemp, Warning, TEXT("NPC out of range"));
 		}
 	}
 }

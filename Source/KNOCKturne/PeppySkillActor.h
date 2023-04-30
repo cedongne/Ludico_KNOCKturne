@@ -19,9 +19,11 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	void LoadSkillDataFromDataTable();
+
 	FPeppySkillData SkillData;
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void LoadSkillDataFromDataTable();
+	void UseSkill();
 };

@@ -3,6 +3,7 @@
 
 #include "BattleTableManagerSystem.h"
 #include "BossSkillActor.h"
+#include "CalcUtil.h"
 
 #define TARGET_PEPPY 0
 #define TARGET_BOSS 1
@@ -105,7 +106,7 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 }
 
 
-void UBattleTableManagerSystem::ApplySkillStatData(FBossSkillData SkillData) {
+void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData) {
 	FCommonStatData* TargetStatData = nullptr;
 
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
@@ -119,21 +120,76 @@ void UBattleTableManagerSystem::ApplySkillStatData(FBossSkillData SkillData) {
 			TargetStatData = &CurBossStat;
 		}
 		else {
-			NTLOG(Warning, TEXT("Target set fail : SkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
+			NTLOG(Warning, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			return;
 		}
 
-		OperateSkillByIndex(SkillIndexes[IndexCount], TargetStatData, &SkillData);
+		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, &SkillData);
 	}
 }
 
-void UBattleTableManagerSystem::OperateSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData) {
+void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData) {
 	switch (SkillIndex) {
-	/*
-		11 단순 공격 : Target의 EP를 즉시 N만큼 깎음.
-	*/
+		/*
+			11 단순 공격 : Target의 EP를 즉시 N만큼 깎음.
+		*/
 	case 11:
 		TargetStatData->EP -= SkillData->Value_1_N;
+		NTLOG(Warning, TEXT("[Boss 11] Attack damage : %d"), TargetStatData->EP);
+		break;
+		/*
+			13 랜덤 공격 : Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
+		*/
+	case 13:
+		TargetStatData->EP -= CalcUtil::RandEvenInRange(SkillData->Value_1_N, SkillData->Value_1_M);
+		NTLOG(Warning, TEXT("[Boss 13] Random attack damage : %d"), TargetStatData->EP);
+		break;
+	default:
+		NTLOG(Warning, TEXT("No Skill index %d"), SkillIndex);
+	}
+}
+
+void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData) {
+	FCommonStatData* TargetStatData = nullptr;
+
+	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
+	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
+
+	for (int IndexCount = 0; IndexCount < 2; IndexCount++) {
+		if (SkillTargets[IndexCount] == TARGET_PEPPY) {
+			TargetStatData = &CurPeppyStat;
+		}
+		else if (SkillTargets[IndexCount] == TARGET_BOSS) {
+			TargetStatData = &CurBossStat;
+		}
+		else {
+			NTLOG(Warning, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
+			return;
+		}
+
+		OperatePeppySkillByIndex(SkillIndexes[IndexCount], TargetStatData, &SkillData);
+	}
+}
+
+void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FPeppySkillData* SkillData) {
+	switch (SkillIndex) {
+		/*
+			11 단순 공격 : Target의 EP를 즉시 N만큼 깎음.
+		*/
+	case 11:
+		TargetStatData->EP -= SkillData->Value_1_N;
+		NTLOG(Warning, TEXT("[Peppy 11] Attack damage : %d"), TargetStatData->EP);
+		break;
+		/*
+			13 랜덤 공격 : Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
+		*/
+	case 13:
+		TargetStatData->EP -= CalcUtil::RandEvenInRange(SkillData->Value_1_N, SkillData->Value_1_M);
+		CurPeppyStat.Energy -= SkillData->Cost;
+		NTLOG(Warning, TEXT("[Peppy 13] Random attack damage : %d"), TargetStatData->EP);
+		break;
+	default:
+		NTLOG(Warning, TEXT("No Skill index %d"), SkillIndex);
 	}
 }
 
@@ -159,10 +215,18 @@ UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
 }
 
-FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStat() {
+FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStatReadOnly() {
 	return CurPeppyStat;
 }
 
-FBossStatData UBattleTableManagerSystem::GetCurBossStat() {
+FBossStatData UBattleTableManagerSystem::GetCurBossStatReadOnly() {
 	return CurBossStat;
+}
+
+FPeppyStatData* UBattleTableManagerSystem::GetCurPeppyStatRef() {
+	return &CurPeppyStat;
+}
+
+FBossStatData* UBattleTableManagerSystem::GetCurBossStatRef() {
+	return &CurBossStat;
 }
