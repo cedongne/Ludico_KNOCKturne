@@ -58,7 +58,7 @@ FString UDialogueTableComponent::GetStringOnBP(FDialogueData DataRow) {
 FDialogueData UDialogueTableComponent::GetNextRowDialogueTable() {
 	if (++CurrentRowIndex >= DialogueRows.Num() - 1) {
 		IsEndedDialogueRows = true;
-		NTLOG(Warning, TEXT("Current dialogue is end"));
+		NTLOG(Warning, TEXT("Reaching end to current dialogue"));
 	}
 	return *(DialogueRows[CurrentRowIndex]);
 }

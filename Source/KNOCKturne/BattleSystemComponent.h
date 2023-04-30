@@ -37,6 +37,7 @@ private:
 	void StartPeppyTurn();
 
 	void TurnChange();
+	void SetTurnTime(int32 TurnTime);
 
 	void RunTurnTimer(float DeltaTime);
 	void DecreaseLeftCurrentTurnTime();
