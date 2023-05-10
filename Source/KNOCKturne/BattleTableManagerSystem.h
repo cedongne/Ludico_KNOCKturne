@@ -57,7 +57,7 @@ struct FPeppySkillData : public FTableRowBase {
 		SkillIndex_1(0), Probability_1(0.0f), SkillTarget_1(-1), Value_1_N(0), Value_1_M(0), Value_1_T(0), BuffCode_1("-1"),
 		SkillIndex_2(0), Probability_2(0.0f), SkillTarget_2(-1), Value_2_N(0), Value_2_M(0), Value_2_T(0), BuffCode_2("-1"),
 		SkillIndex_3(0), Probability_3(0.0f), SkillTarget_3(-1), Value_3_N(0), Value_3_M(0), Value_3_T(0), BuffCode_3("-1"),
-		SkillAnimation("-1"), SkillEffect_1("-1"), SkillEffect_2("-1"), SkillSound_1("-1"), SkillSound_2("-1"), BossEffect_1("-1"), BossEffect_2("-1"), BossSound_1("-1"), BossSound_2("-1"), SkillIcon("-1"), SkillDescript("-1") {}
+		SkillAnimation("-1"), SkillEffect_1("-1"), SkillEffect_2("-1"), SkillSound_1("-1"), SkillSound_2("-1"), BossEffect_1("-1"), BossEffect_2("-1"), BossSound_1("-1"), BossSound_2("-1"), SkillDescript("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillId;
@@ -134,7 +134,7 @@ struct FPeppySkillData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString BossSound_2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString SkillIcon;
+	TSoftObjectPtr<UTexture> SkillIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillDescript;
 };
