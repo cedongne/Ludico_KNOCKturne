@@ -134,7 +134,7 @@ struct FPeppySkillData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString BossSound_2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	TSoftObjectPtr<UTexture> SkillIcon;
+	TObjectPtr<UTexture2D> SkillIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillDescript;
 };
