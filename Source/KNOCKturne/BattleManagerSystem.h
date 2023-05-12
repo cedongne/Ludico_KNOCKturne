@@ -31,6 +31,9 @@ protected:
 	TSubclassOf<AActor> FootholdSubclass;
 	AActor* FootholdObject;
 
+	// SkillActorMap 초기화
+	void InitSkillActorMap();
+
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 LeftCurTurnTime;
@@ -66,4 +69,18 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	TArray<int32> GetSelectedSkills1(); 
+
+	// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
+	TMap<FString, AActor> SkillActorMap;
+
+	// 페피 턴에서 선택한 스킬 액터 리스트
+	TArray<AActor*> SelectedSkillActor;
+
+	// 아이콘 이름으로 스킬 액터 찾기
+	UFUNCTION(BlueprintCallable)
+	AActor* FindSkillActor(FString IconName);
+
+	// 스킬 액터 리스트 원소 추가
+	UFUNCTION(BlueprintCallable)
+	void AddSelectedSkillActor(AActor* SkillActor);
 };

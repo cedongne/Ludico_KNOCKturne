@@ -11,6 +11,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	LeftCurTurnTime = 0;
 
 	SelectedSkills1.SetNum(8);
+
+	InitSkillActorMap();
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {
@@ -64,4 +66,30 @@ int UBattleManagerSystem::GetOneSelectedSkills1(int index) {
 
 TArray<int32> UBattleManagerSystem::GetSelectedSkills1() {
 	return SelectedSkills1;
+}
+
+void UBattleManagerSystem::InitSkillActorMap() {
+	/*SkillActorMap.Add("None", );
+	SkillActorMap.Add("PS_WithYou", );
+	SkillActorMap.Add("PS_ConsolationMusic", );
+	SkillActorMap.Add("PS_Campfire", );
+	SkillActorMap.Add("PS_LetMeHug", );
+	SkillActorMap.Add("PS_Starlight", );
+	SkillActorMap.Add("PS_CharmingVoice", );
+	SkillActorMap.Add("PS_RedEyes", );
+	SkillActorMap.Add("PS_AdviceforFreshStart", );
+	SkillActorMap.Add("PS_AngryScolding", );
+	SkillActorMap.Add("PS_ExhaustiveAdvice", );
+	SkillActorMap.Add("PS_NeedtoRecharge", );
+	SkillActorMap.Add("PS_PretendtoCry", );
+	SkillActorMap.Add("PS_EfficientEmpathy", );
+	SkillActorMap.Add("PS_AmbiguousEmotion", );*/
+}
+
+AActor* UBattleManagerSystem::FindSkillActor(FString IconName) {
+	return SkillActorMap.Find(IconName);
+}
+
+void UBattleManagerSystem::AddSelectedSkillActor(AActor* SkillActor) {
+	SelectedSkillActor.Add(SkillActor);
 }
