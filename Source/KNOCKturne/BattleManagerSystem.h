@@ -31,8 +31,11 @@ protected:
 	TSubclassOf<AActor> FootholdSubclass;
 	AActor* FootholdObject;
 
-	// SkillActorMap 초기화
-	void InitSkillActorMap();
+	// IconRowMap 초기화
+	void InitIconRowMap();
+
+	// IconSkillActorMap 초기화
+	void InitIconSkillActorMap();
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -47,7 +50,7 @@ public:
 	void SetTimerUnvisibleHitArea();
 
 
-
+	/*보따리-전투 전 준비*/
 	// 허브월드 보따리에서 선택한 스킬
 	TArray<int32> SelectedSkills1;
 
@@ -70,8 +73,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TArray<int32> GetSelectedSkills1(); 
 
+	// 보따리에서 선택한 스킬 아이콘 이름-행 번호
+	TMap<FString, int32> IconRowMap;
+
+	// 아이콘 이름으로 행 찾기
+	UFUNCTION(BlueprintCallable)
+	int FindRow(FString IconName);
+
+
+
+	/*페피 턴*/
+
 	// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
-	TMap<FString, AActor> SkillActorMap;
+	TMap<FString, AActor> IconSkillActorMap;
 
 	// 페피 턴에서 선택한 스킬 액터 리스트
 	TArray<AActor*> SelectedSkillActor;

@@ -12,7 +12,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	SelectedSkills1.SetNum(8);
 
-	InitSkillActorMap();
+	InitIconRowMap();
+	InitIconSkillActorMap();
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {
@@ -45,7 +46,8 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 		}), UnsetTime, false);
 }
 
-// 허브월드 보따리에서 선택한 스킬 리스트 크기 설정
+
+/*보따리-전투 전 준비*/
 void UBattleManagerSystem::SetSizeOfSelectedSkills1(int size) {
 	SelectedSkills1.SetNum(size);
 }
@@ -54,12 +56,10 @@ int UBattleManagerSystem::GetSizeOfSelectedSkills1() {
 	return SelectedSkills1.Num();
 }
 
-// 허브월드 보따리에서 선택한 스킬 값 설정하기
 void UBattleManagerSystem::SetOneSelectedSkills1(int index, int value) {
 	SelectedSkills1[index] = value;
 }
 
-// 허브월드 보따리에서 선택한 스킬 값 가져오기
 int UBattleManagerSystem::GetOneSelectedSkills1(int index) {
 	return SelectedSkills1[index];
 }
@@ -68,26 +68,49 @@ TArray<int32> UBattleManagerSystem::GetSelectedSkills1() {
 	return SelectedSkills1;
 }
 
-void UBattleManagerSystem::InitSkillActorMap() {
-	/*SkillActorMap.Add("None", );
-	SkillActorMap.Add("PS_WithYou", );
-	SkillActorMap.Add("PS_ConsolationMusic", );
-	SkillActorMap.Add("PS_Campfire", );
-	SkillActorMap.Add("PS_LetMeHug", );
-	SkillActorMap.Add("PS_Starlight", );
-	SkillActorMap.Add("PS_CharmingVoice", );
-	SkillActorMap.Add("PS_RedEyes", );
-	SkillActorMap.Add("PS_AdviceforFreshStart", );
-	SkillActorMap.Add("PS_AngryScolding", );
-	SkillActorMap.Add("PS_ExhaustiveAdvice", );
-	SkillActorMap.Add("PS_NeedtoRecharge", );
-	SkillActorMap.Add("PS_PretendtoCry", );
-	SkillActorMap.Add("PS_EfficientEmpathy", );
-	SkillActorMap.Add("PS_AmbiguousEmotion", );*/
+void UBattleManagerSystem::InitIconRowMap() {
+	IconRowMap.Add("Icon_skill_PS_WithYou", 0);
+	IconRowMap.Add("Icon_skill_PS_ConsolationMusic", 1);
+	IconRowMap.Add("Icon_skill_PS_Campfire", 2);
+	IconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
+	IconRowMap.Add("Icon_skill_PS_Starlight", 4);
+	IconRowMap.Add("Icon_skill_PS_CharmingVoice", 5);
+	IconRowMap.Add("Icon_skill_PS_RedEyes", 6);
+	IconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
+	IconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
+	IconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 9);
+	IconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
+	IconRowMap.Add("Icon_skill_PS_PretendtoCry", 11);
+	IconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 12);
+	IconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 13);
+}
+
+int32 UBattleManagerSystem::FindRow(FString IconName) {
+	return *IconRowMap.Find(IconName);
+}
+
+
+/*페피 턴*/
+void UBattleManagerSystem::InitIconSkillActorMap() {
+	/*IconSkillActorMap.Add("None", );
+	IconSkillActorMap.Add("Icon_skill_PS_WithYou", );
+	IconSkillActorMap.Add("Icon_skill_PS_ConsolationMusic", );
+	IconSkillActorMap.Add("Icon_skill_PS_Campfire", );
+	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", );
+	IconSkillActorMap.Add("Icon_skill_PS_Starlight", );
+	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", );
+	IconSkillActorMap.Add("Icon_skill_PS_RedEyes", );
+	IconSkillActorMap.Add("Icon_skill_PS_AdviceforFreshStart", );
+	IconSkillActorMap.Add("Icon_skill_PS_AngryScolding", );
+	IconSkillActorMap.Add("Icon_skill_PS_ExhaustiveAdvice", );
+	IconSkillActorMap.Add("Icon_skill_PS_NeedtoRecharge", );
+	IconSkillActorMap.Add("Icon_skill_PS_PretendtoCry", );
+	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", );
+	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", );*/
 }
 
 AActor* UBattleManagerSystem::FindSkillActor(FString IconName) {
-	return SkillActorMap.Find(IconName);
+	return IconSkillActorMap.Find(IconName);
 }
 
 void UBattleManagerSystem::AddSelectedSkillActor(AActor* SkillActor) {
