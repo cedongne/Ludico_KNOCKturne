@@ -223,6 +223,68 @@ struct FBossSkillSpawnData {
 	static FBossSkillSpawnData SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms);
 };
 
+USTRUCT(BlueprintType)
+struct FSpecialSkillData : public FTableRowBase {
+	GENERATED_BODY()
+
+	FSpecialSkillData() : Skill_Index(-1), Probability_1(0.0f), SpecialSkill_Target(-1), value1N(0), value1M(0), value1T(0), 
+		BuffCode("-1"), EnergyCost(0), CoolTime(0), SpecialSkillName("-1"), SpecialSkillDescript("-1") {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Skill_Index;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Probability_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SpecialSkill_Target;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float value1N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float value1M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float value1T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 EnergyCost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 CoolTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SpecialSkillName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TObjectPtr<UTexture2D> SpecialSkillIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SpecialSkillDescript;
+};
+
+USTRUCT(BlueprintType)
+struct FItemData : public FTableRowBase {
+	GENERATED_BODY()
+
+		FItemData() : ItemTarget(-1), TouchColumn("-1"), value1N(0), value1M(0),
+		MaxCount(0), ItemName("-1"), ItemDescript("-1"), ItemEasterEgg("-1"), ItemCharacterDescript("-1") {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 ItemTarget;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString TouchColumn;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float value1N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float value1M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 MaxCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TObjectPtr<UTexture2D> ItemIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ItemName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ItemDescript;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ItemEasterEgg;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ItemCharacterDescript;
+};
+
 UCLASS()
 class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 {
