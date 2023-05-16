@@ -75,4 +75,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 5;
 	float CurWalkSpeed;
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetImmobile();
+	UFUNCTION(BlueprintCallable)
+	void SetMobile();
 };

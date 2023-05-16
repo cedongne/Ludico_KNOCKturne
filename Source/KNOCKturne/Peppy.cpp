@@ -74,6 +74,16 @@ void APeppy::PostInitializeComponents() {
 		*/
 }
 
+void APeppy::SetImmobile() {
+	CanMove = false;
+	CanSlide = false;
+}
+
+void APeppy::SetMobile() {
+	CanMove = true;
+	CanSlide = true;
+}
+
 void APeppy::MoveForward(float Value) {
 	if (CanMove) {
 		if ((Controller != nullptr) && (Value != 0.0f)) {
@@ -159,6 +169,8 @@ void APeppy::SlideHandling(float DeltaTime) {
 	}
 	else {
 		LeftSlideCooltime = 0.0f;
-		CanSlide = true;
+		if (CanMove) {
+			CanSlide = true;
+		}
 	}
 }
