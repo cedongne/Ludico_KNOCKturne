@@ -42,6 +42,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TMap<FString, FString> DialogueMap;
 	TArray<FDialogueString*> DialogueStrings;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
+	class UDataTable* SkillBuffStringTable;
 	
 public:
 	UDialogueManagerSystem();

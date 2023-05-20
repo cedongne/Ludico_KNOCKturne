@@ -6,14 +6,18 @@
 UDialogueManagerSystem::UDialogueManagerSystem() {
 	FString StringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
 	FString DialogueStartIndexTablePath = TEXT("/Game/Assets/DataTable/StartIndexTable.StartIndexTable");
+	FString SkillBuffStringTablePath = TEXT("/Game/Assets/DataTable/SkillBuffStringTable.SkillBuffStringTable");
 	//Load StringTable
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_STRINGTABLE(*StringTablePath);
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_STARTINDEXTABLE(*DialogueStartIndexTablePath);
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SKILLBUFFSTRINGTABLE(*SkillBuffStringTablePath);
 	NTCHECK(DT_STRINGTABLE.Succeeded());
 	NTCHECK(DT_STARTINDEXTABLE.Succeeded());
+	NTCHECK(DT_SKILLBUFFSTRINGTABLE.Succeeded());
 
 	StringTable = DT_STRINGTABLE.Object;
 	StartIndexTable = DT_STARTINDEXTABLE.Object;
+	SkillBuffStringTable = DT_SKILLBUFFSTRINGTABLE.Object;
 
 	DialogueMap.Add(TEXT("Dialogue_Prologue"), TEXT("/Game/Assets/DataTable/Dialogue_Prologue.Dialogue_Prologue"));
 	DialogueMap.Add(TEXT("Dialogue_Npc"), TEXT("/Game/Assets/DataTable/Dialogue_Npc.Dialogue_Npc"));
