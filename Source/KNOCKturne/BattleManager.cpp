@@ -7,6 +7,7 @@
 ABattleManager::ABattleManager()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	SetActorTickEnabled(false);
 
 	LeftCurrentTurnTime = 0;
 	IsBossTurn = true;
@@ -29,8 +30,10 @@ void ABattleManager::BeginPlay()
 void ABattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	RunTurnTimer(DeltaTime);
+	// SetActorTickEnabled() 메서드가 정상적으로 작동하지 않아 임시로 조건문을 추가해 타이머 작동을 조작함. 수정해야 함.
+	if (IsCalled_InitStartBossTurn) {
+		RunTurnTimer(DeltaTime);
+	}
 }
 
 void ABattleManager::StartBossTurn() {
@@ -44,6 +47,9 @@ void ABattleManager::BP_InitStartBossTurn() {
 	if (IsCalled_InitStartBossTurn) {
 		NTLOG(Error, TEXT("StartBossTurn method has already been called. This method can only be called once on blueprint."))
 	}
+	
+//	SetActorTickEnabled(true);
+	NTLOG(Warning, TEXT("%d"), IsActorTickEnabled());
 	IsCalled_InitStartBossTurn = true;
 	TurnChange();
 }
