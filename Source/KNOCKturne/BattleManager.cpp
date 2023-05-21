@@ -37,6 +37,7 @@ void ABattleManager::Tick(float DeltaTime)
 }
 
 void ABattleManager::StartBossTurn() {
+	NTLOG_S(Warning);
 //	SetTurnTime(BattleTableManager->GetCurBossStatReadOnly().Turn);
 	SetTurnTime(3);
 	BP_StartBossTurn();
