@@ -49,20 +49,18 @@ void ABattleManager::BP_InitStartBossTurn() {
 	}
 	
 //	SetActorTickEnabled(true);
-	NTLOG(Warning, TEXT("%d"), IsActorTickEnabled());
 	IsCalled_InitStartBossTurn = true;
 	TurnChange();
 }
 
 void ABattleManager::StartPeppyTurn() {
 //	SetTurnTime(BattleTableManager->GetCurPeppyStatReadOnly().Turn);
-	SetTurnTime(3);
+	SetTurnTime(10);
 	BP_StartPeppyTurn();
 }
 
 
 void ABattleManager::TurnChange() {
-	NTLOG(Warning, TEXT("%d"), IsBossTurn);
 	if (IsBossTurn) {
 		StartBossTurn();
 		IsBossTurn = false;
