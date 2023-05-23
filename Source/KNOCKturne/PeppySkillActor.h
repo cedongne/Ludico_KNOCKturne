@@ -16,6 +16,13 @@ class KNOCKTURNE_API APeppySkillActor : public ACommonSkillActor
 public:
 	APeppySkillActor();
 
+private:
+//	UPROPERTY(VisibleAnywhere, BlueprintReadonly, Category = "Animation")
+//	UAnimMontage* SkillAnimMontage;
+
+	UFUNCTION(BlueprintCallable)
+	FName GetCurrentBlueprintClassName();
+
 protected:
 	virtual void BeginPlay() override;
 

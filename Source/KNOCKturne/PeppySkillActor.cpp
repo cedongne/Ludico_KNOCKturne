@@ -21,3 +21,17 @@ void APeppySkillActor::LoadSkillDataFromDataTable() {
 void APeppySkillActor::UseSkill() {
 	BattleTableManager->UsePeppySkill(SkillData);
 }
+
+FName APeppySkillActor::GetCurrentBlueprintClassName() {
+	return *(GetClass()->GetFName().ToString());
+}
+
+/*
+UAnimMontage* APeppySkillActor::FindAnimMontageAsset() {
+	FString MontageAssetReference = "/Game/Assets/Art_3D/Animation/Peppy_animation/" + SkillData.SkillAnimation + "." + SkillData.SkillAnimation;
+	NTLOG(Warning, TEXT("%s"), *MontageAssetReference);
+//	SkillAnimMontage = LoadObject<UAnimMontage>(NULL, *MontageAssetReference, NULL, LOAD_None, NULL);
+//	return SkillAnimMontage;
+	return LoadObject<UAnimMontage>(NULL, *MontageAssetReference, NULL, LOAD_None, NULL);
+}
+*/
