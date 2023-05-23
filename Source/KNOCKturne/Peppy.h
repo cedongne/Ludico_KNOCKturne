@@ -54,6 +54,15 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHit;
+
+	// Animation triggers;
+	TMap<FString, bool> AnimationTriggerMap;
+	bool IsDeliberate = false;
+	bool IsExhaledeeply = false;
+	bool IsHug = false;
+	bool IsHugCampfire = false;
+	bool IsSummon = false;
+
 private:
 
 	bool CanSlide;
