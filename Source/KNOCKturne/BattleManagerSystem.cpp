@@ -12,7 +12,9 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	SelectedSkills1.SetNum(8);
 
-	InitIconRowMap();
+	InitSkillIconRowMap();
+	InitSpecialtyIconRowMap();
+	InitItemIconRowMap();
 	InitIconSkillActorMap();
 }
 
@@ -68,25 +70,51 @@ TArray<int32> UBattleManagerSystem::GetSelectedSkills1() {
 	return SelectedSkills1;
 }
 
-void UBattleManagerSystem::InitIconRowMap() {
-	IconRowMap.Add("Icon_skill_PS_WithYou", 0);
-	IconRowMap.Add("Icon_skill_PS_ConsolationMusic", 1);
-	IconRowMap.Add("Icon_skill_PS_Campfire", 2);
-	IconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
-	IconRowMap.Add("Icon_skill_PS_Starlight", 4);
-	IconRowMap.Add("Icon_skill_PS_CharmingVoice", 5);
-	IconRowMap.Add("Icon_skill_PS_RedEyes", 6);
-	IconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
-	IconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
-	IconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 9);
-	IconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
-	IconRowMap.Add("Icon_skill_PS_PretendtoCry", 11);
-	IconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 12);
-	IconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 13);
+void UBattleManagerSystem::InitSkillIconRowMap() {
+	SkillIconRowMap.Add("Icon_skill_PS_WithYou", 0);
+	SkillIconRowMap.Add("Icon_skill_PS_ConsolationMusic", 1);
+	SkillIconRowMap.Add("Icon_skill_PS_Campfire", 2);
+	SkillIconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
+	SkillIconRowMap.Add("Icon_skill_PS_Starlight", 4);
+	SkillIconRowMap.Add("Icon_skill_PS_CharmingVoice", 5);
+	SkillIconRowMap.Add("Icon_skill_PS_RedEyes", 6);
+	SkillIconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
+	SkillIconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
+	SkillIconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 9);
+	SkillIconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
+	SkillIconRowMap.Add("Icon_skill_PS_PretendtoCry", 11);
+	SkillIconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 12);
+	SkillIconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 13);
 }
 
-int32 UBattleManagerSystem::FindRow(FString IconName) {
-	return *IconRowMap.Find(IconName);
+int32 UBattleManagerSystem::FindSkillRow(FString IconName) {
+	return *SkillIconRowMap.Find(IconName);
+}
+
+void UBattleManagerSystem::InitSpecialtyIconRowMap() {
+	SpecialtyIconRowMap.Add("Icon_skill_special_wakeup", 0);
+	SpecialtyIconRowMap.Add("Icon_skill_special_gatherenergy", 1);
+	SpecialtyIconRowMap.Add("Icon_skill_special_positivethinking", 2);
+	SpecialtyIconRowMap.Add("Icon_skill_special_narrowescape", 3);
+	SpecialtyIconRowMap.Add("Icon_skill_special_pretendnotsick", 4);
+	SpecialtyIconRowMap.Add("Icon_skill_special_twolives", 5);
+}
+
+int32 UBattleManagerSystem::FindSpecialtylRow(FString IconName) {
+	return *SpecialtyIconRowMap.Find(IconName);
+}
+
+void UBattleManagerSystem::InitItemIconRowMap() {
+	ItemIconRowMap.Add("Icon_Item_broken_cookie", 0);
+	ItemIconRowMap.Add("Icon_Item_sled", 1);
+	ItemIconRowMap.Add("Icon_Item_king_confidential_document", 2);
+	ItemIconRowMap.Add("Icon_Item_fresh_sprout", 3);
+	ItemIconRowMap.Add("Icon_Item_energy_cube", 4);
+	ItemIconRowMap.Add("Icon_Item_eyedrop", 5);
+}
+
+int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
+	return *ItemIconRowMap.Find(IconName);
 }
 
 

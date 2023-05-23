@@ -32,7 +32,13 @@ protected:
 	AActor* FootholdObject;
 
 	// IconRowMap 초기화
-	void InitIconRowMap();
+	void InitSkillIconRowMap();
+
+	// IconRowMap 초기화
+	void InitSpecialtyIconRowMap();
+
+	// IconRowMap 초기화
+	void InitItemIconRowMap();
 
 	// IconSkillActorMap 초기화
 	void InitIconSkillActorMap();
@@ -73,12 +79,29 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TArray<int32> GetSelectedSkills1(); 
 
-	// 보따리에서 선택한 스킬 아이콘 이름-행 번호
-	TMap<FString, int32> IconRowMap;
 
-	// 아이콘 이름으로 행 찾기
+	// 보따리에서 선택한 스킬 아이콘 이름-행 번호
+	TMap<FString, int32> SkillIconRowMap;
+
+	// 아이콘 이름으로 스킬 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int FindRow(FString IconName);
+	int FindSkillRow(FString IconName);
+
+
+	// 보따리에서 선택한 특수기 아이콘 이름-행 번호
+	TMap<FString, int32> SpecialtyIconRowMap;
+
+	// 아이콘 이름으로 아이템 행 찾기
+	UFUNCTION(BlueprintCallable)
+	int FindSpecialtylRow(FString IconName);
+
+
+	// 보따리에서 선택한 특수기 아이콘 이름-행 번호
+	TMap<FString, int32> ItemIconRowMap;
+
+	// 아이콘 이름으로 아이템 행 찾기
+	UFUNCTION(BlueprintCallable)
+	int FindItemlRow(FString IconName);
 
 
 
