@@ -15,7 +15,13 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
 	InitItemIconRowMap();
-	InitIconSkillActorMap();
+	// InitIconSkillActorMap();
+
+	static ConstructorHelpers::FObjectFinder<AActor> BP_PS_AmbiguousEmotion(
+		TEXT("Blueprint'/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion.BP_PS_AmbiguousEmotion'")
+
+	);
+	AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Object;
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {
@@ -119,28 +125,28 @@ int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
 
 
 /*∆‰«« ≈œ*/
-void UBattleManagerSystem::InitIconSkillActorMap() {
-	/*IconSkillActorMap.Add("None", );
-	IconSkillActorMap.Add("Icon_skill_PS_WithYou", );
-	IconSkillActorMap.Add("Icon_skill_PS_ConsolationMusic", );
-	IconSkillActorMap.Add("Icon_skill_PS_Campfire", );
-	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", );
-	IconSkillActorMap.Add("Icon_skill_PS_Starlight", );
-	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", );
-	IconSkillActorMap.Add("Icon_skill_PS_RedEyes", );
-	IconSkillActorMap.Add("Icon_skill_PS_AdviceforFreshStart", );
-	IconSkillActorMap.Add("Icon_skill_PS_AngryScolding", );
-	IconSkillActorMap.Add("Icon_skill_PS_ExhaustiveAdvice", );
-	IconSkillActorMap.Add("Icon_skill_PS_NeedtoRecharge", );
-	IconSkillActorMap.Add("Icon_skill_PS_PretendtoCry", );
-	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", );
-	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", );*/
-}
-
-AActor* UBattleManagerSystem::FindSkillActor(FString IconName) {
-	return IconSkillActorMap.Find(IconName);
-}
-
-void UBattleManagerSystem::AddSelectedSkillActor(AActor* SkillActor) {
-	SelectedSkillActor.Add(SkillActor);
-}
+//void UBattleManagerSystem::InitIconSkillActorMap() {
+//	/*IconSkillActorMap.Add("None", );
+//	IconSkillActorMap.Add("Icon_skill_PS_WithYou", );
+//	IconSkillActorMap.Add("Icon_skill_PS_ConsolationMusic", );
+//	IconSkillActorMap.Add("Icon_skill_PS_Campfire", );
+//	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", );
+//	IconSkillActorMap.Add("Icon_skill_PS_Starlight", );
+//	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", );
+//	IconSkillActorMap.Add("Icon_skill_PS_RedEyes", );
+//	IconSkillActorMap.Add("Icon_skill_PS_AdviceforFreshStart", );
+//	IconSkillActorMap.Add("Icon_skill_PS_AngryScolding", );
+//	IconSkillActorMap.Add("Icon_skill_PS_ExhaustiveAdvice", );
+//	IconSkillActorMap.Add("Icon_skill_PS_NeedtoRecharge", );
+//	IconSkillActorMap.Add("Icon_skill_PS_PretendtoCry", );
+//	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", );*/
+//	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", AmbiguousEmotion_Ref);
+//}
+//
+//AActor* UBattleManagerSystem::FindSkillActor(FString IconName) {
+//	return *(IconSkillActorMap.Find(IconName));
+//}
+//
+//void UBattleManagerSystem::AddSelectedSkillActor(AActor* SkillActor) {
+//	SelectedSkillActor.Add(SkillActor);
+//}
