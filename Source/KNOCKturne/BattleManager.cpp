@@ -11,6 +11,10 @@ ABattleManager::ABattleManager()
 
 	LeftCurrentTurnTime = 0;
 	IsBossTurn = true;
+
+
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
+	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
 }
 
 // Called when the game starts or when spawned
@@ -39,7 +43,7 @@ void ABattleManager::Tick(float DeltaTime)
 void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 //	SetTurnTime(BattleTableManager->GetCurBossStatReadOnly().Turn);
-	SetTurnTime(3);
+	SetTurnTime(10);
 	BP_StartBossTurn();
 }
 

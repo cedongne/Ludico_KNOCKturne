@@ -17,11 +17,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	InitItemIconRowMap();
 	// InitIconSkillActorMap();
 
-	static ConstructorHelpers::FObjectFinder<AActor> BP_PS_AmbiguousEmotion(
-		TEXT("Blueprint'/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion.BP_PS_AmbiguousEmotion'")
-
-	);
-	AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Object;
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
+	IconSkillActorMap.Add("Icon_skill_PS_WithYou", BP_PS_AmbiguousEmotion.Class);
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {

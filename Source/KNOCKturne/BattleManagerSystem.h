@@ -44,7 +44,7 @@ protected:
 	void InitIconSkillActorMap();
 
 	// 아리송한 감정파악
-	AActor* AmbiguousEmotion_Ref;
+	TSubclassOf<AActor> AmbiguousEmotion_Ref;
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -106,12 +106,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int FindItemlRow(FString IconName);
 
-
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
+//	TMap<FString, UClass*> IconSkillActorMap;
 	/*페피 턴*/
 
 	//// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
-	//TMap<FString, AActor*> IconSkillActorMap;
 
 	//// 페피 턴에서 선택한 스킬 액터 리스트
 	//TArray<AActor*> SelectedSkillActor;
