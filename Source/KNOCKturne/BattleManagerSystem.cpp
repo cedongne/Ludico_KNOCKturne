@@ -10,15 +10,15 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	LeftCurTurnTime = 0;
 
-	SelectedSkills1.SetNum(8);
+	SelectedSkills.Add(13);
+	SelectedSkills.SetNum(1);
 
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
 	InitItemIconRowMap();
-	// InitIconSkillActorMap();
 
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
-	IconSkillActorMap.Add("Icon_skill_PS_WithYou", BP_PS_AmbiguousEmotion.Class);
+	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {
@@ -53,24 +53,24 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 
 
 /*보따리-전투 전 준비*/
-void UBattleManagerSystem::SetSizeOfSelectedSkills1(int size) {
-	SelectedSkills1.SetNum(size);
+void UBattleManagerSystem::SetSizeOfSelectedSkills(int size) {
+	SelectedSkills.SetNum(size);
 }
 
-int UBattleManagerSystem::GetSizeOfSelectedSkills1() {
-	return SelectedSkills1.Num();
+int UBattleManagerSystem::GetSizeOfSelectedSkills() {
+	return SelectedSkills.Num();
 }
 
-void UBattleManagerSystem::SetOneSelectedSkills1(int index, int value) {
-	SelectedSkills1[index] = value;
+void UBattleManagerSystem::SetOneSelectedSkills(int index, int value) {
+	SelectedSkills[index] = value;
 }
 
-int UBattleManagerSystem::GetOneSelectedSkills1(int index) {
-	return SelectedSkills1[index];
+int UBattleManagerSystem::GetOneSelectedSkills(int index) {
+	return SelectedSkills[index];
 }
 
-TArray<int32> UBattleManagerSystem::GetSelectedSkills1() {
-	return SelectedSkills1;
+TArray<int32> UBattleManagerSystem::GetSelectedSkills() {
+	return SelectedSkills;
 }
 
 void UBattleManagerSystem::InitSkillIconRowMap() {
@@ -122,28 +122,15 @@ int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
 
 
 /*페피 턴*/
-//void UBattleManagerSystem::InitIconSkillActorMap() {
-//	/*IconSkillActorMap.Add("None", );
-//	IconSkillActorMap.Add("Icon_skill_PS_WithYou", );
-//	IconSkillActorMap.Add("Icon_skill_PS_ConsolationMusic", );
-//	IconSkillActorMap.Add("Icon_skill_PS_Campfire", );
-//	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", );
-//	IconSkillActorMap.Add("Icon_skill_PS_Starlight", );
-//	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", );
-//	IconSkillActorMap.Add("Icon_skill_PS_RedEyes", );
-//	IconSkillActorMap.Add("Icon_skill_PS_AdviceforFreshStart", );
-//	IconSkillActorMap.Add("Icon_skill_PS_AngryScolding", );
-//	IconSkillActorMap.Add("Icon_skill_PS_ExhaustiveAdvice", );
-//	IconSkillActorMap.Add("Icon_skill_PS_NeedtoRecharge", );
-//	IconSkillActorMap.Add("Icon_skill_PS_PretendtoCry", );
-//	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", );*/
-//	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", AmbiguousEmotion_Ref);
-//}
-//
-//AActor* UBattleManagerSystem::FindSkillActor(FString IconName) {
-//	return *(IconSkillActorMap.Find(IconName));
-//}
-//
-//void UBattleManagerSystem::AddSelectedSkillActor(AActor* SkillActor) {
-//	SelectedSkillActor.Add(SkillActor);
-//}
+TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
+	if (*(IconSkillActorMap.Find(IconName)) == nullptr)
+	{
+		return *(IconSkillActorMap.Find(IconName));
+	}
+	else
+		return 0;
+}
+
+void UBattleManagerSystem::AddSelectedSkillActor(TSubclassOf<AActor> SkillActor) {
+	SelectedSkillActor.Add(SkillActor);
+}

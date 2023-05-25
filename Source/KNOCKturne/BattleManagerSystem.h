@@ -61,26 +61,26 @@ public:
 
 	/*보따리-전투 전 준비*/
 	// 허브월드 보따리에서 선택한 스킬
-	TArray<int32> SelectedSkills1;
+	TArray<int32> SelectedSkills;
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 크기 설정
 	UFUNCTION(BlueprintCallable)
-	void SetSizeOfSelectedSkills1(int size);
+	void SetSizeOfSelectedSkills(int size);
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 크기 가져오기
 	UFUNCTION(BlueprintCallable)
-	int GetSizeOfSelectedSkills1();
+	int GetSizeOfSelectedSkills();
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 설정
 	UFUNCTION(BlueprintCallable)
-	void SetOneSelectedSkills1(int index, int value);
+	void SetOneSelectedSkills(int index, int value);
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 가져오기
 	UFUNCTION(BlueprintCallable)
-	int GetOneSelectedSkills1(int index);
+	int GetOneSelectedSkills(int index);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<int32> GetSelectedSkills1(); 
+	TArray<int32> GetSelectedSkills(); 
 
 
 	// 보따리에서 선택한 스킬 아이콘 이름-행 번호
@@ -109,18 +109,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
 //	TMap<FString, UClass*> IconSkillActorMap;
+
 	/*페피 턴*/
 
-	//// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
+	// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
 
-	//// 페피 턴에서 선택한 스킬 액터 리스트
-	//TArray<AActor*> SelectedSkillActor;
+	// 페피 턴에서 선택한 스킬 액터 리스트
+	TArray<TSubclassOf<AActor>> SelectedSkillActor;
 
-	//// 아이콘 이름으로 스킬 액터 찾기
-	//UFUNCTION(BlueprintCallable)
-	//AActor* FindSkillActor(FString IconName);
+	// 아이콘 이름으로 스킬 액터 찾기
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<AActor> FindSkillActor(FString IconName);
 
-	//// 스킬 액터 리스트 원소 추가
-	//UFUNCTION(BlueprintCallable)
-	//void AddSelectedSkillActor(AActor* SkillActor);
+	// 스킬 액터 리스트 원소 추가
+	UFUNCTION(BlueprintCallable)
+	void AddSelectedSkillActor(TSubclassOf<AActor> SkillActor);
 };
