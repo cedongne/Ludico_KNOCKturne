@@ -103,7 +103,7 @@ void UBattleManagerSystem::InitSpecialtyIconRowMap() {
 	SpecialtyIconRowMap.Add("Icon_skill_special_twolives", 5);
 }
 
-int32 UBattleManagerSystem::FindSpecialtylRow(FString IconName) {
+int32 UBattleManagerSystem::FindSpecialtyRow(FString IconName) {
 	return *SpecialtyIconRowMap.Find(IconName);
 }
 

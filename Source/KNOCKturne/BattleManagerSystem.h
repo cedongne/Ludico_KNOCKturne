@@ -96,7 +96,7 @@ public:
 
 	// 아이콘 이름으로 아이템 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int FindSpecialtylRow(FString IconName);
+	int FindSpecialtyRow(FString IconName);
 
 
 	// 보따리에서 선택한 특수기 아이콘 이름-행 번호
