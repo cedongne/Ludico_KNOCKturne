@@ -80,7 +80,7 @@ int UDialogueTableComponent::GetRowSize() {
 	return DialogueRows.Num() - 1;
 }
 
-void UDialogueTableComponent::GetRandomTalkIndex() {
+void UDialogueTableComponent::GetRandomTalkIndex(FString NpcName) {
 	for (int i = 0; i < DialogueRows.Num(); i++)
 	{
 		if (DialogueRows[i]->DialogueGroupCode == Episode ||
@@ -93,6 +93,7 @@ void UDialogueTableComponent::GetRandomTalkIndex() {
 			}
 		}
 	}
+
 	if (StartRandomNpcTalk.Num() != 0)
 	{
 		int random = rand() % StartRandomNpcTalk.Num();

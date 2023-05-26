@@ -86,13 +86,10 @@ public:
 	int GetRowSize();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString NpcName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Episode = "Episode1";
 
 	UFUNCTION(BlueprintCallable)
-	void GetRandomTalkIndex();
+	void GetRandomTalkIndex(FString NpcName);
 
 	UFUNCTION(BlueprintCallable)
 	void EmptyTArray();
