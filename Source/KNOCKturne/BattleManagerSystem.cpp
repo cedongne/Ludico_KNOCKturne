@@ -10,8 +10,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	LeftCurTurnTime = 0;
 
-	SelectedSkills.Add(13);
-	SelectedSkills.SetNum(1);
+	//SelectedSkills.Add(13);
+	SelectedSkills.SetNum(8);
 
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
