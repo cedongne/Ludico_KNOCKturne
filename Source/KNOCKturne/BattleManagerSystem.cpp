@@ -126,6 +126,7 @@ TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
 
 	if (IconSkillActorMap.Contains(IconName))
 	{
+		NTLOG_S(Log);
 		return *(IconSkillActorMap[IconName]);
 	}
 	else
