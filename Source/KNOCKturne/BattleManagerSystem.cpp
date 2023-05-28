@@ -123,12 +123,13 @@ int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
 
 /*∆‰«« ≈œ*/
 TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
-	if (*(IconSkillActorMap.Find(IconName)) == nullptr)
+
+	if (IconSkillActorMap.Contains(IconName))
 	{
-		return *(IconSkillActorMap.Find(IconName));
+		return *(IconSkillActorMap[IconName]);
 	}
 	else
-		return 0;
+		return nullptr;
 }
 
 void UBattleManagerSystem::AddSelectedSkillActor(TSubclassOf<AActor> SkillActor) {
