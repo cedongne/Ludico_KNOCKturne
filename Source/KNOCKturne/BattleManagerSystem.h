@@ -61,26 +61,26 @@ public:
 
 	/*보따리-전투 전 준비*/
 	// 허브월드 보따리에서 선택한 스킬
-	TArray<int32> SelectedSkills;
+	TArray<int32> SelectedSkillCodeList;
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 크기 설정
 	UFUNCTION(BlueprintCallable)
-	void SetSizeOfSelectedSkills(int size);
+	void SetSizeOfSelectedSkillCodeList(int32 size);
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 크기 가져오기
 	UFUNCTION(BlueprintCallable)
-	int GetSizeOfSelectedSkills();
+	int32 GetSizeOfSelectedSkillCodeList();
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 설정
 	UFUNCTION(BlueprintCallable)
-	void SetOneSelectedSkills(int index, int value);
+	void SetOneSelectedSkillCodeList(int32 index, int32 value);
 
 	// 허브월드 보따리에서 선택한 스킬 리스트 가져오기
 	UFUNCTION(BlueprintCallable)
-	int GetOneSelectedSkills(int index);
+	int32 GetOneSelectedSkillCodeInList(int32 index);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<int32> GetSelectedSkills(); 
+	TArray<int32> GetSelectedSkillCodeList(); 
 
 
 	// 보따리에서 선택한 스킬 아이콘 이름-행 번호
@@ -88,7 +88,7 @@ public:
 
 	// 아이콘 이름으로 스킬 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int FindSkillRow(FString IconName);
+	int32 FindSkillRow(FString IconName);
 
 
 	// 보따리에서 선택한 특수기 아이콘 이름-행 번호
@@ -96,7 +96,7 @@ public:
 
 	// 아이콘 이름으로 아이템 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int FindSpecialtyRow(FString IconName);
+	int32 FindSpecialtyRow(FString IconName);
 
 
 	// 보따리에서 선택한 특수기 아이콘 이름-행 번호
@@ -104,7 +104,7 @@ public:
 
 	// 아이콘 이름으로 아이템 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int FindItemlRow(FString IconName);
+	int32 FindItemlRow(FString IconName);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
@@ -115,13 +115,19 @@ public:
 	// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
 
 	// 페피 턴에서 선택한 스킬 액터 리스트
-	TArray<TSubclassOf<AActor>> SelectedSkillActor;
+	TArray<TSubclassOf<AActor>> SelectedSkillActorClassList;
 
 	// 아이콘 이름으로 스킬 액터 찾기
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<AActor> FindSkillActor(FString IconName);
 
-	// 스킬 액터 리스트 원소 추가
+	// 스킬 액터 클래스 리스트 원소 추가
 	UFUNCTION(BlueprintCallable)
-	void AddSelectedSkillActor(TSubclassOf<AActor> SkillActor);
+	void AddSelectedSkillActorClassList(TSubclassOf<AActor> SkillActor);
+
+	UFUNCTION(BlueprintCallable)
+	void EndPeppyTurn();
+
+private:
+
 };

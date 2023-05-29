@@ -30,7 +30,6 @@ void ABattleManager::BeginPlay()
 
 }
 
-// Called every frame
 void ABattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -105,4 +104,9 @@ void ABattleManager::DecreaseLeftCurrentTurnTime() {
 		LeftCurrentTurnTime--;
 		BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 	}
+}
+
+void ABattleManager::UsePeppySkill() {
+	auto SelectedSkillActorClassList = BattleManager->SelectedSkillActorClassList;
+	NTLOG(Warning, TEXT("%d"), SelectedSkillActorClassList.Num());
 }

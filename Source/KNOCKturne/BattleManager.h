@@ -38,6 +38,9 @@ private:
 	void RunTurnTimer(float DeltaTime);
 	void DecreaseLeftCurrentTurnTime();
 
+	UFUNCTION(BlueprintCallable)
+	void UsePeppySkill();
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();
@@ -53,5 +56,4 @@ protected:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-
 };

@@ -10,8 +10,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	LeftCurTurnTime = 0;
 
-	//SelectedSkills.Add(13);
-	SelectedSkills.SetNum(8);
+	//SelectedSkillCodeList.Add(13);
+	SelectedSkillCodeList.SetNum(8);
 
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
@@ -53,24 +53,24 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 
 
 /*보따리-전투 전 준비*/
-void UBattleManagerSystem::SetSizeOfSelectedSkills(int size) {
-	SelectedSkills.SetNum(size);
+void UBattleManagerSystem::SetSizeOfSelectedSkillCodeList(int32 size) {
+	SelectedSkillCodeList.SetNum(size);
 }
 
-int UBattleManagerSystem::GetSizeOfSelectedSkills() {
-	return SelectedSkills.Num();
+int32 UBattleManagerSystem::GetSizeOfSelectedSkillCodeList() {
+	return SelectedSkillCodeList.Num();
 }
 
-void UBattleManagerSystem::SetOneSelectedSkills(int index, int value) {
-	SelectedSkills[index] = value;
+void UBattleManagerSystem::SetOneSelectedSkillCodeList(int32 index, int32 value) {
+	SelectedSkillCodeList[index] = value;
 }
 
-int UBattleManagerSystem::GetOneSelectedSkills(int index) {
-	return SelectedSkills[index];
+int32 UBattleManagerSystem::GetOneSelectedSkillCodeInList(int32 index) {
+	return SelectedSkillCodeList[index];
 }
 
-TArray<int32> UBattleManagerSystem::GetSelectedSkills() {
-	return SelectedSkills;
+TArray<int32> UBattleManagerSystem::GetSelectedSkillCodeList() {
+	return SelectedSkillCodeList;
 }
 
 void UBattleManagerSystem::InitSkillIconRowMap() {
@@ -123,16 +123,20 @@ int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
 
 /*페피 턴*/
 TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
-
-	if (IconSkillActorMap.Contains(IconName))
-	{
-		NTLOG_S(Log);
+	if (IconSkillActorMap.Contains(IconName)) {
 		return *(IconSkillActorMap[IconName]);
 	}
-	else
+	else {
 		return nullptr;
+	}
 }
 
-void UBattleManagerSystem::AddSelectedSkillActor(TSubclassOf<AActor> SkillActor) {
-	SelectedSkillActor.Add(SkillActor);
+void UBattleManagerSystem::AddSelectedSkillActorClassList(TSubclassOf<AActor> SkillActor) {
+	SelectedSkillActorClassList.Add(SkillActor);
+}
+
+void UBattleManagerSystem::EndPeppyTurn() {
+	for (auto SkillActorClass : SelectedSkillActorClassList) {
+		GetWorld()->SpawnActor<AActor>(SkillActorClass);
+	}
 }
