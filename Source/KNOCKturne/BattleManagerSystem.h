@@ -104,7 +104,7 @@ public:
 
 	// 아이콘 이름으로 아이템 행 찾기
 	UFUNCTION(BlueprintCallable)
-	int32 FindItemlRow(FString IconName);
+	int32 FindItemRow(FString IconName);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;

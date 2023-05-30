@@ -228,7 +228,7 @@ struct FSpecialSkillData : public FTableRowBase {
 	GENERATED_BODY()
 
 	FSpecialSkillData() : Skill_Index(-1), Probability_1(0.0f), SpecialSkill_Target(-1), value1N(0), value1M(0), value1T(0), 
-		BuffCode("-1"), EnergyCost(0), CoolTime(0), SpecialSkillName("-1"), SpecialSkillDescript("-1") {}
+		BuffCode("-1"), EnergyCost(0), CoolTime(0), SpecialSkillDescript("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 Skill_Index;
@@ -249,8 +249,6 @@ struct FSpecialSkillData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 CoolTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString SpecialSkillName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TObjectPtr<UTexture2D> SpecialSkillIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SpecialSkillDescript;
@@ -261,7 +259,7 @@ struct FItemData : public FTableRowBase {
 	GENERATED_BODY()
 
 		FItemData() : ItemTarget(-1), TouchColumn("-1"), value1N(0), value1M(0),
-		MaxCount(0), ItemName("-1"), ItemDescript("-1"), ItemEasterEgg("-1"), ItemCharacterDescript("-1") {}
+		MaxCount(0), ItemDescript("-1"), ItemEasterEgg("-1"), ItemCharacterDescript("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 ItemTarget;
@@ -275,8 +273,6 @@ struct FItemData : public FTableRowBase {
 	int32 MaxCount;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TObjectPtr<UTexture2D> ItemIcon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString ItemName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString ItemDescript;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")

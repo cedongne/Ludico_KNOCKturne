@@ -10,7 +10,6 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	LeftCurTurnTime = 0;
 
-	//SelectedSkillCodeList.Add(13);
 	SelectedSkillCodeList.SetNum(8);
 
 	InitSkillIconRowMap();
@@ -116,7 +115,7 @@ void UBattleManagerSystem::InitItemIconRowMap() {
 	ItemIconRowMap.Add("Icon_Item_eyedrop", 5);
 }
 
-int32 UBattleManagerSystem::FindItemlRow(FString IconName) {
+int32 UBattleManagerSystem::FindItemRow(FString IconName) {
 	return *ItemIconRowMap.Find(IconName);
 }
 
