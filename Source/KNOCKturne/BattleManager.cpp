@@ -110,3 +110,11 @@ void ABattleManager::UsePeppySkill() {
 	auto SelectedSkillActorClassList = BattleManager->SelectedSkillActorClassList;
 	NTLOG(Warning, TEXT("%d"), SelectedSkillActorClassList.Num());
 }
+
+float ABattleManager::GetLeftCurrentTurnTime() {
+	return LeftCurrentTurnTime;
+}
+
+void ABattleManager::SetLeftCurrentTurnTime(float TurnTime) {
+	LeftCurrentTurnTime = TurnTime;
+}

@@ -50,6 +50,11 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void BP_StartPeppyTurn();
 
+	UFUNCTION(BlueprintCallable)
+	float GetLeftCurrentTurnTime();
+	UFUNCTION(BlueprintCallable)
+	void SetLeftCurrentTurnTime(float TurnTime);
+
 protected:
 	class UBattleTableManagerSystem* BattleTableManager;
 	class UBattleManagerSystem* BattleManager;
