@@ -128,6 +128,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EndPeppyTurn();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 DraggedIndex = -1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 OverlappedIndex = -1;
+
 private:
 
 };
