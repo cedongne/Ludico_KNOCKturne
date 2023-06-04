@@ -115,6 +115,7 @@ public:
 	// 페피 턴에서 선택한 스킬 아이콘 이름-스킬 액터
 
 	// 페피 턴에서 선택한 스킬 액터 리스트
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TSubclassOf<AActor>> SelectedSkillActorClassList;
 
 	// 아이콘 이름으로 스킬 액터 찾기

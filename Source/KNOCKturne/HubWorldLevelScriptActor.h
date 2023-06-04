@@ -4,14 +4,17 @@
 
 #include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
+
+#include "KNOCKturneLevelScriptActor.h"
 #include "DialogueTableComponent.h"
+
 #include "HubWorldLevelScriptActor.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API AHubWorldLevelScriptActor : public ALevelScriptActor
+class KNOCKTURNE_API AHubWorldLevelScriptActor : public AKNOCKturneLevelScriptActor
 {
 	GENERATED_BODY()
 	
