@@ -11,7 +11,7 @@ CalcUtil::~CalcUtil()
 {
 }
 
-int CalcUtil::RandEvenInRange(int min, int max) {
+int CalcUtil::RandEvenNumberInRange(int min, int max) {
 	srand((unsigned int)time(NULL));
 
 	int randomNum = rand();

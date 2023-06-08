@@ -14,5 +14,5 @@ public:
 	~CalcUtil();
 
 public:
-	static int RandEvenInRange(int min, int max);
+	static int RandEvenNumberInRange(int min, int max);
 };
