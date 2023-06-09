@@ -291,8 +291,10 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	FBattleTableInitDelegate BattleTableInitDelegate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
-	class UDataTable* BossSkillTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* BossContarctSkillTable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* BossNonContarctSkillTable;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* PeppySkillTable;
 
@@ -305,13 +307,15 @@ public:
 	FPeppyStatData GetPeppyStatDataOnTable(FString DataType);
 	FBossStatData GetBossStatDataOnTable(FString DataType);
 
+	FPeppyStatData* GetCurPeppyStatRef();
+	FBossStatData* GetCurBossStatRef();
+
 	UFUNCTION(BlueprintCallable)
 	FPeppyStatData GetCurPeppyStatReadOnly();
 	UFUNCTION(BlueprintCallable)
 	FBossStatData GetCurBossStatReadOnly();
-
-	FPeppyStatData* GetCurPeppyStatRef();
-	FBossStatData* GetCurBossStatRef();
+	UFUNCTION(BlueprintCallable)
+	FName GetCurrentBlueprintClassName();
 
 private:
 	class UKNOCKturneGameInstance* GameInstance;

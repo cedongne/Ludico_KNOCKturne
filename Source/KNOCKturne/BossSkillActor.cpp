@@ -10,11 +10,23 @@
 // Sets default values
 ABossSkillActor::ABossSkillActor()
 {
+	IsContactSkill = true;
 }
 
 void ABossSkillActor::BeginPlay() {
 	Super::BeginPlay();
 
+	Initialization();
+}
+
+void ABossSkillActor::Initialization() {
+	auto TempSkillData = BattleTableManager->BossContarctSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
+	if (TempSkillData == nullptr) {
+		TempSkillData = BattleTableManager->BossNonContarctSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
+		IsContactSkill = false;
+	}
+
+	InitSkillData(*TempSkillData);
 }
 
 void ABossSkillActor::InitSkillData(FBossSkillData NewSkillData) {
@@ -24,7 +36,6 @@ void ABossSkillActor::InitSkillData(FBossSkillData NewSkillData) {
 
 void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	SkillData = NewSkillData;
-	IsInitialized = true;
 	NTLOG(Warning, TEXT("Data set %lf"), SkillData.Value_1_N);
 }
 

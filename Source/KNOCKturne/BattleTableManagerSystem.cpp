@@ -5,18 +5,24 @@
 #include "BossSkillActor.h"
 #include "CalcUtil.h"
 
-#define TARGET_PEPPY 0
-#define TARGET_BOSS 1
+#define TARGET_PEPPY	0
+#define TARGET_BOSS		1
 
 void UBattleTableManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 	Super::Initialize(Collection);
 }
 
 UBattleTableManagerSystem::UBattleTableManagerSystem() {
-	FString BossSkilTablePath = TEXT("/Game/Assets/DataTable/Ep1BossSkillTable.Ep1BossSkillTable");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSKILLTABLE(*BossSkilTablePath);
-	NTCHECK(DT_BOSSKILLTABLE.Succeeded());
-	BossSkillTable = DT_BOSSKILLTABLE.Object;
+	FString BossContactSkillTablePath = TEXT("/Game/Assets/DataTable/Ep1BossContactSkillTable.Ep1BossContactSkillTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSCONTACTSKILLTABLE(*BossContactSkillTablePath);
+	NTCHECK(DT_BOSSCONTACTSKILLTABLE.Succeeded());
+	BossContarctSkillTable = DT_BOSSCONTACTSKILLTABLE.Object;
+
+	FString BossNonContactSkillTablePath = TEXT("/Game/Assets/DataTable/Ep1BossContactSkillTable.Ep1BossContactSkillTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSNONCONTACTSKILLTABLE(*BossNonContactSkillTablePath);
+	NTCHECK(DT_BOSSNONCONTACTSKILLTABLE.Succeeded());
+	BossNonContarctSkillTable = DT_BOSSNONCONTACTSKILLTABLE.Object;
+
 	SetBossSkillSpawnDataTable();
 
 	FString BossStatDataPath = TEXT("/Game/Assets/DataTable/BossStatTable.BossStatTable");
@@ -229,4 +235,8 @@ FPeppyStatData* UBattleTableManagerSystem::GetCurPeppyStatRef() {
 
 FBossStatData* UBattleTableManagerSystem::GetCurBossStatRef() {
 	return &CurBossStat;
+}
+
+FName UBattleTableManagerSystem::GetCurrentBlueprintClassName() {
+	return *(GetClass()->GetFName().ToString());
 }

@@ -25,6 +25,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stat")
 	struct FBossSkillData SkillData;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool IsContactSkill;
+
+	UFUNCTION(BlueprintCallable)
+	void Initialization();
 public:
 	UFUNCTION(BlueprintCallable)
 	void InitSkillData(FBossSkillData NewSkillData);
