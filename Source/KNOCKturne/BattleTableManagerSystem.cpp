@@ -141,7 +141,7 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommo
 			13 랜덤 공격 : Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 		*/
 	case 13:
-		TargetStatData->EP -= CalcUtil::RandEvenInRange(SkillData->Value_1_N, SkillData->Value_1_M);
+		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_1_N, SkillData->Value_1_M);
 		NTLOG(Warning, TEXT("[Boss 13] Random attack damage : %d"), TargetStatData->EP);
 		break;
 	default:
@@ -184,7 +184,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 			13 랜덤 공격 : Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 		*/
 	case 13:
-		TargetStatData->EP -= CalcUtil::RandEvenInRange(SkillData->Value_1_N, SkillData->Value_1_M);
+		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_1_N, SkillData->Value_1_M);
 		CurPeppyStat.Energy -= SkillData->Cost;
 		NTLOG(Warning, TEXT("[Peppy 13] Random attack damage : %d"), TargetStatData->EP);
 		break;
