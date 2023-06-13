@@ -17,7 +17,6 @@ ABattleManager::ABattleManager()
 	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
 }
 
-// Called when the game starts or when spawned
 void ABattleManager::BeginPlay()
 {
 	Super::BeginPlay();
@@ -33,10 +32,8 @@ void ABattleManager::BeginPlay()
 void ABattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	// SetActorTickEnabled() 메서드가 정상적으로 작동하지 않아 임시로 조건문을 추가해 타이머 작동을 조작함. 수정해야 함.
-	if (IsCalled_InitStartBossTurn) {
-		RunTurnTimer(DeltaTime);
-	}
+
+	RunTurnTimer(DeltaTime);
 }
 
 void ABattleManager::StartBossTurn() {
@@ -49,10 +46,11 @@ void ABattleManager::StartBossTurn() {
 /* 해당 메서드는 레벨 블루프린트 등에서 초기화 호출 타이밍 조절 등을 위해 최초 1회만 실행 가능합니다.이후의 Turn 시작 로직은 오직 C++ 클래스 내에서만 이루어집니다. */
 void ABattleManager::BP_InitStartBossTurn() {
 	if (IsCalled_InitStartBossTurn) {
-		NTLOG(Error, TEXT("StartBossTurn method has already been called. This method can only be called once on blueprint."))
+		NTLOG(Error, TEXT("StartBossTurn method has already been called. This method can only be called once on blueprint."));
+		return;
 	}
 	
-//	SetActorTickEnabled(true);
+	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
 	TurnChange();
 }
