@@ -133,9 +133,3 @@ TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
 void UBattleManagerSystem::AddSelectedSkillActorClassList(TSubclassOf<AActor> SkillActor) {
 	SelectedSkillActorClassList.Add(SkillActor);
 }
-
-void UBattleManagerSystem::EndPeppyTurn() {
-	for (auto SkillActorClass : SelectedSkillActorClassList) {
-		GetWorld()->SpawnActor<AActor>(SkillActorClass);
-	}
-}

@@ -9,9 +9,8 @@ ABattleManager::ABattleManager()
 	PrimaryActorTick.bCanEverTick = true;
 	SetActorTickEnabled(false);
 
+	CurrentTurnType = BossTurn;
 	LeftCurrentTurnTime = 0;
-	IsBossTurn = true;
-
 
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
@@ -39,7 +38,7 @@ void ABattleManager::Tick(float DeltaTime)
 void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 //	SetTurnTime(BattleTableManager->GetCurBossStatReadOnly().Turn);
-	SetTurnTime(10);
+	SetLeftCurrentTurnTime(10);
 	BP_StartBossTurn();
 }
 
@@ -52,30 +51,33 @@ void ABattleManager::BP_InitStartBossTurn() {
 	
 	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
-	TurnChange();
+	StartBossTurn();
 }
 
 void ABattleManager::StartPeppyTurn() {
 //	SetTurnTime(BattleTableManager->GetCurPeppyStatReadOnly().Turn);
-	SetTurnTime(10);
+	SetLeftCurrentTurnTime(10);
 	BP_StartPeppyTurn();
 }
 
-
 void ABattleManager::TurnChange() {
-	if (IsBossTurn) {
-		StartBossTurn();
-		IsBossTurn = false;
-	}
-	else {
+	switch (CurrentTurnType) {
+	case BossTurn:
 		StartPeppyTurn();
-		IsBossTurn = true;
+		CurrentTurnType = PeppySkillSelectingTurn;
+		break;
+	case PeppySkillSelectingTurn:
+		SetLeftCurrentTurnTime(100);	// 스킬 사용을 위한 임시 턴 타임 적용
+		BP_UsePeppySkills();
+		CurrentTurnType = PeppySkillUsingTurn;
+		break;
+	case PeppySkillUsingTurn:
+		StartBossTurn();
+		CurrentTurnType = BossTurn;
+		break;
 	}
 }
 
-void ABattleManager::SetTurnTime(int32 TurnTime) {
-	LeftCurrentTurnTime = TurnTime;
-}
 void ABattleManager::RunTurnTimer(float DeltaTime) {
 	if (LeftCurrentTurnTime <= 0.0f) {
 		TurnChange();
@@ -104,15 +106,14 @@ void ABattleManager::DecreaseLeftCurrentTurnTime() {
 	}
 }
 
-void ABattleManager::UsePeppySkill() {
-	auto SelectedSkillActorClassList = BattleManager->SelectedSkillActorClassList;
-	NTLOG(Warning, TEXT("%d"), SelectedSkillActorClassList.Num());
-}
-
 float ABattleManager::GetLeftCurrentTurnTime() {
 	return LeftCurrentTurnTime;
 }
 
 void ABattleManager::SetLeftCurrentTurnTime(float TurnTime) {
 	LeftCurrentTurnTime = TurnTime;
+}
+
+void ABattleManager::EndTurn() {
+	LeftCurrentTurnTime = 0;
 }
