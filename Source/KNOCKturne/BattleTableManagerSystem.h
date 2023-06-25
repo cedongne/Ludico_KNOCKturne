@@ -241,7 +241,7 @@ struct FSpecialSkillData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float value1M;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	float value1T;
+	int32 value1T;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString BuffCode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
