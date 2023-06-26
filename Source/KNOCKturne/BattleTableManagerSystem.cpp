@@ -54,13 +54,13 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	/// SweptGarden
 	TempSpawnLocation.Empty();
 	TempSpawnRotation.Empty();
-	TempSpawnLocation.Push(FVector(800.0f, 330.0f, -85.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 0.0f, 0.0f));
-	TempSpawnLocation.Push(FVector(1180.0f, 810.0f, -85.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 90.0f, 0.0f));
-	TempSpawnLocation.Push(FVector(710.0f, 1220.0f, -85.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 180.0f, 0.0f));
-	TempSpawnLocation.Push(FVector(310.0f, 740.0f, -85.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
 	AddBossSkillSpawnDataToMap(
