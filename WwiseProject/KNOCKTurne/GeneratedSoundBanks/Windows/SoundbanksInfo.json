@@ -1,0 +1,1158 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "145",
+  "RootPaths": {
+   "ProjectRoot": "../..",
+   "SourceFilesRoot": "../../.cache/Windows",
+   "SoundBanksRoot": ".",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "."
+  },
+  "DialogueEvents": [],
+  "SoundBanks": [
+   {
+    "Id": "1355168291",
+    "Type": "User",
+    "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
+    "Language": "SFX",
+    "Hash": "{6AAA72FC-08B0-A832-EBC0-232E4ED109CD}",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk",
+    "Plugins": {
+     "AudioDevices": [
+      {
+       "Id": "2317455096",
+       "Name": "No_Output",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\No_Output",
+       "GUID": "{67116255-B7BA-43CE-B95D-7C972502F95B}",
+       "LibName": "No Output",
+       "LibId": "11862023"
+      },
+      {
+       "Id": "3859886410",
+       "Name": "System",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\System",
+       "GUID": "{47B988B8-C04D-4E5C-878C-ADCAB28CF2F0}",
+       "LibName": "System",
+       "LibId": "11403271"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "393239870",
+      "Name": "SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\SFX",
+      "GUID": "{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}"
+     },
+     {
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Music",
+      "GUID": "{40C489A2-EF75-4D2C-B839-C9BD0966EC68}"
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "1235576194",
+      "Name": "SetMusicVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SetMusicVolume",
+      "GUID": "{EE7ED13E-CB89-4022-A015-5115510FF342}"
+     },
+     {
+      "Id": "1612287370",
+      "Name": "SetSFXVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SetSFXVolume",
+      "GUID": "{49C0EC05-8248-4AB2-B670-BF53639F3F0D}"
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "153626945",
+      "Name": "MusicMute",
+      "ObjectPath": "\\States\\Default Work Unit\\MusicMute",
+      "GUID": "{8EA9FF96-F162-4C14-9CF9-71CF9C62FD73}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\None",
+        "GUID": "{C7770802-0720-435C-A14B-62D90C3A81C2}"
+       },
+       {
+        "Id": "1651971902",
+        "Name": "On",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\On",
+        "GUID": "{F89AAEE6-E375-4980-9966-D1C680034F8B}"
+       },
+       {
+        "Id": "2974103762",
+        "Name": "Mute",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\Mute",
+        "GUID": "{4AF4A2EA-2AC4-427F-9C03-7B19FE339035}"
+       }
+      ]
+     },
+     {
+      "Id": "1264305561",
+      "Name": "SFXMute",
+      "ObjectPath": "\\States\\Default Work Unit\\SFXMute",
+      "GUID": "{772F763F-E67F-41C8-BD59-211303236CDA}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\None",
+        "GUID": "{55246F65-BEA2-460F-A9A4-0D941298A987}"
+       },
+       {
+        "Id": "1651971902",
+        "Name": "On",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\On",
+        "GUID": "{A065D1AA-A45D-4209-BF4D-0BF093DB6819}"
+       },
+       {
+        "Id": "2974103762",
+        "Name": "Mute",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\Mute",
+        "GUID": "{24AC8242-C9C2-429C-921D-6C137CADA647}"
+       }
+      ]
+     },
+     {
+      "Id": "2675729146",
+      "Name": "BattleState",
+      "ObjectPath": "\\States\\Default Work Unit\\BattleState",
+      "GUID": "{A6041A1D-4540-4327-B6FF-DB44CCFCE55C}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\None",
+        "GUID": "{78EB688C-79E7-40F1-8C66-E0C6A8B1A7B7}"
+       },
+       {
+        "Id": "1945239214",
+        "Name": "NOTBattle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\NOTBattle",
+        "GUID": "{10926055-A7DE-4186-9917-DE187CEAB6BA}"
+       },
+       {
+        "Id": "2937832959",
+        "Name": "Battle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\Battle",
+        "GUID": "{F389EF43-73A7-44EB-8123-A0D905A9CE22}"
+       }
+      ]
+     },
+     {
+      "Id": "3573931707",
+      "Name": "Loading",
+      "ObjectPath": "\\States\\Default Work Unit\\Loading",
+      "GUID": "{F6EB1E7C-E7DA-4A3B-9978-65621EF16ED0}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Loading\\None",
+        "GUID": "{8B8C5807-C953-426E-8E74-23127CB1A3C7}"
+       },
+       {
+        "Id": "2337190330",
+        "Name": "OnLoading",
+        "ObjectPath": "\\States\\Default Work Unit\\Loading\\OnLoading",
+        "GUID": "{9B2B7D31-B131-44E9-92DF-2B2ECA4E708E}"
+       }
+      ]
+     },
+     {
+      "Id": "3865314626",
+      "Name": "Material",
+      "ObjectPath": "\\States\\Default Work Unit\\Material",
+      "GUID": "{B97690DA-CAEE-4CB2-9761-514B4E7BDF15}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\None",
+        "GUID": "{B75716EF-102A-47E4-93D2-9734303354E7}"
+       },
+       {
+        "Id": "787898836",
+        "Name": "Snow",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Snow",
+        "GUID": "{DE8F1A6D-9164-4B04-9011-4CA34C3196C3}"
+       },
+       {
+        "Id": "1216965916",
+        "Name": "Stone",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Stone",
+        "GUID": "{4CB2CF2B-58FA-49E1-9BCB-3E51821D918B}"
+       },
+       {
+        "Id": "2058049674",
+        "Name": "Wood",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Wood",
+        "GUID": "{4E6AACEB-7E32-4D15-94DC-C1FD27A4CD7F}"
+       },
+       {
+        "Id": "2654748154",
+        "Name": "Water",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Water",
+        "GUID": "{F9909E4A-7436-4CF6-BFFA-F27607640D5E}"
+       },
+       {
+        "Id": "4248645337",
+        "Name": "Grass",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Grass",
+        "GUID": "{6DCA55B3-27C3-405A-80DD-C19F8CD2A06E}"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "Id": "4056684167",
+    "Type": "User",
+    "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
+    "Language": "SFX",
+    "Hash": "{76F37596-5865-DC1C-90C9-6E6794BEA817}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
+    "ShortName": "Master",
+    "Path": "Master.bnk",
+    "Media": [
+     {
+      "Id": "26675951",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Snow1.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Snow1_10C4C929.wem"
+     },
+     {
+      "Id": "49505542",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Grass1.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Grass1_10C4C929.wem"
+     },
+     {
+      "Id": "94944749",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Stone3.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Stone3_10C4C929.wem"
+     },
+     {
+      "Id": "123812004",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Snow2.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Snow2_10C4C929.wem"
+     },
+     {
+      "Id": "142174096",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer.wav",
+      "CachePath": "SFX/ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem"
+     },
+     {
+      "Id": "164875334",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Text_Typing.wav",
+      "CachePath": "SFX/SFX_Text_Typing_C5579977.wem"
+     },
+     {
+      "Id": "165211439",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_NOTBattle_164bpm_4-4.wav",
+      "CachePath": "SFX/BGM_NOTBattle_164bpm_4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "174940528",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_BattleVar2_164bpm_4-4.wav",
+      "CachePath": "SFX/BGM_BattleVar2_164bpm_4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "193027794",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_UI_Select.wav",
+      "CachePath": "SFX/SFX_UI_Select_10C4C929.wem"
+     },
+     {
+      "Id": "201523215",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_cancle.wav",
+      "CachePath": "SFX/UI_cancle_10C4C929.wem"
+     },
+     {
+      "Id": "210552255",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Skill_SweepGarden.wav",
+      "CachePath": "SFX/Skill_SweepGarden_8A703261.wem"
+     },
+     {
+      "Id": "211861517",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Hover.wav",
+      "CachePath": "SFX/UI_Hover_8D153607.wem"
+     },
+     {
+      "Id": "223719773",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Stone1.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Stone1_10C4C929.wem"
+     },
+     {
+      "Id": "250506823",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_BattleVar1_164bpm_4-4.wav",
+      "CachePath": "SFX/BGM_BattleVar1_164bpm_4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "257835999",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BRS_Roomtone_House_Open_Lite_Birds-Fridge.wav",
+      "CachePath": "SFX/BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem"
+     },
+     {
+      "Id": "317160281",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Grass3.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Grass3_10C4C929.wem"
+     },
+     {
+      "Id": "360611745",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Stone2.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Stone2_10C4C929.wem"
+     },
+     {
+      "Id": "383708649",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Hover.wav",
+      "CachePath": "SFX/UI_Hover_1AA38C9C.wem"
+     },
+     {
+      "Id": "391750526",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FF_CL_ambience_busy_london_streets_totenham_court_road.wav",
+      "CachePath": "SFX/FF_CL_ambience_busy_london_streets_totenham_court_road_1991A03E.wem"
+     },
+     {
+      "Id": "397593734",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BattleDoor2.wav",
+      "CachePath": "SFX/BattleDoor2_10C4C929.wem"
+     },
+     {
+      "Id": "416420098",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Wood2.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Wood2_10C4C929.wem"
+     },
+     {
+      "Id": "435330442",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_BattleVar3_164bpm_4-4.wav",
+      "CachePath": "SFX/BGM_BattleVar3_164bpm_4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "485043058",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "HotelRoomLamp_S08FO.1312.wav",
+      "CachePath": "SFX/HotelRoomLamp_S08FO.1312_15108706.wem"
+     },
+     {
+      "Id": "511898442",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Grass2.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Grass2_10C4C929.wem"
+     },
+     {
+      "Id": "518217883",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_GetEnergy.wav",
+      "CachePath": "SFX/SFX_GetEnergy_10C4C929.wem"
+     },
+     {
+      "Id": "534625915",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_Credit_75bpm4-4_L29M.wav",
+      "CachePath": "SFX/BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem"
+     },
+     {
+      "Id": "575546989",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ObjectFind2.wav",
+      "CachePath": "SFX/ObjectFind2_10C4C929.wem"
+     },
+     {
+      "Id": "604532544",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BattleDoor.wav",
+      "CachePath": "SFX/BattleDoor_10C4C929.wem"
+     },
+     {
+      "Id": "638760269",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Water2.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Water2_10C4C929.wem"
+     },
+     {
+      "Id": "667706857",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie.wav",
+      "CachePath": "SFX/ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie_10C4C929.wem"
+     },
+     {
+      "Id": "727224766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ambi_HerbWorld_Wind.wav",
+      "CachePath": "SFX/Ambi_HerbWorld_Wind_239E1AED.wem"
+     },
+     {
+      "Id": "728677903",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FF_TM_drawer_open_close_simple.wav",
+      "CachePath": "SFX/FF_TM_drawer_open_close_simple_8BA889A0.wem"
+     },
+     {
+      "Id": "742699319",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Water1.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Water1_10C4C929.wem"
+     },
+     {
+      "Id": "765620137",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_Battle_164bpm_4-4.wav",
+      "CachePath": "SFX/BGM_Battle_164bpm_4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "781396450",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "HotelRoomLamp_S08FO.1312.wav",
+      "CachePath": "SFX/HotelRoomLamp_S08FO.1312_C08CDC50.wem"
+     },
+     {
+      "Id": "783667508",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "whitenoise_MSL.wav",
+      "CachePath": "SFX/whitenoise_MSL_594EBFCF.wem"
+     },
+     {
+      "Id": "813775076",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Water3.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Water3_10C4C929.wem"
+     },
+     {
+      "Id": "818588019",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "UI_Hover.wav",
+      "CachePath": "SFX/UI_Hover_9BFAFC11.wem"
+     },
+     {
+      "Id": "821593072",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DoorClose_BW.61261.wav",
+      "CachePath": "SFX/DoorClose_BW.61261_D79A3DCF.wem"
+     },
+     {
+      "Id": "858183081",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_HubWorld_120bpm3-4.wav",
+      "CachePath": "SFX/BGM_HubWorld_120bpm3-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "864687728",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Wood1.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Wood1_10C4C929.wem"
+     },
+     {
+      "Id": "903646689",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_Hover_Door.wav",
+      "CachePath": "SFX/SFX_Hover_Door_10C4C929.wem"
+     },
+     {
+      "Id": "999749974",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic.wav",
+      "CachePath": "SFX/ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem"
+     },
+     {
+      "Id": "1009141722",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj.wav",
+      "CachePath": "SFX/MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj_10C4C929.wem"
+     },
+     {
+      "Id": "1015440715",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "SFX_PeppyWalk_Snow3.wav",
+      "CachePath": "SFX/SFX_PeppyWalk_Snow3_10C4C929.wem"
+     },
+     {
+      "Id": "1017381714",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ambi_HerbWorld_LeavesTallGrassWind.wav",
+      "CachePath": "SFX/Ambi_HerbWorld_LeavesTallGrassWind_10C4C929.wem"
+     },
+     {
+      "Id": "1034982650",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BROOKEW_105_vocal_phrase_sigh_Gmaj.wav",
+      "CachePath": "SFX/BROOKEW_105_vocal_phrase_sigh_Gmaj_96682B67.wem"
+     },
+     {
+      "Id": "1035504761",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK.wav",
+      "CachePath": "SFX/OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem"
+     },
+     {
+      "Id": "1052600951",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Peppy_Jump2.wav",
+      "CachePath": "SFX/Peppy_Jump2_10C4C929.wem"
+     },
+     {
+      "Id": "1062413066",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_Title_71bpm4-4.wav",
+      "CachePath": "SFX/BGM_Title_71bpm4-4_D79FB2B7.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1116020140",
+      "Name": "Battle_BGM",
+      "ObjectPath": "\\Events\\MUS\\Battle_BGM",
+      "GUID": "{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "165211439"
+       },
+       {
+        "Id": "174940528"
+       },
+       {
+        "Id": "250506823"
+       },
+       {
+        "Id": "435330442"
+       },
+       {
+        "Id": "765620137"
+       }
+      ]
+     },
+     {
+      "Id": "2844154539",
+      "Name": "BattleDoor",
+      "ObjectPath": "\\Events\\Battle\\BattleDoor",
+      "GUID": "{B7AC811E-757D-49E2-AE55-907EEE57B394}",
+      "DurationType": "OneShot",
+      "DurationMin": "2",
+      "DurationMax": "2",
+      "MediaRefs": [
+       {
+        "Id": "604532544"
+       }
+      ]
+     },
+     {
+      "Id": "2306915075",
+      "Name": "BattleDoor2",
+      "ObjectPath": "\\Events\\Battle\\BattleDoor2",
+      "GUID": "{02F7B7C8-3867-42BB-BDAD-322112C6CD31}",
+      "DurationType": "OneShot",
+      "DurationMin": "2",
+      "DurationMax": "2",
+      "MediaRefs": [
+       {
+        "Id": "397593734"
+       }
+      ]
+     },
+     {
+      "Id": "1126058891",
+      "Name": "CancleUI",
+      "ObjectPath": "\\Events\\Function\\CancleUI",
+      "GUID": "{048AD721-7F3B-474D-8E85-D49B349CDF7A}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "201523215"
+       }
+      ]
+     },
+     {
+      "Id": "1505888634",
+      "Name": "CountDown",
+      "ObjectPath": "\\Events\\Function\\CountDown",
+      "GUID": "{1B90EFDB-177B-4B80-852C-57AEE5071F38}",
+      "DurationType": "OneShot",
+      "DurationMin": "3",
+      "DurationMax": "3",
+      "MediaRefs": [
+       {
+        "Id": "142174096"
+       }
+      ]
+     },
+     {
+      "Id": "2419847841",
+      "Name": "DeepBreath",
+      "ObjectPath": "\\Events\\IntroCutScene\\DeepBreath",
+      "GUID": "{E8D32E34-4759-4CF8-A35F-BF54F0E01CED}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.285737",
+      "DurationMax": "2.285737",
+      "MediaRefs": [
+       {
+        "Id": "1034982650"
+       }
+      ]
+     },
+     {
+      "Id": "1877847629",
+      "Name": "Door",
+      "ObjectPath": "\\Events\\IntroCutScene\\Door",
+      "GUID": "{CF8700B9-70F3-44EF-8783-91AE81B853E6}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7013487",
+      "DurationMax": "0.7013487",
+      "MediaRefs": [
+       {
+        "Id": "821593072"
+       }
+      ]
+     },
+     {
+      "Id": "3638457343",
+      "Name": "DoorClose",
+      "ObjectPath": "\\Events\\IntroCutScene\\DoorClose",
+      "GUID": "{76EA1136-BD56-4348-B9A3-91572634A7CF}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.392471",
+      "DurationMax": "2.392471",
+      "MediaRefs": [
+       {
+        "Id": "728677903"
+       }
+      ]
+     },
+     {
+      "Id": "2045484125",
+      "Name": "DoorHover",
+      "ObjectPath": "\\Events\\HubWorld\\DoorHover",
+      "GUID": "{A8C0958F-D897-423F-A887-30D1D837C6C4}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.0933334",
+      "DurationMax": "1.0933334",
+      "MediaRefs": [
+       {
+        "Id": "903646689"
+       }
+      ]
+     },
+     {
+      "Id": "4064399842",
+      "Name": "EndBattle",
+      "ObjectPath": "\\Events\\MUS\\EndBattle",
+      "GUID": "{42CBC707-06E1-44D1-9639-78E718B20D5C}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "83925039",
+      "Name": "FS_Grass",
+      "ObjectPath": "\\Events\\SFX\\FS_Grass",
+      "GUID": "{9A2008F9-EDA5-4280-8526-ECBE3FBE4F1A}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.2330625",
+      "DurationMax": "0.514625",
+      "MediaRefs": [
+       {
+        "Id": "49505542"
+       },
+       {
+        "Id": "317160281"
+       },
+       {
+        "Id": "511898442"
+       }
+      ]
+     },
+     {
+      "Id": "1809895686",
+      "Name": "FS_Snow",
+      "ObjectPath": "\\Events\\SFX\\FS_Snow",
+      "GUID": "{657CEC4F-CB00-4921-A27B-09560E379D46}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4476875",
+      "DurationMax": "0.49439582",
+      "MediaRefs": [
+       {
+        "Id": "26675951"
+       },
+       {
+        "Id": "123812004"
+       },
+       {
+        "Id": "1015440715"
+       }
+      ]
+     },
+     {
+      "Id": "834223070",
+      "Name": "FS_Stone",
+      "ObjectPath": "\\Events\\SFX\\FS_Stone",
+      "GUID": "{33A7E903-157A-4D41-8B38-71545BF7618E}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.36972916",
+      "DurationMax": "0.47466666",
+      "MediaRefs": [
+       {
+        "Id": "94944749"
+       },
+       {
+        "Id": "223719773"
+       },
+       {
+        "Id": "360611745"
+       }
+      ]
+     },
+     {
+      "Id": "4065426480",
+      "Name": "FS_Water",
+      "ObjectPath": "\\Events\\SFX\\FS_Water",
+      "GUID": "{2B66B87B-9F0C-4896-BD66-703D22486212}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.3879271",
+      "DurationMax": "0.4284896",
+      "MediaRefs": [
+       {
+        "Id": "638760269"
+       },
+       {
+        "Id": "742699319"
+       },
+       {
+        "Id": "813775076"
+       }
+      ]
+     },
+     {
+      "Id": "3616930680",
+      "Name": "FS_Wood",
+      "ObjectPath": "\\Events\\SFX\\FS_Wood",
+      "GUID": "{CDB304F6-B28E-4B57-BED1-F2FEE4E877F1}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.25",
+      "DurationMax": "0.25",
+      "MediaRefs": [
+       {
+        "Id": "416420098"
+       },
+       {
+        "Id": "864687728"
+       }
+      ]
+     },
+     {
+      "Id": "2322930499",
+      "Name": "GetEnergy",
+      "ObjectPath": "\\Events\\Function\\GetEnergy",
+      "GUID": "{6E8F66B2-EB03-4F0A-8B49-E9AE45CCB6A2}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.238",
+      "DurationMax": "0.238",
+      "MediaRefs": [
+       {
+        "Id": "518217883"
+       }
+      ]
+     },
+     {
+      "Id": "3933848069",
+      "Name": "HomeAmbi",
+      "ObjectPath": "\\Events\\IntroCutScene\\HomeAmbi",
+      "GUID": "{0797BAAF-C465-4E55-A77C-69944ECA4624}",
+      "DurationType": "OneShot",
+      "DurationMin": "17.600708",
+      "DurationMax": "17.600708",
+      "MediaRefs": [
+       {
+        "Id": "257835999"
+       }
+      ]
+     },
+     {
+      "Id": "583061047",
+      "Name": "HoverUI",
+      "ObjectPath": "\\Events\\Function\\HoverUI",
+      "GUID": "{88A8DAC3-07D2-412F-99A4-04F63B74E84D}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4463768",
+      "DurationMax": "0.4531401",
+      "MediaRefs": [
+       {
+        "Id": "211861517"
+       },
+       {
+        "Id": "383708649"
+       },
+       {
+        "Id": "818588019"
+       }
+      ]
+     },
+     {
+      "Id": "2880424473",
+      "Name": "Hub_BGM",
+      "ObjectPath": "\\Events\\MUS\\Hub_BGM",
+      "GUID": "{A5906D44-D623-4F22-A245-563EC4404512}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "858183081"
+       }
+      ]
+     },
+     {
+      "Id": "1787057067",
+      "Name": "HubWorldAmbi",
+      "ObjectPath": "\\Events\\HubWorld\\HubWorldAmbi",
+      "GUID": "{CAB614EC-84F7-4019-8861-E7412F4B998C}",
+      "DurationType": "OneShot",
+      "DurationMin": "117.045334",
+      "DurationMax": "117.045334",
+      "MediaRefs": [
+       {
+        "Id": "727224766"
+       },
+       {
+        "Id": "783667508"
+       },
+       {
+        "Id": "1017381714"
+       }
+      ]
+     },
+     {
+      "Id": "540394431",
+      "Name": "IntroCutSceneStart",
+      "ObjectPath": "\\Events\\MUS\\IntroCutSceneStart",
+      "GUID": "{39C5D52C-C9E8-4DE0-BA6C-A490FD9065D4}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "MediaRefs": [
+       {
+        "Id": "1062413066"
+       }
+      ]
+     },
+     {
+      "Id": "1136739464",
+      "Name": "LampOn",
+      "ObjectPath": "\\Events\\IntroCutScene\\LampOn",
+      "GUID": "{D5371E02-2966-41D7-8D63-FD88E8BB2A03}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.19866666",
+      "DurationMax": "0.19866666",
+      "MediaRefs": [
+       {
+        "Id": "485043058"
+       }
+      ]
+     },
+     {
+      "Id": "826204714",
+      "Name": "LampOn2",
+      "ObjectPath": "\\Events\\IntroCutScene\\LampOn2",
+      "GUID": "{EA179644-0855-401D-8DD3-C342DBD4C996}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6603083",
+      "DurationMax": "0.6603083",
+      "MediaRefs": [
+       {
+        "Id": "781396450"
+       }
+      ]
+     },
+     {
+      "Id": "3398593705",
+      "Name": "NewTest",
+      "ObjectPath": "\\Events\\Default Work Unit\\NewTest",
+      "GUID": "{4393F2EC-952E-4E81-B005-DBB36E641351}",
+      "DurationType": "OneShot",
+      "DurationMin": "11.2941265",
+      "DurationMax": "11.2941265",
+      "MediaRefs": [
+       {
+        "Id": "1009141722"
+       }
+      ]
+     },
+     {
+      "Id": "2981522829",
+      "Name": "Notice",
+      "ObjectPath": "\\Events\\Function\\Notice",
+      "GUID": "{761749AC-0295-4954-88AB-1D9B7BCA8FE1}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.57536703",
+      "DurationMax": "0.57536703",
+      "MediaRefs": [
+       {
+        "Id": "999749974"
+       }
+      ]
+     },
+     {
+      "Id": "3685587509",
+      "Name": "ObjectFind",
+      "ObjectPath": "\\Events\\IntroCutScene\\ObjectFind",
+      "GUID": "{C713AAED-E762-4181-B591-F512D8595FD6}",
+      "DurationType": "OneShot",
+      "DurationMin": "4",
+      "DurationMax": "4",
+      "MediaRefs": [
+       {
+        "Id": "575546989"
+       }
+      ]
+     },
+     {
+      "Id": "530906524",
+      "Name": "PeppyHit",
+      "ObjectPath": "\\Events\\Battle\\PeppyHit",
+      "GUID": "{72D96420-AD04-444C-9A29-E641F18D530C}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1235417",
+      "DurationMax": "1.1235417",
+      "MediaRefs": [
+       {
+        "Id": "667706857"
+       }
+      ]
+     },
+     {
+      "Id": "2653972741",
+      "Name": "PeppyJump",
+      "ObjectPath": "\\Events\\SFX\\PeppyJump",
+      "GUID": "{4775DCBC-4C56-41C2-B4C5-10125DB0437C}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5297316",
+      "DurationMax": "0.5297316",
+      "MediaRefs": [
+       {
+        "Id": "1052600951"
+       }
+      ]
+     },
+     {
+      "Id": "632323847",
+      "Name": "SelectUI",
+      "ObjectPath": "\\Events\\Function\\SelectUI",
+      "GUID": "{17991763-5B7F-4F32-814D-24656FDF7D65}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "193027794"
+       }
+      ]
+     },
+     {
+      "Id": "3770884678",
+      "Name": "StreetNoise",
+      "ObjectPath": "\\Events\\IntroCutScene\\StreetNoise",
+      "GUID": "{82E835CF-CD1C-43B8-A543-3E6F08690043}",
+      "DurationType": "OneShot",
+      "DurationMin": "8.135171",
+      "DurationMax": "8.135171",
+      "MediaRefs": [
+       {
+        "Id": "391750526"
+       }
+      ]
+     },
+     {
+      "Id": "316150744",
+      "Name": "SweepGarden",
+      "ObjectPath": "\\Events\\Battle\\SweepGarden",
+      "GUID": "{958EB58C-C88A-44AD-9D36-254C6C6F2A94}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2515152",
+      "DurationMax": "1.2515152",
+      "MediaRefs": [
+       {
+        "Id": "210552255"
+       }
+      ]
+     },
+     {
+      "Id": "424777189",
+      "Name": "TextPrint",
+      "ObjectPath": "\\Events\\Function\\TextPrint",
+      "GUID": "{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "164875334"
+       }
+      ]
+     },
+     {
+      "Id": "1760998000",
+      "Name": "TextStop",
+      "ObjectPath": "\\Events\\Function\\TextStop",
+      "GUID": "{C3180D15-7C85-4DE8-B28E-989133C215EA}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0",
+      "MediaRefs": [
+       {
+        "Id": "164875334"
+       }
+      ]
+     },
+     {
+      "Id": "571634470",
+      "Name": "Title_BGM",
+      "ObjectPath": "\\Events\\MUS\\Title_BGM",
+      "GUID": "{4AE354BB-D32F-4D94-B7E8-AE4CE3201965}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "1062413066"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{E5C3973E-FAD0-2888-D85C-F211D66C24E3}"
+ }
+}

@@ -1,20 +1,23 @@
 /*******************************************************************************
-The content of the files in this repository include portions of the
-AUDIOKINETIC Wwise Technology released in source code form as part of the SDK
-package.
-
-Commercial License Usage
-
-Licensees holding valid commercial licenses to the AUDIOKINETIC Wwise Technology
-may use these files in accordance with the end user license agreement provided
-with the software or, alternatively, in accordance with the terms contained in a
-written agreement between you and Audiokinetic Inc.
-
-Copyright (c) 2021 Audiokinetic Inc.
+The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
+Technology released in source code form as part of the game integration package.
+The content of this file may not be used without valid licenses to the
+AUDIOKINETIC Wwise Technology.
+Note that the use of the game engine is subject to the Unreal(R) Engine End User
+License Agreement at https://www.unrealengine.com/en-US/eula/unreal
+ 
+License Usage
+ 
+Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
+this file in accordance with the end user license agreement provided with the
+software or, alternatively, in accordance with the terms contained
+in a written agreement between you and Audiokinetic Inc.
+Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
 
 #include "AkSettingsDetailsCustomization.h"
 #include "AkSettings.h"
+#include "AkUEFeatures.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailWidgetRow.h"
@@ -54,7 +57,7 @@ class SDecayKeyEntryDialog : public SCompoundWidget
 			.AutoHeight()
 			[
 				SNew(SBorder)
-				.BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
+				.BorderImage(FAkAppStyle::Get().GetBrush("ToolPanel.GroupBorder"))
 				.VAlign(VAlign_Center)
 				.HAlign(HAlign_Center)
 				[
@@ -106,7 +109,7 @@ class SDecayKeyEntryDialog : public SCompoundWidget
 						.ToolTipText(FText::FromString("Insert given key value"))
 						[
 							SNew(STextBlock)
-							.TextStyle(FEditorStyle::Get(), "FlatButton.DefaultTextStyle")
+							.TextStyle(FAkAppStyle::Get(), "FlatButton.DefaultTextStyle")
 							.Text(FText::FromString("Insert"))
 						]
 					]
@@ -135,7 +138,7 @@ class SClearWarningDialog : public SCompoundWidget
 			.AutoHeight()
 			[
 				SNew(SBorder)
-				.BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
+				.BorderImage(FAkAppStyle::Get().GetBrush("ToolPanel.GroupBorder"))
 				.VAlign(VAlign_Center)
 				.HAlign(HAlign_Center)
 				[
@@ -153,7 +156,7 @@ class SClearWarningDialog : public SCompoundWidget
 			.AutoHeight()
 			[
 				SNew(SBorder)
-				.BorderImage(FEditorStyle::GetBrush("ToolPanel.GroupBorder"))
+				.BorderImage(FAkAppStyle::Get().GetBrush("ToolPanel.GroupBorder"))
 				.VAlign(VAlign_Center)
 				.HAlign(HAlign_Center)
 				[
@@ -163,7 +166,7 @@ class SClearWarningDialog : public SCompoundWidget
 					.AutoWidth()
 					[
 						SNew(SButton)
-						.ButtonStyle(FEditorStyle::Get(), "FlatButton.Success")
+						.ButtonStyle(FAkAppStyle::Get(), "FlatButton.Success")
 						.ForegroundColor(FLinearColor::White)
 						.OnClicked_Lambda([this, InParentWindow, InArgs]()
 						{
@@ -177,7 +180,7 @@ class SClearWarningDialog : public SCompoundWidget
 						.ToolTipText(FText::FromString("Clear aux bus assignment map"))
 						[
 							SNew(STextBlock)
-							.TextStyle(FEditorStyle::Get(), "FlatButton.DefaultTextStyle")
+							.TextStyle(FAkAppStyle::Get(), "FlatButton.DefaultTextStyle")
 							.Text(FText::FromString("Clear"))
 						]
 					]
@@ -186,7 +189,7 @@ class SClearWarningDialog : public SCompoundWidget
 					.AutoWidth()
 					[
 						SNew(SButton)
-						.ButtonStyle(FEditorStyle::Get(), "FlatButton.Default")
+						.ButtonStyle(FAkAppStyle::Get(), "FlatButton.Default")
 						.ForegroundColor(FLinearColor::White)
 						.OnClicked_Lambda([this, InParentWindow, InArgs]()
 						{
@@ -199,7 +202,7 @@ class SClearWarningDialog : public SCompoundWidget
 						.ToolTipText(FText::FromString("Cancel"))
 						[
 							SNew(STextBlock)
-							.TextStyle(FEditorStyle::Get(), "FlatButton.DefaultTextStyle")
+							.TextStyle(FAkAppStyle::Get(), "FlatButton.DefaultTextStyle")
 							.Text(FText::FromString("Cancel"))
 						]
 					]
@@ -246,6 +249,14 @@ void FAkSettingsDetailsCustomization::CustomizeDetails(IDetailLayoutBuilder& Det
 			+ SHorizontalBox::Slot().FillWidth(8)
 		]
 	];
+
+	TArray<TSharedRef<IPropertyHandle>> Properties;
+	CategoryBuilder.GetDefaultProperties(Properties);
+
+	for (TSharedRef<IPropertyHandle> Property : Properties)
+	{
+		CategoryBuilder.AddProperty(Property);
+	}
 }
 
 FReply FAkSettingsDetailsCustomization::ClearAkSettingsRoomDecayAuxBusMap()

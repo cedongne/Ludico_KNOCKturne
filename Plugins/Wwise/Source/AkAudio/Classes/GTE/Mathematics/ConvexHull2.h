@@ -36,7 +36,7 @@
 // ConvexHull2::GetTangent.
 //#define GTE_THROW_ON_CONVEXHULL2_INFINITE_LOOP
 
-namespace gte
+namespace WwiseGTE
 {
     template <typename InputType, typename ComputeType>
     class ConvexHull2

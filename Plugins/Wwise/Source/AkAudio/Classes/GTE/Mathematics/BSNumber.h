@@ -64,7 +64,7 @@
 // from BSNumber to float or double.
 #define GTE_THROW_ON_BSNUMBER_ERRORS
 
-namespace gte
+namespace WwiseGTE
 {
     template <typename UInteger> class BSRational;
 
@@ -1088,101 +1088,101 @@ namespace std
     // specified precision is used when computing the result.
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> acos(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> acos(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::acos((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::acos((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> acosh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> acosh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::acosh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::acosh((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> asin(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> asin(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::asin((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::asin((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> asinh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> asinh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::asinh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::asinh((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> atan(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> atan(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::atan((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::atan((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> atanh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> atanh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::atanh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::atanh((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> atan2(gte::BSNumber<UInteger> const& y, gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> atan2(WwiseGTE::BSNumber<UInteger> const& y, WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::atan2((double)y, (double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::atan2((double)y, (double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> ceil(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> ceil(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::ceil((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::ceil((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> cos(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> cos(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::cos((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::cos((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> cosh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> cosh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::cosh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::cosh((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> exp(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> exp(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::exp((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::exp((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> exp2(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> exp2(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::exp2((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::exp2((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> fabs(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> fabs(WwiseGTE::BSNumber<UInteger> const& x)
     {
         return (x.GetSign() >= 0 ? x : -x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> floor(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> floor(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::floor((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::floor((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> fmod(gte::BSNumber<UInteger> const& x, gte::BSNumber<UInteger> const& y)
+    inline WwiseGTE::BSNumber<UInteger> fmod(WwiseGTE::BSNumber<UInteger> const& x, WwiseGTE::BSNumber<UInteger> const& y)
     {
-        return (gte::BSNumber<UInteger>)std::fmod((double)x, (double)y);
+        return (WwiseGTE::BSNumber<UInteger>)std::fmod((double)x, (double)y);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> frexp(gte::BSNumber<UInteger> const& x, int* exponent)
+    inline WwiseGTE::BSNumber<UInteger> frexp(WwiseGTE::BSNumber<UInteger> const& x, int* exponent)
     {
         if (x.GetSign() != 0)
         {
-            gte::BSNumber<UInteger> result = x;
+            WwiseGTE::BSNumber<UInteger> result = x;
             *exponent = result.GetExponent() + 1;
             result.SetExponent(-1);
             return result;
@@ -1190,78 +1190,78 @@ namespace std
         else
         {
             *exponent = 0;
-            return gte::BSNumber<UInteger>(0);
+            return WwiseGTE::BSNumber<UInteger>(0);
         }
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> ldexp(gte::BSNumber<UInteger> const& x, int exponent)
+    inline WwiseGTE::BSNumber<UInteger> ldexp(WwiseGTE::BSNumber<UInteger> const& x, int exponent)
     {
-        gte::BSNumber<UInteger> result = x;
+        WwiseGTE::BSNumber<UInteger> result = x;
         result.SetBiasedExponent(result.GetBiasedExponent() + exponent);
         return result;
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> log(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> log(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::log((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::log((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> log2(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> log2(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::log2((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::log2((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> log10(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> log10(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::log10((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::log10((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> pow(gte::BSNumber<UInteger> const& x, gte::BSNumber<UInteger> const& y)
+    inline WwiseGTE::BSNumber<UInteger> pow(WwiseGTE::BSNumber<UInteger> const& x, WwiseGTE::BSNumber<UInteger> const& y)
     {
-        return (gte::BSNumber<UInteger>)std::pow((double)x, (double)y);
+        return (WwiseGTE::BSNumber<UInteger>)std::pow((double)x, (double)y);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> sin(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> sin(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::sin((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::sin((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> sinh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> sinh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::sinh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::sinh((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> sqrt(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> sqrt(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::sqrt((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::sqrt((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> tan(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> tan(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::tan((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::tan((double)x);
     }
 
     template <typename UInteger>
-    inline gte::BSNumber<UInteger> tanh(gte::BSNumber<UInteger> const& x)
+    inline WwiseGTE::BSNumber<UInteger> tanh(WwiseGTE::BSNumber<UInteger> const& x)
     {
-        return (gte::BSNumber<UInteger>)std::tanh((double)x);
+        return (WwiseGTE::BSNumber<UInteger>)std::tanh((double)x);
     }
 
     // Type trait that says BSNumber is a signed type.
     template <typename UInteger>
-    struct is_signed<gte::BSNumber<UInteger>> : true_type {};
+    struct is_signed<WwiseGTE::BSNumber<UInteger>> : true_type {};
 }
 
-namespace gte
+namespace WwiseGTE
 {
     template <typename UInteger>
     inline BSNumber<UInteger> atandivpi(BSNumber<UInteger> const& x)

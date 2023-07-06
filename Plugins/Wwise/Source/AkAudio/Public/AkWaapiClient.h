@@ -1,18 +1,19 @@
 /*******************************************************************************
-The content of the files in this repository include portions of the
-AUDIOKINETIC Wwise Technology released in source code form as part of the SDK
-package.
-
-Commercial License Usage
-
-Licensees holding valid commercial licenses to the AUDIOKINETIC Wwise Technology
-may use these files in accordance with the end user license agreement provided
-with the software or, alternatively, in accordance with the terms contained in a
-written agreement between you and Audiokinetic Inc.
-
-Copyright (c) 2021 Audiokinetic Inc.
+The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
+Technology released in source code form as part of the game integration package.
+The content of this file may not be used without valid licenses to the
+AUDIOKINETIC Wwise Technology.
+Note that the use of the game engine is subject to the Unreal(R) Engine End User
+License Agreement at https://www.unrealengine.com/en-US/eula/unreal
+ 
+License Usage
+ 
+Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
+this file in accordance with the end user license agreement provided with the
+software or, alternatively, in accordance with the terms contained
+in a written agreement between you and Audiokinetic Inc.
+Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
-
 
 /*=============================================================================
 	AkWaapiClient.h: Audiokinetic WAAPI interface object.
@@ -25,16 +26,9 @@ Copyright (c) 2021 Audiokinetic Inc.
 ------------------------------------------------------------------------------------*/
 
 #include "AkInclude.h"
-#include "Engine/EngineBaseTypes.h"
-#include "Engine/EngineTypes.h"
 #include "HAL/Runnable.h"
-#include "Serialization/JsonWriter.h"
-#include "Serialization/JsonSerializer.h"
 #include "Dom/JsonObject.h"
 #include "HAL/ThreadSafeBool.h"
-#include "AK/WwiseAuthoringAPI/waapi.h"
-
-DECLARE_LOG_CATEGORY_EXTERN(LogAkWaapiClient, Log, All);
 
 /*------------------------------------------------------------------------------------
 Dependencies, helpers & forward declarations.
@@ -56,6 +50,12 @@ DECLARE_EVENT(FAkWaapiClient, BeginDestroyClient);
 ------------------------------------------------------------------------------------*/
 
 class FAkWaapiClient;
+
+struct KeyValueArgs
+{
+    const FString KeyArg;
+    const FString ValueArg;
+};
 
 class FAkWaapiClientConnectionHandler : public FRunnable
 {
@@ -182,6 +182,15 @@ public:
     bool Call(const char* in_uri, const FString& in_args, const FString& in_options, FString& out_result, int in_iTimeoutMs = 500, bool silenceLog = false);
     bool Call(const char* in_uri, const TSharedRef<FJsonObject>& in_args, const TSharedRef<FJsonObject>& in_options,
         TSharedPtr<FJsonObject>& out_result, int in_iTimeoutMs = 500, bool silenceLog = false);
+
+    /**
+    * Call WAAPI to change the object name form the path or the id of the object (inFromIdOrPath).
+    *
+    * @param inUri		The Unique Resource Identifier used to indicate a specific action to WAAPI; i.e. ak::wwise::core::object::setName
+    * @param Values		An array that contains the pair of field and field value; e.i. when asking WAAPI to rename an item, the arguments are like this : {{object,id},{value,newname}}
+    * @return			A boolean to ensure that the call was successfully done.
+    */
+    bool Call(const char* inUri, const TArray<KeyValueArgs>& Values, TSharedPtr<FJsonObject>& outJsonResult);
 
     /** Sets in_outParentGUID to the object ID of a parent of object in_objectGUID of type in_strType. */
     static void GetParentOfType(FGuid in_objectGUID, FGuid& in_outParentGUID, FString in_strType);
@@ -402,6 +411,8 @@ public:
         static const FString TRIM_END;
     };
 
+    bool bIsWrongProjectLoaded = false;
+
 private:
     /**
     * Since it's a singleton WaapiClient, we  want to make sure this method (default constructor).
@@ -410,8 +421,8 @@ private:
     FAkWaapiClient();
 
     /** Checks if the currently loaded Wwise project matches the project path set in AkSettings (Wwise plugin settings).
-    *  NTOE: This function will block while Wwise has a modal window open. It should not be called on the Game thread.
-    */
+	*  NOTE: This function will block while Wwise has a modal window open. It should not be called on the Game thread.
+	*/
     static bool CheckProjectLoaded();
 
     struct FAkWaapiClientImpl* m_Impl;

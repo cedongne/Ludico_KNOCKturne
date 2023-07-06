@@ -1,16 +1,18 @@
 /*******************************************************************************
-The content of the files in this repository include portions of the
-AUDIOKINETIC Wwise Technology released in source code form as part of the SDK
-package.
-
-Commercial License Usage
-
-Licensees holding valid commercial licenses to the AUDIOKINETIC Wwise Technology
-may use these files in accordance with the end user license agreement provided
-with the software or, alternatively, in accordance with the terms contained in a
-written agreement between you and Audiokinetic Inc.
-
-Copyright (c) 2021 Audiokinetic Inc.
+The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
+Technology released in source code form as part of the game integration package.
+The content of this file may not be used without valid licenses to the
+AUDIOKINETIC Wwise Technology.
+Note that the use of the game engine is subject to the Unreal(R) Engine End User
+License Agreement at https://www.unrealengine.com/en-US/eula/unreal
+ 
+License Usage
+ 
+Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
+this file in accordance with the end user license agreement provided with the
+software or, alternatively, in accordance with the terms contained
+in a written agreement between you and Audiokinetic Inc.
+Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
 
 #pragma once
@@ -114,21 +116,21 @@ struct FAkInitializationStructure
 USTRUCT()
 struct FAkMainOutputSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category="Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "The name of a custom audio device to be used. Custom audio devices are defined in the Audio Device Shareset section of the Wwise project. Leave this empty to output normally through the default audio device."))
-	FString AudioDeviceShareset;
+	UPROPERTY(EditAnywhere, Category="Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "The name of a custom audio device to use. Custom audio devices are defined in the Audio Device ShareSet section of the Wwise project. Leave this empty to output normally through the default audio device."))
+	FString AudioDeviceShareSet;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "Device specific identifier, when multiple devices of the same type are possible. If only one device is possible, leave to 0."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "Device-specific identifier when you are using multiple devices of the same type. Leave the setting at 0 (default) if you are using only one device."))
 	uint32 DeviceID = AK_INVALID_UNIQUE_ID;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "Rule for 3D panning of signals routed to a stereo bus. In \"Speakers\" mode, the angle of the front loudspeakers is used. In \"Headphones\" mode, the speaker angles are superseded with constant power panning between two virtual microphones spaced 180 degrees apart."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "Rule for 3D panning of signals routed to a stereo bus. In \"Speakers\" mode, the angle of the front loudspeakers is used. In \"Headphones\" mode, the speaker angles are superseded by constant power panning between two virtual microphones spaced 180 degrees apart."))
 	EAkPanningRule PanningRule = EAkPanningRule::Speakers;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "A code that completes the identification of channels by uChannelMask. Anonymous: Channel mask == 0 and channels; Standard: Channels must be identified with standard defines in AkSpeakerConfigs; Ambisonic: Channel mask == 0 and channels follow standard ambisonic order."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "A code that completes the identification of channels by uChannelMask. Anonymous: Channel mask == 0 and channels. Standard: Channels must be identified with standard defines in AkSpeakerConfigs. Ambisonic: Channel mask == 0 and channels follow standard ambisonic order."))
 	EAkChannelConfigType ChannelConfigType = EAkChannelConfigType::Anonymous;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (Bitmask, BitmaskEnum = EAkChannelMask, ToolTip = "A bit field, whose channel identifiers depend on AkChannelConfigType (up to 20)."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (Bitmask, BitmaskEnum = "/Script/AkAudio.EAkChannelMask", ToolTip = "A bit field, whose channel identifiers depend on AkChannelConfigType (up to 20)."))
 	uint32 ChannelMask = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Main Output Settings", meta = (ToolTip = "The number of channels, identified (deduced from channel mask) or anonymous (set directly)."))
@@ -141,7 +143,7 @@ struct FAkMainOutputSettings
 USTRUCT()
 struct FAkSpatialAudioSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Maximum number of portals that sound can propagate through.", ClampMin = "0", ClampMax = "8"))
 	uint32 MaxSoundPropagationDepth = AK_MAX_SOUND_PROPAGATION_DEPTH;
@@ -156,26 +158,26 @@ struct FAkSpatialAudioSettings
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Maximum reflection order - the number of 'bounces' in a reflection path. A higher reflection order renders more details at the expense of higher CPU usage.", ClampMin = "0", ClampMax = "4"))
 	uint32 ReflectionOrder = 1;
 
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Maximum diffraction order: the number of 'bends' in a diffraction path. A high diffraction order accommodates more complex geometry at the expense of higher CPU usage. Diffraction must be enabled on the geometry to find diffraction paths. Set to 0 to disable diffraction on all geometry. This parameter limits the recursion depth of diffraction rays cast from the listener to scan the environment, and also the depth of the diffraction search to find paths between emitter and listener. To optimize CPU usage, set it to the maximum number of edges you expect the obstructing geometry to traverse.", ClampMin = "0", ClampMax = "8"))
+	uint32 DiffractionOrder = 4;
+
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "The maximum possible number of diffraction points at each end of a reflection path. Diffraction on reflection allows reflections to fade in and out smoothly as the listener or emitter moves in and out of the reflection's shadow zone. When greater than zero, diffraction rays are sent from the listener to search for reflections around one or more corners from the listener. Diffraction must be enabled on the geometry to find diffracted reflections. Set to 0 to disable diffraction on reflections.", ClampMin = "0", ClampMax = "4"))
+	uint32 DiffractionOnReflectionsOrder = 2;
+
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Length of the rays that are cast inside Spatial Audio. Effectively caps the maximum length of an individual segment in a reflection or diffraction path.", ClampMin = "0"))
 	float MaximumPathLength = 10000.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (DisplayName = "CPU Limit Percentage", ToolTip = "Controls the maximum percentage of an audio frame used by the raytracing engine. Percentage [0, 100] of the current audio frame. A value of 0 indicates no limit on the amount of CPU used for raytracing.", ClampMin = "0", ClampMax = "100"))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (DisplayName = "CPU Limit Percentage", ToolTip = "Controls the maximum percentage of an audio frame the raytracing engine can use. Percentage [0, 100] of the current audio frame. A value of 0 indicates no limit on the amount of CPU used for raytracing.", ClampMin = "0", ClampMax = "100"))
 	float CPULimitPercentage = 0.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Enable computation of diffraction along reflection paths."))
-	bool EnableDiffractionOnReflections = true;
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (DisplayName = "Load Balancing Spread", ToolTip = "The computation of spatial audio paths is spread on LoadBalancingSpread frames. Spreading the computation of paths over several frames can prevent CPU peaks. The spread introduces a delay in path computation.", ClampMin = "1"))
+	uint32 LoadBalancingSpread = 1;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Enable computation of geometric diffraction and transmission paths for all sources that have that have the \"Enable Diffraction and Transmission\" box checked in the Positioning tab of the Wwise Property Editor. This flag enables sound paths around (diffraction) and thorugh (transmission) geometry. Setting to EnableGeometricDiffractionAndTransmission to false implies that geometry is only to be used for reflection calculation. Diffraction edges must be enabled on geometry for diffraction calculation. If EnableGeometricDiffractionAndTransmission is false but a sound has \"Enable Diffraction and Transmission\" checked in the positioning tab of the authoring tool, the sound will only diffract through portals but pass through geometry as if it is not there. One would typically disable this setting if the game intends to perform its own obstruction calculation, but in the situation where geometry is still passed to spatial audio for reflection calculation."))
 	bool EnableGeometricDiffractionAndTransmission = true;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "An emitter that is diffracted through a portal or around geometry will have its apparent or virtual position calculated by Wwise Spatial Audio and passed on to the sound engine."))
 	bool CalcEmitterVirtualPosition = true;
-
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Use the Wwise obstruction curve for modeling the effect of diffraction on a sound. Diffraction is only applied to sounds that have the \"Enable Diffraction and Transmission\" box checked in the Positioning tab of the Wwise Property Editor. Diffraction can also be applied using the diffraction built-in parameter, mapped to an RTPC (the built-in parameter is populated whether or not UseObstruction is checked). While the obstruction curve is a global setting for all sounds, using it to simulate diffraction is preferred over an RTPC, because it provides greater accuracy when modeling multiple diffraction paths, or a combination of diffraction and transmission paths. This is due to the fact that RTPCs can not be separately applied to individual sound paths. Only the path with the least amount of diffraction is sent to the RTPC."))
-	bool UseObstruction = true;
-
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Spatial Audio Settings", meta = (ToolTip = "Use the Wwise occlusion curve for modeling the effect of transmission loss on a sound. The transmission loss factor is applied using the occlusion curve defined in the wwise project settings. Transmission loss is only applied to sounds that have the \"Enable Diffraction and Transmission\" box checked in the Positioning tab of the Wwise Property Editor. Transmission loss can also be applied using the transmission loss built-in parameter, mapped to an RTPC (the built-in parameter is populated whether or not UseOcclusion is checked). While the occlusion curve is a global setting for all sounds, using it to simulate transmission loss is preferred over an RTPC, because it provides greater accuracy when modeling both transmission and diffraction. This is due to the fact that RTPCs can not be applied to individual sound paths, therefore any parameter mapped to a transmission loss RTPC will also affect any potential diffraction paths originating from an emitter."))
-	bool UseOcclusion = true;
 
 	void FillInitializationStructure(FAkInitializationStructure& InitializationStructure) const;
 };
@@ -184,7 +186,7 @@ struct FAkSpatialAudioSettings
 USTRUCT()
 struct FAkCommunicationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Communication Settings", meta = (ToolTip = "Size of the communication pool."))
 	uint32 PoolSize = 256 * 1024;
@@ -195,9 +197,6 @@ struct FAkCommunicationSettings
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Communication Settings", meta = (ToolTip = "The \"command\" channel port. Set to 0 to request a dynamic/ephemeral port."))
 	uint16 CommandPort = 0;
-
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Communication Settings", meta = (ToolTip = "The \"notification\" channel port. Set to 0 to request a dynamic/ephemeral port."))
-	uint16 NotificationPort = 0;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings|Communication Settings", meta = (ToolTip = "The name used to identify this game within the authoring application. Leave empty to use FApp::GetProjectName()."))
 	FString NetworkName;
@@ -212,9 +211,9 @@ protected:
 USTRUCT()
 struct FAkCommunicationSettingsWithSystemInitialization : public FAkCommunicationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
-	UPROPERTY(Config, Category = "Ak Initialization Settings|Communication Settings", EditAnywhere, meta = (ToolTip = "Indicates whether the communication system should be initialized. Some consoles have critical requirements for initialization of their communications system. Set to false only if your game already uses sockets before sound engine initialization."))
+	UPROPERTY(Config, Category = "Ak Initialization Settings|Communication Settings", EditAnywhere, meta = (ToolTip = "Indicates whether or not to initialize the communication system. Some consoles have critical requirements for initialization of their communications systems. Set to false only if your game already uses sockets before sound engine initialization."))
 	bool InitializeSystemComms = true;
 
 	void FillInitializationStructure(FAkInitializationStructure& InitializationStructure) const;
@@ -223,7 +222,7 @@ struct FAkCommunicationSettingsWithSystemInitialization : public FAkCommunicatio
 USTRUCT()
 struct FAkCommunicationSettingsWithCommSelection : public FAkCommunicationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	UPROPERTY(Config, Category = "Ak Initialization Settings|Communication Settings", EditAnywhere, meta = (ToolTip = "Select between Socket and HTCS communication protocol. Socket is the Default option."))
 	EAkCommSystem CommunicationSystem = EAkCommSystem::Socket;
@@ -235,7 +234,7 @@ struct FAkCommunicationSettingsWithCommSelection : public FAkCommunicationSettin
 USTRUCT()
 struct FAkCommonInitializationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Maximum number of memory pools. A memory pool is required for each loaded bank."))
 	uint32 MaximumNumberOfMemoryPools = 256;
@@ -247,7 +246,7 @@ struct FAkCommonInitializationSettings
 	uint32 CommandQueueSize = 256 * 1024;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Number of samples per audio frame (256, 512, 1024, or 2048)."))
-	uint32 SamplesPerFrame = 1024;
+	uint32 SamplesPerFrame = 512;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Platform-independent initialization settings of output devices."))
 	FAkMainOutputSettings MainOutputSettings;
@@ -255,7 +254,7 @@ struct FAkCommonInitializationSettings
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Multiplication factor for all streaming look-ahead heuristic values.", ClampMin = "0.0", ClampMax = "1.0"))
 	float StreamingLookAheadRatio = 1.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Number of refill buffers in voice buffer. Set to 2 for double-buffered, defaults to 4."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Number of refill buffers in voice buffer. Set to 2 for double-buffered. The default value is 4."))
 	uint16 NumberOfRefillsInVoice = 4;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings")
@@ -268,7 +267,7 @@ struct FAkCommonInitializationSettings
 USTRUCT()
 struct FAkCommonInitializationSettingsWithSampleRate : public FAkCommonInitializationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 	UPROPERTY(Config, EditAnywhere, Category = "Common Settings", meta = (ToolTip = "Sampling Rate. Default is 48000 Hz. Use 24000hz for low quality. Any positive reasonable sample rate is supported; however, be careful setting a custom value. Using an odd or really low sample rate may cause the sound engine to malfunction."))
 	uint32 SampleRate = 48000;
@@ -278,9 +277,9 @@ struct FAkCommonInitializationSettingsWithSampleRate : public FAkCommonInitializ
 USTRUCT()
 struct FAkAdvancedInitializationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Size of memory pool for I/O (for automatic streams). It is passed directly to AK::MemoryMgr::CreatePool(), after having been rounded down to a multiple of uGranularity."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Size of memory pool for I/O (for automatic streams). It is rounded down to a multiple of uGranularity and then passed directly to AK::MemoryMgr::CreatePool()."))
 	uint32 IO_MemorySize = 2 * 1024 * 1024;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "I/O requests granularity (typical bytes/request)."))
@@ -289,7 +288,7 @@ struct FAkAdvancedInitializationSettings
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Targeted automatic stream buffer length (ms). When a stream reaches that buffering, it stops being scheduled for I/O except if the scheduler is idle."))
 	float TargetAutoStreamBufferLength = 380.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "If true the device attempts to reuse IO buffers that have already been streamed from disk. This is particularly useful when streaming small looping sounds. The drawback is a small CPU hit when allocating memory, and a slightly larger memory footprint in the StreamManager pool."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "If true, the device attempts to reuse I/O buffers that have already been streamed from disk. This is particularly useful when streaming small looping sounds. However, there is a small increase in CPU usage when allocating memory, and a slightly larger memory footprint in the StreamManager pool."))
 	bool UseStreamCache = false;
 
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Maximum number of bytes that can be \"pinned\" using AK::SoundEngine::PinEventInStreamCache() or AK::IAkStreamMgr::PinFileInCache()."))
@@ -298,19 +297,19 @@ struct FAkAdvancedInitializationSettings
 	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Set to true to enable AK::SoundEngine::PrepareGameSync usage."))
 	bool EnableGameSyncPreparation = false;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Number of quanta ahead when continuous containers should instantiate a new voice before which next sounds should start playing. This look-ahead time allows I/O to occur, and is especially useful to reduce the latency of continuous containers with trigger rate or sample-accurate transitions."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Number of quanta ahead when continuous containers instantiate a new voice before the following sounds start playing. This look-ahead time allows I/O to occur, and is especially useful to reduce the latency of continuous containers with trigger rate or sample-accurate transitions."))
 	uint32 ContinuousPlaybackLookAhead = 1;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Size of the monitoring queue pool. This parameter is not used in Release build."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Size of the monitoring queue pool. This parameter is ignored in Release builds."))
 	uint32 MonitorQueuePoolSize = 1024 * 1024;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Amount of time to wait for hardware devices to trigger an audio interrupt. If there is no interrupt after that time, the sound engine will revert to silent mode and continue operating until the hardware finally comes back."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Time (in milliseconds) to wait for hardware devices to trigger an audio interrupt. If there is no interrupt after that time, the sound engine reverts to silent mode and continues operating until the hardware responds."))
 	uint32 MaximumHardwareTimeoutMs = 1000;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Debug setting: Enable checks for out-of-range (and NAN) floats in the processing code. Do not enable in any normal usage, this setting uses a lot of CPU. Will print error messages in the log if invalid values are found at various point in the pipeline. Contact AK Support with the new error messages for more information."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Debug setting: Enable checks for out-of-range (and NAN) floats in the processing code. Do not enable in any normal usage because this setting uses a lot of CPU. It prints error messages in the log if invalid values are found at various points in the pipeline. Contact AK Support with the new error messages for more information."))
 	bool DebugOutOfRangeCheckEnabled = false;
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (EditCondition = "DebugOutOfRangeCheckEnabled", ToolTip = "Debug setting: Only used when Debug Out Of Range Check Enabled is true. This defines the maximum values samples can have. Normal audio must be contained within +1/-1. This limit should be set higher to allow temporary or short excursions out of range. Default is 16."))
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (EditCondition = "DebugOutOfRangeCheckEnabled", ToolTip = "Debug setting: Only used when Debug Out Of Range Check Enabled is true. This defines the maximum values samples can have. Normal audio must be contained within +1/-1. Set this limit to a value greater than 1 to allow temporary or short excursions out of range. The default value is 16."))
 	float DebugOutOfRangeLimit = 16.f;
 
 	void FillInitializationStructure(FAkInitializationStructure& InitializationStructure) const;
@@ -319,18 +318,24 @@ struct FAkAdvancedInitializationSettings
 USTRUCT()
 struct FAkAdvancedInitializationSettingsWithMultiCoreRendering : public FAkAdvancedInitializationSettings
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Allow to distribute SoundEngine processing tasks across multiple threads. Requires Editor restart."))
-	bool EnableMultiCoreRendering = false;
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (ToolTip = "Enable to run SoundEngine processing tasks on the Unreal Engine worker threads. Requires Editor restart."))
+	bool EnableMultiCoreRendering = true;
+
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (EditCondition = "EnableMultiCoreRendering", ToolTip = "Configure the maximum number of workers that the Sound Engine will request at any given time. Requires Editor restart."))
+	uint32 MaxNumJobWorkers = 1;
+
+	UPROPERTY(EditAnywhere, Category = "Ak Initialization Settings", meta = (EditCondition = "EnableMultiCoreRendering", ToolTip = "Maximum time allotted for each Sound Engine job in microseconds (0 is unlimited). Requires Editor restart."))
+	uint32 JobWorkerMaxExecutionTimeUSec = 0;
 
 	void FillInitializationStructure(FAkInitializationStructure& InitializationStructure) const;
 };
 
-class IAkUnrealIOHook;
+class FWwiseIOHook;
 
 namespace FAkSoundEngineInitialization
 {
-	bool Initialize(IAkUnrealIOHook* IOHook);
-	void Finalize();
+	bool Initialize(FWwiseIOHook* IOHook);
+	void Finalize(FWwiseIOHook* IOHook);
 }

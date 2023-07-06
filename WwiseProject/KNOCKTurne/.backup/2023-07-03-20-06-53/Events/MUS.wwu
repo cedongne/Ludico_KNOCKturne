@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="MUS" ID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Battle_BGM" ID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{6D188419-84DA-4911-8282-2A0D56D81B12}" ShortID="242881907">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Battle" ID="{D5224D3B-168B-46FA-88A6-AB1B9194B9E5}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Hub_BGM" ID="{A5906D44-D623-4F22-A245-563EC4404512}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{3E36A61B-65D5-41CC-A029-3F5B444D136B}" ShortID="910655900">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1.5"/>
+								<Property Name="FadeInCurve" Type="int16" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="2.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hub" ID="{6FE72110-32FF-4FE9-8142-03FA0C3B3375}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Title_BGM" ID="{4AE354BB-D32F-4D94-B7E8-AE4CE3201965}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{7588C6C6-C891-46A7-A6E4-97AEE1E289E3}" ShortID="187467451">
+							<PropertyList>
+								<Property Name="FadeInCurve" Type="int16" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Title" ID="{2BA7669C-F470-456D-9970-BA6C6FDC2174}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="IntroCutSceneStart" ID="{39C5D52C-C9E8-4DE0-BA6C-A490FD9065D4}">
+					<ChildrenList>
+						<Action Name="" ID="{8F77637E-84C7-4182-8C4D-C2BB7A68EB9C}" ShortID="565957963">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="7"/>
+								<Property Name="FadeOutCurve" Type="int16" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="0.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Title" ID="{2BA7669C-F470-456D-9970-BA6C6FDC2174}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="EndBattle" ID="{42CBC707-06E1-44D1-9639-78E718B20D5C}"/>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

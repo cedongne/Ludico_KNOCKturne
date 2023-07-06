@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="SFX" ID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="FS_Snow" ID="{657CEC4F-CB00-4921-A27B-09560E379D46}">
+					<ChildrenList>
+						<Action Name="" ID="{78FABA47-226A-4E4A-8C67-2BE25BDC107C}" ShortID="169773158">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FS_Snow" ID="{1784F97F-9850-4B0A-BD54-63E92FDDD0C8}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="FS_Grass" ID="{9A2008F9-EDA5-4280-8526-ECBE3FBE4F1A}">
+					<ChildrenList>
+						<Action Name="" ID="{CB9213BA-3E19-4712-89AC-DA2067167FA9}" ShortID="181494943">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FS_Grass" ID="{A34E29BB-4F44-4E68-B19A-CE2E6CB5815D}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="FS_Wood" ID="{CDB304F6-B28E-4B57-BED1-F2FEE4E877F1}">
+					<ChildrenList>
+						<Action Name="" ID="{1673BEE3-A917-4822-8FDF-2D3FEC47368F}" ShortID="642807873">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FS_Wood" ID="{DD2E90E2-F0F5-4774-B164-C66BD9FC748A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="FS_Water" ID="{2B66B87B-9F0C-4896-BD66-703D22486212}">
+					<ChildrenList>
+						<Action Name="" ID="{DBEBA4F0-CD1E-4A48-99C7-09F0BB2084A4}" ShortID="84770342">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FS_Water" ID="{B6387557-E0BF-4F71-B824-6D31E17BDE46}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="FS_Stone" ID="{33A7E903-157A-4D41-8B38-71545BF7618E}">
+					<ChildrenList>
+						<Action Name="" ID="{9B0D1B71-2368-4E90-A5BE-1358C60A0AAC}" ShortID="947452814">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FS_Stone" ID="{09E9ECE4-1CAB-4F32-A848-289FED4EF639}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PeppyJump" ID="{4775DCBC-4C56-41C2-B4C5-10125DB0437C}">
+					<ChildrenList>
+						<Action Name="" ID="{526F9A3C-109D-47F6-9506-87B60E66F929}" ShortID="176156320">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Jump" ID="{20B95C68-166E-4211-B1CA-5E8A6AED7F01}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="IntroCutScene" ID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="StreetNoise" ID="{82E835CF-CD1C-43B8-A543-3E6F08690043}">
+					<ChildrenList>
+						<Action Name="" ID="{F20EAF0A-3B25-4302-9268-402586628245}" ShortID="834585007">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="StreetNoise" ID="{4F413E7D-C8C5-4127-B28E-1F16855B967D}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DoorClose" ID="{76EA1136-BD56-4348-B9A3-91572634A7CF}">
+					<ChildrenList>
+						<Action Name="" ID="{697EF5A8-0721-487E-BCBE-95143404C58D}" ShortID="317439977">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DoorClose" ID="{A09F3442-F807-40E2-8493-18D5C668FFC9}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Door" ID="{CF8700B9-70F3-44EF-8783-91AE81B853E6}">
+					<ChildrenList>
+						<Action Name="" ID="{C7B494C4-7AEA-4F86-A3E5-83DFA2466BE7}" ShortID="476269903">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Door" ID="{047718FC-81AD-4EDE-BFDB-AE171F071135}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DeepBreath" ID="{E8D32E34-4759-4CF8-A35F-BF54F0E01CED}">
+					<ChildrenList>
+						<Action Name="" ID="{41B17891-5E86-4189-ABF1-28343EB9C18B}" ShortID="1060107725">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DeepBreath" ID="{E94821AD-2F76-4B63-BEAC-BE4FA942681F}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="HomeAmbi" ID="{0797BAAF-C465-4E55-A77C-69944ECA4624}">
+					<ChildrenList>
+						<Action Name="" ID="{093E29A8-52D5-4C4C-91F0-21A8AE0643B6}" ShortID="189431006">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HomeAmbi" ID="{48A8815D-9146-4AA3-B0E0-9451EE185F78}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ObjectFind" ID="{C713AAED-E762-4181-B591-F512D8595FD6}">
+					<ChildrenList>
+						<Action Name="" ID="{ADB1FED3-6202-4651-82EE-DCE72EE5EA21}" ShortID="525838393">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ObjectFind" ID="{EF7198A6-BB46-41C2-9CE4-B5F6ADA13F20}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="LampOn" ID="{D5371E02-2966-41D7-8D63-FD88E8BB2A03}">
+					<ChildrenList>
+						<Action Name="" ID="{58D3CA5C-037E-4C5D-8800-8F122193074E}" ShortID="681383151">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LampOff" ID="{78ACB05F-EFBA-4C46-9F4B-55261FCEA1C8}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="LampOn2" ID="{EA179644-0855-401D-8DD3-C342DBD4C996}">
+					<ChildrenList>
+						<Action Name="" ID="{1CA6E812-6231-45D8-A3F3-EA98F781B929}" ShortID="724131780">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="LampOff2" ID="{07D02EFF-0662-4DB0-82B5-846ADB1ADBFA}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

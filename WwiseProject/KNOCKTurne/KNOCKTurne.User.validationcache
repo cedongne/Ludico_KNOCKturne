@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ValidationCache Version="1" SchemaVersion="110">
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Virtual Acoustics\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Triggers\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Switches\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\States\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Soundcaster Sessions\Factory Tencent GME.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\SoundBanks\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Queries\Factory Queries.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Queries\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Presets\Factory Spatial Audio.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Presets\Factory Reflect.wwu" DateLow="1688393762" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Presets\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Modulators\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Mixing Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Metadata\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\KNOCKTurne.wproj" DateLow="1688621990" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\KNOCKTurne.User.wsettings" DateLow="1688632884" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Game Parameters\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\MUS.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\IntroCutScene.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\HubWorld.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\Function.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Events\Battle.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Effects\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Conversion Settings\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Control Surface Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Audio Devices\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Attenuations\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Peppy.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Dialogue.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688627906" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Ambi.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Virtual Acoustics\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Triggers\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Switches\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\States\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Soundcaster Sessions\Factory Tencent GME.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\SoundBanks\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Queries\Factory Queries.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Queries\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Presets\Factory Spatial Audio.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Presets\Factory Reflect.wwu" DateLow="1688393762" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Presets\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Modulators\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Mixing Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Metadata\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\KNOCKTurne.wproj" DateLow="1688621990" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\KNOCKTurne.User.wsettings" DateLow="1688633692" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Game Parameters\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\MUS.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\IntroCutScene.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\HubWorld.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\Function.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Events\Battle.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Effects\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Conversion Settings\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Control Surface Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Audio Devices\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Attenuations\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Peppy.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Dialogue.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688627906" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Ambi.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Virtual Acoustics\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Triggers\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Switches\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\States\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Soundcaster Sessions\Factory Tencent GME.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\SoundBanks\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Queries\Factory Queries.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Queries\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Presets\Factory Spatial Audio.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Presets\Factory Reflect.wwu" DateLow="1688393762" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Presets\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Modulators\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Mixing Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Metadata\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\KNOCKTurne.wproj" DateLow="1688621990" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\KNOCKTurne.User.wsettings" DateLow="1688628486" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Game Parameters\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\MUS.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\IntroCutScene.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\HubWorld.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\Function.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\Default Work Unit.wwu" DateLow="1688628094" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Events\Battle.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Effects\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Conversion Settings\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Control Surface Sessions\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Audio Devices\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Attenuations\Default Work Unit.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\SFX.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Peppy.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Dialogue.wwu" DateLow="1688382418" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1688627906" DateHigh="0"/>
+	<ValidationCacheItem File="E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\Actor-Mixer Hierarchy\Ambi.wwu" DateLow="1688382418" DateHigh="0"/>
+</ValidationCache>

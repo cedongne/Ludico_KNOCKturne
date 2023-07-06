@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" SchemaVersion="103">
+	<Events>
+		<WorkUnit Name="Function" ID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="GetEnergy" ID="{6E8F66B2-EB03-4F0A-8B49-E9AE45CCB6A2}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{DD57E012-742B-4974-99D7-DBEDA39D3C77}" ShortID="802178291">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Battle_GetEnergy" ID="{82A9A76A-F639-4A88-8E9C-37827A589430}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SelectUI" ID="{17991763-5B7F-4F32-814D-24656FDF7D65}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="6"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{070DF247-9036-457F-AD27-E597B77D372C}" ShortID="34783012">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CancleUI" ID="{048AD721-7F3B-474D-8E85-D49B349CDF7A}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="6"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{E356F6BF-5F2D-4CA5-A70E-43BAD60C2F10}" ShortID="37198317">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="cancle" ID="{55685DA4-0CCC-4A35-88FD-862169CC2331}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="HoverUI" ID="{88A8DAC3-07D2-412F-99A4-04F63B74E84D}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="6"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{42FD59C2-A55E-417B-B716-DBC5C9D05134}" ShortID="931855561">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hover" ID="{2775D0BD-C729-48A1-8694-888FAB5CC628}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="TextPrint" ID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="22"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{87E6E293-0A3C-4AA8-A269-7C7644FB2366}" ShortID="681097558">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Text_Typing" ID="{B4C5A893-E7AD-4298-8984-91F1F0D78C59}" WorkUnitID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="TextStop" ID="{C3180D15-7C85-4DE8-B28E-989133C215EA}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="22"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{AA881FC4-E4E1-456D-862D-4C59170CFEA0}" ShortID="497124096">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SFX_Text_Typing" ID="{B4C5A893-E7AD-4298-8984-91F1F0D78C59}" WorkUnitID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CountDown" ID="{1B90EFDB-177B-4B80-852C-57AEE5071F38}">
+					<ChildrenList>
+						<Action Name="" ID="{5D9596AA-F95E-4A1A-8C7C-035ADBE0512A}" ShortID="407208518">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="CountDown" ID="{3AEA09D8-8B61-470B-9F7D-D88D62D507A3}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Notice" ID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}">
+					<ChildrenList>
+						<Action Name="" ID="{6F6D9EBE-EC58-417D-A136-640CF458A94D}" ShortID="445043756">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Notice" ID="{D02EA4A1-D155-4889-83A3-426051DE1027}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" SchemaVersion="110">
+	<AudioObjects>
+		<WorkUnit Name="Dialogue" ID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="SFX_Text_Typing" ID="{B4C5A893-E7AD-4298-8984-91F1F0D78C59}" ShortID="24057330">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="MakeUpGain" Type="Real64">
+							<ValueList>
+								<Value>9</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="SFX_Text_Typing" ID="{C361CF8F-4457-4A3F-AB7B-07C4722B5B09}">
+							<PropertyList>
+								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<AudioFile>SFX_Text_Typing.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="164875334"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="SFX_Text_Typing" ID="{C361CF8F-4457-4A3F-AB7B-07C4722B5B09}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

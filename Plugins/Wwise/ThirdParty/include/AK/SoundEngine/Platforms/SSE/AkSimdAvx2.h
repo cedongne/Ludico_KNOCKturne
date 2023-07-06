@@ -21,8 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2021.1.9  Build: 7847
-  Copyright (c) 2006-2022 Audiokinetic Inc.
+  Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
 
 // AkSimdAvx2.h
@@ -41,7 +40,7 @@ the specific language governing permissions and limitations under the License.
 #endif
 
 #include <AK/SoundEngine/Platforms/SSE/AkSimdAvx.h>
-
+#include <string.h>
 
 ////////////////////////////////////////////////////////////////////////
 /// @name AKSIMD arithmetic
@@ -205,7 +204,8 @@ inline AKSIMD_V8I32 AKSIMD_GATHER_EPI32(const T* __restrict base_ptr, Function e
 	__m128i valsTemp[2] = { _mm_setzero_si128(),_mm_setzero_si128() };
 #define _GATHER_SIM_FETCH(_x) \
     {\
-        AkInt32 val = *(AkInt32*)(base_ptr + expr(_x)); \
+        AkInt32 val;\
+        ::memcpy(&val, (base_ptr + expr(_x)), sizeof(val)); \
         valsTemp[_x/4] = _mm_insert_epi32(valsTemp[_x/4],  val, _x%4);\
     }
 
@@ -229,7 +229,8 @@ inline AKSIMD_V8I32 AKSIMD_GATHER_EPI64(const T* base_ptr, Function expr)
 	__m128i valsTemp[2] = { _mm_setzero_si128(),_mm_setzero_si128() };
 #define _GATHER_SIM_FETCH(_x) \
     {\
-        AkInt64 val = *(AkInt64*)(base_ptr + expr(_x)); \
+        AkInt64 val; \
+        ::memcpy(&val, (base_ptr + expr(_x)), sizeof(val)); \
         valsTemp[_x/2] = _mm_insert_epi64(valsTemp[_x/2],  val, _x%2);\
     }
 

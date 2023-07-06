@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" SchemaVersion="110">
+	<Events>
+		<WorkUnit Name="Battle" ID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="BattleDoor" ID="{B7AC811E-757D-49E2-AE55-907EEE57B394}">
+					<ChildrenList>
+						<Action Name="" ID="{D66EDA2E-DB96-4E73-8293-942201B67E66}" ShortID="181863353">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BattleDoor" ID="{C795C573-3F48-4DF8-BE06-7A2E6105E141}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="BattleDoor2" ID="{02F7B7C8-3867-42BB-BDAD-322112C6CD31}">
+					<ChildrenList>
+						<Action Name="" ID="{9141D905-4691-48B1-97DB-2F0E47F493C5}" ShortID="1060919707">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BattleDoor2" ID="{C9238223-56F5-42C1-BFFC-B83A11B5BED4}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="SweepGarden" ID="{958EB58C-C88A-44AD-9D36-254C6C6F2A94}">
+					<ChildrenList>
+						<Action Name="" ID="{EB6F0AA8-C4E5-4D18-A49B-6A245EEAA37E}" ShortID="520970803">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Skill_SweepGarden" ID="{26B38E6D-4934-497C-A058-79E1E1A38BF0}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="PeppyHit" ID="{72D96420-AD04-444C-9A29-E641F18D530C}">
+					<ChildrenList>
+						<Action Name="" ID="{FEFF0661-3FFD-48B8-9210-45A6F0605532}" ShortID="691251412">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Hit" ID="{86184AE6-50DE-4199-9FF7-90C623DC3A2C}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

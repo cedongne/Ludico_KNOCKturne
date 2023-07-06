@@ -1,16 +1,18 @@
 /*******************************************************************************
-The content of the files in this repository include portions of the
-AUDIOKINETIC Wwise Technology released in source code form as part of the SDK
-package.
-
-Commercial License Usage
-
-Licensees holding valid commercial licenses to the AUDIOKINETIC Wwise Technology
-may use these files in accordance with the end user license agreement provided
-with the software or, alternatively, in accordance with the terms contained in a
-written agreement between you and Audiokinetic Inc.
-
-Copyright (c) 2021 Audiokinetic Inc.
+The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
+Technology released in source code form as part of the game integration package.
+The content of this file may not be used without valid licenses to the
+AUDIOKINETIC Wwise Technology.
+Note that the use of the game engine is subject to the Unreal(R) Engine End User
+License Agreement at https://www.unrealengine.com/en-US/eula/unreal
+ 
+License Usage
+ 
+Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
+this file in accordance with the end user license agreement provided with the
+software or, alternatively, in accordance with the terms contained
+in a written agreement between you and Audiokinetic Inc.
+Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
 
 #include "SAcousticSurfacesController.h"
@@ -22,7 +24,6 @@ Copyright (c) 2021 Audiokinetic Inc.
 #include "EditorModes.h"
 #include "Engine/Selection.h"
 #include "Editor/TransBuffer.h"
-#include "EditorStyleSet.h"
 #include "EditorSupportDelegates.h"
 #include "PropertyCustomizationHelpers.h"
 #include "SlateCore/Public/Widgets/SBoxPanel.h"
@@ -189,7 +190,7 @@ EVisibility SAcousticSurfacesLabels::TransmissionLossEnableSurfaceVisibility()
 // SAcousticSurfacesController
 // ==================================================
 
-void SAcousticSurfacesController::Construct(const FArguments& InArgs, TArray<TWeakObjectPtr<UObject>> ObjectsBeingCustomized, IDetailLayoutBuilder* InLayoutBuilder)
+void SAcousticSurfacesController::Construct(const FArguments& InArgs, TArray<TWeakObjectPtr<UObject>> ObjectsBeingCustomized, const TSharedPtr<IDetailLayoutBuilder>& InLayoutBuilder)
 {
 	ensure(ObjectsBeingCustomized.Num() > 0);
 
@@ -230,14 +231,18 @@ void SAcousticSurfacesController::Construct(const FArguments& InArgs, TArray<TWe
 
 	InitReflectorSetsFacesToEdit();
 	UpdateCurrentValues();
+#if AK_SUPPORT_WAAPI
 	RegisterTextureDeletedCallback();
+#endif
 
 	BuildSlate();
 }
 
 SAcousticSurfacesController::~SAcousticSurfacesController()
 {
+#if AK_SUPPORT_WAAPI
 	RemoveTextureDeletedCallback();
+#endif
 	FCoreUObjectDelegates::OnObjectPropertyChanged.Remove(OnPropertyChangedHandle);
 	GLevelEditorModeTools().OnEditorModeIDChanged().RemoveAll(this);
 }
@@ -277,6 +282,11 @@ FAkSurfacePoly& SAcousticSurfacesController::GetAcousticSurfaceChecked(UAkSurfac
 
 void SAcousticSurfacesController::RefreshEditor(bool reinitVisualizers /*= false*/) const
 {
+	if (!LayoutBuilder.IsValid())
+	{
+		return;
+	}
+
 	FEditorSupportDelegates::RedrawAllViewports.Broadcast();
 
 	for (auto elem : ReflectorSetsFacesToEdit)
@@ -296,8 +306,15 @@ void SAcousticSurfacesController::RefreshEditor(bool reinitVisualizers /*= false
 		}
 	}
 
-	if (LayoutBuilder != nullptr)
-		LayoutBuilder->ForceRefreshDetails();
+	IDetailLayoutBuilder* Layout = nullptr;
+	if (auto LockedLayoutBuilder = LayoutBuilder.Pin())
+	{
+		Layout = LockedLayoutBuilder.Get();
+	}
+	if (LIKELY(Layout))
+	{
+		Layout->ForceRefreshDetails();
+	}
 }
 
 void SAcousticSurfacesController::BeginModify(FText TransactionText)
@@ -568,6 +585,16 @@ TOptional<float> SAcousticSurfacesController::GetOcclusionSliderValue() const
 
 void SAcousticSurfacesController::OnOcclusionSliderChanged(float NewValue, ETextCommit::Type Commit)
 {
+	// TODO: Remove this when fixed.
+	// There is a bug in UE5.1 when modifying numerical properties and pressing Enter.
+	// This is the case for the occlusion(transmission loss) value of acoustic surfaces.
+	// This function is getting called a second time with a wrong occlusion value.
+	// When that happens, LayoutBuilder is invalid, so we check it to make sure the value is valid as well.
+	if (!LayoutBuilder.IsValid())
+	{
+		return;
+	}
+
 	// Only apply valid values
 	if (NewValue >= 0.0f && NewValue <= 1.0f)
 	{
@@ -670,7 +697,7 @@ void SAcousticSurfacesController::RegisterTextureDeletedCallback()
 				const FString itemIdString = itemObj->GetStringField(WwiseWaapiHelper::ID);
 				FGuid itemID = FGuid::NewGuid();
 				FGuid::ParseExact(itemIdString, EGuidFormats::DigitsWithHyphensInBraces, itemID);
-				if (CurrentTexture != nullptr && itemID == CurrentTexture->ID)
+				if (CurrentTexture != nullptr && itemID == CurrentTexture->AcousticTextureInfo.WwiseGuid)
 				{
 					AsyncTask(ENamedThreads::GameThread, [this, itemID]
 					{
@@ -703,7 +730,15 @@ void SAcousticSurfacesController::RemoveTextureDeletedCallback()
 
 void SAcousticSurfacesController::BuildSlate()
 {
-	FSlateFontInfo selectionInfoFont = LayoutBuilder != nullptr ? LayoutBuilder->GetDetailFontItalic() : FEditorStyle::GetFontStyle("TinyText");
+	FSlateFontInfo SelectionInfoFont = FAkAppStyle::Get().GetFontStyle("TinyText");
+
+	if (LayoutBuilder.IsValid())
+	{
+		if (auto LockedDetailBuilder = LayoutBuilder.Pin())
+		{
+			SelectionInfoFont = LockedDetailBuilder->GetDetailFontItalic();
+		}
+	}
 
 	ChildSlot
 	[
@@ -813,7 +848,7 @@ void SAcousticSurfacesController::BuildSlate()
 				SNew(STextBlock)
 				.Text(this, &SAcousticSurfacesController::GetSelectionText)
 				.ToolTipText(this, &SAcousticSurfacesController::GetSelectionTextTooltip)
-				.Font(selectionInfoFont)
+				.Font(SelectionInfoFont)
 			]
 			+ SVerticalBox::Slot() // Occlusion
 			.FillHeight(0.33f)
@@ -826,7 +861,7 @@ void SAcousticSurfacesController::BuildSlate()
 					SNew(STextBlock)
 					.Text(this, &SAcousticSurfacesController::GetSelectionText)
 					.ToolTipText(this, &SAcousticSurfacesController::GetSelectionTextTooltip)
-					.Font(selectionInfoFont)
+					.Font(SelectionInfoFont)
 				]
 			]
 			+ SVerticalBox::Slot() // EnableSurface
@@ -837,8 +872,10 @@ void SAcousticSurfacesController::BuildSlate()
 				SNew(STextBlock)
 				.Text(this, &SAcousticSurfacesController::GetSelectionText)
 				.ToolTipText(this, &SAcousticSurfacesController::GetSelectionTextTooltip)
-				.Font(selectionInfoFont)
+				.Font(SelectionInfoFont)
 			]
 		]
 	];
 }
+
+#undef LOCTEXT_NAMESPACE

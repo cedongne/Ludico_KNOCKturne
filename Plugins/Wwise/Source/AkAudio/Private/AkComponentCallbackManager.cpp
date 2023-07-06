@@ -1,18 +1,19 @@
 /*******************************************************************************
-The content of the files in this repository include portions of the
-AUDIOKINETIC Wwise Technology released in source code form as part of the SDK
-package.
-
-Commercial License Usage
-
-Licensees holding valid commercial licenses to the AUDIOKINETIC Wwise Technology
-may use these files in accordance with the end user license agreement provided
-with the software or, alternatively, in accordance with the terms contained in a
-written agreement between you and Audiokinetic Inc.
-
-Copyright (c) 2021 Audiokinetic Inc.
+The content of this file includes portions of the proprietary AUDIOKINETIC Wwise
+Technology released in source code form as part of the game integration package.
+The content of this file may not be used without valid licenses to the
+AUDIOKINETIC Wwise Technology.
+Note that the use of the game engine is subject to the Unreal(R) Engine End User
+License Agreement at https://www.unrealengine.com/en-US/eula/unreal
+ 
+License Usage
+ 
+Licensees holding valid licenses to the AUDIOKINETIC Wwise Technology may use
+this file in accordance with the end user license agreement provided with the
+software or, alternatively, in accordance with the terms contained
+in a written agreement between you and Audiokinetic Inc.
+Copyright (c) 2023 Audiokinetic Inc.
 *******************************************************************************/
-
 
 #include "AkComponentCallbackManager.h"
 #include "AkAudioDevice.h"
@@ -22,6 +23,8 @@ Copyright (c) 2021 Audiokinetic Inc.
 #include "Async/Async.h"
 #include "AkCallbackInfoPool.h"
 #include "AkComponent.h"
+#include "Wwise/WwiseExternalSourceManager.h"
+#include "UObject/UObjectThreadContext.h"
 
 struct FAkComponentCallbackManager_Constants
 {
@@ -85,7 +88,7 @@ void FAkBlueprintDelegateEventCallbackPackage::HandleAction(AkCallbackType in_eT
 			}
 
 			UAkComponent* akComponent = (UAkComponent*)cbInfoCopy->gameObjID;
-			if (!akComponent->IsValidLowLevel())
+			if (!IsValid(akComponent))
 			{
 				return;
 			}
@@ -152,7 +155,14 @@ void FAkComponentCallbackManager::AkComponentCallback(AkCallbackType in_eType, A
 			if (auto* Device = FAkAudioDevice::Get())
 			{
 				Device->RemovePlayingID(((AkEventCallbackInfo*)in_pCallbackInfo)->eventID, ((AkEventCallbackInfo*)in_pCallbackInfo)->playingID);
-				Device->CleanPinnedObjects(((AkEventCallbackInfo*)in_pCallbackInfo)->playingID);
+			}
+
+			if(pPackage->HasExternalSources)
+			{
+				if (auto* ExternalSourceMananger = IWwiseExternalSourceManager::Get())
+				{
+					ExternalSourceMananger->OnEndOfEvent(((AkEventCallbackInfo*)in_pCallbackInfo)->playingID);
+				}
 			}
 		}
 
@@ -172,7 +182,7 @@ FAkComponentCallbackManager::FAkComponentCallbackManager()
 {
 	if (Instance != nullptr)
 	{
-		UE_LOG(LogInit, Error, TEXT("FAkComponentCallbackManager has already been instantiated."));
+		UE_LOG(LogAkAudio, Error, TEXT("FAkComponentCallbackManager has already been instantiated."));
 	}
 
 	Instance = this;
@@ -191,10 +201,10 @@ FAkComponentCallbackManager::~FAkComponentCallbackManager()
 	Instance = nullptr;
 }
 
-IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(AkCallbackFunc in_cbFunc, void* in_Cookie, uint32 in_Flags, AkGameObjectID in_gameObjID)
+IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(AkCallbackFunc in_cbFunc, void* in_Cookie, uint32 in_Flags, AkGameObjectID in_gameObjID, bool HasExternalSources)
 {
 	uint32 KeyHash = GetKeyHash(in_Cookie);
-	auto pPackage = new FAkFunctionPtrEventCallbackPackage(in_cbFunc, in_Cookie, in_Flags, KeyHash);
+	auto pPackage = new FAkFunctionPtrEventCallbackPackage(in_cbFunc, in_Cookie, in_Flags, KeyHash, HasExternalSources);
 	if (pPackage)
 	{
 		FScopeLock Lock(&CriticalSection);
@@ -205,10 +215,10 @@ IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(
 	return pPackage;
 }
 
-IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(FOnAkPostEventCallback BlueprintCallback, uint32 in_Flags, AkGameObjectID in_gameObjID)
+IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(FOnAkPostEventCallback BlueprintCallback, uint32 in_Flags, AkGameObjectID in_gameObjID, bool HasExternalSources)
 {
 	uint32 KeyHash = GetKeyHash(BlueprintCallback);
-	auto pPackage = new FAkBlueprintDelegateEventCallbackPackage(BlueprintCallback, in_Flags, KeyHash);
+	auto pPackage = new FAkBlueprintDelegateEventCallbackPackage(BlueprintCallback, in_Flags, KeyHash, HasExternalSources);
 	if (pPackage)
 	{
 		FScopeLock Lock(&CriticalSection);
@@ -219,9 +229,9 @@ IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(
 	return pPackage;
 }
 
-IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(FWaitEndOfEventAction* LatentAction, AkGameObjectID in_gameObjID)
+IAkUserEventCallbackPackage* FAkComponentCallbackManager::CreateCallbackPackage(FWaitEndOfEventAction* LatentAction, AkGameObjectID in_gameObjID, bool HasExternalSources)
 {
-	auto pPackage = new FAkLatentActionEventCallbackPackage(LatentAction, 0);
+	auto pPackage = new FAkLatentActionEventCallbackPackage(LatentAction, 0, HasExternalSources);
 	if (pPackage)
 	{
 		FScopeLock Lock(&CriticalSection);

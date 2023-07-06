@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{ABB322AA-C1CA-497B-9120-12DC587E61BC}" SchemaVersion="110">
+	<GameParameters>
+		<WorkUnit Name="Default Work Unit" ID="{ABB322AA-C1CA-497B-9120-12DC587E61BC}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="SetMusicVolume" ID="{EE7ED13E-CB89-4022-A015-5115510FF342}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="60"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="SetSFXVolume" ID="{49C0EC05-8248-4AB2-B670-BF53639F3F0D}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="60"/>
+						<Property Name="RTPCRamping" Type="int16" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

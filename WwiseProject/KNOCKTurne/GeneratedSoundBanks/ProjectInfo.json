@@ -1,0 +1,34 @@
+{
+ "ProjectInfo": {
+  "Project": {
+   "Name": "KNOCKTurne",
+   "GUID": "{29DE7C1E-D597-435F-9500-D35F3AF9E99A}",
+   "Generator": "2022.1.5.8242"
+  },
+  "CacheRoot": "../.cache",
+  "Platforms": [
+   {
+    "Name": "Windows",
+    "GUID": "{88482BE1-CED4-4E55-B226-C0B3BC89742A}",
+    "BasePlatform": "Windows",
+    "BasePlatformGUID": "{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}",
+    "Path": "Windows"
+   }
+  ],
+  "Languages": [
+   {
+    "Name": "English(US)",
+    "Id": "684519430",
+    "GUID": "{18974E36-EE1E-4911-AC5A-5A6309FF18E0}",
+    "Default": "true",
+    "UseAsStandIn": "true"
+   },
+   {
+    "Name": "SoundSeed Grain",
+    "Id": "3532711372",
+    "GUID": "{9772BA3A-56D1-460D-85BD-ECBF2BA20196}"
+   }
+  ],
+  "FileHash": "{1BC684A5-8C0D-911F-F19F-9C98ACFEBCD9}"
+ }
+}

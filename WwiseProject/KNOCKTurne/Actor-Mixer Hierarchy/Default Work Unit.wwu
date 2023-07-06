@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" SchemaVersion="110">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="New Test" ID="{B8A6A0E7-45BE-4DF4-9301-8652E5DCBA9F}" ShortID="270553634">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-5</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj" ID="{EE7E61B2-2E0A-49A5-8F41-0D3A2144D8E2}">
+							<Language>SFX</Language>
+							<AudioFile>MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="1009141722"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj" ID="{EE7E61B2-2E0A-49A5-8F41-0D3A2144D8E2}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

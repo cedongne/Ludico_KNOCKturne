@@ -22,7 +22,7 @@
 // nonnull pointers for C and Y and pass K to numCols.  In all cases, pass
 // N to numRows.
 
-namespace gte
+namespace WwiseGTE
 {
     template <typename Real>
     class GaussianElimination

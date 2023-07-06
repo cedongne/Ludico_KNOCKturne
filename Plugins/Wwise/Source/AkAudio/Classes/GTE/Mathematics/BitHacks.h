@@ -23,7 +23,7 @@
 // int32_t inputs are negative.
 #define GTE_THROW_ON_BITHACKS_ERROR
 
-namespace gte
+namespace WwiseGTE
 {
     class BitHacks
     {

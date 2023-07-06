@@ -18,7 +18,7 @@
 // The quadratic field numbers and conversions are described in
 // https://www.geometrictools.com/Documentation/QuadraticFields.pdf
 
-namespace gte
+namespace WwiseGTE
 {
     template <typename Rational>
     class APConversion

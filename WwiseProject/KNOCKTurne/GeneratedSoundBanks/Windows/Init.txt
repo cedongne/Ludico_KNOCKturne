@@ -1,0 +1,44 @@
+State Group	ID	Name			Wwise Object Path	Notes
+	153626945	MusicMute			\Default Work Unit\MusicMute	
+	1264305561	SFXMute			\Default Work Unit\SFXMute	
+	2675729146	BattleState			\Default Work Unit\BattleState	
+	3573931707	Loading			\Default Work Unit\Loading	
+	3865314626	Material			\Default Work Unit\Material	
+
+State	ID	Name	State Group			Notes
+	748895195	None	MusicMute			
+	1651971902	On	MusicMute			
+	2974103762	Mute	MusicMute			
+	748895195	None	SFXMute			
+	1651971902	On	SFXMute			
+	2974103762	Mute	SFXMute			
+	748895195	None	BattleState			
+	1945239214	NOTBattle	BattleState			
+	2937832959	Battle	BattleState			
+	748895195	None	Loading			
+	2337190330	OnLoading	Loading			
+	748895195	None	Material			
+	787898836	Snow	Material			
+	1216965916	Stone	Material			
+	2058049674	Wood	Material			
+	2654748154	Water	Material			
+	4248645337	Grass	Material			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	618595066	Mute	MusicMute	\Master-Mixer Hierarchy\Default Work Unit\Music		
+	704804129	Mute	SFXMute	\Master-Mixer Hierarchy\Default Work Unit\SFX		
+	1009662523	OnLoading	Loading	\Master-Mixer Hierarchy\Default Work Unit\Music		
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1235576194	SetMusicVolume			\Default Work Unit\SetMusicVolume	
+	1612287370	SetSFXVolume			\Default Work Unit\SetSFXVolume	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	393239870	SFX			\Default Work Unit\SFX	
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+	3991942870	Music			\Default Work Unit\Music	
+
+Audio Devices	ID	Name	Type				Notes
+	2317455096	No_Output	No Output			
+	3859886410	System	System			
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{0B6532CB-AA7C-4FF2-8837-92F88253C9BF}" SchemaVersion="103">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{0B6532CB-AA7C-4FF2-8837-92F88253C9BF}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Master" ID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}">
+					<ObjectInclusionList>
+						<ObjectRef Name="HubWorldAmbi" ID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="LampOn2" ID="{EA179644-0855-401D-8DD3-C342DBD4C996}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HoverUI" ID="{88A8DAC3-07D2-412F-99A4-04F63B74E84D}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Function" ID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="IntroCutScene" ID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="ObjectFind" ID="{C713AAED-E762-4181-B591-F512D8595FD6}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BGM_Credit_75bpm4-4_L29M" ID="{69F0FFA0-1363-41AA-90FF-BA60AFC37C3E}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="PeppyJump" ID="{4775DCBC-4C56-41C2-B4C5-10125DB0437C}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="LampOn" ID="{D5371E02-2966-41D7-8D63-FD88E8BB2A03}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DoorHover" ID="{A8C0958F-D897-423F-A887-30D1D837C6C4}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Grass" ID="{9A2008F9-EDA5-4280-8526-ECBE3FBE4F1A}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Interactive Music Hierarchy" ID="{49FED366-B530-42A8-993B-924873AAB707}" WorkUnitID="{49FED366-B530-42A8-993B-924873AAB707}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BattleDoor2" ID="{02F7B7C8-3867-42BB-BDAD-322112C6CD31}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BattleDoor2" ID="{C9238223-56F5-42C1-BFFC-B83A11B5BED4}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="UI_Hover" ID="{36D3F51B-5387-4314-B502-67B2D32C58D8}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DoorClose" ID="{76EA1136-BD56-4348-B9A3-91572634A7CF}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="StreetNoise" ID="{82E835CF-CD1C-43B8-A543-3E6F08690043}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HubWorld_DoorHover" ID="{3BECB364-1ABB-43D1-9373-8CDCDC550914}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="TextPrint" ID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="PeppyHit" ID="{72D96420-AD04-444C-9A29-E641F18D530C}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SweepGarden" ID="{958EB58C-C88A-44AD-9D36-254C6C6F2A94}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="EndBattle" ID="{42CBC707-06E1-44D1-9639-78E718B20D5C}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Door" ID="{CF8700B9-70F3-44EF-8783-91AE81B853E6}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Foot Steps" ID="{8CDF7A82-8C9E-4519-9799-5C27EC1B7C14}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Title" ID="{2BA7669C-F470-456D-9970-BA6C6FDC2174}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HubWorld" ID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="UI_Hover_01" ID="{E9C31A62-152C-4615-9058-E5548CD940C2}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX" ID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" WorkUnitID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Dialogue" ID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" WorkUnitID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Ambi" ID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}" WorkUnitID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MUS" ID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle_BGM" ID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle" ID="{D5224D3B-168B-46FA-88A6-AB1B9194B9E5}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BGM_Battle" ID="{DAC7CF70-8EF4-471C-B003-FE5D8D64DC56}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CancleUI" ID="{048AD721-7F3B-474D-8E85-D49B349CDF7A}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Wood" ID="{DD2E90E2-F0F5-4774-B164-C66BD9FC748A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_PeppyWalk_Grass2" ID="{C4175A07-3731-4786-A0C9-9FCE7591C044}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Events" ID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" WorkUnitID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle" ID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Water" ID="{2B66B87B-9F0C-4896-BD66-703D22486212}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Hover" ID="{2775D0BD-C729-48A1-8694-888FAB5CC628}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Snow" ID="{657CEC4F-CB00-4921-A27B-09560E379D46}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Notice" ID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BattleDoor" ID="{B7AC811E-757D-49E2-AE55-907EEE57B394}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="cancle" ID="{55685DA4-0CCC-4A35-88FD-862169CC2331}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_PeppyWalk_Grass1" ID="{17DF8C1E-89BE-4A3D-ADA1-4861A35FE52B}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Actor-Mixer Hierarchy" ID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" WorkUnitID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Battle_GetEnergy" ID="{82A9A76A-F639-4A88-8E9C-37827A589430}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Peppy" ID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{3AF20CAC-13B9-4AD5-977A-DA867830F7AB}" WorkUnitID="{3AF20CAC-13B9-4AD5-977A-DA867830F7AB}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Snow" ID="{1784F97F-9850-4B0A-BD54-63E92FDDD0C8}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Wood" ID="{CDB304F6-B28E-4B57-BED1-F2FEE4E877F1}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="CountDown" ID="{1B90EFDB-177B-4B80-852C-57AEE5071F38}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BGM_HubWorld_120bpm3-4" ID="{4D918B5D-537B-4BFA-A3B7-F933666CE546}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="UI_Hover_02" ID="{D894248C-E51E-4C83-9CD3-F47234EEFA31}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_PeppyWalk_Grass3" ID="{54F6D107-4BDF-4CBB-9082-363468D34697}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX" ID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Dynamic Dialogue" ID="{309AF5DE-031F-4CE0-9B9B-C0A536275343}" WorkUnitID="{309AF5DE-031F-4CE0-9B9B-C0A536275343}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DeepBreath" ID="{E8D32E34-4759-4CF8-A35F-BF54F0E01CED}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Stone" ID="{33A7E903-157A-4D41-8B38-71545BF7618E}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Default Work Unit" ID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" WorkUnitID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Title_BGM" ID="{4AE354BB-D32F-4D94-B7E8-AE4CE3201965}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="IntroCutSceneStart" ID="{39C5D52C-C9E8-4DE0-BA6C-A490FD9065D4}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="TextStop" ID="{C3180D15-7C85-4DE8-B28E-989133C215EA}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BattleDoor" ID="{C795C573-3F48-4DF8-BE06-7A2E6105E141}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="HomeAmbi" ID="{0797BAAF-C465-4E55-A77C-69944ECA4624}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Grass" ID="{A34E29BB-4F44-4E68-B19A-CE2E6CB5815D}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="GetEnergy" ID="{6E8F66B2-EB03-4F0A-8B49-E9AE45CCB6A2}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Hub_BGM" ID="{A5906D44-D623-4F22-A245-563EC4404512}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Stone" ID="{09E9ECE4-1CAB-4F32-A848-289FED4EF639}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SelectUI" ID="{17991763-5B7F-4F32-814D-24656FDF7D65}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="BGM_HubWorld_120bpm3-4" ID="{93440ACE-8B5E-4F51-961E-5B5A3DA8E337}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="FS_Water" ID="{B6387557-E0BF-4F71-B824-6D31E17BDE46}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Hub" ID="{6FE72110-32FF-4FE9-8142-03FA0C3B3375}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

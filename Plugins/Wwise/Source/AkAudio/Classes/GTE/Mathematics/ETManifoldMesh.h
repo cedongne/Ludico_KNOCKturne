@@ -14,7 +14,7 @@
 #include <memory>
 #include <vector>
 
-namespace gte
+namespace WwiseGTE
 {
     class ETManifoldMesh
     {

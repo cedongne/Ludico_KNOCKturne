@@ -1,0 +1,219 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "145",
+  "SoundBanks": [
+   {
+    "Id": "1355168291",
+    "Type": "User",
+    "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
+    "Language": "SFX",
+    "Hash": "{6AAA72FC-08B0-A832-EBC0-232E4ED109CD}",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk",
+    "Plugins": {
+     "AudioDevices": [
+      {
+       "Id": "2317455096",
+       "Name": "No_Output",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\No_Output",
+       "GUID": "{67116255-B7BA-43CE-B95D-7C972502F95B}",
+       "LibName": "No Output",
+       "LibId": "11862023"
+      },
+      {
+       "Id": "3859886410",
+       "Name": "System",
+       "ObjectPath": "\\Audio Devices\\Default Work Unit\\System",
+       "GUID": "{47B988B8-C04D-4E5C-878C-ADCAB28CF2F0}",
+       "LibName": "System",
+       "LibId": "11403271"
+      }
+     ]
+    },
+    "Busses": [
+     {
+      "Id": "393239870",
+      "Name": "SFX",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\SFX",
+      "GUID": "{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}"
+     },
+     {
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}"
+     },
+     {
+      "Id": "3991942870",
+      "Name": "Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Music",
+      "GUID": "{40C489A2-EF75-4D2C-B839-C9BD0966EC68}"
+     }
+    ],
+    "GameParameters": [
+     {
+      "Id": "1235576194",
+      "Name": "SetMusicVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SetMusicVolume",
+      "GUID": "{EE7ED13E-CB89-4022-A015-5115510FF342}"
+     },
+     {
+      "Id": "1612287370",
+      "Name": "SetSFXVolume",
+      "ObjectPath": "\\Game Parameters\\Default Work Unit\\SetSFXVolume",
+      "GUID": "{49C0EC05-8248-4AB2-B670-BF53639F3F0D}"
+     }
+    ],
+    "StateGroups": [
+     {
+      "Id": "153626945",
+      "Name": "MusicMute",
+      "ObjectPath": "\\States\\Default Work Unit\\MusicMute",
+      "GUID": "{8EA9FF96-F162-4C14-9CF9-71CF9C62FD73}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\None",
+        "GUID": "{C7770802-0720-435C-A14B-62D90C3A81C2}"
+       },
+       {
+        "Id": "1651971902",
+        "Name": "On",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\On",
+        "GUID": "{F89AAEE6-E375-4980-9966-D1C680034F8B}"
+       },
+       {
+        "Id": "2974103762",
+        "Name": "Mute",
+        "ObjectPath": "\\States\\Default Work Unit\\MusicMute\\Mute",
+        "GUID": "{4AF4A2EA-2AC4-427F-9C03-7B19FE339035}"
+       }
+      ]
+     },
+     {
+      "Id": "1264305561",
+      "Name": "SFXMute",
+      "ObjectPath": "\\States\\Default Work Unit\\SFXMute",
+      "GUID": "{772F763F-E67F-41C8-BD59-211303236CDA}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\None",
+        "GUID": "{55246F65-BEA2-460F-A9A4-0D941298A987}"
+       },
+       {
+        "Id": "1651971902",
+        "Name": "On",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\On",
+        "GUID": "{A065D1AA-A45D-4209-BF4D-0BF093DB6819}"
+       },
+       {
+        "Id": "2974103762",
+        "Name": "Mute",
+        "ObjectPath": "\\States\\Default Work Unit\\SFXMute\\Mute",
+        "GUID": "{24AC8242-C9C2-429C-921D-6C137CADA647}"
+       }
+      ]
+     },
+     {
+      "Id": "2675729146",
+      "Name": "BattleState",
+      "ObjectPath": "\\States\\Default Work Unit\\BattleState",
+      "GUID": "{A6041A1D-4540-4327-B6FF-DB44CCFCE55C}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\None",
+        "GUID": "{78EB688C-79E7-40F1-8C66-E0C6A8B1A7B7}"
+       },
+       {
+        "Id": "1945239214",
+        "Name": "NOTBattle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\NOTBattle",
+        "GUID": "{10926055-A7DE-4186-9917-DE187CEAB6BA}"
+       },
+       {
+        "Id": "2937832959",
+        "Name": "Battle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\Battle",
+        "GUID": "{F389EF43-73A7-44EB-8123-A0D905A9CE22}"
+       }
+      ]
+     },
+     {
+      "Id": "3573931707",
+      "Name": "Loading",
+      "ObjectPath": "\\States\\Default Work Unit\\Loading",
+      "GUID": "{F6EB1E7C-E7DA-4A3B-9978-65621EF16ED0}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Loading\\None",
+        "GUID": "{8B8C5807-C953-426E-8E74-23127CB1A3C7}"
+       },
+       {
+        "Id": "2337190330",
+        "Name": "OnLoading",
+        "ObjectPath": "\\States\\Default Work Unit\\Loading\\OnLoading",
+        "GUID": "{9B2B7D31-B131-44E9-92DF-2B2ECA4E708E}"
+       }
+      ]
+     },
+     {
+      "Id": "3865314626",
+      "Name": "Material",
+      "ObjectPath": "\\States\\Default Work Unit\\Material",
+      "GUID": "{B97690DA-CAEE-4CB2-9761-514B4E7BDF15}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\None",
+        "GUID": "{B75716EF-102A-47E4-93D2-9734303354E7}"
+       },
+       {
+        "Id": "787898836",
+        "Name": "Snow",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Snow",
+        "GUID": "{DE8F1A6D-9164-4B04-9011-4CA34C3196C3}"
+       },
+       {
+        "Id": "1216965916",
+        "Name": "Stone",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Stone",
+        "GUID": "{4CB2CF2B-58FA-49E1-9BCB-3E51821D918B}"
+       },
+       {
+        "Id": "2058049674",
+        "Name": "Wood",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Wood",
+        "GUID": "{4E6AACEB-7E32-4D15-94DC-C1FD27A4CD7F}"
+       },
+       {
+        "Id": "2654748154",
+        "Name": "Water",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Water",
+        "GUID": "{F9909E4A-7436-4CF6-BFFA-F27607640D5E}"
+       },
+       {
+        "Id": "4248645337",
+        "Name": "Grass",
+        "ObjectPath": "\\States\\Default Work Unit\\Material\\Grass",
+        "GUID": "{6DCA55B3-27C3-405A-80DD-C19F8CD2A06E}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{D2178B69-1316-1879-7D2A-96926FF91957}"
+ }
+}

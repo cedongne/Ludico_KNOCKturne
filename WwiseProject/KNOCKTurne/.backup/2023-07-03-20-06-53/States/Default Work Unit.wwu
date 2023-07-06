@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{8B942DEF-27D5-44FE-88B8-5356C4839143}" SchemaVersion="103">
+	<States>
+		<WorkUnit Name="Default Work Unit" ID="{8B942DEF-27D5-44FE-88B8-5356C4839143}" PersistMode="Standalone">
+			<ChildrenList>
+				<StateGroup Name="MusicMute" ID="{8EA9FF96-F162-4C14-9CF9-71CF9C62FD73}">
+					<ChildrenList>
+						<State Name="None" ID="{C7770802-0720-435C-A14B-62D90C3A81C2}"/>
+						<State Name="Mute" ID="{4AF4A2EA-2AC4-427F-9C03-7B19FE339035}"/>
+						<State Name="On" ID="{F89AAEE6-E375-4980-9966-D1C680034F8B}"/>
+					</ChildrenList>
+					<TransitionList>
+						<Transition>
+							<StartState Name="On" ID="{F89AAEE6-E375-4980-9966-D1C680034F8B}"/>
+							<EndState Name="Mute" ID="{4AF4A2EA-2AC4-427F-9C03-7B19FE339035}"/>
+							<Time>1</Time>
+							<IsShared>true</IsShared>
+						</Transition>
+					</TransitionList>
+				</StateGroup>
+				<StateGroup Name="SFXMute" ID="{772F763F-E67F-41C8-BD59-211303236CDA}">
+					<ChildrenList>
+						<State Name="None" ID="{55246F65-BEA2-460F-A9A4-0D941298A987}"/>
+						<State Name="Mute" ID="{24AC8242-C9C2-429C-921D-6C137CADA647}"/>
+						<State Name="On" ID="{A065D1AA-A45D-4209-BF4D-0BF093DB6819}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="BattleState" ID="{A6041A1D-4540-4327-B6FF-DB44CCFCE55C}">
+					<ChildrenList>
+						<State Name="None" ID="{78EB688C-79E7-40F1-8C66-E0C6A8B1A7B7}"/>
+						<State Name="Battle" ID="{F389EF43-73A7-44EB-8123-A0D905A9CE22}"/>
+						<State Name="NOTBattle" ID="{10926055-A7DE-4186-9917-DE187CEAB6BA}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Loading" ID="{F6EB1E7C-E7DA-4A3B-9978-65621EF16ED0}">
+					<ChildrenList>
+						<State Name="None" ID="{8B8C5807-C953-426E-8E74-23127CB1A3C7}"/>
+						<State Name="OnLoading" ID="{9B2B7D31-B131-44E9-92DF-2B2ECA4E708E}"/>
+					</ChildrenList>
+				</StateGroup>
+				<StateGroup Name="Material" ID="{B97690DA-CAEE-4CB2-9761-514B4E7BDF15}">
+					<ChildrenList>
+						<State Name="None" ID="{B75716EF-102A-47E4-93D2-9734303354E7}"/>
+						<State Name="Wood" ID="{4E6AACEB-7E32-4D15-94DC-C1FD27A4CD7F}"/>
+						<State Name="Snow" ID="{DE8F1A6D-9164-4B04-9011-4CA34C3196C3}"/>
+						<State Name="Grass" ID="{6DCA55B3-27C3-405A-80DD-C19F8CD2A06E}"/>
+						<State Name="Water" ID="{F9909E4A-7436-4CF6-BFFA-F27607640D5E}"/>
+						<State Name="Stone" ID="{4CB2CF2B-58FA-49E1-9BCB-3E51821D918B}"/>
+					</ChildrenList>
+				</StateGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</States>
+</WwiseDocument>
