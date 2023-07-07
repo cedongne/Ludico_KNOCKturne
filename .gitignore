@@ -80,3 +80,4 @@ Content/Assets
 # wwise
 
 Content/WwiseAudio/Windows/*
+*.bnk
