@@ -3,6 +3,8 @@
 
 #include "BattleManagerSystem.h"
 #include "BattleFoothold.h"
+
+#include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 UBattleManagerSystem::UBattleManagerSystem() {
@@ -43,6 +45,11 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 	FTimerHandle FlagUnsetTimer;
 	GetWorld()->GetTimerManager().ClearTimer(FlagUnsetTimer);
 	float UnsetTime = 8.0f;
+
+	for(auto AttackRange : CurBossSkillHitArea)
+	{
+		AttackRange->bHiddenInGame = false;
+	}
 
 	GetWorld()->GetTimerManager().SetTimer(FlagUnsetTimer, FTimerDelegate::CreateLambda([&]()
 		{

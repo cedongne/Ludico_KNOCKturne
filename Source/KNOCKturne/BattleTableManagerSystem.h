@@ -292,9 +292,9 @@ public:
 	FBattleTableInitDelegate BattleTableInitDelegate;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
-	class UDataTable* BossContarctSkillTable;
+	class UDataTable* BossContactSkillTable;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
-	class UDataTable* BossNonContarctSkillTable;
+	class UDataTable* BossNonContactSkillTable;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* PeppySkillTable;
 

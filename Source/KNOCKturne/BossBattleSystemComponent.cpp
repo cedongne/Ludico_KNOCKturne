@@ -8,6 +8,7 @@
 UBossBattleSystemComponent::UBossBattleSystemComponent()
 {
 	BossSkillList.Add("SweptGarden");
+	BossSkillList.Add("CleanUpIntruder1");
 }
 
 void UBossBattleSystemComponent::SpawnRandomSkill() {

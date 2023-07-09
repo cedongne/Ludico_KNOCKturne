@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 
 #include "BattleTableManagerSystem.h"
+#include "BattleManagerSystem.h"
 
 #include "CommonSkillActor.generated.h"
 
@@ -28,6 +29,7 @@ protected:
 	bool IsInitialized = false;
 
 	class UBattleTableManagerSystem* BattleTableManager;
+	class UBattleManagerSystem* BattleManager;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
 	UStaticMeshComponent* SkillHitArea;

@@ -22,10 +22,7 @@ public:
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flag")
-	bool VisibleBossSkillHitArea;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Property")
-	class UStaticMeshComponent* CurBossSkillHitArea;
+	bool VisibleBossSkillHitArea = false;
 
 	UClass* FootholdClass;
 	TSubclassOf<AActor> FootholdSubclass;
@@ -50,6 +47,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 LeftCurTurnTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Property")
+	TArray<class UWidgetComponent*> CurBossSkillHitArea;
+
 	void InitializeFootholdObject();
 
 	UFUNCTION(BlueprintCallable)
@@ -57,7 +57,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetTimerUnvisibleHitArea();
-
 
 	/*보따리-전투 전 준비*/
 	// 허브월드 보따리에서 선택한 스킬

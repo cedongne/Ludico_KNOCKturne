@@ -16,12 +16,12 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	FString BossContactSkillTablePath = TEXT("/Game/Assets/DataTable/Ep1BossContactSkillTable.Ep1BossContactSkillTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSCONTACTSKILLTABLE(*BossContactSkillTablePath);
 	NTCHECK(DT_BOSSCONTACTSKILLTABLE.Succeeded());
-	BossContarctSkillTable = DT_BOSSCONTACTSKILLTABLE.Object;
+	BossContactSkillTable = DT_BOSSCONTACTSKILLTABLE.Object;
 
-	FString BossNonContactSkillTablePath = TEXT("/Game/Assets/DataTable/Ep1BossContactSkillTable.Ep1BossContactSkillTable");
+	FString BossNonContactSkillTablePath = TEXT("/Game/Assets/DataTable/Ep1BossNonContactSkillTable.Ep1BossNonContactSkillTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSNONCONTACTSKILLTABLE(*BossNonContactSkillTablePath);
 	NTCHECK(DT_BOSSNONCONTACTSKILLTABLE.Succeeded());
-	BossNonContarctSkillTable = DT_BOSSNONCONTACTSKILLTABLE.Object;
+	BossNonContactSkillTable = DT_BOSSNONCONTACTSKILLTABLE.Object;
 
 	SetBossSkillSpawnDataTable();
 
@@ -65,7 +65,13 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 
 	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
-		TEXT("/Game/Blueprints/Skills/Boss/Ep1/BP_SweptGarden.BP_SweptGarden_C"),
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_SweptGarden.BP_SweptGarden_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
+	AddBossSkillSpawnDataToMap(
+		"CleanUpIntruder1",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder1.BP_CleanUpIntruder1_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
@@ -106,9 +112,9 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 		TempSkillTransform.Add(TempTransform);
 	}
 
-	BossSkillSpawnDataMap.Add("SweptGarden", FBossSkillSpawnData::SetBossSkillSpawnData(TempSkillObjectClass, TempSkillTransform));
+	BossSkillSpawnDataMap.Add(SkillName, FBossSkillSpawnData::SetBossSkillSpawnData(TempSkillObjectClass, TempSkillTransform));
 
-	NTLOG(Warning, TEXT("Skill is loaded"));
+	NTLOG(Warning, TEXT("[BossSkillSpawnData] %s is loaded!"), *SkillName);
 }
 
 
