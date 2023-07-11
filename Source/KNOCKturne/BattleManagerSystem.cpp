@@ -22,9 +22,9 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
 
 	ItemCountList.SetNum(6);
-	for (int i = 0; i < ItemCountList.Num(); i++)
+	for (int index = 0; index < ItemCountList.Num(); index++)
 	{
-		ItemCountList[i] = 0;
+		ItemCountList[index] = 0;
 	}
 }
 
