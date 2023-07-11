@@ -4,5 +4,4 @@
 #include "KNOCKturneLevelScriptActor.h"
 
 AKNOCKturneLevelScriptActor::AKNOCKturneLevelScriptActor() {
-	NTLOG_S(Warning);
 }
