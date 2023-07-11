@@ -259,7 +259,8 @@ struct FItemData : public FTableRowBase {
 	GENERATED_BODY()
 
 		FItemData() : ItemTarget(-1), TouchColumn("-1"), value1N(0), value1M(0),
-		MaxCount(0), ItemIcon(nullptr), ItemDescript("-1"), ItemEasterEgg("-1"), ItemCharacterDescript("-1") {}
+		MaxCount(0), ItemIcon(nullptr), ItemDescript("-1"), 
+		ItemEasterEgg("-1"), ItemEasterEgg_Character("-1"), ItemEasterEgg_Line("-1") {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 ItemTarget;
@@ -278,7 +279,9 @@ struct FItemData : public FTableRowBase {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString ItemEasterEgg;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString ItemCharacterDescript;
+	FString ItemEasterEgg_Character;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ItemEasterEgg_Line;
 };
 
 UCLASS()
