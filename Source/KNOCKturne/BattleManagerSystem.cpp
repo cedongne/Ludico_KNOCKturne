@@ -20,6 +20,12 @@ UBattleManagerSystem::UBattleManagerSystem() {
 
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
+
+	ItemCountList.SetNum(6);
+	for (int i = 0; i < ItemCountList.Num(); i++)
+	{
+		ItemCountList[i] = 0;
+	}
 }
 
 void UBattleManagerSystem::InitializeFootholdObject() {

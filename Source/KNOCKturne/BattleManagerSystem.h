@@ -130,4 +130,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 OverlappedIndex = -1;
+
+
+	// 아이템별 개수
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<int32> ItemCountList;
 };
