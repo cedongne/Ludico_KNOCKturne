@@ -143,7 +143,8 @@ void UDialogueTableComponent::GetDreamFragmentTalk() {
 		{
 			if (DialogueRows[index]->DialogueType == 1)
 			{
-				SetCurrentRow(index - 1);
+				SetCurrentRow(index-1);
+				break;
 			}
 		}
 	}
