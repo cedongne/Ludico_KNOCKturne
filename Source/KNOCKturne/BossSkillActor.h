@@ -36,8 +36,6 @@ public:
 	ABossSkillActor();
 
 private:
-	bool IsInitialized = false;
-
 	struct FBossSkillData SkillData;
 
 	void EvaluateCurrentLifeCycleStep(float DeltaSeconds);
@@ -68,7 +66,7 @@ public:
 	void SetSkillData(FBossSkillData NewSkillData);
 
 	UFUNCTION(BlueprintCallable)
-	void HitPlayer();
+	void AttackPlayer();
 
 	UFUNCTION(BlueprintCallable)
 	FVector GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float _DeltaTime);

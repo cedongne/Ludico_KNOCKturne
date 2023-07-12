@@ -13,17 +13,15 @@ ABossSkillActor::ABossSkillActor()
 	PrimaryActorTick.bCanEverTick = true;
 	IsContactSkill = true;
 
-	DefaultSceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	DefaultSceneRoot->SetupAttachment(RootComponent);
 
 	SkillActor = CreateDefaultSubobject<USceneComponent>(TEXT("ActorPivot"));
-	SkillActor->SetupAttachment(DefaultSceneRoot);
+	RootComponent = SkillActor;
 
 	MeshPivot = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshPivot"));
-	MeshPivot->SetupAttachment(SkillActor);
+	MeshPivot->SetupAttachment(RootComponent);
 
 	AttackRange = CreateDefaultSubobject<UWidgetComponent>(TEXT("AttackRange"));
-	AttackRange->SetupAttachment(SkillActor);
+	AttackRange->SetupAttachment(RootComponent);
 }
 
 void ABossSkillActor::BeginPlay() {
@@ -102,7 +100,7 @@ void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	NTLOG(Warning, TEXT("Data set %lf"), SkillData.Value_1_N);
 }
 
-void ABossSkillActor::HitPlayer() {
+void ABossSkillActor::AttackPlayer() {
 	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 
