@@ -135,3 +135,16 @@ FString UDialogueTableComponent::RandomLoadingText() {
 	int random = rand() % LOADING_STRING_NUM + DialogueManager->GetStartIndexTable()->FindRow<FStartIndex>(TEXT("Loading_String"), TEXT(""))->StringIndex;
 	return DialogueManager->GetString2(random);
 }
+
+void UDialogueTableComponent::GetDreamFragmentTalk() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "DreamFragment")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+			}
+		}
+	}
+}

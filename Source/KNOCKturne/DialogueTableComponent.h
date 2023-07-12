@@ -108,4 +108,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FString RandomLoadingText();
+
+	UFUNCTION(BlueprintCallable)
+	void GetDreamFragmentTalk();
 };
