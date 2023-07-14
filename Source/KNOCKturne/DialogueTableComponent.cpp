@@ -143,7 +143,21 @@ void UDialogueTableComponent::GetDreamFragmentTalk() {
 		{
 			if (DialogueRows[index]->DialogueType == 1)
 			{
-				SetCurrentRow(index-1);
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
+
+void UDialogueTableComponent::CancelDreamFragmentChocie() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "DreamFragment_Cancel")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
 				break;
 			}
 		}

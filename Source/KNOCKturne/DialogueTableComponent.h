@@ -111,4 +111,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void GetDreamFragmentTalk();
+
+	UFUNCTION(BlueprintCallable)
+	void CancelDreamFragmentChocie();
 };

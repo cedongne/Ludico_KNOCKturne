@@ -135,4 +135,8 @@ public:
 	// 아이템별 개수
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<int32> ItemCountList;
+
+	// 전투 횟수
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 BattleCount = 0;
 };
