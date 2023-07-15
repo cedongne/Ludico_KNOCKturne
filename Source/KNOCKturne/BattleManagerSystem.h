@@ -107,7 +107,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
-//	TMap<FString, UClass*> IconSkillActorMap;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FString FinalSpecialSkill; // 최종적으로 선택한 특수기
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FString FinalItem; // 최종적으로 선택한 아이템
 
 	/*페피 턴*/
 
@@ -130,6 +135,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 OverlappedIndex = -1;
+
 
 
 	// 아이템별 개수
