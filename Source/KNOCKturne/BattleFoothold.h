@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "PooledObject.h"
+
 #include "BattleFoothold.generated.h"
 
 UCLASS()
-class KNOCKTURNE_API ABattleFoothold : public AActor
+class KNOCKTURNE_API ABattleFoothold : public APooledObject
 {
 	GENERATED_BODY()
 	
