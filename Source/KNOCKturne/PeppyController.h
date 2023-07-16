@@ -24,8 +24,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction = false;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	EInteractionType CurrentInteractionType;
 
 	UFUNCTION(BlueprintCallable)
 	void Interaction();
