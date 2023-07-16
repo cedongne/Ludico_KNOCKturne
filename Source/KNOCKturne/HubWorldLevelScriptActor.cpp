@@ -5,7 +5,6 @@
 #include "Engine/GameInstance.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
-	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
 	PrologueDialogueComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueMananger"));
 }
 

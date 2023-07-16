@@ -4,7 +4,6 @@
 #include "BattleFieldLevelScriptActor.h"
 
 ABattleFieldLevelScriptActor::ABattleFieldLevelScriptActor() {
-	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
 }
 
 void ABattleFieldLevelScriptActor::BeginPlay() {

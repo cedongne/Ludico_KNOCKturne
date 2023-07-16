@@ -4,6 +4,9 @@
 
 #include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
+
+#include "DialogueTableComponent.h"
+
 #include "KNOCKturneLevelScriptActor.generated.h"
 
 /**
@@ -16,4 +19,7 @@ class KNOCKTURNE_API AKNOCKturneLevelScriptActor : public ALevelScriptActor
 	
 public:
 	AKNOCKturneLevelScriptActor();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
+	class UDialogueTableComponent* DialogueTableComponent;
 };

@@ -6,7 +6,6 @@
 #include "Engine/LevelScriptActor.h"
 
 #include "KNOCKturneLevelScriptActor.h"
-#include "DialogueTableComponent.h"
 
 #include "BattleFieldLevelScriptActor.generated.h"
 
@@ -21,8 +20,6 @@ class KNOCKTURNE_API ABattleFieldLevelScriptActor : public AKNOCKturneLevelScrip
 public:
 	ABattleFieldLevelScriptActor();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
-	class UDialogueTableComponent* DialogueTableComponent;
 
 protected:
 	virtual void BeginPlay() override;

@@ -23,8 +23,6 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_BOSSNONCONTACTSKILLTABLE.Succeeded());
 	BossNonContactSkillTable = DT_BOSSNONCONTACTSKILLTABLE.Object;
 
-	SetBossSkillSpawnDataTable();
-
 	FString BossStatDataPath = TEXT("/Game/Assets/DataTable/BossStatTable.BossStatTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSSTATDATATABLE(*BossStatDataPath);
 	NTCHECK(DT_BOSSSTATDATATABLE.Succeeded());
@@ -42,6 +40,8 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 
 	CurPeppyStat = GetPeppyStatDataOnTable("Init");
 	CurBossStat = GetBossStatDataOnTable("Episode1_SadnessQueen_Init");
+
+	SetBossSkillSpawnDataTable();
 }
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
@@ -83,8 +83,6 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	);
 
 	// Note : 혹시 얕은 복사로 인해 TempSpawnLocation과 TempSpawnRotation 객체가 초기화되면서 문제가 발생하는지에 대한 이슈 관리가 필요함.
-
-
 }
 
 FBossSkillSpawnData FBossSkillSpawnData::SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms) {

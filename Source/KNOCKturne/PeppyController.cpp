@@ -24,11 +24,8 @@ void APeppyController::SetupInputComponent()
 void APeppyController::BeginPlay() {
 	Super::BeginPlay();
 
-// GetCurrentLevel : Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	CurrentLevelScriptActor = Cast<AKNOCKturneLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 }
-
 void APeppyController::Interaction() {
-	if (CanInteraction) {
-		// TODO : 상호작용 가능할 때, Npc와의 대화를 시작하는 이벤트 호출. Npc와 대화 시작하면서 BP_Dialogue가 Viewport에 띄워지면 해당 플래그는 false로 변경 되어야 함.
-	}
+	BP_Interaction();
 }

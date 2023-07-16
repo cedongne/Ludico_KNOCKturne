@@ -18,13 +18,16 @@ protected:
 	virtual void SetupInputComponent() override;
 	
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	AKNOCKturneLevelScriptActor* CurrentLevelScriptActor;
 public:
 	APeppyController();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction = false;
 
-
-	UFUNCTION(BlueprintCallable)
 	void Interaction();
+	UFUNCTION(BlueprintImplementableEvent)
+	void BP_Interaction();
 };
