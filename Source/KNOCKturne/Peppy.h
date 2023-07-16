@@ -45,8 +45,6 @@ protected:
 	void SlideAction();
 	void SlideHandling(float DeltaTime);
 
-	void CheckInteraction();
-
 	APlayerController* PeppyController;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
