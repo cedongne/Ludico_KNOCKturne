@@ -19,6 +19,7 @@ ABossSkillActor::ABossSkillActor()
 
 	ActorPivot = CreateDefaultSubobject<USceneComponent>(TEXT("ActorPivot"));
 	ActorPivot->SetupAttachment(RootComponent);
+
 	SkillMeshPivot = CreateDefaultSubobject<USceneComponent>(TEXT("SkillMeshPivot"));
 	SkillMeshPivot->SetupAttachment(ActorPivot);
 	SkillMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SkillMesh"));
