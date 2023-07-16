@@ -14,14 +14,18 @@ ABossSkillActor::ABossSkillActor()
 	IsContactSkill = true;
 
 
-	SkillActor = CreateDefaultSubobject<USceneComponent>(TEXT("ActorPivot"));
-	RootComponent = SkillActor;
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
 
-	MeshPivot = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshPivot"));
-	MeshPivot->SetupAttachment(RootComponent);
+	ActorPivot = CreateDefaultSubobject<USceneComponent>(TEXT("ActorPivot"));
+	ActorPivot->SetupAttachment(RootComponent);
+	SkillMeshPivot = CreateDefaultSubobject<USceneComponent>(TEXT("SkillMeshPivot"));
+	SkillMeshPivot->SetupAttachment(ActorPivot);
+	SkillMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SkillMesh"));
+	SkillMesh->SetupAttachment(SkillMeshPivot);
 
 	AttackRange = CreateDefaultSubobject<UWidgetComponent>(TEXT("AttackRange"));
-	AttackRange->SetupAttachment(RootComponent);
+	AttackRange->SetupAttachment(ActorPivot);
 }
 
 void ABossSkillActor::BeginPlay() {
