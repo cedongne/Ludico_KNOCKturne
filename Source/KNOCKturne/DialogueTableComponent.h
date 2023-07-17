@@ -36,6 +36,23 @@ struct FDialogueData : public FTableRowBase {
 	FString Direction;
 };
 
+USTRUCT(BlueprintType)
+struct FDreamDiaryData : public FTableRowBase {
+	GENERATED_BODY()
+
+
+		FDreamDiaryData() : DiaryGroupCode("-1"), DreamDiaryPage(0), DreamDiaryOpenType(-1), DreamDiaryStringID("-1") {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		FString DiaryGroupCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		int32 DreamDiaryPage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		int32 DreamDiaryOpenType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		FString DreamDiaryStringID;
+};
+
 
 UCLASS(ClassGroup = (DataTableComponent), meta = (BlueprintSpawnableComponent))
 class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
