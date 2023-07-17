@@ -21,8 +21,12 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	AKNOCKturneLevelScriptActor* CurrentLevelScriptActor;
+
 public:
 	APeppyController();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadonly)
+	class UDialogueTableComponent* PrologueDialogueComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction = false;

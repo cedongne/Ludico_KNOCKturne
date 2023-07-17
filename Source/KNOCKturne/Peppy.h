@@ -4,6 +4,10 @@
 
 #include "EngineMinimal.h"
 #include "GameFramework/Character.h"
+
+#include "PeppyStatComponent.h"
+#include "PeppySkillComponent.h"
+
 #include "Peppy.generated.h"
 
 UCLASS()
@@ -23,7 +27,9 @@ public:
 	UCapsuleComponent* InteractionCollider;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
-	class UPeppyStatComponent* PeppyStat;
+	class UPeppyStatComponent* PeppyStatComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Skill)
+	class UPeppySkillComponent* PeppySkillComponent;
 	
 	// Time Threshold to know if it was a short press
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)

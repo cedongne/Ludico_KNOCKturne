@@ -3,6 +3,7 @@
 
 #include "PeppyController.h"
 
+#include "HubworldLevelScriptActor.h"
 #include "BattleFieldLevelScriptActor.h"
 
 APeppyController::APeppyController() {
@@ -23,9 +24,16 @@ void APeppyController::SetupInputComponent()
 
 void APeppyController::BeginPlay() {
 	Super::BeginPlay();
-
-	CurrentLevelScriptActor = Cast<AKNOCKturneLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	
+	CurrentLevelScriptActor = Cast<AHubWorldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	if (CurrentLevelScriptActor == nullptr) {
+		CurrentLevelScriptActor = Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+	}
+	else {
+		PrologueDialogueComponent = ((AHubWorldLevelScriptActor*)CurrentLevelScriptActor)->PrologueDialogueComponent;
+	}
 }
+
 void APeppyController::Interaction() {
 	BP_Interaction();
 }

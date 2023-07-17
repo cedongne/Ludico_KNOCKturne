@@ -36,7 +36,8 @@ APeppy::APeppy()
 
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
-	PeppyStat = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStat"));
+	PeppyStatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
+	PeppySkillComponent = CreateDefaultSubobject<UPeppySkillComponent>(TEXT("PeppySkillComponent"));
 
 	// Initialize variables
 	CanMove = true;
