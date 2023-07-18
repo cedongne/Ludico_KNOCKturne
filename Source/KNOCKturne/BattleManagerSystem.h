@@ -142,7 +142,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<int32> ItemCountList;
 
-	// 전투 횟수
+	// 꿈 일기 해금 열 - 1
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 BattleCount = 0;
+	int32 DreamDiaryOpenRow = 0;
 };
