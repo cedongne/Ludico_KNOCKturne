@@ -9,7 +9,7 @@
 
 #include "PeppySkillComponent.generated.h"
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UPeppySkillComponent : public UActorComponent
 {
 	GENERATED_BODY()
