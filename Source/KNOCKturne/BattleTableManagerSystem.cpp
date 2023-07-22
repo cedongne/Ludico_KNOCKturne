@@ -143,7 +143,7 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData) {
 			TargetStatData = &CurBossStat;
 		}
 		else {
-			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
+//			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			return;
 		}
 		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexBossSkillDataSet(IndexCount, &SkillData));
@@ -199,7 +199,7 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData) {
 			TargetStatData = &CurBossStat;
 		}
 		else {
-			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
+//			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			return;
 		}
 
