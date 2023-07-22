@@ -16,7 +16,7 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Battle" ID="{D5224D3B-168B-46FA-88A6-AB1B9194B9E5}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+									<ObjectRef Name="Battle" ID="{1DC35B4B-4863-42B2-821E-ED1A2A32FA3D}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -77,7 +77,6 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="EndBattle" ID="{42CBC707-06E1-44D1-9639-78E718B20D5C}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

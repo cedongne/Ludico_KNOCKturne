@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{76F37596-5865-DC1C-90C9-6E6794BEA817}",
+    "Hash": "{584BBA2C-0DD0-22CA-0E0F-F4DC4136C493}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -72,14 +72,6 @@
       "CachePath": "SFX/BGM_NOTBattle_164bpm_4-4_D79FB2B7.wem"
      },
      {
-      "Id": "174940528",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_BattleVar2_164bpm_4-4.wav",
-      "CachePath": "SFX/BGM_BattleVar2_164bpm_4-4_D79FB2B7.wem"
-     },
-     {
       "Id": "193027794",
       "Language": "SFX",
       "Streaming": "false",
@@ -118,14 +110,6 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Stone1.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Stone1_10C4C929.wem"
-     },
-     {
-      "Id": "250506823",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_BattleVar1_164bpm_4-4.wav",
-      "CachePath": "SFX/BGM_BattleVar1_164bpm_4-4_D79FB2B7.wem"
      },
      {
       "Id": "257835999",
@@ -182,14 +166,6 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Wood2.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Wood2_10C4C929.wem"
-     },
-     {
-      "Id": "435330442",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_BattleVar3_164bpm_4-4.wav",
-      "CachePath": "SFX/BGM_BattleVar3_164bpm_4-4_D79FB2B7.wem"
      },
      {
       "Id": "485043058",
@@ -280,14 +256,6 @@
       "CachePath": "SFX/SFX_PeppyWalk_Water1_10C4C929.wem"
      },
      {
-      "Id": "765620137",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_Battle_164bpm_4-4.wav",
-      "CachePath": "SFX/BGM_Battle_164bpm_4-4_D79FB2B7.wem"
-     },
-     {
       "Id": "781396450",
       "Language": "SFX",
       "Streaming": "false",
@@ -360,14 +328,6 @@
       "CachePath": "SFX/ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem"
      },
      {
-      "Id": "1009141722",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj.wav",
-      "CachePath": "SFX/MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj_10C4C929.wem"
-     },
-     {
       "Id": "1015440715",
       "Language": "SFX",
       "Streaming": "false",
@@ -400,6 +360,14 @@
       "CachePath": "SFX/OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem"
      },
      {
+      "Id": "1035659040",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Battle_UpTempo.wav",
+      "CachePath": "SFX/Battle_UpTempo_D79FB2B7.wem"
+     },
+     {
       "Id": "1052600951",
       "Language": "SFX",
       "Streaming": "false",
@@ -423,21 +391,58 @@
       "ObjectPath": "\\Events\\MUS\\Battle_BGM",
       "GUID": "{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}",
       "DurationType": "Infinite",
-      "MediaRefs": [
+      "SwitchContainers": [
        {
-        "Id": "165211439"
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2675729146",
+         "Id": "2937832959",
+         "GUID": "{F389EF43-73A7-44EB-8123-A0D905A9CE22}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "1035659040"
+         }
+        ]
        },
        {
-        "Id": "174940528"
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2675729146",
+         "Id": "1945239214",
+         "GUID": "{10926055-A7DE-4186-9917-DE187CEAB6BA}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "165211439"
+         }
+        ]
        },
        {
-        "Id": "250506823"
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2675729146",
+         "Id": "2937832959",
+         "GUID": "{F389EF43-73A7-44EB-8123-A0D905A9CE22}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "1035659040"
+         }
+        ]
        },
        {
-        "Id": "435330442"
-       },
-       {
-        "Id": "765620137"
+        "SwitchValue": {
+         "GroupType": "State",
+         "GroupId": "2675729146",
+         "Id": "1945239214",
+         "GUID": "{10926055-A7DE-4186-9917-DE187CEAB6BA}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "165211439"
+         }
+        ]
        }
       ]
      },
@@ -552,16 +557,6 @@
         "Id": "903646689"
        }
       ]
-     },
-     {
-      "Id": "4064399842",
-      "Name": "EndBattle",
-      "ObjectPath": "\\Events\\MUS\\EndBattle",
-      "GUID": "{42CBC707-06E1-44D1-9639-78E718B20D5C}",
-      "MaxAttenuation": "0",
-      "DurationType": "OneShot",
-      "DurationMin": "0",
-      "DurationMax": "0"
      },
      {
       "Id": "83925039",
@@ -784,20 +779,6 @@
       ]
      },
      {
-      "Id": "3398593705",
-      "Name": "NewTest",
-      "ObjectPath": "\\Events\\Default Work Unit\\NewTest",
-      "GUID": "{4393F2EC-952E-4E81-B005-DBB36E641351}",
-      "DurationType": "OneShot",
-      "DurationMin": "11.2941265",
-      "DurationMax": "11.2941265",
-      "MediaRefs": [
-       {
-        "Id": "1009141722"
-       }
-      ]
-     },
-     {
       "Id": "2981522829",
       "Name": "Notice",
       "ObjectPath": "\\Events\\Function\\Notice",
@@ -934,9 +915,45 @@
        }
       ]
      }
+    ],
+    "StateGroups": [
+     {
+      "Id": "2675729146",
+      "Name": "BattleState",
+      "ObjectPath": "\\States\\Default Work Unit\\BattleState",
+      "GUID": "{A6041A1D-4540-4327-B6FF-DB44CCFCE55C}",
+      "States": [
+       {
+        "Id": "748895195",
+        "Name": "None",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\None",
+        "GUID": "{78EB688C-79E7-40F1-8C66-E0C6A8B1A7B7}"
+       },
+       {
+        "Id": "1945239214",
+        "Name": "NOTBattle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\NOTBattle",
+        "GUID": "{10926055-A7DE-4186-9917-DE187CEAB6BA}"
+       },
+       {
+        "Id": "2937832959",
+        "Name": "Battle",
+        "ObjectPath": "\\States\\Default Work Unit\\BattleState\\Battle",
+        "GUID": "{F389EF43-73A7-44EB-8123-A0D905A9CE22}"
+       }
+      ]
+     }
+    ],
+    "Triggers": [
+     {
+      "Id": "2642173709",
+      "Name": "BattleStart",
+      "ObjectPath": "\\Triggers\\Default Work Unit\\BattleStart",
+      "GUID": "{91EB38F6-88EE-4809-A87F-214D7B2183E7}"
+     }
     ]
    }
   ],
-  "FileHash": "{78267BE9-B9A6-1E77-C45B-7ACB7DC2B521}"
+  "FileHash": "{21622BE9-60A3-F368-A515-4A00F73F7116}"
  }
 }

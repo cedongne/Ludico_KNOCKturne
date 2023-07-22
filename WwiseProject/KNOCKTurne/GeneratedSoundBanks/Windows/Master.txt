@@ -25,13 +25,11 @@ Event	ID	Name			Wwise Object Path	Notes
 	2844154539	BattleDoor			\Battle\BattleDoor	
 	2880424473	Hub_BGM			\MUS\Hub_BGM	
 	2981522829	Notice			\Function\Notice	
-	3398593705	NewTest			\Default Work Unit\NewTest	
 	3616930680	FS_Wood			\SFX\FS_Wood	
 	3638457343	DoorClose			\IntroCutScene\DoorClose	
 	3685587509	ObjectFind			\IntroCutScene\ObjectFind	
 	3770884678	StreetNoise			\IntroCutScene\StreetNoise	
 	3933848069	HomeAmbi			\IntroCutScene\HomeAmbi	
-	4064399842	EndBattle			\MUS\EndBattle	
 	4065426480	FS_Water			\SFX\FS_Water	
 
 State Group	ID	Name			Wwise Object Path	Notes
@@ -53,9 +51,7 @@ Custom State	ID	Name	State Group	Owner		Notes
 	34247638	Water	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass		
 	52513799	Stone	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water		
 	58885753	Snow	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone		
-	68511056	Battle	BattleState	\Interactive Music Hierarchy\Default Work Unit\Battle		
 	167528041	Stone	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass		
-	185075066	NOTBattle	BattleState	\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_Battle_164bpm_4-4		
 	277654808	Wood	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone		
 	279625276	Snow	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood		
 	293598631	Grass	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone		
@@ -69,60 +65,58 @@ Custom State	ID	Name	State Group	Owner		Notes
 	869569994	Water	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone		
 	960467403	Water	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow		
 	1003445297	Stone	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood		
-	1004294173	NOTBattle	BattleState	\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_BattleVar1_164bpm_4-4		
 	1017274020	Wood	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow		
 	1021541696	Wood	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass		
 	1047537514	Wood	Material	\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water		
 
+Trigger	ID	Name			Wwise Object Path	Notes
+	2642173709	BattleStart			\Default Work Unit\BattleStart	
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	26675951	SFX_PeppyWalk_Snow1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow1		87492
-	49505542	SFX_PeppyWalk_Grass1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass1		44844
-	94944749	SFX_PeppyWalk_Stone3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone3		75136
-	123812004	SFX_PeppyWalk_Snow2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow2		86052
-	142174096	CountDown	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem		\Actor-Mixer Hierarchy\SFX\Battle\CountDown		176560
-	164875334	SFX_Text_Typing	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Text_Typing_C5579977.wem		\Actor-Mixer Hierarchy\Dialogue\SFX_Text_Typing		88296
-	165211439	BGM_NOTBattle_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_NOTBattle_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_NOTBattle_164bpm_4-4		24265856
-	174940528	BGM_BattleVar1_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_BattleVar2_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_BattleVar1_164bpm_4-4		24265856
-	193027794	Select	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_UI_Select_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\Select		88296
-	201523215	cancle	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_cancle_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\cancle		88296
-	210552255	Skill_SweepGarden	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Skill_SweepGarden_8A703261.wem		\Actor-Mixer Hierarchy\SFX\Battle\Skill_SweepGarden		220864
-	211861517	UI_Hover_01	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_8D153607.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_01		78836
-	223719773	SFX_PeppyWalk_Stone1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone1		71084
-	250506823	BGM_BattleVar1_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_BattleVar1_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_BattleVar1_164bpm_4-4		24265856
-	257835999	HomeAmbi	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\HomeAmbi		3104860
-	317160281	SFX_PeppyWalk_Grass3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass3		88664
-	360611745	SFX_PeppyWalk_Stone2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone2		91232
-	383708649	UI_Hover	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_1AA38C9C.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover		79776
-	391750526	StreetNoise	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_CL_ambience_busy_london_streets_totenham_court_road_1991A03E.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\StreetNoise		1435140
-	397593734	BattleDoor2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor2		352896
-	416420098	SFX_PeppyWalk_Wood2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood2		48096
-	435330442	BGM_BattleVar1_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_BattleVar3_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_BattleVar1_164bpm_4-4		24265856
-	485043058	LampOff	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_15108706.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff		38240
-	511898442	SFX_PeppyWalk_Grass2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass2		98904
-	518217883	Battle_GetEnergy	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_GetEnergy_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Battle_GetEnergy		45792
-	534625915	BGM_Credit_75bpm4-4_L29M	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\BGM_Credit_75bpm4-4_L29M\BGM_Credit_75bpm4-4_L29M		15805536
-	575546989	ObjectFind	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ObjectFind2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\ObjectFind		705696
-	604532544	BattleDoor	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor		352896
-	638760269	SFX_PeppyWalk_Water2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water2		37336
-	667706857	Hit	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Hit		215880
-	727224766	Wind	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_Wind_239E1AED.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Wind		22472800
-	728677903	DoorClose	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_TM_drawer_open_close_simple_8BA889A0.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DoorClose		422128
-	742699319	SFX_PeppyWalk_Water1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water1		41230
-	765620137	BGM_Battle_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Battle_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\BGM_Battle_164bpm_4-4		24265856
-	781396450	LampOff2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_C08CDC50.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff2		126876
-	783667508	whitenoise	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\whitenoise_MSL_594EBFCF.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\whitenoise		1129056
-	813775076	SFX_PeppyWalk_Water3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water3		40404
-	818588019	UI_Hover_02	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_9BFAFC11.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_02		80028
-	821593072	Door	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\DoorClose_BW.61261_D79A3DCF.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\Door		134752
-	858183081	BGM_HubWorld_120bpm3-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_HubWorld_120bpm3-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Hub\BGM_HubWorld_120bpm3-4\BGM_HubWorld_120bpm3-4		21168096
-	864687728	SFX_PeppyWalk_Wood1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood1		48096
-	903646689	HubWorld_DoorHover	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Hover_Door_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\HubWorld_DoorHover		210016
-	999749974	Notice	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\Notice		114084
-	1009141722	New Test	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\MO_TRNDY_85_electric_guitar_loop_post_punk_Dmaj_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\New Test		1992380
-	1015440715	SFX_PeppyWalk_Snow3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow3		95020
-	1017381714	Texture	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_LeavesTallGrassWind_10C4C929.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Texture		18700384
-	1034982650	DeepBreath	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BROOKEW_105_vocal_phrase_sigh_Gmaj_96682B67.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DeepBreath		403380
-	1035504761	PeppyTurnCount	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppyTurnCount		672844
-	1052600951	Jump	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Peppy_Jump2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Jump		88296
-	1062413066	BGM_Title_71bpm4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\Content\Assets\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Title_71bpm4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Title\BGM_Title_71bpm4-4\BGM_Title_71bpm4-4		23851364
+	26675951	SFX_PeppyWalk_Snow1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow1		87492
+	49505542	SFX_PeppyWalk_Grass1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass1		44844
+	94944749	SFX_PeppyWalk_Stone3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone3		75136
+	123812004	SFX_PeppyWalk_Snow2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow2		86052
+	142174096	CountDown	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem		\Actor-Mixer Hierarchy\SFX\Battle\CountDown		176560
+	164875334	SFX_Text_Typing	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Text_Typing_C5579977.wem		\Actor-Mixer Hierarchy\Dialogue\SFX_Text_Typing		88296
+	165211439	BGM_NOTBattle_164bpm_4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_NOTBattle_164bpm_4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\NOTBattle\BGM_NOTBattle_164bpm_4-4		24265856
+	193027794	Select	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_UI_Select_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\Select		88296
+	201523215	cancle	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_cancle_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\cancle		88296
+	210552255	Skill_SweepGarden	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Skill_SweepGarden_8A703261.wem		\Actor-Mixer Hierarchy\SFX\Battle\Skill_SweepGarden		220864
+	211861517	UI_Hover_01	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_8D153607.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_01		78836
+	223719773	SFX_PeppyWalk_Stone1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone1		71084
+	257835999	HomeAmbi	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\HomeAmbi		3104860
+	317160281	SFX_PeppyWalk_Grass3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass3		88664
+	360611745	SFX_PeppyWalk_Stone2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone2		91232
+	383708649	UI_Hover	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_1AA38C9C.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover		79776
+	391750526	StreetNoise	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_CL_ambience_busy_london_streets_totenham_court_road_1991A03E.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\StreetNoise		1435140
+	397593734	BattleDoor2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor2		352896
+	416420098	SFX_PeppyWalk_Wood2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood2		48096
+	485043058	LampOff	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_15108706.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff		38240
+	511898442	SFX_PeppyWalk_Grass2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass2		98904
+	518217883	Battle_GetEnergy	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_GetEnergy_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Battle_GetEnergy		45792
+	534625915	BGM_Credit_75bpm4-4_L29M	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\BGM_Credit_75bpm4-4_L29M\BGM_Credit_75bpm4-4_L29M		15805536
+	575546989	ObjectFind	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ObjectFind2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\ObjectFind		705696
+	604532544	BattleDoor	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor		352896
+	638760269	SFX_PeppyWalk_Water2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water2		37336
+	667706857	Hit	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Hit		215880
+	727224766	Wind	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_Wind_239E1AED.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Wind		22472800
+	728677903	DoorClose	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_TM_drawer_open_close_simple_8BA889A0.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DoorClose		422128
+	742699319	SFX_PeppyWalk_Water1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water1		41230
+	781396450	LampOff2	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_C08CDC50.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff2		126876
+	783667508	whitenoise	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\whitenoise_MSL_594EBFCF.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\whitenoise		1129056
+	813775076	SFX_PeppyWalk_Water3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water3		40404
+	818588019	UI_Hover_02	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_9BFAFC11.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_02		80028
+	821593072	Door	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\DoorClose_BW.61261_D79A3DCF.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\Door		134752
+	858183081	BGM_HubWorld_120bpm3-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_HubWorld_120bpm3-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Hub\BGM_HubWorld_120bpm3-4\BGM_HubWorld_120bpm3-4		21168096
+	864687728	SFX_PeppyWalk_Wood1	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood1		48096
+	903646689	HubWorld_DoorHover	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Hover_Door_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\HubWorld_DoorHover		210016
+	999749974	Notice	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\Notice		114084
+	1015440715	SFX_PeppyWalk_Snow3	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow3		95020
+	1017381714	Texture	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_LeavesTallGrassWind_10C4C929.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Texture		18700384
+	1034982650	DeepBreath	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BROOKEW_105_vocal_phrase_sigh_Gmaj_96682B67.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DeepBreath		403380
+	1035504761	PeppyTurnCount	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppyTurnCount		672844
+	1035659040	Battle_UpTempo	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Battle_UpTempo_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Battle\BGM_Battle\Battle_UpTempo		9237044
+	1052600951	Jump	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Peppy_Jump2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Jump		88296
+	1062413066	BGM_Title_71bpm4-4	E:\GameDev\[Ludico] KNOCKTurne\Unreal\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Title_71bpm4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Title\BGM_Title_71bpm4-4\BGM_Title_71bpm4-4		23851364
 
