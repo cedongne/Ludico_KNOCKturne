@@ -35,4 +35,8 @@ protected:
 	UStaticMeshComponent* SkillHitArea;
 	UFUNCTION(BlueprintCallable)
 	FName GetCurrentBlueprintClassName();
+
+public:
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void CustomSkillOperation(int32 SkillIndex, FCurEffectIndexSkillData SkillData);
 };

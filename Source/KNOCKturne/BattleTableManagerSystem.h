@@ -215,6 +215,8 @@ USTRUCT(BlueprintType)
 struct FBossSkillSpawnData {
 	GENERATED_BODY()
 
+	FBossSkillSpawnData() : SkillObjectClass(nullptr), SkillTransform(TArray<FTransform>()) {}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	UClass* SkillObjectClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -223,7 +225,10 @@ struct FBossSkillSpawnData {
 	static FBossSkillSpawnData SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms);
 };
 
+USTRUCT(BlueprintType)
 struct FCurEffectIndexSkillData {
+	GENERATED_BODY()
+	
 	FCurEffectIndexSkillData() : SkillId("-1"), SkillIndex(0), Probability(0.0f), SkillTarget(0), Value_N(0.0f), Value_M(0.0f), Value_T(0.0f), BuffCode("-1"), Cost(0) {}
 	
 	void SetCurEffectIndexStatData(FString _SkillId, int32 _SkillIndex, float _Probability, int32 _SkillTarget, float _Value_N, float _Value_M, float _Value_T, FString _BuffCode, int32 _Cost) {
@@ -238,14 +243,23 @@ struct FCurEffectIndexSkillData {
 		Cost = _Cost;
 	}
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString SkillId;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 SkillIndex;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Probability;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 SkillTarget;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Value_N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Value_M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float Value_T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString BuffCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 Cost;
 };
 
@@ -312,7 +326,7 @@ UCLASS()
 class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
-	
+
 	UBattleTableManagerSystem();
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
@@ -325,9 +339,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* PeppySkillTable;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Table")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "DataStructure")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	FPeppyStatData CurPeppyStat;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	FBossStatData CurBossStat;
 public:
 	UDataTable* GetPeppySkillTable();
 
@@ -337,10 +355,6 @@ public:
 	FPeppyStatData* GetCurPeppyStatRef();
 	FBossStatData* GetCurBossStatRef();
 
-	UFUNCTION(BlueprintCallable)
-	FPeppyStatData GetCurPeppyStatReadOnly();
-	UFUNCTION(BlueprintCallable)
-	FBossStatData GetCurBossStatReadOnly();
 	UFUNCTION(BlueprintCallable)
 	FName GetCurrentBlueprintClassName();
 
@@ -352,18 +366,15 @@ private:
 	UPROPERTY()
 	class UDataTable* BossStatDataTable;
 
-	FPeppyStatData CurPeppyStat;
-	FBossStatData CurBossStat;
-
 	void SetBossSkillSpawnDataTable();
 	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
 
 public:
 	/* Skill System */
 	UFUNCTION(BlueprintCallable)
-	void UseBossSkill(FBossSkillData SkillData);
+	void UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor);
 	UFUNCTION(BlueprintCallable)
-	void UsePeppySkill(FPeppySkillData SkillData);
+	void UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor);
 
 private:
 	// 현재 적용할 효과가 몇 번째 인덱스인지에 따라 값 저장 
@@ -372,6 +383,6 @@ private:
 
 	FCurEffectIndexSkillData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
 	FCurEffectIndexSkillData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
-	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData);
-	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData);
+	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor);
+	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor);
 };

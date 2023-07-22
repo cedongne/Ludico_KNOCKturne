@@ -3,6 +3,7 @@
 
 #include "BattleTableManagerSystem.h"
 #include "BossSkillActor.h"
+#include "PeppySkillActor.h"
 #include "CalcUtil.h"
 #include "Peppy.h"
 
@@ -129,7 +130,7 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 }
 
 
-void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData) {
+void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor) {
 	FCommonStatData* TargetStatData = nullptr;
 
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
@@ -146,20 +147,23 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData) {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			return;
 		}
-		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexBossSkillDataSet(IndexCount, &SkillData));
+		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexBossSkillDataSet(IndexCount, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData) {
+void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
 	}
 
+	if (SkillIndex == 1) {
+		RefActor->CustomSkillOperation(SkillIndex, *SkillData);
+	}
 	/*
 		11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
-	if (SkillIndex == 11) {
+	else if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
@@ -185,7 +189,7 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommo
 	}
 }
 
-void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData) {
+void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
 	FCommonStatData* TargetStatData = nullptr;
 
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
@@ -203,20 +207,24 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData) {
 			return;
 		}
 
-		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(IndexCount, &SkillData));
+		OperatePeppySkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(IndexCount, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData) {
+void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
 	}
 
+	if (SkillIndex == 1) {
+		NTLOG(Warning, TEXT("%s"), *(RefActor->GetClass()->GetName()))
+		RefActor->CustomSkillOperation(SkillIndex, *SkillData);
+	}
 	/*
 		11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
-	if (SkillIndex == 11) {
+	else if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
 		CurPeppyStat.Energy -= SkillData->Cost;
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
@@ -270,14 +278,6 @@ FBossStatData UBattleTableManagerSystem::GetBossStatDataOnTable(FString DataType
 
 UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
-}
-
-FPeppyStatData UBattleTableManagerSystem::GetCurPeppyStatReadOnly() {
-	return CurPeppyStat;
-}
-
-FBossStatData UBattleTableManagerSystem::GetCurBossStatReadOnly() {
-	return CurBossStat;
 }
 
 FPeppyStatData* UBattleTableManagerSystem::GetCurPeppyStatRef() {

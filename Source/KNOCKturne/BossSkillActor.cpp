@@ -111,7 +111,7 @@ void ABossSkillActor::AttackPlayer() {
 	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-	BattleTableManager->UseBossSkill(SkillData);
+	BattleTableManager->UseBossSkill(SkillData, this);
 }
 
 FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaSeconds) {

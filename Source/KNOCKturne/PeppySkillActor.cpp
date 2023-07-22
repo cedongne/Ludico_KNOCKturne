@@ -19,7 +19,7 @@ void APeppySkillActor::LoadSkillDataFromDataTable() {
 }
 
 void APeppySkillActor::UseSkill() {
-	BattleTableManager->UsePeppySkill(SkillData);
+	BattleTableManager->UsePeppySkill(SkillData, this);
 }
 
 /*
