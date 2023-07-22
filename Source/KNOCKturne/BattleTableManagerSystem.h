@@ -223,8 +223,8 @@ struct FBossSkillSpawnData {
 	static FBossSkillSpawnData SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms);
 };
 
-struct FCurEffectIndexStatData {
-	FCurEffectIndexStatData() : SkillId("-1"), SkillIndex(0), Probability(0.0f), SkillTarget(0), Value_N(0.0f), Value_M(0.0f), Value_T(0.0f), BuffCode("-1"), Cost(0) {}
+struct FCurEffectIndexSkillData {
+	FCurEffectIndexSkillData() : SkillId("-1"), SkillIndex(0), Probability(0.0f), SkillTarget(0), Value_N(0.0f), Value_M(0.0f), Value_T(0.0f), BuffCode("-1"), Cost(0) {}
 	
 	void SetCurEffectIndexStatData(FString _SkillId, int32 _SkillIndex, float _Probability, int32 _SkillTarget, float _Value_N, float _Value_M, float _Value_T, FString _BuffCode, int32 _Cost) {
 		SkillId = _SkillId;
@@ -367,11 +367,11 @@ public:
 
 private:
 	// 현재 적용할 효과가 몇 번째 인덱스인지에 따라 값 저장 
-	FCurEffectIndexStatData CurEffectIndexBossSkillDataSet;
-	FCurEffectIndexStatData CurEffectIndexPeppySkillDataSet;
+	FCurEffectIndexSkillData CurEffectIndexBossSkillDataSet;
+	FCurEffectIndexSkillData CurEffectIndexPeppySkillDataSet;
 
-	FCurEffectIndexStatData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
-	FCurEffectIndexStatData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
-	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData);
-	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData);
+	FCurEffectIndexSkillData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
+	FCurEffectIndexSkillData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
+	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData);
+	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData);
 };

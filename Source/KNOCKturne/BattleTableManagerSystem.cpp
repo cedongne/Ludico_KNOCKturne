@@ -150,7 +150,7 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData) {
 	}
 }
 
-void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData) {
+void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
@@ -161,24 +161,24 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommo
 	*/
 	if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %d : %d"), SkillData->Value_N, TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
 		13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillIndex == 13) {
 		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %d : %d"), SkillData->Value_N, TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
 		54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
 	else if (SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
-		PeriodicDamages.Init(SkillData->Value_T, SkillData->Value_N);
+		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
 
 		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
-		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %d in %d Turn : "), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turn : %d"), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillIndex);
@@ -207,7 +207,7 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData) {
 	}
 }
 
-void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData) {
+void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
@@ -219,7 +219,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
 		CurPeppyStat.Energy -= SkillData->Cost;
-		NTLOG(Warning, TEXT("[Peppy 11] Attack damage : %d"), TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
 		13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
@@ -227,7 +227,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	else if (SkillIndex == 13) {
 		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
 		CurPeppyStat.Energy -= SkillData->Cost;
-		NTLOG(Warning, TEXT("[Peppy 13] Random attack damage : %d"), TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
 		54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
@@ -236,12 +236,12 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 		// Boss에게 CumulativeDamage 필드를 만들어야 함.
 		/*
 		TArray<int32> PeriodicDamages;
-		PeriodicDamages.Init(SkillData->Value_T, SkillData->Value_N);
+		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
 
 		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
 
 		CurPeppyStat.Energy -= SkillData->Cost;
-		NTLOG(Log, TEXT("[Peppy 54] Periodic attack damage %d in %d Turn : "), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turn : %d"), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
 		*/
 		NTLOG(Error, TEXT("Not implement. See description in script"));
 	}
@@ -292,8 +292,8 @@ FName UBattleTableManagerSystem::GetCurrentBlueprintClassName() {
 	return *(GetClass()->GetFName().ToString());
 }
 
-FCurEffectIndexStatData* UBattleTableManagerSystem::TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData) {
-	FCurEffectIndexStatData* ResultStatData = new FCurEffectIndexStatData();
+FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData) {
+	FCurEffectIndexSkillData* ResultStatData = new FCurEffectIndexSkillData();
 
 	switch (Index) {
 	case 0:
@@ -330,8 +330,8 @@ FCurEffectIndexStatData* UBattleTableManagerSystem::TryGetCurEffectIndexBossSkil
 	return ResultStatData;
 }
 
-FCurEffectIndexStatData* UBattleTableManagerSystem::TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData) {
-	FCurEffectIndexStatData* ResultStatData = new FCurEffectIndexStatData();
+FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData) {
+	FCurEffectIndexSkillData* ResultStatData = new FCurEffectIndexSkillData();
 
 	switch (Index) {
 	case 0:
