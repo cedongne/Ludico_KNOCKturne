@@ -7,7 +7,7 @@ BRIDGE Ludico KNOCKturne
 
 1. `Assets` Repository에 변경 사항이 있는지 확인 후 최신 버전으로 업데이트한다.
 2. `Ludico_KNOCKturne` Repository에 변경 사항이 있는지 확인 후 최신 버전으로 업데이트한다.
-3. 엔진을 키기 전 VS에서 빌드, 혹은 엔진을 키고 `Ctrl + Alt + F11`을 눌러 라이브 코딩을 실행해 스크립트를 업데이트한다.
+3. Visual Script에서 프로젝트를 시작(`Ctrl + F5` 계열)하여 빌드 후 엔진을 시작하고, 엔진 실행 중 추가 빌드가 필요하다면 `Ctrl + Alt + F11`을 눌러 라이브 코딩을 실행해 스크립트를 업데이트한다.
 4. 작업을 시작한다.
 
 ---
