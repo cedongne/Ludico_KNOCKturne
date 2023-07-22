@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "EngineMinimal.h"
+#include "KNOCKturne.h"
 #include "GameFramework/Character.h"
 
 #include "PeppyStatComponent.h"
@@ -35,6 +35,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Flag)
 	bool CanMove;
 
+	TArray<TMap<FString, int32>> DamageArrayEachTurn;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -45,7 +47,7 @@ protected:
 
 	void MoveForward(float value);
 	void MoveRight(float value);
-
+	
 	void SlideAction();
 	void SlideHandling(float DeltaTime);
 
@@ -92,4 +94,11 @@ public:
 	void SetImmobile();
 	UFUNCTION(BlueprintCallable)
 	void SetMobile();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void HitVisualEffect();
+
+	/* N턴 간 보스 턴이 시작될 때마다 페피에게 적용할 대미지를 순서에 맞게 배열 형태로 입력합니다. 지정한 턴에 이미 EffectId를 Key로 가지는 데이터가 존재한다면 값을 누적합니다. */
+	void AddCumulativeDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages);
+	/* N턴 간 보스 턴이 시작될 때마다 페피에게 적용할 대미지를 순서에 맞게 배열 형태로 입력합니다. 지정한 턴에 이미 EffectId를 Key로 가지는 데이터가 존재한다면 값을 추가하지 않습니다.*/
+	void AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages);
 };

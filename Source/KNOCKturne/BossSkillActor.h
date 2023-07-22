@@ -38,6 +38,8 @@ public:
 	ABossSkillActor();
 
 private:
+	float TempDelayTime;
+
 	struct FBossSkillData SkillData;
 
 	void EvaluateCurrentLifeCycleStep(float DeltaSeconds);
@@ -71,5 +73,8 @@ public:
 	void AttackPlayer();
 
 	UFUNCTION(BlueprintCallable)
-	FVector GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float _DeltaTime);
+	FVector GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaSeconds);
+
+	UFUNCTION(BlueprintCallable)
+	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
 };

@@ -174,3 +174,25 @@ void APeppy::SlideHandling(float DeltaTime) {
 		}
 	}
 }
+
+void APeppy::AddCumulativeDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
+	while (DamageArrayEachTurn.Num() < Damages.Num()) {
+		DamageArrayEachTurn.Add(TMap<FString, int32>());
+	}
+
+	for (int32 index = 0; index < Damages.Num(); index++) {
+		int32* Damage = DamageArrayEachTurn[index].Find(EffectId);
+		Damages[index] += (Damage != nullptr) ? *Damage : 0;
+
+		DamageArrayEachTurn[index].Add(EffectId, Damages[index]);
+	}
+}
+
+void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
+	while (DamageArrayEachTurn.Num() < Damages.Num()) {
+		DamageArrayEachTurn.Add(TMap<FString, int32>());
+	}
+	for (int32 index = 0; index < Damages.Num(); index++) {
+		DamageArrayEachTurn[index].FindOrAdd(EffectId, Damages[index]);
+	}
+}

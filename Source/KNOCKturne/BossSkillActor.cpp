@@ -49,6 +49,8 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 	{
 	case ESkillActorLifeCycleStep::DelayTime:
 		if (CurrentLifeTime >= SkillData.SkillDelayTime) {
+			TempDelayTime = SkillData.SkillDelayTime;
+
 			CurrentStep = ESkillActorLifeCycleStep::CastTime;
 			AttackRange->DestroyComponent();
 			BattleManager->CurBossSkillHitArea.Remove(AttackRange);
@@ -112,6 +114,17 @@ void ABossSkillActor::AttackPlayer() {
 	BattleTableManager->UseBossSkill(SkillData);
 }
 
-FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float _DeltaTime) {
-	return FMath::Lerp<FVector>(StartPosition, EndPosition, _DeltaTime / Duration) - StartPosition;
+FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaSeconds) {
+	return FMath::Lerp<FVector>(StartPosition, EndPosition, DeltaSeconds / Duration) - StartPosition;
+}
+
+bool ABossSkillActor::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
+	if (TempDelayTime > DelayTime) {
+		TempDelayTime = 0;
+
+		return true;
+	}
+	TempDelayTime += DeltaSeconds;
+
+	return false;
 }

@@ -3,6 +3,8 @@
 
 #include "BattleManager.h"
 
+#include "Peppy.h"
+
 // Sets default values
 ABattleManager::ABattleManager()
 {
@@ -37,6 +39,8 @@ void ABattleManager::Tick(float DeltaTime)
 
 void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
+
+	ProcessDamageBeforeStartTurn();
 	SetLeftCurrentTurnTime(10);
 	BP_StartBossTurn();
 }
@@ -102,6 +106,24 @@ void ABattleManager::DecreaseLeftCurrentTurnTime() {
 		LeftCurrentTurnTime--;
 		BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 	}
+}
+
+void ABattleManager::ProcessDamageBeforeStartTurn() {
+	auto Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	if (Peppy->DamageArrayEachTurn.IsEmpty()) {
+		return;
+	}
+
+	TMap<FString, int32> CurrentTurnDamages = Peppy->DamageArrayEachTurn[0];
+	Peppy->DamageArrayEachTurn.RemoveAt(0);
+
+	int32 TotalDamage = 0;
+	for (auto DamageData : CurrentTurnDamages) {
+		TotalDamage += DamageData.Value;
+	}
+
+	NTLOG(Warning, TEXT("Peppy get damaged starting boss turn %d"), TotalDamage);
+	BattleTableManager->GetCurPeppyStatRef()->EP -= TotalDamage;
 }
 
 float ABattleManager::GetLeftCurrentTurnTime() {

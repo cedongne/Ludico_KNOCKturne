@@ -43,6 +43,8 @@ private:
 	void RunTurnTimer(float DeltaTime);
 	void DecreaseLeftCurrentTurnTime();
 
+	void ProcessDamageBeforeStartTurn();
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();

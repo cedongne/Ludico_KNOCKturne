@@ -15,7 +15,7 @@ USTRUCT()
 struct FCommonStatData : public FTableRowBase {
 	GENERATED_BODY()
 
-	public:
+public:
 	FCommonStatData() : EP(0), MaxEP(0), DefenseDamage(0), AttackDamage(0), Avd(0.0f), Turn(0) {}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -158,6 +158,7 @@ struct FBossStatData : public FCommonStatData {
 	int32 BossEnergyDrop;
 };
 
+
 USTRUCT(BlueprintType)
 struct FBossSkillData : public FTableRowBase {
 	GENERATED_BODY()
@@ -214,13 +215,38 @@ USTRUCT(BlueprintType)
 struct FBossSkillSpawnData {
 	GENERATED_BODY()
 
-	public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	UClass* SkillObjectClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	TArray<FTransform> SkillTransform;
 
 	static FBossSkillSpawnData SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms);
+};
+
+struct FCurEffectIndexStatData {
+	FCurEffectIndexStatData() : SkillId("-1"), SkillIndex(0), Probability(0.0f), SkillTarget(0), Value_N(0.0f), Value_M(0.0f), Value_T(0.0f), BuffCode("-1"), Cost(0) {}
+	
+	void SetCurEffectIndexStatData(FString _SkillId, int32 _SkillIndex, float _Probability, int32 _SkillTarget, float _Value_N, float _Value_M, float _Value_T, FString _BuffCode, int32 _Cost) {
+		SkillId = _SkillId;
+		SkillIndex = _SkillIndex;
+		Probability = _Probability;
+		SkillTarget = _SkillTarget;
+		Value_N = _Value_N;
+		Value_M = _Value_M;
+		Value_T = _Value_T;
+		BuffCode = _BuffCode;
+		Cost = _Cost;
+	}
+
+	FString SkillId;
+	int32 SkillIndex;
+	float Probability;
+	int32 SkillTarget;
+	float Value_N;
+	float Value_M;
+	float Value_T;
+	FString BuffCode;
+	int32 Cost;
 };
 
 USTRUCT(BlueprintType)
@@ -258,7 +284,7 @@ USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase {
 	GENERATED_BODY()
 
-		FItemData() : ItemTarget(-1), TouchColumn("-1"), value1N(0), value1M(0),
+	FItemData() : ItemTarget(-1), TouchColumn("-1"), value1N(0), value1M(0),
 		MaxCount(0), ItemIcon(nullptr), ItemDescript("-1"), 
 		ItemEasterEgg("-1"), ItemEasterEgg_Character("-1") {}
 
@@ -340,8 +366,12 @@ public:
 	void UsePeppySkill(FPeppySkillData SkillData);
 
 private:
-	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FBossSkillData* SkillData);
-	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FPeppySkillData* SkillData);
-	/****************/
+	// 현재 적용할 효과가 몇 번째 인덱스인지에 따라 값 저장 
+	FCurEffectIndexStatData CurEffectIndexBossSkillDataSet;
+	FCurEffectIndexStatData CurEffectIndexPeppySkillDataSet;
 
+	FCurEffectIndexStatData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
+	FCurEffectIndexStatData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
+	void OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData);
+	void OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexStatData* SkillData);
 };
