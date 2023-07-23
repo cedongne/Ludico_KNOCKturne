@@ -59,7 +59,6 @@ void UBattleSystemComponent::RunTurnTimer(float DeltaTime) {
 		TurnChange();
 	}
 	LeftCurrentTurnTime -= DeltaTime;
-	BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 
 	/* 
 	Timer example
@@ -78,6 +77,5 @@ void UBattleSystemComponent::DecreaseLeftCurrentTurnTime() {
 	NTLOG(Warning, TEXT("Left Time : %d"), LeftCurrentTurnTime);
 	if (LeftCurrentTurnTime >= 0) {
 		LeftCurrentTurnTime--;
-		BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 	}
 }

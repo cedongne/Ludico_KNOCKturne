@@ -4,6 +4,7 @@
 #include "BattleManager.h"
 
 #include "Peppy.h"
+#include "Boss.h"
 
 // Sets default values
 ABattleManager::ABattleManager()
@@ -26,7 +27,6 @@ void ABattleManager::BeginPlay()
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManager = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
-	BattleManager = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
 }
 
@@ -85,7 +85,6 @@ void ABattleManager::RunTurnTimer(float DeltaTime) {
 		TurnChange();
 	}
 	LeftCurrentTurnTime -= DeltaTime;
-	BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 
 	/*
 	Timer example
@@ -104,18 +103,16 @@ void ABattleManager::DecreaseLeftCurrentTurnTime() {
 	NTLOG(Warning, TEXT("Left Time : %d"), LeftCurrentTurnTime);
 	if (LeftCurrentTurnTime >= 0) {
 		LeftCurrentTurnTime--;
-		BattleManager->LeftCurTurnTime = LeftCurrentTurnTime;
 	}
 }
 
 void ABattleManager::ProcessDamageBeforeStartTurn() {
-	auto Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	if (Peppy->DamageArrayEachTurn.IsEmpty()) {
+	if (GetPeppyActor()->DamageArrayEachTurn.IsEmpty()) {
 		return;
 	}
 
-	TMap<FString, int32> CurrentTurnDamages = Peppy->DamageArrayEachTurn[0];
-	Peppy->DamageArrayEachTurn.RemoveAt(0);
+	TMap<FString, int32> CurrentTurnDamages = GetPeppyActor()->DamageArrayEachTurn[0];
+	GetPeppyActor()->DamageArrayEachTurn.RemoveAt(0);
 
 	int32 TotalDamage = 0;
 	for (auto DamageData : CurrentTurnDamages) {
@@ -136,4 +133,12 @@ void ABattleManager::SetLeftCurrentTurnTime(float TurnTime) {
 
 void ABattleManager::EndTurn() {
 	LeftCurrentTurnTime = 0;
+}
+
+ABoss* ABattleManager::GetBossActor() {
+	return (BossActor == nullptr) ? BossActor = Cast<ABoss>(UGameplayStatics::GetActorOfClass(GetWorld(), ABoss::StaticClass())) : BossActor;
+}
+
+APeppy* ABattleManager::GetPeppyActor() {
+	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
 }

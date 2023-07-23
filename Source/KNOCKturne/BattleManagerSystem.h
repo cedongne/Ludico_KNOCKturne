@@ -5,12 +5,8 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+
 #include "BattleManagerSystem.generated.h"
-
-/**
- * 
- */
-
 
 UCLASS()
 class KNOCKTURNE_API UBattleManagerSystem : public UGameInstanceSubsystem
@@ -19,24 +15,17 @@ class KNOCKTURNE_API UBattleManagerSystem : public UGameInstanceSubsystem
 	
 public:
 	UBattleManagerSystem();
-	
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool VisibleBossSkillHitArea = false;
 
-	UClass* FootholdClass;
-	TSubclassOf<AActor> FootholdSubclass;
-	AActor* FootholdObject;
-
 	// IconRowMap 초기화
 	void InitSkillIconRowMap();
-
 	// IconRowMap 초기화
 	void InitSpecialtyIconRowMap();
-
 	// IconRowMap 초기화
 	void InitItemIconRowMap();
-
 	// IconSkillActorMap 초기화
 	void InitIconSkillActorMap();
 
@@ -44,16 +33,8 @@ protected:
 	TSubclassOf<AActor> AmbiguousEmotion_Ref;
 
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 LeftCurTurnTime;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Property")
 	TArray<class UWidgetComponent*> CurBossSkillHitArea;
-
-	void InitializeFootholdObject();
-
-	UFUNCTION(BlueprintCallable)
-	void SpawnFoothold();
 
 	UFUNCTION(BlueprintCallable)
 	void SetTimerUnvisibleHitArea();

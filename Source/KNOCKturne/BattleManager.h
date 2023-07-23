@@ -5,7 +5,8 @@
 #include "KNOCKturne.h"
 #include "GameFramework/Actor.h"
 
-#include "BattleManagerSystem.h"
+#include "Boss.h"
+#include "Peppy.h"
 #include "BattleTableManagerSystem.h"
 
 #include "BattleManager.generated.h"
@@ -25,6 +26,9 @@ public:
 	ABattleManager();
 
 private:
+	ABoss* BossActor = nullptr;
+	APeppy* PeppyActor = nullptr;
+
 	UWorld* world;
 	FTimerHandle TurnOverTimer;
 	FTimerManager LeftTurnTimeTimerManager;
@@ -47,6 +51,12 @@ private:
 
 public:
 	UFUNCTION(BlueprintCallable)
+	ABoss* GetBossActor();
+	UFUNCTION(BlueprintCallable)
+	APeppy* GetPeppyActor();
+
+
+	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();
 
 	UFUNCTION(BlueprintImplementableEvent)
@@ -65,7 +75,6 @@ public:
 
 protected:
 	class UBattleTableManagerSystem* BattleTableManager;
-	class UBattleManagerSystem* BattleManager;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
