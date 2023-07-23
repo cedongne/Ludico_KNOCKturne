@@ -4,6 +4,7 @@
 #include "BattleTableManagerSystem.h"
 #include "BossSkillActor.h"
 #include "PeppySkillActor.h"
+#include "BuffComponent.h"
 #include "CalcUtil.h"
 #include "Peppy.h"
 
@@ -139,9 +140,11 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 	for (int IndexCount = 0; IndexCount < 2; IndexCount++) {
 		if (SkillTargets[IndexCount] == TARGET_PEPPY) {
 			TargetStatData = &CurPeppyStat;
+			TargetBuffComponent = PeppyBuffComponent;
 		}
 		else if (SkillTargets[IndexCount] == TARGET_BOSS) {
 			TargetStatData = &CurBossStat;
+			TargetBuffComponent = PeppyBuffComponent;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
@@ -161,21 +164,33 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommo
 		RefActor->CustomSkillOperation(SkillIndex, *SkillData);
 	}
 	/*
-		11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
+	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
-		13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
+	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillIndex == 13) {
 		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
 		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
-		54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
+	*	16 제한 디버프-긍정: 대상의 모든 긍정적 버프 중 랜덤으로 N개 제거
+	*/
+	else if (SkillIndex == 16) {
+		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
+	}
+	/*
+	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
+	*/
+	else if (SkillIndex == 34) {
+
+	}
+	/*
+	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
 	else if (SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
@@ -218,11 +233,11 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	}
 
 	if (SkillIndex == 1) {
-		NTLOG(Warning, TEXT("%s"), *(RefActor->GetClass()->GetName()))
+		CurPeppyStat.Energy -= SkillData->Cost;
 		RefActor->CustomSkillOperation(SkillIndex, *SkillData);
 	}
 	/*
-		11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
+	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
@@ -230,7 +245,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
-		13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
+	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillIndex == 13) {
 		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
@@ -238,7 +253,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
-		54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
+	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
 	else if (SkillIndex == 54) {
 		// Boss에게 CumulativeDamage 필드를 만들어야 함.

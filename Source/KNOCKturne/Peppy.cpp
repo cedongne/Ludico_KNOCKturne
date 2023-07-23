@@ -1,13 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "Peppy.h"
-#include "PeppyStatComponent.h"
 
-// Sets default values
+#include "PeppyStatComponent.h"
+#include "BuffComponent.h"
+
 APeppy::APeppy()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(RootComponent);
@@ -37,6 +35,7 @@ APeppy::APeppy()
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
 	PeppyStatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
+	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
 
 	// Initialize variables
 	CanMove = true;

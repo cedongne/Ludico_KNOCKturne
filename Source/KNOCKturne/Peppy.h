@@ -28,6 +28,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UPeppyStatComponent* PeppyStatComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
+	class UBuffComponent* BuffComponent;
 	
 	// Time Threshold to know if it was a short press
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)

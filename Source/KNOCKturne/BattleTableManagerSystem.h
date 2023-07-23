@@ -343,9 +343,18 @@ public:
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
-	FPeppyStatData CurPeppyStat;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
 	FBossStatData CurBossStat;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	FPeppyStatData CurPeppyStat;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	class UBuffComponent* BossBuffComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	class UBuffComponent* PeppyBuffComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "StatData")
+	UBuffComponent* TargetBuffComponent;
+	
+
 public:
 	UDataTable* GetPeppySkillTable();
 
