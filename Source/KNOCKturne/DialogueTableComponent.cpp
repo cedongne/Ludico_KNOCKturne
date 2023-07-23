@@ -136,7 +136,7 @@ FString UDialogueTableComponent::RandomLoadingText() {
 	return DialogueManager->GetString2(random);
 }
 
-void UDialogueTableComponent::GetDreamFragmentTalk() {
+void UDialogueTableComponent::SetDreamFragmentDialogueIndex() {
 	for (int index = 0; index < DialogueRows.Num(); index++)
 	{
 		if (DialogueRows[index]->DialogueGroupCode == "DreamFragment")
@@ -150,10 +150,24 @@ void UDialogueTableComponent::GetDreamFragmentTalk() {
 	}
 }
 
-void UDialogueTableComponent::CancelDreamFragmentChocie() {
+void UDialogueTableComponent::SetDreamFragmentCancelIndex() {
 	for (int index = 0; index < DialogueRows.Num(); index++)
 	{
 		if (DialogueRows[index]->DialogueGroupCode == "DreamFragment_Cancel")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
+
+void UDialogueTableComponent::SetAfterBattleDialogueIndex() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "EP1_AfterBattle")
 		{
 			if (DialogueRows[index]->DialogueType == 1)
 			{

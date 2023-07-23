@@ -127,8 +127,11 @@ public:
 	FString RandomLoadingText();
 
 	UFUNCTION(BlueprintCallable)
-	void GetDreamFragmentTalk();
+	void SetDreamFragmentDialogueIndex();
 
 	UFUNCTION(BlueprintCallable)
-	void CancelDreamFragmentChocie();
+	void SetDreamFragmentCancelIndex();
+
+	UFUNCTION(BlueprintCallable)
+	void SetAfterBattleDialogueIndex();
 };
