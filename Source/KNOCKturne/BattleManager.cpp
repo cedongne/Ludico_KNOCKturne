@@ -15,8 +15,8 @@ ABattleManager::ABattleManager()
 	CurrentTurnType = BossTurn;
 	LeftCurrentTurnTime = 0;
 
-	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
-	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
+//	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
+//	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
 }
 
 void ABattleManager::BeginPlay()
@@ -63,6 +63,8 @@ void ABattleManager::StartPeppyTurn() {
 }
 
 void ABattleManager::TurnChange() {
+	SkillActorsOnField.Empty();
+
 	switch (CurrentTurnType) {
 	case BossTurn:
 		StartPeppyTurn();

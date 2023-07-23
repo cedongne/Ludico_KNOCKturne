@@ -53,7 +53,7 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 
 			CurrentStep = ESkillActorLifeCycleStep::CastTime;
 			AttackRange->DestroyComponent();
-			BattleManager->CurBossSkillHitArea.Remove(AttackRange);
+			BattleManagerSystem->CurBossSkillHitArea.Remove(AttackRange);
 		}
 		break;
 	case ESkillActorLifeCycleStep::CastTime:
@@ -80,9 +80,9 @@ void ABossSkillActor::InitSkillData() {
 		return;
 	}
 
-	auto TempSkillData = BattleTableManager->BossContactSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
+	auto TempSkillData = BattleTableManagerSystem->BossContactSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
 	if (TempSkillData == nullptr) {
-		TempSkillData = BattleTableManager->BossNonContactSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
+		TempSkillData = BattleTableManagerSystem->BossNonContactSkillTable->FindRow<FBossSkillData>(GetCurrentBlueprintClassName(), TEXT(""));
 		IsContactSkill = false;
 	}
 
@@ -111,7 +111,7 @@ void ABossSkillActor::AttackPlayer() {
 	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-	BattleTableManager->UseBossSkill(SkillData, this);
+	BattleTableManagerSystem->UseBossSkill(SkillData, this);
 }
 
 FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaSeconds) {

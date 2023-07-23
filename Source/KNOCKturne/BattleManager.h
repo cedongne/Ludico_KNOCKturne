@@ -55,6 +55,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	APeppy* GetPeppyActor();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<AActor*> SkillActorsOnField;
+
 
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();

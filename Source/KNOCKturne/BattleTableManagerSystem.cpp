@@ -207,6 +207,8 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommo
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
 	FCommonStatData* TargetStatData = nullptr;
 
+	CurPeppyStat.Energy -= SkillData.Cost;
+
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
 	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
 
@@ -233,7 +235,6 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	}
 
 	if (SkillIndex == 1) {
-		CurPeppyStat.Energy -= SkillData->Cost;
 		RefActor->CustomSkillOperation(SkillIndex, *SkillData);
 	}
 	/*
@@ -241,7 +242,6 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	*/
 	else if (SkillIndex == 11) {
 		TargetStatData->EP -= SkillData->Value_N;
-		CurPeppyStat.Energy -= SkillData->Cost;
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*
@@ -249,7 +249,6 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FComm
 	*/
 	else if (SkillIndex == 13) {
 		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
-		CurPeppyStat.Energy -= SkillData->Cost;
 		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
 	}
 	/*

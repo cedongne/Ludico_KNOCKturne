@@ -18,6 +18,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_WithYou(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_WithYou"));
 	IconSkillActorMap.Add("Icon_skill_PS_WithYou", BP_PS_WithYou.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_EfficientEmpathy(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_EfficientEmpathy"));
+	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", BP_PS_EfficientEmpathy.Class);
 
 	ItemCountList.SetNum(6);
 	for (int index = 0; index < ItemCountList.Num(); index++)

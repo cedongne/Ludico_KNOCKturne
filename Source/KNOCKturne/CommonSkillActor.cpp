@@ -16,8 +16,9 @@ ACommonSkillActor::ACommonSkillActor()
 void ACommonSkillActor::BeginPlay()
 {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleTableManager = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
-	BattleManager = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
 
 	//	BattleTableManager->BattleTableInitDelegate.AddUFunction(this, FName("InitSkillData"));
 
@@ -29,4 +30,8 @@ void ACommonSkillActor::BeginPlay()
 
 FName ACommonSkillActor::GetCurrentBlueprintClassName() {	
 	return *(GetClass()->GetFName().ToString());
+}
+
+void ACommonSkillActor::RegistSkillActorOnBattleManager() {
+	BattleManager->SkillActorsOnField.Add(this);
 }
