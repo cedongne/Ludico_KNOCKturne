@@ -74,9 +74,10 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 # Assets
-
 Content/Assets
 
 # wwise
-
 WwiseProject/KNOCKTurne/GeneratedSoundBanks/Windows/*
+
+#Package
+Package/*
