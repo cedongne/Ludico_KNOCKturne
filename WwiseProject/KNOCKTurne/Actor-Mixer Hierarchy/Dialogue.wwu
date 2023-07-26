@@ -32,7 +32,6 @@
 							</MediaIDList>
 						</AudioFileSource>
 					</ChildrenList>
-					<ObjectLists/>
 					<ActiveSourceList>
 						<ActiveSource Name="SFX_Text_Typing" ID="{C361CF8F-4457-4A3F-AB7B-07C4722B5B09}" Platform="Linked"/>
 					</ActiveSourceList>

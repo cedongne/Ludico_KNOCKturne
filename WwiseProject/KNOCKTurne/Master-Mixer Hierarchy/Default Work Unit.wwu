@@ -11,13 +11,6 @@
 					</ReferenceList>
 				</Bus>
 				<Bus Name="Music" ID="{40C489A2-EF75-4D2C-B839-C9BD0966EC68}">
-					<PropertyList>
-						<Property Name="BusVolume" Type="Real64">
-							<ValueList>
-								<Value>-96</Value>
-							</ValueList>
-						</Property>
-					</PropertyList>
 					<ReferenceList>
 						<Reference Name="AudioDevice" PluginName="System" CompanyID="0" PluginID="174" PluginType="7">
 							<ObjectRef Name="System" ID="{47B988B8-C04D-4E5C-878C-ADCAB28CF2F0}" WorkUnitID="{98C6E317-D872-4C02-B744-48DF10972F3B}"/>

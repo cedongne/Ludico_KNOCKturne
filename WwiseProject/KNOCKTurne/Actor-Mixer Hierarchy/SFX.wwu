@@ -823,7 +823,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-7</Value>
+										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -880,7 +880,39 @@
 										<ActiveSource Name="FNF_RF_fx_muir_pebble_rinse" ID="{5D102569-77D8-4297-9A88-0BEE2A7A48A8}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{2F48B178-63B6-4D94-BA13-C797B0C42386}" ShortID="349183688">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{8E5EF6AD-31B5-4644-99A5-32A14EBF2C33}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="427230653"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{8E5EF6AD-31B5-4644-99A5-32A14EBF2C33}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
+						</BlendContainer>
+						<BlendContainer Name="Emotion" ID="{3EE4CADD-E613-4D60-9F4F-94B3AC8167A8}" ShortID="509460703">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
 						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
