@@ -47,6 +47,72 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="FootHold" ID="{10CD47FD-2737-4FC5-838F-324E7319A99D}">
+					<ChildrenList>
+						<Action Name="" ID="{876AE1E4-AF59-4330-B104-1A2FD07F6686}" ShortID="4106945">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Foothold" ID="{A32F36E9-6ED1-4EF6-A8C4-F0C8BB59DB58}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Thorn" ID="{4AE1C1D1-DA2E-4B65-BBB6-736EE30967AC}">
+					<ChildrenList>
+						<Action Name="" ID="{3EE381C4-F37B-40AE-AF32-E70D82A49180}" ShortID="1002788875">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Skill_Thorn" ID="{17F1F26F-F5A3-4F23-B960-49D482C53998}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ThornOfLove" ID="{A935BF81-E68F-4CB0-8ACF-058DFEA22F52}">
+					<ChildrenList>
+						<Action Name="" ID="{25D62ED7-E264-471C-9A0B-4F827A4CBC31}" ShortID="261621786">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ThornOfLove" ID="{B702A4D0-4DAA-4A7E-A2E9-CBE24F453AA7}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CleanUp" ID="{C9C1B35A-D296-426B-87B6-24071082E7F8}">
+					<ChildrenList>
+						<Action Name="" ID="{0C20D350-E466-4AB2-8B6B-CCBD4EEAAE01}" ShortID="664741504">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ClenUp" ID="{EF2A2237-2164-465D-A4A9-7853A33B6B35}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="CharmingVoice" ID="{F50D849D-2805-47FF-8B87-DACE410819E0}">
+					<ChildrenList>
+						<Action Name="" ID="{6C8A6A21-4DAC-42A2-9E0C-FF71DC297D4A}" ShortID="560789332">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="CharmingVoice" ID="{4464E0DD-226C-4AFE-ADFA-27B709009DDF}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Efficient" ID="{03EF2582-E71C-491B-BB92-57B3C037DD49}">
+					<ChildrenList>
+						<Action Name="" ID="{FC46C4C2-53EF-4199-82D2-453CE0DA6B40}" ShortID="664494441">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EfficientEmpathy" ID="{94A5A031-7394-4F98-90ED-27C093936766}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

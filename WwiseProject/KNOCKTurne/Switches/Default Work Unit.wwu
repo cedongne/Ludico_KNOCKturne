@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{5125A6E0-97A2-496F-B619-9A15F5730346}" SchemaVersion="110">
 	<Switches>
-		<WorkUnit Name="Default Work Unit" ID="{5125A6E0-97A2-496F-B619-9A15F5730346}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{5125A6E0-97A2-496F-B619-9A15F5730346}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="PeppySkill" ID="{8BD7790E-5BAC-45A0-B5E3-30A9264C9F8F}">
+					<ChildrenList>
+						<Switch Name="CharmingVoice" ID="{A0F16D9D-44DD-42CC-9CF2-FBF8A28485BB}"/>
+						<Switch Name="EfficientEmpathy" ID="{9211153E-DD39-4780-89CB-BE453CD96E34}"/>
+					</ChildrenList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
 	</Switches>
 </WwiseDocument>

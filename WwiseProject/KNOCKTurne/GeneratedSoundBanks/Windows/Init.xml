@@ -59,7 +59,15 @@
 					</States>
 				</StateGroup>
 			</StateGroups>
+			<SwitchGroups>
+				<SwitchGroup Id="3454906576" Name="PeppySkill" ObjectPath="\Switches\Default Work Unit\PeppySkill" GUID="{8BD7790E-5BAC-45A0-B5E3-30A9264C9F8F}">
+					<Switches>
+						<Switch Id="3755255244" Name="CharmingVoice" ObjectPath="\Switches\Default Work Unit\PeppySkill\CharmingVoice" GUID="{A0F16D9D-44DD-42CC-9CF2-FBF8A28485BB}"/>
+						<Switch Id="3847605934" Name="EfficientEmpathy" ObjectPath="\Switches\Default Work Unit\PeppySkill\EfficientEmpathy" GUID="{9211153E-DD39-4780-89CB-BE453CD96E34}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{E317F64A-6416-92D7-AABB-D223BE4568A9}</FileHash>
+	<FileHash>{4B2543ED-6D2F-4D0C-89D1-B18EF209035A}</FileHash>
 </SoundBanksInfo>

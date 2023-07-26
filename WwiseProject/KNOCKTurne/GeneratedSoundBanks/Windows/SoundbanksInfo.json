@@ -219,6 +219,28 @@
        }
       ]
      }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "3454906576",
+      "Name": "PeppySkill",
+      "ObjectPath": "\\Switches\\Default Work Unit\\PeppySkill",
+      "GUID": "{8BD7790E-5BAC-45A0-B5E3-30A9264C9F8F}",
+      "Switches": [
+       {
+        "Id": "3755255244",
+        "Name": "CharmingVoice",
+        "ObjectPath": "\\Switches\\Default Work Unit\\PeppySkill\\CharmingVoice",
+        "GUID": "{A0F16D9D-44DD-42CC-9CF2-FBF8A28485BB}"
+       },
+       {
+        "Id": "3847605934",
+        "Name": "EfficientEmpathy",
+        "ObjectPath": "\\Switches\\Default Work Unit\\PeppySkill\\EfficientEmpathy",
+        "GUID": "{9211153E-DD39-4780-89CB-BE453CD96E34}"
+       }
+      ]
+     }
     ]
    },
    {
@@ -226,11 +248,19 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{584BBA2C-0DD0-22CA-0E0F-F4DC4136C493}",
+    "Hash": "{07BBA84E-DF8A-38E3-5102-31C07BF755AA}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
     "Media": [
+     {
+      "Id": "21977701",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "lft2_fx_one_shot_sonar.wav",
+      "CachePath": "SFX/lft2_fx_one_shot_sonar_E0EBA86B.wem"
+     },
      {
       "Id": "26675951",
       "Language": "SFX",
@@ -246,6 +276,30 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Grass1.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Grass1_10C4C929.wem"
+     },
+     {
+      "Id": "68647759",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min.wav",
+      "CachePath": "SFX/TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min_B8E3373A.wem"
+     },
+     {
+      "Id": "69006938",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BRS_Twig_Snaps_Leaf_Rustles_6.wav",
+      "CachePath": "SFX/BRS_Twig_Snaps_Leaf_Rustles_6_B827A5AF.wem"
+     },
+     {
+      "Id": "87478675",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav",
+      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_F655D3C6.wem"
      },
      {
       "Id": "94944749",
@@ -278,14 +332,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Text_Typing.wav",
       "CachePath": "SFX/SFX_Text_Typing_C5579977.wem"
-     },
-     {
-      "Id": "165211439",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_NOTBattle_164bpm_4-4.wav",
-      "CachePath": "SFX/BGM_NOTBattle_164bpm_4-4_D79FB2B7.wem"
      },
      {
       "Id": "193027794",
@@ -344,12 +390,28 @@
       "CachePath": "SFX/SFX_PeppyWalk_Grass3_10C4C929.wem"
      },
      {
+      "Id": "355218299",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Dusty_Debris_Short_Ground_Fall_Organic_Foley_Sound_Design_Post_Production_Nature_Elemental_Mud_Stone.wav",
+      "CachePath": "SFX/ESM_Dusty_Debris_Short_Ground_Fall_Organic_Foley_Sound_Design_Post_Production_Nature_Elemental_Mud_Stone_10C4C929.wem"
+     },
+     {
       "Id": "360611745",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Stone2.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Stone2_10C4C929.wem"
+     },
+     {
+      "Id": "366777513",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FNF_RF_fx_muir_pebble_rinse.wav",
+      "CachePath": "SFX/FNF_RF_fx_muir_pebble_rinse_10C4C929.wem"
      },
      {
       "Id": "383708649",
@@ -384,6 +446,22 @@
       "CachePath": "SFX/SFX_PeppyWalk_Wood2_10C4C929.wem"
      },
      {
+      "Id": "427230653",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav",
+      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem"
+     },
+     {
+      "Id": "443133299",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "LNG_VocalBreath_Sigh_01.wav",
+      "CachePath": "SFX/LNG_VocalBreath_Sigh_01_10C4C929.wem"
+     },
+     {
       "Id": "485043058",
       "Language": "SFX",
       "Streaming": "false",
@@ -400,20 +478,20 @@
       "CachePath": "SFX/SFX_PeppyWalk_Grass2_10C4C929.wem"
      },
      {
-      "Id": "518217883",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "SFX_GetEnergy.wav",
-      "CachePath": "SFX/SFX_GetEnergy_10C4C929.wem"
-     },
-     {
       "Id": "534625915",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BGM_Credit_75bpm4-4_L29M.wav",
       "CachePath": "SFX/BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem"
+     },
+     {
+      "Id": "566353784",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BattleLast.wav",
+      "CachePath": "SFX/BattleLast_D79FB2B7.wem"
      },
      {
       "Id": "575546989",
@@ -430,6 +508,14 @@
       "Location": "Memory",
       "ShortName": "BattleDoor.wav",
       "CachePath": "SFX/BattleDoor_10C4C929.wem"
+     },
+     {
+      "Id": "618711237",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1.wav",
+      "CachePath": "SFX/ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1_10C4C929.wem"
      },
      {
       "Id": "638760269",
@@ -488,6 +574,14 @@
       "CachePath": "SFX/whitenoise_MSL_594EBFCF.wem"
      },
      {
+      "Id": "803416028",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab.wav",
+      "CachePath": "SFX/ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab_10C4C929.wem"
+     },
+     {
       "Id": "813775076",
       "Language": "SFX",
       "Streaming": "false",
@@ -526,6 +620,22 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Wood1.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Wood1_10C4C929.wem"
+     },
+     {
+      "Id": "870395132",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "IsNotBattle_160.wav",
+      "CachePath": "SFX/IsNotBattle_160_D79FB2B7.wem"
+     },
+     {
+      "Id": "901777490",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MGxSM_snap_dry_stick_and_leaf_11.wav",
+      "CachePath": "SFX/MGxSM_snap_dry_stick_and_leaf_11_10C4C929.wem"
      },
      {
       "Id": "903646689",
@@ -576,14 +686,6 @@
       "CachePath": "SFX/OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem"
      },
      {
-      "Id": "1035659040",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "Battle_UpTempo.wav",
-      "CachePath": "SFX/Battle_UpTempo_D79FB2B7.wem"
-     },
-     {
       "Id": "1052600951",
       "Language": "SFX",
       "Streaming": "false",
@@ -598,6 +700,14 @@
       "Location": "Memory",
       "ShortName": "BGM_Title_71bpm4-4.wav",
       "CachePath": "SFX/BGM_Title_71bpm4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "1070365854",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup.wav",
+      "CachePath": "SFX/ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup_10C4C929.wem"
      }
     ],
     "Events": [
@@ -617,7 +727,7 @@
         },
         "MediaRefs": [
          {
-          "Id": "1035659040"
+          "Id": "566353784"
          }
         ]
        },
@@ -630,7 +740,7 @@
         },
         "MediaRefs": [
          {
-          "Id": "165211439"
+          "Id": "870395132"
          }
         ]
        },
@@ -643,7 +753,7 @@
         },
         "MediaRefs": [
          {
-          "Id": "1035659040"
+          "Id": "566353784"
          }
         ]
        },
@@ -656,7 +766,7 @@
         },
         "MediaRefs": [
          {
-          "Id": "165211439"
+          "Id": "870395132"
          }
         ]
        }
@@ -701,6 +811,43 @@
       "MediaRefs": [
        {
         "Id": "201523215"
+       }
+      ]
+     },
+     {
+      "Id": "3755255244",
+      "Name": "CharmingVoice",
+      "ObjectPath": "\\Events\\Battle\\CharmingVoice",
+      "GUID": "{F50D849D-2805-47FF-8B87-DACE410819E0}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.4904537",
+      "DurationMax": "4.4904537",
+      "MediaRefs": [
+       {
+        "Id": "68647759"
+       },
+       {
+        "Id": "443133299"
+       }
+      ]
+     },
+     {
+      "Id": "2194043091",
+      "Name": "CleanUp",
+      "ObjectPath": "\\Events\\Battle\\CleanUp",
+      "GUID": "{C9C1B35A-D296-426B-87B6-24071082E7F8}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.915948",
+      "DurationMax": "3.915948",
+      "MediaRefs": [
+       {
+        "Id": "355218299"
+       },
+       {
+        "Id": "366777513"
+       },
+       {
+        "Id": "427230653"
        }
       ]
      },
@@ -771,6 +918,37 @@
       "MediaRefs": [
        {
         "Id": "903646689"
+       }
+      ]
+     },
+     {
+      "Id": "4212918798",
+      "Name": "Efficient",
+      "ObjectPath": "\\Events\\Battle\\Efficient",
+      "GUID": "{03EF2582-E71C-491B-BB92-57B3C037DD49}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.912",
+      "DurationMax": "2.912",
+      "MediaRefs": [
+       {
+        "Id": "803416028"
+       },
+       {
+        "Id": "1070365854"
+       }
+      ]
+     },
+     {
+      "Id": "1227874634",
+      "Name": "FootHold",
+      "ObjectPath": "\\Events\\Battle\\FootHold",
+      "GUID": "{10CD47FD-2737-4FC5-838F-324E7319A99D}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.3666666",
+      "DurationMax": "2.3666666",
+      "MediaRefs": [
+       {
+        "Id": "21977701"
        }
       ]
      },
@@ -877,11 +1055,11 @@
       "ObjectPath": "\\Events\\Function\\GetEnergy",
       "GUID": "{6E8F66B2-EB03-4F0A-8B49-E9AE45CCB6A2}",
       "DurationType": "OneShot",
-      "DurationMin": "0.238",
-      "DurationMax": "0.238",
+      "DurationMin": "2.9286563",
+      "DurationMax": "2.9286563",
       "MediaRefs": [
        {
-        "Id": "518217883"
+        "Id": "618711237"
        }
       ]
      },
@@ -1120,6 +1298,37 @@
       ]
      },
      {
+      "Id": "1199896708",
+      "Name": "Thorn",
+      "ObjectPath": "\\Events\\Battle\\Thorn",
+      "GUID": "{4AE1C1D1-DA2E-4B65-BBB6-736EE30967AC}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.4541763",
+      "DurationMax": "1.4541763",
+      "MediaRefs": [
+       {
+        "Id": "69006938"
+       },
+       {
+        "Id": "901777490"
+       }
+      ]
+     },
+     {
+      "Id": "209214979",
+      "Name": "ThornOfLove",
+      "ObjectPath": "\\Events\\Battle\\ThornOfLove",
+      "GUID": "{A935BF81-E68F-4CB0-8ACF-058DFEA22F52}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.4388847",
+      "DurationMax": "3.4388847",
+      "MediaRefs": [
+       {
+        "Id": "87478675"
+       }
+      ]
+     },
+     {
       "Id": "571634470",
       "Name": "Title_BGM",
       "ObjectPath": "\\Events\\MUS\\Title_BGM",
@@ -1170,6 +1379,6 @@
     ]
    }
   ],
-  "FileHash": "{59D8B128-50E5-C3CB-6F25-001849923190}"
+  "FileHash": "{9425C089-04EA-F887-2C8C-FF3050A1CFEF}"
  }
 }

@@ -12,7 +12,7 @@
 						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>-13</Value>
+								<Value>-23</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -53,7 +53,6 @@
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
-							<ObjectLists/>
 							<ActiveSourceList>
 								<ActiveSource Name="Ambi_HerbWorld_LeavesTallGrassWind" ID="{2AB9AA8F-848C-4F2F-926D-637543DF48CD}" Platform="Linked"/>
 							</ActiveSourceList>
@@ -81,7 +80,6 @@
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
-							<ObjectLists/>
 							<ActiveSourceList>
 								<ActiveSource Name="Ambi_HerbWorld_Wind" ID="{368A8EA1-6319-45A1-A7D8-FA844DE0C593}" Platform="Linked"/>
 							</ActiveSourceList>
@@ -116,13 +114,11 @@
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
-							<ObjectLists/>
 							<ActiveSourceList>
 								<ActiveSource Name="whitenoise_MSL" ID="{3EAC5573-66CA-4222-B4CC-1E81963604DE}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
-					<ObjectLists/>
 				</BlendContainer>
 			</ChildrenList>
 		</WorkUnit>
