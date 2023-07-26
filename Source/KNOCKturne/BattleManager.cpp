@@ -63,6 +63,9 @@ void ABattleManager::StartPeppyTurn() {
 }
 
 void ABattleManager::TurnChange() {
+	for (auto SkillActor : SkillActorsOnField) {
+		SkillActor->Destroy();
+	}
 	SkillActorsOnField.Empty();
 
 	switch (CurrentTurnType) {
