@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{07BBA84E-DF8A-38E3-5102-31C07BF755AA}",
+    "Hash": "{DDC80CE4-F081-E9B6-B094-69BCAAB37B99}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -80,6 +80,14 @@
       "CachePath": "SFX/SFX_PeppyWalk_Snow2_10C4C929.wem"
      },
      {
+      "Id": "126380491",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch.wav",
+      "CachePath": "SFX/ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem"
+     },
+     {
       "Id": "142174096",
       "Language": "SFX",
       "Streaming": "false",
@@ -88,12 +96,20 @@
       "CachePath": "SFX/ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem"
      },
      {
+      "Id": "151749542",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard.wav",
+      "CachePath": "SFX/ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard_10C4C929.wem"
+     },
+     {
       "Id": "164875334",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Text_Typing.wav",
-      "CachePath": "SFX/SFX_Text_Typing_C5579977.wem"
+      "CachePath": "SFX/SFX_Text_Typing_AB0232D0.wem"
      },
      {
       "Id": "193027794",
@@ -101,15 +117,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_UI_Select.wav",
-      "CachePath": "SFX/SFX_UI_Select_10C4C929.wem"
-     },
-     {
-      "Id": "201523215",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "UI_cancle.wav",
-      "CachePath": "SFX/UI_cancle_10C4C929.wem"
+      "CachePath": "SFX/SFX_UI_Select_91887BCD.wem"
      },
      {
       "Id": "210552255",
@@ -136,12 +144,36 @@
       "CachePath": "SFX/SFX_PeppyWalk_Stone1_10C4C929.wem"
      },
      {
+      "Id": "228758831",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast.wav",
+      "CachePath": "SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_0F3B2818.wem"
+     },
+     {
       "Id": "257835999",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BRS_Roomtone_House_Open_Lite_Birds-Fridge.wav",
       "CachePath": "SFX/BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem"
+     },
+     {
+      "Id": "292972715",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BRS_SFX_Twinkle_Rings_Out_Lite_1.wav",
+      "CachePath": "SFX/BRS_SFX_Twinkle_Rings_Out_Lite_1_10C4C929.wem"
+     },
+     {
+      "Id": "304755768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard.wav",
+      "CachePath": "SFX/ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard_10C4C929.wem"
      },
      {
       "Id": "317160281",
@@ -182,6 +214,14 @@
       "Location": "Memory",
       "ShortName": "UI_Hover.wav",
       "CachePath": "SFX/UI_Hover_1AA38C9C.wem"
+     },
+     {
+      "Id": "388135562",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch.wav",
+      "CachePath": "SFX/ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem"
      },
      {
       "Id": "391750526",
@@ -240,6 +280,14 @@
       "CachePath": "SFX/SFX_PeppyWalk_Grass2_10C4C929.wem"
      },
      {
+      "Id": "515698632",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BookPaperback_S08FO.177.wav",
+      "CachePath": "SFX/BookPaperback_S08FO.177_10C4C929.wem"
+     },
+     {
       "Id": "534625915",
       "Language": "SFX",
       "Streaming": "false",
@@ -254,6 +302,14 @@
       "Location": "Memory",
       "ShortName": "BattleLast.wav",
       "CachePath": "SFX/BattleLast_D79FB2B7.wem"
+     },
+     {
+      "Id": "571000522",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MO_US_atmosphere_echolocation_C.wav",
+      "CachePath": "SFX/MO_US_atmosphere_echolocation_C_563154D7.wem"
      },
      {
       "Id": "575546989",
@@ -286,14 +342,6 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Water2.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Water2_10C4C929.wem"
-     },
-     {
-      "Id": "667706857",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie.wav",
-      "CachePath": "SFX/ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie_10C4C929.wem"
      },
      {
       "Id": "727224766",
@@ -334,14 +382,6 @@
       "Location": "Memory",
       "ShortName": "whitenoise_MSL.wav",
       "CachePath": "SFX/whitenoise_MSL_594EBFCF.wem"
-     },
-     {
-      "Id": "803416028",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab.wav",
-      "CachePath": "SFX/ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab_10C4C929.wem"
      },
      {
       "Id": "813775076",
@@ -390,6 +430,14 @@
       "Location": "Memory",
       "ShortName": "IsNotBattle_160.wav",
       "CachePath": "SFX/IsNotBattle_160_D79FB2B7.wem"
+     },
+     {
+      "Id": "871458575",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CaveWaterDrips_SFXB.24.wav",
+      "CachePath": "SFX/CaveWaterDrips_SFXB.24_78D83621.wem"
      },
      {
       "Id": "901777490",
@@ -462,14 +510,6 @@
       "Location": "Memory",
       "ShortName": "BGM_Title_71bpm4-4.wav",
       "CachePath": "SFX/BGM_Title_71bpm4-4_D79FB2B7.wem"
-     },
-     {
-      "Id": "1070365854",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup.wav",
-      "CachePath": "SFX/ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup_10C4C929.wem"
      }
     ],
     "Events": [
@@ -568,11 +608,11 @@
       "ObjectPath": "\\Events\\Function\\CancleUI",
       "GUID": "{048AD721-7F3B-474D-8E85-D49B349CDF7A}",
       "DurationType": "OneShot",
-      "DurationMin": "0.5",
-      "DurationMax": "0.5",
+      "DurationMin": "0.625",
+      "DurationMax": "0.625",
       "MediaRefs": [
        {
-        "Id": "201523215"
+        "Id": "388135562"
        }
       ]
      },
@@ -684,19 +724,50 @@
       ]
      },
      {
+      "Id": "3736921243",
+      "Name": "DreamDiary",
+      "ObjectPath": "\\Events\\SFX\\DreamDiary",
+      "GUID": "{8EDC9439-0443-498C-92C5-39AC1C2460E0}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6666667",
+      "DurationMax": "0.6666667",
+      "MediaRefs": [
+       {
+        "Id": "515698632"
+       }
+      ]
+     },
+     {
       "Id": "4212918798",
       "Name": "Efficient",
       "ObjectPath": "\\Events\\Battle\\Efficient",
       "GUID": "{03EF2582-E71C-491B-BB92-57B3C037DD49}",
       "DurationType": "OneShot",
-      "DurationMin": "2.912",
-      "DurationMax": "2.912",
+      "DurationMin": "3.1529577",
+      "DurationMax": "3.1529577",
       "MediaRefs": [
        {
-        "Id": "803416028"
+        "Id": "151749542"
        },
        {
-        "Id": "1070365854"
+        "Id": "228758831"
+       }
+      ]
+     },
+     {
+      "Id": "3146275604",
+      "Name": "Emotion",
+      "ObjectPath": "\\Events\\Battle\\Emotion",
+      "GUID": "{4B707923-7781-411A-8B52-B83F58F30CB8}",
+      "DurationType": "OneShot",
+      "DurationMin": "5.6293697",
+      "DurationMax": "5.6293697",
+      "MediaRefs": [
+       {
+        "Id": "571000522"
+       },
+       {
+        "Id": "871458575"
        }
       ]
      },
@@ -968,11 +1039,11 @@
       "ObjectPath": "\\Events\\Battle\\PeppyHit",
       "GUID": "{72D96420-AD04-444C-9A29-E641F18D530C}",
       "DurationType": "OneShot",
-      "DurationMin": "1.1235417",
-      "DurationMax": "1.1235417",
+      "DurationMin": "0.9190417",
+      "DurationMax": "0.9190417",
       "MediaRefs": [
        {
-        "Id": "667706857"
+        "Id": "126380491"
        }
       ]
      },
@@ -1037,7 +1108,9 @@
       "Name": "TextPrint",
       "ObjectPath": "\\Events\\Function\\TextPrint",
       "GUID": "{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}",
-      "DurationType": "Infinite",
+      "DurationType": "OneShot",
+      "DurationMin": "0.23394495",
+      "DurationMax": "0.23394495",
       "MediaRefs": [
        {
         "Id": "164875334"
@@ -1101,6 +1174,23 @@
         "Id": "1062413066"
        }
       ]
+     },
+     {
+      "Id": "362194202",
+      "Name": "WithYou",
+      "ObjectPath": "\\Events\\Battle\\WithYou",
+      "GUID": "{D8F42C19-B4B0-4981-8F03-66BE21B77997}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.8645806",
+      "DurationMax": "4.8645806",
+      "MediaRefs": [
+       {
+        "Id": "292972715"
+       },
+       {
+        "Id": "304755768"
+       }
+      ]
      }
     ],
     "StateGroups": [
@@ -1141,6 +1231,6 @@
     ]
    }
   ],
-  "FileHash": "{FF0A6CB0-610C-9900-A4E8-3E9413BDA75B}"
+  "FileHash": "{84FDE53F-F2F5-24FB-44B7-D007760941ED}"
  }
 }

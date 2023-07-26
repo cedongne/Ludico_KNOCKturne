@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<SoundBanks>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{07BBA84E-DF8A-38E3-5102-31C07BF755AA}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{DDC80CE4-F081-E9B6-B094-69BCAAB37B99}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -38,21 +38,25 @@
 					<ShortName>SFX_PeppyWalk_Snow2.wav</ShortName>
 					<CachePath>SFX/SFX_PeppyWalk_Snow2_10C4C929.wem</CachePath>
 				</File>
+				<File Id="126380491" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch.wav</ShortName>
+					<CachePath>SFX/ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem</CachePath>
+				</File>
 				<File Id="142174096" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer.wav</ShortName>
 					<CachePath>SFX/ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem</CachePath>
 				</File>
+				<File Id="151749542" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard.wav</ShortName>
+					<CachePath>SFX/ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard_10C4C929.wem</CachePath>
+				</File>
 				<File Id="164875334" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_Text_Typing.wav</ShortName>
-					<CachePath>SFX/SFX_Text_Typing_C5579977.wem</CachePath>
+					<CachePath>SFX/SFX_Text_Typing_AB0232D0.wem</CachePath>
 				</File>
 				<File Id="193027794" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_UI_Select.wav</ShortName>
-					<CachePath>SFX/SFX_UI_Select_10C4C929.wem</CachePath>
-				</File>
-				<File Id="201523215" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>UI_cancle.wav</ShortName>
-					<CachePath>SFX/UI_cancle_10C4C929.wem</CachePath>
+					<CachePath>SFX/SFX_UI_Select_91887BCD.wem</CachePath>
 				</File>
 				<File Id="210552255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Skill_SweepGarden.wav</ShortName>
@@ -66,9 +70,21 @@
 					<ShortName>SFX_PeppyWalk_Stone1.wav</ShortName>
 					<CachePath>SFX/SFX_PeppyWalk_Stone1_10C4C929.wem</CachePath>
 				</File>
+				<File Id="228758831" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast.wav</ShortName>
+					<CachePath>SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_0F3B2818.wem</CachePath>
+				</File>
 				<File Id="257835999" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BRS_Roomtone_House_Open_Lite_Birds-Fridge.wav</ShortName>
 					<CachePath>SFX/BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem</CachePath>
+				</File>
+				<File Id="292972715" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BRS_SFX_Twinkle_Rings_Out_Lite_1.wav</ShortName>
+					<CachePath>SFX/BRS_SFX_Twinkle_Rings_Out_Lite_1_10C4C929.wem</CachePath>
+				</File>
+				<File Id="304755768" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard.wav</ShortName>
+					<CachePath>SFX/ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard_10C4C929.wem</CachePath>
 				</File>
 				<File Id="317160281" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Grass3.wav</ShortName>
@@ -89,6 +105,10 @@
 				<File Id="383708649" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>UI_Hover.wav</ShortName>
 					<CachePath>SFX/UI_Hover_1AA38C9C.wem</CachePath>
+				</File>
+				<File Id="388135562" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch.wav</ShortName>
+					<CachePath>SFX/ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem</CachePath>
 				</File>
 				<File Id="391750526" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>FF_CL_ambience_busy_london_streets_totenham_court_road.wav</ShortName>
@@ -118,6 +138,10 @@
 					<ShortName>SFX_PeppyWalk_Grass2.wav</ShortName>
 					<CachePath>SFX/SFX_PeppyWalk_Grass2_10C4C929.wem</CachePath>
 				</File>
+				<File Id="515698632" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BookPaperback_S08FO.177.wav</ShortName>
+					<CachePath>SFX/BookPaperback_S08FO.177_10C4C929.wem</CachePath>
+				</File>
 				<File Id="534625915" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BGM_Credit_75bpm4-4_L29M.wav</ShortName>
 					<CachePath>SFX/BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem</CachePath>
@@ -125,6 +149,10 @@
 				<File Id="566353784" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BattleLast.wav</ShortName>
 					<CachePath>SFX/BattleLast_D79FB2B7.wem</CachePath>
+				</File>
+				<File Id="571000522" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>MO_US_atmosphere_echolocation_C.wav</ShortName>
+					<CachePath>SFX/MO_US_atmosphere_echolocation_C_563154D7.wem</CachePath>
 				</File>
 				<File Id="575546989" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ObjectFind2.wav</ShortName>
@@ -141,10 +169,6 @@
 				<File Id="638760269" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Water2.wav</ShortName>
 					<CachePath>SFX/SFX_PeppyWalk_Water2_10C4C929.wem</CachePath>
-				</File>
-				<File Id="667706857" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie.wav</ShortName>
-					<CachePath>SFX/ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie_10C4C929.wem</CachePath>
 				</File>
 				<File Id="727224766" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ambi_HerbWorld_Wind.wav</ShortName>
@@ -165,10 +189,6 @@
 				<File Id="783667508" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>whitenoise_MSL.wav</ShortName>
 					<CachePath>SFX/whitenoise_MSL_594EBFCF.wem</CachePath>
-				</File>
-				<File Id="803416028" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab.wav</ShortName>
-					<CachePath>SFX/ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab_10C4C929.wem</CachePath>
 				</File>
 				<File Id="813775076" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Water3.wav</ShortName>
@@ -193,6 +213,10 @@
 				<File Id="870395132" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>IsNotBattle_160.wav</ShortName>
 					<CachePath>SFX/IsNotBattle_160_D79FB2B7.wem</CachePath>
+				</File>
+				<File Id="871458575" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>CaveWaterDrips_SFXB.24.wav</ShortName>
+					<CachePath>SFX/CaveWaterDrips_SFXB.24_78D83621.wem</CachePath>
 				</File>
 				<File Id="901777490" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MGxSM_snap_dry_stick_and_leaf_11.wav</ShortName>
@@ -229,10 +253,6 @@
 				<File Id="1062413066" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BGM_Title_71bpm4-4.wav</ShortName>
 					<CachePath>SFX/BGM_Title_71bpm4-4_D79FB2B7.wem</CachePath>
-				</File>
-				<File Id="1070365854" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup.wav</ShortName>
-					<CachePath>SFX/ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup_10C4C929.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
@@ -274,9 +294,9 @@
 						<MediaRef Id="397593734"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1126058891" Name="CancleUI" ObjectPath="\Events\Function\CancleUI" GUID="{048AD721-7F3B-474D-8E85-D49B349CDF7A}" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
+				<Event Id="1126058891" Name="CancleUI" ObjectPath="\Events\Function\CancleUI" GUID="{048AD721-7F3B-474D-8E85-D49B349CDF7A}" DurationType="OneShot" DurationMin="0.625" DurationMax="0.625">
 					<MediaRefs>
-						<MediaRef Id="201523215"/>
+						<MediaRef Id="388135562"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3755255244" Name="CharmingVoice" ObjectPath="\Events\Battle\CharmingVoice" GUID="{F50D849D-2805-47FF-8B87-DACE410819E0}" DurationType="OneShot" DurationMin="4.4904537" DurationMax="4.4904537">
@@ -317,10 +337,21 @@
 						<MediaRef Id="903646689"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="4212918798" Name="Efficient" ObjectPath="\Events\Battle\Efficient" GUID="{03EF2582-E71C-491B-BB92-57B3C037DD49}" DurationType="OneShot" DurationMin="2.912" DurationMax="2.912">
+				<Event Id="3736921243" Name="DreamDiary" ObjectPath="\Events\SFX\DreamDiary" GUID="{8EDC9439-0443-498C-92C5-39AC1C2460E0}" DurationType="OneShot" DurationMin="0.6666667" DurationMax="0.6666667">
 					<MediaRefs>
-						<MediaRef Id="803416028"/>
-						<MediaRef Id="1070365854"/>
+						<MediaRef Id="515698632"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4212918798" Name="Efficient" ObjectPath="\Events\Battle\Efficient" GUID="{03EF2582-E71C-491B-BB92-57B3C037DD49}" DurationType="OneShot" DurationMin="3.1529577" DurationMax="3.1529577">
+					<MediaRefs>
+						<MediaRef Id="151749542"/>
+						<MediaRef Id="228758831"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3146275604" Name="Emotion" ObjectPath="\Events\Battle\Emotion" GUID="{4B707923-7781-411A-8B52-B83F58F30CB8}" DurationType="OneShot" DurationMin="5.6293697" DurationMax="5.6293697">
+					<MediaRefs>
+						<MediaRef Id="571000522"/>
+						<MediaRef Id="871458575"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="1227874634" Name="FootHold" ObjectPath="\Events\Battle\FootHold" GUID="{10CD47FD-2737-4FC5-838F-324E7319A99D}" DurationType="OneShot" DurationMin="2.3666666" DurationMax="2.3666666">
@@ -416,9 +447,9 @@
 						<MediaRef Id="575546989"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="530906524" Name="PeppyHit" ObjectPath="\Events\Battle\PeppyHit" GUID="{72D96420-AD04-444C-9A29-E641F18D530C}" DurationType="OneShot" DurationMin="1.1235417" DurationMax="1.1235417">
+				<Event Id="530906524" Name="PeppyHit" ObjectPath="\Events\Battle\PeppyHit" GUID="{72D96420-AD04-444C-9A29-E641F18D530C}" DurationType="OneShot" DurationMin="0.9190417" DurationMax="0.9190417">
 					<MediaRefs>
-						<MediaRef Id="667706857"/>
+						<MediaRef Id="126380491"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2653972741" Name="PeppyJump" ObjectPath="\Events\SFX\PeppyJump" GUID="{4775DCBC-4C56-41C2-B4C5-10125DB0437C}" DurationType="OneShot" DurationMin="0.5297316" DurationMax="0.5297316">
@@ -441,7 +472,7 @@
 						<MediaRef Id="210552255"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="424777189" Name="TextPrint" ObjectPath="\Events\Function\TextPrint" GUID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}" DurationType="Infinite">
+				<Event Id="424777189" Name="TextPrint" ObjectPath="\Events\Function\TextPrint" GUID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}" DurationType="OneShot" DurationMin="0.23394495" DurationMax="0.23394495">
 					<MediaRefs>
 						<MediaRef Id="164875334"/>
 					</MediaRefs>
@@ -467,6 +498,12 @@
 						<MediaRef Id="1062413066"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="362194202" Name="WithYou" ObjectPath="\Events\Battle\WithYou" GUID="{D8F42C19-B4B0-4981-8F03-66BE21B77997}" DurationType="OneShot" DurationMin="4.8645806" DurationMax="4.8645806">
+					<MediaRefs>
+						<MediaRef Id="292972715"/>
+						<MediaRef Id="304755768"/>
+					</MediaRefs>
+				</Event>
 			</Events>
 			<StateGroups>
 				<StateGroup Id="2675729146" Name="BattleState" ObjectPath="\States\Default Work Unit\BattleState" GUID="{A6041A1D-4540-4327-B6FF-DB44CCFCE55C}">
@@ -482,5 +519,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{02B7CC23-185C-A297-2992-4FFEAE13EB75}</FileHash>
+	<FileHash>{678C39AC-C11A-8AB2-4D6B-9425D502BEB4}</FileHash>
 </SoundBanksInfo>

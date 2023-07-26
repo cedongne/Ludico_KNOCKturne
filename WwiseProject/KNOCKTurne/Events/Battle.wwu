@@ -113,6 +113,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="WithYou" ID="{D8F42C19-B4B0-4981-8F03-66BE21B77997}">
+					<ChildrenList>
+						<Action Name="" ID="{FBC7EBDB-6E90-44DF-8E8B-E5BA101CF121}" ShortID="326232265">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="WithYou" ID="{BB2E8EAE-CC98-487C-AAF0-CAB220F9E7CA}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Emotion" ID="{4B707923-7781-411A-8B52-B83F58F30CB8}">
+					<ChildrenList>
+						<Action Name="" ID="{A2141DFE-BC4D-45FD-9BFC-1B18C6D7811F}" ShortID="931130803">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Emotion" ID="{3EE4CADD-E613-4D60-9F4F-94B3AC8167A8}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

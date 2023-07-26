@@ -8,6 +8,7 @@
 						<ObjectRef Name="CharmingVoice" ID="{75C0F820-469E-4011-9D1B-61FE6C396D2F}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HubWorldAmbi" ID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="LampOn2" ID="{EA179644-0855-401D-8DD3-C342DBD4C996}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Emotion" ID="{4B707923-7781-411A-8B52-B83F58F30CB8}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HoverUI" ID="{88A8DAC3-07D2-412F-99A4-04F63B74E84D}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Function" ID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="IntroCutScene" ID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
@@ -44,6 +45,7 @@
 						<ObjectRef Name="FS_Wood" ID="{DD2E90E2-F0F5-4774-B164-C66BD9FC748A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX_PeppyWalk_Grass2" ID="{C4175A07-3731-4786-A0C9-9FCE7591C044}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="CharmingVoice" ID="{F50D849D-2805-47FF-8B87-DACE410819E0}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="WithYou" ID="{BB2E8EAE-CC98-487C-AAF0-CAB220F9E7CA}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Events" ID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" WorkUnitID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Battle" ID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Water" ID="{2B66B87B-9F0C-4896-BD66-703D22486212}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
@@ -52,6 +54,7 @@
 						<ObjectRef Name="FS_Snow" ID="{657CEC4F-CB00-4921-A27B-09560E379D46}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Notice" ID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="DreamDiary" ID="{8EDC9439-0443-498C-92C5-39AC1C2460E0}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="BattleDoor" ID="{B7AC811E-757D-49E2-AE55-907EEE57B394}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="cancle" ID="{55685DA4-0CCC-4A35-88FD-862169CC2331}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX_PeppyWalk_Grass1" ID="{17DF8C1E-89BE-4A3D-ADA1-4861A35FE52B}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
