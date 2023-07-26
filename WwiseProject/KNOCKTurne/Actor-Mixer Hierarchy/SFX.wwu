@@ -488,7 +488,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-1</Value>
+										<Value>-8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -524,7 +524,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-20</Value>
+										<Value>-12</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -558,7 +558,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-9</Value>
+										<Value>-17</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -669,6 +669,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<BlendContainer Name="CharmingVoice" ID="{4464E0DD-226C-4AFE-ADFA-27B709009DDF}" ShortID="577378039">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-5</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -753,7 +760,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-7</Value>
+										<Value>-12</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -773,6 +780,11 @@
 												<Value>1</Value>
 											</ValueList>
 										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -790,12 +802,36 @@
 												<MediaID ID="1070365854"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast" ID="{D0174FEE-814D-44CF-88C7-B9AFBAE792A4}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.170103974514563"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.462073483009709"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="228758831"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup" ID="{39470EC4-2957-41CF-9967-0461DFFCDD7A}" Platform="Linked"/>
+										<ActiveSource Name="ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast" ID="{D0174FEE-814D-44CF-88C7-B9AFBAE792A4}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab" ID="{C9226E3B-5420-4E42-BCEA-05499D168240}" ShortID="753906972">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>18</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-8</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -812,9 +848,16 @@
 												<MediaID ID="803416028"/>
 											</MediaIDList>
 										</AudioFileSource>
+										<AudioFileSource Name="ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard" ID="{5F847EC9-219A-483C-8905-0CBC44B69B70}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="151749542"/>
+											</MediaIDList>
+										</AudioFileSource>
 									</ChildrenList>
 									<ActiveSourceList>
-										<ActiveSource Name="ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab" ID="{DBDA4353-C71F-4A2F-A544-519F0EED3CCE}" Platform="Linked"/>
+										<ActiveSource Name="ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard" ID="{5F847EC9-219A-483C-8905-0CBC44B69B70}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -823,7 +866,7 @@
 							<PropertyList>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-8</Value>
+										<Value>-15</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -905,6 +948,18 @@
 							</ChildrenList>
 						</BlendContainer>
 						<BlendContainer Name="Emotion" ID="{3EE4CADD-E613-4D60-9F4F-94B3AC8167A8}" ShortID="509460703">
+							<PropertyList>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>42</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-15</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -913,6 +968,149 @@
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="CaveWaterDrips_SFXB_24" ID="{704056AD-2827-4A56-A161-433C77E0C18C}" ShortID="785834363">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="CaveWaterDrips_SFXB_24" ID="{DD23828F-5059-4956-B87E-A7E2CA980ACC}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="2.8294213592233"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="5.62936957928803"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>CaveWaterDrips_SFXB.24.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="871458575"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="CaveWaterDrips_SFXB_24" ID="{DD23828F-5059-4956-B87E-A7E2CA980ACC}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="MO_US_atmosphere_echolocation_C" ID="{33FCD0A1-F9EE-4C42-9F26-B3B359C22722}" ShortID="844914495">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="MO_US_atmosphere_echolocation_C" ID="{E4F82A8F-BAA0-41A6-B865-2A144C84873C}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="2.68140783303613"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="2.68140783303613"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>MO_US_atmosphere_echolocation_C.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="571000522"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="MO_US_atmosphere_echolocation_C" ID="{E4F82A8F-BAA0-41A6-B865-2A144C84873C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
+						<BlendContainer Name="WithYou" ID="{BB2E8EAE-CC98-487C-AAF0-CAB220F9E7CA}" ShortID="94879120">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-8</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="ESM_Fantasy_Game_Magic_Ring_Pickup_A_Spell_Cast_Instant_Hit_Wizard" ID="{8E5C11E7-180B-498E-8FD4-B9ADC7881016}" ShortID="450248476">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>35</Value>
+											</ValueList>
+										</Property>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-15</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_Fantasy_Game_Magic_Ring_Pickup_A_Spell_Cast_Instant_Hit_Wizard" ID="{57E145D8-CDDC-4466-9EF4-6325975EC0BD}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_Fantasy_Game_Magic_Ring_Pickup_A_Spell_Cast_Instant_Hit_Wizard.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="98763917"/>
+											</MediaIDList>
+										</AudioFileSource>
+										<AudioFileSource Name="ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard" ID="{FD2F0E06-B857-4DA7-BCF5-1ACBC8460B79}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="304755768"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_Fantasy_Game_Item_Collect_Magic_A_Spell_Cast_Instant_Hit_Wizard" ID="{FD2F0E06-B857-4DA7-BCF5-1ACBC8460B79}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="BRS_SFX_Twinkle_Rings_Out_Lite_1" ID="{DE14F693-3EF9-4977-87EF-51016F59DC51}" ShortID="189355635">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="BRS_SFX_Twinkle_Rings_Out_Lite_1" ID="{E3BD982E-B535-4786-A85A-EF68953D6BDF}">
+											<Language>SFX</Language>
+											<AudioFile>BRS_SFX_Twinkle_Rings_Out_Lite_1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="292972715"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="BRS_SFX_Twinkle_Rings_Out_Lite_1" ID="{E3BD982E-B535-4786-A85A-EF68953D6BDF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
 						</BlendContainer>
 					</ChildrenList>
 				</ActorMixer>
@@ -1072,7 +1270,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-7</Value>
+										<Value>-16</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1092,9 +1290,16 @@
 										<MediaID ID="201523215"/>
 									</MediaIDList>
 								</AudioFileSource>
+								<AudioFileSource Name="ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch" ID="{7B2C273C-69F8-4ABC-8956-58FC3A2B2560}">
+									<Language>SFX</Language>
+									<AudioFile>ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="388135562"/>
+									</MediaIDList>
+								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="UI_cancle" ID="{61CB7493-91E8-44CC-8556-6564EA188986}" Platform="Linked"/>
+								<ActiveSource Name="ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch" ID="{7B2C273C-69F8-4ABC-8956-58FC3A2B2560}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" ShortID="438200621">
@@ -1108,7 +1313,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-4</Value>
+										<Value>-17</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1122,10 +1327,22 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="SFX_UI_Select" ID="{BC8FB27F-257D-46DB-AF79-0B9E7B946115}">
+									<PropertyList>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.338834951456311"/>
+										<Property Name="LoopBegin" Type="Real64" Value="0"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>SFX_UI_Select.wav</AudioFile>
 									<MediaIDList>
 										<MediaID ID="193027794"/>
+									</MediaIDList>
+								</AudioFileSource>
+								<AudioFileSource Name="ESM_Fantasy_Game_Crafting_UI_Tab_Button_5_Spell_Cast_Click_Switch_Lever_Latch" ID="{26BE0830-05DC-4BEE-B18E-FD48A75AC287}">
+									<Language>SFX</Language>
+									<AudioFile>ESM_Fantasy_Game_Crafting_UI_Tab_Button_5_Spell_Cast_Click_Switch_Lever_Latch.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="682082745"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
