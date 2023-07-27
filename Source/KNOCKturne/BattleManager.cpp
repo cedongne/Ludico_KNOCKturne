@@ -63,10 +63,12 @@ void ABattleManager::StartPeppyTurn() {
 }
 
 void ABattleManager::TurnChange() {
-	for (auto SkillActor : SkillActorsOnField) {
-		SkillActor->Destroy();
+	if (SkillActorsOnField.Num() > 0) {
+		for (auto SkillActor : SkillActorsOnField) {
+			SkillActor->Destroy();
+		}
+		SkillActorsOnField.Empty();
 	}
-	SkillActorsOnField.Empty();
 
 	switch (CurrentTurnType) {
 	case BossTurn:
