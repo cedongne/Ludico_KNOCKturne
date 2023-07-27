@@ -152,6 +152,11 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 		}
 		OperateBossSkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexBossSkillDataSet(IndexCount, &SkillData), RefActor);
 	}
+
+	if (CurPeppyStat.EP <= 0) {
+		CurPeppyStat.EP = 0;
+		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
+	}
 }
 
 void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
