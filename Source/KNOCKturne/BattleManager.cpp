@@ -41,7 +41,7 @@ void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 
 	ProcessDamageBeforeStartTurn();
-	SetLeftCurrentTurnTime(10);
+	SetLeftCurrentTurnTime(BattleTableManager->CurBossStat.Turn);
 	BP_StartBossTurn();
 }
 
@@ -58,7 +58,7 @@ void ABattleManager::BP_InitStartBossTurn() {
 }
 
 void ABattleManager::StartPeppyTurn() {
-	SetLeftCurrentTurnTime(10);
+	SetLeftCurrentTurnTime(BattleTableManager->CurPeppyStat.Turn);
 	BP_StartPeppyTurn();
 }
 
