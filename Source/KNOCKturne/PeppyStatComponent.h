@@ -42,6 +42,8 @@ protected:
 	void SpendEnergy(float Value);
 
 private:
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
+
 	FPeppyStatData CurStatData;
 	FPeppyStatData MinStatData;
 	FPeppyStatData MaxStatData;

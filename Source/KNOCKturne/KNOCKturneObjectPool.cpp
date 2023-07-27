@@ -45,6 +45,7 @@ APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
 
 	LastIndex = (LastIndex + 1) % PoolSize;
 	ObjectPool[LastIndex]->SetActive(true);
+	ObjectPool[LastIndex]->SetActorEnableCollision(true);
 	return ObjectPool[LastIndex];
 }
 

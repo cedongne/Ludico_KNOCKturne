@@ -37,7 +37,7 @@ void UPeppyStatComponent::InitializeComponent() {
 void UPeppyStatComponent::SetDefaultStat() {
 	auto KNOCKturneGameInstance = Cast<UKNOCKturneGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	NTCHECK(KNOCKturneGameInstance != nullptr);
-	auto BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	NTCHECK(BattleTableManagerSystem != nullptr);
 	
 	CurStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Init");
@@ -67,7 +67,7 @@ void UPeppyStatComponent::Heal(float Value) {
 }
 
 void UPeppyStatComponent::GainEnergy(float Value) {
-	CurrentEP = FMath::Clamp<float>(CurrentEP + Value, MinStatData.MaxEP, MaxStatData.MaxEP);
+	BattleTableManagerSystem->CurPeppyStat.Energy = FMath::Clamp<float>(BattleTableManagerSystem->CurPeppyStat.Energy + Value, MinStatData.Energy, MaxStatData.Energy);
 	NTLOG(Warning, TEXT("Gain energy %lf"), Value);
 }
 
