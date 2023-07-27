@@ -231,6 +231,11 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppyS
 
 		OperatePeppySkillByIndex(SkillIndexes[IndexCount], TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(IndexCount, &SkillData), RefActor);
 	}
+
+	if (CurBossStat.EP <= 0) {
+		CurBossStat.EP = 0;
+		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
+	}
 }
 
 void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 SkillIndex, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor) {
