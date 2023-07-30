@@ -20,7 +20,6 @@ void APeppySkillActor::LoadSkillDataFromDataTable() {
 
 void APeppySkillActor::UseSkill() {
 	BattleTableManagerSystem->UsePeppySkill(SkillData, this);
-	BattleManager->GetBossActor()->Die();
 }
 
 /*
