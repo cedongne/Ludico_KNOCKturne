@@ -131,3 +131,11 @@ TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
 void UBattleManagerSystem::AddSelectedSkillActorClassList(TSubclassOf<AActor> SkillActor) {
 	SelectedSkillActorClassList.Add(SkillActor);
 }
+
+void UBattleManagerSystem::UpdateDreamDiaryWhenGameOver() {
+	DreamDiaryOpenRow = FMath::Clamp((DreamDiaryOpenRow + 1), 0, 4);
+}
+
+void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {
+	DreamDiaryOpenRow = 3;
+}

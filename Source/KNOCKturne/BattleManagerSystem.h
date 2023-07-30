@@ -126,4 +126,9 @@ public:
 	// 꿈 일기 해금 열 - 1
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateDreamDiaryWhenGameOver();
+	UFUNCTION(BlueprintCallable)
+	void UpdateDreamDiaryWhenGameClear();
 };
