@@ -7,31 +7,23 @@
 
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values for this component's properties
 UPeppyStatComponent::UPeppyStatComponent()
 {
-	PrimaryComponentTick.bCanEverTick = false;
-
-	// It makes call InitializeComponent() method
 	bWantsInitializeComponent = true;
 	CurrentEP = 0;
 }
 
 
-// Called when the game starts
 void UPeppyStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	SetDefaultStat();
 	
 }
 
 void UPeppyStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
-
-	SetDefaultStat();
-//	NTLOG(Warning, TEXT("%lf"), CurrentEP);
 }
 
 void UPeppyStatComponent::SetDefaultStat() {
