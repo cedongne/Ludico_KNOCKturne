@@ -5,12 +5,13 @@
 #include "BattleTableManagerSystem.h"
 #include "KNOCKturneGameInstance.h"
 
+#include "Peppy.h"
+
 #include "Kismet/GameplayStatics.h"
 
 UPeppyStatComponent::UPeppyStatComponent()
 {
 	bWantsInitializeComponent = true;
-	CurrentEP = 0;
 }
 
 
@@ -19,7 +20,7 @@ void UPeppyStatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	SetDefaultStat();
-	
+	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 }
 
 void UPeppyStatComponent::InitializeComponent() {
@@ -31,47 +32,28 @@ void UPeppyStatComponent::SetDefaultStat() {
 	NTCHECK(KNOCKturneGameInstance != nullptr);
 	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	NTCHECK(BattleTableManagerSystem != nullptr);
+	BattleManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleManagerSystem>();
+	NTCHECK(BattleManagerSystem != nullptr);
 	
 	CurStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Init");
 	MinStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Min");
 	MaxStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Max");
-
-	MaxEP = CurStatData.MaxEP;
-	CurrentEP = CurStatData.MaxEP;
-	MaxEnergy = CurStatData.MaxEnergy;
-	CurrentEnergy = CurStatData.MaxEnergy;
-	SlidingCooldown = CurStatData.SlidingCooldown;
-	LeftSlidingCooltime = CurStatData.SlidingCooldown;
-	DefenseDamage = CurStatData.DefenseDamage;
 }
 
-void UPeppyStatComponent::GetDamaged(float Value) {
-	CurrentEP = FMath::Clamp<float>(CurrentEP - Value, MinStatData.MaxEP, MaxStatData.MaxEP);
-	if (CurrentEP == MinStatData.MaxEP) {
-		OnHPIsZero.Broadcast();
+bool UPeppyStatComponent::TryUpdateCurStatData(PeppyStatType StatType, float Value) {
+	switch (StatType) {
+	case PeppyStatType::EP:
+		CurStatData.EP = FMath::Clamp<float>(CurStatData.EP - Value, 0, CurStatData.MaxEP);
+		if (CurStatData.EP == 0) {
+			PeppyActor->Die();
+		}
+		break;
+	case PeppyStatType::Energy:
+		CurStatData.Energy = FMath::Clamp<float>(CurStatData.Energy - Value, 0, CurStatData.MaxEnergy);
+		break;
+	default:
+		NTLOG(Error, TEXT("PeppyStatType is invalid!"));
+		return false;
 	}
-	NTLOG(Warning, TEXT("Spend HP %lf"), Value);
-}
-
-void UPeppyStatComponent::Heal(float Value) {
-	CurrentEP = FMath::Clamp<float>(CurrentEP + Value, MinStatData.MaxEP, MaxStatData.MaxEP);
-	NTLOG(Warning, TEXT("Gain HP %lf"), Value);
-}
-
-void UPeppyStatComponent::GainEnergy(float Value) {
-	BattleTableManagerSystem->CurPeppyStat.Energy = FMath::Clamp<float>(BattleTableManagerSystem->CurPeppyStat.Energy + Value, MinStatData.Energy, MaxStatData.Energy);
-	NTLOG(Warning, TEXT("Gain energy %lf"), Value);
-}
-
-void UPeppyStatComponent::SpendEnergy(float Value) {
-	CurrentEP = FMath::Clamp<float>(CurrentEP - Value, MinStatData.MaxEP, MaxStatData.MaxEP);
-	NTLOG(Warning, TEXT("Spend energy %lf"), Value);
-}
-
-int32 UPeppyStatComponent::GetCurrentEP() {
-	return CurrentEP;
-}
-
-void UPeppyStatComponent::ChangeCurrentEP(int32 Value) {
-	CurrentEP += Value;
+	return true;
 }
