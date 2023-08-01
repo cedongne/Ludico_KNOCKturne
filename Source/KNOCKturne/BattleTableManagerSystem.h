@@ -369,6 +369,8 @@ public:
 
 private:
 	class UKNOCKturneGameInstance* GameInstance;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta=(AllowPrivateAccess = "true"))
+	class ABattleManager* BattleManager;
 
 	UPROPERTY()
 	class UDataTable* PeppyStatDataTable;

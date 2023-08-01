@@ -7,6 +7,7 @@
 #include "BuffComponent.h"
 #include "CalcUtil.h"
 #include "Peppy.h"
+#include "BattleManager.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
@@ -153,11 +154,6 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 		OperateBossSkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
 	}
 
-	if (CurPeppyStat.EP <= 0) {
-		NTLOG(Error, TEXT("Peppy die"));
-		CurPeppyStat.EP = 0;
-		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
-	}
 }
 
 void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
@@ -208,6 +204,12 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FC
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData->SkillIndex);
 	}
+
+	if (CurPeppyStat.EP <= 0) {
+		NTLOG(Error, TEXT("Peppy die"));
+		CurPeppyStat.EP = 0;
+		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
+	}
 }
 
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
@@ -231,12 +233,6 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppyS
 		}
 
 		OperatePeppySkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
-	}
-
-	if (CurBossStat.EP <= 0) {
-		NTLOG(Error, TEXT("Boss die"));
-		CurBossStat.EP = 0;
-		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
 	}
 }
 
@@ -281,6 +277,13 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, F
 	}
 	else {
 		NTLOG(Error, TEXT("No Peppy skill index %d"), EffectSequence);
+	}
+
+	if (CurBossStat.EP <= 0) {
+		NTLOG(Error, TEXT("Boss die"));
+		CurBossStat.EP = 0;
+
+		BattleManager->GetBossActor()->Die();
 	}
 }
 

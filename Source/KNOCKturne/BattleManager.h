@@ -26,6 +26,7 @@ public:
 	ABattleManager();
 
 private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	ABoss* BossActor = nullptr;
 	APeppy* PeppyActor = nullptr;
 
