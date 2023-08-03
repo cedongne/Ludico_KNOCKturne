@@ -131,4 +131,7 @@ public:
 	void UpdateDreamDiaryWhenGameOver();
 	UFUNCTION(BlueprintCallable)
 	void UpdateDreamDiaryWhenGameClear();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool RightafterBattleClear = false;
 };

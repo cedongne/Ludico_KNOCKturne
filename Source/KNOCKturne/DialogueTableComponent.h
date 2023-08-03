@@ -134,4 +134,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetAfterBattleDialogueIndex();
+
+	UFUNCTION(BlueprintCallable)
+	void SetAfterBattleDialogueinHubworldIndex();
 };

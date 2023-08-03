@@ -177,3 +177,17 @@ void UDialogueTableComponent::SetAfterBattleDialogueIndex() {
 		}
 	}
 }
+
+void UDialogueTableComponent::SetAfterBattleDialogueinHubworldIndex() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "EP1_AfterBattle_Hubworld")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
