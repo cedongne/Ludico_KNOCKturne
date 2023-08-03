@@ -63,6 +63,7 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 		break;
 	case ESkillActorLifeCycleStep::DestroyTime:
 		if (CurrentLifeTime >= SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME) {
+			BattleManager->SkillActorsOnField.Remove(this->GetFName().ToString());
 			Destroy();
 		}
 		break;

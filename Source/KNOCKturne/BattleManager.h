@@ -57,7 +57,7 @@ public:
 	APeppy* GetPeppyActor();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TArray<AActor*> SkillActorsOnField;
+	TMap<FString, AActor*> SkillActorsOnField;
 
 
 	UFUNCTION(BlueprintCallable)

@@ -8,10 +8,9 @@ APeppySkillActor::APeppySkillActor() {
 
 void APeppySkillActor::BeginPlay() {
 	Super::BeginPlay();
-	RegistSkillActorOnBattleManager();
+
 	LoadSkillDataFromDataTable();
 	UseSkill();
-
 }
 
 void APeppySkillActor::LoadSkillDataFromDataTable() {
@@ -32,8 +31,3 @@ UAnimMontage* APeppySkillActor::FindAnimMontageAsset() {
 	return LoadObject<UAnimMontage>(NULL, *MontageAssetReference, NULL, LOAD_None, NULL);
 }
 */
-
-
-void APeppySkillActor::RegistSkillActorOnBattleManager() {
-	BattleManager->SkillActorsOnField.Add(this);
-}

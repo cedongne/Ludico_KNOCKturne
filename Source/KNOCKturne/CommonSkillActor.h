@@ -38,6 +38,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	FName GetCurrentBlueprintClassName();
 
+private:
+	void RegistSkillActorOnBattleManager();
+
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void CustomSkillOperation(int32 EffectSequence, FCurEffectIndexSkillData SkillData);

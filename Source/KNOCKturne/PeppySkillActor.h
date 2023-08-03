@@ -17,7 +17,9 @@ public:
 	APeppySkillActor();
 
 private:
-	void RegistSkillActorOnBattleManager();
+//	UPROPERTY(VisibleAnywhere, BlueprintReadonly, Category = "Animation")
+//	UAnimMontage* SkillAnimMontage;
+
 
 protected:
 	virtual void BeginPlay() override;
