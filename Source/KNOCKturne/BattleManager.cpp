@@ -63,13 +63,6 @@ void ABattleManager::StartPeppyTurn() {
 }
 
 void ABattleManager::TurnChange() {
-	if (SkillActorsOnField.Num() > 0) {
-		for (auto SkillActor : SkillActorsOnField) {
-			SkillActor->Destroy();
-		}
-		SkillActorsOnField.Empty();
-	}
-
 	switch (CurrentTurnType) {
 	case BossTurn:
 		StartPeppyTurn();
@@ -81,6 +74,11 @@ void ABattleManager::TurnChange() {
 		CurrentTurnType = PeppySkillUsingTurn;
 		break;
 	case PeppySkillUsingTurn:
+		for (auto PeppySkillActor : SkillActorsOnField) {
+			PeppySkillActor->Destroy();
+		}
+		SkillActorsOnField.Empty();
+
 		StartBossTurn();
 		CurrentTurnType = BossTurn;
 		break;
@@ -140,6 +138,12 @@ void ABattleManager::SetLeftCurrentTurnTime(float TurnTime) {
 
 void ABattleManager::EndTurn() {
 	LeftCurrentTurnTime = 0;
+}
+
+void ABattleManager::EndBattle() {
+	SetActorTickEnabled(false);
+	TurnChange();
+	BossActor->Destroy();
 }
 
 ABoss* ABattleManager::GetBossActor() {
