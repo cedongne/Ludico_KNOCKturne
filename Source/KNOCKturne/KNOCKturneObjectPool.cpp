@@ -35,7 +35,6 @@ void UKNOCKturneObjectPool::BeginPlay()
 }
 
 APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
-	NTLOG(Warning, TEXT("%d"), LastIndex);
 	if (FirstIndex == LastIndex) {
 		if (ObjectPool[FirstIndex]->IsActive()) {
 			NTLOG(Warning, TEXT("Object pool is full"));
