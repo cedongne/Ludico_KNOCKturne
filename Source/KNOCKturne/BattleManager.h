@@ -76,6 +76,8 @@ public:
 	void SetLeftCurrentTurnTime(float TurnTime);
 	UFUNCTION(BlueprintCallable)
 	void EndTurn();
+	UFUNCTION(BlueprintCallable)
+	void EndBattle();
 
 protected:
 	class UBattleTableManagerSystem* BattleTableManager;
