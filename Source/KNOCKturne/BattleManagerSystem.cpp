@@ -133,7 +133,15 @@ void UBattleManagerSystem::AddSelectedSkillActorClassList(TSubclassOf<AActor> Sk
 }
 
 void UBattleManagerSystem::UpdateDreamDiaryWhenGameOver() {
-	DreamDiaryOpenRow = FMath::Clamp((DreamDiaryOpenRow + 1), 0, 4);
+	// DreamDiaryOpenRow = FMath::Clamp((DreamDiaryOpenRow + 1), 0, 4);
+
+	if (DreamDiaryOpenRow < 3) {
+		DreamDiaryOpenRow += 1;
+		isDreamDiaryUpdated = true;
+	}
+	else {
+		isDreamDiaryUpdated = false;
+	}
 }
 
 void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {

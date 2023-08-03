@@ -191,3 +191,45 @@ void UDialogueTableComponent::SetAfterBattleDialogueinHubworldIndex() {
 		}
 	}
 }
+
+void UDialogueTableComponent::SetAfterBattleFailDialogueIndex() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "AfterBattleFail_Hubworld")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
+
+void UDialogueTableComponent::SetBattleFailDiaryDialogueIndex() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "AfterBattleFail_Hubworld_DreamDiary")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
+
+void UDialogueTableComponent::SetBattleFailFragmentDialogueIndex() {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == "AfterBattleFail_Hubworld_DreamFragment")
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
