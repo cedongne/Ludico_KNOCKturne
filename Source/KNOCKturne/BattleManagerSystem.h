@@ -133,5 +133,14 @@ public:
 	void UpdateDreamDiaryWhenGameClear();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isBattleFail = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool RightafterBattleClear = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isDreamDiaryUpdated = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool GetDreamFragment = false;
 };
