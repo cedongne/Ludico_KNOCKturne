@@ -149,11 +149,18 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
-			return;
+			break;
 		}
 		OperateBossSkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
 	}
 
+	if (CurPeppyStat.EP <= 0) {
+
+		BattleManager->SetActorTickEnabled(false);
+		BattleManager->GetBossActor()->SetActorTickEnabled(false);
+		CurPeppyStat.EP = 0;
+		BattleManager->GetPeppyActor()->Die();
+	}
 }
 
 void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
@@ -205,11 +212,6 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FC
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData->SkillIndex);
 	}
 
-	if (CurPeppyStat.EP <= 0) {
-		NTLOG(Error, TEXT("Peppy die"));
-		CurPeppyStat.EP = 0;
-		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->Die();
-	}
 }
 
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
@@ -229,10 +231,19 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppyS
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
-			return;
+			break;;
 		}
 
 		OperatePeppySkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
+	}
+
+	if (CurBossStat.EP <= 0) {
+		NTLOG(Error, TEXT("Boss die"));
+		CurBossStat.EP = 0;
+		
+		BattleManager->SetActorTickEnabled(false);
+		BattleManager->EndBattle();
+		BattleManager->GetBossActor()->Die();
 	}
 }
 
@@ -279,13 +290,6 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, F
 		NTLOG(Error, TEXT("No Peppy skill index %d"), EffectSequence);
 	}
 
-	if (CurBossStat.EP <= 0) {
-		NTLOG(Error, TEXT("Boss die"));
-		CurBossStat.EP = 0;
-
-		BattleManager->EndBattle();
-		BattleManager->GetBossActor()->Die();
-	}
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {

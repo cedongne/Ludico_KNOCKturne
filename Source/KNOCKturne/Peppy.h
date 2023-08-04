@@ -61,6 +61,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHit;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool IsDie = false;
+
 	// Animation triggers;
 	TMap<FString, bool> AnimationTriggerMap;
 	bool IsDeliberate = false;
@@ -70,7 +73,6 @@ protected:
 	bool IsSummon = false;
 
 private:
-
 	bool CanSlide;
 
 	float SlideCooldown;
@@ -91,6 +93,7 @@ private:
 	float MoveSpeed = 5;
 	float CurWalkSpeed;
 
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetImmobile();
@@ -98,8 +101,10 @@ public:
 	void SetMobile();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void HitVisualEffect();
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+
 	void Die();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void BP_Die();
 
 	/* N턴 간 보스 턴이 시작될 때마다 페피에게 적용할 대미지를 순서에 맞게 배열 형태로 입력합니다. 지정한 턴에 이미 EffectId를 Key로 가지는 데이터가 존재한다면 값을 누적합니다. */
 	void AddCumulativeDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages);

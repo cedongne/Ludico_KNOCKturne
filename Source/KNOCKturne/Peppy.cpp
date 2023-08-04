@@ -76,11 +76,13 @@ void APeppy::PostInitializeComponents() {
 void APeppy::SetImmobile() {
 	CanMove = false;
 	CanSlide = false;
+	GetCapsuleComponent()->SetCollisionProfileName("NoCollision");
 }
 
 void APeppy::SetMobile() {
 	CanMove = true;
 	CanSlide = true;
+	GetCapsuleComponent()->SetCollisionProfileName("Peppy");
 }
 
 void APeppy::MoveForward(float Value) {
@@ -194,4 +196,9 @@ void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
 	for (int32 index = 0; index < Damages.Num(); index++) {
 		DamageArrayEachTurn[index].FindOrAdd(EffectId, Damages[index]);
 	}
+}
+
+void APeppy::Die() {
+	IsDie = true;
+	BP_Die();
 }
