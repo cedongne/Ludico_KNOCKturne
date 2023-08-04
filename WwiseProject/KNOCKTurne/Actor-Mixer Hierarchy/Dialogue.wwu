@@ -24,7 +24,6 @@
 							<PropertyList>
 								<Property Name="FadeOutDuration" Type="Real64" Value="0.0362385321100917"/>
 								<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-								<Property Name="TrimEnd" Type="Real64" Value="0.23394495412844"/>
 							</PropertyList>
 							<Language>SFX</Language>
 							<AudioFile>SFX_Text_Typing.wav</AudioFile>
