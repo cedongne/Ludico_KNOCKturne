@@ -155,7 +155,6 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 	}
 
 	if (CurPeppyStat.EP <= 0) {
-
 		BattleManager->SetActorTickEnabled(false);
 		BattleManager->GetBossActor()->SetActorTickEnabled(false);
 		CurPeppyStat.EP = 0;
