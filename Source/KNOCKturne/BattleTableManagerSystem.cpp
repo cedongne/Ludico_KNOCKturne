@@ -283,6 +283,7 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, F
 		NTLOG(Error, TEXT("Boss die"));
 		CurBossStat.EP = 0;
 
+		BattleManager->EndBattle();
 		BattleManager->GetBossActor()->Die();
 	}
 }

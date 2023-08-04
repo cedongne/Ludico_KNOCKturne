@@ -143,7 +143,6 @@ void ABattleManager::EndTurn() {
 void ABattleManager::EndBattle() {
 	SetActorTickEnabled(false);
 	TurnChange();
-	BossActor->Destroy();
 }
 
 ABoss* ABattleManager::GetBossActor() {
