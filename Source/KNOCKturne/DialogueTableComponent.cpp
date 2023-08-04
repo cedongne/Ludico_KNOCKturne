@@ -233,3 +233,17 @@ void UDialogueTableComponent::SetBattleFailFragmentDialogueIndex() {
 		}
 	}
 }
+
+bool UDialogueTableComponent::isRedefineNeededLine(FString RowName) {
+	bool isRedefineNeeded = false;
+
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (RowName == "AfterBattleFail_Hubworld_2")
+		{
+			isRedefineNeeded = true;
+			break;
+		}
+	}
+	return isRedefineNeeded;
+}

@@ -146,4 +146,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetBattleFailFragmentDialogueIndex();
+
+	UFUNCTION(BlueprintCallable)
+	bool isRedefineNeededLine(FString RowName);
 };
