@@ -26,7 +26,8 @@ void ABattleManager::BeginPlay()
 	world = GetWorld();
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleTableManager = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
 }
 
@@ -41,7 +42,7 @@ void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 
 	ProcessDamageBeforeStartTurn();
-	SetLeftCurrentTurnTime(BattleTableManager->CurBossStat.Turn);
+	SetLeftCurrentTurnTime(BattleTableManagerSystem->CurBossStat.Turn);
 	BP_StartBossTurn();
 }
 
@@ -58,7 +59,7 @@ void ABattleManager::BP_InitStartBossTurn() {
 }
 
 void ABattleManager::StartPeppyTurn() {
-	SetLeftCurrentTurnTime(BattleTableManager->CurPeppyStat.Turn);
+	SetLeftCurrentTurnTime(BattleTableManagerSystem->CurPeppyStat.Turn);
 	BP_StartPeppyTurn();
 }
 
@@ -70,7 +71,7 @@ void ABattleManager::TurnChange() {
 
 	switch (CurrentTurnType) {
 	case BossTurn:
-		UpdateRoundInfo();
+		BattleManagerSystem->UpdateRoundInfo();
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
 		break;
@@ -126,7 +127,7 @@ void ABattleManager::ProcessDamageBeforeStartTurn() {
 	}
 
 	NTLOG(Warning, TEXT("Peppy get damaged starting boss turn %d"), TotalDamage);
-	BattleTableManager->GetCurPeppyStatRef()->EP -= TotalDamage;
+	BattleTableManagerSystem->GetCurPeppyStatRef()->EP -= TotalDamage;
 }
 
 float ABattleManager::GetLeftCurrentTurnTime() {
@@ -152,9 +153,4 @@ ABoss* ABattleManager::GetBossActor() {
 
 APeppy* ABattleManager::GetPeppyActor() {
 	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
-}
-
-void ABattleManager::UpdateRoundInfo() {
-	Round++;
-	LastRoundBossHpRatio = BattleTableManager->CurBossStat.EP * 100 / BattleTableManager->CurBossStat.MaxEP;
 }

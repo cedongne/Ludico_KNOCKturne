@@ -8,6 +8,7 @@
 #include "Boss.h"
 #include "Peppy.h"
 #include "BattleTableManagerSystem.h"
+#include "BattleManagerSystem.h"
 
 #include "BattleManager.generated.h"
 
@@ -50,7 +51,6 @@ private:
 
 	void ProcessDamageBeforeStartTurn();
 
-	void UpdateRoundInfo();
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -60,11 +60,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 Round = 0;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 LastRoundBossHpRatio;
 	
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();
@@ -86,7 +81,8 @@ public:
 	void EndBattle();
 
 protected:
-	class UBattleTableManagerSystem* BattleTableManager;
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;

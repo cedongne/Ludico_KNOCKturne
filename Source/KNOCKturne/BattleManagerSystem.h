@@ -6,6 +6,8 @@
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 
+#include "BattleTableManagerSystem.h"
+
 #include "BattleManagerSystem.generated.h"
 
 UCLASS()
@@ -17,6 +19,10 @@ public:
 	UBattleManagerSystem();
 
 protected:
+	class UBattleTableManagerSystem* BattleTableManagerSystem = nullptr;
+
+	void LoadBattleTableManagerSystem();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool VisibleBossSkillHitArea = false;
 
@@ -143,4 +149,11 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool GetDreamFragment = false;
+
+	// Round 관련 항목
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 Round = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 LastRoundBossHpRatio;
+	void UpdateRoundInfo();
 };
