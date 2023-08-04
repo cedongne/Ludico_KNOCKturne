@@ -70,6 +70,7 @@ void ABattleManager::TurnChange() {
 
 	switch (CurrentTurnType) {
 	case BossTurn:
+		UpdateRoundInfo();
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
 		break;
@@ -151,4 +152,9 @@ ABoss* ABattleManager::GetBossActor() {
 
 APeppy* ABattleManager::GetPeppyActor() {
 	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
+}
+
+void ABattleManager::UpdateRoundInfo() {
+	Round++;
+	LastRoundBossHpRatio = BattleTableManager->CurBossStat.EP * 100 / BattleTableManager->CurBossStat.MaxEP;
 }

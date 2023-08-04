@@ -50,6 +50,8 @@ private:
 
 	void ProcessDamageBeforeStartTurn();
 
+	void UpdateRoundInfo();
+
 public:
 	UFUNCTION(BlueprintCallable)
 	ABoss* GetBossActor();
@@ -59,7 +61,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
 
-
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 Round = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 LastRoundBossHpRatio;
+	
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBossTurn();
 
