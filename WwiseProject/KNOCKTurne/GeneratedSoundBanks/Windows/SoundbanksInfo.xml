@@ -76,14 +76,14 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{DDC80CE4-F081-E9B6-B094-69BCAAB37B99}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{95AE7AC4-1D39-4E6F-6815-1432CDB586BB}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
 			<Media>
 				<File Id="21977701" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>lft2_fx_one_shot_sonar.wav</ShortName>
-					<CachePath>SFX/lft2_fx_one_shot_sonar_E0EBA86B.wem</CachePath>
+					<CachePath>SFX/lft2_fx_one_shot_sonar_CA4C3EB8.wem</CachePath>
 				</File>
 				<File Id="26675951" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Snow1.wav</ShortName>
@@ -95,15 +95,15 @@
 				</File>
 				<File Id="68647759" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min.wav</ShortName>
-					<CachePath>SFX/TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min_B8E3373A.wem</CachePath>
+					<CachePath>SFX/TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min_BA0B9739.wem</CachePath>
 				</File>
 				<File Id="69006938" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BRS_Twig_Snaps_Leaf_Rustles_6.wav</ShortName>
-					<CachePath>SFX/BRS_Twig_Snaps_Leaf_Rustles_6_B827A5AF.wem</CachePath>
+					<CachePath>SFX/BRS_Twig_Snaps_Leaf_Rustles_6_04C23264.wem</CachePath>
 				</File>
 				<File Id="87478675" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</ShortName>
-					<CachePath>SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_F655D3C6.wem</CachePath>
+					<CachePath>SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_5C8C7093.wem</CachePath>
 				</File>
 				<File Id="94944749" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Stone3.wav</ShortName>
@@ -127,11 +127,11 @@
 				</File>
 				<File Id="164875334" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_Text_Typing.wav</ShortName>
-					<CachePath>SFX/SFX_Text_Typing_AB0232D0.wem</CachePath>
+					<CachePath>SFX/SFX_Text_Typing_43A4CF22.wem</CachePath>
 				</File>
 				<File Id="193027794" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_UI_Select.wav</ShortName>
-					<CachePath>SFX/SFX_UI_Select_91887BCD.wem</CachePath>
+					<CachePath>SFX/SFX_UI_Select_B744575A.wem</CachePath>
 				</File>
 				<File Id="210552255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Skill_SweepGarden.wav</ShortName>
@@ -147,7 +147,7 @@
 				</File>
 				<File Id="228758831" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast.wav</ShortName>
-					<CachePath>SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_0F3B2818.wem</CachePath>
+					<CachePath>SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_7F874C9D.wem</CachePath>
 				</File>
 				<File Id="257835999" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BRS_Roomtone_House_Open_Lite_Birds-Fridge.wav</ShortName>
@@ -227,7 +227,7 @@
 				</File>
 				<File Id="571000522" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MO_US_atmosphere_echolocation_C.wav</ShortName>
-					<CachePath>SFX/MO_US_atmosphere_echolocation_C_563154D7.wem</CachePath>
+					<CachePath>SFX/MO_US_atmosphere_echolocation_C_5A157BE7.wem</CachePath>
 				</File>
 				<File Id="575546989" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ObjectFind2.wav</ShortName>
@@ -291,7 +291,7 @@
 				</File>
 				<File Id="871458575" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>CaveWaterDrips_SFXB.24.wav</ShortName>
-					<CachePath>SFX/CaveWaterDrips_SFXB.24_78D83621.wem</CachePath>
+					<CachePath>SFX/CaveWaterDrips_SFXB.24_EB5BF907.wem</CachePath>
 				</File>
 				<File Id="901777490" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MGxSM_snap_dry_stick_and_leaf_11.wav</ShortName>
@@ -547,7 +547,7 @@
 						<MediaRef Id="210552255"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="424777189" Name="TextPrint" ObjectPath="\Events\Function\TextPrint" GUID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}" DurationType="OneShot" DurationMin="0.23394495" DurationMax="0.23394495">
+				<Event Id="424777189" Name="TextPrint" ObjectPath="\Events\Function\TextPrint" GUID="{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
 					<MediaRefs>
 						<MediaRef Id="164875334"/>
 					</MediaRefs>
@@ -594,5 +594,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{3F3182D9-E416-F22F-6105-F1974BC6C375}</FileHash>
+	<FileHash>{EEEDC343-4C24-260B-0867-1600BE52BD66}</FileHash>
 </SoundBanksInfo>

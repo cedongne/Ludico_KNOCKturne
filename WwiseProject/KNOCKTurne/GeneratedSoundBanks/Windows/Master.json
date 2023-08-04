@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{DDC80CE4-F081-E9B6-B094-69BCAAB37B99}",
+    "Hash": "{95AE7AC4-1D39-4E6F-6815-1432CDB586BB}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -21,7 +21,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "lft2_fx_one_shot_sonar.wav",
-      "CachePath": "SFX/lft2_fx_one_shot_sonar_E0EBA86B.wem"
+      "CachePath": "SFX/lft2_fx_one_shot_sonar_CA4C3EB8.wem"
      },
      {
       "Id": "26675951",
@@ -45,7 +45,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min.wav",
-      "CachePath": "SFX/TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min_B8E3373A.wem"
+      "CachePath": "SFX/TORI_LETZLER_90_vocal_cinematic_humming_01_wet_C#min_BA0B9739.wem"
      },
      {
       "Id": "69006938",
@@ -53,7 +53,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BRS_Twig_Snaps_Leaf_Rustles_6.wav",
-      "CachePath": "SFX/BRS_Twig_Snaps_Leaf_Rustles_6_B827A5AF.wem"
+      "CachePath": "SFX/BRS_Twig_Snaps_Leaf_Rustles_6_04C23264.wem"
      },
      {
       "Id": "87478675",
@@ -61,7 +61,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav",
-      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_F655D3C6.wem"
+      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_5C8C7093.wem"
      },
      {
       "Id": "94944749",
@@ -109,7 +109,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_Text_Typing.wav",
-      "CachePath": "SFX/SFX_Text_Typing_AB0232D0.wem"
+      "CachePath": "SFX/SFX_Text_Typing_43A4CF22.wem"
      },
      {
       "Id": "193027794",
@@ -117,7 +117,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "SFX_UI_Select.wav",
-      "CachePath": "SFX/SFX_UI_Select_91887BCD.wem"
+      "CachePath": "SFX/SFX_UI_Select_B744575A.wem"
      },
      {
       "Id": "210552255",
@@ -149,7 +149,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast.wav",
-      "CachePath": "SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_0F3B2818.wem"
+      "CachePath": "SFX/ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_7F874C9D.wem"
      },
      {
       "Id": "257835999",
@@ -309,7 +309,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "MO_US_atmosphere_echolocation_C.wav",
-      "CachePath": "SFX/MO_US_atmosphere_echolocation_C_563154D7.wem"
+      "CachePath": "SFX/MO_US_atmosphere_echolocation_C_5A157BE7.wem"
      },
      {
       "Id": "575546989",
@@ -437,7 +437,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "CaveWaterDrips_SFXB.24.wav",
-      "CachePath": "SFX/CaveWaterDrips_SFXB.24_78D83621.wem"
+      "CachePath": "SFX/CaveWaterDrips_SFXB.24_EB5BF907.wem"
      },
      {
       "Id": "901777490",
@@ -1109,8 +1109,8 @@
       "ObjectPath": "\\Events\\Function\\TextPrint",
       "GUID": "{4375809F-48DB-43EE-A594-4EDFAFD2F6D2}",
       "DurationType": "OneShot",
-      "DurationMin": "0.23394495",
-      "DurationMax": "0.23394495",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
       "MediaRefs": [
        {
         "Id": "164875334"
@@ -1231,6 +1231,6 @@
     ]
    }
   ],
-  "FileHash": "{84FDE53F-F2F5-24FB-44B7-D007760941ED}"
+  "FileHash": "{C34A5F2B-C171-1FA2-B577-04BF1B201590}"
  }
 }
