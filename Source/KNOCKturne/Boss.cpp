@@ -1,10 +1,10 @@
 #include "Boss.h"
-#include "BuffComponent.h"
 
 ABoss::ABoss()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	StatComponent = CreateDefaultSubobject<UBossStatComponent>(TEXT("StatComponent"));
 	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
 }
 

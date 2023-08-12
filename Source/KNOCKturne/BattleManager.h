@@ -7,8 +7,6 @@
 
 #include "Boss.h"
 #include "Peppy.h"
-#include "BattleTableManagerSystem.h"
-#include "BattleManagerSystem.h"
 
 #include "BattleManager.generated.h"
 
@@ -27,10 +25,6 @@ public:
 	ABattleManager();
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	ABoss* BossActor = nullptr;
-	APeppy* PeppyActor = nullptr;
-
 	UWorld* world;
 	FTimerHandle TurnOverTimer;
 	FTimerManager LeftTurnTimeTimerManager;
@@ -53,10 +47,20 @@ private:
 
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	ABoss* BossActor;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	APeppy* PeppyActor;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AActor> BossActorSubClass;
+
 	UFUNCTION(BlueprintCallable)
 	ABoss* GetBossActor();
 	UFUNCTION(BlueprintCallable)
 	APeppy* GetPeppyActor();
+
+	void GetActors();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;

@@ -5,27 +5,14 @@
 #include "KNOCKturne.h"
 #include "Components/ActorComponent.h"
 
+#include "StatComponent.h"
 #include "BattleTableManagerSystem.h"
 #include "BattleManagerSystem.h"
 
 #include "PeppyStatComponent.generated.h"
 
-UENUM(BlueprintType)
-enum class PeppyStatType : uint8 {
-	EP,
-	MaxEP,
-	Energy,
-	MaxEnergy,
-	SlidingCooldown,
-	Speed,
-	DefenseDamage,
-	AttackDamage,
-	Avd,
-	Turn
-};
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class KNOCKTURNE_API UPeppyStatComponent : public UActorComponent
+class KNOCKTURNE_API UPeppyStatComponent : public UStatComponent
 {
 	GENERATED_BODY()
 
@@ -48,12 +35,13 @@ private:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
 
-	UPROPERTY(Transient, BlueprintReadOnly, Meta = (AllowPrivateAccess = true))
-	FPeppyStatData CurStatData;
 	FPeppyStatData MinStatData;
 	FPeppyStatData MaxStatData;
 
 public:
+	UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly)
+	FPeppyStatData CurStatData;
+
 	UFUNCTION(BlueprintCallable)
-	bool TryUpdateCurStatData(PeppyStatType StatType, float Value);
+	virtual bool TryUpdateCurStatData (FStatType StatType, float Value) override;
 };

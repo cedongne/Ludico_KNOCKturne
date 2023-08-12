@@ -3,6 +3,9 @@
 
 #include "BattleManagerSystem.h"
 
+#include "NTBattleGameMode.h"
+#include "BattleManager.h"
+
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -152,7 +155,7 @@ void UBattleManagerSystem::UpdateRoundInfo() {
 	LoadBattleTableManagerSystem();
 
 	Round++;
-	LastRoundBossHpRatio = BattleTableManagerSystem->CurBossStat.EP * 100 / BattleTableManagerSystem->CurBossStat.MaxEP;
+	LastRoundBossHpRatio = BattleManager->BossActor->StatComponent->CurStatData.EP * 100 / BattleManager->BossActor->StatComponent->CurStatData.MaxEP;
 	NTLOG(Warning, TEXT("%d %d"), Round, LastRoundBossHpRatio);
 }
 

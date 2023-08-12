@@ -5,6 +5,9 @@
 #include "KNOCKturne.h"
 #include "GameFramework/Actor.h"
 
+#include "BossStatComponent.h"
+#include "BuffComponent.h"
+
 #include "Boss.generated.h"
 
 UCLASS()
@@ -15,6 +18,8 @@ class KNOCKTURNE_API ABoss : public AActor
 public:
 	ABoss();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
+	class UBossStatComponent* StatComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UBuffComponent* BuffComponent;
 

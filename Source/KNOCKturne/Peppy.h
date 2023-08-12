@@ -27,7 +27,7 @@ public:
 	UCapsuleComponent* InteractionCollider;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
-	class UPeppyStatComponent* PeppyStatComponent;
+	class UPeppyStatComponent* StatComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UBuffComponent* BuffComponent;
 	

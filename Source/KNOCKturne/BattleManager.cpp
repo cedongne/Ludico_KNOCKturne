@@ -5,6 +5,10 @@
 
 #include "Peppy.h"
 #include "Boss.h"
+#include "PeppyStatComponent.h"
+#include "BossStatComponent.h"
+#include "BattleTableManagerSystem.h"
+#include "BattleManagerSystem.h"
 
 // Sets default values
 ABattleManager::ABattleManager()
@@ -15,6 +19,10 @@ ABattleManager::ABattleManager()
 	CurrentTurnType = BossTurn;
 	LeftCurrentTurnTime = 0;
 
+	static ConstructorHelpers::FClassFinder<ABoss> BP_BossActorClass(TEXT("/Game/Blueprints/Actors/Battle/NPC/BP_BossRose"));
+	BossActorSubClass = BP_BossActorClass.Class;
+
+
 //	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 //	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
 }
@@ -24,11 +32,14 @@ void ABattleManager::BeginPlay()
 	Super::BeginPlay();
 
 	world = GetWorld();
-
+	
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleTableManagerSystem->BattleManager = this;
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	BattleManagerSystem->BattleManager = this;
 
+	GetActors();
 }
 
 void ABattleManager::Tick(float DeltaTime)
@@ -42,7 +53,7 @@ void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 
 	ProcessDamageBeforeStartTurn();
-	SetLeftCurrentTurnTime(BattleTableManagerSystem->CurBossStat.Turn);
+	SetLeftCurrentTurnTime(BossActor->StatComponent->CurStatData.Turn);
 	BP_StartBossTurn();
 }
 
@@ -59,7 +70,7 @@ void ABattleManager::BP_InitStartBossTurn() {
 }
 
 void ABattleManager::StartPeppyTurn() {
-	SetLeftCurrentTurnTime(BattleTableManagerSystem->CurPeppyStat.Turn);
+	SetLeftCurrentTurnTime(PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
 }
 
@@ -127,7 +138,7 @@ void ABattleManager::ProcessDamageBeforeStartTurn() {
 	}
 
 	NTLOG(Warning, TEXT("Peppy get damaged starting boss turn %d"), TotalDamage);
-	BattleTableManagerSystem->GetCurPeppyStatRef()->EP -= TotalDamage;
+	PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::EP, -TotalDamage);
 }
 
 float ABattleManager::GetLeftCurrentTurnTime() {
@@ -153,4 +164,12 @@ ABoss* ABattleManager::GetBossActor() {
 
 APeppy* ABattleManager::GetPeppyActor() {
 	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
+}
+
+void ABattleManager::GetActors() {
+	BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
+	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	BossActor->StatComponent->SetDefaultStat();
+	PeppyActor->StatComponent->SetDefaultStat();
 }

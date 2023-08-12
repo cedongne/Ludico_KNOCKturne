@@ -18,6 +18,8 @@ class KNOCKTURNE_API UBattleManagerSystem : public UGameInstanceSubsystem
 public:
 	UBattleManagerSystem();
 
+	class ABattleManager* BattleManager;
+
 protected:
 	class UBattleTableManagerSystem* BattleTableManagerSystem = nullptr;
 

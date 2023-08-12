@@ -4,8 +4,8 @@
 #include "PeppyStatComponent.h"
 #include "BattleTableManagerSystem.h"
 #include "KNOCKturneGameInstance.h"
-
 #include "Peppy.h"
+#include "NTBattleGameMode.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -19,7 +19,6 @@ void UPeppyStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetDefaultStat();
 	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 }
 
@@ -40,16 +39,18 @@ void UPeppyStatComponent::SetDefaultStat() {
 	MaxStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Max");
 }
 
-bool UPeppyStatComponent::TryUpdateCurStatData(PeppyStatType StatType, float Value) {
+bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 	switch (StatType) {
-	case PeppyStatType::EP:
-		CurStatData.EP = FMath::Clamp<float>(CurStatData.EP - Value, 0, CurStatData.MaxEP);
-		if (CurStatData.EP == 0) {
-			PeppyActor->Die();
+	case FStatType::EP:
+		CurStatData.EP = FMath::Clamp<int32>(CurStatData.EP + Value, 0, CurStatData.MaxEP);
+		if (CurStatData.EP <= 0) {
+			CurStatData.EP = 0;
+
+			BattleGameMode->GameOver();
 		}
 		break;
-	case PeppyStatType::Energy:
-		CurStatData.Energy = FMath::Clamp<float>(CurStatData.Energy - Value, 0, CurStatData.MaxEnergy);
+	case FStatType::Energy:
+		CurStatData.Energy = FMath::Clamp<int32>(CurStatData.Energy + Value, 0, CurStatData.MaxEnergy);
 		break;
 	default:
 		NTLOG(Error, TEXT("PeppyStatType is invalid!"));

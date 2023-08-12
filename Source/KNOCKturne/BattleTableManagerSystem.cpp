@@ -2,12 +2,13 @@
 
 
 #include "BattleTableManagerSystem.h"
+#include "BattleManager.h"
 #include "BossSkillActor.h"
 #include "PeppySkillActor.h"
 #include "BuffComponent.h"
 #include "CalcUtil.h"
 #include "Peppy.h"
-#include "BattleManager.h"
+#include "PeppyStatComponent.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
@@ -42,9 +43,7 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
 
-	CurPeppyStat = GetPeppyStatDataOnTable("Init");
-	CurBossStat = GetBossStatDataOnTable("Episode1_SadnessQueen_Init");
-
+	
 	SetBossSkillSpawnDataTable();
 }
 
@@ -133,36 +132,29 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 
 
 void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor) {
-	FCommonStatData* TargetStatData = nullptr;
-
+	UStatComponent* TargetStatComponent = nullptr;
+	UBuffComponent* TargetBuffComponent = nullptr;
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
 	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
 
 	for (int Sequence = 0; Sequence < 2; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatData = &CurPeppyStat;
-			TargetBuffComponent = PeppyBuffComponent;
+			TargetStatComponent = BattleManager->PeppyActor->StatComponent;
+			TargetBuffComponent = BattleManager->PeppyActor->BuffComponent;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatData = &CurBossStat;
-			TargetBuffComponent = PeppyBuffComponent;
+			TargetStatComponent = BattleManager->BossActor->StatComponent;
+			TargetBuffComponent = BattleManager->BossActor->BuffComponent;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;
 		}
-		OperateBossSkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
-	}
-
-	if (CurPeppyStat.EP <= 0) {
-		BattleManager->SetActorTickEnabled(false);
-		BattleManager->GetBossActor()->SetActorTickEnabled(false);
-		CurPeppyStat.EP = 0;
-		BattleManager->GetPeppyActor()->Die();
+		OperateBossSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
+void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
@@ -175,21 +167,21 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FC
 	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 11) {
-		TargetStatData->EP -= SkillData->Value_N;
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
+		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData->Value_N);
+		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData->Value_N);
 	}
 	/*
 	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 13) {
-		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
+		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M));
+		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData->Value_N);
 	}
 	/*
 	*	16 제한 디버프-긍정: 대상의 모든 긍정적 버프 중 랜덤으로 N개 제거
 	*/
 	else if (SkillData->SkillIndex == 16) {
-		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
+//		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
 	}
 	/*
 	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
@@ -205,7 +197,7 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FC
 		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
 
 		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
-		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turn : %d"), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
+		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turns"), SkillData->Value_N, SkillData->Value_T);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData->SkillIndex);
@@ -214,41 +206,38 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, FC
 }
 
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
-	FCommonStatData* TargetStatData = nullptr;
-
-	CurPeppyStat.Energy -= SkillData.Cost;
+	UStatComponent* TargetStatComponent = nullptr;
+	UBuffComponent* TargetBuffComponent = nullptr;
+	BattleManager->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
 	int32 SkillIndexes[3] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2, SkillData.SkillIndex_3 };
 	int32 SkillTargets[3] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2, SkillData.SkillTarget_3 };
 
 	for (int Sequence = 0; Sequence < 3; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatData = &CurPeppyStat;
+			TargetStatComponent = BattleManager->PeppyActor->StatComponent;
+			TargetBuffComponent = BattleManager->PeppyActor->BuffComponent;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatData = &CurBossStat;
+			TargetStatComponent = BattleManager->BossActor->StatComponent;
+			TargetBuffComponent = BattleManager->BossActor->BuffComponent;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;;
 		}
 
-		OperatePeppySkillByIndex(Sequence, TargetStatData, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
-	}
-
-	if (CurBossStat.EP <= 0) {
-		NTLOG(Error, TEXT("Boss die"));
-		CurBossStat.EP = 0;
-		
-		BattleManager->SetActorTickEnabled(false);
-		BattleManager->EndBattle();
-		BattleManager->GetBossActor()->Die();
+		OperatePeppySkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, FCommonStatData* TargetStatData, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor) {
+void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
+		return;
+	}
+	if (TargetStatComponent == nullptr) {
+		NTLOG(Error, TEXT("TargetStatComponent is invalid for operation!"));
 		return;
 	}
 
@@ -259,15 +248,17 @@ void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, F
 	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 11) {
-		TargetStatData->EP -= SkillData->Value_N;
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
+		if (!TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData->Value_N)) {
+			NTLOG(Error, TEXT("EP update failed!"));
+		}
+		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData->Value_N);
 	}
 	/*
 	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 13) {
-		TargetStatData->EP -= CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M);
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf : %d"), SkillData->Value_N, TargetStatData->EP);
+		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M));
+		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData->Value_N);
 	}
 	/*
 	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
@@ -311,14 +302,6 @@ FBossStatData UBattleTableManagerSystem::GetBossStatDataOnTable(FString DataType
 
 UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
-}
-
-FPeppyStatData* UBattleTableManagerSystem::GetCurPeppyStatRef() {
-	return &CurPeppyStat;
-}
-
-FBossStatData* UBattleTableManagerSystem::GetCurBossStatRef() {
-	return &CurBossStat;
 }
 
 FName UBattleTableManagerSystem::GetCurrentBlueprintClassName() {

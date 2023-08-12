@@ -34,7 +34,7 @@ APeppy::APeppy()
 
 	PeppyController = UGameplayStatics::GetPlayerController(this, 0);
 
-	PeppyStatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
+	StatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
 	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
 
 	// Initialize variables
@@ -200,5 +200,6 @@ void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
 
 void APeppy::Die() {
 	IsDie = true;
+
 	BP_Die();
 }
