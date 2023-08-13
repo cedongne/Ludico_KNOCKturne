@@ -169,4 +169,7 @@ APeppy* ABattleManager::GetPeppyActor() {
 void ABattleManager::LoadActors() {
 	BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	BossActor->StatComponent->SetDefaultStat();
+	PeppyActor->StatComponent->SetDefaultStat();
 }
