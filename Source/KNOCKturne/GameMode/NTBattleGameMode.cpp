@@ -13,7 +13,6 @@ void ANTBattleGameMode::InitGame(const FString& MapName, const FString& Option, 
 	Super::InitGame(MapName, Option, ErrorMessage);
 
 	BattleManager = GetWorld()->SpawnActor<ABattleManager>(BP_BattleManagerClass);
-	NTLOG_S(Error);
 }
 
 void ANTBattleGameMode::GameOver() {
@@ -27,6 +26,6 @@ void ANTBattleGameMode::GameClear() {
 }
 
 void ANTBattleGameMode::EndBattle() {
+	BattleManager->GetPeppyActor()->SetImmobile();
 	BattleManager->SetActorTickEnabled(false);
-	BattleManager->EndBattle();
 }

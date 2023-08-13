@@ -36,6 +36,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void InitializeComponent() override;
 
 	class ANTBattleGameMode* BattleGameMode = nullptr;
 

@@ -12,3 +12,7 @@ void ABoss::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
+void ABoss::Die() {
+	BP_Die();
+}

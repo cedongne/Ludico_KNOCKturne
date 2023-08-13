@@ -4,15 +4,19 @@
 
 UStatComponent::UStatComponent()
 {
-	BattleGameMode = Cast<ANTBattleGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
-	NTCHECK(BattleGameMode != nullptr);
 }
-
 
 // Called when the game starts
 void UStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void UStatComponent::InitializeComponent() {
+	Super::InitializeComponent();
+
+	BattleGameMode = Cast<ANTBattleGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	NTCHECK(BattleGameMode != nullptr);
 }
 
 AActor* UStatComponent::GetOwnerActor(AActor* OwnerActor) {

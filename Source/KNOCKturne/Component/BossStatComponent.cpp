@@ -19,6 +19,10 @@ void UBossStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+}
+
+void UBossStatComponent::InitializeComponent() {
+	Super::InitializeComponent();
 	SetDefaultStat();
 }
 

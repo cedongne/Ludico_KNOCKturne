@@ -20,11 +20,11 @@ void UPeppyStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetDefaultStat();
 }
 
 void UPeppyStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
+	SetDefaultStat();
 }
 
 void UPeppyStatComponent::SetDefaultStat() {

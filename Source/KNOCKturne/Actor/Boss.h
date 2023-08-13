@@ -27,6 +27,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void Die();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void BP_Die();
 };
