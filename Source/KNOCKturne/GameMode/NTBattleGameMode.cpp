@@ -13,20 +13,32 @@ void ANTBattleGameMode::InitGame(const FString& MapName, const FString& Option, 
 	Super::InitGame(MapName, Option, ErrorMessage);
 
 	BattleManager = GetWorld()->SpawnActor<ABattleManager>(BP_BattleManagerClass);
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
 	NTLOG_S(Error);
 }
 
 void ANTBattleGameMode::GameOver() {
 	BattleManager->GetPeppyActor()->Die();
+	GetDreamFragment();
 	EndBattle();
 }
 
 void ANTBattleGameMode::GameClear() {
 	BattleManager->GetBossActor()->Die();
 	EndBattle();
+	KNOCKturneGameState->DreamFragmentCount += 1;
 }
 
 void ANTBattleGameMode::EndBattle() {
 	BattleManager->SetActorTickEnabled(false);
 	BattleManager->EndBattle();
+}
+
+void ANTBattleGameMode::GetDreamFragment() {
+	float ReducedEP = 1 - (BattleManager->GetBossActor()->StatComponent->CurStatData.EP * 100);
+
+	if (ReducedEP >= 80) {
+		KNOCKturneGameState->DreamFragmentCount += 1;
+	}
 }
