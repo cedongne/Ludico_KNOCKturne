@@ -13,4 +13,8 @@ UCLASS()
 class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 DreamFragmentCount = 1;
 };
