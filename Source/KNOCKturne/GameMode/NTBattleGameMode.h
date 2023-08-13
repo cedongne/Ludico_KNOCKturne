@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 
 #include "Actor/BattleManager.h"
+#include "GameMode/KNOCKturneGameState.h"
 
 #include "NTBattleGameMode.generated.h"
 
@@ -25,8 +26,11 @@ protected:
 
 private:
 	TSubclassOf<class ABattleManager> BP_BattleManagerClass;
+	AKNOCKturneGameState* KNOCKturneGameState;
 
 	void EndBattle();
+
+	void GetDreamFragment();
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Actor")
