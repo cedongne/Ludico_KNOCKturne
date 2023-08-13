@@ -39,7 +39,7 @@ void ABattleManager::BeginPlay()
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	BattleManagerSystem->BattleManager = this;
 
-	GetActors();
+	LoadActors();
 }
 
 void ABattleManager::Tick(float DeltaTime)
@@ -166,10 +166,7 @@ APeppy* ABattleManager::GetPeppyActor() {
 	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
 }
 
-void ABattleManager::GetActors() {
+void ABattleManager::LoadActors() {
 	BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-
-	BossActor->StatComponent->SetDefaultStat();
-	PeppyActor->StatComponent->SetDefaultStat();
 }

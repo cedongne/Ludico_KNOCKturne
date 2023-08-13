@@ -19,7 +19,7 @@ void UBossStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	SetDefaultStat();
 }
 
 void UBossStatComponent::SetDefaultStat() {

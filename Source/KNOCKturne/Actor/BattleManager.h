@@ -35,6 +35,8 @@ private:
 
 	bool IsCalled_InitStartBossTurn = false;
 
+	void LoadActors();
+
 	void StartBossTurn();
 	void StartPeppyTurn();
 
@@ -60,7 +62,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	APeppy* GetPeppyActor();
 
-	void GetActors();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;

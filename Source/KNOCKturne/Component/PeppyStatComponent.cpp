@@ -12,6 +12,7 @@
 UPeppyStatComponent::UPeppyStatComponent()
 {
 	bWantsInitializeComponent = true;
+	PeppyActor = Cast<APeppy>(GetOwner());
 }
 
 
@@ -19,7 +20,7 @@ void UPeppyStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	SetDefaultStat();
 }
 
 void UPeppyStatComponent::InitializeComponent() {

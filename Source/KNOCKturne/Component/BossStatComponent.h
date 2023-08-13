@@ -24,7 +24,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	class UBattleTableManagerSystem* BattleTableManagerSystem;
+	class UBattleTableManagerSystem* BattleTableManagerSystem = nullptr;
 
 	class ABoss* BossActor;
 
