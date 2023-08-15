@@ -55,6 +55,9 @@ void ABattleManager::StartBossTurn() {
 	ProcessDamageBeforeStartTurn();
 	SetLeftCurrentTurnTime(BossActor->StatComponent->CurStatData.Turn);
 	BP_StartBossTurn();
+
+	BattleManagerSystem->Round = 1;
+	BattleManagerSystem->LastRoundBossHpRatio = 100;
 }
 
 /* 해당 메서드는 레벨 블루프린트 등에서 초기화 호출 타이밍 조절 등을 위해 최초 1회만 실행 가능합니다.이후의 Turn 시작 로직은 오직 C++ 클래스 내에서만 이루어집니다. */
@@ -82,7 +85,6 @@ void ABattleManager::TurnChange() {
 
 	switch (CurrentTurnType) {
 	case BossTurn:
-		BattleManagerSystem->UpdateRoundInfo();
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
 		break;
@@ -94,6 +96,7 @@ void ABattleManager::TurnChange() {
 	case PeppySkillUsingTurn:
 		StartBossTurn();
 		CurrentTurnType = BossTurn;
+		BattleManagerSystem->UpdateRoundInfo();
 		break;
 	}
 }

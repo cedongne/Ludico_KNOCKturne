@@ -154,8 +154,8 @@ public:
 
 	// Round 관련 항목
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 Round = 0;
+	int32 Round = 1;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 LastRoundBossHpRatio;
+	int32 LastRoundBossHpRatio = 100;
 	void UpdateRoundInfo();
 };
