@@ -32,6 +32,9 @@ private:
 
 	void GetDreamFragment();
 
+protected:
+	class UBattleManagerSystem* BattleManagerSystem;
+
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Actor")
 	ABattleManager* BattleManager;

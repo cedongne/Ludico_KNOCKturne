@@ -16,5 +16,5 @@ class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 DreamFragmentCount = 1;
+	int32 DreamFragmentCount = 0;
 };

@@ -3,6 +3,7 @@
 
 #include "NTBattleGameMode.h"
 #include "Actor/BattleManager.h"
+#include "GameInstance/BattleManagerSystem.h"
 
 ANTBattleGameMode::ANTBattleGameMode() {
 	static ConstructorHelpers::FClassFinder<ABattleManager> BP_BattleManagerPath(TEXT("/Game/Blueprints/Actors/Battle/BP_BattleManager"));
@@ -13,8 +14,6 @@ void ANTBattleGameMode::InitGame(const FString& MapName, const FString& Option, 
 	Super::InitGame(MapName, Option, ErrorMessage);
 
 	BattleManager = GetWorld()->SpawnActor<ABattleManager>(BP_BattleManagerClass);
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-
 }
 
 void ANTBattleGameMode::GameOver() {
@@ -25,8 +24,8 @@ void ANTBattleGameMode::GameOver() {
 
 void ANTBattleGameMode::GameClear() {
 	BattleManager->GetBossActor()->Die();
+	GetDreamFragment();
 	EndBattle();
-	KNOCKturneGameState->DreamFragmentCount += 1;
 }
 
 void ANTBattleGameMode::EndBattle() {
@@ -35,9 +34,18 @@ void ANTBattleGameMode::EndBattle() {
 }
 
 void ANTBattleGameMode::GetDreamFragment() {
-	float ReducedEP = 1 - (BattleManager->GetBossActor()->StatComponent->CurStatData.EP * 100);
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
+	float ReducedEP = BattleManagerSystem->LastRoundBossHpRatio;
+	KNOCKturneGameState->DreamFragmentCount += 1;
 	if (ReducedEP >= 80) {
 		KNOCKturneGameState->DreamFragmentCount += 1;
 	}
+
+	if (KNOCKturneGameState == nullptr) {
+		NTLOG(Warning, TEXT("%d"), ReducedEP);
+	}
+	// NTLOG(Warning, TEXT("%d"), ReducedEP);
 }
