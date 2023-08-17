@@ -5,6 +5,7 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "GameMode/KNOCKturneGameState.h"
 
 #include "BattleTableManagerSystem.h"
 
@@ -14,6 +15,8 @@ UCLASS()
 class KNOCKTURNE_API UBattleManagerSystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
+private:
+	AKNOCKturneGameState* KNOCKturneGameState;
 	
 public:
 	UBattleManagerSystem();
@@ -28,16 +31,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool VisibleBossSkillHitArea = false;
 
-	// IconRowMap ÃÊ±âÈ­
+	// IconRowMap ï¿½Ê±ï¿½È­
 	void InitSkillIconRowMap();
-	// IconRowMap ÃÊ±âÈ­
+	// IconRowMap ï¿½Ê±ï¿½È­
 	void InitSpecialtyIconRowMap();
-	// IconRowMap ÃÊ±âÈ­
+	// IconRowMap ï¿½Ê±ï¿½È­
 	void InitItemIconRowMap();
-	// IconSkillActorMap ÃÊ±âÈ­
+	// IconSkillActorMap ï¿½Ê±ï¿½È­
 	void InitIconSkillActorMap();
 
-	// ¾Æ¸®¼ÛÇÑ °¨Á¤ÆÄ¾Ç
+	// ï¿½Æ¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½
 	TSubclassOf<AActor> AmbiguousEmotion_Ref;
 
 public:
@@ -47,23 +50,23 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetTimerUnvisibleHitArea();
 
-	/*º¸µû¸®-ÀüÅõ Àü ÁØºñ*/
-	// Çãºê¿ùµå º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Øºï¿½*/
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³
 	TArray<int32> SelectedSkillCodeList;
 
-	// Çãºê¿ùµå º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¸®½ºÆ® Å©±â ¼³Á¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ® Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	void SetSizeOfSelectedSkillCodeList(int32 size);
 
-	// Çãºê¿ùµå º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¸®½ºÆ® Å©±â °¡Á®¿À±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ® Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	int32 GetSizeOfSelectedSkillCodeList();
 
-	// Çãºê¿ùµå º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¸®½ºÆ® ¼³Á¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	void SetOneSelectedSkillCodeList(int32 index, int32 value);
 
-	// Çãºê¿ùµå º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¸®½ºÆ® °¡Á®¿À±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	int32 GetOneSelectedSkillCodeInList(int32 index);
 
@@ -71,26 +74,26 @@ public:
 	TArray<int32> GetSelectedSkillCodeList(); 
 
 
-	// º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¾ÆÀÌÄÜ ÀÌ¸§-Çà ¹øÈ£
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½-ï¿½ï¿½ ï¿½ï¿½È£
 	TMap<FString, int32> SkillIconRowMap;
 
-	// ¾ÆÀÌÄÜ ÀÌ¸§À¸·Î ½ºÅ³ Çà Ã£±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ Ã£ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	int32 FindSkillRow(FString IconName);
 
 
-	// º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ Æ¯¼ö±â ¾ÆÀÌÄÜ ÀÌ¸§-Çà ¹øÈ£
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½-ï¿½ï¿½ ï¿½ï¿½È£
 	TMap<FString, int32> SpecialtyIconRowMap;
 
-	// ¾ÆÀÌÄÜ ÀÌ¸§À¸·Î ¾ÆÀÌÅÛ Çà Ã£±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã£ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	int32 FindSpecialtyRow(FString IconName);
 
 
-	// º¸µû¸®¿¡¼­ ¼±ÅÃÇÑ Æ¯¼ö±â ¾ÆÀÌÄÜ ÀÌ¸§-Çà ¹øÈ£
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½-ï¿½ï¿½ ï¿½ï¿½È£
 	TMap<FString, int32> ItemIconRowMap;
 
-	// ¾ÆÀÌÄÜ ÀÌ¸§À¸·Î ¾ÆÀÌÅÛ Çà Ã£±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã£ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	int32 FindItemRow(FString IconName);
 
@@ -98,24 +101,24 @@ public:
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	FString FinalSpecialSkill; // ÃÖÁ¾ÀûÀ¸·Î ¼±ÅÃÇÑ Æ¯¼ö±â
+	FString FinalSpecialSkill; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	FString FinalItem; // ÃÖÁ¾ÀûÀ¸·Î ¼±ÅÃÇÑ ¾ÆÀÌÅÛ
+	FString FinalItem; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	/*ÆäÇÇ ÅÏ*/
+	/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½*/
 
-	// ÆäÇÇ ÅÏ¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¾ÆÀÌÄÜ ÀÌ¸§-½ºÅ³ ¾×ÅÍ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½-ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
 
-	// ÆäÇÇ ÅÏ¿¡¼­ ¼±ÅÃÇÑ ½ºÅ³ ¾×ÅÍ ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TSubclassOf<AActor>> SelectedSkillActorClassList;
 
-	// ¾ÆÀÌÄÜ ÀÌ¸§À¸·Î ½ºÅ³ ¾×ÅÍ Ã£±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<AActor> FindSkillActor(FString IconName);
 
-	// ½ºÅ³ ¾×ÅÍ Å¬·¡½º ¸®½ºÆ® ¿ø¼Ò Ãß°¡
+	// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	UFUNCTION(BlueprintCallable)
 	void AddSelectedSkillActorClassList(TSubclassOf<AActor> SkillActor);
 
@@ -127,11 +130,11 @@ public:
 
 
 
-	// ¾ÆÀÌÅÛº° °³¼ö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ûºï¿½ ï¿½ï¿½ï¿½ï¿½
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<int32> ItemCountList;
 
-	// ²Þ ÀÏ±â ÇØ±Ý ¿­ - 1
+	// ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½Ø±ï¿½ ï¿½ï¿½ - 1
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;
 
@@ -139,6 +142,8 @@ public:
 	void UpdateDreamDiaryWhenGameOver();
 	UFUNCTION(BlueprintCallable)
 	void UpdateDreamDiaryWhenGameClear();
+	UFUNCTION(BlueprintCallable)
+	void GetDreamFragmentAfterBattle();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool isBattleFail = false;
@@ -152,10 +157,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool GetDreamFragment = false;
 
-	// Round °ü·Ã Ç×¸ñ
+	// Round ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 Round = 1;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 LastRoundBossHpRatio = 100;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 ReducedEP = 0;
 	void UpdateRoundInfo();
 };

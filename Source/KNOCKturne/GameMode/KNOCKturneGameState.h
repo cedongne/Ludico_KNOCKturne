@@ -19,4 +19,6 @@ public:
 	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		int32 DreamDiaryOpenRow = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool GetDreamFragment = false;
 };

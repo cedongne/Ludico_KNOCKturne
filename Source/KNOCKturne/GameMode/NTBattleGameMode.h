@@ -26,14 +26,8 @@ protected:
 
 private:
 	TSubclassOf<class ABattleManager> BP_BattleManagerClass;
-	AKNOCKturneGameState* KNOCKturneGameState;
 
 	void EndBattle();
-
-	void GetDreamFragment();
-
-protected:
-	class UBattleManagerSystem* BattleManagerSystem;
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Actor")

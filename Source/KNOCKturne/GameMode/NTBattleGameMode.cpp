@@ -18,34 +18,15 @@ void ANTBattleGameMode::InitGame(const FString& MapName, const FString& Option, 
 
 void ANTBattleGameMode::GameOver() {
 	BattleManager->GetPeppyActor()->Die();
-	GetDreamFragment();
 	EndBattle();
 }
 
 void ANTBattleGameMode::GameClear() {
 	BattleManager->GetBossActor()->Die();
-	GetDreamFragment();
 	EndBattle();
 }
 
 void ANTBattleGameMode::EndBattle() {
 	BattleManager->GetPeppyActor()->SetImmobile();
 	BattleManager->SetActorTickEnabled(false);
-}
-
-void ANTBattleGameMode::GetDreamFragment() {
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
-
-	float ReducedEP = BattleManagerSystem->LastRoundBossHpRatio;
-	KNOCKturneGameState->DreamFragmentCount += 1;
-	if (ReducedEP >= 80) {
-		KNOCKturneGameState->DreamFragmentCount += 1;
-	}
-
-	if (KNOCKturneGameState == nullptr) {
-		NTLOG(Warning, TEXT("%d"), ReducedEP);
-	}
-	// NTLOG(Warning, TEXT("%d"), ReducedEP);
 }

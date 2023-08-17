@@ -52,7 +52,7 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 }
 
 
-/*º¸µû¸®-ÀüÅõ Àü ÁØºñ*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Øºï¿½*/
 void UBattleManagerSystem::SetSizeOfSelectedSkillCodeList(int32 size) {
 	SelectedSkillCodeList.SetNum(size);
 }
@@ -121,7 +121,7 @@ int32 UBattleManagerSystem::FindItemRow(FString IconName) {
 }
 
 
-/*ÆäÇÇ ÅÏ*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½*/
 TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
 	if (IconSkillActorMap.Contains(IconName)) {
 		return *(IconSkillActorMap[IconName]);
@@ -151,11 +151,26 @@ void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {
 	DreamDiaryOpenRow = 3;
 }
 
+void UBattleManagerSystem::GetDreamFragmentAfterBattle() {
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
+	if (ReducedEP >= 80) {
+		KNOCKturneGameState->DreamFragmentCount += 1;
+
+		KNOCKturneGameState->GetDreamFragment = true;
+		NTLOG(Warning, TEXT("%d %d"), KNOCKturneGameState->DreamFragmentCount, KNOCKturneGameState->GetDreamFragment);
+	}
+	else {
+		NTLOG(Warning, TEXT("Did not satisfy the condition"));
+	}
+}
+
 void UBattleManagerSystem::UpdateRoundInfo() {
 	LoadBattleTableManagerSystem();
 
 	Round++;
 	LastRoundBossHpRatio = BattleManager->BossActor->StatComponent->CurStatData.EP * 100 / BattleManager->BossActor->StatComponent->CurStatData.MaxEP;
+	ReducedEP = 100 - LastRoundBossHpRatio;
 	NTLOG(Warning, TEXT("%d %d"), Round, LastRoundBossHpRatio);
 }
 
