@@ -154,15 +154,15 @@ void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {
 void UBattleManagerSystem::GetDreamFragmentAfterBattle() {
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 
-	if (ReducedEP >= 80) {
+	if (ReducedEP >= 30) {
 		KNOCKturneGameState->DreamFragmentCount += 1;
-
 		KNOCKturneGameState->GetDreamFragment = true;
-		NTLOG(Warning, TEXT("%d %d"), KNOCKturneGameState->DreamFragmentCount, KNOCKturneGameState->GetDreamFragment);
 	}
 	else {
 		NTLOG(Warning, TEXT("Did not satisfy the condition"));
 	}
+
+	NTLOG(Warning, TEXT("%d %d"), KNOCKturneGameState->DreamFragmentCount, KNOCKturneGameState->GetDreamFragment);
 }
 
 void UBattleManagerSystem::UpdateRoundInfo() {
