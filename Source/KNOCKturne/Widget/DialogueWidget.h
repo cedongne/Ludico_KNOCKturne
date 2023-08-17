@@ -65,9 +65,9 @@ protected:
 		class UOverlay* Overlay_NpcName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 		class UOverlay* Overlay_PeppyName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
 		class UWidgetAnimation* PeppyAppear;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
 		class UWidgetAnimation* DreamMAppear;
 	
 public:
