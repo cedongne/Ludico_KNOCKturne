@@ -8,9 +8,13 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/Overlay.h"
+#include "Engine/DataTable.h"
 #include "string"
 
+#include "GameInstance/BattleManagerSystem.h"
 #include "Component/DialogueTableComponent.h"
+#include "GameMode/PeppyController.h"
+#include "GameMode/KNOCKturneGameState.h"
 
 #include "DialogueWidget.generated.h"
 
@@ -24,9 +28,24 @@ class KNOCKTURNE_API UDialogueWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+	void BeginPlay();
 	void NativePreConstruct();
 
+	AKNOCKturneGameState* KNOCKturneGameState;
+
 protected:
+	APeppyController* PeppyController;
+	class UBattleManagerSystem* BattleManagerSystem;
+
+	FString FullDialogue;
+	TArray<int32> OpenBracesArray;
+	int32 SkillIndexValueArrayIndex = -1;
+	int32 CloseBracesIndex = 0;
+	FString RedefinedDescription;
+	bool InputEDuringWriting = false;
+	bool isCameraMoving = false;
+	bool isDirection = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 		class UImage* Image_BlackScreen;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -71,8 +90,6 @@ protected:
 		class UWidgetAnimation* DreamMAppear;
 	
 public:
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void GetNextDialogueLine(UDialogueTableComponent* DialogueTableComponent);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UTexture2D* Im_dia_peppy_basic;
@@ -112,6 +129,15 @@ public:
 		class UTexture2D* Im_cutS_pro_dreamW4;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UTexture2D* Im_cutS_pro_dreamW5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UTexture2D* icon_dia_select_yes_32_32;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UTexture2D* icon_dia_select_no_32_32;
+
+	UPROPERTY(BlueprintReadWrite)
+		float TextSpeed = 0.07;
+	UPROPERTY(BlueprintReadWrite)
+		int32 TypingIndex = 0;
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeName(FDialogueData DataRow);
@@ -125,4 +151,34 @@ public:
 		void ChangeCutScene(FDialogueData DataRow);
 	UFUNCTION(BlueprintCallable)
 		void ChangeDialogueUI(FDialogueData DataRow);
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void GetNextDialogueLine(UDialogueTableComponent* DialogueTableComponent);
+	UFUNCTION(BlueprintCallable)
+		FString GetCompleteRichTextTag(FString Dialogue);
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void TypingEffect();
+	UFUNCTION(BlueprintCallable)
+		void DownArrowEvent();
+	UFUNCTION(BlueprintCallable)
+		void UpArrowEvent();
+	UFUNCTION(BlueprintCallable)
+		FString GetSkillIndexByKeyword(FString Num);
+	UFUNCTION(BlueprintCallable)
+		FString GetValueOfSkillIndex(FString Description, int32 OpenBracesArrayIndex);
+	UFUNCTION(BlueprintCallable)
+		FString RedefineLine(FString Description);
+	UFUNCTION(BlueprintCallable)
+		FString ApplyRedefinedLine(FString OriginalStr, UDialogueTableComponent* DialogueTableComponentRowVar);
+	UFUNCTION(BlueprintCallable)
+		void NextTalk(UDialogueTableComponent* DialogueTableComponentRowVar);
+	UFUNCTION(BlueprintCallable)
+		void InputEDuringTalking(UDialogueTableComponent* DialogueTableComponentRowVar);
+	UFUNCTION(BlueprintCallable)
+		void AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar);
+
+	UFUNCTION(BlueprintCallable)
+		void IsEndedDialogueRowsTrue();
+	UFUNCTION(BlueprintCallable)
+		void IsDirectionTrue();
 };

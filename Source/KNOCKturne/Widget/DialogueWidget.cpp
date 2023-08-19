@@ -3,6 +3,12 @@
 
 #include "DialogueWidget.h"
 
+void UDialogueWidget::BeginPlay() {
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+}
+
 void UDialogueWidget::NativePreConstruct() {
 	Image_BlackScreen = (UImage*)GetWidgetFromName(TEXT("Image_BlackScreen"));
 	HandCutScene = (UImage*)GetWidgetFromName(TEXT("HandCutScene"));
@@ -191,4 +197,206 @@ void UDialogueWidget::ChangeDialogueUI(FDialogueData DataRow) {
 	ChangePeppyImg(DataRow);
 	ChangeNPCImg(DataRow);
 	ChangeCutScene(DataRow);
+}
+
+FString UDialogueWidget::GetCompleteRichTextTag(FString Dialogue) {
+	FString CompleteTag = "";
+
+	while (TypingIndex < Dialogue.Len()) {
+		CompleteTag = CompleteTag.Append(Dialogue.Mid(TypingIndex, TypingIndex + 1));
+		if (CompleteTag == ">") {
+			TypingIndex++;
+			return CompleteTag;
+		}
+		else {
+			TypingIndex++;
+		}
+	}
+
+	return "";
+}
+
+void UDialogueWidget::DownArrowEvent() {
+	/*UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_1->Brush.GetResourceObject());
+
+	if (Image_Dialogue_Select_1->GetVisibility() == ESlateVisibility::Visible) {
+		if (Texture == icon_dia_select_yes_32_32) {
+			Image_Dialogue_Select_1->SetBrushFromTexture(icon_dia_select_no_32_32);
+			TextBlock_Dialogue_Select_1->SetColorAndOpacity(FLinearColor(0.623961f, 0.623961f, 0.623961f, 1.f));
+			Image_Dialogue_Select_2->SetBrushFromTexture(icon_dia_select_yes_32_32);
+			TextBlock_Dialogue_Select_2->SetColorAndOpacity(FLinearColor(0.f, 0.f, 0.f, 1.f));
+		}
+	}*/
+}
+
+void UDialogueWidget::UpArrowEvent() {
+	/*UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_2->Brush.GetResourceObject());
+
+	if (Image_Dialogue_Select_2->GetVisibility() == ESlateVisibility::Visible) {
+		if (Texture == icon_dia_select_yes_32_32) {
+			Image_Dialogue_Select_1->SetBrushFromTexture(icon_dia_select_yes_32_32);
+			TextBlock_Dialogue_Select_1->SetColorAndOpacity(FLinearColor(0.f, 0.f, 0.f, 1.f));
+			Image_Dialogue_Select_2->SetBrushFromTexture(icon_dia_select_no_32_32);
+			TextBlock_Dialogue_Select_2->SetColorAndOpacity(FLinearColor(0.623961f, 0.623961f, 0.623961f, 1.f));
+		}
+	}*/
+}
+
+FString UDialogueWidget::GetSkillIndexByKeyword(FString Num) {
+	switch(FCString::Atoi(*Num)) {
+		case 0:
+			return FString::FromInt(BattleManagerSystem->Round);
+		case 1:
+			return FString::FromInt(100 - BattleManagerSystem->LastRoundBossHpRatio);
+		default:
+			return "None";
+	}
+}
+
+FString UDialogueWidget::GetValueOfSkillIndex(FString Description, int32 OpenBracesArrayIndex) {
+	int32 index = OpenBracesArray[OpenBracesArrayIndex];
+	FString substr = Description.Mid(index + 2, index + 3);
+	if (substr == "}") {
+		CloseBracesIndex = index + 2;
+		FString SkillIndexStr = GetSkillIndexByKeyword(Description.Mid(index + 1, index + 2));
+
+		return SkillIndexStr;
+	}
+	else {
+		CloseBracesIndex = index + 3;
+		FString SkillIndexStr = GetSkillIndexByKeyword(Description.Mid(index + 1, index + 3));
+
+		return SkillIndexStr;
+	}
+}
+
+FString UDialogueWidget::RedefineLine(FString Description) {
+	for (int index = 0; index < Description.Len(); index++) {
+		if (Description.Mid(index, index + 1) == "{") {
+			SkillIndexValueArrayIndex++;
+			OpenBracesArray.SetNum(OpenBracesArray.Num() + 1);
+			OpenBracesArray[SkillIndexValueArrayIndex] = index;
+		}
+	}
+
+	for (int idx = 0; idx < OpenBracesArray.Num(); idx++) {
+		FString str1 = GetValueOfSkillIndex(Description, idx);
+		if (idx == 0) {
+			FString str2 = Description.Mid(0, OpenBracesArray[idx]);
+			FString str3 = str2.Append(str1);
+			int temp_idx = CloseBracesIndex + 1;
+			FString str4 = Description.Mid(temp_idx, (OpenBracesArray[idx + 1] - temp_idx) + temp_idx);
+
+			if (idx + 1 < OpenBracesArray.Num()) {
+				RedefinedDescription = str3.Append(str4);
+			}
+			else {
+				RedefinedDescription = str3;
+			}
+		}
+		else {
+			FString str2 = RedefinedDescription.Append(str1);
+			int temp_idx = CloseBracesIndex + 1;
+			FString str3 = Description.Mid(temp_idx, (OpenBracesArray[idx + 1] - temp_idx) + temp_idx);
+
+			if (idx + 1 < OpenBracesArray.Num()) {
+				RedefinedDescription = str2.Append(str3);
+			}
+			else {
+				RedefinedDescription = str2;
+			}
+		}
+	}
+	int temp_idx = CloseBracesIndex + 1;
+	int temp_idx2 = Description.Len() - 1 - CloseBracesIndex;
+	RedefinedDescription = RedefinedDescription.Append(Description.Mid(temp_idx, temp_idx + temp_idx2));
+	return RedefinedDescription;
+}
+
+FString UDialogueWidget::ApplyRedefinedLine(FString OriginalStr, UDialogueTableComponent* DialogueTableComponentRowVar) {
+	int32 index = DialogueTableComponentRowVar->GetCurrentRow();
+	FName RowName = DialogueTableComponentRowVar->DialogueTable->GetRowNames()[index];
+	bool isRedefineNeeded = DialogueTableComponentRowVar->isRedefineNeededLine(RowName.ToString());
+
+	if (isRedefineNeeded) {
+		return RedefineLine(OriginalStr);
+	}
+	else {
+		return OriginalStr;
+	}
+}
+
+void UDialogueWidget::NextTalk(UDialogueTableComponent* DialogueTableComponentRowVar) {
+	TextSpeed = 0.07;
+	FDialogueData dialogueData = DialogueTableComponentRowVar->GetNextRowDialogueTable();
+	FString originalDialogue = DialogueTableComponentRowVar->GetStringOnBP(dialogueData);
+	FString Line = ApplyRedefinedLine(originalDialogue, DialogueTableComponentRowVar);
+	FullDialogue = Line;
+	TypingEffect();
+	ChangeDialogueUI(dialogueData);
+
+	if (dialogueData.Direction == "-1") {
+		isDirection = false;
+	}
+	else {
+		isDirection = true;
+	}
+
+	if (DialogueTableComponentRowVar->NextDialogueTypeIs1()) {
+		DialogueTableComponentRowVar->SetIsEndedDialogueRows(true);
+	}
+}
+
+void UDialogueWidget::InputEDuringTalking(UDialogueTableComponent* DialogueTableComponentRowVar) {
+	if (!isCameraMoving) {
+		if (InputEDuringWriting) {
+			TextSpeed = 0.005;
+		}
+		else {
+			if (DialogueTableComponentRowVar->IsEndedDialogueRows)
+			{
+				IsEndedDialogueRowsTrue();
+
+				PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(this, 0);
+				PeppyController->CanInteraction = true;
+			}
+			else {
+				if (isDirection) {
+					IsDirectionTrue();
+				}
+				else {
+					NextTalk(DialogueTableComponentRowVar);
+				}
+			}
+		}
+	}
+}
+
+void UDialogueWidget::AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar) {
+	if (DataRow.Direction == "AfterBattleFail_Hubworld_DreamDiary") {
+		if (KNOCKturneGameState->isDreamDiaryUpdated) {
+			DialogueTableComponentVar->SetBattleFailDiaryDialogueIndex();
+		}
+		else {
+			DialogueTableComponentVar->SetIsEndedDialogueRows(true);
+		}
+	}
+	else {
+		if (DataRow.Direction == "AfterBattleFail_Hubworld_DreamFragment") {
+			if (KNOCKturneGameState->GetDreamFragment) {
+				DialogueTableComponentVar->SetBattleFailFragmentDialogueIndex();
+			}
+			else {
+				DialogueTableComponentVar->SetIsEndedDialogueRows(true);
+			}
+		}
+	}
+}
+
+void UDialogueWidget::IsEndedDialogueRowsTrue() {
+
+}
+
+void UDialogueWidget::IsDirectionTrue() {
+
 }

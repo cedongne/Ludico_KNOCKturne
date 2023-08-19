@@ -21,4 +21,6 @@ public:
 		int32 DreamDiaryOpenRow = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool GetDreamFragment = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool isDreamDiaryUpdated = false;
 };

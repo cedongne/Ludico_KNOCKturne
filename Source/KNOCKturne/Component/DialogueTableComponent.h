@@ -60,9 +60,6 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
-	bool IsEndedDialogueRows;
-
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
 	int32 CurrentRowIndex;
@@ -71,6 +68,9 @@ protected:
 	TArray<int32> StartRandomNpcTalk;
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Property")
+		bool IsEndedDialogueRows;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Table")
 	class UDataTable* DialogueTable;
 	class UDialogueManagerSystem* DialogueManager;
