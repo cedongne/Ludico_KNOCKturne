@@ -3,7 +3,6 @@
 
 #include "DreamDiaryWidget.h"
 
-#include "GameInstance/BattleManagerSystem.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
 #include "GameInstance/DialogueManagerSystem.h"
 #include "Component/DialogueTableComponent.h"
@@ -12,7 +11,7 @@
 
 void UDreamDiaryWidget::BeginPlay() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 }
 
 UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
@@ -23,13 +22,9 @@ UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer
 	DreamDiaryTable = DT_DREAMDIARYTABLE.Object;
 	StringTable = DT_STRINGTABLE.Object;
 	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetDreamDiaryRows", DreamDiaryRows);
-
-	// DefaultSetting();
 }
 
 void UDreamDiaryWidget::NativePreConstruct() {
-	Super::NativePreConstruct();
-
 	CanvasPanel_DreamCatcher = (UCanvasPanel*)GetWidgetFromName(TEXT("CanvasPanel_DreamCatcher"));
 	Image_Dreamcatcher = (UImage*)GetWidgetFromName(TEXT("Image_Dreamcatcher"));
 	Image_Point = (UImage*)GetWidgetFromName(TEXT("Image_Point"));
@@ -64,6 +59,10 @@ void UDreamDiaryWidget::NativePreConstruct() {
 	if (Button_Next) {
 		Button_Next->OnClicked.AddDynamic(this, &UDreamDiaryWidget::Button_NextOnClicked);
 	}
+}
+
+void UDreamDiaryWidget::Construct() {
+	DefaultSetting();
 }
 
 UDataTable* UDreamDiaryWidget::GetStringTable() {
@@ -103,13 +102,13 @@ void UDreamDiaryWidget::SetWhetherToOpenDreamDiaryOrNot(bool isNextButton) {
 			Button_Back->SetVisibility(ESlateVisibility::Visible);
 		}
 
-		if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage + 3) {
+		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 3) {
 			SetCurrentOddPageToNextPage();
 			SetDreamDiaryContent(true, true);
 		}
 		else {
 			SetCurrentOddPageToNextPage();
-			if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage + 2) {
+			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 2) {
 				SetDreamDiaryContent(true, false);
 			}
 			else {
@@ -120,11 +119,11 @@ void UDreamDiaryWidget::SetWhetherToOpenDreamDiaryOrNot(bool isNextButton) {
 	}
 	else {
 		SetCurrentOddPageToBackPage();
-		if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage - 1) {
+		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 1) {
 			SetDreamDiaryContent(true, true);
 		}
 		else {
-			if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage - 2) {
+			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 2) {
 				SetDreamDiaryContent(true, false);
 			}
 			else {
@@ -187,12 +186,14 @@ void UDreamDiaryWidget::DefaultSetting() {
 	FString DreamDiaryFirstPageString = GetStringTable()->FindRow<FDialogueString>(FName(DreamDiaryRows[0]->DreamDiaryStringID), TEXT(""))->KOR;
 	RichTextBlock_Content_Even->SetText(FText::FromString(DreamDiaryFirstPageString));
 
-	for (int index = 0; index < BattleManagerSystem->DreamDiaryOpenRow; index++) {
+	NTLOG(Warning, TEXT("%d"), KNOCKturneGameState->DreamDiaryOpenRow);
+
+	for (int index = 0; index < KNOCKturneGameState->DreamDiaryOpenRow; index++) {
 		SetDreamcatcherPointUI(index);
 	}
 
-	if (BattleManagerSystem->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
-		BattleManagerSystem->DreamDiaryOpenRow = 3;
+	if (KNOCKturneGameState->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
+		KNOCKturneGameState->DreamDiaryOpenRow = 3;
 	}
 }
 

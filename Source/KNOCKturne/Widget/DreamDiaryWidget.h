@@ -9,6 +9,8 @@
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
 
+#include "GameMode/KNOCKturneGameState.h"
+
 #include "DreamDiaryWidget.generated.h"
 
 /**
@@ -22,13 +24,16 @@ class KNOCKTURNE_API UDreamDiaryWidget : public UUserWidget
 	void BeginPlay();
 	UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
+	void Construct();
+
+	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
 
 	class UDataTable* DreamDiaryTable;
 	class UDataTable* StringTable;
 	TArray<FDreamDiaryData*> DreamDiaryRows;
-	class UBattleManagerSystem* BattleManagerSystem;
+	UDialogueTableComponent* DialogueComponent;
 
 	void Button_ExitOnClicked();
 	void Button_BackOnClicked();
