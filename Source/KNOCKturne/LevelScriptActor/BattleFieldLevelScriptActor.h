@@ -20,6 +20,8 @@ class KNOCKTURNE_API ABattleFieldLevelScriptActor : public AKNOCKturneLevelScrip
 public:
 	ABattleFieldLevelScriptActor();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void LevelPlay();
 
 protected:
 	virtual void BeginPlay() override;

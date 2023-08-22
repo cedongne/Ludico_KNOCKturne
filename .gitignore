@@ -81,3 +81,4 @@ WwiseProject/KNOCKTurne/GeneratedSoundBanks/Windows/*
 
 #Package
 Package/*
+/Source/KNOCKturne/Actor/BattleManager.h

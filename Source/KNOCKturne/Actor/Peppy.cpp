@@ -65,6 +65,8 @@ void APeppy::Tick(float DeltaTime)
 
 void APeppy::PostInitializeComponents() {
 	Super::PostInitializeComponents();
+
+	StatComponent->SetDefaultStat();
 /*
 	PeppyStat->OnHPIsZero.AddLambda([this]() ->void {
 		NTLOG(Warning, TEXT("OnHPIsZero"));

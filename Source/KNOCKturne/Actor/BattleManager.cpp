@@ -2,13 +2,15 @@
 
 
 #include "BattleManager.h"
-
 #include "Peppy.h"
 #include "Boss.h"
 #include "Component/PeppyStatComponent.h"
 #include "Component/BossStatComponent.h"
 #include "GameInstance/BattleTableManagerSystem.h"
 #include "GameInstance/BattleManagerSystem.h"
+#include "GameInstance/ActorManagerSystem.h"
+#include "GameMode/NTBattleGameMode.h"
+#include "LevelScriptActor/BattleFieldLevelScriptActor.h"
 
 // Sets default values
 ABattleManager::ABattleManager()
@@ -31,15 +33,7 @@ void ABattleManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	world = GetWorld();
-	
-	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
-	BattleTableManagerSystem->BattleManager = this;
-	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
-	BattleManagerSystem->BattleManager = this;
-
-	LoadActors();
+	Init();
 }
 
 void ABattleManager::Tick(float DeltaTime)
@@ -53,7 +47,7 @@ void ABattleManager::StartBossTurn() {
 	NTLOG_S(Warning);
 
 	ProcessDamageBeforeStartTurn();
-	SetLeftCurrentTurnTime(BossActor->StatComponent->CurStatData.Turn);
+	SetLeftCurrentTurnTime(ActorManagerSystem->BossActor->StatComponent->CurStatData.Turn);
 	BP_StartBossTurn();
 
 	BattleManagerSystem->Round = 1;
@@ -61,19 +55,18 @@ void ABattleManager::StartBossTurn() {
 }
 
 /* 해당 메서드는 레벨 블루프린트 등에서 초기화 호출 타이밍 조절 등을 위해 최초 1회만 실행 가능합니다.이후의 Turn 시작 로직은 오직 C++ 클래스 내에서만 이루어집니다. */
-void ABattleManager::BP_InitStartBossTurn() {
+void ABattleManager::BP_InitStartBattle() {
 	if (IsCalled_InitStartBossTurn) {
 		NTLOG(Error, TEXT("StartBossTurn method has already been called. This method can only be called once on blueprint."));
 		return;
 	}
-	
 	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
 	StartBossTurn();
 }
 
 void ABattleManager::StartPeppyTurn() {
-	SetLeftCurrentTurnTime(PeppyActor->StatComponent->CurStatData.Turn);
+	SetLeftCurrentTurnTime(ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
 }
 
@@ -85,6 +78,7 @@ void ABattleManager::TurnChange() {
 
 	switch (CurrentTurnType) {
 	case BossTurn:
+		ActorManagerSystem->BossActor->ClearUseSkillTimer();
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
 		break;
@@ -94,6 +88,10 @@ void ABattleManager::TurnChange() {
 		CurrentTurnType = PeppySkillUsingTurn;
 		break;
 	case PeppySkillUsingTurn:
+		ActorManagerSystem->BossActor->SpawnBossSkillWhenStartBossTurn();
+		if (ActorManagerSystem->BossActor->IsDie) {
+			Cast<ANTBattleGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->GameClear();
+		}
 		StartBossTurn();
 		CurrentTurnType = BossTurn;
 		BattleManagerSystem->UpdateRoundInfo();
@@ -128,12 +126,12 @@ void ABattleManager::DecreaseLeftCurrentTurnTime() {
 }
 
 void ABattleManager::ProcessDamageBeforeStartTurn() {
-	if (GetPeppyActor()->DamageArrayEachTurn.IsEmpty()) {
+	if (ActorManagerSystem->PeppyActor->DamageArrayEachTurn.IsEmpty()) {
 		return;
 	}
 
-	TMap<FString, int32> CurrentTurnDamages = GetPeppyActor()->DamageArrayEachTurn[0];
-	GetPeppyActor()->DamageArrayEachTurn.RemoveAt(0);
+	TMap<FString, int32> CurrentTurnDamages = ActorManagerSystem->PeppyActor->DamageArrayEachTurn[0];
+	ActorManagerSystem->PeppyActor->DamageArrayEachTurn.RemoveAt(0);
 
 	int32 TotalDamage = 0;
 	for (auto DamageData : CurrentTurnDamages) {
@@ -141,7 +139,7 @@ void ABattleManager::ProcessDamageBeforeStartTurn() {
 	}
 
 	NTLOG(Warning, TEXT("Peppy get damaged starting boss turn %d"), TotalDamage);
-	PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::EP, -TotalDamage);
+	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::EP, -TotalDamage);
 }
 
 float ABattleManager::GetLeftCurrentTurnTime() {
@@ -161,18 +159,18 @@ void ABattleManager::EndBattle() {
 	TurnChange();
 }
 
-ABoss* ABattleManager::GetBossActor() {
-	return (BossActor == nullptr) ? BossActor = Cast<ABoss>(UGameplayStatics::GetActorOfClass(GetWorld(), ABoss::StaticClass())) : BossActor;
-}
+void ABattleManager::Init() {
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleTableManagerSystem->BattleManager = this;
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	BattleManagerSystem->BattleManager = this;
+	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
 
-APeppy* ABattleManager::GetPeppyActor() {
-	return (PeppyActor == nullptr) ? PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)) : PeppyActor;
-}
+	ActorManagerSystem->BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
+	ActorManagerSystem->PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	ActorManagerSystem->BattleManager = this;
+	BP_ActorInit();
 
-void ABattleManager::LoadActors() {
-	BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
-	PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-
-	BossActor->StatComponent->SetDefaultStat();
-	PeppyActor->StatComponent->SetDefaultStat();
+	Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor())->LevelPlay();
 }

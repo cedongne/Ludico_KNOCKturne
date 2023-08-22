@@ -2,11 +2,11 @@
 
 
 #include "BattleManagerSystem.h"
-
 #include "GameMode/NTBattleGameMode.h"
 #include "Actor/BattleManager.h"
-
 #include "Components/WidgetComponent.h"
+#include "GameInstance/BattleTableManagerSystem.h"
+#include "GameInstance/ActorManagerSystem.h"
 #include "Kismet/GameplayStatics.h"
 
 UBattleManagerSystem::UBattleManagerSystem() {
@@ -33,6 +33,14 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	{
 		ItemCountList[index] = 0;
 	}
+}
+
+void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
+	Super::Initialize(Collection);
+	
+	auto GameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 }
 
 void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
@@ -169,7 +177,7 @@ void UBattleManagerSystem::UpdateRoundInfo() {
 	LoadBattleTableManagerSystem();
 
 	Round++;
-	LastRoundBossHpRatio = BattleManager->BossActor->StatComponent->CurStatData.EP * 100 / BattleManager->BossActor->StatComponent->CurStatData.MaxEP;
+	LastRoundBossHpRatio = ActorManagerSystem->BossActor->StatComponent->CurStatData.EP * 100 / ActorManagerSystem->BossActor->StatComponent->CurStatData.MaxEP;
 	ReducedEP = 100 - LastRoundBossHpRatio;
 	NTLOG(Warning, TEXT("%d %d"), Round, LastRoundBossHpRatio);
 }

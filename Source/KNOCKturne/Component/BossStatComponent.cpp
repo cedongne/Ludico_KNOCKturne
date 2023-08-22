@@ -13,17 +13,17 @@ UBossStatComponent::UBossStatComponent()
 	NTCHECK(BossActor != nullptr);
 }
 
+void UBossStatComponent::InitializeComponent() {
+	Super::InitializeComponent();
+
+	SetDefaultStat();
+}
 
 // Called when the game starts
 void UBossStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-}
-
-void UBossStatComponent::InitializeComponent() {
-	Super::InitializeComponent();
-	SetDefaultStat();
 }
 
 void UBossStatComponent::SetDefaultStat() {
@@ -43,8 +43,8 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 		CurStatData.EP = FMath::Clamp<int32>(CurStatData.EP + Value, 0, CurStatData.MaxEP);
 		if (CurStatData.EP <= 0) {
 			CurStatData.EP = 0;
-
-			BattleGameMode->GameClear();
+			// 턴이 끝난 후 Die 처리를 하기 위해 Flag만 설정하고 BattleManager의 TurnChange()에서 실제 Die 메서드를 호출함.
+			BossActor->IsDie = true;
 		}
 		break;
 	default:

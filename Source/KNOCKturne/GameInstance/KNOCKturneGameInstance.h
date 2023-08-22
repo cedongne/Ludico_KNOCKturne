@@ -3,10 +3,8 @@
 #pragma once
 
 #include "KNOCKturne.h"
-
 #include "Engine/DataTable.h"
 #include "Engine/GameInstance.h"
-
 #include "KNOCKturneGameInstance.generated.h"
 
 UCLASS()
@@ -18,8 +16,4 @@ public:
 	UKNOCKturneGameInstance();
 
 	virtual void Init() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = StatData)
-	FTransform PeppyTransform;
-	
 };

@@ -4,10 +4,9 @@
 
 #include "KNOCKturne.h"
 #include "GameFramework/GameModeBase.h"
-
 #include "Actor/BattleManager.h"
 #include "GameMode/KNOCKturneGameState.h"
-
+#include "GameInstance/ActorManagerSystem.h"
 #include "NTBattleGameMode.generated.h"
 
 /**
@@ -22,23 +21,31 @@ public:
 	ANTBattleGameMode();
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UMG_Game")
+	TSubclassOf<UUserWidget> BP_BattleHudClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BP")
+	class UUserWidget* BP_BattleHud;
+
 	void InitGame(const FString& MapName, const FString& Option, FString& ErrorMessage) override;
+	void RestartPlayer(AController* NewPlayer) override;
 
 private:
 	TSubclassOf<class ABattleManager> BP_BattleManagerClass;
+	TSubclassOf<class ABoss> BP_BossActorClass;
 
-	void EndBattle();
+	class ABattleManager* BattleManager;
+	class UActorManagerSystem* ActorManagerSystem;
 
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Actor")
-	ABattleManager* BattleManager;
+	UFUNCTION(BlueprintCallable)
+	void SpawnHud();
+	UFUNCTION(BlueprintCallable)
+	void EndBattle();
 
 	UFUNCTION(BlueprintCallable)
 	void GameOver();
 	UFUNCTION(BlueprintCallable)
 	void GameClear();
-
-
-
 
 };

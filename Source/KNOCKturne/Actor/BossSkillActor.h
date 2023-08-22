@@ -56,12 +56,13 @@ protected:
 	float CurrentLifeTime = 0;
 
 	UFUNCTION(BlueprintCallable)
-	void Initialize();
+	void Initialize() override;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	ESkillActorLifeCycleStep CurrentStep = ESkillActorLifeCycleStep::DelayTime;
 
 public:
+
 	UFUNCTION(BlueprintCallable)
 	void InitSkillData();
 	UFUNCTION(BlueprintCallable)
@@ -77,4 +78,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
+
+	
 };

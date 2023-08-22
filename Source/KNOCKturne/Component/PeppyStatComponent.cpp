@@ -13,6 +13,7 @@ UPeppyStatComponent::UPeppyStatComponent()
 {
 	bWantsInitializeComponent = true;
 	PeppyActor = Cast<APeppy>(GetOwner());
+
 }
 
 
@@ -34,7 +35,7 @@ void UPeppyStatComponent::SetDefaultStat() {
 	NTCHECK(BattleTableManagerSystem != nullptr);
 	BattleManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleManagerSystem>();
 	NTCHECK(BattleManagerSystem != nullptr);
-	
+
 	CurStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Init");
 	MinStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Min");
 	MaxStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Max");

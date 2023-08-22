@@ -6,9 +6,6 @@
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "GameMode/KNOCKturneGameState.h"
-
-#include "BattleTableManagerSystem.h"
-
 #include "BattleManagerSystem.generated.h"
 
 UCLASS()
@@ -24,7 +21,10 @@ public:
 	class ABattleManager* BattleManager;
 
 protected:
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+
 	class UBattleTableManagerSystem* BattleTableManagerSystem = nullptr;
+	class UActorManagerSystem* ActorManagerSystem = nullptr;
 
 	void LoadBattleTableManagerSystem();
 
@@ -159,7 +159,7 @@ public:
 
 	// Round ���� �׸�
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 Round = 1;
+	int32 Round = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 LastRoundBossHpRatio = 100;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

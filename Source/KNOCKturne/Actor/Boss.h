@@ -7,6 +7,8 @@
 
 #include "Component/BossStatComponent.h"
 #include "Component/BuffComponent.h"
+#include "Component/KNOCKturneObjectPool.h"
+#include "GameInstance/BattleTableManagerSystem.h"
 
 #include "Boss.generated.h"
 
@@ -22,13 +24,27 @@ public:
 	class UBossStatComponent* StatComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UBuffComponent* BuffComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UKNOCKturneObjectPool* EnergySpawner;
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void PostInitializeComponents() override;
 
+private:
+	UBattleTableManagerSystem* BattleTableManagerSystem;
+
+	FTimerHandle UseSkillTimerHandler;
+
+	void SpawnBossSkill();
+	
 public:
-	void Die();
+	bool IsDie = false;
 
+	void SpawnBossSkillWhenStartBossTurn();
+	void ClearUseSkillTimer();
+
+	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void BP_Die();
 };

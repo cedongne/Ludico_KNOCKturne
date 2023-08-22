@@ -35,8 +35,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component")
 	UStaticMeshComponent* SkillHitArea;
+	
 	UFUNCTION(BlueprintCallable)
 	FName GetCurrentBlueprintClassName();
+
+	virtual void Initialize();
 
 private:
 	void RegistSkillActorOnBattleManager();

@@ -8,7 +8,7 @@ APeppySkillActor::APeppySkillActor() {
 
 void APeppySkillActor::BeginPlay() {
 	Super::BeginPlay();
-
+	Initialize();
 	LoadSkillDataFromDataTable();
 	UseSkill();
 }

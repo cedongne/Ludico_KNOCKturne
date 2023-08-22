@@ -31,8 +31,6 @@ ABossSkillActor::ABossSkillActor()
 
 void ABossSkillActor::BeginPlay() {
 	Super::BeginPlay();
-
-	Initialize();
 }
 
 void ABossSkillActor::Tick(float DeltaSeconds) {
@@ -64,6 +62,11 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 	case ESkillActorLifeCycleStep::DestroyTime:
 		if (CurrentLifeTime >= SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME) {
 			BattleManager->SkillActorsOnField.Remove(this->GetFName().ToString());
+			auto owner = Cast<class ABoss>(GetOwner());
+			if (owner != nullptr) {
+				NTLOG(Warning, TEXT("%s's owner is %s"), *GetName(), *(owner->GetName()));
+//				owner->UseSkill();
+			}
 			Destroy();
 		}
 		break;
@@ -73,6 +76,8 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 }
 
 void ABossSkillActor::Initialize() {
+	Super::Initialize();
+
 	InitSkillData();
 }
 
@@ -99,7 +104,7 @@ void ABossSkillActor::InitSkillData() {
 
 FBossSkillData ABossSkillActor::GetSkillData() {
 	if (!IsInitialized) {
-		InitSkillData();
+		Initialize();
 	}
 	return SkillData;
 }
@@ -126,6 +131,5 @@ bool ABossSkillActor::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
 		return true;
 	}
 	TempDelayTime += DeltaSeconds;
-
 	return false;
 }

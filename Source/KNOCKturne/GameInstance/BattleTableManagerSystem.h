@@ -344,6 +344,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "DataStructure")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;
 
+	class UActorManagerSystem* ActorManagerSystem;
 	class ABattleManager* BattleManager;
 
 public:
@@ -356,7 +357,6 @@ public:
 	FName GetCurrentBlueprintClassName();
 
 private:
-
 	class UKNOCKturneGameInstance* GameInstance;
 	class APeppy* PeppyActor = nullptr;
 

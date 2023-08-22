@@ -2,18 +2,21 @@
 
 
 #include "BattleTableManagerSystem.h"
+#include "Actor/Peppy.h"
 #include "Actor/BattleManager.h"
 #include "Actor/BossSkillActor.h"
 #include "Actor/PeppySkillActor.h"
 #include "Component/BuffComponent.h"
 #include "Util/CalcUtil.h"
-#include "Actor/Peppy.h"
+#include "GameInstance/ActorManagerSystem.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
 
 void UBattleTableManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 	Super::Initialize(Collection);
+
+	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
 }
 
 UBattleTableManagerSystem::UBattleTableManagerSystem() {
@@ -138,12 +141,12 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 
 	for (int Sequence = 0; Sequence < 2; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatComponent = BattleManager->PeppyActor->StatComponent;
-			TargetBuffComponent = BattleManager->PeppyActor->BuffComponent;
+			TargetStatComponent = ActorManagerSystem->PeppyActor->StatComponent;
+			TargetBuffComponent = ActorManagerSystem->PeppyActor->BuffComponent;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatComponent = BattleManager->BossActor->StatComponent;
-			TargetBuffComponent = BattleManager->BossActor->BuffComponent;
+			TargetStatComponent = ActorManagerSystem->BossActor->StatComponent;
+			TargetBuffComponent = ActorManagerSystem->BossActor->BuffComponent;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
@@ -207,19 +210,19 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, US
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
 	UStatComponent* TargetStatComponent = nullptr;
 	UBuffComponent* TargetBuffComponent = nullptr;
-	BattleManager->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
+	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
 	int32 SkillIndexes[3] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2, SkillData.SkillIndex_3 };
 	int32 SkillTargets[3] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2, SkillData.SkillTarget_3 };
 
 	for (int Sequence = 0; Sequence < 3; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatComponent = BattleManager->PeppyActor->StatComponent;
-			TargetBuffComponent = BattleManager->PeppyActor->BuffComponent;
+			TargetStatComponent = ActorManagerSystem->PeppyActor->StatComponent;
+			TargetBuffComponent = ActorManagerSystem->PeppyActor->BuffComponent;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatComponent = BattleManager->BossActor->StatComponent;
-			TargetBuffComponent = BattleManager->BossActor->BuffComponent;
+			TargetStatComponent = ActorManagerSystem->BossActor->StatComponent;
+			TargetBuffComponent = ActorManagerSystem->BossActor->BuffComponent;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
