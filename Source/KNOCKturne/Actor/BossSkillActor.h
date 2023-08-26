@@ -41,6 +41,7 @@ public:
 private:
 	float TempDelayTime;
 	const float ShowAttackRangeTime_Total = 2.0f;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	float ShowAttackRangeTime_PreSpawnActor;
 
 	FTimerHandle ActivateActorTickTimerHandler;
