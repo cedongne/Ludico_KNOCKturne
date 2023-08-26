@@ -11,6 +11,8 @@
 ABossSkillActor::ABossSkillActor()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = false;
+	SetActorTickEnabled(false);
 	IsContactSkill = true;
 
 
@@ -24,6 +26,7 @@ ABossSkillActor::ABossSkillActor()
 	SkillMeshPivot->SetupAttachment(ActorPivot);
 	SkillMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SkillMesh"));
 	SkillMesh->SetupAttachment(SkillMeshPivot);
+	SkillMesh->bHiddenInGame = true;
 
 	AttackRange = CreateDefaultSubobject<UWidgetComponent>(TEXT("AttackRange"));
 	AttackRange->SetupAttachment(ActorPivot);
@@ -35,7 +38,6 @@ void ABossSkillActor::BeginPlay() {
 
 void ABossSkillActor::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
-
 	EvaluateCurrentLifeCycleStep(DeltaSeconds);
 }
 
@@ -77,8 +79,9 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 
 void ABossSkillActor::Initialize() {
 	Super::Initialize();
-
 	InitSkillData();
+
+	ActivateActorTickAfterDelay(ShowAttackRangeTime_PreSpawnActor);
 }
 
 void ABossSkillActor::InitSkillData() {
@@ -99,7 +102,22 @@ void ABossSkillActor::InitSkillData() {
 	else {
 		SkillData = *TempSkillData;
 		IsInitialized = true;
+		ShowAttackRangeTime_PreSpawnActor = ShowAttackRangeTime_Total - SkillData.SkillDelayTime;
 	}
+}
+
+void ABossSkillActor::ActivateActorTickAfterDelay(float DelayTime) {
+	GetWorld()->GetTimerManager().SetTimer(
+		ActivateActorTickTimerHandler,
+		this,
+		&ABossSkillActor::ActivateActorTick,
+		DelayTime,
+		false);
+}
+
+void ABossSkillActor::ActivateActorTick() {
+	SkillMesh->bHiddenInGame = false;
+	SetActorTickEnabled(true);
 }
 
 FBossSkillData ABossSkillActor::GetSkillData() {
@@ -110,11 +128,9 @@ FBossSkillData ABossSkillActor::GetSkillData() {
 }
 void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	SkillData = NewSkillData;
-	NTLOG(Warning, TEXT("Data set %lf"), SkillData.Value_1_N);
 }
 
 void ABossSkillActor::AttackPlayer() {
-	NTLOG(Warning, TEXT("%lf"), SkillData.Value_1_N);
 	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 
 	BattleTableManagerSystem->UseBossSkill(SkillData, this);

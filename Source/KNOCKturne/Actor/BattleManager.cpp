@@ -44,8 +44,6 @@ void ABattleManager::Tick(float DeltaTime)
 }
 
 void ABattleManager::StartBossTurn() {
-	NTLOG_S(Warning);
-
 	ProcessDamageBeforeStartTurn();
 	SetLeftCurrentTurnTime(ActorManagerSystem->BossActor->StatComponent->CurStatData.Turn);
 	BP_StartBossTurn();
@@ -119,7 +117,6 @@ void ABattleManager::RunTurnTimer(float DeltaTime) {
 	*/
 }
 void ABattleManager::DecreaseLeftCurrentTurnTime() {
-	NTLOG(Warning, TEXT("Left Time : %d"), LeftCurrentTurnTime);
 	if (LeftCurrentTurnTime >= 0) {
 		LeftCurrentTurnTime--;
 	}

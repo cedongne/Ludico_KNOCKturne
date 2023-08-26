@@ -23,8 +23,6 @@ void ABoss::PostInitializeComponents() {
 	Super::PostInitializeComponents();
 
 	StatComponent->SetDefaultStat();
-
-	NTLOG_S(Warning);
 }
 
 // 보스 턴동안 주기적으로 스킬을 스폰.
@@ -45,8 +43,7 @@ void ABoss::SpawnBossSkill() {
 	}
 
 	float SkillLifeTime = SkillData->SkillCastTime + SkillData->SkillDelayTime;
-	float NextSkillDelayTime = FMath::RandRange(StatComponent->CurStatData.BossMinDelay, StatComponent->CurStatData.BossMaxDelay);
-
+	float NextSkillDelayTime = FMath::RandRange(StatComponent->CurStatData.BossMinDelay, StatComponent->CurStatData.BossMaxDelay) - 2 + SkillData->SkillDelayTime;
 	GetWorld()->GetTimerManager().SetTimer(
 		UseSkillTimerHandler,
 		this,
@@ -54,7 +51,8 @@ void ABoss::SpawnBossSkill() {
 		SkillLifeTime + NextSkillDelayTime,
 		false);
 }
-/**보스 턴이 시작될 때 일정 딜레이를 가지고 스킬을 스폰.*/
+
+/*보스 턴이 시작될 때 일정 딜레이를 가지고 스킬을 스폰.*/
 void ABoss::SpawnBossSkillWhenStartBossTurn() {
 	GetWorld()->GetTimerManager().SetTimer(
 		UseSkillTimerHandler,

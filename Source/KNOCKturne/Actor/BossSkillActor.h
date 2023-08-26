@@ -13,6 +13,7 @@
 
 UENUM(BlueprintType)
 enum class ESkillActorLifeCycleStep : uint8 {
+	ShowSkillRangeTime UMETA(DisplayName = "ShowSkillRangeTime"),
 	DelayTime UMETA(DisplayName = "DelayTime"),
 	CastTime UMETA(DisplayName = "CastTime"),
 	DestroyTime UMETA(DisplayName = "DestroyTime")
@@ -39,10 +40,15 @@ public:
 
 private:
 	float TempDelayTime;
+	const float ShowAttackRangeTime_Total = 2.0f;
+	float ShowAttackRangeTime_PreSpawnActor;
 
+	FTimerHandle ActivateActorTickTimerHandler;
 	struct FBossSkillData SkillData;
 
 	void EvaluateCurrentLifeCycleStep(float DeltaSeconds);
+	void ActivateActorTickAfterDelay(float DelayTime);
+	void ActivateActorTick();
 
 protected:
 	virtual void BeginPlay() override;
@@ -62,7 +68,6 @@ protected:
 	ESkillActorLifeCycleStep CurrentStep = ESkillActorLifeCycleStep::DelayTime;
 
 public:
-
 	UFUNCTION(BlueprintCallable)
 	void InitSkillData();
 	UFUNCTION(BlueprintCallable)
