@@ -39,9 +39,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasPositiveBuffs;
+	TMap<FString, float> HasPositiveBuffs_PerTurn;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasNegativeBuffs;
+	TMap<FString, float> HasPositiveBuffs_PerSecond;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<FString, float> HasNegativeBuffs_PerTurn;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<FString, float> HasNegativeBuffs_PerSecond;
 
 public:
 	/* 자신에게 적용된 BuffId를 가진 긍정적 버프를 제거합니다.*/
