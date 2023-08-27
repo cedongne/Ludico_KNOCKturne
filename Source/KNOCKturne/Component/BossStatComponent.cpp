@@ -9,13 +9,13 @@
 
 UBossStatComponent::UBossStatComponent()
 {
-	BossActor = Cast<ABoss>(GetOwner());
-	NTCHECK(BossActor != nullptr);
 }
 
 void UBossStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
 
+	BossActor = Cast<ABoss>(GetOwner());
+	NTCHECK(BossActor != nullptr);
 	SetDefaultStat();
 }
 
