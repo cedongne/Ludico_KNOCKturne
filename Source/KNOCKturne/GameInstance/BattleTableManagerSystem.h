@@ -3,12 +3,9 @@
 #pragma once
 
 #include "KNOCKturne.h"
-
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-
 #include "Component/StatComponent.h"
-
 #include "BattleTableManagerSystem.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FBattleTableInitDelegate);
@@ -369,7 +366,6 @@ private:
 	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
 
 public:
-	/* Skill System */
 	UFUNCTION(BlueprintCallable)
 	void UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor);
 	UFUNCTION(BlueprintCallable)
@@ -382,6 +378,5 @@ private:
 
 	FCurEffectIndexSkillData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
 	FCurEffectIndexSkillData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
-	void OperateBossSkillByIndex(int32 SkillIndex, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor);
-	void OperatePeppySkillByIndex(int32 SkillIndex, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor);
+	void OperateSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, class ACommonSkillActor* SkillActor);
 };

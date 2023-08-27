@@ -6,6 +6,7 @@
 #include "Actor/BattleManager.h"
 #include "Actor/BossSkillActor.h"
 #include "Actor/PeppySkillActor.h"
+#include "Actor/CommonSkillActor.h"
 #include "Component/BuffComponent.h"
 #include "Util/CalcUtil.h"
 #include "GameInstance/ActorManagerSystem.h"
@@ -132,7 +133,6 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 	NTLOG(Log, TEXT("[BossSkillSpawnData] %s is loaded!"), *SkillName);
 }
 
-
 void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor) {
 	UStatComponent* TargetStatComponent = nullptr;
 	UBuffComponent* TargetBuffComponent = nullptr;
@@ -152,28 +152,28 @@ void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkil
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;
 		}
-		OperateBossSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
+		OperateSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, ABossSkillActor* RefActor) {
+void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, ACommonSkillActor* SkillActor) {
 	if (SkillData == nullptr) {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
 	}
 
 	if (SkillData->SkillIndex == 1) {
-		RefActor->CustomSkillOperation(EffectSequence, *SkillData);
+		SkillActor->CustomSkillOperation(EffectSequence, *SkillData);
 	}
 	/*
-	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
+	*	11 단순 공격: 대상의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 11) {
 		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData->Value_N);
 		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData->Value_N);
 	}
 	/*
-	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
+	*	13 랜덤 공격: 대상의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillData->SkillIndex == 13) {
 		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M));
@@ -183,7 +183,13 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, US
 	*	16 제한 디버프-긍정: 대상의 모든 긍정적 버프 중 랜덤으로 N개 제거
 	*/
 	else if (SkillData->SkillIndex == 16) {
-//		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
+		//		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
+	}
+	/*
+	*	32 공격력 상승: T턴동안 대상이 가하는 최종 데미지가 N만큼 증가
+	*/
+	else if (SkillData->SkillIndex == 32) {
+
 	}
 	/*
 	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
@@ -192,19 +198,21 @@ void UBattleTableManagerSystem::OperateBossSkillByIndex(int32 EffectSequence, US
 
 	}
 	/*
+	*	52
+	*/
+	/*
 	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
 	else if (SkillData->SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
 		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
 
-		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
+		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turns"), SkillData->Value_N, SkillData->Value_T);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData->SkillIndex);
 	}
-
 }
 
 void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
@@ -229,59 +237,8 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppyS
 			break;;
 		}
 
-		OperatePeppySkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
+		OperateSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
 	}
-}
-
-void UBattleTableManagerSystem::OperatePeppySkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, APeppySkillActor* RefActor) {
-	if (SkillData == nullptr) {
-		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
-		return;
-	}
-	if (TargetStatComponent == nullptr) {
-		NTLOG(Error, TEXT("TargetStatComponent is invalid for operation!"));
-		return;
-	}
-
-	if (SkillData->SkillIndex == 1) {
-		RefActor->CustomSkillOperation(EffectSequence, *SkillData);
-	}
-	/*
-	*	11 단순 공격: Target의 EP를 즉시 N만큼 깎음.
-	*/
-	else if (SkillData->SkillIndex == 11) {
-		if (!TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData->Value_N)) {
-			NTLOG(Error, TEXT("EP update failed!"));
-		}
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData->Value_N);
-	}
-	/*
-	*	13 랜덤 공격: Target의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
-	*/
-	else if (SkillData->SkillIndex == 13) {
-		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M));
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData->Value_N);
-	}
-	/*
-	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
-	*/
-	else if (SkillData->SkillIndex == 54) {
-		// Boss에게 CumulativeDamage 필드를 만들어야 함.
-		/*
-		TArray<int32> PeriodicDamages;
-		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
-
-		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
-
-		CurPeppyStat.Energy -= SkillData->Cost;
-		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turn : %d"), SkillData->Value_N, SkillData->Value_T, TargetStatData->EP);
-		*/
-		NTLOG(Error, TEXT("Not implement. See description in script"));
-	}
-	else {
-		NTLOG(Error, TEXT("No Peppy skill index %d"), EffectSequence);
-	}
-
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
