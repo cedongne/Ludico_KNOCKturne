@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "KNOCKturne.h"
 #include "Components/ActorComponent.h"
 #include "BuffComponent.generated.h"
 
@@ -24,8 +24,16 @@ enum class EBuffType : uint8 {
 	Friction			UMETA(DisplayName = "Friction"),
 	Mood				UMETA(DisplayName = "Mood"),
 	Warning				UMETA(DisplayName = "Warning"),
-
 };
+
+UENUM(BlueprintType)
+enum class EBuffDataType : uint8 {
+	Positive_Turn	UMETA(DisplayName = "Positive_Turn"),
+	Positive_Second	UMETA(DisplayName = "Positive_Second"),
+	Negative_Turn	UMETA(DisplayName = "Negative_Turn"),
+	Negative_Second	UMETA(DisplayName = "Negative_Second")
+};
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UBuffComponent : public UActorComponent
@@ -39,13 +47,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasPositiveBuffs_PerTurn;
+	TMap<FString, int32> HasPositiveBuffs_PerTurn;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasPositiveBuffs_PerSecond;
+	TMap<FString, int32> HasPositiveBuffs_PerSecond;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasNegativeBuffs_PerTurn;
+	TMap<FString, int32> HasNegativeBuffs_PerTurn;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<FString, float> HasNegativeBuffs_PerSecond;
+	TMap<FString, int32> HasNegativeBuffs_PerSecond;
 
 public:
 	/* 자신에게 적용된 BuffId를 가진 긍정적 버프를 제거합니다.*/
@@ -67,6 +75,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveAllNegativeBuff();
 	/* 자신에게 적용된 모든 버프를 제거합니다.*/
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable)	
 	void RemoveAllBuff();
+	/* 자신에게 TermType을 주기로 Duration만큼의 지속하는 BuffType의 버프를 부여합니다.*/
+	UFUNCTION(BlueprintCallable) 
+	void AcquireBuff(EBuffType BuffType, EBuffDataType TermType, FString BuffName, int32 Duration);
+
+	void ElapseSecond();
+	void ElapseTurn();
+	
+	void ExpireBuff(TMap<FString, int32>* BuffMap, FString BuffId);
 };

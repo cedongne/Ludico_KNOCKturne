@@ -371,6 +371,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor);
 
+	UFUNCTION(BlueprintCallable)
+	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);
 private:
 	// 현재 적용할 효과가 몇 번째 인덱스인지에 따라 값 저장 
 	FCurEffectIndexSkillData CurEffectIndexBossSkillDataSet;
@@ -378,5 +380,4 @@ private:
 
 	FCurEffectIndexSkillData* TryGetCurEffectIndexBossSkillDataSet(int32 Index, FBossSkillData* CurStatData);
 	FCurEffectIndexSkillData* TryGetCurEffectIndexPeppySkillDataSet(int32 Index, FPeppySkillData* CurStatData);
-	void OperateSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, class ACommonSkillActor* SkillActor);
 };

@@ -14,9 +14,6 @@ UBossStatComponent::UBossStatComponent()
 void UBossStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
 
-	BossActor = Cast<ABoss>(GetOwner());
-	NTCHECK(BossActor != nullptr);
-	SetDefaultStat();
 }
 
 // Called when the game starts
@@ -24,6 +21,9 @@ void UBossStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BossActor = Cast<ABoss>(GetOwner());
+	NTCHECK(BossActor != nullptr);
+	SetDefaultStat();
 }
 
 void UBossStatComponent::SetDefaultStat() {

@@ -46,5 +46,5 @@ private:
 
 public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void CustomSkillOperation(int32 EffectSequence, FCurEffectIndexSkillData SkillData);
+	void CustomSkillOperation(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, AActor* SkillActor);
 };

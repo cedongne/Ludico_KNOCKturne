@@ -134,68 +134,67 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 }
 
 void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor) {
-	UStatComponent* TargetStatComponent = nullptr;
-	UBuffComponent* TargetBuffComponent = nullptr;
 	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
 	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
 
+	AActor* TargetActor;
+
 	for (int Sequence = 0; Sequence < 2; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatComponent = ActorManagerSystem->PeppyActor->StatComponent;
-			TargetBuffComponent = ActorManagerSystem->PeppyActor->BuffComponent;
+			TargetActor = ActorManagerSystem->PeppyActor;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatComponent = ActorManagerSystem->BossActor->StatComponent;
-			TargetBuffComponent = ActorManagerSystem->BossActor->BuffComponent;
+			TargetActor = ActorManagerSystem->BossActor;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;
 		}
-		OperateSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
+		OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
 	}
 }
 
-void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, UStatComponent* TargetStatComponent, FCurEffectIndexSkillData* SkillData, ACommonSkillActor* SkillActor) {
-	if (SkillData == nullptr) {
+void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, ACommonSkillActor* SkillActor) {
+	if (SkillData.SkillId == "-1") {
 		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
 		return;
 	}
-
-	if (SkillData->SkillIndex == 1) {
-		SkillActor->CustomSkillOperation(EffectSequence, *SkillData);
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
+	if (SkillData.SkillIndex == 1) {
+		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
 	}
 	/*
 	*	11 단순 공격: 대상의 EP를 즉시 N만큼 깎음.
 	*/
-	else if (SkillData->SkillIndex == 11) {
-		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData->Value_N);
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData->Value_N);
+	else if (SkillData.SkillIndex == 11) {
+		StatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData.Value_N);
+		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData.Value_N);
 	}
 	/*
 	*	13 랜덤 공격: 대상의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
-	else if (SkillData->SkillIndex == 13) {
-		TargetStatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData->Value_N, SkillData->Value_M));
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData->Value_N);
+	else if (SkillData.SkillIndex == 13) {
+		StatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData.Value_N, SkillData.Value_M));
+		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData.Value_N);
 	}
 	/*
 	*	16 제한 디버프-긍정: 대상의 모든 긍정적 버프 중 랜덤으로 N개 제거
 	*/
-	else if (SkillData->SkillIndex == 16) {
-		//		TargetBuffComponent->RemoveRandomPositiveBuff(SkillData->Value_N);
+	else if (SkillData.SkillIndex == 16) {
+		BuffComponent->RemoveRandomPositiveBuff(SkillData.Value_N);
 	}
 	/*
 	*	32 공격력 상승: T턴동안 대상이 가하는 최종 데미지가 N만큼 증가
 	*/
-	else if (SkillData->SkillIndex == 32) {
+	else if (SkillData.SkillIndex == 32) {
 
 	}
 	/*
 	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
 	*/
-	else if (SkillData->SkillIndex == 34) {
-
+	else if (SkillData.SkillIndex == 34) {
+		BuffComponent->AcquireBuff(EBuffType::Reflect, EBuffDataType::Positive_Turn, SkillData.SkillId, SkillData.Value_T);
 	}
 	/*
 	*	52
@@ -203,15 +202,15 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, UStatC
 	/*
 	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
-	else if (SkillData->SkillIndex == 54) {
+	else if (SkillData.SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
-		PeriodicDamages.Init(SkillData->Value_N, SkillData->Value_T);
+		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
 
-		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData->SkillId, PeriodicDamages);
-		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turns"), SkillData->Value_N, SkillData->Value_T);
+		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
+		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turns"), SkillData.Value_N, SkillData.Value_T);
 	}
 	else {
-		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData->SkillIndex);
+		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
 }
 
@@ -220,24 +219,23 @@ void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppyS
 	UBuffComponent* TargetBuffComponent = nullptr;
 	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
+	AActor* TargetActor;
+
 	int32 SkillIndexes[3] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2, SkillData.SkillIndex_3 };
 	int32 SkillTargets[3] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2, SkillData.SkillTarget_3 };
 
 	for (int Sequence = 0; Sequence < 3; Sequence++) {
 		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetStatComponent = ActorManagerSystem->PeppyActor->StatComponent;
-			TargetBuffComponent = ActorManagerSystem->PeppyActor->BuffComponent;
+			TargetActor = ActorManagerSystem->PeppyActor;
 		}
 		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetStatComponent = ActorManagerSystem->BossActor->StatComponent;
-			TargetBuffComponent = ActorManagerSystem->BossActor->BuffComponent;
+			TargetActor = ActorManagerSystem->BossActor;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;;
 		}
-
-		OperateSkillByIndex(Sequence, TargetStatComponent, TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
+		OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
 	}
 }
 

@@ -24,7 +24,6 @@ ABattleManager::ABattleManager()
 	static ConstructorHelpers::FClassFinder<ABoss> BP_BossActorClass(TEXT("/Game/Blueprints/Actors/Battle/NPC/BP_BossRose"));
 	BossActorSubClass = BP_BossActorClass.Class;
 
-
 //	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 //	auto AmbiguousEmotion_Ref = BP_PS_AmbiguousEmotion.Class;
 }
@@ -169,5 +168,22 @@ void ABattleManager::Init() {
 	ActorManagerSystem->BattleManager = this;
 	BP_ActorInit();
 
+	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);
+	HandledBuffComponents.Add(ActorManagerSystem->PeppyActor->BuffComponent);
 	Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor())->LevelPlay();
+}
+
+void ABattleManager::HandleBuffsEachTurns() {
+}
+
+void ABattleManager::HandleBuffsEachSeconds() {
+	GetWorld()->GetTimerManager().SetTimer(
+		BuffBySecondsHandler,
+		this,
+		&ABattleManager::HandleBuffsEachSeconds,
+		1,
+		false);
+	for (auto HandledBuffComponent : HandledBuffComponents) {
+		HandledBuffComponent->ElapseSecond();
+	}
 }

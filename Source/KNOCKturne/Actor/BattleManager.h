@@ -81,7 +81,7 @@ private:
 	void HandleBuffsEachTurns();
 	void HandleBuffsEachSeconds();
 
-	FTimerHandle SecondBuffsHandler;
+	FTimerHandle BuffBySecondsHandler;
 
 protected:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
