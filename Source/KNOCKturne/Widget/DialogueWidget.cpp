@@ -3,7 +3,7 @@
 
 #include "DialogueWidget.h"
 
-void UDialogueWidget::BeginPlay() {
+void UDialogueWidget::NativeOnInitialized() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
@@ -357,7 +357,7 @@ void UDialogueWidget::InputEDuringTalking(UDialogueTableComponent* DialogueTable
 			{
 				IsEndedDialogueRowsTrue();
 
-				PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(this, 0);
+				PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 				PeppyController->CanInteraction = true;
 			}
 			else {
@@ -391,12 +391,4 @@ void UDialogueWidget::AfterBattleFailDirection(FDialogueData DataRow, UDialogueT
 			}
 		}
 	}
-}
-
-void UDialogueWidget::IsEndedDialogueRowsTrue() {
-
-}
-
-void UDialogueWidget::IsDirectionTrue() {
-
 }

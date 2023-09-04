@@ -28,7 +28,7 @@ class KNOCKTURNE_API UDialogueWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	void BeginPlay();
+	virtual void NativeOnInitialized();
 	void NativePreConstruct();
 
 	AKNOCKturneGameState* KNOCKturneGameState;
@@ -177,8 +177,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void IsEndedDialogueRowsTrue();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void IsDirectionTrue();
 };
