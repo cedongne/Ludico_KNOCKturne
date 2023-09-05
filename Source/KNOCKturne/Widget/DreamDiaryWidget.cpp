@@ -235,6 +235,7 @@ void UDreamDiaryWidget::Button_ExitOnClicked() {
 
 void UDreamDiaryWidget::Button_BackOnClicked() {
 	SetWhetherToOpenDreamDiaryOrNot(false);
+	NTLOG(Warning, TEXT("DreamDiary: Back"));
 }
 
 void UDreamDiaryWidget::Button_NextOnClicked() {

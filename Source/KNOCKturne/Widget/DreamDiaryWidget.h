@@ -35,8 +35,11 @@ protected:
 	TArray<FDreamDiaryData*> DreamDiaryRows;
 	UDialogueTableComponent* DialogueTableComponent;
 
+	UFUNCTION()
 	void Button_ExitOnClicked();
+	UFUNCTION()
 	void Button_BackOnClicked();
+	UFUNCTION()
 	void Button_NextOnClicked();
 
 public:
