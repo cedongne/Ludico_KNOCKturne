@@ -37,12 +37,10 @@ protected:
 	APeppyController* PeppyController;
 	class UBattleManagerSystem* BattleManagerSystem;
 
-	FString FullDialogue;
 	TArray<int32> OpenBracesArray;
 	int32 SkillIndexValueArrayIndex = -1;
 	int32 CloseBracesIndex = 0;
 	FString RedefinedDescription;
-	bool InputEDuringWriting = false;
 	bool isCameraMoving = false;
 	bool isDirection = false;
 
@@ -138,6 +136,10 @@ public:
 		float TextSpeed = 0.07;
 	UPROPERTY(BlueprintReadWrite)
 		int32 TypingIndex = 0;
+	UPROPERTY(BlueprintReadWrite)
+		FString FullDialogue;
+	UPROPERTY(BlueprintReadWrite)
+		bool InputEDuringWriting = false;
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ChangeName(FDialogueData DataRow);
