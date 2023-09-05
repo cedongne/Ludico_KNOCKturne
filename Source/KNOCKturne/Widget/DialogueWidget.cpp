@@ -33,7 +33,7 @@ void UDialogueWidget::NativePreConstruct() {
 	DreamMAppear = (UWidgetAnimation*)GetWidgetFromName(TEXT("DreamMAppear"));
 }
 
-void UDialogueWidget::ChangeName(FDialogueData DataRow) {
+/*void UDialogueWidget::ChangeName(FDialogueData DataRow) {
 	FString CurrentCharacterStringID = DataRow.CharacterStringID;
 
 	if (CurrentCharacterStringID == "Peppy_character") {
@@ -61,7 +61,7 @@ void UDialogueWidget::ChangeName(FDialogueData DataRow) {
 		Overlay_NpcName->SetRenderOpacity(1.0);
 		Overlay_PeppyName->SetRenderOpacity(0.0);
 	}
-}
+}*/
 
 void UDialogueWidget::ChangePeppyImg(FDialogueData DataRow) {
 	FString CurrentImageLID = DataRow.ImageLID;

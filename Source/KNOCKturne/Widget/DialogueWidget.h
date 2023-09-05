@@ -139,7 +139,7 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 		int32 TypingIndex = 0;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ChangeName(FDialogueData DataRow);
 	UFUNCTION(BlueprintCallable)
 		void ChangePeppyImg(FDialogueData DataRow);

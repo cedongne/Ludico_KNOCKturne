@@ -21,10 +21,10 @@ class KNOCKTURNE_API UDreamDiaryWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	void BeginPlay();
+	virtual void NativeOnInitialized();
 	UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
-	void Construct();
+	virtual void NativeConstruct();
 
 	AKNOCKturneGameState* KNOCKturneGameState;
 
@@ -33,7 +33,7 @@ protected:
 	class UDataTable* DreamDiaryTable;
 	class UDataTable* StringTable;
 	TArray<FDreamDiaryData*> DreamDiaryRows;
-	UDialogueTableComponent* DialogueComponent;
+	UDialogueTableComponent* DialogueTableComponent;
 
 	void Button_ExitOnClicked();
 	void Button_BackOnClicked();

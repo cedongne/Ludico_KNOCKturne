@@ -9,9 +9,11 @@
 
 #include <string>
 
-void UDreamDiaryWidget::BeginPlay() {
+void UDreamDiaryWidget::NativeOnInitialized() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
+	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetAllRows", DreamDiaryRows);
 }
 
 UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
@@ -21,7 +23,6 @@ UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_DREAMDIARYTABLE(*DreamDiaryDataPath);
 	DreamDiaryTable = DT_DREAMDIARYTABLE.Object;
 	StringTable = DT_STRINGTABLE.Object;
-	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetDreamDiaryRows", DreamDiaryRows);
 }
 
 void UDreamDiaryWidget::NativePreConstruct() {
@@ -49,6 +50,11 @@ void UDreamDiaryWidget::NativePreConstruct() {
 	Button_Exit = (UButton*)GetWidgetFromName(TEXT("Button_Exit"));
 	Button_Back = (UButton*)GetWidgetFromName(TEXT("Button_Back"));
 	Button_Next = (UButton*)GetWidgetFromName(TEXT("Button_Next"));
+}
+
+void UDreamDiaryWidget::NativeConstruct() {
+
+	DefaultSetting();
 
 	if (Button_Exit) {
 		Button_Exit->OnClicked.AddDynamic(this, &UDreamDiaryWidget::Button_ExitOnClicked);
@@ -59,10 +65,6 @@ void UDreamDiaryWidget::NativePreConstruct() {
 	if (Button_Next) {
 		Button_Next->OnClicked.AddDynamic(this, &UDreamDiaryWidget::Button_NextOnClicked);
 	}
-}
-
-void UDreamDiaryWidget::Construct() {
-	DefaultSetting();
 }
 
 UDataTable* UDreamDiaryWidget::GetStringTable() {
@@ -195,6 +197,8 @@ void UDreamDiaryWidget::DefaultSetting() {
 	if (KNOCKturneGameState->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
 		KNOCKturneGameState->DreamDiaryOpenRow = 3;
 	}
+
+	NTLOG(Warning, TEXT("DreamDiary: DefaultSetting"));
 }
 
 void UDreamDiaryWidget::SetDreamcatcherPointUI(int32 PointNum) {
@@ -226,6 +230,7 @@ void UDreamDiaryWidget::SetDreamcatcherPointUI(int32 PointNum) {
 
 void UDreamDiaryWidget::Button_ExitOnClicked() {
 	this->RemoveFromParent();
+	NTLOG(Warning, TEXT("DreamDiary: Exit"));
 }
 
 void UDreamDiaryWidget::Button_BackOnClicked() {
@@ -234,4 +239,5 @@ void UDreamDiaryWidget::Button_BackOnClicked() {
 
 void UDreamDiaryWidget::Button_NextOnClicked() {
 	SetWhetherToOpenDreamDiaryOrNot(true);
+	NTLOG(Warning, TEXT("DreamDiary: Next"));
 }
