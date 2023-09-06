@@ -233,15 +233,12 @@ void UDreamDiaryWidget::SetDreamcatcherPointUI(int32 PointNum) {
 
 void UDreamDiaryWidget::Button_ExitOnClicked() {
 	this->RemoveFromParent();
-	NTLOG(Warning, TEXT("DreamDiary: Exit"));
 }
 
 void UDreamDiaryWidget::Button_BackOnClicked() {
 	SetWhetherToOpenDreamDiaryOrNot(false);
-	NTLOG(Warning, TEXT("DreamDiary: Back"));
 }
 
 void UDreamDiaryWidget::Button_NextOnClicked() {
 	SetWhetherToOpenDreamDiaryOrNot(true);
-	NTLOG(Warning, TEXT("DreamDiary: Next"));
 }

@@ -156,8 +156,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void GetNextDialogueLine(UDialogueTableComponent* DialogueTableComponent);
-	UFUNCTION(BlueprintCallable)
-		FString GetCompleteRichTextTag(FString Dialogue);
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void TypingEffect();
 	UFUNCTION(BlueprintCallable)

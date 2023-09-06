@@ -199,23 +199,6 @@ void UDialogueWidget::ChangeDialogueUI(FDialogueData DataRow) {
 	ChangeCutScene(DataRow);
 }
 
-FString UDialogueWidget::GetCompleteRichTextTag(FString Dialogue) {
-	FString CompleteTag = "";
-
-	while (TypingIndex < Dialogue.Len()) {
-		CompleteTag = CompleteTag.Append(Dialogue.Mid(TypingIndex, TypingIndex + 1));
-		if (CompleteTag == ">") {
-			TypingIndex++;
-			return CompleteTag;
-		}
-		else {
-			TypingIndex++;
-		}
-	}
-
-	return "";
-}
-
 void UDialogueWidget::DownArrowEvent() {
 	/*UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_1->Brush.GetResourceObject());
 
