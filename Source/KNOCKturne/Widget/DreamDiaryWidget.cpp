@@ -104,31 +104,34 @@ void UDreamDiaryWidget::SetWhetherToOpenDreamDiaryOrNot(bool isNextButton) {
 			Button_Back->SetVisibility(ESlateVisibility::Visible);
 		}
 
-		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 3) {
+		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 3) { // 다음 장 오른쪽 페이지 해금 여부
 			SetCurrentOddPageToNextPage();
 			SetDreamDiaryContent(true, true);
 		}
 		else {
-			SetCurrentOddPageToNextPage();
-			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 2) {
+			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 2) { // 다음 장 왼쪽 페이지 해금 여부
+				SetCurrentOddPageToNextPage();
 				SetDreamDiaryContent(true, false);
 			}
 			else {
+				SetCurrentOddPageToNextPage();
 				Unopened_Odd();
 			}
 			Unopened_Even();
 		}
 	}
 	else {
-		SetCurrentOddPageToBackPage();
-		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 1) {
+		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 1) { // 이전 장 오른쪽 페이지 해금 여부
+			SetCurrentOddPageToBackPage();
 			SetDreamDiaryContent(true, true);
 		}
 		else {
-			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 2) {
+			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 2) { // 이전 장 왼족 페이지 해금 여부
+				SetCurrentOddPageToBackPage();
 				SetDreamDiaryContent(true, false);
 			}
 			else {
+				SetCurrentOddPageToBackPage();
 				Unopened_Odd();
 			}
 			Unopened_Even();
