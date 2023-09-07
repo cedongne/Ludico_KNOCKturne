@@ -9,6 +9,7 @@
 #include "GameMode/KNOCKturneGameState.h"
 #include "GameMode/PeppyController.h"
 #include "Widget/DialogueWidget.h"
+#include "Widget/HubworldHUDWidget.h"
 #include "Actor/Peppy.h"
 
 #include "HubWorldLevelScriptActor.generated.h"
@@ -60,8 +61,8 @@ protected:
 	APeppy* Peppy;
 	TSubclassOf<UUserWidget> DialogueWidgetClass;
 	class UDialogueWidget* DialogueWidgetRef;
-	/*TSubclassOf<UUserWidget> HubworldHUDClass;
-	class UDialogueWidget* HubworldHUDRef;*/
+	TSubclassOf<UUserWidget> HubworldHUDClass;
+	class UHubworldHUDWidget* HubworldHUDRef;
 
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void BlackScreenOn();

@@ -23,7 +23,7 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 //	PeppyController->PrologueInProcess = true;
 //	PrologueDialogueComponent->ResetDialogueRowPointer();
 //
-//	// BP_Dialogue 위젯 생성
+//	 // BP_Dialogue 위젯 생성
 //	if (DialogueWidgetClass) {
 //		DialogueWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
 //		if (DialogueWidgetRef) {
@@ -33,24 +33,24 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 //
 //	DialogueWidgetRef->TextBlock_E->SetVisibility(ESlateVisibility::Visible);
 //	
-//	// Get Actor of Class(BP_DreamM)
-//	// Set Actor Rotation (0.0, 0.0, -70.0)
+//	 //Get Actor of Class(BP_DreamM)
+//	 //Set Actor Rotation (0.0, 0.0, -70.0)
 //
 //	DialogueWidgetRef->GetNextDialogueLine(PrologueDialogueComponent);
 //}
-
-bool AHubWorldLevelScriptActor::MoveDirectionTF(FDialogueData DataTable) {
-	if (DataTable.Direction.Contains("DT")) {
-		return true;
-	}
-	else if (DataTable.Direction.Contains("DF")) {
-		return false;
-	}
-	else {
-		return NULL;
-	}
-}
-
+//
+//bool AHubWorldLevelScriptActor::MoveDirectionTF(FDialogueData DataTable) {
+//	if (DataTable.Direction.Contains("DT")) {
+//		return true;
+//	}
+//	else if (DataTable.Direction.Contains("DF")) {
+//		return false;
+//	}
+//	else {
+//		return NULL;
+//	}
+//}
+//
 //void AHubWorldLevelScriptActor::StorePrevCameraRotation() {
 //	PrevCameraRotation = Peppy->Camera->GetComponentRotation();
 //}
@@ -141,13 +141,16 @@ bool AHubWorldLevelScriptActor::MoveDirectionTF(FDialogueData DataTable) {
 //
 //void AHubWorldLevelScriptActor::CreateHubworldHUD() {
 //	if (HubworldHUDClass) {
-//		HubworldHUDRef = CreateWidget<UDialogueWidget>(GetWorld(), HubworldHUDClass);
+//		HubworldHUDRef = CreateWidget<UHubworldHUDWidget>(GetWorld(), HubworldHUDClass);
 //		if (HubworldHUDRef) {
 //			HubworldHUDRef->AddToViewport();
 //		}
 //	}
 //
 //	if (KNOCKturneGameState->isDreamDiaryUpdated) {
-//		// HubworldHUDRef->Image_DreamDiary
+//		HubworldHUDRef->Image_DreamDiary_Updated->SetVisibility(ESlateVisibility::Visible);
+//	}
+//	else {
+//		HubworldHUDRef->Image_DreamDiary_Updated->SetVisibility(ESlateVisibility::Hidden);
 //	}
 //}
