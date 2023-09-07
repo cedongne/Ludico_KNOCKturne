@@ -30,6 +30,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CanInteraction = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool PrologueInProcess = false;
 
 	void Interaction();
 	UFUNCTION(BlueprintImplementableEvent)

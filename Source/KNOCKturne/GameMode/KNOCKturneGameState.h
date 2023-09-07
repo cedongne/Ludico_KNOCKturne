@@ -23,4 +23,8 @@ public:
 		bool GetDreamFragment = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool isDreamDiaryUpdated = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool isBattleFail = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		bool RightafterBattleClear = false;
 };

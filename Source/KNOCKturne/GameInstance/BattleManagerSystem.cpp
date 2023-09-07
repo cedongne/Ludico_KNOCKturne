@@ -17,6 +17,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	InitSpecialtyIconRowMap();
 	InitItemIconRowMap();
 
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_WithYou(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_WithYou"));
@@ -148,10 +150,10 @@ void UBattleManagerSystem::UpdateDreamDiaryWhenGameOver() {
 
 	if (DreamDiaryOpenRow < 3) {
 		DreamDiaryOpenRow += 1;
-		isDreamDiaryUpdated = true;
+		KNOCKturneGameState->isDreamDiaryUpdated = true;
 	}
 	else {
-		isDreamDiaryUpdated = false;
+		KNOCKturneGameState->isDreamDiaryUpdated = false;
 	}
 }
 
@@ -160,8 +162,6 @@ void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {
 }
 
 void UBattleManagerSystem::GetDreamFragmentAfterBattle() {
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-
 	if (ReducedEP >= 30) {
 		KNOCKturneGameState->DreamFragmentCount += 1;
 		KNOCKturneGameState->GetDreamFragment = true;

@@ -145,18 +145,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GetDreamFragmentAfterBattle();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool isBattleFail = false;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool RightafterBattleClear = false;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool isDreamDiaryUpdated = false;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool GetDreamFragment = false;
-
 	// Round ���� �׸�
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 Round = 0;
