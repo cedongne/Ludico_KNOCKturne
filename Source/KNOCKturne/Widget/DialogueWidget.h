@@ -41,53 +41,50 @@ protected:
 	int32 SkillIndexValueArrayIndex = -1;
 	int32 CloseBracesIndex = 0;
 	FString RedefinedDescription;
-	bool isCameraMoving = false;
-	bool isDirection = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_BlackScreen;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* HandCutScene;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Peppy;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Npc;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_CutScene;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Dialogue;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class URichTextBlock* RichTextBlock_Dialogue;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Continue;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* TextBlock_E;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_NpcName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* Text_NpcName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_PeppyName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* Text_PeppyName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Dialogue_Select_1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UImage* Image_Dialogue_Select_2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* TextBlock_Dialogue_Select_1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* TextBlock_Dialogue_Select_2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UOverlay* Overlay_NpcName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UOverlay* Overlay_PeppyName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
-		class UWidgetAnimation* PeppyAppear;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
-		class UWidgetAnimation* DreamMAppear;
 	
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_BlackScreen;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* HandCutScene;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Peppy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Npc;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_CutScene;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Dialogue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class URichTextBlock* RichTextBlock_Dialogue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Continue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_E;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_NpcName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* Text_NpcName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_PeppyName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* Text_PeppyName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Dialogue_Select_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_Dialogue_Select_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Dialogue_Select_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Dialogue_Select_2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UOverlay* Overlay_NpcName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UOverlay* Overlay_PeppyName;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
+	class UWidgetAnimation* PeppyAppear;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
+	class UWidgetAnimation* DreamMAppear;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UTexture2D* Im_dia_peppy_basic;
@@ -140,6 +137,10 @@ public:
 		FString FullDialogue;
 	UPROPERTY(BlueprintReadWrite)
 		bool InputEDuringWriting = false;
+	UPROPERTY(BlueprintReadWrite)
+		bool isDirection = false;
+	UPROPERTY(BlueprintReadWrite)
+		bool isCameraMoving = false;
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ChangeName(FDialogueData DataRow);
