@@ -234,6 +234,20 @@ void UDialogueTableComponent::SetBattleFailFragmentDialogueIndex() {
 	}
 }
 
+void UDialogueTableComponent::SetDialogueIndexByGroupCode(FString GroupCode) {
+	for (int index = 0; index < DialogueRows.Num(); index++)
+	{
+		if (DialogueRows[index]->DialogueGroupCode == GroupCode)
+		{
+			if (DialogueRows[index]->DialogueType == 1)
+			{
+				SetCurrentRow(index - 1);
+				break;
+			}
+		}
+	}
+}
+
 bool UDialogueTableComponent::isRedefineNeededLine(FString RowName) {
 	bool isRedefineNeeded = false;
 

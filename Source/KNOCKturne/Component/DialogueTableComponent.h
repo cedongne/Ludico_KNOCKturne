@@ -148,5 +148,8 @@ public:
 	void SetBattleFailFragmentDialogueIndex();
 
 	UFUNCTION(BlueprintCallable)
+	void SetDialogueIndexByGroupCode(FString GroupCode);
+
+	UFUNCTION(BlueprintCallable)
 	bool isRedefineNeededLine(FString RowName);
 };
