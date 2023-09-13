@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
+#include "Engine/DataTable.h"
 #include "SkillUIStructure.generated.h"
 
 /**
@@ -15,24 +15,29 @@ class KNOCKTURNE_API SkillUIStructure
 public:
 	SkillUIStructure();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UTexture2D* UI_battleSetting_background_default;
+	class UTexture2D* UI_battleSetting_background_default;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UTexture2D* UI_battleSetting_skill_default;
+	class UTexture2D* UI_battleSetting_skill_default;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UTexture2D* Icon_skill_PS_WithYou;
+	class UTexture2D* Icon_skill_PS_WithYou;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UTexture2D* icon_checkbox;
+	class UTexture2D* icon_checkbox;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UTexture2D* UI_battleSetting_skill_none;
+	class UTexture2D* UI_battleSetting_skill_none;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* image;
+
+	UFUNCTION()
+	void InitializeSkillStructure(FSkillStructureData SkillStructure);
+	UFUNCTION()
+	void InitializeSelectedSkillStructure(FSelectedSkillStructureData SelectedSkillStructure);
+	UFUNCTION()
+	void InitializeItemStructure(FItemStructureData ItemStructure);
 };
 
 USTRUCT(BlueprintType)
 struct FSkillStructureData : public FTableRowBase {
 	GENERATED_BODY()
-
-	/*FSkillStructureData : BackgroundImg(UI_battleSetting_background_default), IconBackgroundImg(UI_battleSetting_skill_default),
-	SkillIcon(Icon_skill_PS_WithYou), CheckBox(icon_checkbox), Num(-1), SkillName(""), Energy(0), Stance(""),
-	CoolTime(0), NumVisibility(ESlateVisibility::Hidden), Description("") {}*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		TObjectPtr<UTexture2D> BackgroundImg;
@@ -62,10 +67,6 @@ USTRUCT(BlueprintType)
 struct FSelectedSkillStructureData : public FTableRowBase {
 	GENERATED_BODY()
 
-	/*FSelectedSkillStructureData : BackgroundImg(UI_battleSetting_background_default), Icon(Icon_skill_PS_WithYou),
-	IconVisibility(ESlateVisibility::Hidden), CancelButton(ESlateVisibility::Hidden), 
-	NumVisibility(ESlateVisibility::Hidden), NumBackgroundVisibility(ESlateVisibility::Hidden) {}*/
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		TObjectPtr<UTexture2D> BackgroundImg;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -83,9 +84,6 @@ struct FSelectedSkillStructureData : public FTableRowBase {
 USTRUCT(BlueprintType)
 struct FItemStructureData : public FTableRowBase {
 	GENERATED_BODY()
-
-	/*FItemStructureData : BackgroundImg(UI_battleSetting_background_default), IconBackgroundImg(UI_battleSetting_skill_default), 
-	Icon(Icon_skill_PS_WithYou), CheckBox(icon_checkbox), IconVisibility(ESlateVisibility::Hidden), SkillName(""), Count(0), Description("") {}*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		TObjectPtr<UTexture2D> BackgroundImg;
