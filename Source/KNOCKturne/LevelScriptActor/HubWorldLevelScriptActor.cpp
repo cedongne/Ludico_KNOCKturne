@@ -33,8 +33,6 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 
 	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
 	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
-	static ConstructorHelpers::FClassFinder<UUserWidget> BP_LoadingPath(TEXT("/Game/Blueprints/UMG/BP_Loading.BP_Loading"));
-	BP_Loading = BP_LoadingPath.Class;
 }
 
 void AHubWorldLevelScriptActor::StartPrologueDialogue() {

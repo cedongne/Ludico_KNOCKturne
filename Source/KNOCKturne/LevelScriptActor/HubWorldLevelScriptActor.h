@@ -30,7 +30,6 @@ class KNOCKTURNE_API AHubWorldLevelScriptActor : public AKNOCKturneLevelScriptAc
 	GENERATED_BODY()
 
 	AKNOCKturneGameState* KNOCKturneGameState;
-	TSubclassOf<UUserWidget> BP_Loading;
 
 	
 public:
