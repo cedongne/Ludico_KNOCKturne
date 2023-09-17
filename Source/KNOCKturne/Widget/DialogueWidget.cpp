@@ -3,13 +3,9 @@
 
 #include "DialogueWidget.h"
 
-void UDialogueWidget::NativeOnInitialized() {
-	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-}
-
 void UDialogueWidget::NativePreConstruct() {
+	Super::NativePreConstruct();
+
 	Image_BlackScreen = (UImage*)GetWidgetFromName(TEXT("Image_BlackScreen"));
 	HandCutScene = (UImage*)GetWidgetFromName(TEXT("HandCutScene"));
 	Image_Peppy = (UImage*)GetWidgetFromName(TEXT("Image_Peppy"));
@@ -31,6 +27,28 @@ void UDialogueWidget::NativePreConstruct() {
 	Overlay_PeppyName = (UOverlay*)GetWidgetFromName(TEXT("Overlay_PeppyName"));
 	PeppyAppear = (UWidgetAnimation*)GetWidgetFromName(TEXT("PeppyAppear"));
 	DreamMAppear = (UWidgetAnimation*)GetWidgetFromName(TEXT("DreamMAppear"));
+}
+
+void UDialogueWidget::NativeConstruct() {
+	Super::NativeConstruct();
+
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
+}
+
+void UDialogueWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+	if (PeppyController != nullptr) {
+		if (PeppyController->WasInputKeyJustPressed(EKeys::Down)) {
+			DownArrowEvent();
+		}
+		else if (PeppyController->WasInputKeyJustPressed(EKeys::Up)) {
+			UpArrowEvent();
+		}
+	}
 }
 
 /*void UDialogueWidget::ChangeName(FDialogueData DataRow) {
@@ -200,7 +218,7 @@ void UDialogueWidget::ChangeDialogueUI(FDialogueData DataRow) {
 }
 
 void UDialogueWidget::DownArrowEvent() {
-	/*UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_1->Brush.GetResourceObject());
+	UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_1->Brush.GetResourceObject());
 
 	if (Image_Dialogue_Select_1->GetVisibility() == ESlateVisibility::Visible) {
 		if (Texture == icon_dia_select_yes_32_32) {
@@ -209,11 +227,11 @@ void UDialogueWidget::DownArrowEvent() {
 			Image_Dialogue_Select_2->SetBrushFromTexture(icon_dia_select_yes_32_32);
 			TextBlock_Dialogue_Select_2->SetColorAndOpacity(FLinearColor(0.f, 0.f, 0.f, 1.f));
 		}
-	}*/
+	}
 }
 
 void UDialogueWidget::UpArrowEvent() {
-	/*UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_2->Brush.GetResourceObject());
+	UTexture2D* Texture = Cast<UTexture2D>(Image_Dialogue_Select_2->Brush.GetResourceObject());
 
 	if (Image_Dialogue_Select_2->GetVisibility() == ESlateVisibility::Visible) {
 		if (Texture == icon_dia_select_yes_32_32) {
@@ -222,7 +240,7 @@ void UDialogueWidget::UpArrowEvent() {
 			Image_Dialogue_Select_2->SetBrushFromTexture(icon_dia_select_no_32_32);
 			TextBlock_Dialogue_Select_2->SetColorAndOpacity(FLinearColor(0.623961f, 0.623961f, 0.623961f, 1.f));
 		}
-	}*/
+	}
 }
 
 FString UDialogueWidget::GetSkillIndexByKeyword(FString Num) {
@@ -317,6 +335,7 @@ void UDialogueWidget::NextTalk(UDialogueTableComponent* DialogueTableComponentRo
 	FullDialogue = Line;
 	TypingEffect();
 	ChangeDialogueUI(dialogueData);
+	DialogueDataStructure  = dialogueData;
 
 	if (dialogueData.Direction == "-1") {
 		isDirection = false;
@@ -340,7 +359,6 @@ void UDialogueWidget::InputEDuringTalking(UDialogueTableComponent* DialogueTable
 			{
 				IsEndedDialogueRowsTrue();
 
-				PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 				PeppyController->CanInteraction = true;
 			}
 			else {

@@ -150,20 +150,6 @@ void UDialogueTableComponent::SetDreamFragmentDialogueIndex() {
 	}
 }
 
-void UDialogueTableComponent::SetDreamFragmentCancelIndex() {
-	for (int index = 0; index < DialogueRows.Num(); index++)
-	{
-		if (DialogueRows[index]->DialogueGroupCode == "DreamFragment_Cancel")
-		{
-			if (DialogueRows[index]->DialogueType == 1)
-			{
-				SetCurrentRow(index - 1);
-				break;
-			}
-		}
-	}
-}
-
 void UDialogueTableComponent::SetAfterBattleDialogueIndex() {
 	for (int index = 0; index < DialogueRows.Num(); index++)
 	{

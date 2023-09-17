@@ -205,3 +205,17 @@ void APeppy::Die() {
 
 	BP_Die();
 }
+
+void APeppy::SetInteractingNpcStr(AActor* OverlappedActor) {
+	FString OverlappedActorStr = UKismetSystemLibrary::GetDisplayName(OverlappedActor);
+
+	if (OverlappedActorStr == "BP_RabbitNPC") {
+		InteractingNpcStr = "Rabbit";
+	}
+	else if (OverlappedActorStr == "BP_DreamM") {
+		InteractingNpcStr = "DreamM";
+	}
+	else if (OverlappedActorStr == "BP_Pond") {
+		InteractingNpcStr = "Lake";
+	}
+}

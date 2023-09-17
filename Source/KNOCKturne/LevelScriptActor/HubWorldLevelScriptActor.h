@@ -67,13 +67,13 @@ public:
 	ADreamM* DreamMActor;
 	UPROPERTY(EditAnywhere)
 	ARabbit* RabbitActor;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> DialogueWidgetClass;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UDialogueWidget* DialogueWidgetRef;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> HubworldHUDClass;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UHubworldHUDWidget* HubworldHUDRef;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> BP_EscClass;
@@ -91,6 +91,10 @@ public:
 	TSubclassOf<UUserWidget> BP_BlinkClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UUserWidget* BP_BlinkRef;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_DreamFragmentClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UUserWidget* BP_DreamFragmentRef;
 	/*UPROPERTY(EditAnywhere, VisibleAnywhere, BlueprintReadOnly)
 	ULevelSequence* LevelSequence;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -128,7 +132,7 @@ public:
 	void BattleFailDialogueAllEnded();
 	UFUNCTION(Blueprintcallable)
 	void CreateHubworldHUD();
-	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	UFUNCTION(Blueprintcallable)
 	void PrologueEnded();
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void IfPrologueDirectionTrue();
@@ -144,9 +148,28 @@ public:
 	void BattleFailDialogue();
 	UFUNCTION(Blueprintcallable)
 	void AfterBattleFailDirection(FDialogueData DialogueData);
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void BindNpcTalk();
+	UFUNCTION(Blueprintcallable)
+	void RandomTalk();
+	UFUNCTION(Blueprintcallable)
+	void AfterBattleFailHubworldDialogueEnded();
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void BattleFailDialogueWithEventBinding();
+	UFUNCTION(Blueprintcallable)
+	void TalkWithNpcEnded();
+	UFUNCTION(Blueprintcallable)
+	void StartDreamFragmentDialogue();
+	UFUNCTION(Blueprintcallable)
+	void DreamMDirectionTrue();
+	UFUNCTION(Blueprintcallable)
+	void StartAfterBattleDialogue();
+	UFUNCTION(Blueprintcallable)
+	void AfterBattleDialogueEnded();
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float deltaTime) override;
 
 	APeppyController* PeppyController;
 	APeppy* Peppy;

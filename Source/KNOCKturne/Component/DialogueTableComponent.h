@@ -130,9 +130,6 @@ public:
 	void SetDreamFragmentDialogueIndex();
 
 	UFUNCTION(BlueprintCallable)
-	void SetDreamFragmentCancelIndex();
-
-	UFUNCTION(BlueprintCallable)
 	void SetAfterBattleDialogueIndex();
 
 	UFUNCTION(BlueprintCallable)

@@ -33,6 +33,18 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 
 	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
 	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
+
+	// StartLevelByCondition();
+}
+
+void AHubWorldLevelScriptActor::Tick(float deltaTime) {
+	Super::Tick(deltaTime);
+
+	if (PeppyController != nullptr) {
+		if (PeppyController->WasInputKeyJustPressed(EKeys::Escape)) {
+			EscKeyEvent();
+		}
+	}
 }
 
 void AHubWorldLevelScriptActor::StartPrologueDialogue() {
@@ -170,6 +182,13 @@ void AHubWorldLevelScriptActor::CreateHubworldHUD() {
 	}
 }
 
+void AHubWorldLevelScriptActor::PrologueEnded() {
+	isPrologue = true;
+	PeppyController->PrologueInProcess = false;
+	DialogueWidgetRef->TextSpeed = 0.0;
+	DialogueWidgetRef->RemoveFromParent();
+}
+
 void AHubWorldLevelScriptActor::DefaultLocation() {
 	Peppy->SetActorTransform(OriginalPeppyTransform);
 	Peppy->Camera->SetWorldTransform(OriginalCameraTransform);
@@ -250,7 +269,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			Delay(3.44);
 			UWidgetLayoutLibrary::RemoveAllWidgets(this);
 			CreateHubworldHUD();
-			BattleFailDialogue();
+			BattleFailDialogueWithEventBinding();
 		}
 		else {
 			if (LoadingWidgetClass) {
@@ -313,6 +332,10 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 		StartPrologueDialogue();
 		CreateHubworldHUD();
 	}
+
+
+	BindNpcTalk();
+	SetPeppyHiddenOrNot();
 }
 
 void AHubWorldLevelScriptActor::BattleFailDialogue() {
@@ -353,4 +376,74 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 			BattleFailDialogueAllEnded();
 		}
 	}
+}
+
+void AHubWorldLevelScriptActor::RandomTalk() {
+	DialogueTableComponent->SetIsEndedDialogueRows(false);
+
+	if (DialogueWidgetRef == nullptr) {
+		if (DialogueWidgetClass) {
+			DialogueWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
+			if (DialogueWidgetRef) {
+				DialogueWidgetRef->AddToViewport();
+			}
+			else {
+				NTLOG(Warning, TEXT("BP_Dialogue widget creating is failed!"));
+			}
+		}
+	}
+
+	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
+	DialogueTableComponent->GetRandomTalkIndex(Peppy->InteractingNpcStr);
+	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+}
+
+void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
+	if (DialogueWidgetRef->isDirection) {
+		AfterBattleFailDirection(DialogueWidgetRef->DialogueDataStructure);
+	}
+	else {
+		BattleFailDialogueAllEnded();
+	}
+}
+
+void AHubWorldLevelScriptActor::TalkWithNpcEnded() {
+	DialogueWidgetRef->RemoveFromParent();
+	DialogueTableComponent->EmptyTArray();
+	Delay(0.5);
+	Peppy->ReturnCameraInInteraction();
+}
+
+void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
+	DialogueTableComponent->SetIsEndedDialogueRows(false);
+	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
+	DialogueTableComponent->SetDialogueIndexByGroupCode("DreamFragment");
+	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+}
+
+void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
+	DialogueWidgetRef->isCameraMoving = true;
+
+	if (BP_DreamFragmentRef == nullptr) {
+		if (BP_DreamFragmentClass) {
+			BP_DreamFragmentRef = CreateWidget<UUserWidget>(GetWorld(), BP_DreamFragmentClass);
+			if (BP_DreamFragmentRef) {
+				BP_DreamFragmentRef->AddToViewport();
+			}
+			else {
+				NTLOG(Warning, TEXT("BP_DreamFragment creating is failed!"));
+			}
+		}
+	}
+}
+
+void AHubWorldLevelScriptActor::StartAfterBattleDialogue() {
+	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
+	DialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle_Hubworld");
+	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+}
+
+void AHubWorldLevelScriptActor::AfterBattleDialogueEnded() {
+	TalkWithNpcEnded();
+	KNOCKturneGameState->RightafterBattleClear = false;
 }

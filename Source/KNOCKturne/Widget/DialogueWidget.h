@@ -28,12 +28,13 @@ class KNOCKTURNE_API UDialogueWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	virtual void NativeOnInitialized();
-	void NativePreConstruct();
-
 	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
+	void NativePreConstruct() override;
+	void NativeConstruct() override;
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
+
 	APeppyController* PeppyController;
 	class UBattleManagerSystem* BattleManagerSystem;
 
@@ -141,6 +142,9 @@ public:
 		bool isDirection = false;
 	UPROPERTY(BlueprintReadWrite)
 		bool isCameraMoving = false;
+	UPROPERTY(BlueprintReadWrite)
+	FDialogueData DialogueDataStructure;
+
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ChangeName(FDialogueData DataRow);
