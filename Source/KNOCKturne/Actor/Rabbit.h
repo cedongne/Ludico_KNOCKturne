@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 
 #include "NPC.h"
+#include "Peppy.h"
 
 #include "Rabbit.generated.h"
 
@@ -15,18 +16,17 @@ class KNOCKTURNE_API ARabbit : public ANPC
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	ARabbit();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	APeppy* Peppy;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+public:	
+	UFUNCTION(BlueprintCallable)
+	void RabbitStartTalk();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void RabbitRandomTalk();
 
 };

@@ -206,7 +206,7 @@ void APeppy::Die() {
 	BP_Die();
 }
 
-void APeppy::SetInteractingNpcStr(AActor* OverlappedActor) {
+void APeppy::SetInteractingNpcStr() {
 	FString OverlappedActorStr = UKismetSystemLibrary::GetDisplayName(OverlappedActor);
 
 	if (OverlappedActorStr == "BP_RabbitNPC") {

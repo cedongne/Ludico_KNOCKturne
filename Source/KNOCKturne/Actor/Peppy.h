@@ -40,6 +40,9 @@ public:
 
 	TArray<TMap<FString, int32>> DamageArrayEachTurn;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AActor* OverlappedActor;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -104,6 +107,8 @@ public:
 	void HitVisualEffect();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void ReturnCameraInInteraction();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void InteractionCameraMove(APawn* NPC);
 
 	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
@@ -117,5 +122,5 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FString InteractingNpcStr;
 	UFUNCTION(BlueprintCallable)
-	void SetInteractingNpcStr(AActor* OverlappedActor);
+	void SetInteractingNpcStr();
 };
