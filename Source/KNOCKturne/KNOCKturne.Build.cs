@@ -9,7 +9,7 @@ public class KNOCKturne : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "MovieScene", "LevelSequence" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

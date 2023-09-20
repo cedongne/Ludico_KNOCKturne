@@ -11,10 +11,9 @@ AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-	// LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), LevelSequence, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHubWorldLevelScriptActor::StaticClass(), HubworldActors);
-	for (int i = 0; i < HubworldActors.Num(); ++i)
+	/*for (int i = 0; i < HubworldActors.Num(); ++i)
 	{
 		DreamMActor = dynamic_cast<ADreamM*>(HubworldActors[i]);
 		RabbitActor = dynamic_cast<ARabbit*>(HubworldActors[i]);
@@ -26,14 +25,14 @@ AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	}
 	else {
 		NTLOG(Warning, TEXT("not found"));
-	}
+	}*/
 }
 
 void AHubWorldLevelScriptActor::BeginPlay() {
 	Super::BeginPlay();
 
 	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
-	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
+	//PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
 
 	// StartLevelByCondition();
 }
@@ -188,6 +187,62 @@ void AHubWorldLevelScriptActor::PrologueEnded() {
 	PeppyController->PrologueInProcess = false;
 	DialogueWidgetRef->TextSpeed = 0.0;
 	DialogueWidgetRef->RemoveFromParent();
+
+	if (LevelSequencePlayer)
+	{
+		LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+		LevelSequencePlayer->PlayReverse();
+	}
+	else
+	{
+		NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+	}
+
+	Delay(2.0);
+
+	if (!isSkip) {
+		if (LevelSequencePlayer)
+		{
+			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), Hubworld_Cabin, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+			LevelSequencePlayer->Play();
+		}
+		else
+		{
+			NTLOG(Warning, TEXT("Unable to create Hubworld_Cabin level sequence player!"));
+		}
+
+		Delay(7.0);
+		SetState("Loading", "OnLoading");
+	}
+
+	if (LoadingWidgetClass) {
+		LoadingWidgetRef = CreateWidget<ULoadingWidget>(GetWorld(), LoadingWidgetClass);
+		if (LoadingWidgetRef) {
+			LoadingWidgetRef->AddToViewport();
+		}
+		else {
+			NTLOG(Warning, TEXT("LoadingWidget creating is failed!"));
+		}
+	}
+
+	LoadingWidgetRef->LoadingText = DialogueTableComponent->RandomLoadingText();
+	Delay(4.0);
+	SetState("Loading", "None");
+	DefaultLocation();
+	LoadingWidgetRef->RemoveFromParent();
+
+	if (LevelSequencePlayer)
+	{
+		LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+		LevelSequencePlayer->PlayReverse();
+	}
+	else
+	{
+		NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+	}
+
+	Delay(2.0);
+	isSkip = false;
 }
 
 void AHubWorldLevelScriptActor::DefaultLocation() {
@@ -229,14 +284,15 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			BP_BlackRef->RemoveFromParent();
 			Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
-			/*if (LevelSequencePlayer)
+			if (LevelSequencePlayer)
 			{
+				LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 				LevelSequencePlayer->Play();
 			}
 			else
 			{
-				NTLOG(Warning, TEXT("Unable to create level sequence player!"));
-			}*/
+				NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+			}
 
 			Delay(2.0);
 			CreateHubworldHUD();
@@ -287,14 +343,15 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			Delay(0.2);
 			UWidgetLayoutLibrary::RemoveAllWidgets(this);
 
-			/*if (LevelSequencePlayer)
+			if (LevelSequencePlayer)
 			{
+				LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 				LevelSequencePlayer->Play();
 			}
 			else
 			{
-				NTLOG(Warning, TEXT("Unable to create level sequence player!"));
-			}*/
+				NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+			}
 
 			CreateHubworldHUD();
 		}

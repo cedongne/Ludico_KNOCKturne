@@ -4,8 +4,10 @@
 
 #include "KNOCKturne.h"
 #include "Engine/LevelScriptActor.h"
-#include <MovieSceneSequencePlayer.h>
 #include <Blueprint/WidgetLayoutLibrary.h>
+#include "LevelSequence.h"
+#include "LevelSequencePlayer.h"
+#include "LevelSequenceActor.h"
 
 #include "Actor/DreamM.h"
 #include "Actor/Rabbit.h"
@@ -35,7 +37,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 MDSelection = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool isPrologue = false;
+	bool isPrologue = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isSkip = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FRotator PrevCameraRotation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -92,12 +96,14 @@ public:
 	TSubclassOf<UUserWidget> BP_DreamFragmentClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UUserWidget* BP_DreamFragmentRef;
-	/*UPROPERTY(EditAnywhere, VisibleAnywhere, BlueprintReadOnly)
-	ULevelSequence* LevelSequence;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	ULevelSequence* FadeIn;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	ULevelSequence* Hubworld_Cabin;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	ULevelSequencePlayer* LevelSequencePlayer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	ALevelSequenceActor* SequenceActor;*/
+	ALevelSequenceActor* SequenceActor;
 
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void BlackScreenOn();
@@ -163,6 +169,8 @@ public:
 	void StartAfterBattleDialogue();
 	UFUNCTION(Blueprintcallable)
 	void AfterBattleDialogueEnded();
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void SetState(FName StateGroup, FName State);
 
 protected:
 	virtual void BeginPlay() override;
