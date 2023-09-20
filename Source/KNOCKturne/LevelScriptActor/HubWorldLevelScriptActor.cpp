@@ -3,6 +3,7 @@
 
 #include "HubWorldLevelScriptActor.h"
 #include "Engine/GameInstance.h"
+#include "Actor/Peppy.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	PrologueDialogueComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueMananger"));
@@ -394,7 +395,7 @@ void AHubWorldLevelScriptActor::RandomTalk() {
 	}
 
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	DialogueTableComponent->GetRandomTalkIndex(Peppy->InteractingNpcStr);
+	DialogueTableComponent->SetRandomTalkIndex(Peppy->InteractingNpcActor, Peppy->InteractingNpcGroupcode);
 	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
 }
 

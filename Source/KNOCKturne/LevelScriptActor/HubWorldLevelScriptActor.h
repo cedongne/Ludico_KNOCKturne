@@ -7,23 +7,18 @@
 #include <MovieSceneSequencePlayer.h>
 #include <Blueprint/WidgetLayoutLibrary.h>
 
+#include "Actor/DreamM.h"
+#include "Actor/Rabbit.h"
+#include "Actor/Lake.h"
 #include "KNOCKturneLevelScriptActor.h"
 #include "GameMode/KNOCKturneGameState.h"
 #include "GameMode/PeppyController.h"
 #include "Widget/DialogueWidget.h"
 #include "Widget/HubworldHUDWidget.h"
 #include "Widget/LoadingWidget.h"
-#include "Actor/Peppy.h"
-#include "Actor/DreamM.h"
-#include "Actor/Rabbit.h"
 
-//#include "../../../../Program Files/Epic Games/UE_5.0/Engine/Intermediate/Build/Win64/UnrealEditor/Inc/LevelSequence/SequenceMediaController.generated.h"
-//#include "../../../../Program Files/Epic Games/UE_5.0/Engine/Intermediate/Build/Win64/UnrealEditor/Inc/LevelSequence/LevelSequenceActor.generated.h"
 #include "HubWorldLevelScriptActor.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class KNOCKTURNE_API AHubWorldLevelScriptActor : public AKNOCKturneLevelScriptActor
 {
@@ -67,6 +62,8 @@ public:
 	ADreamM* DreamMActor;
 	UPROPERTY(EditAnywhere)
 	ARabbit* RabbitActor;
+	UPROPERTY(EditAnywhere)
+	ALake* LakeActor;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> DialogueWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -171,6 +168,6 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float deltaTime) override;
 
+	class APeppy* Peppy;
 	APeppyController* PeppyController;
-	APeppy* Peppy;
 };

@@ -25,6 +25,10 @@ public:
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHoverMouse;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool GiveFragment = false;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 TalkCount = 0;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetCanInteraction();

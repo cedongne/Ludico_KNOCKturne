@@ -5,9 +5,11 @@
 #include "KNOCKturne.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "GameFramework/Controller.h"
 
 #include "Component/PeppyStatComponent.h"
 #include "Component/PeppySkillComponent.h"
+#include "NPC.h"
 
 #include "Peppy.generated.h"
 
@@ -76,6 +78,8 @@ protected:
 	bool IsHugCampfire = false;
 	bool IsSummon = false;
 
+	class AHubWorldLevelScriptActor* HubWorldLevelScriptActor;
+
 private:
 	bool CanSlide;
 
@@ -96,7 +100,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MoveSpeed = 5;
 	float CurWalkSpeed;
-
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -120,7 +123,9 @@ public:
 	void AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	FString InteractingNpcStr;
+	FString InteractingNpcGroupcode;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	ANPC* InteractingNpcActor;
 	UFUNCTION(BlueprintCallable)
-	void SetInteractingNpcStr();
+	void SetInteractingNpc();
 };

@@ -5,6 +5,10 @@
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
 #include "Components/ActorComponent.h"
+#include "GameMode/KNOCKturneGameState.h"
+
+#include "Actor/NPC.h"
+
 #include "DialogueTableComponent.generated.h"
 
 USTRUCT(BlueprintType)
@@ -59,6 +63,8 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+	AKNOCKturneGameState* KNOCKturneGameState;
+
 protected:
 	TArray<FDialogueData*> DialogueRows;
 	int32 DialogueRowsSize;
@@ -106,7 +112,13 @@ public:
 	FString Episode = "Episode1";
 
 	UFUNCTION(BlueprintCallable)
-	void GetRandomTalkIndex(FString NpcName);
+	void SetRandomTalkIndex(ANPC* InteractingNpc, FString NpcName);
+
+	UFUNCTION(BlueprintCallable)
+	void GetNormalRandomTalkIndexs(ANPC* InteractingNpc, FString NpcName);
+
+	UFUNCTION(BlueprintCallable)
+	void GetGiveFragmentRandomTalkIndexs(ANPC* InteractingNpc, FString NpcName);
 
 	UFUNCTION(BlueprintCallable)
 	void EmptyTArray();

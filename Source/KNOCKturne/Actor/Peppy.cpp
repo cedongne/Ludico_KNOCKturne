@@ -2,6 +2,7 @@
 
 #include "Component/PeppyStatComponent.h"
 #include "Component/BuffComponent.h"
+#include "LevelScriptActor/HubWorldLevelScriptActor.h"
 
 APeppy::APeppy()
 {
@@ -206,16 +207,22 @@ void APeppy::Die() {
 	BP_Die();
 }
 
-void APeppy::SetInteractingNpcStr() {
+void APeppy::SetInteractingNpc() {
 	FString OverlappedActorStr = UKismetSystemLibrary::GetDisplayName(OverlappedActor);
 
-	if (OverlappedActorStr == "BP_RabbitNPC") {
-		InteractingNpcStr = "Rabbit";
-	}
-	else if (OverlappedActorStr == "BP_DreamM") {
-		InteractingNpcStr = "DreamM";
-	}
-	else if (OverlappedActorStr == "BP_Pond") {
-		InteractingNpcStr = "Lake";
+	if (GetWorld()->GetMapName() == "LV_HubWorld") {
+		HubWorldLevelScriptActor = Cast<AHubWorldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
+		if (OverlappedActorStr == "BP_DreamM") {
+			InteractingNpcGroupcode = "DreamM";
+			InteractingNpcActor = HubWorldLevelScriptActor->DreamMActor;
+		}
+		else if (OverlappedActorStr == "BP_RabbitNPC") {
+			InteractingNpcGroupcode = "Rabbit";
+			InteractingNpcActor = HubWorldLevelScriptActor->RabbitActor;
+		}
+		else if (OverlappedActorStr == "BP_Lake") {
+			InteractingNpcGroupcode = "Lake";
+			InteractingNpcActor = HubWorldLevelScriptActor->LakeActor;
+		}
 	}
 }
