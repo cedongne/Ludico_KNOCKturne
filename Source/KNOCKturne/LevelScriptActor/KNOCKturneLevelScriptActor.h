@@ -21,5 +21,5 @@ public:
 	AKNOCKturneLevelScriptActor();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
-	class UDialogueTableComponent* DialogueTableComponent;
+	class UDialogueTableComponent* CommonDialogueTableComponent;
 };

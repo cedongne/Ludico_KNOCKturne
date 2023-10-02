@@ -4,5 +4,5 @@
 #include "KNOCKturneLevelScriptActor.h"
 
 AKNOCKturneLevelScriptActor::AKNOCKturneLevelScriptActor() {
-	DialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueManager"));
+	CommonDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueTableManager"));
 }

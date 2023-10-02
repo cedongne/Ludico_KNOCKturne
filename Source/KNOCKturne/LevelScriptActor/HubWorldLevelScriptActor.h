@@ -33,7 +33,8 @@ public:
 	AHubWorldLevelScriptActor();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
-	UDialogueTableComponent* PrologueDialogueComponent;
+	UDialogueTableComponent* PrologueDialogueTableComponent;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 MDSelection = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -178,4 +179,7 @@ protected:
 
 	class APeppy* Peppy;
 	APeppyController* PeppyController;
+
+	virtual void PreInitializeComponents() override;
+	virtual void PostInitializeComponents() override;
 };

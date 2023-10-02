@@ -3,11 +3,11 @@
 
 #include "BattleFieldLevelScriptActor.h"
 
-ABattleFieldLevelScriptActor::ABattleFieldLevelScriptActor() {
+ABattleFieldLevelScriptActor::ABattleFieldLevelScriptActor(){
 }
 
 void ABattleFieldLevelScriptActor::BeginPlay() {
 	Super::BeginPlay();
 
-	DialogueTableComponent->LoadDialogueTable("Dialogue_EP1_Battle");
+	CommonDialogueTableComponent->LoadDialogueTable("Dialogue_EP1_Battle");
 }

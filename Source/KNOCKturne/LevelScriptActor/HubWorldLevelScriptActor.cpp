@@ -6,11 +6,9 @@
 #include "Actor/Peppy.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
-	PrologueDialogueComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("DialogueMananger"));
+	PrologueDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("PrologueDialogueMananger"));
+
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHubWorldLevelScriptActor::StaticClass(), HubworldActors);
 	/*for (int i = 0; i < HubworldActors.Num(); ++i)
@@ -28,11 +26,23 @@ AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	}*/
 }
 
+void AHubWorldLevelScriptActor::PreInitializeComponents() {
+	Super::PreInitializeComponents();
+}
+
+void AHubWorldLevelScriptActor::PostInitializeComponents() {
+	Super::PostInitializeComponents();
+}
+
 void AHubWorldLevelScriptActor::BeginPlay() {
 	Super::BeginPlay();
 
-	DialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
-	//PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	PeppyController = Cast<APeppyController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
+
+	CommonDialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
+//	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
 
 	// StartLevelByCondition();
 }
@@ -49,7 +59,7 @@ void AHubWorldLevelScriptActor::Tick(float deltaTime) {
 
 void AHubWorldLevelScriptActor::StartPrologueDialogue() {
 	PeppyController->PrologueInProcess = true;
-	PrologueDialogueComponent->ResetDialogueRowPointer();
+	PrologueDialogueTableComponent->ResetDialogueRowPointer();
 
 	if (DialogueWidgetClass) {
 		DialogueWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
@@ -63,7 +73,7 @@ void AHubWorldLevelScriptActor::StartPrologueDialogue() {
 
 	DialogueWidgetRef->TextBlock_E->SetVisibility(ESlateVisibility::Visible);
 
-	DialogueWidgetRef->GetNextDialogueLine(PrologueDialogueComponent);
+	DialogueWidgetRef->GetNextDialogueLine(PrologueDialogueTableComponent);
 }
 
 bool AHubWorldLevelScriptActor::MoveDirectionTF(FDialogueData DataTable) {
@@ -118,7 +128,7 @@ void AHubWorldLevelScriptActor::CallMoveDirection(FDialogueData DataTable) {
 		MDSelection++;
 	}
 	else {
-		DialogueWidgetRef->NextTalk(PrologueDialogueComponent);
+		DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
 		DialogueWidgetRef->SetVisibility(ESlateVisibility::Visible);
 	}
 }
@@ -135,7 +145,7 @@ void AHubWorldLevelScriptActor::NextIsDirection(FDialogueData DataTable) {
 void AHubWorldLevelScriptActor::AfterPrologueDirection() {
 	DialogueWidgetRef->isCameraMoving = false;
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetText(FText::FromString(""));
-	DialogueWidgetRef->NextTalk(PrologueDialogueComponent);
+	DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
 	DialogueWidgetRef->SetVisibility(ESlateVisibility::Visible);
 }
 
@@ -225,7 +235,7 @@ void AHubWorldLevelScriptActor::PrologueEnded() {
 		}
 	}
 
-	LoadingWidgetRef->LoadingText = DialogueTableComponent->RandomLoadingText();
+	LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
 	Delay(4.0);
 	SetState("Loading", "None");
 	DefaultLocation();
@@ -339,7 +349,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				}
 			}
 
-			LoadingWidgetRef->LoadingText = DialogueTableComponent->RandomLoadingText();
+			LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
 			Delay(0.2);
 			UWidgetLayoutLibrary::RemoveAllWidgets(this);
 
@@ -407,19 +417,19 @@ void AHubWorldLevelScriptActor::BattleFailDialogue() {
 		}
 	}
 
-	DialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle");
-	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle");
+	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
 void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueData) {
 	if (DialogueData.Direction == "AfterBattleFail_Hubworld_DreamDiary and DreamFragment") {
 		if (KNOCKturneGameState->isDreamDiaryUpdated) {
-			DialogueTableComponent->SetBattleFailDiaryDialogueIndex();
-			DialogueWidgetRef->NextTalk(PrologueDialogueComponent);
+			CommonDialogueTableComponent->SetBattleFailDiaryDialogueIndex();
+			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
 		}
 		else if(KNOCKturneGameState->GetDreamFragment){
-			DialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
-			DialogueWidgetRef->NextTalk(PrologueDialogueComponent);
+			CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
+			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
 		}
 		else {
 			BattleFailDialogueAllEnded();
@@ -427,8 +437,8 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 	}
 	else if (DialogueData.Direction == "AfterBattleFail_Hubworld_DreamFragment") {
 		if (KNOCKturneGameState->GetDreamFragment) {
-			DialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
-			DialogueWidgetRef->NextTalk(PrologueDialogueComponent);
+			CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
+			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
 		}
 		else {
 			BattleFailDialogueAllEnded();
@@ -437,7 +447,7 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 }
 
 void AHubWorldLevelScriptActor::RandomTalk() {
-	DialogueTableComponent->SetIsEndedDialogueRows(false);
+	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 
 	if (DialogueWidgetRef == nullptr) {
 		if (DialogueWidgetClass) {
@@ -452,8 +462,8 @@ void AHubWorldLevelScriptActor::RandomTalk() {
 	}
 
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	DialogueTableComponent->SetRandomTalkIndex(Peppy->InteractingNpcActor, Peppy->InteractingNpcGroupcode);
-	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+	CommonDialogueTableComponent->SetRandomTalkIndex(Peppy->InteractingNpcActor, Peppy->InteractingNpcGroupcode);
+	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
 void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
@@ -467,16 +477,16 @@ void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
 
 void AHubWorldLevelScriptActor::TalkWithNpcEnded() {
 	DialogueWidgetRef->RemoveFromParent();
-	DialogueTableComponent->EmptyTArray();
+	CommonDialogueTableComponent->EmptyTArray();
 	Delay(0.5);
 	Peppy->ReturnCameraInInteraction();
 }
 
 void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
-	DialogueTableComponent->SetIsEndedDialogueRows(false);
+	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	DialogueTableComponent->SetDialogueIndexByGroupCode("DreamFragment");
-	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("DreamFragment");
+	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
 void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
@@ -497,8 +507,8 @@ void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
 
 void AHubWorldLevelScriptActor::StartAfterBattleDialogue() {
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	DialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle_Hubworld");
-	DialogueWidgetRef->GetNextDialogueLine(DialogueTableComponent);
+	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle_Hubworld");
+	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
 void AHubWorldLevelScriptActor::AfterBattleDialogueEnded() {

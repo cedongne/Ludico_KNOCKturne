@@ -30,7 +30,7 @@ void APeppyController::BeginPlay() {
 		CurrentLevelScriptActor = Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 	}
 	else {
-		PrologueDialogueComponent = ((AHubWorldLevelScriptActor*)CurrentLevelScriptActor)->PrologueDialogueComponent;
+		PrologueDialogueComponent = ((AHubWorldLevelScriptActor*)CurrentLevelScriptActor)->PrologueDialogueTableComponent;
 	}
 }
 
