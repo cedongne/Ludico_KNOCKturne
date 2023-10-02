@@ -17,16 +17,14 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	InitSpecialtyIconRowMap();
 	InitItemIconRowMap();
 
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_AmbiguousEmotion(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_AmbiguousEmotion"));
 	IconSkillActorMap.Add("Icon_skill_PS_AmbiguousEmotion", BP_PS_AmbiguousEmotion.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_WithYou(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_WithYou"));
 	IconSkillActorMap.Add("Icon_skill_PS_WithYou", BP_PS_WithYou.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_EfficientEmpathy(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_EfficientEmpathy"));
 	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", BP_PS_EfficientEmpathy.Class);
-//	static ConstructorHelpers::FClassFinder<AActor> BP_PS_LetMeHug(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_LetMeHug"));
-//	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_LetMeHug(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_LetMeHug"));
+	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_CharmingVoice(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_CharmingVoice"));
 	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", BP_PS_CharmingVoice.Class);
 
@@ -52,6 +50,9 @@ void UBattleManagerSystem::SetTimerUnvisibleHitArea() {
 
 	for(auto AttackRange : CurBossSkillHitArea)
 	{
+		if (AttackRange == nullptr) {
+			break;
+		}
 		AttackRange->bHiddenInGame = false;
 	}
 
@@ -186,5 +187,11 @@ void UBattleManagerSystem::LoadBattleTableManagerSystem() {
 	if (BattleTableManagerSystem == nullptr) {
 		UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 		BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	}
+}
+
+void UBattleManagerSystem::LoadGameState(AGameStateBase* GameState) {
+	if (KNOCKturneGameState == nullptr) {
+		KNOCKturneGameState = Cast<AKNOCKturneGameState>(GameState);
 	}
 }

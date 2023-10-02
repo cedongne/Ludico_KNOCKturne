@@ -16,7 +16,6 @@ void ABoss::BeginPlay()
 
 	auto KNOCKturneGameInstance = Cast<UKNOCKturneGameInstance>(GetGameInstance());
 	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
-	SpawnBossSkill();
 }
 
 void ABoss::PostInitializeComponents() {

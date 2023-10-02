@@ -11,6 +11,12 @@
 
 #include "CommonSkillActor.generated.h"
 
+UENUM(BlueprintType)
+enum class ESkillUsingType : uint8 {
+	Sequential		UMETA(DisplayName = "Sequential"),
+	Probabilistic	UMETA(DisplayName = "Probabilistic")
+};
+
 UCLASS()
 class KNOCKTURNE_API ACommonSkillActor : public AActor
 {
@@ -28,6 +34,8 @@ protected:
 	bool IsHitPlayer = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Flag")
 	bool IsInitialized = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Type")
+	ESkillUsingType CurSkillUsingType = ESkillUsingType::Sequential;
 
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
@@ -40,6 +48,8 @@ protected:
 	FName GetCurrentBlueprintClassName();
 
 	virtual void Initialize();
+
+	virtual bool TryOperateSkillEffect(ESkillUsingType SkillUsingType);
 
 private:
 	void RegistSkillActorOnBattleManager();

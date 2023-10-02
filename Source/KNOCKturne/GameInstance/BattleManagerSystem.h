@@ -20,6 +20,7 @@ public:
 
 	class ABattleManager* BattleManager;
 
+	void LoadGameState(AGameStateBase* GameState);
 protected:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 

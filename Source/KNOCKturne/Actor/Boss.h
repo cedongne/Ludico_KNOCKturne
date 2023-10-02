@@ -35,14 +35,14 @@ private:
 	UBattleTableManagerSystem* BattleTableManagerSystem;
 
 	FTimerHandle UseSkillTimerHandler;
-
-	void SpawnBossSkill();
 	
 public:
 	bool IsDie = false;
 
 	void SpawnBossSkillWhenStartBossTurn();
 	void ClearUseSkillTimer();
+
+	void SpawnBossSkill();
 
 	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

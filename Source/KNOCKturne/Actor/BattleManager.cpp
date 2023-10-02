@@ -45,6 +45,7 @@ void ABattleManager::Tick(float DeltaTime)
 void ABattleManager::StartBossTurn() {
 	ProcessDamageBeforeStartTurn();
 	SetLeftCurrentTurnTime(ActorManagerSystem->BossActor->StatComponent->CurStatData.Turn);
+	ActorManagerSystem->BossActor->SpawnBossSkill();
 	BP_StartBossTurn();
 
 	BattleManagerSystem->Round = 1;

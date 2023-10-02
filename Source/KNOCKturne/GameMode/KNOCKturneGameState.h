@@ -27,4 +27,7 @@ public:
 		bool isBattleFail = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool RightafterBattleClear = false;
+
+protected:
+	void HandleBeginPlay() override;
 };

@@ -27,22 +27,24 @@ void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
 	if (Num < 0) {
 		NTLOG(Error, TEXT("Num must be Positive!"));
 	}
-	while (Num--) {
-		auto randIndex = rand() % totalPositiveBuffNum;
-		if (randIndex >= HasPositiveBuffs_PerTurn.Num()) {
-			randIndex -= HasPositiveBuffs_PerTurn.Num();
-			for (auto Buff : HasPositiveBuffs_PerSecond) {
-				if (randIndex-- == 0) {
-					HasPositiveBuffs_PerSecond.Remove(Buff.Key);
-					break;
+	if (totalPositiveBuffNum > 0) {
+		while (Num--) {
+			auto randIndex = rand() % totalPositiveBuffNum;
+			if (randIndex >= HasPositiveBuffs_PerTurn.Num()) {
+				randIndex -= HasPositiveBuffs_PerTurn.Num();
+				for (auto Buff : HasPositiveBuffs_PerSecond) {
+					if (randIndex-- == 0) {
+						HasPositiveBuffs_PerSecond.Remove(Buff.Key);
+						break;
+					}
 				}
 			}
-		}
-		else {
-			for (auto Buff : HasPositiveBuffs_PerTurn) {
-				if (randIndex-- == 0) {
-					HasPositiveBuffs_PerTurn.Remove(Buff.Key);
-					break;
+			else {
+				for (auto Buff : HasPositiveBuffs_PerTurn) {
+					if (randIndex-- == 0) {
+						HasPositiveBuffs_PerTurn.Remove(Buff.Key);
+						break;
+					}
 				}
 			}
 		}
@@ -54,22 +56,24 @@ void UBuffComponent::RemoveRandomNegativeBuff(int32 Num) {
 	if (Num < 0) {
 		NTLOG(Error, TEXT("Num must be Positive!"));
 	}
-	while (Num--) {
-		auto randIndex = rand() % totalNegativeBuffNum;
-		if (randIndex >= HasNegativeBuffs_PerTurn.Num()) {
-			randIndex -= HasNegativeBuffs_PerTurn.Num();
-			for (auto Buff : HasNegativeBuffs_PerSecond) {
-				if (randIndex-- == 0) {
-					HasNegativeBuffs_PerSecond.Remove(Buff.Key);
-					break;
+	if (totalNegativeBuffNum > 0) {
+		while (Num--) {
+			auto randIndex = rand() % totalNegativeBuffNum;
+			if (randIndex >= HasNegativeBuffs_PerTurn.Num()) {
+				randIndex -= HasNegativeBuffs_PerTurn.Num();
+				for (auto Buff : HasNegativeBuffs_PerSecond) {
+					if (randIndex-- == 0) {
+						HasNegativeBuffs_PerSecond.Remove(Buff.Key);
+						break;
+					}
 				}
 			}
-		}
-		else {
-			for (auto Buff : HasNegativeBuffs_PerTurn) {
-				if (randIndex-- == 0) {
-					HasNegativeBuffs_PerTurn.Remove(Buff.Key);
-					break;
+			else {
+				for (auto Buff : HasNegativeBuffs_PerTurn) {
+					if (randIndex-- == 0) {
+						HasNegativeBuffs_PerTurn.Remove(Buff.Key);
+						break;
+					}
 				}
 			}
 		}

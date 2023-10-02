@@ -24,11 +24,15 @@ private:
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
+	void Initialize() override;
+
 	void LoadSkillDataFromDataTable();
 
 	FPeppySkillData SkillData;
 
-public:
 	UFUNCTION(BlueprintCallable)
-	void UseSkill();
+	bool TryOperateSkillEffect(ESkillUsingType SkillUsingType) override;
+
+	ESkillUsingType CurSkillUsingType = ESkillUsingType::Sequential;
 };

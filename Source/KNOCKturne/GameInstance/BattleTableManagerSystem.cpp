@@ -133,32 +133,145 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 	NTLOG(Log, TEXT("[BossSkillSpawnData] %s is loaded!"), *SkillName);
 }
 
-void UBattleTableManagerSystem::UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor) {
-	int32 SkillIndexes[2] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2 };
-	int32 SkillTargets[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
+bool UBattleTableManagerSystem::TryUseBossSkillSequential(FBossSkillData SkillData, ABossSkillActor* RefActor) {
+	int32 SkillTarget[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
 
 	AActor* TargetActor;
 
 	for (int Sequence = 0; Sequence < 2; Sequence++) {
-		if (SkillTargets[Sequence] == TARGET_PEPPY) {
+		if (SkillTarget[Sequence] == TARGET_PEPPY) {
 			TargetActor = ActorManagerSystem->PeppyActor;
 		}
-		else if (SkillTargets[Sequence] == TARGET_BOSS) {
+		else if (SkillTarget[Sequence] == TARGET_BOSS) {
 			TargetActor = ActorManagerSystem->BossActor;
 		}
 		else {
 //			NTLOG(Error, TEXT("Target set fail : BossSkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
 			break;
 		}
-		OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
+
+		auto CurSequenceEffectSkillData = *TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData);
+		if (CurSequenceEffectSkillData.SkillId == "-1") {
+			NTLOG(Error, TEXT("SkillData is invalid!"));
+			return false;
+		}
+
+		if (FMath::FRand() > CurSequenceEffectSkillData.Probability) {
+			return false;
+		}
+		OperateSkillByIndex(Sequence, TargetActor, CurSequenceEffectSkillData, RefActor);
 	}
+
+	return true;
+}
+
+bool UBattleTableManagerSystem::TryUseBossSkillProbabilistic(FBossSkillData SkillData, ABossSkillActor* RefActor) {
+	auto Probability = FMath::FRand();
+	int32 Sequence;
+	int32 SkillTarget;
+	bool SkillSucceed = Probability < SkillData.Probability_1;
+
+	if (SkillSucceed) {
+		Sequence = 0;
+		SkillTarget = SkillData.SkillTarget_1;
+	}
+	else {
+		Sequence = 1;
+		SkillTarget = SkillData.SkillTarget_2;
+	}
+
+	AActor* TargetActor;
+
+	if (SkillTarget == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+	}
+	else if (SkillTarget == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+	}
+	else {
+		NTLOG(Error, TEXT("Target set fail : PeppySkillTarget is invalid value"));
+		return false;
+	}
+	OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexBossSkillDataSet(Sequence, &SkillData), RefActor);
+
+	return SkillSucceed;
+}
+
+bool UBattleTableManagerSystem::TryUsePeppySkillSequential(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
+	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
+
+	int32 SkillTarget[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
+
+	AActor* TargetActor;
+
+	for (int Sequence = 0; Sequence < 3; Sequence++) {
+		if (SkillTarget[Sequence] == TARGET_PEPPY) {
+			TargetActor = ActorManagerSystem->PeppyActor;
+		}
+		else if (SkillTarget[Sequence] == TARGET_BOSS) {
+			TargetActor = ActorManagerSystem->BossActor;
+		}
+		else {
+			NTLOG(Error, TEXT("Target set fail : PeppySkillTarget is invalid value"));
+			break;
+		}
+		
+		auto CurSequenceEffectSkillData = *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData);
+		if (CurSequenceEffectSkillData.SkillId == "-1") {
+			NTLOG(Error, TEXT("SkillData is invalid!"));
+			return false;
+		}
+
+		if (FMath::FRand() > CurSequenceEffectSkillData.Probability) {
+			return false;
+		}
+		OperateSkillByIndex(Sequence, TargetActor, CurSequenceEffectSkillData, RefActor);
+	}
+
+	return true;
+}
+
+bool UBattleTableManagerSystem::TryUsePeppySkillProbabilistic(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
+	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
+
+	auto Probability = FMath::FRand();
+	int32 Sequence;
+	int32 SkillTarget;
+	bool SkillSucceed = Probability < SkillData.Probability_1;
+
+	// 페피 스킬은 EffectSequence가 3까지 있지만, 확률에 따라 하나의 효과만 적용하는 처리는 EffectSequence 2까지만 존재하므로 이와 같이 임시 구현.
+	if (SkillSucceed) {
+		Sequence = 0;
+		SkillTarget = SkillData.SkillTarget_1;
+	}
+	else {
+		Sequence = 1;
+		SkillTarget = SkillData.SkillTarget_2;
+	}
+
+	AActor* TargetActor;
+
+	if (SkillTarget == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+	}
+	else if (SkillTarget == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+	}
+	else {
+		NTLOG(Error, TEXT("Target set fail : PeppySkillTarget is invalid value"));
+		return false;
+	}
+	OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
+
+	return SkillSucceed;
 }
 
 void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, ACommonSkillActor* SkillActor) {
-	if (SkillData.SkillId == "-1") {
-		NTLOG(Error, TEXT("SkillData is invalid for operation!"));
+	if (SkillData.SkillId == "-1" || TargetActor == nullptr) {
+		NTLOG(Error, TEXT("Skill operate is failed!"));
 		return;
 	}
+
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
 	if (SkillData.SkillIndex == 1) {
@@ -169,14 +282,14 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*/
 	else if (SkillData.SkillIndex == 11) {
 		StatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData.Value_N);
-		NTLOG(Log, TEXT("[Boss 11] Attack damage %lf"), SkillData.Value_N);
+		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
 	*	13 랜덤 공격: 대상의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillData.SkillIndex == 13) {
 		StatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData.Value_N, SkillData.Value_M));
-		NTLOG(Log, TEXT("[Boss 13] Random attack damage %lf"), SkillData.Value_N);
+		NTLOG(Log, TEXT("[%s : SkillIndex 13] Random attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
 	*	16 제한 디버프-긍정: 대상의 모든 긍정적 버프 중 랜덤으로 N개 제거
@@ -207,37 +320,14 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
-		NTLOG(Log, TEXT("[Boss 54] Periodic attack damage %lf in %lf Turns"), SkillData.Value_N, SkillData.Value_T);
+		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
 }
 
-void UBattleTableManagerSystem::UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
-	UStatComponent* TargetStatComponent = nullptr;
-	UBuffComponent* TargetBuffComponent = nullptr;
-	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
-	AActor* TargetActor;
-
-	int32 SkillIndexes[3] = { SkillData.SkillIndex_1, SkillData.SkillIndex_2, SkillData.SkillIndex_3 };
-	int32 SkillTargets[3] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2, SkillData.SkillTarget_3 };
-
-	for (int Sequence = 0; Sequence < 3; Sequence++) {
-		if (SkillTargets[Sequence] == TARGET_PEPPY) {
-			TargetActor = ActorManagerSystem->PeppyActor;
-		}
-		else if (SkillTargets[Sequence] == TARGET_BOSS) {
-			TargetActor = ActorManagerSystem->BossActor;
-		}
-		else {
-//			NTLOG(Error, TEXT("Target set fail : PeppySkillTargets[%d] is invalid value(%d)"), IndexCount, SkillIndexes[IndexCount]);
-			break;;
-		}
-		OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
-	}
-}
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
 	FPeppyStatData* statData = PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));

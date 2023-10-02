@@ -367,9 +367,13 @@ private:
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void UseBossSkill(FBossSkillData SkillData, ABossSkillActor* RefActor);
+	bool TryUseBossSkillSequential(FBossSkillData SkillData, ABossSkillActor* RefActor);
 	UFUNCTION(BlueprintCallable)
-	void UsePeppySkill(FPeppySkillData SkillData, APeppySkillActor* RefActor);
+	bool TryUseBossSkillProbabilistic(FBossSkillData SkillData, ABossSkillActor* RefActor);
+	UFUNCTION(BlueprintCallable)
+	bool TryUsePeppySkillSequential(FPeppySkillData SkillData, APeppySkillActor* RefActor);
+	UFUNCTION(BlueprintCallable)
+	bool TryUsePeppySkillProbabilistic(FPeppySkillData SkillData, APeppySkillActor* RefActor);
 
 	UFUNCTION(BlueprintCallable)
 	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);

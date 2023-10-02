@@ -36,6 +36,12 @@ FName ACommonSkillActor::GetCurrentBlueprintClassName() {
 	return *(GetClass()->GetFName().ToString());
 }
 
+bool ACommonSkillActor::TryOperateSkillEffect(ESkillUsingType SkillUsingType) {
+	NTLOG(Error, TEXT("Override the (UseSkill) function!"));
+
+	return false;
+}
+
 void ACommonSkillActor::RegistSkillActorOnBattleManager() {
 	BattleManager->SkillActorsOnField.Add(this->GetFName().ToString(), this);
 }

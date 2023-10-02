@@ -8,9 +8,16 @@ APeppySkillActor::APeppySkillActor() {
 
 void APeppySkillActor::BeginPlay() {
 	Super::BeginPlay();
-	Initialize();
+
+	// 이펙트 발동 타이밍과의 조정을 위해 블루프린트 Call로 변경
+	// Initialize();
+	// OperateSkillEffect(CurSkillUsingType);
+}
+
+void APeppySkillActor::Initialize() {
+	Super::Initialize();
+
 	LoadSkillDataFromDataTable();
-	UseSkill();
 }
 
 void APeppySkillActor::LoadSkillDataFromDataTable() {
@@ -18,8 +25,15 @@ void APeppySkillActor::LoadSkillDataFromDataTable() {
 	SkillData = *(BattleTableManagerSystem->GetPeppySkillTable()->FindRow<FPeppySkillData>(*BlueprintClassName, TEXT("Fail to load PeppySkillData")));
 }
 
-void APeppySkillActor::UseSkill() {
-	BattleTableManagerSystem->UsePeppySkill(SkillData, this);
+bool APeppySkillActor::TryOperateSkillEffect(ESkillUsingType SkillUsingType) {
+	switch (SkillUsingType) {
+	case ESkillUsingType::Sequential:
+		return BattleTableManagerSystem->TryUsePeppySkillSequential(SkillData, this);
+	case ESkillUsingType::Probabilistic:
+		return BattleTableManagerSystem->TryUsePeppySkillProbabilistic(SkillData, this);
+	}
+
+	return false;
 }
 
 /*

@@ -130,10 +130,15 @@ void ABossSkillActor::SetSkillData(FBossSkillData NewSkillData) {
 	SkillData = NewSkillData;
 }
 
-void ABossSkillActor::AttackPlayer() {
-	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+bool ABossSkillActor::TryOperateSkillEffect(ESkillUsingType SkillUsingType) {
+	switch (SkillUsingType) {
+	case ESkillUsingType::Sequential:
+		return BattleTableManagerSystem->TryUseBossSkillSequential(SkillData, this);
+	case ESkillUsingType::Probabilistic:
+		return BattleTableManagerSystem->TryUseBossSkillProbabilistic(SkillData, this);
+	}
 
-	BattleTableManagerSystem->UseBossSkill(SkillData, this);
+	return false;
 }
 
 FVector ABossSkillActor::GetDeltaDurationMove(FVector StartPosition, FVector EndPosition, float Duration, float DeltaSeconds) {

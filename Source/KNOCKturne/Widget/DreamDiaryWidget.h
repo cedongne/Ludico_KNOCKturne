@@ -10,6 +10,7 @@
 #include "Components/Button.h"
 
 #include "GameMode/KNOCKturneGameState.h"
+#include "Component/DialogueTableComponent.h"
 
 #include "DreamDiaryWidget.generated.h"
 
@@ -33,7 +34,7 @@ protected:
 	class UDataTable* DreamDiaryTable;
 	class UDataTable* StringTable;
 	TArray<FDreamDiaryData*> DreamDiaryRows;
-	UDialogueTableComponent* DialogueTableComponent;
+	class UDialogueTableComponent* DialogueTableComponent;
 
 	UFUNCTION()
 	void Button_ExitOnClicked();
