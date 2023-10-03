@@ -160,7 +160,6 @@ void UDialogueWidget::ChangeCutScene(FDialogueData DataRow) {
 		HandCutScene->SetOpacity(1.0);
 	}
 	else if (CurrentCutSID == "Im_cutS_pro_lake") {
-		HandCutScene->SetOpacity(0.0);
 		Image_CutScene->SetBrushFromTexture(Im_cutS_pro_lake);
 		Image_CutScene->SetOpacity(1.0);
 	}
@@ -205,6 +204,7 @@ void UDialogueWidget::ChangeCutScene(FDialogueData DataRow) {
 		Image_CutScene->SetOpacity(1.0);
 	}
 	else {
+		HandCutScene->SetOpacity(0.0);
 		Image_CutScene->SetOpacity(0.0);
 	}
 }

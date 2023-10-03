@@ -9,21 +9,6 @@ AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	PrologueDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("PrologueDialogueMananger"));
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHubWorldLevelScriptActor::StaticClass(), HubworldActors);
-	/*for (int i = 0; i < HubworldActors.Num(); ++i)
-	{
-		DreamMActor = dynamic_cast<ADreamM*>(HubworldActors[i]);
-		RabbitActor = dynamic_cast<ARabbit*>(HubworldActors[i]);
-	}
-
-	if (DreamMActor != nullptr) {
-		NTLOG(Warning, TEXT("found"));
-		DreamMActor->SetActorRotation(FRotator(0.0, 0.0, -70.0));
-	}
-	else {
-		NTLOG(Warning, TEXT("not found"));
-	}*/
 }
 
 void AHubWorldLevelScriptActor::PreInitializeComponents() {
@@ -42,9 +27,9 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 
 	CommonDialogueTableComponent->LoadDialogueTable("Dialogue_Npc");
-//	PrologueDialogueComponent->LoadDialogueTable("Dialogue_Prologue");
+	PrologueDialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 
-	// StartLevelByCondition();
+	 StartLevelByCondition();
 }
 
 void AHubWorldLevelScriptActor::Tick(float deltaTime) {
@@ -208,51 +193,12 @@ void AHubWorldLevelScriptActor::PrologueEnded() {
 		NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
 	}
 
-	Delay(2.0);
-
-	if (!isSkip) {
-		if (LevelSequencePlayer)
+	GetWorld()->GetTimerManager().SetTimer(LvSequenceTimerHandle, FTimerDelegate::CreateLambda([&]()
 		{
-			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), Hubworld_Cabin, FMovieSceneSequencePlaybackSettings(), SequenceActor);
-			LevelSequencePlayer->Play();
-		}
-		else
-		{
-			NTLOG(Warning, TEXT("Unable to create Hubworld_Cabin level sequence player!"));
-		}
+			PrologueEndedAfterFadeIn();
 
-		Delay(7.0);
-		SetState("Loading", "OnLoading");
-	}
-
-	if (LoadingWidgetClass) {
-		LoadingWidgetRef = CreateWidget<ULoadingWidget>(GetWorld(), LoadingWidgetClass);
-		if (LoadingWidgetRef) {
-			LoadingWidgetRef->AddToViewport();
-		}
-		else {
-			NTLOG(Warning, TEXT("LoadingWidget creating is failed!"));
-		}
-	}
-
-	LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
-	Delay(4.0);
-	SetState("Loading", "None");
-	DefaultLocation();
-	LoadingWidgetRef->RemoveFromParent();
-
-	if (LevelSequencePlayer)
-	{
-		LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
-		LevelSequencePlayer->PlayReverse();
-	}
-	else
-	{
-		NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
-	}
-
-	Delay(2.0);
-	isSkip = false;
+			GetWorld()->GetTimerManager().ClearTimer(LvSequenceTimerHandle);
+		}), 2, false);
 }
 
 void AHubWorldLevelScriptActor::DefaultLocation() {
@@ -290,8 +236,13 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				}
 			}
 
-			Delay(1.5);
-			BP_BlackRef->RemoveFromParent();
+			GetWorld()->GetTimerManager().SetTimer(BlackWigetTimerHandle, FTimerDelegate::CreateLambda([&]()
+				{
+					BP_BlackRef->RemoveFromParent();
+
+					GetWorld()->GetTimerManager().ClearTimer(BlackWigetTimerHandle);
+				}), 1.5, false);
+			
 			Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
 			if (LevelSequencePlayer)
@@ -304,8 +255,15 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
 			}
 
-			Delay(2.0);
-			CreateHubworldHUD();
+			FTimerHandle CreateHUDTimerHandle;
+			GetWorld()->GetTimerManager().SetTimer(CreateHUDTimerHandle, FTimerDelegate::CreateLambda([&]()
+				{
+					CreateHubworldHUD();
+
+
+					GetWorld()->GetTimerManager().ClearTimer(CreateHUDTimerHandle);
+				}), 2, false);
+			
 		}
 		else if (KNOCKturneGameState->isBattleFail) {
 			if (BP_BlackClass) {
@@ -318,25 +276,34 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				}
 			}
 
-			Delay(2.0);
-			UWidgetLayoutLibrary::RemoveAllWidgets(this);
-			OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
-			Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
+			GetWorld()->GetTimerManager().SetTimer(HubworldTimerHandle, FTimerDelegate::CreateLambda([&]()
+				{
+					UWidgetLayoutLibrary::RemoveAllWidgets(this);
+					OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
+					Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
 
-			if (BP_BlinkClass) {
-				BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
-				if (BP_BlinkRef) {
-					BP_BlinkRef->AddToViewport();
-				}
-				else {
-					NTLOG(Warning, TEXT("BP_Blink widget creating is failed!"));
-				}
-			}
+					if (BP_BlinkClass) {
+						BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
+						if (BP_BlinkRef) {
+							BP_BlinkRef->AddToViewport();
+						}
+						else {
+							NTLOG(Warning, TEXT("BP_Blink widget creating is failed!"));
+						}
+					}
 
-			Delay(3.44);
-			UWidgetLayoutLibrary::RemoveAllWidgets(this);
-			CreateHubworldHUD();
-			BattleFailDialogueWithEventBinding();
+					GetWorld()->GetTimerManager().SetTimer(BlinkTimerHandle, FTimerDelegate::CreateLambda([&]()
+						{
+							UWidgetLayoutLibrary::RemoveAllWidgets(this);
+							CreateHubworldHUD();
+							BattleFailDialogueWithEventBinding();
+
+							GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
+						}), 3.44, false);
+
+					GetWorld()->GetTimerManager().ClearTimer(HubworldTimerHandle);
+				}), 2, false);
+			
 		}
 		else {
 			if (LoadingWidgetClass) {
@@ -350,20 +317,24 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			}
 
 			LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
-			Delay(0.2);
-			UWidgetLayoutLibrary::RemoveAllWidgets(this);
 
-			if (LevelSequencePlayer)
-			{
-				LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
-				LevelSequencePlayer->Play();
-			}
-			else
-			{
-				NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
-			}
+			GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
+				{
+					UWidgetLayoutLibrary::RemoveAllWidgets(this);
+					if (LevelSequencePlayer)
+					{
+						LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+						LevelSequencePlayer->Play();
+					}
+					else
+					{
+						NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+					}
 
-			CreateHubworldHUD();
+					CreateHubworldHUD();
+
+					GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
+				}), 4, false);
 		}
 	}
 	else {
@@ -377,28 +348,38 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			}
 		}
 
-		Delay(2.0);
-		UWidgetLayoutLibrary::RemoveAllWidgets(this);
-		OriginalPeppyTransform = Peppy->GetActorTransform();
-		OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
-		OriginalRabbitTransform = RabbitActor->GetActorTransform();
-		OriginalDreamMLocation = DreamMActor->GetActorLocation();
-		Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -90.0, -30.0));
+		GetWorld()->GetTimerManager().SetTimer(BlackWigetTimerHandle, FTimerDelegate::CreateLambda([&]()
+			{
+				UWidgetLayoutLibrary::RemoveAllWidgets(this);
+				OriginalPeppyTransform = Peppy->GetActorTransform();
+				OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
+				OriginalRabbitTransform = RabbitActor->GetActorTransform();
+				OriginalDreamMLocation = DreamMActor->GetActorLocation();
+				Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -90.0, -30.0));
+				NTLOG(Warning, TEXT("%s"), *(Peppy->Camera->GetComponentRotation().ToString()));
 
-		if (BP_BlinkClass) {
-			BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
-			if (BP_BlinkRef) {
-				BP_BlinkRef->AddToViewport();
-			}
-			else {
-				NTLOG(Warning, TEXT("BP_Blink widget creating is failed!"));
-			}
-		}
 
-		Delay(3.44);
-		UWidgetLayoutLibrary::RemoveAllWidgets(this);
-		StartPrologueDialogue();
-		CreateHubworldHUD();
+				if (BP_BlinkClass) {
+					BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
+					if (BP_BlinkRef) {
+						BP_BlinkRef->AddToViewport();
+					}
+					else {
+						NTLOG(Warning, TEXT("BP_Blink widget creating is failed!"));
+					}
+				}
+
+				GetWorld()->GetTimerManager().SetTimer(BlinkTimerHandle, FTimerDelegate::CreateLambda([&]()
+					{
+						UWidgetLayoutLibrary::RemoveAllWidgets(this);
+						StartPrologueDialogueWithEventBinding();
+						CreateHubworldHUD();
+
+						GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
+					}), 3.44, false);
+
+				GetWorld()->GetTimerManager().ClearTimer(BlackWigetTimerHandle);
+			}), 2, false);
 	}
 
 
@@ -417,7 +398,7 @@ void AHubWorldLevelScriptActor::BattleFailDialogue() {
 		}
 	}
 
-	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle");
+	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld");
 	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
@@ -478,8 +459,14 @@ void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
 void AHubWorldLevelScriptActor::TalkWithNpcEnded() {
 	DialogueWidgetRef->RemoveFromParent();
 	CommonDialogueTableComponent->EmptyTArray();
-	Delay(0.5);
-	Peppy->ReturnCameraInInteraction();
+
+	FTimerHandle ReturnCameraTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(ReturnCameraTimerHandle, FTimerDelegate::CreateLambda([&]()
+		{
+			Peppy->ReturnCameraInInteraction();
+
+			GetWorld()->GetTimerManager().ClearTimer(ReturnCameraTimerHandle);
+		}), 0.5, false);
 }
 
 void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
@@ -514,4 +501,63 @@ void AHubWorldLevelScriptActor::StartAfterBattleDialogue() {
 void AHubWorldLevelScriptActor::AfterBattleDialogueEnded() {
 	TalkWithNpcEnded();
 	KNOCKturneGameState->RightafterBattleClear = false;
+}
+
+void AHubWorldLevelScriptActor::PrologueEndedAfterFadeIn() {
+	if (!isSkip) {
+		if (LevelSequencePlayer)
+		{
+			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), Hubworld_Cabin, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+			LevelSequencePlayer->Play();
+		}
+		else
+		{
+			NTLOG(Warning, TEXT("Unable to create Hubworld_Cabin level sequence player!"));
+		}
+
+		GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
+			{
+				SetState("Loading", "OnLoading");
+				if (LoadingWidgetClass) {
+					LoadingWidgetRef = CreateWidget<ULoadingWidget>(GetWorld(), LoadingWidgetClass);
+					if (LoadingWidgetRef) {
+						LoadingWidgetRef->AddToViewport();
+					}
+					else {
+						NTLOG(Warning, TEXT("LoadingWidget creating is failed!"));
+					}
+				}
+
+				LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
+
+				FTimerHandle LoadingTimerHandle2;
+				GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle2, FTimerDelegate::CreateLambda([&]()
+					{
+						SetState("Loading", "None");
+						DefaultLocation();
+						LoadingWidgetRef->RemoveFromParent();
+
+						if (LevelSequencePlayer)
+						{
+							LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
+							LevelSequencePlayer->PlayReverse();
+						}
+						else
+						{
+							NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
+						}
+
+						GetWorld()->GetTimerManager().SetTimer(LvSequenceTimerHandle, FTimerDelegate::CreateLambda([&]()
+							{
+								isSkip = false;
+
+								GetWorld()->GetTimerManager().ClearTimer(LvSequenceTimerHandle);
+							}), 1.5, false);
+
+						GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle2);
+					}), 4, false);
+
+				GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
+			}), 7, false);
+	}
 }

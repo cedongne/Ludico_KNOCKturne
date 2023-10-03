@@ -210,7 +210,7 @@ void APeppy::Die() {
 void APeppy::SetInteractingNpc() {
 	FString OverlappedActorStr = UKismetSystemLibrary::GetDisplayName(OverlappedActor);
 
-	if (GetWorld()->GetMapName() == "LV_HubWorld") {
+	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
 		HubWorldLevelScriptActor = Cast<AHubWorldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 		if (OverlappedActorStr == "BP_DreamM") {
 			InteractingNpcGroupcode = "DreamM";

@@ -115,6 +115,9 @@ void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString I
 			SetCurrentRow(StartRandomNpcTalk[0] - 1);
 		}
 	}
+	else {
+		NTLOG(Warning, TEXT("StartRandomNpcTalk Array is not Empty!"));
+	}
 }
 
 void UDialogueTableComponent::GetNormalRandomTalkIndexs(ANPC* InteractingNpc, FString InteractingNpcGroupcode) {

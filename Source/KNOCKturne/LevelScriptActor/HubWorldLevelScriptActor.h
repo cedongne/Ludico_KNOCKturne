@@ -146,8 +146,6 @@ public:
 	void EscKeyEvent();
 	UFUNCTION(Blueprintcallable)
 	void StartLevelByCondition();
-	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
-	void Delay(float Duration);
 	UFUNCTION(Blueprintcallable)
 	void BattleFailDialogue();
 	UFUNCTION(Blueprintcallable)
@@ -172,6 +170,10 @@ public:
 	void AfterBattleDialogueEnded();
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void SetState(FName StateGroup, FName State);
+	UFUNCTION(Blueprintcallable)
+	void PrologueEndedAfterFadeIn();
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void StartPrologueDialogueWithEventBinding();
 
 protected:
 	virtual void BeginPlay() override;
@@ -179,6 +181,11 @@ protected:
 
 	class APeppy* Peppy;
 	APeppyController* PeppyController;
+	FTimerHandle BlackWigetTimerHandle;
+	FTimerHandle HubworldTimerHandle;
+	FTimerHandle BlinkTimerHandle;
+	FTimerHandle LoadingTimerHandle;
+	FTimerHandle LvSequenceTimerHandle;
 
 	virtual void PreInitializeComponents() override;
 	virtual void PostInitializeComponents() override;
