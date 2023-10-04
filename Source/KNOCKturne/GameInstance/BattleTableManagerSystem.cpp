@@ -318,6 +318,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else if (SkillData.SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
 		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
+		BuffComponent->AcquireBuff(EBuffType::Bleeding, EBuffDataType::Negative_Turn, SkillData.SkillId, SkillData.Value_T);
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
@@ -326,8 +327,6 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
 }
-
-
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
 	FPeppyStatData* statData = PeppyStatDataTable->FindRow<FPeppyStatData>(*DataType, TEXT(""));

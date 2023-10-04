@@ -8,6 +8,9 @@ ABoss::ABoss()
 
 	StatComponent = CreateDefaultSubobject<UBossStatComponent>(TEXT("StatComponent"));
 	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
+
+	static ConstructorHelpers::FClassFinder<AActor> BP_EnergySpawnerPath(TEXT("/Game/Blueprints/Actors/Battle/BP_EnergySpawner"));
+	BP_EnergySpawnerClass = BP_EnergySpawnerPath.Class;
 }
 
 void ABoss::BeginPlay()
@@ -16,6 +19,8 @@ void ABoss::BeginPlay()
 
 	auto KNOCKturneGameInstance = Cast<UKNOCKturneGameInstance>(GetGameInstance());
 	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
+
+	EnergySpawner = Cast<UKNOCKturneObjectPool>(GetWorld()->SpawnActor<AActor>(BP_EnergySpawnerClass)->GetComponentByClass(UKNOCKturneObjectPool::StaticClass()));
 }
 
 void ABoss::PostInitializeComponents() {

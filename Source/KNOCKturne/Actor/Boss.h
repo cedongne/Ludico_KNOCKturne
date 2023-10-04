@@ -24,7 +24,7 @@ public:
 	class UBossStatComponent* StatComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UBuffComponent* BuffComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UKNOCKturneObjectPool* EnergySpawner;
 
 protected:
@@ -32,6 +32,7 @@ protected:
 	virtual void PostInitializeComponents() override;
 
 private:
+	TSubclassOf<AActor> BP_EnergySpawnerClass;
 	UBattleTableManagerSystem* BattleTableManagerSystem;
 
 	FTimerHandle UseSkillTimerHandler;

@@ -79,6 +79,7 @@ void ABattleManager::TurnChange() {
 		ActorManagerSystem->BossActor->ClearUseSkillTimer();
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
+		ActorManagerSystem->BossActor->EnergySpawner->DeactivateAllSpawnedObject();
 		break;
 	case PeppySkillSelectingTurn:
 		SetLeftCurrentTurnTime(100);	// 스킬 사용을 위한 임시 턴 타임 적용

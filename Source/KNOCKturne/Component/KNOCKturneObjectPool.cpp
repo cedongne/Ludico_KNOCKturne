@@ -43,6 +43,9 @@ APooledObject* UKNOCKturneObjectPool::SpawnPooledObject() {
 	}
 
 	LastIndex = (LastIndex + 1) % PoolSize;
+	auto locX = FMath::FRandRange(350.0f, 1150.0f);
+	auto locY = FMath::FRandRange(370.0f, 1170.0f);
+	ObjectPool[LastIndex]->TeleportTo(FVector(locX, locY, -20), FRotator::ZeroRotator);
 	ObjectPool[LastIndex]->SetActive(true);
 	ObjectPool[LastIndex]->SetActorEnableCollision(true);
 	return ObjectPool[LastIndex];
@@ -85,6 +88,7 @@ void UKNOCKturneObjectPool::DeactivateAllSpawnedObject() {
 	for (int index = 0; index < PoolSize; index++) {
 		ObjectPool[index]->SetActive(false);
 		ObjectPool[index]->SetActorLocation(FVector::Zero());
+		ObjectPool[index]->SetActorEnableCollision(false);
 	}
 }
 
