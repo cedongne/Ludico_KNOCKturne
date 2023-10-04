@@ -183,9 +183,9 @@ void AHubWorldLevelScriptActor::PrologueEnded() {
 	DialogueWidgetRef->TextSpeed = 0.0;
 	DialogueWidgetRef->RemoveFromParent();
 
+	LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 	if (LevelSequencePlayer)
 	{
-		LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 		LevelSequencePlayer->PlayReverse();
 	}
 	else
@@ -245,9 +245,9 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			
 			Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
+			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 			if (LevelSequencePlayer)
 			{
-				LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 				LevelSequencePlayer->Play();
 			}
 			else
@@ -321,9 +321,10 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
 				{
 					UWidgetLayoutLibrary::RemoveAllWidgets(this);
+
+					LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 					if (LevelSequencePlayer)
 					{
-						LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 						LevelSequencePlayer->Play();
 					}
 					else
@@ -505,9 +506,10 @@ void AHubWorldLevelScriptActor::AfterBattleDialogueEnded() {
 
 void AHubWorldLevelScriptActor::PrologueEndedAfterFadeIn() {
 	if (!isSkip) {
+
+		LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), Hubworld_Cabin, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 		if (LevelSequencePlayer)
 		{
-			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), Hubworld_Cabin, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 			LevelSequencePlayer->Play();
 		}
 		else
@@ -537,9 +539,9 @@ void AHubWorldLevelScriptActor::PrologueEndedAfterFadeIn() {
 						DefaultLocation();
 						LoadingWidgetRef->RemoveFromParent();
 
+						LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 						if (LevelSequencePlayer)
 						{
-							LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 							LevelSequencePlayer->PlayReverse();
 						}
 						else
