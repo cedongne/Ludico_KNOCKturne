@@ -171,9 +171,13 @@ public:
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void SetState(FName StateGroup, FName State);
 	UFUNCTION(Blueprintcallable)
-	void PrologueEndedAfterFadeIn();
+	void PrologueEndedAfterFadeOut();
+	UFUNCTION(Blueprintcallable)
+	void StartLoadingAfterPrologue();
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void StartPrologueDialogueWithEventBinding();
+	UFUNCTION(Blueprintcallable)
+	void SkipPrologue();
 
 protected:
 	virtual void BeginPlay() override;
