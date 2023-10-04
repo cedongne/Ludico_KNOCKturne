@@ -4,6 +4,7 @@
 #include "HubWorldLevelScriptActor.h"
 #include "Engine/GameInstance.h"
 #include "Actor/Peppy.h"
+#include "Actor/DreamM.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	PrologueDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("PrologueDialogueMananger"));
@@ -285,7 +286,8 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				{
 					UWidgetLayoutLibrary::RemoveAllWidgets(this);
 					OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
-					Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
+					//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
+					Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(-120.0, -90.0, 0.0));
 
 					if (BP_BlinkClass) {
 						BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
@@ -340,7 +342,8 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 					CreateHubworldHUD();
 
 					GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
-				}), 4, false);
+					//4초로 변경 필요
+				}), 0.1, false);
 		}
 	}
 	else {
@@ -436,7 +439,10 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 void AHubWorldLevelScriptActor::RandomTalk() {
 	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 
-	if (DialogueWidgetRef == nullptr) {
+	if(DreamMActor->DialogueWidgetRef){
+		DialogueWidgetRef = DreamMActor->DialogueWidgetRef;
+	}
+	if (DialogueWidgetRef == nullptr || DialogueWidgetRef->IsInViewport() == false) {
 		if (DialogueWidgetClass) {
 			DialogueWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
 			if (DialogueWidgetRef) {
@@ -449,8 +455,13 @@ void AHubWorldLevelScriptActor::RandomTalk() {
 	}
 
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	CommonDialogueTableComponent->SetRandomTalkIndex(Peppy->InteractingNpcActor, Peppy->InteractingNpcGroupcode);
-	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
+	if (Peppy->InteractingNpcActor && Peppy->InteractingNpcGroupcode != "") {
+		CommonDialogueTableComponent->SetRandomTalkIndex(Peppy->InteractingNpcActor, Peppy->InteractingNpcGroupcode);
+		DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
+	}
+	else {
+		NTLOG(Warning, TEXT("Peppy->InteractingNpcActor or Peppy->InteractingNpcGroupcode is Empty!"));
+	}
 }
 
 void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
@@ -463,19 +474,19 @@ void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
 }
 
 void AHubWorldLevelScriptActor::TalkWithNpcEnded() {
-	DialogueWidgetRef->RemoveFromParent();
-	CommonDialogueTableComponent->EmptyTArray();
-
-	FTimerHandle ReturnCameraTimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(ReturnCameraTimerHandle, FTimerDelegate::CreateLambda([&]()
-		{
-			Peppy->ReturnCameraInInteraction();
-
-			GetWorld()->GetTimerManager().ClearTimer(ReturnCameraTimerHandle);
-		}), 0.5, false);
+	if (DreamMActor->DialogueWidgetRef) {
+		DreamMActor->DialogueWidgetRef->RemoveFromParent();
+	}
+	if (DialogueWidgetRef) {
+		DialogueWidgetRef->RemoveFromParent();
+	}
+	
+	CommonDialogueTableComponent->EmptyStartRandomNpcTalkArr();
+	Peppy->ReturnCameraInInteraction();
 }
 
 void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
+	DialogueWidgetRef = DreamMActor->DialogueWidgetRef;
 	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
 	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("DreamFragment");

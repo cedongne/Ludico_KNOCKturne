@@ -15,14 +15,12 @@
 UDialogueTableComponent::UDialogueTableComponent() {
 	IsEndedDialogueRows = false;
 	CurrentRowIndex = -1;
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 }
 
 UDialogueTableComponent::UDialogueTableComponent(FString TablePath)
 {
 	IsEndedDialogueRows = false;
 	CurrentRowIndex = -1;
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_TABLE(*TablePath);
 	DialogueTable = DT_TABLE.Object;
@@ -33,6 +31,7 @@ void UDialogueTableComponent::BeginPlay() {
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	DialogueManager = GameInstance->GetSubsystem<UDialogueManagerSystem>();
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 }
 
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
@@ -94,8 +93,11 @@ void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString I
 			GiveFragmentPro = 50;
 		}
 		
-		if (GiveFragmentPro > Probability) {
+		if (GiveFragmentPro >= Probability) {
 			GetGiveFragmentRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
+		}
+		else {
+			GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
 		}
 	}
 	else if (InteractingNpc->TalkCount == 3) {
@@ -105,8 +107,10 @@ void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString I
 		GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
 	}
 
-	if (StartRandomNpcTalk.Num() != 0)
+	if (!StartRandomNpcTalk.IsEmpty())
 	{
+		NTLOG(Warning, TEXT("StartRandomNpcTalk Array is NOT Empty!"));
+
 		if (StartRandomNpcTalk.Num() > 1) {
 			int random = rand() % StartRandomNpcTalk.Num();
 			SetCurrentRow(StartRandomNpcTalk[random] - 1);
@@ -116,7 +120,7 @@ void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString I
 		}
 	}
 	else {
-		NTLOG(Warning, TEXT("StartRandomNpcTalk Array is not Empty!"));
+		NTLOG(Warning, TEXT("StartRandomNpcTalk Array is Empty!"));
 	}
 }
 
@@ -133,6 +137,7 @@ void UDialogueTableComponent::GetNormalRandomTalkIndexs(ANPC* InteractingNpc, FS
 			}
 		}
 	}
+	NTLOG(Warning, TEXT("NpcGroupcode: %s"), *InteractingNpcGroupcode);
 
 	InteractingNpc->TalkCount++;
 }
@@ -140,7 +145,7 @@ void UDialogueTableComponent::GetNormalRandomTalkIndexs(ANPC* InteractingNpc, FS
 void UDialogueTableComponent::GetGiveFragmentRandomTalkIndexs(ANPC* InteractingNpc, FString InteractingNpcGroupcode) {
 	for (int i = 0; i < DialogueRows.Num(); i++)
 	{
-		if (DialogueRows[i]->DialogueGroupCode == "GiveFragment")
+		if (DialogueRows[i]->DialogueGroupCode == "GiveDreamFragment")
 		{
 			if (DialogueRows[i]->CharacterGroupCode == InteractingNpcGroupcode &&
 				DialogueRows[i]->DialogueType == 1)
@@ -154,7 +159,7 @@ void UDialogueTableComponent::GetGiveFragmentRandomTalkIndexs(ANPC* InteractingN
 	InteractingNpc->GiveFragment = true;
 }
 
-void UDialogueTableComponent::EmptyTArray() {
+void UDialogueTableComponent::EmptyStartRandomNpcTalkArr() {
 	StartRandomNpcTalk.Empty();
 }
 

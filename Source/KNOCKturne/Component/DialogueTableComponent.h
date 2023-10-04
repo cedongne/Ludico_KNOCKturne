@@ -121,7 +121,7 @@ public:
 	void GetGiveFragmentRandomTalkIndexs(ANPC* InteractingNpc, FString NpcName);
 
 	UFUNCTION(BlueprintCallable)
-	void EmptyTArray();
+	void EmptyStartRandomNpcTalkArr();
 
 	UFUNCTION(BlueprintCallable)
 	bool NextDialogueTypeIs1();

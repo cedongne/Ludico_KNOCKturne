@@ -39,6 +39,8 @@ public:
 	void DreamMAfterBattleTalk();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void DreamMDreamFragment();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void SetPeppyName();
 
 protected:
 	virtual void BeginPlay() override;

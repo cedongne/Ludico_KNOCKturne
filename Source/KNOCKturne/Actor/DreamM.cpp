@@ -2,11 +2,11 @@
 
 
 #include "DreamM.h"
+#include "LevelScriptActor/HubWorldLevelScriptActor.h"
 
-// Sets default values
 ADreamM::ADreamM()
 {
-	// PrimaryActorTick.bCanEverTick = true;
+	
 }
 
 void ADreamM::BeginPlay()
@@ -24,10 +24,10 @@ void ADreamM::SelectDialogue() {
 		DialogueWidgetRef->TextBlock_Dialogue_Select_2->SetVisibility(ESlateVisibility::Hidden);
 		DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Hidden);
 
-		if (DialogueWidgetRef->Image_Dialogue_Select_1->Brush.GetResourceName() == "icon_dia_selet_yes_32_32") {
+		if (DialogueWidgetRef->Image_Dialogue_Select_1->Brush.GetResourceName() == "icon_dia_select_yes_32_32") {
 			DreamMDreamFragment();
 		}
-		else if (DialogueWidgetRef->Image_Dialogue_Select_2->Brush.GetResourceName() == "icon_dia_selet_yes_32_32") {
+		else if (DialogueWidgetRef->Image_Dialogue_Select_2->Brush.GetResourceName() == "icon_dia_select_yes_32_32") {
 			DreamMRandomTalk();
 		}
 
@@ -68,7 +68,7 @@ void ADreamM::DreamMStartTalk() {
 				DialogueWidgetRef->Image_Npc->SetVisibility(ESlateVisibility::Hidden);
 				DialogueWidgetRef->Overlay_NpcName->SetVisibility(ESlateVisibility::Hidden);
 				DialogueWidgetRef->Image_CutScene->SetOpacity(0.0);
-				DialogueWidgetRef->Text_PeppyName->SetText(FText::FromString("페피"));
+				SetPeppyName();
 			}
 			else {
 				BeforeSelectingDialogue = false;
