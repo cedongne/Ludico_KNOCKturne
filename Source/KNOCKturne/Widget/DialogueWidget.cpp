@@ -254,86 +254,34 @@ FString UDialogueWidget::GetSkillIndexByKeyword(FString Num) {
 	}
 }
 
-FString UDialogueWidget::GetValueOfSkillIndex(FString Description, int32 OpenBracesArrayIndex) {
-	int32 index = OpenBracesArray[OpenBracesArrayIndex];
-	FString substr = Description.Mid(index + 2, index + 3);
-	if (substr == "}") {
-		CloseBracesIndex = index + 2;
-		FString SkillIndexStr = GetSkillIndexByKeyword(Description.Mid(index + 1, index + 2));
+FString UDialogueWidget::RedefineLine(FString OriginalStr) {
+	RedefinedLine = OriginalStr;
 
-		return SkillIndexStr;
-	}
-	else {
-		CloseBracesIndex = index + 3;
-		FString SkillIndexStr = GetSkillIndexByKeyword(Description.Mid(index + 1, index + 3));
-
-		return SkillIndexStr;
-	}
-}
-
-FString UDialogueWidget::RedefineLine(FString Description) {
-	for (int index = 0; index < Description.Len(); index++) {
-		if (Description.Mid(index, index + 1) == "{") {
-			SkillIndexValueArrayIndex++;
-			OpenBracesArray.SetNum(OpenBracesArray.Num() + 1);
-			OpenBracesArray[SkillIndexValueArrayIndex] = index;
+	for (int idx = 0; idx < RedefinedLine.Len(); idx++) {
+		if (RedefinedLine[idx] == '{') {
+			ReplaceIndexNumbyKeyword(idx + 1);
 		}
 	}
 
-	for (int idx = 0; idx < OpenBracesArray.Num(); idx++) {
-		FString str1 = GetValueOfSkillIndex(Description, idx);
-		if (idx == 0) {
-			FString str2 = Description.Mid(0, OpenBracesArray[idx]);
-			FString str3 = str2.Append(str1);
-			int temp_idx = CloseBracesIndex + 1;
-			FString str4 = Description.Mid(temp_idx, (OpenBracesArray[idx + 1] - temp_idx) + temp_idx);
-
-			if (idx + 1 < OpenBracesArray.Num()) {
-				RedefinedDescription = str3.Append(str4);
-			}
-			else {
-				RedefinedDescription = str3;
-			}
-		}
-		else {
-			FString str2 = RedefinedDescription.Append(str1);
-			int temp_idx = CloseBracesIndex + 1;
-			FString str3 = Description.Mid(temp_idx, (OpenBracesArray[idx + 1] - temp_idx) + temp_idx);
-
-			if (idx + 1 < OpenBracesArray.Num()) {
-				RedefinedDescription = str2.Append(str3);
-			}
-			else {
-				RedefinedDescription = str2;
-			}
+	int count = -1;
+	for (int index = 0; index < RedefinedLine.Len(); index++) {
+		if (RedefinedLine[index] == '{' || RedefinedLine[index] == '}') {
+			count++;
+			RedefinedLine.RemoveAt(index, 1);
 		}
 	}
-	int temp_idx = CloseBracesIndex + 1;
-	int temp_idx2 = Description.Len() - 1 - CloseBracesIndex;
-	RedefinedDescription = RedefinedDescription.Append(Description.Mid(temp_idx, temp_idx + temp_idx2));
-	return RedefinedDescription;
-}
 
-FString UDialogueWidget::ApplyRedefinedLine(FString OriginalStr, UDialogueTableComponent* DialogueTableComponentRowVar) {
-	int32 index = DialogueTableComponentRowVar->GetCurrentRow();
-	FName RowName = DialogueTableComponentRowVar->DialogueTable->GetRowNames()[index];
-	bool isRedefineNeeded = DialogueTableComponentRowVar->isRedefineNeededLine(RowName.ToString());
-
-	if (isRedefineNeeded) {
-		return RedefineLine(OriginalStr);
-	}
-	else {
-		return OriginalStr;
-	}
+	return RedefinedLine;
 }
 
 void UDialogueWidget::NextTalk(UDialogueTableComponent* DialogueTableComponentRowVar) {
 	TextSpeed = 0.07;
 	FDialogueData dialogueData = DialogueTableComponentRowVar->GetNextRowDialogueTable();
 	FString originalDialogue = DialogueTableComponentRowVar->GetStringOnBP(dialogueData);
-	FString Line = ApplyRedefinedLine(originalDialogue, DialogueTableComponentRowVar);
+	FString Line = RedefineLine(originalDialogue);
 	FullDialogue = Line;
 	TypingEffect();
+
 	ChangeDialogueUI(dialogueData);
 	DialogueDataStructure  = dialogueData;
 

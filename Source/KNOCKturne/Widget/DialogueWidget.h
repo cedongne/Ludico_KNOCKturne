@@ -38,11 +38,6 @@ protected:
 	APeppyController* PeppyController;
 	class UBattleManagerSystem* BattleManagerSystem;
 
-	TArray<int32> OpenBracesArray;
-	int32 SkillIndexValueArrayIndex = -1;
-	int32 CloseBracesIndex = 0;
-	FString RedefinedDescription;
-	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_BlackScreen;
@@ -144,6 +139,8 @@ public:
 		bool isCameraMoving = false;
 	UPROPERTY(BlueprintReadWrite)
 	FDialogueData DialogueDataStructure;
+	UPROPERTY(BlueprintReadWrite)
+		FString RedefinedLine;
 
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -170,20 +167,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 		FString GetSkillIndexByKeyword(FString Num);
 	UFUNCTION(BlueprintCallable)
-		FString GetValueOfSkillIndex(FString Description, int32 OpenBracesArrayIndex);
-	UFUNCTION(BlueprintCallable)
-		FString RedefineLine(FString Description);
-	UFUNCTION(BlueprintCallable)
-		FString ApplyRedefinedLine(FString OriginalStr, UDialogueTableComponent* DialogueTableComponentRowVar);
+		FString RedefineLine(FString OriginalStr);
 	UFUNCTION(BlueprintCallable)
 		void NextTalk(UDialogueTableComponent* DialogueTableComponentRowVar);
 	UFUNCTION(BlueprintCallable)
 		void InputEDuringTalking(UDialogueTableComponent* DialogueTableComponentRowVar);
 	UFUNCTION(BlueprintCallable)
 		void AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar);
+		UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void ReplaceIndexNumbyKeyword(int32 RedefinedLineIdx);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void IsEndedDialogueRowsTrue();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void IsDirectionTrue();
+
 };
