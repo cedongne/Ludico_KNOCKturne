@@ -60,7 +60,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FRotator PrevDreamMRotation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector OriginalDreamMLocation;
+	FTransform OriginalDreamMTransform;
 	UPROPERTY(EditAnywhere)
 	TArray<AActor*> HubworldActors;
 	UPROPERTY(EditAnywhere)

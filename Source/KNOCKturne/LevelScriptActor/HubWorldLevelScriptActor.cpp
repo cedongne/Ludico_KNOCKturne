@@ -6,6 +6,8 @@
 #include "Actor/Peppy.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
+	PrimaryActorTick.bCanEverTick = true;
+	SetActorTickEnabled(true);
 	PrologueDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("PrologueDialogueMananger"));
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
@@ -62,7 +64,6 @@ void AHubWorldLevelScriptActor::StartPrologueDialogue() {
 	}
 
 	DialogueWidgetRef->TextBlock_E->SetVisibility(ESlateVisibility::Visible);
-
 	DialogueWidgetRef->GetNextDialogueLine(PrologueDialogueTableComponent);
 }
 
@@ -185,8 +186,11 @@ void AHubWorldLevelScriptActor::CreateHubworldHUD() {
 void AHubWorldLevelScriptActor::PrologueEnded() {
 	isPrologue = true;
 	PeppyController->PrologueInProcess = false;
-	DialogueWidgetRef->TextSpeed = 0.0;
-	DialogueWidgetRef->RemoveFromParent();
+
+	if (DialogueWidgetRef) {
+		DialogueWidgetRef->TextSpeed = 0.0;
+		DialogueWidgetRef->RemoveFromParent();
+	}
 
 	LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 	if (LevelSequencePlayer)
@@ -211,9 +215,7 @@ void AHubWorldLevelScriptActor::DefaultLocation() {
 	Peppy->Camera->SetWorldTransform(OriginalCameraTransform);
 	RabbitActor->SetActorTransform(OriginalRabbitTransform);
 	Peppy->SetActorHiddenInGame(false);
-	DreamMActor->SetActorLocation(OriginalDreamMLocation);
-	DreamMActor->SetActorRotation(FRotator(0.0, 0.0, 100.0));
-	DreamMActor->SetActorHiddenInGame(false);
+	DreamMActor->SetActorTransform(OriginalDreamMTransform);
 }
 
 void AHubWorldLevelScriptActor::EscKeyEvent() {
@@ -362,7 +364,8 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				OriginalPeppyTransform = Peppy->GetActorTransform();
 				OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
 				OriginalRabbitTransform = RabbitActor->GetActorTransform();
-				OriginalDreamMLocation = DreamMActor->GetActorLocation();
+				OriginalDreamMTransform = DreamMActor->GetActorTransform();
+
 				//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -90.0, -30.0));
 				Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(-120.0, -90.0, 0.0));
 
@@ -379,7 +382,10 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				GetWorld()->GetTimerManager().SetTimer(BlinkTimerHandle, FTimerDelegate::CreateLambda([&]()
 					{
 						UWidgetLayoutLibrary::RemoveAllWidgets(this);
-						StartPrologueDialogueWithEventBinding();
+
+						if (!isSkip) { // 대사 시작 전 스킵 시 프롤로그 시작X
+							StartPrologueDialogueWithEventBinding();
+						}
 						CreateHubworldHUD();
 
 						GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
@@ -540,6 +546,9 @@ void AHubWorldLevelScriptActor::PrologueEndedAfterFadeOut() {
 				GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
 			}), 7, false);
 	}
+	else {
+		StartLoadingAfterPrologue();
+	}
 }
 
 void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
@@ -560,12 +569,14 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 		{
 			SetState("Loading", "None");
 			DefaultLocation();
+			NTLOG(Warning, TEXT("%f, %f, %f"), OriginalPeppyTransform.GetLocation().X, OriginalPeppyTransform.GetLocation().Y, OriginalPeppyTransform.GetLocation().Z);
+			NTLOG(Warning, TEXT("%f, %f, %f"), OriginalPeppyTransform.GetRotation().X, OriginalPeppyTransform.GetRotation().Y, OriginalPeppyTransform.GetRotation().Z);
 			LoadingWidgetRef->RemoveFromParent();
 
 			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 			if (LevelSequencePlayer)
 			{
-				LevelSequencePlayer->PlayReverse();
+				LevelSequencePlayer->Play();
 			}
 			else
 			{
@@ -584,12 +595,9 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 }
 
 void AHubWorldLevelScriptActor::SkipPrologue() {
-	if (isPrologue == false) {
+	if (isPrologue == false && isSkip == false) {
 		PrologueDialogueTableComponent->SetIsEndedDialogueRows(true);
 		isSkip = true;
-		isPrologue = true;
-		PeppyController->PrologueInProcess = false;
-		DialogueWidgetRef->TextSpeed = 0.0;
 		PrologueEnded();
 	}
 }
