@@ -35,21 +35,6 @@ protected:
 	TArray<FDreamDiaryData*> DreamDiaryRows;
 	class UDialogueTableComponent* DialogueTableComponent;
 
-	UFUNCTION()
-	void Button_ExitOnClicked();
-	UFUNCTION()
-	void Button_BackOnClicked();
-	UFUNCTION()
-	void Button_NextOnClicked();
-
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* UI_diary_point_1_v2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* UI_diary_point_2_v2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* UI_diary_dreamcatcher_v2;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CanvasPanel_DreamCatcher;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -89,15 +74,30 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_Lines;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* TextBlock_EpisodeNum;
+	class UTextBlock* TextBlock_EpisodeNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UTextBlock* TextBlock_EpisodeName;
+	class UTextBlock* TextBlock_EpisodeName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UButton* Button_Exit;
+	class UButton* Button_Exit;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UButton* Button_Back;
+	class UButton* Button_Back;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-		class UButton* Button_Next;
+	class UButton* Button_Next;
+
+	UFUNCTION()
+	void Button_ExitOnClicked();
+	UFUNCTION()
+	void Button_BackOnClicked();
+	UFUNCTION()
+	void Button_NextOnClicked();
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* UI_diary_point_1_v2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* UI_diary_point_2_v2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* UI_diary_dreamcatcher_v2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 CurrentOddPage = -1;

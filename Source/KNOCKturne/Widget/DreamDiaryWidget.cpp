@@ -19,6 +19,8 @@ UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer
 }
 
 void UDreamDiaryWidget::NativePreConstruct() {
+	Super::NativePreConstruct();
+
 	CanvasPanel_DreamCatcher = (UCanvasPanel*)GetWidgetFromName(TEXT("CanvasPanel_DreamCatcher"));
 	Image_Dreamcatcher = (UImage*)GetWidgetFromName(TEXT("Image_Dreamcatcher"));
 	Image_Point = (UImage*)GetWidgetFromName(TEXT("Image_Point"));
@@ -46,6 +48,8 @@ void UDreamDiaryWidget::NativePreConstruct() {
 }
 
 void UDreamDiaryWidget::NativeConstruct() {
+	Super::NativeConstruct();
+
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 
