@@ -4,7 +4,6 @@
 #include "HubWorldLevelScriptActor.h"
 #include "Engine/GameInstance.h"
 #include "Actor/Peppy.h"
-#include "Actor/DreamM.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	PrologueDialogueTableComponent = CreateDefaultSubobject<UDialogueTableComponent>(TEXT("PrologueDialogueMananger"));
@@ -287,7 +286,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 					UWidgetLayoutLibrary::RemoveAllWidgets(this);
 					OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
 					//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
-					Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(-120.0, -90.0, 0.0));
+					Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -30.0, 0.0));
 
 					if (BP_BlinkClass) {
 						BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
@@ -414,12 +413,12 @@ void AHubWorldLevelScriptActor::BattleFailDialogue() {
 void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueData) {
 	if (DialogueData.Direction == "AfterBattleFail_Hubworld_DreamDiary and DreamFragment") {
 		if (KNOCKturneGameState->isDreamDiaryUpdated) {
-			CommonDialogueTableComponent->SetBattleFailDiaryDialogueIndex();
-			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
+			CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamDiary");
+			DialogueWidgetRef->NextTalk(CommonDialogueTableComponent);
 		}
 		else if(KNOCKturneGameState->GetDreamFragment){
 			CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
-			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
+			DialogueWidgetRef->NextTalk(CommonDialogueTableComponent);
 		}
 		else {
 			BattleFailDialogueAllEnded();
@@ -428,7 +427,7 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 	else if (DialogueData.Direction == "AfterBattleFail_Hubworld_DreamFragment") {
 		if (KNOCKturneGameState->GetDreamFragment) {
 			CommonDialogueTableComponent->SetDialogueIndexByGroupCode("AfterBattleFail_Hubworld_DreamFragment");
-			DialogueWidgetRef->NextTalk(PrologueDialogueTableComponent);
+			DialogueWidgetRef->NextTalk(CommonDialogueTableComponent);
 		}
 		else {
 			BattleFailDialogueAllEnded();

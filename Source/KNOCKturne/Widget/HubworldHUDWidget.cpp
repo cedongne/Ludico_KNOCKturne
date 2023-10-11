@@ -27,7 +27,7 @@ void UHubworldHUDWidget::NativeConstruct() {
 
 void UHubworldHUDWidget::Button_DiaryOnClicked() {
 	if (DreamDiaryWidgetClass) {
-		DreamDiaryWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DreamDiaryWidgetClass);
+		DreamDiaryWidgetRef = CreateWidget<UDreamDiaryWidget>(GetWorld(), DreamDiaryWidgetClass);
 		if (DreamDiaryWidgetRef) {
 			DreamDiaryWidgetRef->AddToViewport();
 		}
@@ -35,6 +35,6 @@ void UHubworldHUDWidget::Button_DiaryOnClicked() {
 
 	if (Image_DreamDiary_Updated->GetVisibility() == ESlateVisibility::Visible) {
 		Image_DreamDiary_Updated->SetVisibility(ESlateVisibility::Hidden);
-
+		KNOCKturneGameState->isDreamDiaryUpdated = false;
 	}
 }

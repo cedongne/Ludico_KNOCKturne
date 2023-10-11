@@ -9,6 +9,7 @@
 #include "LevelSequencePlayer.h"
 #include "LevelSequenceActor.h"
 
+#include "Actor/DreamM.h"
 #include "Actor/Rabbit.h"
 #include "Actor/Lake.h"
 #include "KNOCKturneLevelScriptActor.h"

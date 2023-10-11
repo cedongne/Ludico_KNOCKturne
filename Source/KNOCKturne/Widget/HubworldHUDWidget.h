@@ -26,13 +26,6 @@ class KNOCKTURNE_API UHubworldHUDWidget : public UUserWidget
 	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
-	TSubclassOf<UUserWidget> DreamDiaryWidgetClass;
-	class UDialogueWidget* DreamDiaryWidgetRef;
-
-	UFUNCTION()
-	void Button_DiaryOnClicked();
-	
-public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Diary;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -45,6 +38,15 @@ public:
 	class UImage* Image_DiaryText;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_SaveText;
+
+	UFUNCTION()
+	void Button_DiaryOnClicked();
+	
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_DreamDiary_Updated;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> DreamDiaryWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UDreamDiaryWidget* DreamDiaryWidgetRef;
 };

@@ -9,13 +9,6 @@
 
 #include <string>
 
-void UDreamDiaryWidget::NativeOnInitialized() {
-	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-
-	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetAllRows", DreamDiaryRows);
-}
-
 UDreamDiaryWidget::UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 	FString DreamDiaryDataPath = TEXT("/Game/Assets/DataTable/DreamDiaryTable.DreamDiaryTable");
 	FString StringTablePath = TEXT("/Game/Assets/DataTable/StringTable.StringTable");
@@ -53,6 +46,10 @@ void UDreamDiaryWidget::NativePreConstruct() {
 }
 
 void UDreamDiaryWidget::NativeConstruct() {
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
+	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetAllRows", DreamDiaryRows);
 
 	DefaultSetting();
 
@@ -191,8 +188,6 @@ void UDreamDiaryWidget::DefaultSetting() {
 	FString DreamDiaryFirstPageString = GetStringTable()->FindRow<FDialogueString>(FName(DreamDiaryRows[0]->DreamDiaryStringID), TEXT(""))->KOR;
 	RichTextBlock_Content_Even->SetText(FText::FromString(DreamDiaryFirstPageString));
 
-	NTLOG(Warning, TEXT("%d"), KNOCKturneGameState->DreamDiaryOpenRow);
-
 	for (int index = 0; index < KNOCKturneGameState->DreamDiaryOpenRow; index++) {
 		SetDreamcatcherPointUI(index);
 	}
@@ -200,8 +195,6 @@ void UDreamDiaryWidget::DefaultSetting() {
 	if (KNOCKturneGameState->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
 		KNOCKturneGameState->DreamDiaryOpenRow = 3;
 	}
-
-	NTLOG(Warning, TEXT("DreamDiary: DefaultSetting"));
 }
 
 void UDreamDiaryWidget::SetDreamcatcherPointUI(int32 PointNum) {

@@ -22,7 +22,6 @@ class KNOCKTURNE_API UDreamDiaryWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	virtual void NativeOnInitialized();
 	UDreamDiaryWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	virtual void NativeConstruct();
