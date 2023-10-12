@@ -27,6 +27,8 @@ public:
 		bool isBattleFail = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 		bool RightafterBattleClear = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+		TArray<int32> ItemCountList;
 
 protected:
 	void HandleBeginPlay() override;

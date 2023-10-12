@@ -132,8 +132,6 @@ public:
 
 
 	// �����ۺ� ����
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	TArray<int32> ItemCountList;
 
 	// �� �ϱ� �ر� �� - 1
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

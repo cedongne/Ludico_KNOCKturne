@@ -9,4 +9,8 @@ void AKNOCKturneGameState::HandleBeginPlay() {
 
 	auto BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 	BattleManagerSystem->LoadGameState(this);
+
+	for (int i = 0; i < 6; i++) {
+		ItemCountList.Add(0);
+	}
 }

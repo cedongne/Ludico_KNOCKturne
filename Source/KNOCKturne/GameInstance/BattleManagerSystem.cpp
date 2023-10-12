@@ -27,12 +27,6 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_CharmingVoice(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_CharmingVoice"));
 	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", BP_PS_CharmingVoice.Class);
-
-	ItemCountList.SetNum(6);
-	for (int index = 0; index < ItemCountList.Num(); index++)
-	{
-		ItemCountList[index] = 0;
-	}
 }
 
 void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {

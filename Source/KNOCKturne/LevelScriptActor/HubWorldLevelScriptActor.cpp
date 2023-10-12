@@ -569,8 +569,6 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 		{
 			SetState("Loading", "None");
 			DefaultLocation();
-			NTLOG(Warning, TEXT("%f, %f, %f"), OriginalPeppyTransform.GetLocation().X, OriginalPeppyTransform.GetLocation().Y, OriginalPeppyTransform.GetLocation().Z);
-			NTLOG(Warning, TEXT("%f, %f, %f"), OriginalPeppyTransform.GetRotation().X, OriginalPeppyTransform.GetRotation().Y, OriginalPeppyTransform.GetRotation().Z);
 			LoadingWidgetRef->RemoveFromParent();
 
 			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
