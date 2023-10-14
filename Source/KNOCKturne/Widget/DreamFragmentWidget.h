@@ -15,6 +15,8 @@
 #include "Components/GridPanel.h"
 #include "SkillDescriptionComponent.h"
 #include "ItemCardWidget.h"
+#include "AlertModalWidget.h"
+#include "DialogueWidget.h"
 
 #include "DreamFragmentWidget.generated.h"
 
@@ -31,6 +33,7 @@ class KNOCKTURNE_API UDreamFragmentWidget : public UUserWidget
 	void NativeConstruct();
 
 	AKNOCKturneGameState* KNOCKturneGameState;
+	int32 SelectedItemNum;
 
 protected:
 	class UDataTable* ItemTable;
@@ -39,6 +42,7 @@ protected:
 	TArray<FDialogueString*> SkillBuffStringTableRows;
 	TArray<int32> RndItemRowNumArr;
 	USkillDescriptionComponent* SkillDescriptionComponent;
+	TArray<UUserWidget*> DialogueWidgetArr;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -53,10 +57,22 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UItemCardWidget* ItemCardFormRef;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> AlertModalClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UAlertModalWidget* AlertModalRef;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<UItemCardWidget*> ItemCardArr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> DialogueWidgetClass;
 
 	UFUNCTION(Blueprintcallable)
 	void PickRandomItem();
 	UFUNCTION(Blueprintcallable)
 	void SetItemCardUI();
+	UFUNCTION(BlueprintCallable)
+	void Button_SelectOnClicked();
+	UFUNCTION(BlueprintCallable)
+	void AlertModal_YesOnClicked();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void CallDreamFragmentTalk();
 };

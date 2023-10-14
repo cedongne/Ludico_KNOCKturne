@@ -31,6 +31,13 @@ void UDreamFragmentWidget::NativeConstruct() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 
+	if (Button_Select) {
+		Button_Select->OnClicked.AddDynamic(this, &UDreamFragmentWidget::Button_SelectOnClicked);
+	}
+	if (AlertModalRef) {
+		AlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UDreamFragmentWidget::AlertModal_YesOnClicked);
+	}
+
 	for (int i = 0; i < 3; i++) {
 		if (ItemCardFormClass) {
 			ItemCardFormRef = CreateWidget<UItemCardWidget>(GetWorld(), ItemCardFormClass);
@@ -92,5 +99,43 @@ void UDreamFragmentWidget::SetItemCardUI() {
 			eastereggcharacter = "";
 		}
 		ItemCardArr[i]->RichTextBlock_EastereggCharacter->SetText(FText::FromString(eastereggcharacter));
+	}
+}
+
+void UDreamFragmentWidget::Button_SelectOnClicked() {
+	if (AlertModalClass) {
+		AlertModalRef = CreateWidget<UAlertModalWidget>(GetWorld(), AlertModalClass);
+		if (AlertModalRef) {
+			AlertModalRef->AddToViewport();
+		}
+	}
+
+	FText selcteditemtext;
+	for (int i = 0; i < 3; i++) {
+		if (ItemCardArr[i]->Image_SubBackground->Brush.GetResourceName() == "UI_DreamFragments_SubBackground_Selected") {
+			selcteditemtext = ItemCardArr[i]->TextBlock_Name->GetText();
+			SelectedItemNum = RndItemRowNumArr[i];
+		}
+	}
+
+	AlertModalRef->TextBlock_ItemName->SetText(selcteditemtext);
+	AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Hidden);
+	AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Visible);
+	AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UDreamFragmentWidget::AlertModal_YesOnClicked() {
+	NTLOG(Warning, TEXT("clicked"));
+	KNOCKturneGameState->ItemCountList[SelectedItemNum]++;
+	AlertModalRef->RemoveFromParent();
+	this->RemoveFromParent();
+	KNOCKturneGameState->DreamFragmentCount--;
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, DialogueWidgetArr, DialogueWidgetClass);
+	if (DialogueWidgetArr[0]) {
+		UDialogueWidget* DialogueWidget = (UDialogueWidget*)DialogueWidgetArr[0];
+		DialogueWidget->isCameraMoving = false;
+
+		CallDreamFragmentTalk();
 	}
 }

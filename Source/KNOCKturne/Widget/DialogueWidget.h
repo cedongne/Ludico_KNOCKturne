@@ -135,7 +135,7 @@ public:
 		bool InputEDuringWriting = false;
 	UPROPERTY(BlueprintReadWrite)
 		bool isDirection = false;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool isCameraMoving = false;
 	UPROPERTY(BlueprintReadWrite)
 	FDialogueData DialogueDataStructure;
