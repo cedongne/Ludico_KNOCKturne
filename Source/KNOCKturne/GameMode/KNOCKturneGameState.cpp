@@ -3,14 +3,15 @@
 
 #include "KNOCKturneGameState.h"
 #include "GameInstance/BattleManagerSystem.h"
+#include "Containers/Array.h"
 
 void AKNOCKturneGameState::HandleBeginPlay() {
 	Super::HandleBeginPlay();
 
 	auto BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 	BattleManagerSystem->LoadGameState(this);
+}
 
-	for (int i = 0; i < 6; i++) {
-		ItemCountList.Add(0);
-	}
+AKNOCKturneGameState::AKNOCKturneGameState() {
+	ItemCountList.Init(0, 6);
 }

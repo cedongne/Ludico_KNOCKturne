@@ -13,6 +13,7 @@ UCLASS()
 class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 {
 	GENERATED_BODY()
+	AKNOCKturneGameState();
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

@@ -4,8 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 #include "Components/Button.h"
+#include "Components/RichTextBlock.h"
 
 #include "ItemCardWidget.generated.h"
 
@@ -19,7 +22,10 @@ class KNOCKTURNE_API UItemCardWidget : public UUserWidget
 
 	void NativePreConstruct();
 	void NativeConstruct();
-	
+
+protected:
+	TArray<UUserWidget*> DreamFragmentWidgetArr;
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* UI_DreamFragments_SubBackground;
@@ -40,6 +46,13 @@ public:
 	class URichTextBlock* RichTextBlock_EastereggCharacter;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Background;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> ItemCardFormClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> DreamFragmentWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UDreamFragmentWidget* DreamFragmentWidget;
 
 	UFUNCTION(BlueprintCallable)
 	void Button_BackgroundOnClicked();

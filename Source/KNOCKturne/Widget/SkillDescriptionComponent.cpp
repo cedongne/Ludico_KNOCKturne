@@ -17,7 +17,7 @@ USkillDescriptionComponent::USkillDescriptionComponent()
 
 FString USkillDescriptionComponent::ItemCheckValueN(float ValueN) {
 	if (ValueN != -1.0) {
-		return FString::SanitizeFloat(ValueN);
+		return FString::FromInt(round(ValueN));
 	}
 	else {
 		return "None";
@@ -26,7 +26,7 @@ FString USkillDescriptionComponent::ItemCheckValueN(float ValueN) {
 
 FString USkillDescriptionComponent::ItemCheckValueM(float ValueM) {
 	if (ValueM != -1.0) {
-		return FString::SanitizeFloat(ValueM * 100);
+		return FString::FromInt(round(ValueM * 100));
 	}
 	else {
 		return "None";
@@ -53,7 +53,12 @@ FString USkillDescriptionComponent::ItemRedefineDescription(int RowNum) {
 		if (OriginalStr[idx] == '{') {
 			const TCHAR* Keyword = *OriginalStr.Mid(idx + 1, 1);
 			const TCHAR* SkillIndex = *ItemGetSkillIndexByKeyword(RowNum, Keyword);
-			Redefined = OriginalStr.Replace(Keyword, SkillIndex);
+
+			NTLOG(Warning, TEXT("%s"), *OriginalStr.Mid(idx + 1, 1));
+			NTLOG(Warning, TEXT("%s"), *ItemGetSkillIndexByKeyword(RowNum, Keyword));
+
+			Redefined = OriginalStr.Replace(Keyword, SkillIndex, ESearchCase::IgnoreCase);
+			NTLOG(Warning, TEXT("%s"), *Redefined);
 		}
 	}
 
