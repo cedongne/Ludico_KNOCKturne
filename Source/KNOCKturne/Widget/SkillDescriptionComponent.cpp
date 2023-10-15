@@ -47,18 +47,16 @@ FString USkillDescriptionComponent::ItemGetSkillIndexByKeyword(int RowNum, FStri
 FString USkillDescriptionComponent::ItemRedefineDescription(int RowNum) {
 	FString rowname = ItemTableRows[RowNum]->ItemDescript;
 	FString OriginalStr = SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
-	FString Redefined;
+	FString Redefined = OriginalStr;
+	int32 StartIdx = 0;
 
-	for (int idx = 0; idx < OriginalStr.Len(); idx++) {
-		if (OriginalStr[idx] == '{') {
-			const TCHAR* Keyword = *OriginalStr.Mid(idx + 1, 1);
-			const TCHAR* SkillIndex = *ItemGetSkillIndexByKeyword(RowNum, Keyword);
+	for (int idx = 0; idx < Redefined.Len(); idx++) {
+		if (Redefined[idx] == '{') {
+			FString tmp1 = Redefined.Mid(0, idx + 1);
+			FString skillindex = ItemGetSkillIndexByKeyword(RowNum, Redefined.Mid(idx + 1, 1));
+			FString tmp2 = Redefined.Mid(idx + 2, Redefined.Len() - (idx + 2));
 
-			NTLOG(Warning, TEXT("%s"), *OriginalStr.Mid(idx + 1, 1));
-			NTLOG(Warning, TEXT("%s"), *ItemGetSkillIndexByKeyword(RowNum, Keyword));
-
-			Redefined = OriginalStr.Replace(Keyword, SkillIndex, ESearchCase::IgnoreCase);
-			NTLOG(Warning, TEXT("%s"), *Redefined);
+			Redefined = (tmp1.Append(skillindex)).Append(tmp2);
 		}
 	}
 
