@@ -40,7 +40,10 @@ protected:
 
 	class ANTBattleGameMode* BattleGameMode = nullptr;
 
+
 public:
 	AActor* GetOwnerActor(AActor* OwnerActor);
+
+	virtual void GetDamaged(float Value);
 	virtual bool TryUpdateCurStatData(FStatType StatType, float Value);
 };

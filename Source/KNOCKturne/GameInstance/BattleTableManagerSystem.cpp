@@ -281,14 +281,14 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	11 단순 공격: 대상의 EP를 즉시 N만큼 깎음.
 	*/
 	else if (SkillData.SkillIndex == 11) {
-		StatComponent->TryUpdateCurStatData(FStatType::EP, -SkillData.Value_N);
+		StatComponent->GetDamaged(SkillData.Value_N);
 		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
 	*	13 랜덤 공격: 대상의 EP를 즉시 N 이상 M 이하의 랜덤한 짝수 수치만큼 깎음.
 	*/
 	else if (SkillData.SkillIndex == 13) {
-		StatComponent->TryUpdateCurStatData(FStatType::EP, -CalcUtil::RandEvenNumberInRange(SkillData.Value_N, SkillData.Value_M));
+		StatComponent->GetDamaged(CalcUtil::RandEvenNumberInRange(SkillData.Value_N, SkillData.Value_M));
 		NTLOG(Log, TEXT("[%s : SkillIndex 13] Random attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
@@ -307,18 +307,18 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
 	*/
 	else if (SkillData.SkillIndex == 34) {
-		BuffComponent->AcquireBuff(EBuffType::Reflect, EBuffDataType::Positive_Turn, SkillData.SkillId, SkillData.Value_T);
+		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, SkillData.SkillId);
 	}
 	/*
 	*	52
 	*/
 	/*
-	*	54 지속 데미지(출혈): 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
+	*	54 지속 데미지: 대상의 HP가 각 턴마다 N만큼 T턴동안 감소
 	*/
 	else if (SkillData.SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
 		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
-		BuffComponent->AcquireBuff(EBuffType::Bleeding, EBuffDataType::Negative_Turn, SkillData.SkillId, SkillData.Value_T);
+		BuffComponent->AcquireBuff(EBuffType::PeriodicAttack, SkillData.SkillId);
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);

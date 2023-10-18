@@ -5,6 +5,10 @@
 
 UBuffComponent::UBuffComponent()
 {
+	FString BuffTablePath = TEXT("/Game/Assets/DataTable/BuffTable.BuffTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
+	NTCHECK(DT_BuffTABLE.Succeeded());
+	BuffTable = DT_BuffTABLE.Object;
 }
 
 void UBuffComponent::BeginPlay()
@@ -12,14 +16,11 @@ void UBuffComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-void UBuffComponent::RemovePositiveBuff(FString BuffId) {
-	HasPositiveBuffs_PerTurn.Remove(BuffId);
-	HasPositiveBuffs_PerSecond.Remove(BuffId);
-}
-
-void UBuffComponent::RemoveNegativeBuff(FString BuffId) {
-	HasNegativeBuffs_PerTurn.Remove(BuffId);
-	HasNegativeBuffs_PerSecond.Remove(BuffId);
+void UBuffComponent::RemoveBuff(EBuffType BuffType) {
+	HasPositiveBuffs_PerTurn.Remove(BuffType);
+	HasPositiveBuffs_PerSecond.Remove(BuffType);
+	HasNegativeBuffs_PerTurn.Remove(BuffType);
+	HasNegativeBuffs_PerSecond.Remove(BuffType);
 }
 
 void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
@@ -27,24 +28,26 @@ void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
 	if (Num < 0) {
 		NTLOG(Error, TEXT("Num must be Positive!"));
 	}
-	if (totalPositiveBuffNum > 0) {
-		while (Num--) {
-			auto randIndex = rand() % totalPositiveBuffNum;
-			if (randIndex >= HasPositiveBuffs_PerTurn.Num()) {
-				randIndex -= HasPositiveBuffs_PerTurn.Num();
-				for (auto Buff : HasPositiveBuffs_PerSecond) {
-					if (randIndex-- == 0) {
-						HasPositiveBuffs_PerSecond.Remove(Buff.Key);
-						break;
-					}
+
+	if (Num > totalPositiveBuffNum) {
+		Num = totalPositiveBuffNum;
+	}
+	while (Num--) {
+		auto randIndex = rand() % totalPositiveBuffNum;
+		if (randIndex >= HasPositiveBuffs_PerTurn.Num()) {
+			randIndex -= HasPositiveBuffs_PerTurn.Num();
+			for (auto Buff : HasPositiveBuffs_PerSecond) {
+				if (randIndex-- == 0) {
+					HasPositiveBuffs_PerSecond.Remove(Buff.Key);
+					break;
 				}
 			}
-			else {
-				for (auto Buff : HasPositiveBuffs_PerTurn) {
-					if (randIndex-- == 0) {
-						HasPositiveBuffs_PerTurn.Remove(Buff.Key);
-						break;
-					}
+		}
+		else {
+			for (auto Buff : HasPositiveBuffs_PerTurn) {
+				if (randIndex-- == 0) {
+					HasPositiveBuffs_PerTurn.Remove(Buff.Key);
+					break;
 				}
 			}
 		}
@@ -56,24 +59,26 @@ void UBuffComponent::RemoveRandomNegativeBuff(int32 Num) {
 	if (Num < 0) {
 		NTLOG(Error, TEXT("Num must be Positive!"));
 	}
-	if (totalNegativeBuffNum > 0) {
-		while (Num--) {
-			auto randIndex = rand() % totalNegativeBuffNum;
-			if (randIndex >= HasNegativeBuffs_PerTurn.Num()) {
-				randIndex -= HasNegativeBuffs_PerTurn.Num();
-				for (auto Buff : HasNegativeBuffs_PerSecond) {
-					if (randIndex-- == 0) {
-						HasNegativeBuffs_PerSecond.Remove(Buff.Key);
-						break;
-					}
+
+	if (Num > totalNegativeBuffNum) {
+		Num = totalNegativeBuffNum;
+	}
+	while (Num--) {
+		auto randIndex = rand() % totalNegativeBuffNum;
+		if (randIndex >= HasNegativeBuffs_PerTurn.Num()) {
+			randIndex -= HasNegativeBuffs_PerTurn.Num();
+			for (auto Buff : HasNegativeBuffs_PerSecond) {
+				if (randIndex-- == 0) {
+					HasNegativeBuffs_PerSecond.Remove(Buff.Key);
+					break;
 				}
 			}
-			else {
-				for (auto Buff : HasNegativeBuffs_PerTurn) {
-					if (randIndex-- == 0) {
-						HasNegativeBuffs_PerTurn.Remove(Buff.Key);
-						break;
-					}
+		}
+		else {
+			for (auto Buff : HasNegativeBuffs_PerTurn) {
+				if (randIndex-- == 0) {
+					HasNegativeBuffs_PerTurn.Remove(Buff.Key);
+					break;
 				}
 			}
 		}
@@ -95,54 +100,77 @@ void UBuffComponent::RemoveAllBuff() {
 	RemoveAllNegativeBuff();
 }
 
-void UBuffComponent::AcquireBuff(EBuffType BuffType, EBuffDataType TermType, FString BuffName, int32 Duration) {
-	switch (TermType) {
-	case EBuffDataType::Positive_Turn:
-		HasPositiveBuffs_PerTurn.Add(BuffName, Duration);
-		break;
-	case EBuffDataType::Positive_Second:
-		HasPositiveBuffs_PerSecond.Add(BuffName, Duration);
-		break;
-	case EBuffDataType::Negative_Turn:
-		HasNegativeBuffs_PerTurn.Add(BuffName, Duration);
-		break;
-	case EBuffDataType::Negative_Second:
-		HasNegativeBuffs_PerSecond.Add(BuffName, Duration);
-		break;
+void UBuffComponent::AcquireBuff(EBuffType BuffType, FString SourceId) {
+	auto buffTypeStr = BuffTypeToStringMap.Find(BuffType);
+	if (buffTypeStr == nullptr) {
+		NTLOG(Error, TEXT("BuffType is invalid!"));
+		return;
+	}
+
+	auto acquiredBuff = BuffTable->FindRow<FBuffTable>(FName(*buffTypeStr), TEXT(""));
+	if (acquiredBuff == nullptr) {
+		NTLOG(Error, TEXT("Buff acquiration is failed!"));
+		return;
+	}
+	
+	auto buffData = new FBuffData(SourceId, acquiredBuff);
+
+	if (acquiredBuff->BuffType == 0) {
+		switch (buffData->BuffTermType) {
+		case EBuffTermType::Turn:
+			HasPositiveBuffs_PerTurn.Add(BuffType, *buffData);
+			break;
+		case EBuffTermType::Second:
+			HasPositiveBuffs_PerSecond.Add(BuffType, *buffData);
+			break;
+		}
+	}
+	else if (acquiredBuff->BuffType == 1) {
+		switch (buffData->BuffTermType) {
+		case EBuffTermType::Turn:
+			HasNegativeBuffs_PerTurn.Add(BuffType, *buffData);
+			break;
+		case EBuffTermType::Second:
+			HasNegativeBuffs_PerSecond.Add(BuffType, *buffData);
+			break;
+		}
 	}
 }
 
 void UBuffComponent::ElapseTurn() {
 	for (auto buff : HasPositiveBuffs_PerTurn) {
-		buff.Value--;
-		if (buff.Value == 0) {
-			ExpireBuff(&HasPositiveBuffs_PerTurn, buff.Key);
+		if (buff.Value.Duration-- == 0) {
+			HasPositiveBuffs_PerTurn.Remove(buff.Key);
 		}
 	}
 	for (auto buff : HasNegativeBuffs_PerTurn) {
-		buff.Value--;
-		if (buff.Value == 0) {
-			ExpireBuff(&HasNegativeBuffs_PerTurn, buff.Key);
+		if (buff.Value.Duration-- == 0) {
+			HasNegativeBuffs_PerTurn.Remove(buff.Key);
 		}
 	}
 }
 
 void UBuffComponent::ElapseSecond() {
 	for (auto buff : HasPositiveBuffs_PerSecond) {
-		buff.Value--;
-		if (buff.Value == 0) {
-			ExpireBuff(&HasPositiveBuffs_PerSecond, buff.Key);
+		if (buff.Value.Duration-- == 0) {
+			HasPositiveBuffs_PerSecond.Remove(buff.Key);
 		}
 	}
 	for (auto buff : HasNegativeBuffs_PerSecond) {
-		buff.Value--;
-		if (buff.Value == 0) {
-			ExpireBuff(&HasNegativeBuffs_PerSecond, buff.Key);
+		if (buff.Value.Duration-- == 0) {
+			HasNegativeBuffs_PerSecond.Remove(buff.Key);
 		}
 	}
 }
 
+void UBuffComponent::ExpireBuff(TMap<EBuffType, FBuffData>* BuffMap, EBuffType BuffType) {
+	BuffMap->Remove(BuffType);
+}
 
-void UBuffComponent::ExpireBuff(TMap<FString, int32>* BuffMap, FString BuffId) {
-	BuffMap->Remove(BuffId);
+bool UBuffComponent::HasBuff(EBuffType BuffType) {
+	return HasPositiveBuffs_PerSecond.Contains(BuffType)
+		|| HasPositiveBuffs_PerTurn.Contains(BuffType)
+		|| HasNegativeBuffs_PerSecond.Contains(BuffType)
+		|| HasNegativeBuffs_PerTurn.Contains(BuffType)
+		? true : false;
 }

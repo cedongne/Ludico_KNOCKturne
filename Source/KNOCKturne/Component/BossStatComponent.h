@@ -36,6 +36,10 @@ public:
 	UPROPERTY(Transient, BlueprintReadOnly)
 	FBossStatData CurStatData;
 
+
+	UFUNCTION(BlueprintCallable)
+	void GetDamaged(float Value) override;
+
 	UFUNCTION(BlueprintCallable)
 	virtual bool TryUpdateCurStatData(FStatType StatType, float Value) override;
 

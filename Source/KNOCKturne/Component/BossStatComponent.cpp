@@ -37,6 +37,10 @@ void UBossStatComponent::SetDefaultStat() {
 	MaxStatData = BattleTableManagerSystem->GetBossStatDataOnTable("Max");
 }
 
+void UBossStatComponent::GetDamaged(float Value) {
+	TryUpdateCurStatData(FStatType::EP, -Value);
+}
+
 bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 	switch (StatType) {
 	case FStatType::EP:

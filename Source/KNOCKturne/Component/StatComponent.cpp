@@ -17,11 +17,20 @@ void UStatComponent::BeginPlay()
 
 void UStatComponent::InitializeComponent() {
 	Super::InitializeComponent();
-
 }
 
 AActor* UStatComponent::GetOwnerActor(AActor* OwnerActor) {
 	return OwnerActor;
+}
+
+void UStatComponent::GetDamaged(float Value) {
+	auto buffComponent = GetOwner()->GetComponentByClass(UBuffComponent::StaticClass());
+	if (buffComponent == nullptr) {
+		return;
+	}
+
+	
+	NTLOG(Warning, TEXT("GetDamaged() method must be override!"));
 }
 
 bool UStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {

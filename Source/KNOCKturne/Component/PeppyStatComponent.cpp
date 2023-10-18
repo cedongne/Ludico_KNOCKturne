@@ -41,6 +41,10 @@ void UPeppyStatComponent::SetDefaultStat() {
 	MaxStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Max");
 }
 
+void UPeppyStatComponent::GetDamaged(float Value) {
+	TryUpdateCurStatData(FStatType::EP, -Value);
+}
+
 bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 	switch (StatType) {
 	case FStatType::EP:
