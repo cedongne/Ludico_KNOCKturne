@@ -27,6 +27,7 @@ void ANTBattleGameMode::RestartPlayer(AController* NewPlayer) {
 
 void ANTBattleGameMode::GameOver() {
 	ActorManagerSystem->PeppyActor->Die();
+	ActorManagerSystem->BossActor->ClearUseSkillTimer();
 	EndBattle();
 }
 
