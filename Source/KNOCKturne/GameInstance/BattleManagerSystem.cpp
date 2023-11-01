@@ -27,6 +27,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_CharmingVoice(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_CharmingVoice"));
 	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", BP_PS_CharmingVoice.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_RedEyes(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_RedEyes"));
+	IconSkillActorMap.Add("Icon_skill_PS_RedEyes", BP_PS_RedEyes.Class);
 }
 
 void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {

@@ -304,7 +304,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 
 	}
 	/*
-	*	34 반사: 대상이 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려줌
+	*	34 반사: 대상에게 T턴동안 상대에게 데미지를 받을 때마다 N만큼의 데미지를 돌려주는 ‘반사(ReflexiveAttack)’ 버프를 부여
 	*/
 	else if (SkillData.SkillIndex == 34) {
 		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, SkillData.SkillId);
@@ -322,6 +322,12 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
+	}
+	/*
+	*	92 경고: 대상에게 T턴동안 유지되는 ‘경고(Warning)’ 버프를 부여
+	*/
+	else if (SkillData.SkillIndex == 92) {
+		BuffComponent->AcquireBuff(EBuffType::Warning, SkillData.SkillId);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
