@@ -5,6 +5,8 @@
 
 UBuffComponent::UBuffComponent()
 {
+	PrimaryComponentTick.bCanEverTick = true;
+
 	FString BuffTablePath = TEXT("/Game/Assets/DataTable/BuffTable.BuffTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
 	NTCHECK(DT_BuffTABLE.Succeeded());
@@ -14,6 +16,12 @@ UBuffComponent::UBuffComponent()
 void UBuffComponent::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	ElapseDeltaTime(DeltaTime);
 }
 
 void UBuffComponent::RemoveBuff(EBuffType BuffType) {
@@ -138,27 +146,49 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FString SourceId) {
 }
 
 void UBuffComponent::ElapseTurn() {
-	for (auto buff : HasPositiveBuffs_PerTurn) {
-		if (buff.Value.Duration-- == 0) {
-			HasPositiveBuffs_PerTurn.Remove(buff.Key);
+	TArray<EBuffType> Keys;
+	HasPositiveBuffs_PerTurn.GetKeys(Keys);
+
+	for (auto& Key : Keys) {
+		if (--HasPositiveBuffs_PerTurn[Key].Duration == 0) {
+			if (HasPositiveBuffs_PerTurn.Remove(Key)) {
+				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
+			}
 		}
 	}
-	for (auto buff : HasNegativeBuffs_PerTurn) {
-		if (buff.Value.Duration-- == 0) {
-			HasNegativeBuffs_PerTurn.Remove(buff.Key);
+
+	HasNegativeBuffs_PerTurn.GetKeys(Keys);
+	for (auto& Key : Keys) {
+		if (--HasNegativeBuffs_PerTurn[Key].Duration == 0) {
+			if (HasNegativeBuffs_PerTurn.Remove(Key)) {
+				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
+			}
 		}
 	}
 }
 
-void UBuffComponent::ElapseSecond() {
-	for (auto buff : HasPositiveBuffs_PerSecond) {
-		if (buff.Value.Duration-- == 0) {
-			HasPositiveBuffs_PerSecond.Remove(buff.Key);
+void UBuffComponent::ElapseDeltaTime(float DeltaTime) {
+	TArray<EBuffType> Keys;
+
+	HasPositiveBuffs_PerSecond.GetKeys(Keys);
+	for (auto& Key : Keys) {
+		HasPositiveBuffs_PerSecond[Key].Duration -= DeltaTime;
+
+		if (HasPositiveBuffs_PerSecond[Key].Duration <= 0) {
+			if (HasPositiveBuffs_PerSecond.Remove(Key)) {
+				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
+			}
 		}
 	}
-	for (auto buff : HasNegativeBuffs_PerSecond) {
-		if (buff.Value.Duration-- == 0) {
-			HasNegativeBuffs_PerSecond.Remove(buff.Key);
+
+	HasNegativeBuffs_PerSecond.GetKeys(Keys);
+	for (auto& Key : Keys) {
+		HasNegativeBuffs_PerSecond[Key].Duration -= DeltaTime;
+
+		if (HasNegativeBuffs_PerSecond[Key].Duration-- == 0) {
+			if (HasNegativeBuffs_PerSecond.Remove(Key)) {
+				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
+			}
 		}
 	}
 }

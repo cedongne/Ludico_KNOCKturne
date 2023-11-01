@@ -160,6 +160,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
 		TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
@@ -216,8 +217,8 @@ public:
 	UFUNCTION(BlueprintCallable) 
 	void AcquireBuff(EBuffType BuffType, FString Source);
 
-	void ElapseSecond();
 	void ElapseTurn();
+	void ElapseDeltaTime(float DeltaTime);
 	
 	void ExpireBuff(TMap<EBuffType, FBuffData>* BuffMap, EBuffType BuffType);
 

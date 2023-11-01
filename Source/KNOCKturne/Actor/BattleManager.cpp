@@ -80,6 +80,7 @@ void ABattleManager::TurnChange() {
 		StartPeppyTurn();
 		CurrentTurnType = PeppySkillSelectingTurn;
 		ActorManagerSystem->BossActor->EnergySpawner->DeactivateAllSpawnedObject();
+
 		break;
 	case PeppySkillSelectingTurn:
 		SetLeftCurrentTurnTime(100);	// 스킬 사용을 위한 임시 턴 타임 적용
@@ -94,6 +95,9 @@ void ABattleManager::TurnChange() {
 		StartBossTurn();
 		CurrentTurnType = BossTurn;
 		BattleManagerSystem->UpdateRoundInfo();
+
+		ActorManagerSystem->BossActor->BuffComponent->ElapseTurn();
+		ActorManagerSystem->PeppyActor->BuffComponent->ElapseTurn();
 		break;
 	}
 }
@@ -173,19 +177,4 @@ void ABattleManager::Init() {
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);
 	HandledBuffComponents.Add(ActorManagerSystem->PeppyActor->BuffComponent);
 	Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor())->LevelPlay();
-}
-
-void ABattleManager::HandleBuffsEachTurns() {
-}
-
-void ABattleManager::HandleBuffsEachSeconds() {
-	GetWorld()->GetTimerManager().SetTimer(
-		BuffBySecondsHandler,
-		this,
-		&ABattleManager::HandleBuffsEachSeconds,
-		1,
-		false);
-	for (auto HandledBuffComponent : HandledBuffComponents) {
-		HandledBuffComponent->ElapseSecond();
-	}
 }
