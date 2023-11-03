@@ -72,7 +72,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Button_SelectOnClicked();
 	UFUNCTION(BlueprintCallable)
-	void AlertModal_YesOnClicked();
+	void OnClicked_AlertModal_Yes();
+	UFUNCTION(BlueprintCallable)
+	void OnClicked_AlertModal_No();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void CallDreamFragmentTalk();
 };
