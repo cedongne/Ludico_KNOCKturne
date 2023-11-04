@@ -24,13 +24,19 @@ void USpecialtyListFormWidget::OnClicked_Specialty()
 {
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
-			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-			UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush);
-			PackageSkillWidget->Selected_Specialty->Image_Icon->SetBrushFromTexture(selectedimg);
+			if (PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+				PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush);
+				PackageSkillWidget->Selected_Specialty->Image_Icon->SetBrushFromTexture(selectedimg);
 
-			if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
-				PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
-				PackageSkillWidget->Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+				if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
+					PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+					PackageSkillWidget->Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+				}
+			}
+			else {
+				PackageSkillWidget->Selected_Specialty->CancelSpecialty();
+				break;
 			}
 		}
 		else {

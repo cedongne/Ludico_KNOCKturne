@@ -4,6 +4,8 @@
 #include "Widget/Pac_SelectedUI_Widget.h"
 #include "PackageSkillWidget.h"
 #include "SkillListFormWidget.h"
+#include "ItemListFormWidget.h"
+#include "SpecialtyListFormWidget.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
 
 void UPac_SelectedUI_Widget::NativePreConstruct() {
@@ -83,10 +85,22 @@ void UPac_SelectedUI_Widget::CancelSpecialty()
 {
 	PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	PackageSkillWidget->Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+
+	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
+		if (PackageSkillWidget->Selected_Specialty->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush.GetResourceName()) {
+			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
+		}
+	}
 }
 
 void UPac_SelectedUI_Widget::CancelItem()
 {
 	PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	PackageSkillWidget->Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+
+	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
+		if (PackageSkillWidget->Selected_Item->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush.GetResourceName()) {
+			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
+		}
+	}
 }

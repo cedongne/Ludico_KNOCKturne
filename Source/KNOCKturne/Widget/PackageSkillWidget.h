@@ -12,6 +12,8 @@
 #include "Components/TextBlock.h"
 #include "Components/ScrollBox.h"
 #include "GameMode/KNOCKturneGameState.h"
+#include "AlertModalWidget.h"
+#include "GameInstance/BattleManagerSystem.h"
 
 #include "PackageSkillWidget.generated.h"
 
@@ -28,6 +30,7 @@ class KNOCKTURNE_API UPackageSkillWidget : public UUserWidget
 	void NativeConstruct();
 
 	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 
@@ -114,6 +117,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UUserWidget* BP_BlankSpaceRef;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> AlertModalClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UAlertModalWidget* AlertModalRef;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()
@@ -144,4 +152,10 @@ public:
 	void OnClick_Exit();
 	UFUNCTION()
 	void OnClick_Reset();
+	UFUNCTION()
+	void OnClick_SettingDone();
+	UFUNCTION()
+	void OnClick_AlertModalYes();
+	UFUNCTION()
+	void OnClick_AlertModalNo();
 };

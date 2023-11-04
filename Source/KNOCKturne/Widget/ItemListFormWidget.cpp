@@ -25,13 +25,19 @@ void UItemListFormWidget::OnClicked_Item()
 {
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background && KNOCKturneGameState->ItemCountList[i] > 0) {
-			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-			UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush);
-			PackageSkillWidget->Selected_Item->Image_Icon->SetBrushFromTexture(selectedimg);
+			if (PackageSkillWidget->ItemListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+				PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush);
+				PackageSkillWidget->Selected_Item->Image_Icon->SetBrushFromTexture(selectedimg);
 
-			if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
-				PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
-				PackageSkillWidget->Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+				if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
+					PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+					PackageSkillWidget->Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+				}
+			}
+			else {
+				PackageSkillWidget->Selected_Item->CancelItem();
+				break;
 			}
 		}
 		else {

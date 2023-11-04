@@ -32,7 +32,9 @@ void UPackageSkillWidget::NativePreConstruct() {
 void UPackageSkillWidget::NativeConstruct() {
 	Super::NativeConstruct();
 
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
 	SpecialSkillTable->GetAllRows<FSpecialSkillData>("GetAllRows", SpecialSkillTableRows);
@@ -59,7 +61,10 @@ void UPackageSkillWidget::NativeConstruct() {
 	if (Button_Reset) {
 		Button_Reset->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_Reset);
 	}
-
+	if (Button_SettingDone) {
+		Button_SettingDone->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_SettingDone);
+	}
+	
 }
 
 void UPackageSkillWidget::CreateSkillList() {
@@ -344,4 +349,96 @@ void UPackageSkillWidget::OnClick_Reset()
 	Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
 	Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+
+	for (int i = 0; i < SkillListArr.Num(); i++) {
+		SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(SkillListFormRef->icon_checkbox);
+	}
+	for (int i = 0; i < SpecialtyListArr.Num(); i++) {
+		SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox);
+	}
+	for (int i = 0; i < ItemListArr.Num(); i++) {
+		ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(ItemListFormRef->icon_checkbox);
+	}
+}
+
+void UPackageSkillWidget::OnClick_SettingDone() {
+	if (SelectedUIListArr[0]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
+		SetIsEnabled(false);
+
+		if (AlertModalClass) {
+			AlertModalRef = CreateWidget<UAlertModalWidget>(GetWorld(), AlertModalClass);
+			if (AlertModalRef) {
+				AlertModalRef->AddToViewport();
+			}
+		}
+		if (AlertModalRef) {
+			AlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_AlertModalYes);
+			AlertModalRef->Button_No->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_AlertModalNo);
+		}
+
+		AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Visible);
+		AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Hidden);
+		AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);
+	}
+	else {
+		// 특수기가 선택되지 않았으면 '정신, 번뜩' 자동으로 선택
+		if (Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
+			Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTableRows[0]->SpecialSkillIcon);
+		}
+
+		// 선택한 스킬 저장
+		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+			if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+				UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(SelectedUIListArr[i]->Image_Icon->Brush);
+				FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
+
+				if (BattleManagerSystem->FindSkillRow(skilliconname)) {
+					BattleManagerSystem->SetOneSelectedSkillCodeList(i, BattleManagerSystem->FindSkillRow(skilliconname));
+
+				}
+				else {
+					NTLOG(Warning, TEXT("Cannot Find SkillRow!"));
+				}
+			}
+			else {
+				break;
+			}
+		}
+
+		// 선택한 특수기 저장
+		UTexture2D* specialtyimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Selected_Specialty->Image_Icon->Brush);
+		FString specialtyiconname = UKismetSystemLibrary::GetDisplayName(specialtyimg);
+		if (BattleManagerSystem->FindSpecialtyRow(specialtyiconname)) {
+			int specialtyidx = BattleManagerSystem->FindSpecialtyRow(specialtyiconname);
+			BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
+		}
+		else {
+			NTLOG(Warning, TEXT("Cannot Find SpecialtyRow!"));
+		}
+
+		// 선택한 아이템 저장
+		if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+			UTexture2D* itemimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Selected_Item->Image_Icon->Brush);
+			FString itemiconname = UKismetSystemLibrary::GetDisplayName(itemimg);
+			if (BattleManagerSystem->FindSpecialtyRow(itemiconname)) {
+				int itemidx = BattleManagerSystem->FindSpecialtyRow(itemiconname);
+				BattleManagerSystem->FinalItem = ItemTable->GetRowNames()[itemidx].ToString();
+			}
+			else {
+				NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
+			}
+		}
+
+		RemoveFromParent();
+	}
+}
+
+void UPackageSkillWidget::OnClick_AlertModalYes() {
+	AlertModalRef->RemoveFromParent();
+	RemoveFromParent();
+}
+
+void UPackageSkillWidget::OnClick_AlertModalNo() {
+	AlertModalRef->RemoveFromParent();
+	SetIsEnabled(true);
 }
