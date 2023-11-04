@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 
 #include "Components/Button.h"
+#include "PackageSkillWidget.h"
+#include "Pac_SelectedUI_Widget.h"
 
 #include "SpecialtyListFormWidget.generated.h"
 
@@ -53,5 +55,5 @@ public:
 	class UPackageSkillWidget* PackageSkillWidget;
 
 	UFUNCTION()
-	void OnClicked_Skill();
+	void OnClicked_Specialty();
 };

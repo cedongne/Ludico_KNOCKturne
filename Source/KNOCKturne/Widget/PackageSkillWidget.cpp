@@ -5,13 +5,22 @@
 #include "SkillListFormWidget.h"
 #include "Pac_SelectedUI_Widget.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
+#include "SpecialtyListFormWidget.h"
+#include "ItemListFormWidget.h"
 
 UPackageSkillWidget::UPackageSkillWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 	FString PeppySkillTablePath = TEXT("/Game/Assets/DataTable/PeppySkillTable.PeppySkillTable");
+	FString SpecialSkillTablePath = TEXT("/Game/Assets/DataTable/SpecialSkillTable.SpecialSkillTable");
+	FString ItemTablePath = TEXT("/Game/Assets/DataTable/ItemTable.ItemTable");
 	FString SkillBuffStringTablePath = TEXT("/Game/Assets/DataTable/SkillBuffStringTable.SkillBuffStringTable");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_ITEMTABLE(*PeppySkillTablePath);
+
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSKILLTABLE(*PeppySkillTablePath);
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SPECIALSKILLTABLE(*SpecialSkillTablePath);
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_ITEMTABLE(*ItemTablePath);
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SKILLBUFFSTRINGTABLE(*SkillBuffStringTablePath);
-	PeppySkillTable = DT_ITEMTABLE.Object;
+	PeppySkillTable = DT_PEPPYSKILLTABLE.Object;
+	SpecialSkillTable = DT_SPECIALSKILLTABLE.Object;
+	ItemTable = DT_ITEMTABLE.Object;
 	SkillBuffStringTable = DT_SKILLBUFFSTRINGTABLE.Object;
 }
 
@@ -23,7 +32,11 @@ void UPackageSkillWidget::NativePreConstruct() {
 void UPackageSkillWidget::NativeConstruct() {
 	Super::NativeConstruct();
 
+	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
+	SpecialSkillTable->GetAllRows<FSpecialSkillData>("GetAllRows", SpecialSkillTableRows);
+	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
 	SkillBuffStringTable->GetAllRows<FDialogueString>("GetAllRows", SkillBuffStringTableRows);
 
 	CreateSkillList();
@@ -134,12 +147,35 @@ void UPackageSkillWidget::CreateSpecialtyList() {
 					else {
 						UniformGridPanel_Specialty->AddChildToUniformGrid(SpecialtyListFormRef, row, 0);
 					}
+
+					if (i == 6) {
+						SetSpecialtyUI(SpecialtyListFormRef, 5);
+					}
+					else {
+						SetSpecialtyUI(SpecialtyListFormRef, i);
+					}
 				}
 			}
 		}
 	}
 
 
+}
+
+void UPackageSkillWidget::SetSpecialtyUI(USpecialtyListFormWidget* SpecialtyListForm, int idx)
+{
+	UTexture2D* iconimg = SpecialSkillTableRows[idx]->SpecialSkillIcon;
+	SpecialtyListForm->Image_Icon->SetBrushFromTexture(iconimg);
+
+	FString stringid = SpecialSkillTable->GetRowNames()[idx].ToString();
+	FString name = SkillBuffStringTable->FindRow<FDialogueString>(FName(*stringid.Append("_String")), TEXT(""))->KOR;
+	SpecialtyListForm->TextBlock_SkillName->SetText(FText::FromString(name));
+
+	FString cooltime = FString::FromInt(SpecialSkillTableRows[idx]->CoolTime);
+	SpecialtyListForm->TextBlock_CoolTimeSec->SetText(FText::FromString(cooltime));
+
+	FString energy = FString::FromInt(SpecialSkillTableRows[idx]->EnergyCost);
+	SpecialtyListForm->TextBlock_Energy->SetText(FText::FromString(energy));
 }
 
 void UPackageSkillWidget::CreateItemList() {
@@ -167,10 +203,30 @@ void UPackageSkillWidget::CreateItemList() {
 					else {
 						UniformGridPanel_Item->AddChildToUniformGrid(ItemListFormRef, row, 0);
 					}
+
+					if (i == 6) {
+						SetItemUI(ItemListFormRef, 5);
+					}
+					else {
+						SetItemUI(ItemListFormRef, i);
+					}
 				}
 			}
 		}
 	}
+}
+
+void UPackageSkillWidget::SetItemUI(UItemListFormWidget* ItemListForm, int idx)
+{
+	UTexture2D* iconimg = ItemTableRows[idx]->ItemIcon;
+	ItemListForm->Image_Icon->SetBrushFromTexture(iconimg);
+
+	FString stringid = ItemTable->GetRowNames()[idx].ToString();
+	FString name = SkillBuffStringTable->FindRow<FDialogueString>(FName(*stringid.Append("_String")), TEXT(""))->KOR;
+	ItemListForm->TextBlock_SkillName->SetText(FText::FromString(name));
+
+	FString count = FString::FromInt(KNOCKturneGameState->ItemCountList[idx]);
+	ItemListForm->TextBlock_Count->SetText(FText::FromString(count));
 }
 
 void UPackageSkillWidget::OnClick_SkillTab() {
@@ -287,5 +343,5 @@ void UPackageSkillWidget::OnClick_Reset()
 	Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
 	Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
-	Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+	Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
 }

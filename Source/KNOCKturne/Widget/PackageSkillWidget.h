@@ -11,8 +11,7 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/ScrollBox.h"
-#include "SpecialtyListFormWidget.h"
-#include "ItemListFormWidget.h"
+#include "GameMode/KNOCKturneGameState.h"
 
 #include "PackageSkillWidget.generated.h"
 
@@ -27,6 +26,8 @@ class KNOCKTURNE_API UPackageSkillWidget : public UUserWidget
 	UPackageSkillWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	void NativeConstruct();
+
+	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
 
@@ -46,6 +47,10 @@ public:
 
 	class UDataTable* PeppySkillTable;
 	TArray<FPeppySkillData*> PeppySkillTableRows;
+	class UDataTable* SpecialSkillTable;
+	TArray<FSpecialSkillData*> SpecialSkillTableRows;
+	class UDataTable* ItemTable;
+	TArray<FItemData*> ItemTableRows;
 	class UDataTable* SkillBuffStringTable;
 	TArray<FDialogueString*> SkillBuffStringTableRows;
 
@@ -118,7 +123,11 @@ public:
 	UFUNCTION()
 	void CreateSpecialtyList();
 	UFUNCTION()
+	void SetSpecialtyUI(USpecialtyListFormWidget* SpecialtyListForm, int idx);
+	UFUNCTION()
 	void CreateItemList();
+	UFUNCTION()
+	void SetItemUI(UItemListFormWidget* ItemListForm, int idx);
 	UFUNCTION()
 	void OnClick_SkillTab();
 	UFUNCTION()

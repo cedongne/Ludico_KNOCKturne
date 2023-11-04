@@ -43,4 +43,10 @@ public:
 
 	UFUNCTION()
 	void OnClick_Cancel();
+	UFUNCTION()
+	void CancelSkill();
+	UFUNCTION()
+	void CancelSpecialty();
+	UFUNCTION()
+	void CancelItem();
 };

@@ -25,6 +25,19 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 }
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
+	if (PackageSkillWidget->UniformGridPanel_Skill->GetVisibility() == ESlateVisibility::Visible) {
+		CancelSkill();
+	}
+	else if (PackageSkillWidget->UniformGridPanel_Specialty->GetVisibility() == ESlateVisibility::Visible) {
+		CancelSpecialty();
+	}
+	else if (PackageSkillWidget->UniformGridPanel_Item->GetVisibility() == ESlateVisibility::Visible) {
+		CancelItem();
+	}
+}
+
+void UPac_SelectedUI_Widget::CancelSkill()
+{
 	int cancelIdx = 0;
 
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
@@ -64,4 +77,16 @@ void UPac_SelectedUI_Widget::OnClick_Cancel() {
 			PackageSkillWidget->SkillListArr[k]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
 		}
 	}
+}
+
+void UPac_SelectedUI_Widget::CancelSpecialty()
+{
+	PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	PackageSkillWidget->Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UPac_SelectedUI_Widget::CancelItem()
+{
+	PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	PackageSkillWidget->Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
 }

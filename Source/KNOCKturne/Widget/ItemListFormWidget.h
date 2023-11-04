@@ -6,6 +6,9 @@
 #include "Blueprint/UserWidget.h"
 
 #include "Components/Button.h"
+#include "PackageSkillWidget.h"
+#include "Pac_SelectedUI_Widget.h"
+#include "GameMode/KNOCKturneGameState.h"
 
 #include "ItemListFormWidget.generated.h"
 
@@ -18,6 +21,8 @@ class KNOCKTURNE_API UItemListFormWidget : public UUserWidget
 	GENERATED_BODY()
 	void NativePreConstruct();
 	void NativeConstruct();
+
+	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
@@ -49,5 +54,5 @@ public:
 	class UPackageSkillWidget* PackageSkillWidget;
 
 	UFUNCTION()
-	void OnClicked_Skill();
+	void OnClicked_Item();
 };
