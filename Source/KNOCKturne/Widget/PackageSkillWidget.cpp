@@ -442,3 +442,22 @@ void UPackageSkillWidget::OnClick_AlertModalNo() {
 	AlertModalRef->RemoveFromParent();
 	SetIsEnabled(true);
 }
+
+void UPackageSkillWidget::SetBeforeSelectedSkills()
+{
+	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
+		SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(PeppySkillTableRows[BattleManagerSystem->SelectedSkillCodeList[i]]->SkillIcon);
+		SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+		SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+
+		SkillListArr[BattleManagerSystem->SelectedSkillCodeList[i]]->Image_CheckBox->SetBrushFromTexture(SkillListFormRef->icon_checkbox_selected);
+	}
+
+	if (BattleManagerSystem->FinalSpecialSkill != "") {
+		//Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillData>(FName(*BattleManagerSystem->FinalSpecialSkill, TEXT(""))->;)
+	}
+
+	if (BattleManagerSystem->FinalItem != "") {
+		//Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem, TEXT(""))->;
+	}
+}

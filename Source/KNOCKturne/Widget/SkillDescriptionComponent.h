@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "GameInstance/BattleTableManagerSystem.h"
 #include "GameInstance/DialogueManagerSystem.h"
+#include "Components/Button.h"
 
 #include "SkillDescriptionComponent.generated.h"
 
@@ -20,12 +21,32 @@ public:
 	USkillDescriptionComponent();
 
 protected:
+	class UDataTable* PeppySkillTable;
+	TArray<FPeppySkillData*> PeppySkillTableRows;
+	class UDataTable* SpecialSkillTable;
+	TArray<FSpecialSkillData*> SpecialSkillTableRows;
 	class UDataTable* ItemTable;
 	TArray<FItemData*> ItemTableRows;
 	class UDataTable* SkillBuffStringTable;
 	TArray<FDialogueString*> SkillBuffStringTableRows;
 
 public:	
+	UFUNCTION(Blueprintcallable)
+	FString SkillSpecialtyCheckValueN(int SkillIndex, float ValueN);
+	UFUNCTION(Blueprintcallable)
+	FString SkillSpecialtyCheckValueM(int SkillIndex, float ValueM);
+	UFUNCTION(Blueprintcallable)
+	FString CheckProbability(float Probability);
+	UFUNCTION(Blueprintcallable)
+	FString SkillGetSkillIndexByKeyword(int RowNum, FString Num);
+	UFUNCTION(Blueprintcallable)
+	FString SkillRedefineDescription(int RowNum);
+
+	UFUNCTION(Blueprintcallable)
+	FString SpecialtyGetSkillIndexByKeyword(int RowNum, FString Num);
+	UFUNCTION(Blueprintcallable)
+	FString SpecialtyRedefineDescription(int RowNum);
+
 	UFUNCTION(Blueprintcallable)
 	FString ItemCheckValueN(float ValueN);
 	UFUNCTION(Blueprintcallable)
@@ -34,5 +55,8 @@ public:
 	FString ItemGetSkillIndexByKeyword(int RowNum, FString Num);
 	UFUNCTION(Blueprintcallable)
 	FString ItemRedefineDescription(int RowNum);
+
+	UFUNCTION(Blueprintcallable)
+	void SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
 		
 };

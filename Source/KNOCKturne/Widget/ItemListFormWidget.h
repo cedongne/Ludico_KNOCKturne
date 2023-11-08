@@ -6,9 +6,12 @@
 #include "Blueprint/UserWidget.h"
 
 #include "Components/Button.h"
+#include "Components/RichTextBlock.h"
 #include "PackageSkillWidget.h"
 #include "Pac_SelectedUI_Widget.h"
 #include "GameMode/KNOCKturneGameState.h"
+#include "SkillDescriptionComponent.h"
+#include "ItemHoverWidget.h"
 
 #include "ItemListFormWidget.generated.h"
 
@@ -19,6 +22,7 @@ UCLASS()
 class KNOCKTURNE_API UItemListFormWidget : public UUserWidget
 {
 	GENERATED_BODY()
+	UItemListFormWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	void NativeConstruct();
 
@@ -26,6 +30,7 @@ class KNOCKTURNE_API UItemListFormWidget : public UUserWidget
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
+	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -53,6 +58,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> ItemHoverClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UItemHoverWidget* ItemHoverWidgetRef;
+
+	int hoveredNum = 0;
+
 	UFUNCTION()
-	void OnClicked_Item();
+	void SelectItem(int clickedNum);
+	UFUNCTION()
+	void OnClick_Item();
+	UFUNCTION()
+	void OnHovered_Item();
 };

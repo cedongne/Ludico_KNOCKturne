@@ -158,4 +158,6 @@ public:
 	void OnClick_AlertModalYes();
 	UFUNCTION()
 	void OnClick_AlertModalNo();
+	UFUNCTION()
+	void SetBeforeSelectedSkills();
 };

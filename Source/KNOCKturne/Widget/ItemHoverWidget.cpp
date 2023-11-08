@@ -1,0 +1,34 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Widget/ItemHoverWidget.h"
+#include "PackageSkillWidget.h"
+#include "ItemListFormWidget.h"
+#include <Blueprint/WidgetBlueprintLibrary.h>
+
+void UItemHoverWidget::NativeConstruct() {
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
+	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
+
+	if (Button_Background) {
+		Button_Background->OnClicked.AddDynamic(this, &UItemHoverWidget::OnClick_Button);
+	}
+}
+
+void UItemHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+	if (!IsHovered()) {
+		RemoveFromParent();
+	}
+}
+
+void UItemHoverWidget::OnClick_Button()
+{
+	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+		PackageSkillWidget->ItemListFormRef->SelectItem(PackageSkillWidget->ItemListFormRef->hoveredNum);
+	}
+	else {
+		PackageSkillWidget->SelectedUIRef->CancelSkill(PackageSkillWidget->ItemListFormRef->hoveredNum);
+	}
+}

@@ -7,14 +7,16 @@
 #include "PackageSkillWidget.h"
 #include "Pac_SelectedUI_Widget.h"
 
+USkillListFormWidget::USkillListFormWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+	SkillDescriptionComponent = CreateDefaultSubobject<USkillDescriptionComponent>(TEXT("SkillDescriptionComponent"));
+}
+
 void USkillListFormWidget::NativePreConstruct() {
 	Button_Background = (UButton*)GetWidgetFromName(TEXT("Button_Background"));
 	Image_Background = (UImage*)GetWidgetFromName(TEXT("Image_Background"));
 	Image_CheckBox = (UImage*)GetWidgetFromName(TEXT("Image_CheckBox"));
-	Image_Energy = (UImage*)GetWidgetFromName(TEXT("Image_Energy"));
 	Image_Icon = (UImage*)GetWidgetFromName(TEXT("Image_Icon"));
 	Image_IconBackground = (UImage*)GetWidgetFromName(TEXT("Image_IconBackground"));
-	Image_Stance = (UImage*)GetWidgetFromName(TEXT("Image_Stance"));
 	TextBlock_CoolTimeSec = (UTextBlock*)GetWidgetFromName(TEXT("TextBlock_CoolTimeSec"));
 	TextBlock_SkillName = (UTextBlock*)GetWidgetFromName(TEXT("TextBlock_SkillName"));
 	TextBlock_Energy = (UTextBlock*)GetWidgetFromName(TEXT("TextBlock_Energy"));
@@ -26,17 +28,21 @@ void USkillListFormWidget::NativeConstruct() {
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
 	if (Button_Background) {
-		Button_Background->OnClicked.AddDynamic(this, &USkillListFormWidget::OnClicked_Skill);
+		Button_Background->OnClicked.AddDynamic(this, &USkillListFormWidget::OnClick_Skill);
+		Button_Background->OnHovered.AddDynamic(this, &USkillListFormWidget::OnHovered_Skill);
 	}
 }
 
-void USkillListFormWidget::OnClicked_Skill() {
+void USkillListFormWidget::SelectSkill(int clickedNum) {
 	if (PackageSkillWidget->SelectedUIListArr[7]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)
 	{
 		for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
-			if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background && PackageSkillWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+			if (i == clickedNum && PackageSkillWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 				PackageSkillWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				SelectedSkillImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[i]->Image_Icon->Brush);
+				if (SkillHoverWidgetRef) {
+					SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				}
 				AddSkillInSelectedUI();
 			}
 		}
@@ -53,6 +59,16 @@ void USkillListFormWidget::OnClicked_Skill() {
 	}
 }
 
+void USkillListFormWidget::OnClick_Skill()
+{
+	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
+		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
+			SelectSkill(i);
+			break;
+		}
+	}
+}
+
 void USkillListFormWidget::AddSkillInSelectedUI() {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
@@ -63,3 +79,42 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 		}
 	}
 }
+
+void USkillListFormWidget::OnHovered_Skill()
+{
+	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
+		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
+			hoveredNum = i;
+			break;
+		}
+	}
+
+	if (SkillHoverWidgetRef) {
+		if (!SkillHoverWidgetRef->IsInViewport()) {
+			if (SkillHoverClass) {
+				SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
+				if (SkillHoverWidgetRef) {
+					SkillHoverWidgetRef->AddToViewport();
+				}
+			}
+		}
+	}
+	else {
+		if (SkillHoverClass) {
+			SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
+			if (SkillHoverWidgetRef) {
+				SkillHoverWidgetRef->AddToViewport();
+			}
+		}
+	}
+
+	SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_CheckBox->Brush));
+	SkillHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_Icon->Brush));
+	SkillHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_CoolTimeSec->GetText());
+	SkillHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_SkillName->GetText());
+	SkillHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Energy->GetText());
+	SkillHoverWidgetRef->TextBlock_Stance->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Stance->GetText());
+	SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(hoveredNum)));
+	SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef, PackageSkillWidget->SkillListArr[hoveredNum]->Button_Background);
+}
+

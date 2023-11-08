@@ -28,7 +28,7 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
 	if (PackageSkillWidget->UniformGridPanel_Skill->GetVisibility() == ESlateVisibility::Visible) {
-		CancelSkill();
+		OnClick_CancelSkill();
 	}
 	else if (PackageSkillWidget->UniformGridPanel_Specialty->GetVisibility() == ESlateVisibility::Visible) {
 		CancelSpecialty();
@@ -38,24 +38,22 @@ void UPac_SelectedUI_Widget::OnClick_Cancel() {
 	}
 }
 
-void UPac_SelectedUI_Widget::CancelSkill()
+void UPac_SelectedUI_Widget::CancelSkill(int cancelNum)
 {
-	int cancelIdx = 0;
-
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
-		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
-			cancelIdx = i;
+		if (i == cancelNum) {
+			canceledNum = i;
 			cancelimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush);
 			break;
 		}
 	}
 
-	if ((cancelIdx == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[cancelIdx + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
-		PackageSkillWidget->SelectedUIListArr[cancelIdx]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
-		PackageSkillWidget->SelectedUIListArr[cancelIdx]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	if ((canceledNum == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[canceledNum + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
+		PackageSkillWidget->SelectedUIListArr[canceledNum]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+		PackageSkillWidget->SelectedUIListArr[canceledNum]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	}
 	else {
-		for (int j = cancelIdx; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
+		for (int j = canceledNum; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
 			// 다음 칸이 비어있지 않으면
 			if (PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 				PackageSkillWidget->SelectedUIListArr[j]->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->Brush));
@@ -77,6 +75,16 @@ void UPac_SelectedUI_Widget::CancelSkill()
 	for (int k = 0; k < PackageSkillWidget->SkillListArr.Num(); k++) {
 		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[k]->Image_Icon->Brush) == cancelimg) {
 			PackageSkillWidget->SkillListArr[k]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
+			PackageSkillWidget->SkillListArr[k]->SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
+		}
+	}
+}
+
+void UPac_SelectedUI_Widget::OnClick_CancelSkill()
+{
+	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
+		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
+			CancelSkill(i);
 		}
 	}
 }
@@ -89,6 +97,7 @@ void UPac_SelectedUI_Widget::CancelSpecialty()
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (PackageSkillWidget->Selected_Specialty->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush.GetResourceName()) {
 			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
+			PackageSkillWidget->SpecialtyListArr[i]->SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
 		}
 	}
 }
@@ -101,6 +110,7 @@ void UPac_SelectedUI_Widget::CancelItem()
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->Selected_Item->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush.GetResourceName()) {
 			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
+			PackageSkillWidget->ItemListArr[i]->ItemHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
 		}
 	}
 }

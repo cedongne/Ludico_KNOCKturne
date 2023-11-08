@@ -4,10 +4,12 @@
 #include "Widget/SpecialtyListFormWidget.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
 
+USpecialtyListFormWidget::USpecialtyListFormWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+	SkillDescriptionComponent = CreateDefaultSubobject<USkillDescriptionComponent>(TEXT("SkillDescriptionComponent"));
+}
 
 void USpecialtyListFormWidget::NativePreConstruct()
 {
-	
 }
 
 void USpecialtyListFormWidget::NativeConstruct()
@@ -16,18 +18,20 @@ void USpecialtyListFormWidget::NativeConstruct()
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
 	if (Button_Background) {
-		Button_Background->OnClicked.AddDynamic(this, &USpecialtyListFormWidget::OnClicked_Specialty);
+		Button_Background->OnClicked.AddDynamic(this, &USpecialtyListFormWidget::OnClick_Specialty);
+		Button_Background->OnHovered.AddDynamic(this, &USpecialtyListFormWidget::OnHovered_Specialty);
 	}
 }
 
-void USpecialtyListFormWidget::OnClicked_Specialty()
+void USpecialtyListFormWidget::SelectSpecialty(int clickedNum)
 {
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
-		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
+		if (i == clickedNum) {
 			if (PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 				PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush);
 				PackageSkillWidget->Selected_Specialty->Image_Icon->SetBrushFromTexture(selectedimg);
+				SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 
 				if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -41,6 +45,56 @@ void USpecialtyListFormWidget::OnClicked_Specialty()
 		}
 		else {
 			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+			if (SpecialtyHoverWidgetRef) {
+				SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+
+			}
 		}
 	}
+}
+
+void USpecialtyListFormWidget::OnClick_Specialty()
+{
+	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
+		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
+			SelectSpecialty(i);
+			break;
+		}
+	}
+}
+
+void USpecialtyListFormWidget::OnHovered_Specialty() {
+	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
+		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
+			hoveredNum = i;
+			break;
+		}
+	}
+
+	if (SpecialtyHoverWidgetRef) {
+		if (!SpecialtyHoverWidgetRef->IsInViewport()) {
+			if (SpecialtyHoverClass) {
+				SpecialtyHoverWidgetRef = CreateWidget<USpecialtyHoverWidget>(GetWorld(), SpecialtyHoverClass);
+				if (SpecialtyHoverWidgetRef) {
+					SpecialtyHoverWidgetRef->AddToViewport();
+				}
+			}
+		}
+	}
+	else {
+		if (SpecialtyHoverClass) {
+			SpecialtyHoverWidgetRef = CreateWidget<USpecialtyHoverWidget>(GetWorld(), SpecialtyHoverClass);
+			if (SpecialtyHoverWidgetRef) {
+				SpecialtyHoverWidgetRef->AddToViewport();
+			}
+		}
+	}
+
+	SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[hoveredNum]->Image_CheckBox->Brush));
+	SpecialtyHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[hoveredNum]->Image_Icon->Brush));
+	SpecialtyHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_CoolTimeSec->GetText());
+	SpecialtyHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_SkillName->GetText());
+	SpecialtyHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_Energy->GetText());
+	SpecialtyHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SpecialtyRedefineDescription(hoveredNum)));
+	SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef, PackageSkillWidget->SpecialtyListArr[hoveredNum]->Button_Background);
 }

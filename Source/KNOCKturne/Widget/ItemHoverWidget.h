@@ -3,30 +3,24 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "Blueprint/UserWidget.h"
-
 #include "Components/Button.h"
-#include "Components/RichTextBlock.h"
-#include "SkillDescriptionComponent.h"
-#include "SkillHoverWidget.h"
 
-#include "SkillListFormWidget.generated.h"
+#include "ItemHoverWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
+class KNOCKTURNE_API UItemHoverWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	USkillListFormWidget(const FObjectInitializer& ObjectInitializer);
-	void NativePreConstruct();
 	void NativeConstruct();
 
 protected:
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 	TArray<UUserWidget*> PackageSkillWidgetArr;
-	UTexture2D* SelectedSkillImg;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -45,33 +39,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_IconBackground;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_CoolTimeSec;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_SkillName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_Energy;
+	class UTextBlock* TextBlock_Count;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_Stance;
+	class URichTextBlock* TextBlock_Description;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> SkillHoverClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class USkillHoverWidget* SkillHoverWidgetRef;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int hoveredNum = 0;
-
 	UFUNCTION()
-	void SelectSkill(int clickedNum);
-	UFUNCTION()
-	void OnClick_Skill();
-	UFUNCTION()
-	void AddSkillInSelectedUI();
-	UFUNCTION()
-	void OnHovered_Skill();
+	void OnClick_Button();
 };

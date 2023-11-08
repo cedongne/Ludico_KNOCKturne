@@ -6,8 +6,11 @@
 #include "Blueprint/UserWidget.h"
 
 #include "Components/Button.h"
+#include "Components/RichTextBlock.h"
 #include "PackageSkillWidget.h"
 #include "Pac_SelectedUI_Widget.h"
+#include "SpecialtyHoverWidget.h"
+#include "SkillDescriptionComponent.h"
 
 #include "SpecialtyListFormWidget.generated.h"
 
@@ -18,11 +21,13 @@ UCLASS()
 class KNOCKTURNE_API USpecialtyListFormWidget : public UUserWidget
 {
 	GENERATED_BODY()
+	USpecialtyListFormWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	void NativeConstruct();
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
+	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -36,8 +41,6 @@ public:
 	class UImage* Image_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_CheckBox;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UImage* Image_Energy;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_Icon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -54,6 +57,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> SpecialtyHoverClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USpecialtyHoverWidget* SpecialtyHoverWidgetRef;
+
+	int hoveredNum = 0;
+
 	UFUNCTION()
-	void OnClicked_Specialty();
+	void SelectSpecialty(int clickedNum);
+	UFUNCTION()
+	void OnClick_Specialty();
+	UFUNCTION()
+	void OnHovered_Specialty();
 };

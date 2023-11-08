@@ -3,30 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "Blueprint/UserWidget.h"
-
 #include "Components/Button.h"
-#include "Components/RichTextBlock.h"
-#include "SkillDescriptionComponent.h"
-#include "SkillHoverWidget.h"
+#include "Pac_SelectedUI_Widget.h"
 
-#include "SkillListFormWidget.generated.h"
+#include "SkillHoverWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
+class KNOCKTURNE_API USkillHoverWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	USkillListFormWidget(const FObjectInitializer& ObjectInitializer);
-	void NativePreConstruct();
 	void NativeConstruct();
 
 protected:
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 	TArray<UUserWidget*> PackageSkillWidgetArr;
-	UTexture2D* SelectedSkillImg;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -52,26 +47,14 @@ public:
 	class UTextBlock* TextBlock_Energy;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_Stance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class URichTextBlock* TextBlock_Description;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> SkillHoverClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class USkillHoverWidget* SkillHoverWidgetRef;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int hoveredNum = 0;
-
 	UFUNCTION()
-	void SelectSkill(int clickedNum);
-	UFUNCTION()
-	void OnClick_Skill();
-	UFUNCTION()
-	void AddSkillInSelectedUI();
-	UFUNCTION()
-	void OnHovered_Skill();
+	void OnClick_Button();
 };

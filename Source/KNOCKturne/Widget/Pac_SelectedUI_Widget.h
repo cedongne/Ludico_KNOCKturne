@@ -41,10 +41,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
+	int canceledNum = 0;
+
 	UFUNCTION()
 	void OnClick_Cancel();
 	UFUNCTION()
-	void CancelSkill();
+	void CancelSkill(int cancelNum);
+	UFUNCTION()
+	void OnClick_CancelSkill();
 	UFUNCTION()
 	void CancelSpecialty();
 	UFUNCTION()
