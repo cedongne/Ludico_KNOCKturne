@@ -26,9 +26,21 @@ void UItemHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds)
 void UItemHoverWidget::OnClick_Button()
 {
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
-		PackageSkillWidget->ItemListFormRef->SelectItem(PackageSkillWidget->ItemListFormRef->hoveredNum);
+		PackageSkillWidget->ItemListFormRef->SelectItem(FindInteractionNum(), this);
 	}
 	else {
-		PackageSkillWidget->SelectedUIRef->CancelSkill(PackageSkillWidget->ItemListFormRef->hoveredNum);
+		PackageSkillWidget->SelectedUIRef->CancelItem(this);
 	}
+}
+
+int32 UItemHoverWidget::FindInteractionNum()
+{
+	for (int i = 0; i < PackageSkillWidget->ItemTableRows.Num(); i++) {
+		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Image_Icon->Brush) == PackageSkillWidget->ItemTableRows[i]->ItemIcon) {
+			return i;
+		}
+	}
+
+	NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
+	return 100;
 }

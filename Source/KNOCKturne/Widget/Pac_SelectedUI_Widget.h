@@ -30,6 +30,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_Icon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_SkillError;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Cancel;
@@ -41,16 +43,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
-	int canceledNum = 0;
 
 	UFUNCTION()
 	void OnClick_Cancel();
 	UFUNCTION()
-	void CancelSkill(int cancelNum);
+	void CancelSkill(int cancelNum, USkillHoverWidget* SkillHover);
 	UFUNCTION()
 	void OnClick_CancelSkill();
 	UFUNCTION()
-	void CancelSpecialty();
+	void CancelSpecialty(USpecialtyHoverWidget* SpecialtyHover);
 	UFUNCTION()
-	void CancelItem();
+	void CancelItem(UItemHoverWidget* ItemHover);
 };

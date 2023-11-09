@@ -25,7 +25,7 @@ void UItemListFormWidget::NativeConstruct()
 	}
 }
 
-void UItemListFormWidget::SelectItem(int clickedNum)
+void UItemListFormWidget::SelectItem(int clickedNum, UItemHoverWidget* ItemHover)
 {
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background && KNOCKturneGameState->ItemCountList[i] > 0) {
@@ -33,7 +33,7 @@ void UItemListFormWidget::SelectItem(int clickedNum)
 				PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush);
 				PackageSkillWidget->Selected_Item->Image_Icon->SetBrushFromTexture(selectedimg);
-				ItemHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				ItemHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 
 				if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -41,14 +41,14 @@ void UItemListFormWidget::SelectItem(int clickedNum)
 				}
 			}
 			else {
-				PackageSkillWidget->Selected_Item->CancelItem();
+				PackageSkillWidget->Selected_Item->CancelItem(ItemHover);
 				break;
 			}
 		}
 		else {
 			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-			if (ItemHoverWidgetRef) {
-				ItemHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+			if (ItemHover) {
+				ItemHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 			}
 		}
 	}
@@ -58,13 +58,15 @@ void UItemListFormWidget::OnClick_Item()
 {
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background) {
-			SelectItem(i);
+			SelectItem(i, ItemHoverWidgetRef);
 			break;
 		}
 	}
 }
 
 void UItemListFormWidget::OnHovered_Item() {
+	int hoveredNum = 0;
+
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background) {
 			hoveredNum = i;

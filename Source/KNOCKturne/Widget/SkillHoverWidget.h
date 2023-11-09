@@ -7,6 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Pac_SelectedUI_Widget.h"
+#include "Components/CanvasPanel.h"
 
 #include "SkillHoverWidget.generated.h"
 
@@ -29,6 +30,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UCanvasPanel* CanvasPanel;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -57,4 +60,6 @@ public:
 
 	UFUNCTION()
 	void OnClick_Button();
+	UFUNCTION()
+	int32 FindInteractionNum();
 };

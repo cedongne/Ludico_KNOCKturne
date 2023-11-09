@@ -62,10 +62,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USpecialtyHoverWidget* SpecialtyHoverWidgetRef;
 
-	int hoveredNum = 0;
-
 	UFUNCTION()
-	void SelectSpecialty(int clickedNum);
+	void SelectSpecialty(int clickedNum, USpecialtyHoverWidget* SpecialtyHover);
 	UFUNCTION()
 	void OnClick_Specialty();
 	UFUNCTION()

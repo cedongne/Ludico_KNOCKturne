@@ -26,9 +26,21 @@ void USkillHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds
 void USkillHoverWidget::OnClick_Button()
 {
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
-		PackageSkillWidget->SkillListFormRef->SelectSkill(PackageSkillWidget->SkillListFormRef->hoveredNum);
+		PackageSkillWidget->SkillListFormRef->SelectSkill(FindInteractionNum(), this);
 	}
 	else {
-		PackageSkillWidget->SelectedUIRef->CancelSkill(PackageSkillWidget->SkillListFormRef->hoveredNum);
+		PackageSkillWidget->SelectedUIRef->CancelSkill(FindInteractionNum(), this);
 	}
+}
+
+int32 USkillHoverWidget::FindInteractionNum()
+{
+	for (int i = 0; i < PackageSkillWidget->PeppySkillTableRows.Num(); i++) {
+		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Image_Icon->Brush) == PackageSkillWidget->PeppySkillTableRows[i]->SkillIcon) {
+			return i;
+		}
+	}
+
+	NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
+	return 100;
 }

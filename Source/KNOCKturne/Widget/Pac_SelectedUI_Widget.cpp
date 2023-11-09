@@ -31,29 +31,28 @@ void UPac_SelectedUI_Widget::OnClick_Cancel() {
 		OnClick_CancelSkill();
 	}
 	else if (PackageSkillWidget->UniformGridPanel_Specialty->GetVisibility() == ESlateVisibility::Visible) {
-		CancelSpecialty();
+		CancelSpecialty(PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef);
 	}
 	else if (PackageSkillWidget->UniformGridPanel_Item->GetVisibility() == ESlateVisibility::Visible) {
-		CancelItem();
+		CancelItem(PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef);
 	}
 }
 
-void UPac_SelectedUI_Widget::CancelSkill(int cancelNum)
+void UPac_SelectedUI_Widget::CancelSkill(int cancelNum, USkillHoverWidget* SkillHover)
 {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (i == cancelNum) {
-			canceledNum = i;
 			cancelimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush);
 			break;
 		}
 	}
 
-	if ((canceledNum == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[canceledNum + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
-		PackageSkillWidget->SelectedUIListArr[canceledNum]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
-		PackageSkillWidget->SelectedUIListArr[canceledNum]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	if ((cancelNum == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[cancelNum + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
+		PackageSkillWidget->SelectedUIListArr[cancelNum]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+		PackageSkillWidget->SelectedUIListArr[cancelNum]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	}
 	else {
-		for (int j = canceledNum; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
+		for (int j = cancelNum; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
 			// 다음 칸이 비어있지 않으면
 			if (PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 				PackageSkillWidget->SelectedUIListArr[j]->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->Brush));
@@ -75,7 +74,7 @@ void UPac_SelectedUI_Widget::CancelSkill(int cancelNum)
 	for (int k = 0; k < PackageSkillWidget->SkillListArr.Num(); k++) {
 		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[k]->Image_Icon->Brush) == cancelimg) {
 			PackageSkillWidget->SkillListArr[k]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
-			PackageSkillWidget->SkillListArr[k]->SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
+			SkillHover->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SkillListFormRef->icon_checkbox);
 		}
 	}
 }
@@ -84,12 +83,12 @@ void UPac_SelectedUI_Widget::OnClick_CancelSkill()
 {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
-			CancelSkill(i);
+			CancelSkill(i, PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef);
 		}
 	}
 }
 
-void UPac_SelectedUI_Widget::CancelSpecialty()
+void UPac_SelectedUI_Widget::CancelSpecialty(USpecialtyHoverWidget* SpecialtyHover)
 {
 	PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	PackageSkillWidget->Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
@@ -97,12 +96,12 @@ void UPac_SelectedUI_Widget::CancelSpecialty()
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (PackageSkillWidget->Selected_Specialty->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush.GetResourceName()) {
 			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
-			PackageSkillWidget->SpecialtyListArr[i]->SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
+			SpecialtyHover->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->SpecialtyListFormRef->icon_checkbox);
 		}
 	}
 }
 
-void UPac_SelectedUI_Widget::CancelItem()
+void UPac_SelectedUI_Widget::CancelItem(UItemHoverWidget* ItemHover)
 {
 	PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	PackageSkillWidget->Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
@@ -110,7 +109,7 @@ void UPac_SelectedUI_Widget::CancelItem()
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
 		if (PackageSkillWidget->Selected_Item->Image_Icon->Brush.GetResourceName() == PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush.GetResourceName()) {
 			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
-			PackageSkillWidget->ItemListArr[i]->ItemHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
+			ItemHover->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
 		}
 	}
 }

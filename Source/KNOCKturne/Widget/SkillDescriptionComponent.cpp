@@ -49,7 +49,7 @@ FString USkillDescriptionComponent::SkillSpecialtyCheckValueM(int SkillIndex, fl
 			return FString::FromInt(round(ValueM * 100.0));
 		}
 		else {
-			return FString::FromInt(round(ValueM * 100));
+			return FString::FromInt(round(ValueM));
 		}
 	}
 	else {
@@ -101,8 +101,15 @@ FString USkillDescriptionComponent::SkillGetSkillIndexByKeyword(int RowNum, FStr
 }
 
 FString USkillDescriptionComponent::SkillRedefineDescription(int RowNum) {
-	FString rowname = PeppySkillTableRows[RowNum]->SkillDescript;
-	FString OriginalStr = SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
+	//FString rowname = PeppySkillTableRows[RowNum]->SkillDescript;
+	FString rowname = "";
+	if (PeppySkillTableRows[RowNum]->SkillDescript == "") {
+		NTLOG(Warning, TEXT("%d"), RowNum);
+	}
+	else {
+		rowname = PeppySkillTableRows[RowNum]->SkillDescript;
+	}
+	/*FString OriginalStr = SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
 	FString Redefined = OriginalStr;
 	int32 StartIdx = 0;
 	FString tmp1 = "";
@@ -132,7 +139,8 @@ FString USkillDescriptionComponent::SkillRedefineDescription(int RowNum) {
 			count++;
 			Redefined.RemoveAt(index, 1);
 		}
-	}
+	}*/
+	FString Redefined = "";
 
 	return Redefined;
 }
@@ -242,8 +250,14 @@ FString USkillDescriptionComponent::ItemRedefineDescription(int RowNum) {
 
 void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
 {
+	FVector2D PixelPos;
+	FVector2D ViewportPos;
+	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
+	USlateBlueprintLibrary::LocalToViewport(backgroundBtn, Geometry, FVector2D(0.0, 0.0), PixelPos, ViewportPos);
+
 	FVector2D pos;
-	pos.X = backgroundBtn->GetCachedGeometry().GetAbsolutePosition().X;
-	pos.Y = backgroundBtn->GetCachedGeometry().GetAbsolutePosition().Y - (backgroundBtn->GetDesiredSize().Y) / 2 + (hoverwidget->GetDesiredSize().Y) / 2;
+	pos.X = ViewportPos.X;
+	pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
 	hoverwidget->SetPositionInViewport(pos);
+	NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
 }

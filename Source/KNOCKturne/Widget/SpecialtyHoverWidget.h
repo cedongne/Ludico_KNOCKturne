@@ -54,4 +54,6 @@ public:
 
 	UFUNCTION()
 	void OnClick_Button();
+	UFUNCTION()
+	int32 FindInteractionNum();
 };

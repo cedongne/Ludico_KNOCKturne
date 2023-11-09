@@ -26,6 +26,7 @@ void USkillListFormWidget::NativePreConstruct() {
 void USkillListFormWidget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
+	
 
 	if (Button_Background) {
 		Button_Background->OnClicked.AddDynamic(this, &USkillListFormWidget::OnClick_Skill);
@@ -33,22 +34,30 @@ void USkillListFormWidget::NativeConstruct() {
 	}
 }
 
-void USkillListFormWidget::SelectSkill(int clickedNum) {
+void USkillListFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+}
+
+void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillHover) {
 	if (PackageSkillWidget->SelectedUIListArr[7]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)
 	{
 		for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 			if (i == clickedNum && PackageSkillWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 				PackageSkillWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				SelectedSkillImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[i]->Image_Icon->Brush);
-				if (SkillHoverWidgetRef) {
-					SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+				if (SkillHover) {
+					SkillHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				}
+				else {
+					NTLOG(Warning, TEXT("SkillHoverWidget is NULL!"));
 				}
 				AddSkillInSelectedUI();
 			}
 		}
 	}
 	else {
-		
 		for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 			if (PackageSkillWidget->SelectedUIListArr[i]->SkillError) {
 				NTLOG(Warning, TEXT("skillerror!"));
@@ -63,7 +72,12 @@ void USkillListFormWidget::OnClick_Skill()
 {
 	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
-			SelectSkill(i);
+			if (PackageSkillWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+				SelectSkill(i, SkillHoverWidgetRef);
+			}
+			else {
+				PackageSkillWidget->SelectedUIRef->CancelSkill(i, SkillHoverWidgetRef);
+			}
 			break;
 		}
 	}
@@ -82,6 +96,8 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 
 void USkillListFormWidget::OnHovered_Skill()
 {
+	int hoveredNum = 0;
+
 	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
 			hoveredNum = i;
@@ -89,7 +105,7 @@ void USkillListFormWidget::OnHovered_Skill()
 		}
 	}
 
-	if (SkillHoverWidgetRef) {
+	/*if (SkillHoverWidgetRef) {
 		if (!SkillHoverWidgetRef->IsInViewport()) {
 			if (SkillHoverClass) {
 				SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
@@ -98,8 +114,8 @@ void USkillListFormWidget::OnHovered_Skill()
 				}
 			}
 		}
-	}
-	else {
+	}*/
+	if (!SkillHoverWidgetRef || !SkillHoverWidgetRef->IsInViewport()) {
 		if (SkillHoverClass) {
 			SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
 			if (SkillHoverWidgetRef) {

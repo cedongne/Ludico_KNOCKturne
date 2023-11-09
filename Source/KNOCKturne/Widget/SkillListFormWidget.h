@@ -22,9 +22,11 @@ class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
 	USkillListFormWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	void NativeConstruct();
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
+	TArray<UUserWidget*> SkillHoverWidgetArr;
 	UTexture2D* SelectedSkillImg;
 	USkillDescriptionComponent* SkillDescriptionComponent;
 
@@ -63,11 +65,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USkillHoverWidget* SkillHoverWidgetRef;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int hoveredNum = 0;
-
 	UFUNCTION()
-	void SelectSkill(int clickedNum);
+	void SelectSkill(int clickedNum, USkillHoverWidget* SkillHover);
 	UFUNCTION()
 	void OnClick_Skill();
 	UFUNCTION()

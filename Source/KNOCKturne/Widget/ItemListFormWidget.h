@@ -63,10 +63,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UItemHoverWidget* ItemHoverWidgetRef;
 
-	int hoveredNum = 0;
-
 	UFUNCTION()
-	void SelectItem(int clickedNum);
+	void SelectItem(int clickedNum, UItemHoverWidget* ItemHover);
 	UFUNCTION()
 	void OnClick_Item();
 	UFUNCTION()

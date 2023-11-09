@@ -23,7 +23,7 @@ void USpecialtyListFormWidget::NativeConstruct()
 	}
 }
 
-void USpecialtyListFormWidget::SelectSpecialty(int clickedNum)
+void USpecialtyListFormWidget::SelectSpecialty(int clickedNum, USpecialtyHoverWidget* SpecialtyHover)
 {
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (i == clickedNum) {
@@ -31,7 +31,7 @@ void USpecialtyListFormWidget::SelectSpecialty(int clickedNum)
 				PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush);
 				PackageSkillWidget->Selected_Specialty->Image_Icon->SetBrushFromTexture(selectedimg);
-				SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 
 				if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -39,14 +39,14 @@ void USpecialtyListFormWidget::SelectSpecialty(int clickedNum)
 				}
 			}
 			else {
-				PackageSkillWidget->Selected_Specialty->CancelSpecialty();
+				PackageSkillWidget->Selected_Specialty->CancelSpecialty(SpecialtyHover);
 				break;
 			}
 		}
 		else {
 			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-			if (SpecialtyHoverWidgetRef) {
-				SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+			if (SpecialtyHover) {
+				SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 
 			}
 		}
@@ -57,13 +57,15 @@ void USpecialtyListFormWidget::OnClick_Specialty()
 {
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
-			SelectSpecialty(i);
+			SelectSpecialty(i, SpecialtyHoverWidgetRef);
 			break;
 		}
 	}
 }
 
 void USpecialtyListFormWidget::OnHovered_Specialty() {
+	int hoveredNum = 0;
+
 	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
 		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
 			hoveredNum = i;
