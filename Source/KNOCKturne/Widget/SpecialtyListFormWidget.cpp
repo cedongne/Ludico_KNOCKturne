@@ -31,7 +31,12 @@ void USpecialtyListFormWidget::SelectSpecialty(int clickedNum, USpecialtyHoverWi
 				PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[i]->Image_Icon->Brush);
 				PackageSkillWidget->Selected_Specialty->Image_Icon->SetBrushFromTexture(selectedimg);
-				SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+				if (SpecialtyHover) {
+					SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				}
+				
+				NTLOG(Warning, TEXT("%s"), *icon_checkbox_selected->GetFName().ToString());
 
 				if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -45,10 +50,6 @@ void USpecialtyListFormWidget::SelectSpecialty(int clickedNum, USpecialtyHoverWi
 		}
 		else {
 			PackageSkillWidget->SpecialtyListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-			if (SpecialtyHover) {
-				SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-
-			}
 		}
 	}
 }
@@ -73,7 +74,7 @@ void USpecialtyListFormWidget::OnHovered_Specialty() {
 		}
 	}
 
-	if (SpecialtyHoverWidgetRef) {
+	/*if (SpecialtyHoverWidgetRef) {
 		if (!SpecialtyHoverWidgetRef->IsInViewport()) {
 			if (SpecialtyHoverClass) {
 				SpecialtyHoverWidgetRef = CreateWidget<USpecialtyHoverWidget>(GetWorld(), SpecialtyHoverClass);
@@ -84,6 +85,15 @@ void USpecialtyListFormWidget::OnHovered_Specialty() {
 		}
 	}
 	else {
+		if (SpecialtyHoverClass) {
+			SpecialtyHoverWidgetRef = CreateWidget<USpecialtyHoverWidget>(GetWorld(), SpecialtyHoverClass);
+			if (SpecialtyHoverWidgetRef) {
+				SpecialtyHoverWidgetRef->AddToViewport();
+			}
+		}
+	}*/
+
+	if (!SpecialtyHoverWidgetRef || !SpecialtyHoverWidgetRef->IsInViewport()) {
 		if (SpecialtyHoverClass) {
 			SpecialtyHoverWidgetRef = CreateWidget<USpecialtyHoverWidget>(GetWorld(), SpecialtyHoverClass);
 			if (SpecialtyHoverWidgetRef) {

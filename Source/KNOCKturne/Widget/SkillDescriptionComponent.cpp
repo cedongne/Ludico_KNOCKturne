@@ -257,7 +257,8 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UBu
 
 	FVector2D pos;
 	pos.X = ViewportPos.X;
-	pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
+	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
+	pos.Y = ViewportPos.Y - 207.0 / 2 + 104.0 / 2;
 	hoverwidget->SetPositionInViewport(pos);
 	NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
 }

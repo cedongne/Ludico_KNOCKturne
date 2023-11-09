@@ -20,6 +20,8 @@ class KNOCKTURNE_API UPac_SelectedUI_Widget : public UUserWidget
 	void NativePreConstruct();
 	void NativeConstruct();
 
+	class UBattleManagerSystem* BattleManagerSystem;
+
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
 	UTexture2D* cancelimg;

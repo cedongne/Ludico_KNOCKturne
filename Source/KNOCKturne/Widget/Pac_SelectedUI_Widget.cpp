@@ -18,6 +18,8 @@ void UPac_SelectedUI_Widget::NativePreConstruct() {
 }
 
 void UPac_SelectedUI_Widget::NativeConstruct() {
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
@@ -40,19 +42,22 @@ void UPac_SelectedUI_Widget::OnClick_Cancel() {
 
 void UPac_SelectedUI_Widget::CancelSkill(int cancelNum, USkillHoverWidget* SkillHover)
 {
+	int cancelNuminSelectedUI = 0;
+	cancelimg = PackageSkillWidget->PeppySkillTableRows[cancelNum]->SkillIcon;
+	
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
-		if (i == cancelNum) {
-			cancelimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush);
+		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush) == cancelimg) {
+			cancelNuminSelectedUI = i;
 			break;
 		}
 	}
 
-	if ((cancelNum == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[cancelNum + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
-		PackageSkillWidget->SelectedUIListArr[cancelNum]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
-		PackageSkillWidget->SelectedUIListArr[cancelNum]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	if ((cancelNuminSelectedUI == PackageSkillWidget->SelectedUIListArr.Num() - 1) || (PackageSkillWidget->SelectedUIListArr[cancelNuminSelectedUI + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)) {
+		PackageSkillWidget->SelectedUIListArr[cancelNuminSelectedUI]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+		PackageSkillWidget->SelectedUIListArr[cancelNuminSelectedUI]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
 	}
 	else {
-		for (int j = cancelNum; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
+		for (int j = cancelNuminSelectedUI; j < PackageSkillWidget->SelectedUIListArr.Num() - 1; j++) {
 			// 다음 칸이 비어있지 않으면
 			if (PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 				PackageSkillWidget->SelectedUIListArr[j]->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[j + 1]->Image_Icon->Brush));
@@ -83,7 +88,8 @@ void UPac_SelectedUI_Widget::OnClick_CancelSkill()
 {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
-			CancelSkill(i, PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef);
+			int cancelNum = BattleManagerSystem->FindSkillRow(UKismetSystemLibrary::GetDisplayName(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon));
+			CancelSkill(cancelNum, PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef);
 		}
 	}
 }

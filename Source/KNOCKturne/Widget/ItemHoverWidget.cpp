@@ -19,7 +19,9 @@ void UItemHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds)
 	Super::NativeTick(Geometry, DeltaSeconds);
 
 	if (!IsHovered()) {
-		RemoveFromParent();
+		if (PackageSkillWidget->ItemListArr[FindInteractionNum()]->Button_Background->IsHovered() == false) {
+			RemoveFromParent();
+		}
 	}
 }
 

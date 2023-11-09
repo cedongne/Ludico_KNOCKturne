@@ -19,7 +19,9 @@ void USpecialtyHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSec
 	Super::NativeTick(Geometry, DeltaSeconds);
 
 	if (!IsHovered()) {
-		RemoveFromParent();
+		if (PackageSkillWidget->SpecialtyListArr[FindInteractionNum()]->Button_Background->IsHovered() == false) {
+			RemoveFromParent();
+		}
 	}
 }
 

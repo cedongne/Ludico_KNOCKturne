@@ -33,7 +33,10 @@ void UItemListFormWidget::SelectItem(int clickedNum, UItemHoverWidget* ItemHover
 				PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush);
 				PackageSkillWidget->Selected_Item->Image_Icon->SetBrushFromTexture(selectedimg);
-				ItemHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+				if (ItemHover) {
+					ItemHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				}
 
 				if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -47,9 +50,6 @@ void UItemListFormWidget::SelectItem(int clickedNum, UItemHoverWidget* ItemHover
 		}
 		else {
 			PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-			if (ItemHover) {
-				ItemHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-			}
 		}
 	}
 }
@@ -74,7 +74,7 @@ void UItemListFormWidget::OnHovered_Item() {
 		}
 	}
 
-	if (ItemHoverWidgetRef) {
+	/*if (ItemHoverWidgetRef) {
 		if (!ItemHoverWidgetRef->IsInViewport()) {
 			if (ItemHoverClass) {
 				ItemHoverWidgetRef = CreateWidget<UItemHoverWidget>(GetWorld(), ItemHoverClass);
@@ -85,6 +85,15 @@ void UItemListFormWidget::OnHovered_Item() {
 		}
 	}
 	else {
+		if (ItemHoverClass) {
+			ItemHoverWidgetRef = CreateWidget<UItemHoverWidget>(GetWorld(), ItemHoverClass);
+			if (ItemHoverWidgetRef) {
+				ItemHoverWidgetRef->AddToViewport();
+			}
+		}
+	}*/
+
+	if (!ItemHoverWidgetRef || !ItemHoverWidgetRef->IsInViewport()) {
 		if (ItemHoverClass) {
 			ItemHoverWidgetRef = CreateWidget<UItemHoverWidget>(GetWorld(), ItemHoverClass);
 			if (ItemHoverWidgetRef) {
