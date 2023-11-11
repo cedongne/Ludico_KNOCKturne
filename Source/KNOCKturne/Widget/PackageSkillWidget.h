@@ -124,9 +124,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UAlertModalWidget* AlertModalRef;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool isHover = false;
-
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()
@@ -167,4 +164,10 @@ public:
 	void SetBeforeSelectedSkills();
 	UFUNCTION()
 	void RemoveSelectedHoverWidget();
+	UFUNCTION()
+	void SaveSelectedSkill();
+	UFUNCTION()
+	void SaveSelectedSpecialty();
+	UFUNCTION()
+	void SaveSelectedItem();
 };

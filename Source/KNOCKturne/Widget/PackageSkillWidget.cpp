@@ -390,60 +390,19 @@ void UPackageSkillWidget::OnClick_SettingDone() {
 		AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);
 	}
 	else {
-		// 특수기가 선택되지 않았으면 '정신, 번뜩' 자동으로 선택
-		if (Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
-			Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTableRows[0]->SpecialSkillIcon);
-		}
-
-		// 선택한 스킬 저장
-		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
-			if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
-				UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(SelectedUIListArr[i]->Image_Icon->Brush);
-				FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
-
-				if (BattleManagerSystem->FindSkillRow(skilliconname)) {
-					BattleManagerSystem->SetOneSelectedSkillCodeList(i, BattleManagerSystem->FindSkillRow(skilliconname));
-
-				}
-				else {
-					NTLOG(Warning, TEXT("Cannot Find SkillRow!"));
-				}
-			}
-			else {
-				break;
-			}
-		}
-
-		// 선택한 특수기 저장
-		UTexture2D* specialtyimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Selected_Specialty->Image_Icon->Brush);
-		FString specialtyiconname = UKismetSystemLibrary::GetDisplayName(specialtyimg);
-		if (BattleManagerSystem->FindSpecialtyRow(specialtyiconname)) {
-			int specialtyidx = BattleManagerSystem->FindSpecialtyRow(specialtyiconname);
-			BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
-		}
-		else {
-			NTLOG(Warning, TEXT("Cannot Find SpecialtyRow!"));
-		}
-
-		// 선택한 아이템 저장
-		if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
-			UTexture2D* itemimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Selected_Item->Image_Icon->Brush);
-			FString itemiconname = UKismetSystemLibrary::GetDisplayName(itemimg);
-			if (BattleManagerSystem->FindItemRow(itemiconname)) {
-				int itemidx = BattleManagerSystem->FindItemRow(itemiconname);
-				BattleManagerSystem->FinalItem = ItemTable->GetRowNames()[itemidx].ToString();
-			}
-			else {
-				NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
-			}
-		}
-
+		SaveSelectedSkill();
+		SaveSelectedSpecialty();
+		SaveSelectedItem();
 		RemoveFromParent();
 	}
 }
 
 void UPackageSkillWidget::OnClick_AlertModalYes() {
 	AlertModalRef->RemoveFromParent();
+	SaveSelectedSpecialty();
+	if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+		SaveSelectedItem();
+	}
 	RemoveFromParent();
 }
 
@@ -454,8 +413,9 @@ void UPackageSkillWidget::OnClick_AlertModalNo() {
 
 void UPackageSkillWidget::SetBeforeSelectedSkills()
 {
+	NTLOG(Warning, TEXT("%s"), *BattleManagerSystem->FinalItem);
 	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
-		if (BattleManagerSystem->SelectedSkillCodeList[i] == -1) {
+		if (BattleManagerSystem->SelectedSkillCodeList[i] == NULL) {
 			break;
 		}
 		else {
@@ -471,6 +431,13 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillData>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon);
 		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+
+		if (BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)) {
+			//SpecialtyListArr[BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
+		}
+		else {
+			NTLOG(Warning, TEXT("Cannot Find SpecialtyRow!"));
+		}
 	}
 	else {
 		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTableRows[0]->SpecialSkillIcon);
@@ -483,6 +450,12 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon);
 		Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+		if (BattleManagerSystem->FindItemRow(BattleManagerSystem->FinalItem)) {
+			//SpecialtyListArr[BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
+		}
+		else {
+			NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
+		}
 	}
 }
 
@@ -507,6 +480,61 @@ void UPackageSkillWidget::RemoveSelectedHoverWidget() {
 	if (ItemListFormRef->ItemHoverWidgetRef) {
 		if (ItemListFormRef->ItemHoverWidgetRef->IsHovered() == false && Selected_Item->Button_Background->IsHovered() == false) {
 			ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
+		}
+	}
+}
+
+void UPackageSkillWidget::SaveSelectedSkill() {
+	BattleManagerSystem->SelectedSkillCodeList.SetNum(8);
+	// 선택한 스킬 저장
+	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+		if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+			FString skilliconname = SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString();
+			if (BattleManagerSystem->FindSkillRow(skilliconname)) {
+				BattleManagerSystem->SetOneSelectedSkillCodeList(i, BattleManagerSystem->FindSkillRow(skilliconname));
+
+			}
+			else {
+				//NTLOG(Warning, TEXT("Cannot Find SkillRow!"));
+			}
+		}
+		else {
+			BattleManagerSystem->SetSizeOfSelectedSkillCodeList(i);
+			break;
+		}
+	}
+}
+
+void UPackageSkillWidget::SaveSelectedSpecialty() {
+	// 특수기가 선택되지 않았으면 '정신, 번뜩' 자동으로 선택
+	if (Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
+		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTableRows[0]->SpecialSkillIcon);
+	}
+	// 선택한 특수기 저장
+	FString specialtyiconname = Selected_Specialty->Image_Icon->Brush.GetResourceName().ToString();
+	NTLOG(Warning, TEXT("%s"), *specialtyiconname);
+
+	if (BattleManagerSystem->FindSpecialtyRow(specialtyiconname)) {
+		int specialtyidx = BattleManagerSystem->FindSpecialtyRow(specialtyiconname);
+		BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
+	}
+	else {
+		NTLOG(Warning, TEXT("Cannot Find SpecialtyRow: %s"), *specialtyiconname);
+	}
+}
+
+void UPackageSkillWidget::SaveSelectedItem() {
+	// 선택한 아이템 저장
+	if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+		FString itemiconname = Selected_Item->Image_Icon->Brush.GetResourceName().ToString();
+		NTLOG(Warning, TEXT("%s"), *itemiconname);
+
+		if (BattleManagerSystem->FindItemRow(itemiconname)) {
+			int itemidx = BattleManagerSystem->FindItemRow(itemiconname);
+			BattleManagerSystem->FinalItem = ItemTable->GetRowNames()[itemidx].ToString();
+		}
+		else {
+			NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
 		}
 	}
 }

@@ -252,7 +252,7 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UBu
 	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
 	pos.Y = ViewportPos.Y - 207.0 / 2 + 104.0 / 2;
 	hoverwidget->SetPositionInViewport(pos);
-	NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
+	//NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
 }
 
 void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)

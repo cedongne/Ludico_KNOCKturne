@@ -28,7 +28,7 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 }
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
-	if (PackageSkillWidget->UniformGridPanel_Skill->GetVisibility() == ESlateVisibility::Visible) {
+	/*if (PackageSkillWidget->UniformGridPanel_Skill->GetVisibility() == ESlateVisibility::Visible) {
 		OnClick_CancelSkill();
 	}
 	else if (PackageSkillWidget->UniformGridPanel_Specialty->GetVisibility() == ESlateVisibility::Visible) {
@@ -36,6 +36,16 @@ void UPac_SelectedUI_Widget::OnClick_Cancel() {
 	}
 	else if (PackageSkillWidget->UniformGridPanel_Item->GetVisibility() == ESlateVisibility::Visible) {
 		CancelItem(PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef);
+	}*/
+
+	if (this->Button_Background == PackageSkillWidget->Selected_Specialty->Button_Background) {
+		CancelSpecialty(PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef);
+	}
+	else if (this->Button_Background == PackageSkillWidget->Selected_Item->Button_Background) {
+		CancelItem(PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef);
+	}
+	else {
+		OnClick_CancelSkill();
 	}
 }
 
@@ -87,7 +97,7 @@ void UPac_SelectedUI_Widget::OnClick_CancelSkill()
 {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
-			int cancelNum = BattleManagerSystem->FindSkillRow(UKismetSystemLibrary::GetDisplayName(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon));
+			int cancelNum = BattleManagerSystem->FindSkillRow(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
 			CancelSkill(cancelNum, PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef);
 		}
 	}

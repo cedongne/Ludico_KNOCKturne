@@ -11,7 +11,7 @@
 
 UBattleManagerSystem::UBattleManagerSystem() {
 
-	SelectedSkillCodeList.Init(-1, 8);
+	SelectedSkillCodeList.SetNum(8);
 
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
@@ -69,7 +69,6 @@ int32 UBattleManagerSystem::GetSizeOfSelectedSkillCodeList() {
 }
 
 void UBattleManagerSystem::SetOneSelectedSkillCodeList(int32 index, int32 value) {
-	//SelectedSkillCodeList.SetNum(SelectedSkillCodeList.Num() + 1);
 	SelectedSkillCodeList[index] = value;
 }
 
