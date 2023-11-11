@@ -25,7 +25,6 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 
 	Button_Cancel->OnClicked.AddDynamic(this, &UPac_SelectedUI_Widget::OnClick_Cancel);
 	Button_Background->OnHovered.AddDynamic(this, &UPac_SelectedUI_Widget::OnHovered_SelectedSkill);
-	Button_Background->OnUnhovered.AddDynamic(this, &UPac_SelectedUI_Widget::OnUnHovered_SelectedSkill);
 }
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
@@ -148,27 +147,4 @@ void UPac_SelectedUI_Widget::OnHovered_SelectedSkill()
 			}
 		}
 	}
-}
-
-void UPac_SelectedUI_Widget::OnUnHovered_SelectedSkill()
-{
-	//// 선택한 특수기 비호버
-	//if (PackageSkillWidget->Selected_Specialty->Button_Background == this->Button_Background && PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef) {
-	//	PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef->RemoveFromParent();
-	//}
-	//// 선택한 아이템 비호버
-	//else if (PackageSkillWidget->Selected_Item->Button_Background == this->Button_Background && PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef) {
-	//	PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
-	//}
-	//// 선택한 스킬 비호버
-	//else {
-	//	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
-	//		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background && PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef) {
-	//			//PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef->RemoveSelectedHoverWidget(PackageSkillWidget->SelectedUIListArr[i]->Button_Background);
-	//			if (PackageSkillWidget->isHover == false) {
-	//				PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
-	//			}
-	//		}
-	//	}
-	//}
 }

@@ -59,6 +59,4 @@ public:
 	void OnHovered_SelectedSkill();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlaySkillErrorAnim();
-	UFUNCTION()
-	void OnUnHovered_SelectedSkill();
 };
