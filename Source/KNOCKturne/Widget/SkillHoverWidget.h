@@ -22,6 +22,7 @@ class KNOCKTURNE_API USkillHoverWidget : public UUserWidget
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
+	TArray<UUserWidget*> PeppyTurnWidgetArr;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -57,12 +58,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPeppyTurnWidget* PeppyTurnWidget;
+
 	UFUNCTION()
 	void OnClick_Button();
 	UFUNCTION()
 	int32 FindInteractionNum();
 	UFUNCTION()
 	void Remove();
-	UFUNCTION()
-	void RemoveSelectedHoverWidget(UButton* SelectedSkillBtn);
 };

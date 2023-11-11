@@ -20,6 +20,7 @@ void UPac_SelectedUI_Widget::NativePreConstruct() {
 void UPac_SelectedUI_Widget::NativeConstruct() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 

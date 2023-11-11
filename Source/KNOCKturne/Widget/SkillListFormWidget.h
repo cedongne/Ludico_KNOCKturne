@@ -9,6 +9,7 @@
 #include "Components/RichTextBlock.h"
 #include "SkillDescriptionComponent.h"
 #include "SkillHoverWidget.h"
+#include "PeppyTurnWidget.h"
 
 #include "SkillListFormWidget.generated.h"
 
@@ -27,6 +28,7 @@ class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
 	TArray<UUserWidget*> SkillHoverWidgetArr;
+	TArray<UUserWidget*> PeppyTurnWidgetArr;
 	UTexture2D* SelectedSkillImg;
 
 public:
@@ -58,6 +60,11 @@ public:
 	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPeppyTurnWidget* PeppyTurnWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> SkillHoverClass;

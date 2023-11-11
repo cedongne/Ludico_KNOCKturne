@@ -8,7 +8,9 @@
 
 void USpecialtyHoverWidget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
-	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
+	if (PackageSkillWidgetArr.Num() > 0 && (UPackageSkillWidget*)PackageSkillWidgetArr[0]) {
+		PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
+	}
 
 	Button_Background->OnUnhovered.AddDynamic(this, &USpecialtyHoverWidget::Remove);
 }
