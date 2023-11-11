@@ -28,7 +28,6 @@ protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
 	TArray<UUserWidget*> SkillHoverWidgetArr;
 	UTexture2D* SelectedSkillImg;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -65,12 +64,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USkillHoverWidget* SkillHoverWidgetRef;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	USkillDescriptionComponent* SkillDescriptionComponent;
+
 	UFUNCTION()
 	void SelectSkill(int clickedNum, USkillHoverWidget* SkillHover);
 	UFUNCTION()
 	void OnClick_Skill();
 	UFUNCTION()
 	void AddSkillInSelectedUI();
+	UFUNCTION()
+	void CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI);
 	UFUNCTION()
 	void OnHovered_Skill();
 };

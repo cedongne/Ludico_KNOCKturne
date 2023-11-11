@@ -45,7 +45,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageSkillWidget* PackageSkillWidget;
 
-
 	UFUNCTION()
 	void OnClick_Cancel();
 	UFUNCTION()
@@ -56,4 +55,10 @@ public:
 	void CancelSpecialty(USpecialtyHoverWidget* SpecialtyHover);
 	UFUNCTION()
 	void CancelItem(UItemHoverWidget* ItemHover);
+	UFUNCTION()
+	void OnHovered_SelectedSkill();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlaySkillErrorAnim();
+	UFUNCTION()
+	void OnUnHovered_SelectedSkill();
 };

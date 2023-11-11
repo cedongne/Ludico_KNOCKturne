@@ -28,11 +28,13 @@ class KNOCKTURNE_API UPackageSkillWidget : public UUserWidget
 	UPackageSkillWidget(const FObjectInitializer& ObjectInitializer);
 	void NativePreConstruct();
 	void NativeConstruct();
+	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
 
 	AKNOCKturneGameState* KNOCKturneGameState;
 	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
+	UButton* SelectedUIBtn;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -122,6 +124,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UAlertModalWidget* AlertModalRef;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool isHover = false;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()
@@ -160,4 +165,6 @@ public:
 	void OnClick_AlertModalNo();
 	UFUNCTION()
 	void SetBeforeSelectedSkills();
+	UFUNCTION()
+	void RemoveSelectedHoverWidget();
 };

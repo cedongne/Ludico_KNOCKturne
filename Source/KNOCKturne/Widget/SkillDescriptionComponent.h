@@ -58,5 +58,6 @@ public:
 
 	UFUNCTION(Blueprintcallable)
 	void SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
-		
+	UFUNCTION(Blueprintcallable)
+	void SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
 };

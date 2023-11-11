@@ -101,15 +101,8 @@ FString USkillDescriptionComponent::SkillGetSkillIndexByKeyword(int RowNum, FStr
 }
 
 FString USkillDescriptionComponent::SkillRedefineDescription(int RowNum) {
-	//FString rowname = PeppySkillTableRows[RowNum]->SkillDescript;
-	FString rowname = "";
-	if (PeppySkillTableRows[RowNum]->SkillDescript == "") {
-		NTLOG(Warning, TEXT("%d"), RowNum);
-	}
-	else {
-		rowname = PeppySkillTableRows[RowNum]->SkillDescript;
-	}
-	/*FString OriginalStr = SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
+	FString rowname = PeppySkillTableRows[RowNum]->SkillDescript;
+	FString OriginalStr = SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
 	FString Redefined = OriginalStr;
 	int32 StartIdx = 0;
 	FString tmp1 = "";
@@ -139,8 +132,7 @@ FString USkillDescriptionComponent::SkillRedefineDescription(int RowNum) {
 			count++;
 			Redefined.RemoveAt(index, 1);
 		}
-	}*/
-	FString Redefined = "";
+	}
 
 	return Redefined;
 }
@@ -261,4 +253,18 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UBu
 	pos.Y = ViewportPos.Y - 207.0 / 2 + 104.0 / 2;
 	hoverwidget->SetPositionInViewport(pos);
 	NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
+}
+
+void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+{
+	FVector2D PixelPos;
+	FVector2D ViewportPos;
+	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
+	USlateBlueprintLibrary::LocalToViewport(backgroundBtn, Geometry, FVector2D(0.0, 0.0), PixelPos, ViewportPos);
+
+	FVector2D pos;
+	pos.X = ViewportPos.X + 70.0;
+	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
+	pos.Y = ViewportPos.Y - 55.0;
+	hoverwidget->SetPositionInViewport(pos);
 }

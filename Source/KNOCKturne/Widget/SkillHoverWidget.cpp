@@ -10,19 +10,7 @@ void USkillHoverWidget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
-	if (Button_Background) {
-		Button_Background->OnClicked.AddDynamic(this, &USkillHoverWidget::OnClick_Button);
-	}
-}
-
-void USkillHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
-	Super::NativeTick(Geometry, DeltaSeconds);
-
-	if (!IsHovered()) {
-		if (PackageSkillWidget->SkillListArr[FindInteractionNum()]->Button_Background->IsHovered() == false) {
-			RemoveFromParent();
-		}
-	}
+	Button_Background->OnUnhovered.AddDynamic(this, &USkillHoverWidget::Remove);
 }
 
 void USkillHoverWidget::OnClick_Button()
@@ -45,4 +33,16 @@ int32 USkillHoverWidget::FindInteractionNum()
 
 	NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
 	return 100;
+}
+
+void USkillHoverWidget::Remove()
+{
+	RemoveFromParent();
+}
+
+void USkillHoverWidget::RemoveSelectedHoverWidget(UButton* SelectedSkillBtn)
+{
+	if (this->Button_Background->IsHovered() == false && SelectedSkillBtn->IsHovered() == false) {
+		RemoveFromParent();
+	}
 }

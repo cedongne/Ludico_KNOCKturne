@@ -27,10 +27,17 @@ void USkillListFormWidget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 	
-
 	if (Button_Background) {
 		Button_Background->OnClicked.AddDynamic(this, &USkillListFormWidget::OnClick_Skill);
 		Button_Background->OnHovered.AddDynamic(this, &USkillListFormWidget::OnHovered_Skill);
+	}
+
+	if (SkillHoverWidgetRef) {
+		if (!SkillHoverWidgetRef->IsHovered()) {
+			if (PackageSkillWidget->SkillListArr[SkillHoverWidgetRef->FindInteractionNum()]->Button_Background->IsHovered() == false) {
+				RemoveFromParent();
+			}
+		}
 	}
 }
 
@@ -61,7 +68,8 @@ void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillH
 		for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 			if (PackageSkillWidget->SelectedUIListArr[i]->SkillError) {
 				NTLOG(Warning, TEXT("skillerror!"));
-				PlayAnimation(PackageSkillWidget->SelectedUIListArr[i]->SkillError);
+				//PlayAnimation(PackageSkillWidget->SelectedUIListArr[i]->SkillError);
+				PackageSkillWidget->SelectedUIListArr[i]->PlaySkillErrorAnim();
 			}
 			
 		}
@@ -94,17 +102,8 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 	}
 }
 
-void USkillListFormWidget::OnHovered_Skill()
+void USkillListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI)
 {
-	int hoveredNum = 0;
-
-	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
-		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
-			hoveredNum = i;
-			break;
-		}
-	}
-
 	/*if (SkillHoverWidgetRef) {
 		if (!SkillHoverWidgetRef->IsInViewport()) {
 			if (SkillHoverClass) {
@@ -124,6 +123,10 @@ void USkillListFormWidget::OnHovered_Skill()
 		}
 	}
 
+	if (!isSelectedUI && SkillHoverWidgetRef) {
+		SkillHoverWidgetRef->Button_Background->OnClicked.AddDynamic(SkillHoverWidgetRef, &USkillHoverWidget::OnClick_Button);
+	}
+
 	SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_CheckBox->Brush));
 	SkillHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_Icon->Brush));
 	SkillHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_CoolTimeSec->GetText());
@@ -131,6 +134,21 @@ void USkillListFormWidget::OnHovered_Skill()
 	SkillHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Energy->GetText());
 	SkillHoverWidgetRef->TextBlock_Stance->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Stance->GetText());
 	SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(hoveredNum)));
-	SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef, PackageSkillWidget->SkillListArr[hoveredNum]->Button_Background);
+
+	if (isSelectedUI) {
+		SkillDescriptionComponent->SetSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);
+	}
+	else {
+		SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef, backgroundBtn);
+	}
 }
 
+void USkillListFormWidget::OnHovered_Skill()
+{
+	for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
+		if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
+			CreateHoverWidget(i, PackageSkillWidget->SkillListArr[i]->Button_Background, false);
+			break;
+		}
+	}
+}

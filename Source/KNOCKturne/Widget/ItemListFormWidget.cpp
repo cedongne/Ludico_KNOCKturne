@@ -28,7 +28,7 @@ void UItemListFormWidget::NativeConstruct()
 void UItemListFormWidget::SelectItem(int clickedNum, UItemHoverWidget* ItemHover)
 {
 	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
-		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background && KNOCKturneGameState->ItemCountList[i] > 0) {
+		if (i == clickedNum && KNOCKturneGameState->ItemCountList[i] > 0) {
 			if (PackageSkillWidget->ItemListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 				PackageSkillWidget->ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				UTexture2D* selectedimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[i]->Image_Icon->Brush);
@@ -64,16 +64,8 @@ void UItemListFormWidget::OnClick_Item()
 	}
 }
 
-void UItemListFormWidget::OnHovered_Item() {
-	int hoveredNum = 0;
-
-	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
-		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background) {
-			hoveredNum = i;
-			break;
-		}
-	}
-
+void UItemListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI)
+{
 	/*if (ItemHoverWidgetRef) {
 		if (!ItemHoverWidgetRef->IsInViewport()) {
 			if (ItemHoverClass) {
@@ -102,10 +94,30 @@ void UItemListFormWidget::OnHovered_Item() {
 		}
 	}
 
+	if (!isSelectedUI && ItemHoverWidgetRef) {
+		ItemHoverWidgetRef->Button_Background->OnClicked.AddDynamic(ItemHoverWidgetRef, &UItemHoverWidget::OnClick_Button);
+	}
+
 	ItemHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[hoveredNum]->Image_CheckBox->Brush));
 	ItemHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->ItemListArr[hoveredNum]->Image_Icon->Brush));
 	ItemHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->ItemListArr[hoveredNum]->TextBlock_SkillName->GetText());
 	ItemHoverWidgetRef->TextBlock_Count->SetText(PackageSkillWidget->ItemListArr[hoveredNum]->TextBlock_Count->GetText());
 	ItemHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->ItemRedefineDescription(hoveredNum)));
 	SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, PackageSkillWidget->ItemListArr[hoveredNum]->Button_Background);
+
+	if (isSelectedUI) {
+		SkillDescriptionComponent->SetSelectedSkillHoverPos(ItemHoverWidgetRef, backgroundBtn);
+	}
+	else {
+		SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, backgroundBtn);
+	}
+}
+
+void UItemListFormWidget::OnHovered_Item() {
+	for (int i = 0; i < PackageSkillWidget->ItemListArr.Num(); i++) {
+		if (PackageSkillWidget->ItemListArr[i]->Button_Background == this->Button_Background) {
+			CreateHoverWidget(i, PackageSkillWidget->ItemListArr[i]->Button_Background, false);
+			break;
+		}
+	}
 }

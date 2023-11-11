@@ -27,7 +27,6 @@ class KNOCKTURNE_API USpecialtyListFormWidget : public UUserWidget
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -62,10 +61,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USpecialtyHoverWidget* SpecialtyHoverWidgetRef;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	USkillDescriptionComponent* SkillDescriptionComponent;
+
 	UFUNCTION()
 	void SelectSpecialty(int clickedNum, USpecialtyHoverWidget* SpecialtyHover);
 	UFUNCTION()
 	void OnClick_Specialty();
+	UFUNCTION()
+	void CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI);
 	UFUNCTION()
 	void OnHovered_Specialty();
 };

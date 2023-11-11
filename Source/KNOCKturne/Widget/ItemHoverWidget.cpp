@@ -10,19 +10,7 @@ void UItemHoverWidget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
-	if (Button_Background) {
-		Button_Background->OnClicked.AddDynamic(this, &UItemHoverWidget::OnClick_Button);
-	}
-}
-
-void UItemHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
-	Super::NativeTick(Geometry, DeltaSeconds);
-
-	if (!IsHovered()) {
-		if (PackageSkillWidget->ItemListArr[FindInteractionNum()]->Button_Background->IsHovered() == false) {
-			RemoveFromParent();
-		}
-	}
+	Button_Background->OnUnhovered.AddDynamic(this, &UItemHoverWidget::Remove);
 }
 
 void UItemHoverWidget::OnClick_Button()
@@ -45,4 +33,9 @@ int32 UItemHoverWidget::FindInteractionNum()
 
 	NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
 	return 100;
+}
+
+void UItemHoverWidget::Remove()
+{
+	RemoveFromParent();
 }

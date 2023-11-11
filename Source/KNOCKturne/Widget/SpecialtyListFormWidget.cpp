@@ -35,8 +35,6 @@ void USpecialtyListFormWidget::SelectSpecialty(int clickedNum, USpecialtyHoverWi
 				if (SpecialtyHover) {
 					SpecialtyHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				}
-				
-				NTLOG(Warning, TEXT("%s"), *icon_checkbox_selected->GetFName().ToString());
 
 				if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 					PackageSkillWidget->Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -64,16 +62,8 @@ void USpecialtyListFormWidget::OnClick_Specialty()
 	}
 }
 
-void USpecialtyListFormWidget::OnHovered_Specialty() {
-	int hoveredNum = 0;
-
-	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
-		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
-			hoveredNum = i;
-			break;
-		}
-	}
-
+void USpecialtyListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI)
+{
 	/*if (SpecialtyHoverWidgetRef) {
 		if (!SpecialtyHoverWidgetRef->IsInViewport()) {
 			if (SpecialtyHoverClass) {
@@ -102,6 +92,10 @@ void USpecialtyListFormWidget::OnHovered_Specialty() {
 		}
 	}
 
+	if (!isSelectedUI && SpecialtyHoverWidgetRef) {
+		SpecialtyHoverWidgetRef->Button_Background->OnClicked.AddDynamic(SpecialtyHoverWidgetRef, &USpecialtyHoverWidget::OnClick_Button);
+	}
+
 	SpecialtyHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[hoveredNum]->Image_CheckBox->Brush));
 	SpecialtyHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SpecialtyListArr[hoveredNum]->Image_Icon->Brush));
 	SpecialtyHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_CoolTimeSec->GetText());
@@ -109,4 +103,20 @@ void USpecialtyListFormWidget::OnHovered_Specialty() {
 	SpecialtyHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_Energy->GetText());
 	SpecialtyHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SpecialtyRedefineDescription(hoveredNum)));
 	SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef, PackageSkillWidget->SpecialtyListArr[hoveredNum]->Button_Background);
+
+	if (isSelectedUI) {
+		SkillDescriptionComponent->SetSelectedSkillHoverPos(SpecialtyHoverWidgetRef, backgroundBtn);
+	}
+	else {
+		SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef, backgroundBtn);
+	}
+}
+
+void USpecialtyListFormWidget::OnHovered_Specialty() {
+	for (int i = 0; i < PackageSkillWidget->SpecialtyListArr.Num(); i++) {
+		if (PackageSkillWidget->SpecialtyListArr[i]->Button_Background == this->Button_Background) {
+			CreateHoverWidget(i, PackageSkillWidget->SpecialtyListArr[i]->Button_Background, false);
+			break;
+		}
+	}
 }

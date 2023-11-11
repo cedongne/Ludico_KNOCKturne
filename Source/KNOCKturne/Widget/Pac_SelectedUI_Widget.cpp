@@ -23,9 +23,9 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
 	PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 
-	if (Button_Cancel) {
-		Button_Cancel->OnClicked.AddDynamic(this, &UPac_SelectedUI_Widget::OnClick_Cancel);
-	}
+	Button_Cancel->OnClicked.AddDynamic(this, &UPac_SelectedUI_Widget::OnClick_Cancel);
+	Button_Background->OnHovered.AddDynamic(this, &UPac_SelectedUI_Widget::OnHovered_SelectedSkill);
+	Button_Background->OnUnhovered.AddDynamic(this, &UPac_SelectedUI_Widget::OnUnHovered_SelectedSkill);
 }
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
@@ -118,4 +118,57 @@ void UPac_SelectedUI_Widget::CancelItem(UItemHoverWidget* ItemHover)
 			ItemHover->Image_CheckBox->SetBrushFromTexture(PackageSkillWidget->ItemListFormRef->icon_checkbox);
 		}
 	}
+}
+
+void UPac_SelectedUI_Widget::OnHovered_SelectedSkill()
+{
+	// 선택한 특수기 호버
+	if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->Selected_Specialty->Button_Background == this->Button_Background) {
+		UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->Selected_Specialty->Image_Icon->Brush);
+		FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
+		int hoveredNum = BattleManagerSystem->FindSpecialtyRow(skilliconname);
+		PackageSkillWidget->SpecialtyListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->Selected_Specialty->Button_Background, true);
+	}
+	// 선택한 아이템 호버
+	else if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->Selected_Item->Button_Background == this->Button_Background) {
+		UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->Selected_Item->Image_Icon->Brush);
+		FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
+		int hoveredNum = BattleManagerSystem->FindItemRow(skilliconname);
+		PackageSkillWidget->ItemListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->Selected_Item->Button_Background, true);
+	}
+	// 선택한 스킬 호버
+	else {
+		for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
+			if (PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background) {
+				UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush);
+				FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
+				int hoveredNum = BattleManagerSystem->FindSkillRow(skilliconname);
+				PackageSkillWidget->SkillListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->SelectedUIListArr[i]->Button_Background, true);
+				break;
+			}
+		}
+	}
+}
+
+void UPac_SelectedUI_Widget::OnUnHovered_SelectedSkill()
+{
+	//// 선택한 특수기 비호버
+	//if (PackageSkillWidget->Selected_Specialty->Button_Background == this->Button_Background && PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef) {
+	//	PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef->RemoveFromParent();
+	//}
+	//// 선택한 아이템 비호버
+	//else if (PackageSkillWidget->Selected_Item->Button_Background == this->Button_Background && PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef) {
+	//	PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
+	//}
+	//// 선택한 스킬 비호버
+	//else {
+	//	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
+	//		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background && PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef) {
+	//			//PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef->RemoveSelectedHoverWidget(PackageSkillWidget->SelectedUIListArr[i]->Button_Background);
+	//			if (PackageSkillWidget->isHover == false) {
+	//				PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+	//			}
+	//		}
+	//	}
+	//}
 }

@@ -45,6 +45,7 @@ void UPackageSkillWidget::NativeConstruct() {
 	CreateSelectedSkillList();
 	CreateSpecialtyList();
 	CreateItemList();
+	SetBeforeSelectedSkills();
 
 	if (SkillTab) {
 		SkillTab->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_SkillTab);
@@ -64,7 +65,15 @@ void UPackageSkillWidget::NativeConstruct() {
 	if (Button_SettingDone) {
 		Button_SettingDone->OnClicked.AddDynamic(this, &UPackageSkillWidget::OnClick_SettingDone);
 	}
-	
+}
+
+void UPackageSkillWidget::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
+{
+	Super::NativeTick(MyGeometry, DeltaTime);
+
+	if (SkillListFormRef->SkillHoverWidgetRef || SpecialtyListFormRef->SpecialtyHoverWidgetRef || ItemListFormRef->ItemHoverWidgetRef) {
+		RemoveSelectedHoverWidget();
+	}
 }
 
 void UPackageSkillWidget::CreateSkillList() {
@@ -420,8 +429,8 @@ void UPackageSkillWidget::OnClick_SettingDone() {
 		if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 			UTexture2D* itemimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Selected_Item->Image_Icon->Brush);
 			FString itemiconname = UKismetSystemLibrary::GetDisplayName(itemimg);
-			if (BattleManagerSystem->FindSpecialtyRow(itemiconname)) {
-				int itemidx = BattleManagerSystem->FindSpecialtyRow(itemiconname);
+			if (BattleManagerSystem->FindItemRow(itemiconname)) {
+				int itemidx = BattleManagerSystem->FindItemRow(itemiconname);
 				BattleManagerSystem->FinalItem = ItemTable->GetRowNames()[itemidx].ToString();
 			}
 			else {
@@ -446,18 +455,58 @@ void UPackageSkillWidget::OnClick_AlertModalNo() {
 void UPackageSkillWidget::SetBeforeSelectedSkills()
 {
 	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
-		SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(PeppySkillTableRows[BattleManagerSystem->SelectedSkillCodeList[i]]->SkillIcon);
-		SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
-		SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+		if (BattleManagerSystem->SelectedSkillCodeList[i] == -1) {
+			break;
+		}
+		else {
+			SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(PeppySkillTableRows[BattleManagerSystem->SelectedSkillCodeList[i]]->SkillIcon);
+			SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+			SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 
-		SkillListArr[BattleManagerSystem->SelectedSkillCodeList[i]]->Image_CheckBox->SetBrushFromTexture(SkillListFormRef->icon_checkbox_selected);
+			SkillListArr[BattleManagerSystem->SelectedSkillCodeList[i]]->Image_CheckBox->SetBrushFromTexture(SkillListFormRef->icon_checkbox_selected);
+		}
 	}
 
 	if (BattleManagerSystem->FinalSpecialSkill != "") {
-		//Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillData>(FName(*BattleManagerSystem->FinalSpecialSkill, TEXT(""))->;)
+		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillData>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon);
+		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+	}
+	else {
+		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTableRows[0]->SpecialSkillIcon);
+		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+		SpecialtyListArr[0]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
 	}
 
 	if (BattleManagerSystem->FinalItem != "") {
-		//Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem, TEXT(""))->;
+		Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon);
+		Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+		Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void UPackageSkillWidget::RemoveSelectedHoverWidget() {
+	if (SkillListFormRef->SkillHoverWidgetRef) {
+		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+			if (SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName() == SkillListFormRef->SkillHoverWidgetRef->Image_Icon->Brush.GetResourceName()) {
+				SelectedUIBtn = SelectedUIListArr[i]->Button_Background;
+				break;
+			}
+		}
+
+		if (SkillListFormRef->SkillHoverWidgetRef->IsHovered() == false && SelectedUIBtn->IsHovered() == false) {
+			SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+		}
+	}
+	if (SpecialtyListFormRef->SpecialtyHoverWidgetRef) {
+		if (SpecialtyListFormRef->SpecialtyHoverWidgetRef->IsHovered() == false && Selected_Specialty->Button_Background->IsHovered() == false) {
+			SpecialtyListFormRef->SpecialtyHoverWidgetRef->RemoveFromParent();
+		}
+	}
+	if (ItemListFormRef->ItemHoverWidgetRef) {
+		if (ItemListFormRef->ItemHoverWidgetRef->IsHovered() == false && Selected_Item->Button_Background->IsHovered() == false) {
+			ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
+		}
 	}
 }

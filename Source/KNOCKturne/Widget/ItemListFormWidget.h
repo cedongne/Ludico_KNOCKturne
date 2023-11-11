@@ -30,7 +30,6 @@ class KNOCKTURNE_API UItemListFormWidget : public UUserWidget
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -63,10 +62,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UItemHoverWidget* ItemHoverWidgetRef;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	USkillDescriptionComponent* SkillDescriptionComponent;
+
 	UFUNCTION()
 	void SelectItem(int clickedNum, UItemHoverWidget* ItemHover);
 	UFUNCTION()
 	void OnClick_Item();
+	UFUNCTION()
+	void CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI);
 	UFUNCTION()
 	void OnHovered_Item();
 };

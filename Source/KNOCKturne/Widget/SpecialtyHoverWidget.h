@@ -19,7 +19,6 @@ class KNOCKTURNE_API USpecialtyHoverWidget : public UUserWidget
 	void NativeConstruct();
 
 protected:
-	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 	TArray<UUserWidget*> PackageSkillWidgetArr;
 
 public:
@@ -56,4 +55,6 @@ public:
 	void OnClick_Button();
 	UFUNCTION()
 	int32 FindInteractionNum();
+	UFUNCTION()
+	void Remove();
 };
