@@ -268,3 +268,29 @@ void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidg
 	pos.Y = ViewportPos.Y - 55.0;
 	hoverwidget->SetPositionInViewport(pos);
 }
+
+void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+{
+	FVector2D PixelPos;
+	FVector2D ViewportPos;
+	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
+	USlateBlueprintLibrary::LocalToViewport(backgroundBtn, Geometry, FVector2D(0.0, 0.0), PixelPos, ViewportPos);
+
+	FVector2D pos;
+	pos.X = ViewportPos.X;
+	pos.Y = ViewportPos.Y - 40.0;
+	hoverwidget->SetPositionInViewport(pos);
+}
+
+void USkillDescriptionComponent::SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+{
+	FVector2D PixelPos;
+	FVector2D ViewportPos;
+	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
+	USlateBlueprintLibrary::LocalToViewport(backgroundBtn, Geometry, FVector2D(0.0, 0.0), PixelPos, ViewportPos);
+
+	FVector2D pos;
+	pos.X = ViewportPos.X - 197.5;
+	pos.Y = ViewportPos.Y + 80.0;
+	hoverwidget->SetPositionInViewport(pos);
+}

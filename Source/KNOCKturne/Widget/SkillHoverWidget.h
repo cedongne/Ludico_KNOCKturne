@@ -19,6 +19,7 @@ class KNOCKTURNE_API USkillHoverWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	void NativeConstruct();
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;

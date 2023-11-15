@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widget/PeppyTurnWidget.h"
@@ -6,6 +6,8 @@
 #include "SkillListFormWidget.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "PeppyTurn_SelectedUI_Widget.h"
+#include "GameInstance/ActorManagerSystem.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UPeppyTurnWidget::UPeppyTurnWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 	FString PeppySkillTablePath = TEXT("/Game/Assets/DataTable/PeppySkillTable.PeppySkillTable");
@@ -24,21 +26,17 @@ void UPeppyTurnWidget::NativeConstruct()
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
 
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
 	SkillBuffStringTable->GetAllRows<FDialogueString>("GetAllRows", SkillBuffStringTableRows);
 
-	// ---테스트용
-	BattleManagerSystem->SetSizeOfSelectedSkillCodeList(8);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(0, 1);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(1, 4);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(2, 5);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(3, 7);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(4, 3);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(5, 2);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(6, 10);
-	BattleManagerSystem->SetOneSelectedSkillCodeList(7, 12);
-	// ---
+	CreateSkillList();
+	CreateSelectedSkillList();
+
+	Button_Reset->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_Reset);
+	Button_Attack->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_Attack);
+	Button_Skip->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_Skip);
 }
 
 void UPeppyTurnWidget::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
@@ -71,7 +69,7 @@ void UPeppyTurnWidget::CreateSkillList() {
 		}
 	}
 
-	for (int i = BattleManagerSystem->SelectedSkillCodeList.Num(); i < 8 - BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
+	for (int i = 0; i < 8 - BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
 		if (BP_BlankSpaceClass) {
 			BP_BlankSpaceRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlankSpaceClass);
 			if (BP_BlankSpaceRef) {
@@ -107,38 +105,159 @@ void UPeppyTurnWidget::SetSkillUI(USkillListFormWidget* SkillListForm, int idx) 
 
 void UPeppyTurnWidget::CreateSelectedSkillList()
 {
-	int row = 0;
-
 	for (int i = 0; i < 4; i++) {
 		if (SelectedUIClass) {
 			SelectedUIRef = CreateWidget<UPeppyTurn_SelectedUI_Widget>(GetWorld(), SelectedUIClass);
 			if (SelectedUIRef) {
 				SelectedUIListArr.Add(SelectedUIRef);
-				if (i % 2 == 1) {
-					UniformGridPanel_SelectedSkill->AddChildToUniformGrid(SelectedUIRef, row, 1);
-					++row;
-				}
-				else {
-					UniformGridPanel_SelectedSkill->AddChildToUniformGrid(SelectedUIRef, row, 0);
-				}
+				UniformGridPanel_SelectedSkill->AddChildToUniformGrid(SelectedUIRef, 0, i);
 				SelectedUIRef->TextBlock_SelectNum->SetText(FText::FromString(FString::FromInt(i + 1)));
 			}
 		}
 	}
 }
 
+void UPeppyTurnWidget::OnClick_Reset()
+{
+	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+		SelectedUIListArr[i]->BP_PeppyTurnIcon->SetVisibility(ESlateVisibility::Hidden);
+		SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+		SelectedUIListArr[i]->Image_NumBackground->SetVisibility(ESlateVisibility::Hidden);
+		SelectedUIListArr[i]->TextBlock_SelectNum->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	for (int i = 0; i < SkillListArr.Num(); i++) {
+		SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(SkillListFormRef->icon_checkbox);
+	}
+}
+
 void UPeppyTurnWidget::RemoveSelectedHoverWidget()
 {
-	/*if (SkillListFormRef->SkillHoverWidgetRef) {
+	if (SkillListFormRef->SkillHoverWidgetRef) {
 		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
-			if (SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName() == SkillListFormRef->SkillHoverWidgetRef->Image_Icon->Brush.GetResourceName()) {
-				SelectedUIBtn = SelectedUIListArr[i]->Button_Background;
+			if (SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName() == SkillListFormRef->SkillHoverWidgetRef->Image_Icon->Brush.GetResourceName()) {
+				if (SkillListFormRef->SkillHoverWidgetRef->IsHovered() == false && SelectedUIListArr[i]->Button_Background->IsHovered() == false) {
+					SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+					break;
+				}
+			}
+		}
+	}
+}
+
+void UPeppyTurnWidget::OnClick_AlertModalYes() {
+	AlertModalRef->RemoveFromParent();
+	RemoveFromParent();
+	SetSkillActorList();
+}
+
+void UPeppyTurnWidget::OnClick_AlertModalNo() {
+	AlertModalRef->RemoveFromParent();
+	SetIsEnabled(true);
+}
+
+void UPeppyTurnWidget::AddEnergy(int EnergyCost)
+{
+	TotalSelectedEnergyCost += EnergyCost;
+	TextBlock_Energy->SetText(FText::FromString(FString::FromInt(TotalSelectedEnergyCost)));
+	SetEnergyWarningText();	
+}
+
+void UPeppyTurnWidget::MinusEnergy(int EnergyCost)
+{
+	TotalSelectedEnergyCost -= EnergyCost;
+	TextBlock_Energy->SetText(FText::FromString(FString::FromInt(TotalSelectedEnergyCost)));
+	SetEnergyWarningText();
+}
+
+void UPeppyTurnWidget::SetEnergyWarningText()
+{
+	if (TotalSelectedEnergyCost - (ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy) > 0) {
+		TextBlock_Energy->SetColorAndOpacity(FLinearColor(1.f, 0.074214f, 0.074214f, 1.f));
+		ExceededEnergyCost = TotalSelectedEnergyCost - (ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy);
+		FString warningTxt = "이용 가능한 에너지를 " + FString::FromInt(ExceededEnergyCost) + " 초과했습니다.";
+		TextBlock_EnergyWarning->SetText(FText::FromString(warningTxt));
+		TextBlock_EnergyWarning->SetVisibility(ESlateVisibility::Visible);
+		Button_Attack->SetIsEnabled(false);
+	}
+	else {
+		TextBlock_Energy->SetColorAndOpacity(FLinearColor(1.f, 1.f, 1.f, 1.f));
+		TextBlock_EnergyWarning->SetVisibility(ESlateVisibility::Hidden);
+		Button_Attack->SetIsEnabled(true);
+	}
+}
+
+void UPeppyTurnWidget::OnClick_Skip()
+{
+	SetIsEnabled(false);
+
+	if (AlertModalClass) {
+		AlertModalRef = CreateWidget<UAlertModalWidget>(GetWorld(), AlertModalClass);
+		if (AlertModalRef) {
+			AlertModalRef->AddToViewport();
+			AlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_AlertModalYes);
+			AlertModalRef->Button_No->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_AlertModalNo);
+		}
+	}
+
+	AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Visible);
+	AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Hidden);
+	AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UPeppyTurnWidget::SetSkillActorList()
+{
+	BattleManagerSystem->SelectedSkillActorClassList.Empty();
+
+	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+		if (SelectedUIListArr[i]->Button_Cancel->GetVisibility() == ESlateVisibility::Visible) {
+			FString iconname = SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString();
+			if (BattleManagerSystem->IconSkillActorMap.Contains(iconname)) {
+				if (UKismetSystemLibrary::IsValidClass(*(BattleManagerSystem->IconSkillActorMap[iconname]))) {
+					BattleManagerSystem->SelectedSkillActorClassList.Add(*BattleManagerSystem->IconSkillActorMap[iconname]);
+				}
+			}
+		}
+	}
+
+	RemoveFromParent();
+	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
+	BattleManager->EndTurn();
+}
+
+void UPeppyTurnWidget::OnClick_Attack()
+{
+	if (SkillListArr.Num() == 0) {
+		RemoveFromParent();
+	}
+	else {
+		bool SelectedSkillExist = false;
+
+		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+			if (SelectedUIListArr[i]->Button_Cancel->GetVisibility() == ESlateVisibility::Visible) {
+				SelectedSkillExist = true;
 				break;
 			}
 		}
 
-		if (SkillListFormRef->SkillHoverWidgetRef->IsHovered() == false && SelectedUIBtn->IsHovered() == false) {
-			SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+		if (SelectedSkillExist) {
+			SetSkillActorList();
 		}
-	}*/
+		else {
+			SetIsEnabled(false);
+
+			if (AlertModalClass) {
+				AlertModalRef = CreateWidget<UAlertModalWidget>(GetWorld(), AlertModalClass);
+				if (AlertModalRef) {
+					AlertModalRef->AddToViewport();
+					AlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_AlertModalYes);
+					AlertModalRef->Button_No->OnClicked.AddDynamic(this, &UPeppyTurnWidget::OnClick_AlertModalNo);
+				}
+			}
+
+			AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Visible);
+			AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Hidden);
+			AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
 }

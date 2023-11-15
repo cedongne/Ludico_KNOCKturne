@@ -7,7 +7,8 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Image.h"
 #include "Components/Button.h"
-
+#include "PeppyTurn_SelectedIcon_Widget.h"
+#include "GameInstance/BattleManagerSystem.h"
 
 #include "PeppyTurn_SelectedUI_Widget.generated.h"
 
@@ -41,14 +42,22 @@ public:
 	class UTextBlock* TextBlock_SelectNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Cancel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UButton* Button_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
 	class UWidgetAnimation* PeppyTurn_SkillError;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UPackageSkillWidget* PeppyTurnWidget;
+	class UPeppyTurnWidget* PeppyTurnWidget;
 
 	UFUNCTION(BlueprintimplementableEvent)
 	void PlaySkillErrorAnim();
+	UFUNCTION()
+	void CancelSkill(int cancelNum, USkillHoverWidget* SkillHover);
+	UFUNCTION()
+	void OnHovered_SelectedSkill();
+	UFUNCTION()
+	void OnClick_CancelSkill();
 };

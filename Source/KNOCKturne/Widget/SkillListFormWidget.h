@@ -16,6 +16,12 @@
 /**
  * 
  */
+
+enum CurrentWidget {
+	PakageSkillWidget,
+	PeppyTurnUIWidget
+};
+
 UCLASS()
 class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
 {
@@ -24,6 +30,7 @@ class KNOCKTURNE_API USkillListFormWidget : public UUserWidget
 	void NativePreConstruct();
 	void NativeConstruct();
 	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 	TArray<UUserWidget*> PackageSkillWidgetArr;
@@ -73,6 +80,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	USkillDescriptionComponent* SkillDescriptionComponent;
+
+	CurrentWidget curWidget;
 
 	UFUNCTION()
 	void SelectSkill(int clickedNum, USkillHoverWidget* SkillHover);

@@ -52,7 +52,7 @@ void ABattleManager::StartBossTurn() {
 	BattleManagerSystem->LastRoundBossHpRatio = 100;
 }
 
-/* ÇØ´ç ¸Þ¼­µå´Â ·¹º§ ºí·çÇÁ¸°Æ® µî¿¡¼­ ÃÊ±âÈ­ È£Ãâ Å¸ÀÌ¹Ö Á¶Àý µîÀ» À§ÇØ ÃÖÃÊ 1È¸¸¸ ½ÇÇà °¡´ÉÇÕ´Ï´Ù.ÀÌÈÄÀÇ Turn ½ÃÀÛ ·ÎÁ÷Àº ¿ÀÁ÷ C++ Å¬·¡½º ³»¿¡¼­¸¸ ÀÌ·ç¾îÁý´Ï´Ù. */
+/* ï¿½Ø´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½î¿¡ï¿½ï¿½ ï¿½Ê±ï¿½È­ È£ï¿½ï¿½ Å¸ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 1È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Turn ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ C++ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. */
 void ABattleManager::BP_InitStartBattle() {
 	if (IsCalled_InitStartBossTurn) {
 		NTLOG(Error, TEXT("StartBossTurn method has already been called. This method can only be called once on blueprint."));
@@ -83,7 +83,7 @@ void ABattleManager::TurnChange() {
 
 		break;
 	case PeppySkillSelectingTurn:
-		SetLeftCurrentTurnTime(100);	// ½ºÅ³ »ç¿ëÀ» À§ÇÑ ÀÓ½Ã ÅÏ Å¸ÀÓ Àû¿ë
+		SetLeftCurrentTurnTime(100);	// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		BP_UsePeppySkills();
 		CurrentTurnType = PeppySkillUsingTurn;
 		break;

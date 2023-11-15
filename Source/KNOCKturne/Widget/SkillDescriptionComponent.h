@@ -60,4 +60,8 @@ public:
 	void SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
 	UFUNCTION(Blueprintcallable)
 	void SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
+	UFUNCTION(Blueprintcallable)
+	void SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
+	UFUNCTION(Blueprintcallable)
+	void SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
 };

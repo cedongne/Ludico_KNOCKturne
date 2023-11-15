@@ -26,13 +26,19 @@ void USkillListFormWidget::NativePreConstruct() {
 }
 
 void USkillListFormWidget::NativeConstruct() {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
-		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
+	if (PackageSkillWidgetArr.Num() > 0 && (UPackageSkillWidget*)PackageSkillWidgetArr[0]) {
 		PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
+		curWidget = PakageSkillWidget;
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_LV_Battle") {
-		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PeppyTurnWidgetArr, PeppyTurnWidgetClass);
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PeppyTurnWidgetArr, PeppyTurnWidgetClass);
+	if (PeppyTurnWidgetArr.Num() > 0 && (UPeppyTurnWidget*)PeppyTurnWidgetArr[0]) {
 		PeppyTurnWidget = (UPeppyTurnWidget*)PeppyTurnWidgetArr[0];
+		curWidget = PeppyTurnUIWidget;
 	}
 
 	if (Button_Background) {
@@ -48,7 +54,7 @@ void USkillListFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSeco
 
 void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillHover) {
 	// 허브월드
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (curWidget == PakageSkillWidget) {
 		if (PackageSkillWidget->SelectedUIListArr[7]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden)
 		{
 			for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
@@ -70,33 +76,34 @@ void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillH
 		else {
 			for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 				if (PackageSkillWidget->SelectedUIListArr[i]->SkillError) {
-					NTLOG(Warning, TEXT("skillerror!"));
-					//PlayAnimation(PackageSkillWidget->SelectedUIListArr[i]->SkillError);
 					PackageSkillWidget->SelectedUIListArr[i]->PlaySkillErrorAnim();
 				}
-
 			}
 		}
 	}
 	
 	// 전투 레벨
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_LV_Battle") {
-		if (PeppyTurnWidget->SelectedUIListArr[3]->Image_NumBackground->GetVisibility() == ESlateVisibility::Hidden) {
-			for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
-				if (i == clickedNum && PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
-					PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-					SelectedSkillImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush);
+	else if (curWidget == PeppyTurnUIWidget) {
+		bool CanSelect = false;
 
-					if (SkillHover) {
-						SkillHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-					}
-					
-					AddSkillInSelectedUI();
-					break;
+		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
+			if (BattleManagerSystem->SelectedSkillCodeList[i] == clickedNum && PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+				CanSelect = true;
+				PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				SelectedSkillImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush);
+
+				if (SkillHover) {
+					SkillHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 				}
+
+				AddSkillInSelectedUI();
+				int tablerownum = *BattleManagerSystem->SkillIconRowMap.Find(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
+				int energy = PeppyTurnWidget->PeppySkillTableRows[tablerownum]->Cost;
+				PeppyTurnWidget->AddEnergy(energy);
+				break;
 			}
 		}
-		else {
+		if(CanSelect == false) {
 			for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
 				PeppyTurnWidget->SelectedUIListArr[i]->PlaySkillErrorAnim();
 			}
@@ -106,7 +113,7 @@ void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillH
 
 void USkillListFormWidget::OnClick_Skill()
 {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (curWidget == PakageSkillWidget) {
 		for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 			if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
 				if (PackageSkillWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
@@ -119,14 +126,14 @@ void USkillListFormWidget::OnClick_Skill()
 			}
 		}
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_LV_Battle") {
+	else if (curWidget == PeppyTurnUIWidget) {
 		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 			if (PeppyTurnWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
 				if (PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 					SelectSkill(i, SkillHoverWidgetRef);
 				}
 				else {
-					//PeppyTurnWidget->SelectedUIRef->CancelSkill(i, SkillHoverWidgetRef);
+					PeppyTurnWidget->SelectedUIRef->CancelSkill(i, SkillHoverWidgetRef);
 				}
 				break;
 			}
@@ -135,7 +142,7 @@ void USkillListFormWidget::OnClick_Skill()
 }
 
 void USkillListFormWidget::AddSkillInSelectedUI() {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (curWidget == PakageSkillWidget) {
 		for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 			if (PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 				PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(SelectedSkillImg);
@@ -145,7 +152,7 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 			}
 		}
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_LV_Battle") {
+	else if (curWidget == PeppyTurnUIWidget) {
 		for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
 			if (PeppyTurnWidget->SelectedUIListArr[i]->Image_NumBackground->GetVisibility() == ESlateVisibility::Hidden) {
 				PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(SelectedSkillImg);
@@ -159,18 +166,8 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 	}
 }
 
-void USkillListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI)
+void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UButton* backgroundBtn, bool isSelectedUI)
 {
-	/*if (SkillHoverWidgetRef) {
-		if (!SkillHoverWidgetRef->IsInViewport()) {
-			if (SkillHoverClass) {
-				SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
-				if (SkillHoverWidgetRef) {
-					SkillHoverWidgetRef->AddToViewport();
-				}
-			}
-		}
-	}*/
 	if (!SkillHoverWidgetRef || !SkillHoverWidgetRef->IsInViewport()) {
 		if (SkillHoverClass) {
 			SkillHoverWidgetRef = CreateWidget<USkillHoverWidget>(GetWorld(), SkillHoverClass);
@@ -184,14 +181,14 @@ void USkillListFormWidget::CreateHoverWidget(int hoveredNum, UButton* background
 		SkillHoverWidgetRef->Button_Background->OnClicked.AddDynamic(SkillHoverWidgetRef, &USkillHoverWidget::OnClick_Button);
 	}
 
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
-		SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_CheckBox->Brush));
-		SkillHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[hoveredNum]->Image_Icon->Brush));
-		SkillHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_CoolTimeSec->GetText());
-		SkillHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_SkillName->GetText());
-		SkillHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Energy->GetText());
-		SkillHoverWidgetRef->TextBlock_Stance->SetText(PackageSkillWidget->SkillListArr[hoveredNum]->TextBlock_Stance->GetText());
-		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(hoveredNum)));
+	if (curWidget == PakageSkillWidget) {
+		SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[listhoveredNum]->Image_CheckBox->Brush));
+		SkillHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SkillListArr[listhoveredNum]->Image_Icon->Brush));
+		SkillHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PackageSkillWidget->SkillListArr[listhoveredNum]->TextBlock_CoolTimeSec->GetText());
+		SkillHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->SkillListArr[listhoveredNum]->TextBlock_SkillName->GetText());
+		SkillHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SkillListArr[listhoveredNum]->TextBlock_Energy->GetText());
+		SkillHoverWidgetRef->TextBlock_Stance->SetText(PackageSkillWidget->SkillListArr[listhoveredNum]->TextBlock_Stance->GetText());
+		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(listhoveredNum)));
 
 		if (isSelectedUI) {
 			SkillDescriptionComponent->SetSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);
@@ -200,13 +197,27 @@ void USkillListFormWidget::CreateHoverWidget(int hoveredNum, UButton* background
 			SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef, backgroundBtn);
 		}
 	}
+	else if (curWidget == PeppyTurnUIWidget) {
+		SkillHoverWidgetRef->Image_CheckBox->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[listhoveredNum]->Image_CheckBox->Brush));
+		SkillHoverWidgetRef->Image_Icon->SetBrushFromTexture(UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[listhoveredNum]->Image_Icon->Brush));
+		SkillHoverWidgetRef->TextBlock_CoolTimeSec->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_CoolTimeSec->GetText());
+		SkillHoverWidgetRef->TextBlock_SkillName->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_SkillName->GetText());
+		SkillHoverWidgetRef->TextBlock_Energy->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Energy->GetText());
+		SkillHoverWidgetRef->TextBlock_Stance->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Stance->GetText());
+		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(listhoveredNum)));
 
-	
+		if (isSelectedUI) {
+			SkillDescriptionComponent->SetPeppyTurnSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);
+		}
+		else {
+			SkillDescriptionComponent->SetPeppyTurnHoverWidgetPos(SkillHoverWidgetRef, backgroundBtn);
+		}
+	}
 }
 
 void USkillListFormWidget::OnHovered_Skill()
 {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (curWidget == PakageSkillWidget) {
 		for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 			if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
 				CreateHoverWidget(i, PackageSkillWidget->SkillListArr[i]->Button_Background, false);
@@ -214,5 +225,12 @@ void USkillListFormWidget::OnHovered_Skill()
 			}
 		}
 	}
-	
+	else if (curWidget == PeppyTurnUIWidget) {
+		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
+			if (PeppyTurnWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
+				CreateHoverWidget(i, PeppyTurnWidget->SkillListArr[i]->Button_Background, false);
+				break;
+			}
+		}
+	}
 }

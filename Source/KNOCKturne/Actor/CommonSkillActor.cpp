@@ -27,8 +27,8 @@ void ACommonSkillActor::Initialize() {
 	//	BattleTableManager->BattleTableInitDelegate.AddUFunction(this, FName("InitSkillData"));
 
 	//	FBossSkillData* TempSkillData = BattleTableManager->BossSkillTable->FindRow<FBossSkillData>(*(GetClass()->GetName()), TEXT(""));
-	//	SkillData = *TempSkillData;	// фВюнем е╦ютюг FBossSkillData ╠╦а╤ц╪ ╨╞╪Ж╦╕ ╟╙ е╦ютюг FBossSkillData ╨╞╪Ж©║ фВюнем ©╛╩Йю╦╥н юЗюЕго╢б ╟мюл ╨р╟║╢игт.
-									// = ©╛╩Йюзюг а╓юг╟║ ╣г╬Н южаЖ ╬й╢ы╢б ©║╥╞.
+	//	SkillData = *TempSkillData;	// О©╫О©╫О©╫О©╫О©╫О©╫ е╦О©╫О©╫О©╫О©╫ FBossSkillData О©╫О©╫О©╫О©╫ц╪ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ е╦О©╫О©╫О©╫О©╫ FBossSkillData О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫о╢О©╫ О©╫О©╫О©╫О©╫ О©╫р╟О©╫О©╫О©╫О©╫О©╫.
+									// = О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫г╟О©╫ О©╫г╬О©╫ О©╫О©╫О©╫О©╫ О©╫й╢ы╢О©╫ О©╫О©╫О©╫О©╫.
 	RegistSkillActorOnBattleManager();
 }
 

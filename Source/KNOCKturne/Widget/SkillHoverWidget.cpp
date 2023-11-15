@@ -6,16 +6,19 @@
 #include "SkillListFormWidget.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "PeppyTurnWidget.h"
+#include "PeppyTurn_SelectedUI_Widget.h"
 
 void USkillHoverWidget::NativeConstruct() {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
-		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
-		if (PackageSkillWidgetArr.Num() > 0 && (UPackageSkillWidget*)PackageSkillWidgetArr[0]) {
-			PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
-		}
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PackageSkillWidgetArr, PackageSkillWidgetClass);
+	if (PackageSkillWidgetArr.Num() > 0 && (UPackageSkillWidget*)PackageSkillWidgetArr[0]) {
+		PackageSkillWidget = (UPackageSkillWidget*)PackageSkillWidgetArr[0];
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_LV_Battle") {
-		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PeppyTurnWidgetArr, PeppyTurnWidgetClass);
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PeppyTurnWidgetArr, PeppyTurnWidgetClass);
+	if (PeppyTurnWidgetArr.Num() > 0 && (UPeppyTurnWidget*)PeppyTurnWidgetArr[0]) {
 		PeppyTurnWidget = (UPeppyTurnWidget*)PeppyTurnWidgetArr[0];
 	}
 
@@ -24,7 +27,7 @@ void USkillHoverWidget::NativeConstruct() {
 
 void USkillHoverWidget::OnClick_Button()
 {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (PackageSkillWidget) {
 		if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 			PackageSkillWidget->SkillListFormRef->SelectSkill(FindInteractionNum(), this);
 		}
@@ -32,35 +35,26 @@ void USkillHoverWidget::OnClick_Button()
 			PackageSkillWidget->SelectedUIRef->CancelSkill(FindInteractionNum(), this);
 		}
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_Battle") {
+	else if (PeppyTurnWidget) {
 		if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 			PeppyTurnWidget->SkillListFormRef->SelectSkill(FindInteractionNum(), this);
 		}
 		else {
-			//PeppyTurnWidget->SelectedUIRef->CancelSkill(FindInteractionNum(), this);
+			PeppyTurnWidget->SelectedUIRef->CancelSkill(FindInteractionNum(), this);
 		}
 	}
 }
 
 int32 USkillHoverWidget::FindInteractionNum()
 {
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
-		for (int i = 0; i < PackageSkillWidget->PeppySkillTableRows.Num(); i++) {
-			if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Image_Icon->Brush) == PackageSkillWidget->PeppySkillTableRows[i]->SkillIcon) {
-				return i;
-			}
-		}
+	if (*BattleManagerSystem->SkillIconRowMap.Find(Image_Icon->Brush.GetResourceName().ToString())) {
+		int tablenum = *BattleManagerSystem->SkillIconRowMap.Find(Image_Icon->Brush.GetResourceName().ToString());
+		return tablenum;
 	}
-	else if (GetWorld()->GetMapName() == "UEDPIE_0_Battle") {
-		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
-			if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(Image_Icon->Brush) == UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush)) {
-				return i;
-			}
-		}
+	else {
+		NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
+		return NULL;
 	}
-
-	NTLOG(Warning, TEXT("FindInteractionNum is NULL!"));
-	return 100;
 }
 
 void USkillHoverWidget::Remove()

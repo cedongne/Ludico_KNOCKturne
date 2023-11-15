@@ -29,16 +29,6 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 }
 
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
-	/*if (PackageSkillWidget->UniformGridPanel_Skill->GetVisibility() == ESlateVisibility::Visible) {
-		OnClick_CancelSkill();
-	}
-	else if (PackageSkillWidget->UniformGridPanel_Specialty->GetVisibility() == ESlateVisibility::Visible) {
-		CancelSpecialty(PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef);
-	}
-	else if (PackageSkillWidget->UniformGridPanel_Item->GetVisibility() == ESlateVisibility::Visible) {
-		CancelItem(PackageSkillWidget->ItemListFormRef->ItemHoverWidgetRef);
-	}*/
-
 	if (this->Button_Background == PackageSkillWidget->Selected_Specialty->Button_Background) {
 		CancelSpecialty(PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef);
 	}
@@ -98,7 +88,7 @@ void UPac_SelectedUI_Widget::OnClick_CancelSkill()
 {
 	for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 		if (PackageSkillWidget->SelectedUIListArr[i]->Button_Cancel == this->Button_Cancel) {
-			int cancelNum = BattleManagerSystem->FindSkillRow(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
+			int cancelNum = *BattleManagerSystem->SkillIconRowMap.Find(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
 			CancelSkill(cancelNum, PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef);
 		}
 	}
@@ -136,23 +126,22 @@ void UPac_SelectedUI_Widget::OnHovered_SelectedSkill()
 	if (PackageSkillWidget->Selected_Specialty->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->Selected_Specialty->Button_Background == this->Button_Background) {
 		UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->Selected_Specialty->Image_Icon->Brush);
 		FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
-		int hoveredNum = BattleManagerSystem->FindSpecialtyRow(skilliconname);
+		int hoveredNum = *BattleManagerSystem->SpecialtyIconRowMap.Find(skilliconname);
 		PackageSkillWidget->SpecialtyListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->Selected_Specialty->Button_Background, true);
 	}
 	// 선택한 아이템 호버
 	else if (PackageSkillWidget->Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->Selected_Item->Button_Background == this->Button_Background) {
 		UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->Selected_Item->Image_Icon->Brush);
 		FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
-		int hoveredNum = BattleManagerSystem->FindItemRow(skilliconname);
+		int hoveredNum = *BattleManagerSystem->ItemIconRowMap.Find(skilliconname);
 		PackageSkillWidget->ItemListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->Selected_Item->Button_Background, true);
 	}
 	// 선택한 스킬 호버
 	else {
 		for (int i = 0; i < PackageSkillWidget->SelectedUIListArr.Num(); i++) {
 			if (PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background) {
-				UTexture2D* skillimg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush);
-				FString skilliconname = UKismetSystemLibrary::GetDisplayName(skillimg);
-				int hoveredNum = BattleManagerSystem->FindSkillRow(skilliconname);
+				FString skilliconname = PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString();
+				int hoveredNum = *BattleManagerSystem->SkillIconRowMap.Find(skilliconname);
 				PackageSkillWidget->SkillListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->SelectedUIListArr[i]->Button_Background, true);
 				break;
 			}

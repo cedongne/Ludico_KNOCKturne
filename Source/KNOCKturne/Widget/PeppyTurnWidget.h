@@ -30,7 +30,8 @@ class KNOCKTURNE_API UPeppyTurnWidget : public UUserWidget
 	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
-	UButton* SelectedUIBtn;
+	class UActorManagerSystem* ActorManagerSystem;
+	class ABattleManager* BattleManager;
 
 public:
 	class UDataTable* PeppySkillTable;
@@ -77,6 +78,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UAlertModalWidget* AlertModalRef;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 TotalSelectedEnergyCost = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 ExceededEnergyCost = 0;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()
@@ -85,4 +91,22 @@ public:
 	void CreateSelectedSkillList();
 	UFUNCTION()
 	void RemoveSelectedHoverWidget();
+	UFUNCTION()
+	void OnClick_Reset();
+	UFUNCTION()
+	void OnClick_AlertModalYes();
+	UFUNCTION()
+	void OnClick_AlertModalNo();
+	UFUNCTION()
+	void AddEnergy(int EnergyCost);
+	UFUNCTION()
+	void MinusEnergy(int EnergyCost);
+	UFUNCTION()
+	void SetEnergyWarningText();
+	UFUNCTION()
+	void OnClick_Skip();
+	UFUNCTION()
+	void SetSkillActorList();
+	UFUNCTION()
+	void OnClick_Attack();
 };

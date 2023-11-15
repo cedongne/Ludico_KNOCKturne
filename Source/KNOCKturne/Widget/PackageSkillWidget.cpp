@@ -172,8 +172,6 @@ void UPackageSkillWidget::CreateSpecialtyList() {
 			}
 		}
 	}
-
-
 }
 
 void UPackageSkillWidget::SetSpecialtyUI(USpecialtyListFormWidget* SpecialtyListForm, int idx)
@@ -432,8 +430,8 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 
-		if (BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)) {
-			//SpecialtyListArr[BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
+		if (BattleManagerSystem->SpecialtyIconRowMap.Find(BattleManagerSystem->FinalSpecialSkill)) {
+			SpecialtyListArr[*BattleManagerSystem->SpecialtyIconRowMap.Find(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
 		}
 		else {
 			NTLOG(Warning, TEXT("Cannot Find SpecialtyRow!"));
@@ -450,8 +448,8 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon);
 		Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
-		if (BattleManagerSystem->FindItemRow(BattleManagerSystem->FinalItem)) {
-			//SpecialtyListArr[BattleManagerSystem->FindSpecialtyRow(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
+		if (BattleManagerSystem->ItemIconRowMap.Find(BattleManagerSystem->FinalItem)) {
+			ItemListArr[*BattleManagerSystem->ItemIconRowMap.Find(BattleManagerSystem->FinalItem)]->Image_CheckBox->SetBrushFromTexture(ItemListFormRef->icon_checkbox_selected);
 		}
 		else {
 			NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
@@ -490,8 +488,8 @@ void UPackageSkillWidget::SaveSelectedSkill() {
 	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
 		if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 			FString skilliconname = SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString();
-			if (BattleManagerSystem->FindSkillRow(skilliconname)) {
-				BattleManagerSystem->SetOneSelectedSkillCodeList(i, BattleManagerSystem->FindSkillRow(skilliconname));
+			if (BattleManagerSystem->SkillIconRowMap.Find(skilliconname)) {
+				BattleManagerSystem->SetOneSelectedSkillCodeList(i, *BattleManagerSystem->SkillIconRowMap.Find(skilliconname));
 
 			}
 			else {
@@ -514,8 +512,8 @@ void UPackageSkillWidget::SaveSelectedSpecialty() {
 	FString specialtyiconname = Selected_Specialty->Image_Icon->Brush.GetResourceName().ToString();
 	NTLOG(Warning, TEXT("%s"), *specialtyiconname);
 
-	if (BattleManagerSystem->FindSpecialtyRow(specialtyiconname)) {
-		int specialtyidx = BattleManagerSystem->FindSpecialtyRow(specialtyiconname);
+	if (BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname)) {
+		int specialtyidx = *BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname);
 		BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
 	}
 	else {
@@ -529,8 +527,8 @@ void UPackageSkillWidget::SaveSelectedItem() {
 		FString itemiconname = Selected_Item->Image_Icon->Brush.GetResourceName().ToString();
 		NTLOG(Warning, TEXT("%s"), *itemiconname);
 
-		if (BattleManagerSystem->FindItemRow(itemiconname)) {
-			int itemidx = BattleManagerSystem->FindItemRow(itemiconname);
+		if (BattleManagerSystem->ItemIconRowMap.Find(itemiconname)) {
+			int itemidx = *BattleManagerSystem->ItemIconRowMap.Find(itemiconname);
 			BattleManagerSystem->FinalItem = ItemTable->GetRowNames()[itemidx].ToString();
 		}
 		else {
