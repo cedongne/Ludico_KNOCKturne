@@ -43,9 +43,6 @@ void UPeppyTurnWidget::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
 {
 	Super::NativeTick(MyGeometry, DeltaTime);
 
-	if (SkillListFormRef->SkillHoverWidgetRef) {
-		RemoveSelectedHoverWidget();
-	}
 }
 
 void UPeppyTurnWidget::CreateSkillList() {
@@ -131,20 +128,6 @@ void UPeppyTurnWidget::OnClick_Reset()
 	}
 }
 
-void UPeppyTurnWidget::RemoveSelectedHoverWidget()
-{
-	if (SkillListFormRef->SkillHoverWidgetRef) {
-		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
-			if (SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName() == SkillListFormRef->SkillHoverWidgetRef->Image_Icon->Brush.GetResourceName()) {
-				if (SkillListFormRef->SkillHoverWidgetRef->IsHovered() == false && SelectedUIListArr[i]->Button_Background->IsHovered() == false) {
-					SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
-					break;
-				}
-			}
-		}
-	}
-}
-
 void UPeppyTurnWidget::OnClick_AlertModalYes() {
 	AlertModalRef->RemoveFromParent();
 	RemoveFromParent();
@@ -174,8 +157,8 @@ void UPeppyTurnWidget::SetEnergyWarningText()
 {
 	if (TotalSelectedEnergyCost - (ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy) > 0) {
 		TextBlock_Energy->SetColorAndOpacity(FLinearColor(1.f, 0.074214f, 0.074214f, 1.f));
-		ExceededEnergyCost = TotalSelectedEnergyCost - (ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy);
-		FString warningTxt = "이용 가능한 에너지를 " + FString::FromInt(ExceededEnergyCost) + " 초과했습니다.";
+		int ExceededEnergyCost = TotalSelectedEnergyCost - (ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy);
+		FString warningTxt = FString::Printf(TEXT("이용 가능한 에너지를 %d 초과했습니다."), ExceededEnergyCost);
 		TextBlock_EnergyWarning->SetText(FText::FromString(warningTxt));
 		TextBlock_EnergyWarning->SetVisibility(ESlateVisibility::Visible);
 		Button_Attack->SetIsEnabled(false);

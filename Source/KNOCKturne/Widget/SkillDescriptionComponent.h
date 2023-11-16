@@ -16,8 +16,6 @@ UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API USkillDescriptionComponent : public UActorComponent
 {
 	GENERATED_BODY()
-
-public:	
 	USkillDescriptionComponent();
 
 protected:
@@ -31,6 +29,11 @@ protected:
 	TArray<FDialogueString*> SkillBuffStringTableRows;
 
 public:	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UButton* HoveredWidget;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UUserWidget* HoverWidgetRef;
+
 	UFUNCTION(Blueprintcallable)
 	FString SkillSpecialtyCheckValueN(int SkillIndex, float ValueN);
 	UFUNCTION(Blueprintcallable)
@@ -64,4 +67,7 @@ public:
 	void SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
 	UFUNCTION(Blueprintcallable)
 	void SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn);
+
+	UFUNCTION(Blueprintcallable)
+	void RemoveSelectedHoverWidget();
 };

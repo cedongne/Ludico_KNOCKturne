@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -80,8 +80,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 TotalSelectedEnergyCost = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 ExceededEnergyCost = 0;
 
 	UFUNCTION()
 	void CreateSkillList();
@@ -89,8 +87,6 @@ public:
 	void SetSkillUI(USkillListFormWidget* SkillListForm, int idx);
 	UFUNCTION()
 	void CreateSelectedSkillList();
-	UFUNCTION()
-	void RemoveSelectedHoverWidget();
 	UFUNCTION()
 	void OnClick_Reset();
 	UFUNCTION()

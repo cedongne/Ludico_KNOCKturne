@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "DialogueWidget.h"
@@ -51,11 +51,12 @@ void UDialogueWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) 
 	}
 }
 
-/*void UDialogueWidget::ChangeName(FDialogueData DataRow) {
+void UDialogueWidget::ChangeName(FDialogueData DataRow) {
 	FString CurrentCharacterStringID = DataRow.CharacterStringID;
 
 	if (CurrentCharacterStringID == "Peppy_character") {
-		Text_PeppyName->SetText(FText::FromString("페피"));
+		FString name = FString::Printf(TEXT("페피"));
+		Text_PeppyName->SetText(FText::FromString(name));
 		Overlay_NpcName->SetRenderOpacity(0.0);
 		Overlay_PeppyName->SetRenderOpacity(1.0);
 	}
@@ -65,21 +66,24 @@ void UDialogueWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) 
 		Overlay_PeppyName->SetRenderOpacity(0.0);
 	}
 	else if (CurrentCharacterStringID == "DreamM_character") {
-		Text_NpcName->SetText(FText::FromString("꿈 관장자"));
+		FString name = FString::Printf(TEXT("꿈 관장자"));
+		Text_NpcName->SetText(FText::FromString(name));
 		Overlay_NpcName->SetRenderOpacity(1.0);
 		Overlay_PeppyName->SetRenderOpacity(0.0);
 	}
 	else if (CurrentCharacterStringID == "Rabbit_character") {
-		Text_NpcName->SetText(FText::FromString("허브월드 토끼"));
+		FString name = FString::Printf(TEXT("허브월드 토끼"));
+		Text_NpcName->SetText(FText::FromString(name));
 		Overlay_NpcName->SetRenderOpacity(1.0);
 		Overlay_PeppyName->SetRenderOpacity(0.0);
 	}
 	else if (CurrentCharacterStringID == "YellowRose_character") {
-		Text_NpcName->SetText(FText::FromString("노란 장미"));
+		FString name = FString::Printf(TEXT("노란 장미"));
+		Text_NpcName->SetText(FText::FromString(name));
 		Overlay_NpcName->SetRenderOpacity(1.0);
 		Overlay_PeppyName->SetRenderOpacity(0.0);
 	}
-}*/
+}
 
 void UDialogueWidget::ChangePeppyImg(FDialogueData DataRow) {
 	FString CurrentImageLID = DataRow.ImageLID;

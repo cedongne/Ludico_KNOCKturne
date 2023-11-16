@@ -26,6 +26,14 @@ void UPeppyTurn_SelectedUI_Widget::NativeConstruct()
 	Button_Background->OnHovered.AddDynamic(this, &UPeppyTurn_SelectedUI_Widget::OnHovered_SelectedSkill);
 }
 
+void UPeppyTurn_SelectedUI_Widget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+	if (PeppyTurnWidget->SkillListFormRef->SkillHoverWidgetRef) {
+		PeppyTurnWidget->SkillListFormRef->SkillDescriptionComponent->RemoveSelectedHoverWidget();
+	}
+}
+
 void UPeppyTurn_SelectedUI_Widget::CancelSkill(int tablecancelNum, USkillHoverWidget* SkillHover)
 {
 	int cancelNuminSelectedUI = 0;

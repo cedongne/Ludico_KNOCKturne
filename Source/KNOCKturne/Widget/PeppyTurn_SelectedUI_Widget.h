@@ -22,6 +22,7 @@ class KNOCKTURNE_API UPeppyTurn_SelectedUI_Widget : public UUserWidget
 	
 	void NativePreConstruct();
 	void NativeConstruct();
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 
 	class UBattleManagerSystem* BattleManagerSystem;
 

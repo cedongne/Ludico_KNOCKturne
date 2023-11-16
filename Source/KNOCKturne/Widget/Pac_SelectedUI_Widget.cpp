@@ -28,6 +28,14 @@ void UPac_SelectedUI_Widget::NativeConstruct() {
 	Button_Background->OnHovered.AddDynamic(this, &UPac_SelectedUI_Widget::OnHovered_SelectedSkill);
 }
 
+void UPac_SelectedUI_Widget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+	if (PackageSkillWidget->SkillListFormRef->SkillHoverWidgetRef) {
+		PackageSkillWidget->SkillListFormRef->SkillDescriptionComponent->RemoveSelectedHoverWidget();
+	}
+}
+
 void UPac_SelectedUI_Widget::OnClick_Cancel() {
 	if (this->Button_Background == PackageSkillWidget->Selected_Specialty->Button_Background) {
 		CancelSpecialty(PackageSkillWidget->SpecialtyListFormRef->SpecialtyHoverWidgetRef);

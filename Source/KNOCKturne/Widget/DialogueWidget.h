@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -138,13 +138,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool isCameraMoving = false;
 	UPROPERTY(BlueprintReadWrite)
-	FDialogueData DialogueDataStructure;
+		FDialogueData DialogueDataStructure;
 	UPROPERTY(BlueprintReadWrite)
 		FString RedefinedLine;
 
-
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void ChangeName(FDialogueData DataRow);
+	UFUNCTION(BlueprintCallable)
+		void ChangeName(FDialogueData DataRow);
 	UFUNCTION(BlueprintCallable)
 		void ChangePeppyImg(FDialogueData DataRow);
 	UFUNCTION(BlueprintCallable)
@@ -174,7 +173,7 @@ public:
 		void InputEDuringTalking(UDialogueTableComponent* DialogueTableComponentRowVar);
 	UFUNCTION(BlueprintCallable)
 		void AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar);
-		UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 		void ReplaceIndexNumbyKeyword(int32 RedefinedLineIdx);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

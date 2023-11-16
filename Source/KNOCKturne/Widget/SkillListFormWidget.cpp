@@ -50,6 +50,9 @@ void USkillListFormWidget::NativeConstruct() {
 void USkillListFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
 	Super::NativeTick(Geometry, DeltaSeconds);
 
+	if (SkillHoverWidgetRef) {
+		SkillDescriptionComponent->RemoveSelectedHoverWidget();
+	}
 }
 
 void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillHover) {

@@ -47,7 +47,7 @@ void USkillHoverWidget::OnClick_Button()
 
 int32 USkillHoverWidget::FindInteractionNum()
 {
-	if (*BattleManagerSystem->SkillIconRowMap.Find(Image_Icon->Brush.GetResourceName().ToString())) {
+	if (BattleManagerSystem->SkillIconRowMap.Contains(Image_Icon->Brush.GetResourceName().ToString())) {
 		int tablenum = *BattleManagerSystem->SkillIconRowMap.Find(Image_Icon->Brush.GetResourceName().ToString());
 		return tablenum;
 	}

@@ -72,7 +72,7 @@ void UPackageSkillWidget::NativeTick(const FGeometry& MyGeometry, float DeltaTim
 	Super::NativeTick(MyGeometry, DeltaTime);
 
 	if (SkillListFormRef->SkillHoverWidgetRef || SpecialtyListFormRef->SpecialtyHoverWidgetRef || ItemListFormRef->ItemHoverWidgetRef) {
-		RemoveSelectedHoverWidget();
+		SkillListFormRef->SkillDescriptionComponent->RemoveSelectedHoverWidget();
 	}
 }
 
@@ -411,9 +411,8 @@ void UPackageSkillWidget::OnClick_AlertModalNo() {
 
 void UPackageSkillWidget::SetBeforeSelectedSkills()
 {
-	NTLOG(Warning, TEXT("%s"), *BattleManagerSystem->FinalItem);
 	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
-		if (BattleManagerSystem->SelectedSkillCodeList[i] == NULL) {
+		if ((BattleManagerSystem->SelectedSkillCodeList[i] == -1 || BattleManagerSystem->SelectedSkillCodeList[i] == NULL) && BattleManagerSystem->SelectedSkillCodeList[i] != 0) {
 			break;
 		}
 		else {
@@ -430,8 +429,10 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 
-		if (BattleManagerSystem->SpecialtyIconRowMap.Find(BattleManagerSystem->FinalSpecialSkill)) {
-			SpecialtyListArr[*BattleManagerSystem->SpecialtyIconRowMap.Find(BattleManagerSystem->FinalSpecialSkill)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
+
+		FString iconname = Selected_Specialty->Image_Icon->Brush.GetResourceName().ToString();
+		if (BattleManagerSystem->SpecialtyIconRowMap.Contains(iconname)) {
+			SpecialtyListArr[*BattleManagerSystem->SpecialtyIconRowMap.Find(iconname)]->Image_CheckBox->SetBrushFromTexture(SpecialtyListFormRef->icon_checkbox_selected);
 		}
 		else {
 			NTLOG(Warning, TEXT("Cannot Find SpecialtyRow!"));
@@ -448,36 +449,13 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 		Selected_Item->Image_Icon->SetBrushFromTexture(ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon);
 		Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Item->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
-		if (BattleManagerSystem->ItemIconRowMap.Find(BattleManagerSystem->FinalItem)) {
-			ItemListArr[*BattleManagerSystem->ItemIconRowMap.Find(BattleManagerSystem->FinalItem)]->Image_CheckBox->SetBrushFromTexture(ItemListFormRef->icon_checkbox_selected);
+
+		FString iconname = Selected_Item->Image_Icon->Brush.GetResourceName().ToString();
+		if (BattleManagerSystem->ItemIconRowMap.Contains(iconname)) {
+			ItemListArr[*BattleManagerSystem->ItemIconRowMap.Find(iconname)]->Image_CheckBox->SetBrushFromTexture(ItemListFormRef->icon_checkbox_selected);
 		}
 		else {
 			NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
-		}
-	}
-}
-
-void UPackageSkillWidget::RemoveSelectedHoverWidget() {
-	if (SkillListFormRef->SkillHoverWidgetRef) {
-		for (int i = 0; i < SelectedUIListArr.Num(); i++) {
-			if (SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName() == SkillListFormRef->SkillHoverWidgetRef->Image_Icon->Brush.GetResourceName()) {
-				SelectedUIBtn = SelectedUIListArr[i]->Button_Background;
-				break;
-			}
-		}
-
-		if (SkillListFormRef->SkillHoverWidgetRef->IsHovered() == false && SelectedUIBtn->IsHovered() == false) {
-			SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
-		}
-	}
-	if (SpecialtyListFormRef->SpecialtyHoverWidgetRef) {
-		if (SpecialtyListFormRef->SpecialtyHoverWidgetRef->IsHovered() == false && Selected_Specialty->Button_Background->IsHovered() == false) {
-			SpecialtyListFormRef->SpecialtyHoverWidgetRef->RemoveFromParent();
-		}
-	}
-	if (ItemListFormRef->ItemHoverWidgetRef) {
-		if (ItemListFormRef->ItemHoverWidgetRef->IsHovered() == false && Selected_Item->Button_Background->IsHovered() == false) {
-			ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
 		}
 	}
 }
@@ -493,7 +471,7 @@ void UPackageSkillWidget::SaveSelectedSkill() {
 
 			}
 			else {
-				//NTLOG(Warning, TEXT("Cannot Find SkillRow!"));
+				NTLOG(Warning, TEXT("Cannot Find SkillRow!"));
 			}
 		}
 		else {

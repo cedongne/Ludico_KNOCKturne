@@ -3,6 +3,8 @@
 
 #include "Widget/SkillDescriptionComponent.h"
 #include <Blueprint/SlateBlueprintLibrary.h>
+#include <Blueprint/WidgetLayoutLibrary.h>
+#include "Components/CanvasPanelSlot.h"
 
 USkillDescriptionComponent::USkillDescriptionComponent()
 {
@@ -242,6 +244,9 @@ FString USkillDescriptionComponent::ItemRedefineDescription(int RowNum) {
 
 void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
 {
+	HoveredWidget = backgroundBtn;
+	HoverWidgetRef = hoverwidget;
+
 	FVector2D PixelPos;
 	FVector2D ViewportPos;
 	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
@@ -251,12 +256,17 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UBu
 	pos.X = ViewportPos.X;
 	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
 	pos.Y = ViewportPos.Y - 207.0 / 2 + 104.0 / 2;
+	//pos.Y = ViewportPos.Y - (UWidgetLayoutLibrary::SlotAsCanvasSlot(hoverwidget)->GetSize().Y) / 2 + (UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y) / 2;
 	hoverwidget->SetPositionInViewport(pos);
-	//NTLOG(Warning, TEXT("%d, %d"), hoverwidget->GetDesiredSize().Y , hoverwidget->GetDesiredSize().Y);
+	//NTLOG(Warning, TEXT("%d"), UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y);
+	//NTLOG(Warning, TEXT("%d, %d"), UWidgetLayoutLibrary::SlotAsCanvasSlot(hoverwidget)->GetSize().Y, UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y);
 }
 
 void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
 {
+	HoveredWidget = backgroundBtn;
+	HoverWidgetRef = hoverwidget;
+
 	FVector2D PixelPos;
 	FVector2D ViewportPos;
 	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
@@ -271,6 +281,9 @@ void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidg
 
 void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
 {
+	HoveredWidget = backgroundBtn;
+	HoverWidgetRef = hoverwidget;
+
 	FVector2D PixelPos;
 	FVector2D ViewportPos;
 	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
@@ -284,6 +297,9 @@ void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwi
 
 void USkillDescriptionComponent::SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
 {
+	HoveredWidget = backgroundBtn;
+	HoverWidgetRef = hoverwidget;
+
 	FVector2D PixelPos;
 	FVector2D ViewportPos;
 	FGeometry Geometry = backgroundBtn->GetCachedGeometry();
@@ -293,4 +309,11 @@ void USkillDescriptionComponent::SetPeppyTurnSelectedSkillHoverPos(UUserWidget* 
 	pos.X = ViewportPos.X - 197.5;
 	pos.Y = ViewportPos.Y + 80.0;
 	hoverwidget->SetPositionInViewport(pos);
+}
+
+void USkillDescriptionComponent::RemoveSelectedHoverWidget()
+{
+	if (HoverWidgetRef && HoveredWidget && HoverWidgetRef->IsHovered() == false && HoveredWidget->IsHovered() == false) {
+		HoverWidgetRef->RemoveFromParent();
+	}
 }

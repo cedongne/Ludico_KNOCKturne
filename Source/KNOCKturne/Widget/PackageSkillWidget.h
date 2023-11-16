@@ -163,8 +163,6 @@ public:
 	UFUNCTION()
 	void SetBeforeSelectedSkills();
 	UFUNCTION()
-	void RemoveSelectedHoverWidget();
-	UFUNCTION()
 	void SaveSelectedSkill();
 	UFUNCTION()
 	void SaveSelectedSpecialty();

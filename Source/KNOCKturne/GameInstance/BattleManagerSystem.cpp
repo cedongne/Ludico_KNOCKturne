@@ -11,7 +11,7 @@
 
 UBattleManagerSystem::UBattleManagerSystem() {
 
-	SelectedSkillCodeList.SetNum(8);
+	SelectedSkillCodeList.Init(-1, 8);
 
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();

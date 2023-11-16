@@ -13,5 +13,5 @@ void AKNOCKturneGameState::HandleBeginPlay() {
 }
 
 AKNOCKturneGameState::AKNOCKturneGameState() {
-	ItemCountList.Init(1, 6);
+	ItemCountList.Init(0, 6);
 }

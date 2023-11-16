@@ -19,6 +19,7 @@ class KNOCKTURNE_API UPac_SelectedUI_Widget : public UUserWidget
 	GENERATED_BODY()
 	void NativePreConstruct();
 	void NativeConstruct();
+	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
 
 	class UBattleManagerSystem* BattleManagerSystem;
 
