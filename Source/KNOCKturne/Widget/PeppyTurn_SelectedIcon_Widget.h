@@ -48,4 +48,8 @@ public:
 
 	UFUNCTION()
 	void SwapSkill();
+
+	// 사운드
+	UFUNCTION(BlueprintimplementableEvent)
+	void HoverSound();
 };

@@ -35,6 +35,7 @@ void UPeppyTurn_SelectedUI_Widget::NativeTick(const FGeometry& Geometry, float D
 
 	if (BP_PeppyTurnIcon->Image_SelectedSkillIcon->IsHovered()) {
 		OnHovered_SelectedSkill();
+		BP_PeppyTurnIcon->HoverSound();
 	}
 }
 
