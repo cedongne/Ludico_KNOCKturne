@@ -92,14 +92,22 @@ void USkillListFormWidget::SelectSkill(int clickedNum, USkillHoverWidget* SkillH
 		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 			if (BattleManagerSystem->SelectedSkillCodeList[i] == clickedNum && PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 				CanSelect = true;
-				PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+				PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_numbering);
 				SelectedSkillImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush);
 
 				if (SkillHover) {
-					SkillHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+					SkillHover->Image_CheckBox->SetBrushFromTexture(icon_checkbox_numbering);
 				}
 
 				AddSkillInSelectedUI();
+
+				if (PeppyTurn_SelectNum.ToString() != "-1") {
+					PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetVisibility(ESlateVisibility::Visible);
+					PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetText(PeppyTurn_SelectNum);
+					SkillHover->TextBlock_Num->SetVisibility(ESlateVisibility::Visible);
+					SkillHover->TextBlock_Num->SetText(PeppyTurn_SelectNum);
+				}
+
 				int tablerownum = *BattleManagerSystem->SkillIconRowMap.Find(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
 				int energy = PeppyTurnWidget->PeppySkillTableRows[tablerownum]->Cost;
 				PeppyTurnWidget->AddEnergy(energy);
@@ -163,6 +171,7 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 				PeppyTurnWidget->SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 				PeppyTurnWidget->SelectedUIListArr[i]->Image_NumBackground->SetVisibility(ESlateVisibility::Visible);
 				PeppyTurnWidget->SelectedUIListArr[i]->TextBlock_SelectNum->SetVisibility(ESlateVisibility::Visible);
+				PeppyTurn_SelectNum = PeppyTurnWidget->SelectedUIListArr[i]->TextBlock_SelectNum->GetText();
 				break;
 			}
 		}
@@ -208,6 +217,9 @@ void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UButton* backgr
 		SkillHoverWidgetRef->TextBlock_Energy->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Energy->GetText());
 		SkillHoverWidgetRef->TextBlock_Stance->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Stance->GetText());
 		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(listhoveredNum)));
+		SkillHoverWidgetRef->TextBlock_Num->SetVisibility(ESlateVisibility::Visible);
+		SkillHoverWidgetRef->TextBlock_Num->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Num->GetText());
+
 
 		if (isSelectedUI) {
 			SkillDescriptionComponent->SetPeppyTurnSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);

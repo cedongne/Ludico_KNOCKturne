@@ -49,7 +49,9 @@ void UPeppyTurn_SelectedUI_Widget::CancelSkill(int tablecancelNum, USkillHoverWi
 	for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush) == cancelimg) {
 			PeppyTurnWidget->SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(PeppyTurnWidget->SkillListFormRef->icon_checkbox);
+			PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetVisibility(ESlateVisibility::Hidden);
 			SkillHover->Image_CheckBox->SetBrushFromTexture(PeppyTurnWidget->SkillListFormRef->icon_checkbox);
+			SkillHover->TextBlock_Num->SetVisibility(ESlateVisibility::Hidden);
 		}
 	}
 

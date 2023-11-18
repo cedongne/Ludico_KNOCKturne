@@ -37,12 +37,15 @@ protected:
 	TArray<UUserWidget*> SkillHoverWidgetArr;
 	TArray<UUserWidget*> PeppyTurnWidgetArr;
 	UTexture2D* SelectedSkillImg;
+	FText PeppyTurn_SelectNum = FText::FromString("-1"); // PeppyTurn_UI에서 선택한 스킬이 몇 번째 순서인지
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox_selected;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* icon_checkbox_numbering;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Background;
@@ -62,6 +65,8 @@ public:
 	class UTextBlock* TextBlock_Energy;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_Stance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Num;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
