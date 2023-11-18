@@ -103,13 +103,13 @@ void UItemListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgroundB
 	ItemHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->ItemListArr[hoveredNum]->TextBlock_SkillName->GetText());
 	ItemHoverWidgetRef->TextBlock_Count->SetText(PackageSkillWidget->ItemListArr[hoveredNum]->TextBlock_Count->GetText());
 	ItemHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->ItemRedefineDescription(hoveredNum)));
-	SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, PackageSkillWidget->ItemListArr[hoveredNum]->Button_Background);
+	SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, (UUserWidget*)PackageSkillWidget->ItemListArr[hoveredNum]->Button_Background);
 
 	if (isSelectedUI) {
-		SkillDescriptionComponent->SetSelectedSkillHoverPos(ItemHoverWidgetRef, backgroundBtn);
+		SkillDescriptionComponent->SetSelectedSkillHoverPos(ItemHoverWidgetRef, (UUserWidget*)backgroundBtn);
 	}
 	else {
-		SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, backgroundBtn);
+		SkillDescriptionComponent->SetHoverWidgetPos(ItemHoverWidgetRef, (UUserWidget*)backgroundBtn);
 	}
 }
 

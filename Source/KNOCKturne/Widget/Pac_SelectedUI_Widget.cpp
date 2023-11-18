@@ -150,7 +150,7 @@ void UPac_SelectedUI_Widget::OnHovered_SelectedSkill()
 			if (PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible && PackageSkillWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background) {
 				FString skilliconname = PackageSkillWidget->SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString();
 				int hoveredNum = *BattleManagerSystem->SkillIconRowMap.Find(skilliconname);
-				PackageSkillWidget->SkillListFormRef->CreateHoverWidget(hoveredNum, PackageSkillWidget->SelectedUIListArr[i]->Button_Background, true);
+				PackageSkillWidget->SkillListFormRef->CreateHoverWidget(hoveredNum, (UUserWidget*)PackageSkillWidget->SelectedUIListArr[i]->Button_Background, true);
 				break;
 			}
 		}

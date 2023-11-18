@@ -95,7 +95,7 @@ public:
 	UFUNCTION()
 	void AddSkillInSelectedUI();
 	UFUNCTION()
-	void CreateHoverWidget(int hoveredNum, UButton* backgroundBtn, bool isSelectedUI);
+	void CreateHoverWidget(int hoveredNum, UUserWidget* backgroundBtn, bool isSelectedUI);
 	UFUNCTION()
 	void OnHovered_Skill();
 };

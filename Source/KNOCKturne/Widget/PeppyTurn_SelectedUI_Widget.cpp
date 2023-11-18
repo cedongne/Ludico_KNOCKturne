@@ -23,7 +23,7 @@ void UPeppyTurn_SelectedUI_Widget::NativeConstruct()
 	PeppyTurnWidget = (UPeppyTurnWidget*)PeppyTurnWidgetArr[0];
 
 	Button_Cancel->OnClicked.AddDynamic(this, &UPeppyTurn_SelectedUI_Widget::OnClick_CancelSkill);
-	Button_Background->OnHovered.AddDynamic(this, &UPeppyTurn_SelectedUI_Widget::OnHovered_SelectedSkill);
+	//Button_Background->OnHovered.AddDynamic(this, &UPeppyTurn_SelectedUI_Widget::OnHovered_SelectedSkill);
 }
 
 void UPeppyTurn_SelectedUI_Widget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
@@ -31,6 +31,10 @@ void UPeppyTurn_SelectedUI_Widget::NativeTick(const FGeometry& Geometry, float D
 
 	if (PeppyTurnWidget->SkillListFormRef->SkillHoverWidgetRef) {
 		PeppyTurnWidget->SkillListFormRef->SkillDescriptionComponent->RemoveSelectedHoverWidget();
+	}
+
+	if (BP_PeppyTurnIcon->Image_SelectedSkillIcon->IsHovered()) {
+		OnHovered_SelectedSkill();
 	}
 }
 
@@ -69,7 +73,7 @@ void UPeppyTurn_SelectedUI_Widget::OnHovered_SelectedSkill()
 	FString skilliconname = "";
 	int selectedUINum = 0;
 	for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
-		if (PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->GetVisibility() == ESlateVisibility::Visible && PeppyTurnWidget->SelectedUIListArr[i]->Button_Background == this->Button_Background) {
+		if (PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->GetVisibility() == ESlateVisibility::Visible && PeppyTurnWidget->SelectedUIListArr[i] == this) {
 			selectedUINum = i;
 			skilliconname = PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString();
 			break;
@@ -79,7 +83,7 @@ void UPeppyTurn_SelectedUI_Widget::OnHovered_SelectedSkill()
 	for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 		if (skilliconname == PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush.GetResourceName().ToString())
 		{
-			PeppyTurnWidget->SkillListFormRef->CreateHoverWidget(i, PeppyTurnWidget->SelectedUIListArr[selectedUINum]->Button_Background, true);
+			PeppyTurnWidget->SkillListFormRef->CreateHoverWidget(i, (UUserWidget*)PeppyTurnWidget->SelectedUIListArr[selectedUINum]->BP_PeppyTurnIcon->Image_SelectedSkillIcon, true);
 			break;
 		}
 	}

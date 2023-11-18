@@ -178,7 +178,7 @@ void USkillListFormWidget::AddSkillInSelectedUI() {
 	}
 }
 
-void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UButton* backgroundBtn, bool isSelectedUI)
+void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UUserWidget* backgroundBtn, bool isSelectedUI)
 {
 	if (!SkillHoverWidgetRef || !SkillHoverWidgetRef->IsInViewport()) {
 		if (SkillHoverClass) {
@@ -235,7 +235,7 @@ void USkillListFormWidget::OnHovered_Skill()
 	if (curWidget == PakageSkillWidget) {
 		for (int i = 0; i < PackageSkillWidget->SkillListArr.Num(); i++) {
 			if (PackageSkillWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
-				CreateHoverWidget(i, PackageSkillWidget->SkillListArr[i]->Button_Background, false);
+				CreateHoverWidget(i, (UUserWidget*)PackageSkillWidget->SkillListArr[i]->Button_Background, false);
 				break;
 			}
 		}
@@ -243,7 +243,7 @@ void USkillListFormWidget::OnHovered_Skill()
 	else if (curWidget == PeppyTurnUIWidget) {
 		for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 			if (PeppyTurnWidget->SkillListArr[i]->Button_Background == this->Button_Background) {
-				CreateHoverWidget(i, PeppyTurnWidget->SkillListArr[i]->Button_Background, false);
+				CreateHoverWidget(i, (UUserWidget*)PeppyTurnWidget->SkillListArr[i]->Button_Background, false);
 				break;
 			}
 		}

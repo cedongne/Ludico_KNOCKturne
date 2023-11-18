@@ -242,7 +242,7 @@ FString USkillDescriptionComponent::ItemRedefineDescription(int RowNum) {
 	return Redefined;
 }
 
-void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn)
 {
 	HoveredWidget = backgroundBtn;
 	HoverWidgetRef = hoverwidget;
@@ -262,7 +262,7 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UBu
 	//NTLOG(Warning, TEXT("%d, %d"), UWidgetLayoutLibrary::SlotAsCanvasSlot(hoverwidget)->GetSize().Y, UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y);
 }
 
-void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn)
 {
 	HoveredWidget = backgroundBtn;
 	HoverWidgetRef = hoverwidget;
@@ -279,7 +279,7 @@ void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidg
 	hoverwidget->SetPositionInViewport(pos);
 }
 
-void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn)
 {
 	HoveredWidget = backgroundBtn;
 	HoverWidgetRef = hoverwidget;
@@ -295,7 +295,7 @@ void USkillDescriptionComponent::SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwi
 	hoverwidget->SetPositionInViewport(pos);
 }
 
-void USkillDescriptionComponent::SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UButton* backgroundBtn)
+void USkillDescriptionComponent::SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn)
 {
 	HoveredWidget = backgroundBtn;
 	HoverWidgetRef = hoverwidget;
