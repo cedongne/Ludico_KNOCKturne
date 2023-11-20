@@ -81,6 +81,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 TotalSelectedEnergyCost = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 draggedIdx;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 overlappedIdx;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()

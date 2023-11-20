@@ -16,7 +16,7 @@ class KNOCKTURNE_API UPeppyTurn_SelectedIcon_Widget : public UUserWidget
 	GENERATED_BODY()
 	void NativeConstruct();
 	virtual void NativeOnDragEnter(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
-	virtual void NativeOnDragLeave(const FDragDropEvent& InDragDropEvent, UDragDropOperation* WidgetDetectDrag);
+	virtual void NativeOnDragLeave(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent);
 	virtual void NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation);
 	virtual bool NativeOnDragOver(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
@@ -38,13 +38,6 @@ public:
 	TSubclassOf<UUserWidget> PeppyTurnDragVisualClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPeppyTurn_DragVisual_Widget* PeppyTurnDragVisualWidget;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 draggedIdx = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 overlappedIdx = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool isOverlapped = false;
 
 	UFUNCTION()
 	void SwapSkill();

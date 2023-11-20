@@ -18,46 +18,40 @@ void UPeppyTurn_SelectedIcon_Widget::NativeConstruct()
 
 void UPeppyTurn_SelectedIcon_Widget::NativeOnDragEnter(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-	NTLOG(Warning, TEXT("OnDragEnter"));
 	Super::NativeOnDragEnter(InGeometry, InDragDropEvent, InOperation);
 	isOverlapped = true;
-	NTLOG(Warning, TEXT("OnDragEnter"));
 }
 
-void UPeppyTurn_SelectedIcon_Widget::NativeOnDragLeave(const FDragDropEvent& InDragDropEvent, UDragDropOperation* WidgetDetectDrag)
+void UPeppyTurn_SelectedIcon_Widget::NativeOnDragLeave(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-	Super::NativeOnDragLeave(InDragDropEvent, WidgetDetectDrag);
+	Super::NativeOnDragLeave(InDragDropEvent, InOperation);
 	isOverlapped = false;
 }
 
 FReply UPeppyTurn_SelectedIcon_Widget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-	FReply Local_Reply = Super::OnMouseButtonDown(InGeometry, InMouseEvent).NativeReply;
+	Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
 
 	for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
-		if (this == PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon) {
-			draggedIdx = i;
+		if (this->Image_SelectedSkillIcon->Brush.GetResourceName() ==
+			PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName()) {
+			PeppyTurnWidget->draggedIdx = i;
 			break;
 		}
 	}
 
-	return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, Image_SelectedSkillIcon, EKeys::LeftMouseButton).NativeReply;
+	return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, EKeys::LeftMouseButton).NativeReply;
 }
 
 void UPeppyTurn_SelectedIcon_Widget::NativeOnDragDetected(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent, UDragDropOperation*& OutOperation)
 {
 	Super::NativeOnDragDetected(InGeometry, InMouseEvent, OutOperation);
-	NTLOG(Warning, TEXT("OnDragDetected"));
 
 	if (PeppyTurnDragVisualClass) {
 		PeppyTurnDragVisualWidget = CreateWidget<UPeppyTurn_DragVisual_Widget>(GetWorld(), PeppyTurnDragVisualClass);
-		if (PeppyTurnDragVisualWidget) {
-			PeppyTurnDragVisualWidget->AddToViewport();
-		}
 	}
 
 	PeppyTurnDragVisualWidget->Image_DragVisual->SetBrush(Image_SelectedSkillIcon->Brush);
-	PeppyTurnDragVisualWidget->Image_DragVisual = Image_SelectedSkillIcon;
 	PeppyTurnDragVisualWidget->Image_DragVisual->SetDesiredSizeOverride(FVector2D(50.0, 50.0));
 
 	UDragDropOperation* DragOperation = UWidgetBlueprintLibrary::CreateDragDropOperation(UDragDropOperation::StaticClass());
@@ -71,7 +65,7 @@ bool UPeppyTurn_SelectedIcon_Widget::NativeOnDragOver(const FGeometry& InGeometr
 
 	for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
 		if (this == PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon) {
-			overlappedIdx = i;
+			PeppyTurnWidget->overlappedIdx = i;
 			break;
 		}
 	}
@@ -86,9 +80,6 @@ bool UPeppyTurn_SelectedIcon_Widget::NativeOnDrop(const FGeometry& InGeometry, c
 	if (isOverlapped) {
 		SwapSkill();
 	}
-	else {
-
-	}
 
 	return false;
 }
@@ -96,18 +87,23 @@ bool UPeppyTurn_SelectedIcon_Widget::NativeOnDrop(const FGeometry& InGeometry, c
 void UPeppyTurn_SelectedIcon_Widget::SwapSkill()
 {
 	// 선택한 스킬 순서 변경
-	UTexture2D* DraggedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
-	UTexture2D* OverlappedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
-	PeppyTurnWidget->SelectedUIListArr[draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(OverlappedImg);
-	PeppyTurnWidget->SelectedUIListArr[overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(DraggedImg);
+	UTexture2D* DraggedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
+	UTexture2D* OverlappedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
+	PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(OverlappedImg);
+	PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(DraggedImg);
+	FText draggedSelectNum = PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->TextBlock_SelectNum->GetText();
+	FText overlappedSelectNum = PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->TextBlock_SelectNum->GetText();
 
 	// 스킬 리스트 번호 변경
 	for (int i = 0; i < PeppyTurnWidget->SkillListArr.Num(); i++) {
 		int breakNum = 0;
 
-		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush) == DraggedImg
-			|| UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush) == OverlappedImg) {
-			PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetText(PeppyTurnWidget->SelectedUIListArr[i]->TextBlock_SelectNum->GetText());
+		if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush) == DraggedImg) {
+			PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetText(overlappedSelectNum);
+			breakNum++;
+		}
+		else if (UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SkillListArr[i]->Image_Icon->Brush) == OverlappedImg) {
+			PeppyTurnWidget->SkillListArr[i]->TextBlock_Num->SetText(draggedSelectNum);
 			breakNum++;
 		}
 
