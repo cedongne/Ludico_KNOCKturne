@@ -329,6 +329,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
 				{
 					UWidgetLayoutLibrary::RemoveAllWidgets(this);
+					HubBGM();
 
 					LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 					if (LevelSequencePlayer)
@@ -360,6 +361,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 
 		GetWorld()->GetTimerManager().SetTimer(BlackWigetTimerHandle, FTimerDelegate::CreateLambda([&]()
 			{
+				HubBGM();
 				UWidgetLayoutLibrary::RemoveAllWidgets(this);
 				OriginalPeppyTransform = Peppy->GetActorTransform();
 				OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
@@ -540,7 +542,7 @@ void AHubWorldLevelScriptActor::PrologueEndedAfterFadeOut() {
 
 		GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
 			{
-				SetState("Loading", "OnLoading");
+				LoadingSound1();
 				StartLoadingAfterPrologue();
 
 				GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
@@ -567,7 +569,7 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 	FTimerHandle LoadingTimerHandle2;
 	GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle2, FTimerDelegate::CreateLambda([&]()
 		{
-			SetState("Loading", "None");
+			LoadingSound2();
 			DefaultLocation();
 			LoadingWidgetRef->RemoveFromParent();
 

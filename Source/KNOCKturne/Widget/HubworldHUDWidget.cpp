@@ -21,11 +21,11 @@ void UHubworldHUDWidget::NativePreConstruct() {
 
 void UHubworldHUDWidget::NativeConstruct() {
 	if (Button_Diary) {
-		Button_Diary->OnClicked.AddDynamic(this, &UHubworldHUDWidget::Button_DiaryOnClicked);
+		Button_Diary->OnClicked.AddDynamic(this, &UHubworldHUDWidget::OnClick_ButtonDiary);
 	}
 }
 
-void UHubworldHUDWidget::Button_DiaryOnClicked() {
+void UHubworldHUDWidget::OnClick_ButtonDiary() {
 	if (DreamDiaryWidgetClass) {
 		DreamDiaryWidgetRef = CreateWidget<UDreamDiaryWidget>(GetWorld(), DreamDiaryWidgetClass);
 		if (DreamDiaryWidgetRef) {

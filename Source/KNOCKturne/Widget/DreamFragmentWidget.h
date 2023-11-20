@@ -77,4 +77,12 @@ public:
 	void OnClicked_AlertModal_No();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void CallDreamFragmentTalk();
+
+	// 사운드
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void NoticeSound();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void SelectSound();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void CancelSound();
 };

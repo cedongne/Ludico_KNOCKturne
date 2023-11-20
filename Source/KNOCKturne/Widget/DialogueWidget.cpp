@@ -36,6 +36,9 @@ void UDialogueWidget::NativeConstruct() {
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	FString line = FString::Printf(TEXT("지금 %d개의 꿈조각을 가지고 있어. 관장자님께 꿈조각 해몽을 부탁드려볼까?"), KNOCKturneGameState->DreamFragmentCount);
+	TextBlock_Dialogue_Select_1->SetText(FText::FromString(line));
 }
 
 void UDialogueWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {

@@ -38,9 +38,6 @@ protected:
 	class UImage* Image_DiaryText;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_SaveText;
-
-	UFUNCTION()
-	void Button_DiaryOnClicked();
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -49,4 +46,7 @@ public:
 	TSubclassOf<UUserWidget> DreamDiaryWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UDreamDiaryWidget* DreamDiaryWidgetRef;
+
+	UFUNCTION()
+	void OnClick_ButtonDiary();
 };

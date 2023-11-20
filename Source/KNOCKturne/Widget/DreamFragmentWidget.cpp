@@ -103,6 +103,7 @@ void UDreamFragmentWidget::Button_SelectOnClicked() {
 	if (AlertModalClass) {
 		AlertModalRef = CreateWidget<UAlertModalWidget>(GetWorld(), AlertModalClass);
 		if (AlertModalRef) {
+			NoticeSound();
 			AlertModalRef->AddToViewport();
 		}
 	}
@@ -142,8 +143,11 @@ void UDreamFragmentWidget::OnClicked_AlertModal_Yes() {
 	else {
 		NTLOG(Warning, TEXT("No DialogueWidget!"));
 	}
+
+	SelectSound();
 }
 
 void UDreamFragmentWidget::OnClicked_AlertModal_No() {
 	AlertModalRef->RemoveFromParent();
+	CancelSound();
 }

@@ -179,6 +179,14 @@ public:
 	UFUNCTION(Blueprintcallable)
 	void SkipPrologue();
 
+	// 사운드
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void LoadingSound1();
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void LoadingSound2();
+	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
+	void HubBGM();
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float deltaTime) override;

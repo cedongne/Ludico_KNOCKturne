@@ -38,6 +38,8 @@ public:
 	TSubclassOf<UUserWidget> PeppyTurnDragVisualClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPeppyTurn_DragVisual_Widget* PeppyTurnDragVisualWidget;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool isOverlapped = false;
 
 	UFUNCTION()
 	void SwapSkill();
