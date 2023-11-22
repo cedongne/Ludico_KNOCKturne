@@ -391,6 +391,8 @@ void UPackageSkillWidget::OnClick_SettingDone() {
 		SaveSelectedSkill();
 		SaveSelectedSpecialty();
 		SaveSelectedItem();
+		
+		RemoveAllHoverWidgets();
 		RemoveFromParent();
 	}
 }
@@ -401,6 +403,7 @@ void UPackageSkillWidget::OnClick_AlertModalYes() {
 	if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 		SaveSelectedItem();
 	}
+	RemoveAllHoverWidgets();
 	RemoveFromParent();
 }
 
@@ -512,5 +515,18 @@ void UPackageSkillWidget::SaveSelectedItem() {
 		else {
 			NTLOG(Warning, TEXT("Cannot Find ItemRow!"));
 		}
+	}
+}
+
+void UPackageSkillWidget::RemoveAllHoverWidgets()
+{
+	if (SkillListFormRef->SkillHoverWidgetRef) {
+		SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+	}
+	if (SpecialtyListFormRef->SpecialtyHoverWidgetRef) {
+		SpecialtyListFormRef->SpecialtyHoverWidgetRef->RemoveFromParent();
+	}
+	if (ItemListFormRef->ItemHoverWidgetRef) {
+		ItemListFormRef->ItemHoverWidgetRef->RemoveFromParent();
 	}
 }

@@ -130,7 +130,6 @@ void UPeppyTurnWidget::OnClick_Reset()
 
 void UPeppyTurnWidget::OnClick_AlertModalYes() {
 	AlertModalRef->RemoveFromParent();
-	RemoveFromParent();
 	SetSkillActorList();
 }
 
@@ -203,6 +202,9 @@ void UPeppyTurnWidget::SetSkillActorList()
 		}
 	}
 
+	if (SkillListFormRef->SkillHoverWidgetRef) {
+		SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+	}
 	RemoveFromParent();
 	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
 	BattleManager->EndTurn();
@@ -211,6 +213,9 @@ void UPeppyTurnWidget::SetSkillActorList()
 void UPeppyTurnWidget::OnClick_Attack()
 {
 	if (SkillListArr.Num() == 0) {
+		if (SkillListFormRef->SkillHoverWidgetRef) {
+			SkillListFormRef->SkillHoverWidgetRef->RemoveFromParent();
+		}
 		RemoveFromParent();
 	}
 	else {

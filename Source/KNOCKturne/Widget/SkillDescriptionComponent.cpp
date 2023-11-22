@@ -254,12 +254,11 @@ void USkillDescriptionComponent::SetHoverWidgetPos(UUserWidget* hoverwidget, UUs
 
 	FVector2D pos;
 	pos.X = ViewportPos.X;
-	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
 	pos.Y = ViewportPos.Y - 207.0 / 2 + 104.0 / 2;
 	//pos.Y = ViewportPos.Y - (UWidgetLayoutLibrary::SlotAsCanvasSlot(hoverwidget)->GetSize().Y) / 2 + (UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y) / 2;
 	hoverwidget->SetPositionInViewport(pos);
-	//NTLOG(Warning, TEXT("%d"), UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y);
-	//NTLOG(Warning, TEXT("%d, %d"), UWidgetLayoutLibrary::SlotAsCanvasSlot(hoverwidget)->GetSize().Y, UWidgetLayoutLibrary::SlotAsCanvasSlot(backgroundBtn)->GetSize().Y);
+
+	//NTLOG(Warning, TEXT("%d, %d"), Geometry->Get);
 }
 
 void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn)
@@ -274,7 +273,6 @@ void USkillDescriptionComponent::SetSelectedSkillHoverPos(UUserWidget* hoverwidg
 
 	FVector2D pos;
 	pos.X = ViewportPos.X + 70.0;
-	//pos.Y = ViewportPos.Y - (backgroundBtn->GetDesiredSize().Y / 2) + (hoverwidget->GetDesiredSize().Y / 2);
 	pos.Y = ViewportPos.Y - 55.0;
 	hoverwidget->SetPositionInViewport(pos);
 }

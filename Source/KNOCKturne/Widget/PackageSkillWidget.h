@@ -168,4 +168,6 @@ public:
 	void SaveSelectedSpecialty();
 	UFUNCTION()
 	void SaveSelectedItem();
+	UFUNCTION()
+	void RemoveAllHoverWidgets();
 };
