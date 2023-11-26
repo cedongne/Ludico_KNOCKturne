@@ -52,8 +52,8 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TArray<FVector> TempSpawnLocation;
-	// ¾ð¸®¾ó ¿¡µðÅÍ »ó¿¡¼± ·ÎÅ×ÀÌÅÍ°¡	Roll, Pitch, Yaw
-	// C++ ½ºÅ©¸³Æ® »ó¿¡¼± ·ÎÅ×ÀÌÅÍ°¡		Pitch, Yaw, Roll	¼øÀÌ¶ó´Â °ÍÀ» À¯ÀÇÇÒ °Í.
+	// ï¿½ð¸®¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó¿¡¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½	Roll, Pitch, Yaw
+	// C++ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ó¿¡¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½		Pitch, Yaw, Roll	ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 	TArray<FRotator> TempSpawnRotation;
 
 
@@ -93,8 +93,14 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
+	AddBossSkillSpawnDataToMap(
+		"ChasePeppy",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
 
-	// Note : È¤½Ã ¾èÀº º¹»ç·Î ÀÎÇØ TempSpawnLocation°ú TempSpawnRotation °´Ã¼°¡ ÃÊ±âÈ­µÇ¸é¼­ ¹®Á¦°¡ ¹ß»ýÇÏ´ÂÁö¿¡ ´ëÇÑ ÀÌ½´ °ü¸®°¡ ÇÊ¿äÇÔ.
+	// Note : È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ TempSpawnLocationï¿½ï¿½ TempSpawnRotation ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ç¸é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½.
 }
 
 FBossSkillSpawnData FBossSkillSpawnData::SetBossSkillSpawnData(UClass* _SkillObjectClass, TArray<FTransform> _SkillTrnasforms) {
@@ -239,7 +245,7 @@ bool UBattleTableManagerSystem::TryUsePeppySkillProbabilistic(FPeppySkillData Sk
 	int32 SkillTarget;
 	bool SkillSucceed = Probability < SkillData.Probability_1;
 
-	// ÆäÇÇ ½ºÅ³Àº EffectSequence°¡ 3±îÁö ÀÖÁö¸¸, È®·ü¿¡ µû¶ó ÇÏ³ªÀÇ È¿°ú¸¸ Àû¿ëÇÏ´Â Ã³¸®´Â EffectSequence 2±îÁö¸¸ Á¸ÀçÇÏ¹Ç·Î ÀÌ¿Í °°ÀÌ ÀÓ½Ã ±¸Çö.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ EffectSequenceï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ EffectSequence 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¹Ç·ï¿½ ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	if (SkillSucceed) {
 		Sequence = 0;
 		SkillTarget = SkillData.SkillTarget_1;
@@ -278,33 +284,33 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
 	}
 	/*
-	*	11 ´Ü¼ø °ø°Ý: ´ë»óÀÇ EP¸¦ Áï½Ã N¸¸Å­ ±ðÀ½.
+	*	11 ï¿½Ü¼ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ EPï¿½ï¿½ ï¿½ï¿½ï¿½ Nï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½.
 	*/
 	else if (SkillData.SkillIndex == 11) {
 		StatComponent->GetDamaged(SkillData.Value_N);
 		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
-	*	13 ·£´ý °ø°Ý: ´ë»óÀÇ EP¸¦ Áï½Ã N ÀÌ»ó M ÀÌÇÏÀÇ ·£´ýÇÑ Â¦¼ö ¼öÄ¡¸¸Å­ ±ðÀ½.
+	*	13 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ EPï¿½ï¿½ ï¿½ï¿½ï¿½ N ï¿½Ì»ï¿½ M ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Â¦ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½.
 	*/
 	else if (SkillData.SkillIndex == 13) {
 		StatComponent->GetDamaged(CalcUtil::RandEvenNumberInRange(SkillData.Value_N, SkillData.Value_M));
 		NTLOG(Log, TEXT("[%s : SkillIndex 13] Random attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	/*
-	*	16 Á¦ÇÑ µð¹öÇÁ-±àÁ¤: ´ë»óÀÇ ¸ðµç ±àÁ¤Àû ¹öÇÁ Áß ·£´ýÀ¸·Î N°³ Á¦°Å
+	*	16 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	*/
 	else if (SkillData.SkillIndex == 16) {
 		BuffComponent->RemoveRandomPositiveBuff(SkillData.Value_N);
 	}
 	/*
-	*	32 °ø°Ý·Â »ó½Â: TÅÏµ¿¾È ´ë»óÀÌ °¡ÇÏ´Â ÃÖÁ¾ µ¥¹ÌÁö°¡ N¸¸Å­ Áõ°¡
+	*	32 ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½: Tï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Nï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½
 	*/
 	else if (SkillData.SkillIndex == 32) {
 
 	}
 	/*
-	*	34 ¹Ý»ç: ´ë»ó¿¡°Ô TÅÏµ¿¾È »ó´ë¿¡°Ô µ¥¹ÌÁö¸¦ ¹ÞÀ» ¶§¸¶´Ù N¸¸Å­ÀÇ µ¥¹ÌÁö¸¦ µ¹·ÁÁÖ´Â ¡®¹Ý»ç(ReflexiveAttack)¡¯ ¹öÇÁ¸¦ ºÎ¿©
+	*	34 ï¿½Ý»ï¿½: ï¿½ï¿½ó¿¡°ï¿½ Tï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ë¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Nï¿½ï¿½Å­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ý»ï¿½(ReflexiveAttack)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½
 	*/
 	else if (SkillData.SkillIndex == 34) {
 		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, SkillData.SkillId);
@@ -313,7 +319,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	52
 	*/
 	/*
-	*	54 Áö¼Ó µ¥¹ÌÁö: ´ë»óÀÇ HP°¡ °¢ ÅÏ¸¶´Ù N¸¸Å­ TÅÏµ¿¾È °¨¼Ò
+	*	54 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ HPï¿½ï¿½ ï¿½ï¿½ ï¿½Ï¸ï¿½ï¿½ï¿½ Nï¿½ï¿½Å­ Tï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	*/
 	else if (SkillData.SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
@@ -324,7 +330,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
 	}
 	/*
-	*	92 °æ°í: ´ë»ó¿¡°Ô TÅÏµ¿¾È À¯ÁöµÇ´Â ¡®°æ°í(Warning)¡¯ ¹öÇÁ¸¦ ºÎ¿©
+	*	92 ï¿½ï¿½ï¿½: ï¿½ï¿½ó¿¡°ï¿½ Tï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½(Warning)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½
 	*/
 	else if (SkillData.SkillIndex == 92) {
 		BuffComponent->AcquireBuff(EBuffType::Warning, SkillData.SkillId);
