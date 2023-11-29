@@ -154,3 +154,8 @@ bool ABossSkillActor::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
 	TempDelayTime += DeltaSeconds;
 	return false;
 }
+
+void ABossSkillActor::EndCurBossSkill()
+{
+	CurrentStep = ESkillActorLifeCycleStep::DestroyTime;
+}

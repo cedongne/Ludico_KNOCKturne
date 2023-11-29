@@ -47,7 +47,7 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 		CurStatData.EP = FMath::Clamp<int32>(CurStatData.EP + Value, 0, CurStatData.MaxEP);
 		if (CurStatData.EP <= 0) {
 			CurStatData.EP = 0;
-			// ÅÏÀÌ ³¡³­ ÈÄ Die Ã³¸®¸¦ ÇÏ±â À§ÇØ Flag¸¸ ¼³Á¤ÇÏ°í BattleManagerÀÇ TurnChange()¿¡¼­ ½ÇÁ¦ Die ¸Þ¼­µå¸¦ È£ÃâÇÔ.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Die Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Flagï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ BattleManagerï¿½ï¿½ TurnChange()ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Die ï¿½Þ¼ï¿½ï¿½å¸¦ È£ï¿½ï¿½ï¿½ï¿½.
 			BossActor->IsDie = true;
 		}
 		break;

@@ -29,7 +29,7 @@ void ABoss::PostInitializeComponents() {
 	StatComponent->SetDefaultStat();
 }
 
-// º¸½º ÅÏµ¿¾È ÁÖ±âÀûÀ¸·Î ½ºÅ³À» ½ºÆù.
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 void ABoss::SpawnBossSkill() {
 	TArray<FString> BossSkillKeyArray;
 	BattleTableManagerSystem->BossSkillSpawnDataMap.GenerateKeyArray(BossSkillKeyArray);
@@ -56,7 +56,7 @@ void ABoss::SpawnBossSkill() {
 		false);
 }
 
-/*º¸½º ÅÏÀÌ ½ÃÀÛµÉ ¶§ ÀÏÁ¤ µô·¹ÀÌ¸¦ °¡Áö°í ½ºÅ³À» ½ºÆù.*/
+/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.*/
 void ABoss::SpawnBossSkillWhenStartBossTurn() {
 	GetWorld()->GetTimerManager().SetTimer(
 		UseSkillTimerHandler,

@@ -85,4 +85,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
+
+	UFUNCTION(BlueprintCallable)
+	void EndCurBossSkill();
 };

@@ -378,7 +378,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);
 private:
-	// ÇöÀç Àû¿ëÇÒ È¿°ú°¡ ¸î ¹øÂ° ÀÎµ¦½ºÀÎÁö¿¡ µû¶ó °ª ÀúÀå 
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Â° ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	FCurEffectIndexSkillData CurEffectIndexBossSkillDataSet;
 	FCurEffectIndexSkillData CurEffectIndexPeppySkillDataSet;
 
