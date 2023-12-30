@@ -47,7 +47,7 @@ void ABoss::SpawnBossSkill() {
 	}
 
 	float SkillLifeTime = SkillData->SkillCastTime + SkillData->SkillDelayTime;
-	float NextSkillDelayTime = FMath::RandRange(StatComponent->CurStatData.BossMinDelay, StatComponent->CurStatData.BossMaxDelay) - 2 + SkillData->SkillDelayTime;
+	NextSkillDelayTime = FMath::RandRange(StatComponent->CurStatData.BossMinDelay, StatComponent->CurStatData.BossMaxDelay) - 2 + SkillData->SkillDelayTime;
 	GetWorld()->GetTimerManager().SetTimer(
 		UseSkillTimerHandler,
 		this,

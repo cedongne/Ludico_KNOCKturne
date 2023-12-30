@@ -26,6 +26,8 @@ public:
 	class UBuffComponent* BuffComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UKNOCKturneObjectPool* EnergySpawner;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float NextSkillDelayTime;
 
 protected:
 	virtual void BeginPlay() override;

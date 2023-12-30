@@ -3,8 +3,10 @@
 
 #include "BossSkillActor.h"
 #include "Peppy.h"
+#include "Boss.h"
 #include "Engine/DataTable.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
+#include "GameInstance/ActorManagerSystem.h"
 
 #define SKILL_DESTROTY_TIME 1
 
@@ -158,4 +160,19 @@ bool ABossSkillActor::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
 void ABossSkillActor::EndCurBossSkill()
 {
 	CurrentStep = ESkillActorLifeCycleStep::DestroyTime;
+	CurrentLifeTime += SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME;	
+}
+
+void ABossSkillActor::StopAndSpawnNewBossSkill()
+{
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	class UActorManagerSystem* ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
+	ActorManagerSystem->BossActor->ClearUseSkillTimer();
+
+	GetWorld()->GetTimerManager().SetTimer(
+		NextSkillDelayTimerHandler,
+		ActorManagerSystem->BossActor,
+		&ABoss::SpawnBossSkill,
+		ActorManagerSystem->BossActor->NextSkillDelayTime,
+		false);
 }

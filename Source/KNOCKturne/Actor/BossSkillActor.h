@@ -45,6 +45,7 @@ private:
 	float ShowAttackRangeTime_PreSpawnActor;
 
 	FTimerHandle ActivateActorTickTimerHandler;
+	FTimerHandle NextSkillDelayTimerHandler;
 	struct FBossSkillData SkillData;
 
 	void EvaluateCurrentLifeCycleStep(float DeltaSeconds);
@@ -88,4 +89,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EndCurBossSkill();
+
+	UFUNCTION(BlueprintCallable)
+	void StopAndSpawnNewBossSkill();
 };
