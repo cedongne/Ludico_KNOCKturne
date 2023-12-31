@@ -89,6 +89,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EndCurBossSkill();
+	UFUNCTION(BlueprintCallable)
+	void EndCurBossSkillAfterSec(float Sec);
 
 	UFUNCTION(BlueprintCallable)
 	void StopAndSpawnNewBossSkill();

@@ -163,6 +163,18 @@ void ABossSkillActor::EndCurBossSkill()
 	CurrentLifeTime += SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME;	
 }
 
+void ABossSkillActor::EndCurBossSkillAfterSec(float Sec)
+{
+	FTimerHandle EndSkillTimerHandler;
+
+	GetWorld()->GetTimerManager().SetTimer(
+		EndSkillTimerHandler,
+		this,
+		&ABossSkillActor::EndCurBossSkill,
+		Sec,
+		false);
+}
+
 void ABossSkillActor::StopAndSpawnNewBossSkill()
 {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));

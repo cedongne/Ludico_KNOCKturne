@@ -42,7 +42,9 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
-	TryUpdateCurStatData(FStatType::EP, -Value);
+	if (CanBeDamaged) {
+		TryUpdateCurStatData(FStatType::EP, -Value);
+	}
 }
 
 bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {

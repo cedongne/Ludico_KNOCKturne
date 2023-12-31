@@ -70,7 +70,9 @@ void ABattleManager::StartPeppyTurn() {
 
 void ABattleManager::TurnChange() {
 	for (auto SkillActor : SkillActorsOnField) {
-		SkillActor.Value->Destroy();
+		if (SkillActor.Value) {
+			SkillActor.Value->Destroy();
+		}
 	}
 	SkillActorsOnField.Empty();
 

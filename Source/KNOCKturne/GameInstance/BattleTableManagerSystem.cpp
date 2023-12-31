@@ -70,6 +70,8 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
 	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
@@ -98,6 +100,12 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
+	AddBossSkillSpawnDataToMap(
+		"GoBackMoment",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);

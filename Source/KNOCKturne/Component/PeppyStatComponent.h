@@ -41,6 +41,8 @@ private:
 public:
 	UPROPERTY(Transient, VisibleAnywhere, BlueprintReadOnly)
 	FPeppyStatData CurStatData;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool CanBeDamaged = true;
 
 	UFUNCTION(BlueprintCallable)
 	void GetDamaged(float Value) override;
