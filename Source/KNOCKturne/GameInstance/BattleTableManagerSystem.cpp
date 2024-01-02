@@ -72,6 +72,10 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
 	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
@@ -106,6 +110,18 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	AddBossSkillSpawnDataToMap(
 		"GoBackMoment",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
+	/*AddBossSkillSpawnDataToMap(
+		"MixedFeeling",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_MixedFeeling.BP_MixedFeeling_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);*/
+	AddBossSkillSpawnDataToMap(
+		"BindPeppy",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BindPeppy.BP_BindPeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
@@ -338,6 +354,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
+	}
+	else if (SkillData.SkillIndex == 72) {
+		BuffComponent->AcquireBuff(EBuffType::SpeedDecrease, SkillData.SkillId);
 	}
 	/*
 	*	92 ���: ��󿡰� T�ϵ��� �����Ǵ� �����(Warning)�� ������ �ο�
