@@ -109,6 +109,9 @@ void ABossSkillActor::InitSkillData() {
 }
 
 void ABossSkillActor::ActivateActorTickAfterDelay(float DelayTime) {
+	if (DelayTime <= 0)
+		DelayTime = 0.0001;
+
 	GetWorld()->GetTimerManager().SetTimer(
 		ActivateActorTickTimerHandler,
 		this,

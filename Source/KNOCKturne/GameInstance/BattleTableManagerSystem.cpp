@@ -76,6 +76,8 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
 	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
@@ -113,15 +115,21 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	/*AddBossSkillSpawnDataToMap(
+	AddBossSkillSpawnDataToMap(
 		"MixedFeeling",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_MixedFeeling.BP_MixedFeeling_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	AddBossSkillSpawnDataToMap(
 		"BindPeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BindPeppy.BP_BindPeppy_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
+	AddBossSkillSpawnDataToMap(
+		"HeightenedLonging",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_HeightenedLonging.BP_HeightenedLonging_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
