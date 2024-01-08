@@ -503,15 +503,13 @@ void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
 void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
 	DialogueWidgetRef->isCameraMoving = true;
 
-	if (BP_DreamFragmentRef == nullptr) {
-		if (BP_DreamFragmentClass) {
-			BP_DreamFragmentRef = CreateWidget<UUserWidget>(GetWorld(), BP_DreamFragmentClass);
-			if (BP_DreamFragmentRef) {
-				BP_DreamFragmentRef->AddToViewport();
-			}
-			else {
-				NTLOG(Warning, TEXT("BP_DreamFragment creating is failed!"));
-			}
+	if (BP_DreamFragmentClass) {
+		BP_DreamFragmentRef = CreateWidget<UUserWidget>(GetWorld(), BP_DreamFragmentClass);
+		if (BP_DreamFragmentRef) {
+			BP_DreamFragmentRef->AddToViewport();
+		}
+		else {
+			NTLOG(Warning, TEXT("BP_DreamFragment creating is failed!"));
 		}
 	}
 }
