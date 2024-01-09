@@ -38,6 +38,7 @@ private:
 	UBattleTableManagerSystem* BattleTableManagerSystem;
 
 	FTimerHandle UseSkillTimerHandler;
+	bool isFirstSkill = true;
 	
 public:
 	bool IsDie = false;
