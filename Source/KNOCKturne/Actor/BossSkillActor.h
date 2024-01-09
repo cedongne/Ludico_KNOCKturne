@@ -73,6 +73,9 @@ protected:
 	bool TryOperateSkillEffect(ESkillUsingType SkillUsingType) override;
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool CanDestroy = true;
+
 	UFUNCTION(BlueprintCallable)
 	void InitSkillData();
 	UFUNCTION(BlueprintCallable)

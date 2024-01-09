@@ -64,7 +64,7 @@ void ABossSkillActor::EvaluateCurrentLifeCycleStep(float DeltaSeconds) {
 		}
 		break;
 	case ESkillActorLifeCycleStep::DestroyTime:
-		if (CurrentLifeTime >= SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME) {
+		if (CurrentLifeTime >= SkillData.SkillDelayTime + SkillData.SkillCastTime + SKILL_DESTROTY_TIME && CanDestroy) {
 			BattleManager->SkillActorsOnField.Remove(this->GetFName().ToString());
 			auto owner = Cast<class ABoss>(GetOwner());
 			if (owner != nullptr) {
