@@ -14,6 +14,7 @@ enum class EBuffType : uint8 {
 	ReflexiveAttack		UMETA(DisplayName = "ReflexiveAttack"),
 	PeriodicRecovery	UMETA(DisplayName = "PeriodicRecovery"),
 	AttackDecrease		UMETA(DisplayName = "AttackDecrease"),
+	EnergyDropIncrease		UMETA(DisplayName = "EnergyDropIncrease"),
 	PeriodicAttack		UMETA(DisplayName = "PeriodicAttack"),
 	Blind				UMETA(DisplayName = "Blind"),
 	SpeedDecrease		UMETA(DisplayName = "SpeedDecrease"),
@@ -111,9 +112,9 @@ public:
 	int32 Value_T;
 
 	FBuffData* CreateBuffData(FString _SourceId, FBuffTable* BuffTableData) {
-		// TArray<EBuffType>ÀÇ Contains ¸Ş¼­µå·Î °£´ÜÇÏ°Ô ±¸ÇöÇÒ ¼ö ÀÖÀ» ÁÙ ¾Ë¾Ò´Âµ¥, uenumÀÌ == operator¸¦ Áö¿øÇÏÁö ¾ÊÀ½.
-		// ÇØ´ç ¿¬»êÀÚ ¿À¹ö·ÎµùÀ» ÇÏ·Á ÇßÁö¸¸, enum class ¾È¿¡ ¸Ş¼­µå ±¸Çöµµ ºÒ°¡´ÉÇÔ. 
-		// ±×·¡¼­ ¾îÂ¿ ¼ö ¾øÀÌ ¾Æ·¡¿Í °°ÀÌ ¹è¿­ ÀüÃ¼¸¦ ¼øÈ¸ÇÏ¸ç uint32 Å¸ÀÔÀ¸·ÎÀÇ °­Á¦ Ä³½ºÆÃÀ» ÅëÇØ ºñ±³ÇÔ.
+		// TArray<EBuffType>ì˜ Contains ë©”ì„œë“œë¡œ ê°„ë‹¨í•˜ê²Œ êµ¬í˜„í•  ìˆ˜ ìˆì„ ì¤„ ì•Œì•˜ëŠ”ë°, uenumì´ == operatorë¥¼ ì§€ì›í•˜ì§€ ì•ŠìŒ.
+		// í•´ë‹¹ ì—°ì‚°ì ì˜¤ë²„ë¡œë”©ì„ í•˜ë ¤ í–ˆì§€ë§Œ, enum class ì•ˆì— ë©”ì„œë“œ êµ¬í˜„ë„ ë¶ˆê°€ëŠ¥í•¨. 
+		// ê·¸ë˜ì„œ ì–´ì©” ìˆ˜ ì—†ì´ ì•„ë˜ì™€ ê°™ì´ ë°°ì—´ ì „ì²´ë¥¼ ìˆœíšŒí•˜ë©° uint32 íƒ€ì…ìœ¼ë¡œì˜ ê°•ì œ ìºìŠ¤íŒ…ì„ í†µí•´ ë¹„êµí•¨.
 		bool isTurnTypeBuff = false;
 		for (auto Buff : BuffListPerTurn) {
 			if (int32(Buff) == int32(BuffTableData->BuffType)) {
@@ -130,6 +131,7 @@ public:
 		EBuffType::AttackIncrease,
 		EBuffType::ReflexiveAttack,
 		EBuffType::PeriodicRecovery,
+		EBuffType::EnergyDropIncrease,
 		EBuffType::AttackDecrease,
 		EBuffType::PeriodicAttack,
 		EBuffType::SpeedDecrease,
@@ -176,6 +178,7 @@ private:
 		{ EBuffType::AttackIncrease,	"AttackIncrease" },
 		{ EBuffType::ReflexiveAttack,	"ReflexiveAttack"},
 		{ EBuffType::PeriodicRecovery,	"PeriodicRecovery"},
+		{ EBuffType::EnergyDropIncrease,	"EnergyDropIncrease"},
 		{ EBuffType::AttackDecrease,	"AttackDecrease" },
 		{ EBuffType::PeriodicAttack,	"PeriodicAttack"},
 		{ EBuffType::Blind,				"Blind" },
@@ -195,25 +198,25 @@ private:
 	class UDataTable* BuffTable;
 
 public:
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ BuffTypÀÇ ¹öÇÁ¸¦ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ BuffTypì˜ ë²„í”„ë¥¼ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)
 	void RemoveBuff(EBuffType BuffType);
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ ·£´ıÇÑ ±àÁ¤Àû ¹öÇÁ¸¦ Num°³ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ ëœë¤í•œ ê¸ì •ì  ë²„í”„ë¥¼ Numê°œ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)
 	void RemoveRandomPositiveBuff(int32 Num);
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ ·£´ıÇÑ ºÎÁ¤Àû ¹öÇÁ¸¦ Num°³ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ ëœë¤í•œ ë¶€ì •ì  ë²„í”„ë¥¼ Numê°œ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)
 	void RemoveRandomNegativeBuff(int32 Num);
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ ¸ğµç ±àÁ¤Àû ¹öÇÁ¸¦ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ ëª¨ë“  ê¸ì •ì  ë²„í”„ë¥¼ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)
 	void RemoveAllPositiveBuff();
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ ¸ğµç ºÎÁ¤Àû ¹öÇÁ¸¦ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ ëª¨ë“  ë¶€ì •ì  ë²„í”„ë¥¼ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)
 	void RemoveAllNegativeBuff();
-	/* ÀÚ½Å¿¡°Ô Àû¿ëµÈ ¸ğµç ¹öÇÁ¸¦ Á¦°ÅÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ ì ìš©ëœ ëª¨ë“  ë²„í”„ë¥¼ ì œê±°í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable)	
 	void RemoveAllBuff();
-	/* ÀÚ½Å¿¡°Ô TermTypeÀ» ÁÖ±â·Î Duration¸¸Å­ÀÇ Áö¼ÓÇÏ´Â BuffTypeÀÇ ¹öÇÁ¸¦ ºÎ¿©ÇÕ´Ï´Ù.*/
+	/* ìì‹ ì—ê²Œ TermTypeì„ ì£¼ê¸°ë¡œ Durationë§Œí¼ì˜ ì§€ì†í•˜ëŠ” BuffTypeì˜ ë²„í”„ë¥¼ ë¶€ì—¬í•©ë‹ˆë‹¤.*/
 	UFUNCTION(BlueprintCallable) 
 	void AcquireBuff(EBuffType BuffType, FString Source);
 

@@ -120,6 +120,11 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FString SourceId) {
 		NTLOG(Error, TEXT("Buff acquiration is failed!"));
 		return;
 	}
+
+	// 중복된 버프 제거
+	if (HasBuff(BuffType)) {
+		RemoveBuff(BuffType);
+	}
 	
 	auto buffData = new FBuffData(SourceId, acquiredBuff);
 
