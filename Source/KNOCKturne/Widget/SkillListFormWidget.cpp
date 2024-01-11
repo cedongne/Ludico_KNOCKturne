@@ -216,7 +216,8 @@ void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UUserWidget* ba
 		SkillHoverWidgetRef->TextBlock_SkillName->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_SkillName->GetText());
 		SkillHoverWidgetRef->TextBlock_Energy->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Energy->GetText());
 		SkillHoverWidgetRef->TextBlock_Stance->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Stance->GetText());
-		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(listhoveredNum)));
+		int TableRowNum = BattleManagerSystem->SelectedSkillCodeList[listhoveredNum];
+		SkillHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SkillRedefineDescription(TableRowNum)));
 		SkillHoverWidgetRef->TextBlock_Num->SetVisibility(ESlateVisibility::Visible);
 		SkillHoverWidgetRef->TextBlock_Num->SetText(PeppyTurnWidget->SkillListArr[listhoveredNum]->TextBlock_Num->GetText());
 
