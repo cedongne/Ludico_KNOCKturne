@@ -115,7 +115,7 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	AddBossSkillSpawnDataToMap(
+	 AddBossSkillSpawnDataToMap(
 		"MixedFeeling",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_MixedFeeling.BP_MixedFeeling_C"),
 		TempSpawnLocation,
@@ -314,6 +314,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
+
+	BuffComponent->OperateBuffs(EffectSequence, TargetActor, SkillData);
+
 	if (SkillData.SkillIndex == 1) {
 		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
 	}
@@ -341,7 +344,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	32 ���ݷ� ���: T�ϵ��� ����� ���ϴ� ���� �������� N��ŭ ����
 	*/
 	else if (SkillData.SkillIndex == 32) {
-
+		BuffComponent->AcquireBuff(EBuffType::AttackIncrease, SkillData.SkillId);
 	}
 	/*
 	*	34 �ݻ�: ��󿡰� T�ϵ��� ��뿡�� �������� ���� ������ N��ŭ�� �������� �����ִ� ���ݻ�(ReflexiveAttack)�� ������ �ο�
@@ -352,6 +355,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	/*
 	*	52
 	*/
+	else if (SkillData.SkillIndex == 52) {
+		BuffComponent->AcquireBuff(EBuffType::AttackDecrease, SkillData.SkillId);
+	}
 	/*
 	*	54 ���� ������: ����� HP�� �� �ϸ��� N��ŭ T�ϵ��� ����
 	*/
@@ -366,6 +372,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else if (SkillData.SkillIndex == 72) {
 		BuffComponent->AcquireBuff(EBuffType::SpeedDecrease, SkillData.SkillId);
 	}
+	else if (SkillData.SkillIndex == 73) {
+		BuffComponent->AcquireBuff(EBuffType::Confuse, SkillData.SkillId);
+	}
 	/*
 	*	92 ���: ��󿡰� T�ϵ��� �����Ǵ� �����(Warning)�� ������ �ο�
 	*/
@@ -375,6 +384,8 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
+
+	BuffComponent->ReturnBeforeBuffData(EffectSequence, SkillData);
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
