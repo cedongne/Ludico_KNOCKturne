@@ -2,6 +2,7 @@
 
 
 #include "BuffComponent.h"
+#include "GameInstance/ActorManagerSystem.h"
 
 UBuffComponent::UBuffComponent()
 {
@@ -16,6 +17,10 @@ UBuffComponent::UBuffComponent()
 void UBuffComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
 }
 
 void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
@@ -208,4 +213,50 @@ bool UBuffComponent::HasBuff(EBuffType BuffType) {
 		|| HasNegativeBuffs_PerSecond.Contains(BuffType)
 		|| HasNegativeBuffs_PerTurn.Contains(BuffType)
 		? true : false;
+}
+
+void UBuffComponent::TryAttackIncrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+{
+	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
+		AttackIncreaseTargetActor = TargetActor;
+		UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, SkillData.Value_N);
+	}
+}
+
+void UBuffComponent::EndAttackIncrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+{
+	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
+		UStatComponent* StatComponent = Cast<UStatComponent>(AttackIncreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -SkillData.Value_N);
+	}
+}
+
+void UBuffComponent::TryAttackDecrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+{
+	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
+		AttackDecreaseTargetActor = TargetActor;
+		UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -SkillData.Value_N);
+	}
+}
+
+void UBuffComponent::EndAttackDecrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+{
+	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
+		UStatComponent* StatComponent = Cast<UStatComponent>(AttackDecreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, SkillData.Value_N);
+	}
+}
+
+void UBuffComponent::OperateBuffs(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+{
+	TryAttackIncrease(EffectSequence, TargetActor, SkillData);
+	TryAttackDecrease(EffectSequence, TargetActor, SkillData);
+}
+
+void UBuffComponent::ReturnBeforeBuffData(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+{
+	EndAttackIncrease(EffectSequence, SkillData);
+	EndAttackDecrease(EffectSequence, SkillData);
 }

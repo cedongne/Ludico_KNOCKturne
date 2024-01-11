@@ -60,6 +60,9 @@ bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) 
 	case FStatType::Energy:
 		CurStatData.Energy = FMath::Clamp<int32>(CurStatData.Energy + Value, 0, CurStatData.MaxEnergy);
 		break;
+	case FStatType::AttackDamage:
+		CurStatData.AttackDamage += Value;
+		break;
 	default:
 		NTLOG(Error, TEXT("PeppyStatType is invalid!"));
 		return false;
