@@ -215,7 +215,107 @@ bool UBuffComponent::HasBuff(EBuffType BuffType) {
 		? true : false;
 }
 
-void UBuffComponent::TryAttackIncrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::OperatePositiveBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor)
+{
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+
+	switch (BuffType) {
+	case EBuffType::AttackIncrease:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
+		break;
+	case EBuffType::EnergyDropIncrease:
+		StatComponent->TryUpdateCurStatData(FStatType::Energy, BuffData.Value_N);
+		break;
+	case EBuffType::Shield:
+		UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+		PeppyStatComponent->CanBeDamaged = false;
+		break;
+	default:
+		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
+	}
+}
+
+void UBuffComponent::OperatePositiveBuffs_PerSecond(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor, float DeltaSeconds)
+{
+	// UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+
+	switch (BuffType) {
+	case EBuffType::PeriodicRecovery:
+		if (DelayWithDeltaTime(BuffData.Value_M, DeltaSeconds)) {
+			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+		}
+		break;
+	default:
+		NTLOG(Warning, TEXT("No PositiveBuffs_PerSecond Found!"));
+	}
+}
+
+void UBuffComponent::OperateNegativeBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor)
+{
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+
+	switch (BuffType) {
+	case EBuffType::AttackDecrease:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
+		break;
+	default:
+		NTLOG(Warning, TEXT("No NegativeBuffs_PerTurn Found!"));
+	}
+}
+
+void UBuffComponent::OperateNegativeBuffs_PerSecond(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor, float DeltaSeconds)
+{
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+
+	switch (BuffType) {
+	case EBuffType::PeriodicAttack:
+		if (DelayWithDeltaTime(BuffData.Value_M, DeltaSeconds)) {
+			StatComponent->GetDamaged(BuffData.Value_N);
+		}
+		break;
+	/*case EBuffType::SpeedDecrease:
+		
+		break;
+	case EBuffType::Confuse:
+
+		break;*/
+	default:
+		NTLOG(Warning, TEXT("No NegativeBuffs_PerSecond Found!"));
+	}
+}
+
+void UBuffComponent::OperateBuffs_PerTurn()
+{
+	TArray<EBuffType> Keys;
+	HasPositiveBuffs_PerTurn.GetKeys(Keys);
+
+	for (auto& Key : Keys) {
+		//OperatePositiveBuffs_PerTurn(HasPositiveBuffs_PerTurn[Key], Key, );
+	}
+
+	HasNegativeBuffs_PerTurn.GetKeys(Keys);
+	for (auto& Key : Keys) {
+		//OperateNegativeBuffs_PerTurn(HasNegativeBuffs_PerTurn[Key], Key, );
+	}
+}
+
+void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
+{
+
+}
+
+bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
+	if (TempDelayTime > DelayTime) {
+		TempDelayTime = 0;
+
+		return true;
+	}
+	TempDelayTime += DeltaSeconds;
+	return false;
+}
+
+void UBuffComponent::TryAttackIncrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
 		AttackIncreaseTargetActor = TargetActor;
@@ -224,7 +324,7 @@ void UBuffComponent::TryAttackIncrease(int32 EffectSequence, AActor* TargetActor
 	}
 }
 
-void UBuffComponent::EndAttackIncrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::EndAttackIncrease(FCurEffectIndexSkillData SkillData)
 {
 	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
 		UStatComponent* StatComponent = Cast<UStatComponent>(AttackIncreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
@@ -232,7 +332,7 @@ void UBuffComponent::EndAttackIncrease(int32 EffectSequence, FCurEffectIndexSkil
 	}
 }
 
-void UBuffComponent::TryAttackDecrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::TryAttackDecrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
 {
 	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
 		AttackDecreaseTargetActor = TargetActor;
@@ -241,7 +341,7 @@ void UBuffComponent::TryAttackDecrease(int32 EffectSequence, AActor* TargetActor
 	}
 }
 
-void UBuffComponent::EndAttackDecrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::EndAttackDecrease(FCurEffectIndexSkillData SkillData)
 {
 	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
 		UStatComponent* StatComponent = Cast<UStatComponent>(AttackDecreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
@@ -249,14 +349,27 @@ void UBuffComponent::EndAttackDecrease(int32 EffectSequence, FCurEffectIndexSkil
 	}
 }
 
-void UBuffComponent::OperateBuffs(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::TryPeriodicAttack(AActor* TargetActor, FCurEffectIndexSkillData SkillData, float DeltaSeconds)
 {
-	TryAttackIncrease(EffectSequence, TargetActor, SkillData);
-	TryAttackDecrease(EffectSequence, TargetActor, SkillData);
+	if (HasNegativeBuffs_PerSecond.Contains(EBuffType::PeriodicAttack)) {
+		UStatComponent* StatComponent = Cast<UStatComponent>(PeriodicAttackTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+		TempDelayTime += DeltaSeconds;
+
+		if (TempDelayTime >= SkillData.Value_M) {
+			StatComponent->GetDamaged(SkillData.Value_N);
+			TempDelayTime = 0;
+		}
+	}
 }
 
-void UBuffComponent::ReturnBeforeBuffData(int32 EffectSequence, FCurEffectIndexSkillData SkillData)
+void UBuffComponent::OperateBuffs(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
 {
-	EndAttackIncrease(EffectSequence, SkillData);
-	EndAttackDecrease(EffectSequence, SkillData);
+	TryAttackIncrease(TargetActor, SkillData);
+	TryAttackDecrease(TargetActor, SkillData);
+}
+
+void UBuffComponent::ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData)
+{
+	EndAttackIncrease(SkillData);
+	EndAttackDecrease(SkillData);
 }

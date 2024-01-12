@@ -201,6 +201,9 @@ private:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
 
+	float TempDelayTime;
+	float isPeriodicAtack = false;
+
 public:
 	/* 자신에게 적용된 BuffTyp의 버프를 제거합니다.*/
 	UFUNCTION(BlueprintCallable)
@@ -229,27 +232,50 @@ public:
 	
 	void ExpireBuff(TMap<EBuffType, FBuffData>* BuffMap, EBuffType BuffType);
 
+	UFUNCTION(BlueprintCallable)
 	bool HasBuff(EBuffType BuffType);
+
+	UFUNCTION(BlueprintCallable)
+	void OperatePositiveBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor);
+	UFUNCTION(BlueprintCallable)
+	void OperatePositiveBuffs_PerSecond(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor, float DeltaSeconds);
+	UFUNCTION(BlueprintCallable)
+	void OperateNegativeBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor);
+	UFUNCTION(BlueprintCallable)
+	void OperateNegativeBuffs_PerSecond(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor, float DeltaSeconds);
+
+	UFUNCTION(BlueprintCallable)
+	void OperateBuffs_PerTurn();
+	UFUNCTION(BlueprintCallable)
+	void OperateBuffs_PerSecond(float DeltaSeconds);
+
+	UFUNCTION()
+	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
 
 	/*공격력 상승 버프를 적용합니다.*/
 	UPROPERTY()
 	AActor* AttackIncreaseTargetActor;
 	UFUNCTION(BlueprintCallable)
-	void TryAttackIncrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData);
+	void TryAttackIncrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
 	UFUNCTION(BlueprintCallable)
-	void EndAttackIncrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData);
+	void EndAttackIncrease(FCurEffectIndexSkillData SkillData);
 	/*공격력 감소 버프를 적용합니다.*/
 	UPROPERTY()
 	AActor* AttackDecreaseTargetActor;
 	UFUNCTION(BlueprintCallable)
-	void TryAttackDecrease(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData);
+	void TryAttackDecrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
 	UFUNCTION(BlueprintCallable)
-	void EndAttackDecrease(int32 EffectSequence, FCurEffectIndexSkillData SkillData);
+	void EndAttackDecrease(FCurEffectIndexSkillData SkillData);
+	/*지속 데미지 버프를 적용합니다.*/
+	UPROPERTY()
+	AActor* PeriodicAttackTargetActor;
+	UFUNCTION()
+	void TryPeriodicAttack(AActor* TargetActor, FCurEffectIndexSkillData SkillData, float DeltaTime);
 
 	/*현재 보유하고 있는 모든 버프를 적용합니다.*/
 	UFUNCTION(BlueprintCallable)
-	void OperateBuffs(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData);
+	void OperateBuffs(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
 	/*적용되는 값이 유동적으로 변하는 버프는 테이블 값을 적용 전으로 되돌립니다.*/
 	UFUNCTION(BlueprintCallable)
-	void ReturnBeforeBuffData(int32 EffectSequence, FCurEffectIndexSkillData SkillData);
+	void ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData);
 };

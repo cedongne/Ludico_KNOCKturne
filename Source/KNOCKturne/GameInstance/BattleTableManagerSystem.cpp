@@ -255,6 +255,7 @@ bool UBattleTableManagerSystem::TryUsePeppySkillSequential(FPeppySkillData Skill
 			NTLOG(Error, TEXT("Target set fail : PeppySkillTarget is invalid value"));
 			break;
 		}
+		NTLOG(Error, TEXT("%d"), SkillTarget[Sequence]);
 		
 		auto CurSequenceEffectSkillData = *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData);
 		if (CurSequenceEffectSkillData.SkillId == "-1") {
@@ -315,7 +316,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
 
-	BuffComponent->OperateBuffs(EffectSequence, TargetActor, SkillData);
+	BuffComponent->OperateBuffs(TargetActor, SkillData);
 
 	if (SkillData.SkillIndex == 1) {
 		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
