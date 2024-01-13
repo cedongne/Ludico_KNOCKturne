@@ -203,7 +203,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 		case EBuffTermType::Second:
 			HasPositiveBuffs_PerSecond.Add(BuffType, *buffData);
 			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
-			if (HasPositiveBuffs_PerSecond[BuffType].Value_M == -1) {
+			if (HasPositiveBuffs_PerSecond[BuffType].Value_M == 0) {
 				OperatePositiveBuffs_PerSecond(BuffType, 0);
 			}
 			break;
@@ -219,7 +219,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 		case EBuffTermType::Second:
 			HasNegativeBuffs_PerSecond.Add(BuffType, *buffData);
 			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
-			if (HasNegativeBuffs_PerSecond[BuffType].Value_M == -1) {
+			if (HasNegativeBuffs_PerSecond[BuffType].Value_M == 0) {
 				OperateNegativeBuffs_PerSecond(BuffType, 0);
 			}
 			break;
@@ -438,13 +438,13 @@ void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 	HasPositiveBuffs_PerTurn.GetKeys(NegativeBuffKeys);
 
 	for (auto& Key : PositiveBuffKeys) {
-		if (HasPositiveBuffs_PerSecond[Key].Value_M != -1) {
+		if (HasPositiveBuffs_PerSecond[Key].Value_M != 0) {
 			OperatePositiveBuffs_PerSecond(Key, DeltaSeconds);
 		}
 	}
 
 	for (auto& Key : NegativeBuffKeys) {
-		if (HasNegativeBuffs_PerSecond[Key].Value_M != -1) {
+		if (HasNegativeBuffs_PerSecond[Key].Value_M != 0) {
 			OperateNegativeBuffs_PerSecond(Key, DeltaSeconds);
 		}
 	}
