@@ -51,6 +51,12 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 			BossActor->IsDie = true;
 		}
 		break;
+	case FStatType::AttackDamage:
+		CurStatData.AttackDamage += Value;
+		break;
+	case FStatType::BossEnergyDrop:
+		CurStatData.BossEnergyDrop += Value;
+		break;
 	default:
 		NTLOG(Error, TEXT("PeppyStatType is invalid!"));
 		return false;

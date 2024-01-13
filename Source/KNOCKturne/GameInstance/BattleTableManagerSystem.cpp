@@ -316,7 +316,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
 
-	BuffComponent->OperateBuffs(TargetActor, SkillData);
+	//BuffComponent->OperateBuffs(TargetActor, SkillData);
 
 	if (SkillData.SkillIndex == 1) {
 		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
@@ -345,19 +345,19 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	32 ���ݷ� ���: T�ϵ��� ����� ���ϴ� ���� �������� N��ŭ ����
 	*/
 	else if (SkillData.SkillIndex == 32) {
-		BuffComponent->AcquireBuff(EBuffType::AttackIncrease, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::AttackIncrease, TargetActor, SkillData);
 	}
 	/*
 	*	34 �ݻ�: ��󿡰� T�ϵ��� ��뿡�� �������� ���� ������ N��ŭ�� �������� �����ִ� ���ݻ�(ReflexiveAttack)�� ������ �ο�
 	*/
 	else if (SkillData.SkillIndex == 34) {
-		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, TargetActor, SkillData);
 	}
 	/*
 	*	52
 	*/
 	else if (SkillData.SkillIndex == 52) {
-		BuffComponent->AcquireBuff(EBuffType::AttackDecrease, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::AttackDecrease, TargetActor, SkillData);
 	}
 	/*
 	*	54 ���� ������: ����� HP�� �� �ϸ��� N��ŭ T�ϵ��� ����
@@ -365,28 +365,28 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else if (SkillData.SkillIndex == 54) {
 		TArray<int32> PeriodicDamages;
 		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
-		BuffComponent->AcquireBuff(EBuffType::PeriodicAttack, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::PeriodicAttack, TargetActor, SkillData);
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
 	}
 	else if (SkillData.SkillIndex == 72) {
-		BuffComponent->AcquireBuff(EBuffType::SpeedDecrease, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::SpeedDecrease, TargetActor, SkillData);
 	}
 	else if (SkillData.SkillIndex == 73) {
-		BuffComponent->AcquireBuff(EBuffType::Confuse, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::Confuse, TargetActor, SkillData);
 	}
 	/*
 	*	92 ���: ��󿡰� T�ϵ��� �����Ǵ� �����(Warning)�� ������ �ο�
 	*/
 	else if (SkillData.SkillIndex == 92) {
-		BuffComponent->AcquireBuff(EBuffType::Warning, SkillData.SkillId);
+		BuffComponent->AcquireBuff(EBuffType::Warning, TargetActor, SkillData);
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
 
-	BuffComponent->ReturnBeforeBuffData(EffectSequence, SkillData);
+	//BuffComponent->ReturnBeforeBuffData(EffectSequence, SkillData);
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
