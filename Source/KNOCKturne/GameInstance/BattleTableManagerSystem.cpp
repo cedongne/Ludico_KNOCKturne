@@ -78,8 +78,12 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
+	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
+	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"SweptGarden",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_SweptGarden.BP_SweptGarden_C"),
 		TempSpawnLocation,
@@ -96,14 +100,14 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder2.BP_CleanUpIntruder2_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
+	);*/
 	AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,
@@ -133,6 +137,18 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
+	AddBossSkillSpawnDataToMap(
+		"BloodColoredFlower",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BloodColoredFlower.BP_BloodColoredFlower_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);
+	AddBossSkillSpawnDataToMap(
+		"ExtendedRoot",
+		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ExtendedRoot.BP_ExtendedRoot_C"),
+		TempSpawnLocation,
+		TempSpawnRotation
+	);*/
 
 	// Note : Ȥ�� ���� ����� ���� TempSpawnLocation�� TempSpawnRotation ��ü�� �ʱ�ȭ�Ǹ鼭 ������ �߻��ϴ����� ���� �̽� ������ �ʿ���.
 }
@@ -315,8 +331,6 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	UBuffComponent* BuffComponent = Cast<UBuffComponent>(TargetActor->GetComponentByClass(UBuffComponent::StaticClass()));
 
-	//BuffComponent->OperateBuffs(TargetActor, SkillData);
-
 	if (SkillData.SkillIndex == 1) {
 		SkillActor->CustomSkillOperation(EffectSequence, TargetActor, SkillData, SkillActor);
 	}
@@ -326,6 +340,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else if (SkillData.SkillIndex == 11) {
 		StatComponent->GetDamaged(SkillData.Value_N);
 		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
+	}
+	else if (SkillData.SkillIndex == 12) {
+		StatComponent->TryUpdateCurStatData(FStatType::EP, SkillData.Value_N);
 	}
 	/*
 	*	13 ���� ����: ����� EP�� ��� N �̻� M ������ ������ ¦�� ��ġ��ŭ ����.
@@ -362,9 +379,12 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*	54 ���� ������: ����� HP�� �� �ϸ��� N��ŭ T�ϵ��� ����
 	*/
 	else if (SkillData.SkillIndex == 54) {
-		TArray<int32> PeriodicDamages;
-		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);
-		BuffComponent->AcquireBuff(EBuffType::PeriodicAttack, TargetActor, SkillData);
+		/*TArray<int32> PeriodicDamages;
+		PeriodicDamages.Init(SkillData.Value_N, SkillData.Value_T);*/
+		auto Probability = FMath::FRand();
+		if (Probability < 100) {
+			BuffComponent->AcquireBuff(EBuffType::PeriodicAttack, TargetActor, SkillData);
+		}
 
 		//		Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))->AddCumulativeDamageBeforeStartTurn(SkillData.SkillId, PeriodicDamages);
 		NTLOG(Log, TEXT("[%s : SkillIndex 54] Periodic attack damage %lf in %lf Turns"), *SkillData.SkillId, SkillData.Value_N, SkillData.Value_T);
@@ -384,8 +404,6 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
-
-	//BuffComponent->ReturnBeforeBuffData(EffectSequence, SkillData);
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {

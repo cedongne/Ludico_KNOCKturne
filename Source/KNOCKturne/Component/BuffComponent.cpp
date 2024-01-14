@@ -188,7 +188,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 	if (HasBuff(BuffType)) {
 		RemoveBuff(BuffType);
 	}
-	
+
 	FString SourceId = SkillData.SkillId;
 	auto buffData = new FBuffData(SourceId, acquiredBuff);
 	TargetOfBuff.Add(BuffType, TargetActor);
@@ -433,16 +433,16 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 {
 	TArray<EBuffType> PositiveBuffKeys;
-	HasPositiveBuffs_PerTurn.GetKeys(PositiveBuffKeys);
+	HasPositiveBuffs_PerSecond.GetKeys(PositiveBuffKeys);
 	TArray<EBuffType> NegativeBuffKeys;
-	HasPositiveBuffs_PerTurn.GetKeys(NegativeBuffKeys);
+	HasNegativeBuffs_PerSecond.GetKeys(NegativeBuffKeys);
 
 	for (auto& Key : PositiveBuffKeys) {
 		if (HasPositiveBuffs_PerSecond[Key].Value_M != 0) {
 			OperatePositiveBuffs_PerSecond(Key, DeltaSeconds);
 		}
 	}
-
+	
 	for (auto& Key : NegativeBuffKeys) {
 		if (HasNegativeBuffs_PerSecond[Key].Value_M != 0) {
 			OperateNegativeBuffs_PerSecond(Key, DeltaSeconds);
@@ -457,6 +457,7 @@ bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
 		return true;
 	}
 	TempDelayTime += DeltaSeconds;
+	NTLOG(Warning, TEXT("%d"), TempDelayTime);
 	return false;
 }
 
@@ -550,8 +551,4 @@ void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData 
 	BuffData.Value_N = BuffTableData->defaultN;
 	BuffData.Value_M = BuffTableData->defaultM;
 	BuffData.Value_T = BuffTableData->defaultT;
-
-	NTLOG(Warning, TEXT("%d"), BuffData.Value_N);
-	NTLOG(Warning, TEXT("%d"), BuffData.Value_M);
-	NTLOG(Warning, TEXT("%d"), BuffData.Value_T);
 }
