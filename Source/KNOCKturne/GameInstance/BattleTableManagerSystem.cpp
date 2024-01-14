@@ -276,17 +276,16 @@ bool UBattleTableManagerSystem::TryUsePeppySkillProbabilistic(FPeppySkillData Sk
 	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
 	auto Probability = FMath::FRand();
-	int32 Sequence;
 	int32 SkillTarget;
 	bool SkillSucceed = Probability < SkillData.Probability_1;
 
 	// ���� ��ų�� EffectSequence�� 3���� ������, Ȯ���� ���� �ϳ��� ȿ���� �����ϴ� ó���� EffectSequence 2������ �����ϹǷ� �̿� ���� �ӽ� ����.
 	if (SkillSucceed) {
-		Sequence = 0;
+		PeppySkillProbabilisticSequence = 0;
 		SkillTarget = SkillData.SkillTarget_1;
 	}
 	else {
-		Sequence = 1;
+		PeppySkillProbabilisticSequence = 1;
 		SkillTarget = SkillData.SkillTarget_2;
 	}
 
@@ -302,7 +301,7 @@ bool UBattleTableManagerSystem::TryUsePeppySkillProbabilistic(FPeppySkillData Sk
 		NTLOG(Error, TEXT("Target set fail : PeppySkillTarget is invalid value"));
 		return false;
 	}
-	OperateSkillByIndex(Sequence, TargetActor, *TryGetCurEffectIndexPeppySkillDataSet(Sequence, &SkillData), RefActor);
+	OperateSkillByIndex(PeppySkillProbabilisticSequence, TargetActor, *TryGetCurEffectIndexPeppySkillDataSet(PeppySkillProbabilisticSequence, &SkillData), RefActor);
 
 	return SkillSucceed;
 }

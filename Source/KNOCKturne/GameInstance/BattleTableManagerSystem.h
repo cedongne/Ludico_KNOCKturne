@@ -344,6 +344,9 @@ public:
 	class UActorManagerSystem* ActorManagerSystem;
 	class ABattleManager* BattleManager;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 PeppySkillProbabilisticSequence;
+
 public:
 	UDataTable* GetPeppySkillTable();
 

@@ -59,6 +59,8 @@ public:
 	float defaultM;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float defaultT;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffName;
 };
 
 USTRUCT(BlueprintType)
@@ -300,5 +302,5 @@ public:
 	//UFUNCTION(BlueprintCallable)
 	//void ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData);
 
-	void TryUpdateBuffDataBySkillData(FString BuffID, float ValueN, float ValueM, float ValueT);
+	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);
 };

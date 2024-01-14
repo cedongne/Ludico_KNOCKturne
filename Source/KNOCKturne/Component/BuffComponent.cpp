@@ -197,12 +197,12 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
 			HasPositiveBuffs_PerTurn.Add(BuffType, *buffData);
-			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
+			TryUpdateBuffDataBySkillData(BuffType, HasPositiveBuffs_PerTurn[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			OperatePositiveBuffs_PerTurn(BuffType);
 			break;
 		case EBuffTermType::Second:
 			HasPositiveBuffs_PerSecond.Add(BuffType, *buffData);
-			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
+			TryUpdateBuffDataBySkillData(BuffType, HasPositiveBuffs_PerSecond[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			if (HasPositiveBuffs_PerSecond[BuffType].Value_M == 0) {
 				OperatePositiveBuffs_PerSecond(BuffType, 0);
 			}
@@ -213,12 +213,12 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
 			HasNegativeBuffs_PerTurn.Add(BuffType, *buffData);
-			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
+			TryUpdateBuffDataBySkillData(BuffType, HasNegativeBuffs_PerTurn[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			OperateNegativeBuffs_PerTurn(BuffType);
 			break;
 		case EBuffTermType::Second:
 			HasNegativeBuffs_PerSecond.Add(BuffType, *buffData);
-			TryUpdateBuffDataBySkillData(BuffTypeToStringMap[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
+			TryUpdateBuffDataBySkillData(BuffType, HasNegativeBuffs_PerSecond[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			if (HasNegativeBuffs_PerSecond[BuffType].Value_M == 0) {
 				OperateNegativeBuffs_PerSecond(BuffType, 0);
 			}
@@ -539,10 +539,19 @@ bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
 //	return true;
 //}
 
-void UBuffComponent::TryUpdateBuffDataBySkillData(FString BuffID, float ValueN, float ValueM, float ValueT) {
-	FBuffData* BuffData = BuffTable->FindRow<FBuffData>(*BuffID, TEXT(""));
+void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT) {
+	FString BuffID = BuffTypeToStringMap[BuffType];
+	FBuffTable* BuffTableData = BuffTable->FindRow<FBuffTable>(*BuffID, TEXT(""));
 
-	BuffData->Value_N = ValueN;
-	BuffData->Value_M = ValueM;
-	BuffData->Value_T = ValueT;
+	BuffTableData->defaultN = ValueN;
+	BuffTableData->defaultM = ValueM;
+	BuffTableData->defaultT = ValueT;
+
+	BuffData.Value_N = BuffTableData->defaultN;
+	BuffData.Value_M = BuffTableData->defaultM;
+	BuffData.Value_T = BuffTableData->defaultT;
+
+	NTLOG(Warning, TEXT("%d"), BuffData.Value_N);
+	NTLOG(Warning, TEXT("%d"), BuffData.Value_M);
+	NTLOG(Warning, TEXT("%d"), BuffData.Value_T);
 }
