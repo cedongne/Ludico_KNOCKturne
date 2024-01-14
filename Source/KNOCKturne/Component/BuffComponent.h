@@ -89,7 +89,7 @@ public:
 				isTurnType = true;
 				break;
 			}
-		}
+		}	
 
 		this->BuffType = BuffTableData->BuffType;
 		this->BuffTermType = isTurnType ? EBuffTermType::Turn : EBuffTermType::Second;
@@ -136,7 +136,6 @@ public:
 		EBuffType::PeriodicRecovery,
 		EBuffType::EnergyDropIncrease,
 		EBuffType::AttackDecrease,
-		EBuffType::PeriodicAttack,
 		EBuffType::Seal,
 		EBuffType::IntervalIncrease,
 		EBuffType::SpecialMpIncrease,
@@ -148,7 +147,7 @@ public:
 	};
 
 	TArray<EBuffType> BuffListPerSecond = {
-		EBuffType::PeriodicRecovery,
+		EBuffType::PeriodicAttack,
 		EBuffType::Blind,
 		EBuffType::Confuse,
 		EBuffType::SpeedDecrease

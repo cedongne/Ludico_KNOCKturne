@@ -400,12 +400,14 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 			StatComponent->GetDamaged(BuffData.Value_N);
 		}
 		break;
-	/*case EBuffType::SpeedDecrease:
-		
+	case EBuffType::SpeedDecrease: {
+		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+		Peppy->GetCharacterMovement()->MaxWalkSpeed = Peppy->GetVelocity().Length() * (1 - BuffData.Value_N);
 		break;
+	}
 	case EBuffType::Confuse:
 
-		break;*/
+		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerSecond Found!"));
 	}
@@ -415,6 +417,19 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 {
 	AActor* TargetActor = TargetOfBuff[BuffType];
 	FBuffData BuffData = HasNegativeBuffs_PerSecond[BuffType];
+
+	switch (BuffType) {
+	case EBuffType::SpeedDecrease: {
+		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+		Peppy->GetCharacterMovement()->MaxWalkSpeed = (Peppy->GetVelocity().Length()) / 40 * 100;
+		break;
+	}
+	case EBuffType::Confuse:
+		
+		break;
+	default:
+		NTLOG(Warning, TEXT("No NegativeBuffs_PerSecond Found!"));
+	}
 }
 
 //void UBuffComponent::OperateBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor)
