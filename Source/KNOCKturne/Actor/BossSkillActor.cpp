@@ -9,6 +9,7 @@
 #include "GameInstance/ActorManagerSystem.h"
 
 #define SKILL_DESTROTY_TIME 1
+#define MIN_DELAY_TIME 0.0001
 
 ABossSkillActor::ABossSkillActor()
 {
@@ -110,7 +111,7 @@ void ABossSkillActor::InitSkillData() {
 
 void ABossSkillActor::ActivateActorTickAfterDelay(float DelayTime) {
 	if (DelayTime <= 0)
-		DelayTime = 0.0001;
+		DelayTime = MIN_DELAY_TIME;
 
 	GetWorld()->GetTimerManager().SetTimer(
 		ActivateActorTickTimerHandler,
