@@ -35,4 +35,5 @@ protected:
 	bool TryOperateSkillEffect(ESkillUsingType SkillUsingType) override;
 
 	ESkillUsingType CurSkillUsingType = ESkillUsingType::Sequential;
+
 };

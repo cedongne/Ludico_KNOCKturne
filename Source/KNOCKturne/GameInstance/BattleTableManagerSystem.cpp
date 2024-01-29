@@ -48,6 +48,7 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 
 	
 	SetBossSkillSpawnDataTable();
+	CurPeppySkillData.Add("BP_PS_Starlight_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Starlight_C"), TEXT("Fail to load PeppySkillData"))));
 }
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
@@ -428,8 +429,21 @@ UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
 }
 
+TMap<FString, FPeppySkillData> UBattleTableManagerSystem::GetCurPeppySkillData()
+{
+	return CurPeppySkillData;
+}
+
 FName UBattleTableManagerSystem::GetCurrentBlueprintClassName() {
 	return *(GetClass()->GetFName().ToString());
+}
+
+void UBattleTableManagerSystem::TryUpdateCurSkillDataCost(FString BPClassName, float Value)
+{
+	if (CurPeppySkillData.Find(BPClassName) == nullptr)
+		return;
+
+	CurPeppySkillData[BPClassName].Cost += Value;
 }
 
 FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexBossSkillDataSet(int32 Sequence, FBossSkillData* CurStatData) {

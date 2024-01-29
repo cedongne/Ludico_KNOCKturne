@@ -23,7 +23,8 @@ enum class FStatType : uint8 {
 	BossMaxDelay,
 	BossStanceCode,
 	BossInitStance,
-	BossEnergyDrop
+	BossEnergyDrop,
+	Cost
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

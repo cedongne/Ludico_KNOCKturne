@@ -349,12 +349,16 @@ public:
 
 public:
 	UDataTable* GetPeppySkillTable();
+	TMap<FString, FPeppySkillData> GetCurPeppySkillData();
 
 	FPeppyStatData GetPeppyStatDataOnTable(FString DataType);
 	FBossStatData GetBossStatDataOnTable(FString DataType);
 
 	UFUNCTION(BlueprintCallable)
 	FName GetCurrentBlueprintClassName();
+
+	UFUNCTION(BlueprintCallable)
+	void TryUpdateCurSkillDataCost(FString BPClassName, float Value);
 
 private:
 	class UKNOCKturneGameInstance* GameInstance;
@@ -368,6 +372,8 @@ private:
 	void SetBossSkillSpawnDataTable();
 	void AddBossSkillSpawnDataToMap(FString SkillName, TCHAR* SkillObjectPath, TArray<FVector> SpawnLocation, TArray<FRotator> SpawnRotation);
 
+	TMap<FString, FPeppySkillData> CurPeppySkillData;
+
 public:
 	UFUNCTION(BlueprintCallable)
 	bool TryUseBossSkillSequential(FBossSkillData SkillData, ABossSkillActor* RefActor);
@@ -380,6 +386,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);
+
 private:
 	// ���� ������ ȿ���� �� ��° �ε��������� ���� �� ���� 
 	FCurEffectIndexSkillData CurEffectIndexBossSkillDataSet;

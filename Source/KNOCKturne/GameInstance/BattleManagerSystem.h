@@ -152,4 +152,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 ReducedEP = 0;
 	void UpdateRoundInfo();
+
+	// '아름다운 별빛' 사용 횟수
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 UseStarlightNum = 0;
 };

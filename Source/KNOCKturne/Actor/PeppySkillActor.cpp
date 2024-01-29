@@ -9,7 +9,7 @@ APeppySkillActor::APeppySkillActor() {
 void APeppySkillActor::BeginPlay() {
 	Super::BeginPlay();
 
-	// ÀÌÆåÆ® ¹ßµ¿ Å¸ÀÌ¹Ö°úÀÇ Á¶Á¤À» À§ÇØ ºí·çÇÁ¸°Æ® Call·Î º¯°æ
+	// ì´íŽ™íŠ¸ ë°œë™ íƒ€ì´ë°ê³¼ì˜ ì¡°ì •ì„ ìœ„í•´ ë¸”ë£¨í”„ë¦°íŠ¸ Callë¡œ ë³€ê²½
 	// Initialize();
 	// OperateSkillEffect(CurSkillUsingType);
 }
@@ -23,6 +23,10 @@ void APeppySkillActor::Initialize() {
 void APeppySkillActor::LoadSkillDataFromDataTable() {
 	FString BlueprintClassName = GetClass()->GetFName().ToString();
 	SkillData = *(BattleTableManagerSystem->GetPeppySkillTable()->FindRow<FPeppySkillData>(*BlueprintClassName, TEXT("Fail to load PeppySkillData")));
+
+	if (BattleTableManagerSystem->GetCurPeppySkillData().Find(BlueprintClassName) != nullptr) {
+		SkillData.Cost = BattleTableManagerSystem->GetCurPeppySkillData()[BlueprintClassName].Cost;
+	}
 }
 
 bool APeppySkillActor::TryOperateSkillEffect(ESkillUsingType SkillUsingType) {
