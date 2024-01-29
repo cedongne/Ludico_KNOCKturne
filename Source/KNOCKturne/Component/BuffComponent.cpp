@@ -4,6 +4,9 @@
 #include "BuffComponent.h"
 #include "GameInstance/ActorManagerSystem.h"
 
+#define TARGET_PEPPY	0
+#define TARGET_BOSS		1
+
 UBuffComponent::UBuffComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
@@ -171,7 +174,7 @@ void UBuffComponent::RemoveAllBuff() {
 	RemoveAllNegativeBuff();
 }
 
-void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEffectIndexSkillData SkillData) {
+void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData SkillData) {
 	auto buffTypeStr = BuffTypeToStringMap.Find(BuffType);
 	if (buffTypeStr == nullptr) {
 		NTLOG(Error, TEXT("BuffType is invalid!"));
@@ -191,6 +194,14 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEf
 
 	FString SourceId = SkillData.SkillId;
 	auto buffData = new FBuffData(SourceId, acquiredBuff);
+
+	AActor* TargetActor;
+	if (SkillData.SkillTarget == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+	}
+	else if (SkillData.SkillTarget == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+	}
 	TargetOfBuff.Add(BuffType, TargetActor);
 
 	if (acquiredBuff->BuffType == 0) {
@@ -300,6 +311,9 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 	case EBuffType::EnergyDropIncrease:
 		StatComponent->TryUpdateCurStatData(FStatType::Energy, BuffData.Value_N);
 		break;
+	case EBuffType::Mood:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
+		break;
 	case EBuffType::Shield:
 	{
 		// 쉴드 개수 확인 필요, 데미지 입을 때 쉴드 개수--필요
@@ -307,9 +321,6 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 		PeppyStatComponent->CanBeDamaged = false;
 		break;
 	}
-	case EBuffType::Mood:
-		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
-		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -351,7 +362,7 @@ void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float De
 	switch (BuffType) {
 	case EBuffType::PeriodicRecovery:
 		// 페피 위치가 M초 후에도 동일한지 확인 필요
-		if (DelayWithDeltaTime(BuffData.Value_M, DeltaSeconds)) {
+		if (DelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
 			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
 			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
 		}
@@ -396,7 +407,7 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 
 	switch (BuffType) {
 	case EBuffType::PeriodicAttack:
-		if (DelayWithDeltaTime(BuffData.Value_M, DeltaSeconds)) {
+		if (DelayWithDeltaTime(EBuffType::PeriodicAttack, BuffData.Value_M, DeltaSeconds)) {
 			StatComponent->GetDamaged(BuffData.Value_N);
 		}
 		break;
@@ -465,14 +476,17 @@ void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 	}
 }
 
-bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
-	if (TempDelayTime > DelayTime) {
-		TempDelayTime = 0;
+bool UBuffComponent::DelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds) {
+	if (!BuffTempDelayTime.Contains(BuffType))
+		BuffTempDelayTime.Add(BuffType, 0);
+
+	if (BuffTempDelayTime[BuffType] > DelayTime) {
+		BuffTempDelayTime[BuffType] = 0;
 
 		return true;
 	}
-	TempDelayTime += DeltaSeconds;
-	NTLOG(Warning, TEXT("%d"), TempDelayTime);
+	BuffTempDelayTime[BuffType] += DeltaSeconds;
+	NTLOG(Warning, TEXT("%d"), BuffTempDelayTime[BuffType]);
 	return false;
 }
 

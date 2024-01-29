@@ -133,7 +133,6 @@ public:
 	TArray<EBuffType> BuffListPerTurn = {
 		EBuffType::AttackIncrease,
 		EBuffType::ReflexiveAttack,
-		EBuffType::PeriodicRecovery,
 		EBuffType::EnergyDropIncrease,
 		EBuffType::AttackDecrease,
 		EBuffType::Seal,
@@ -147,18 +146,12 @@ public:
 	};
 
 	TArray<EBuffType> BuffListPerSecond = {
+		EBuffType::PeriodicRecovery,
 		EBuffType::PeriodicAttack,
 		EBuffType::Blind,
 		EBuffType::Confuse,
 		EBuffType::SpeedDecrease
 	};
-};
-
-UENUM(BlueprintType)
-enum class FBuffDefaultType : uint8 {
-	Value_N,
-	Value_M,
-	Value_T
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -171,6 +164,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<EBuffType, AActor*> TargetOfBuff;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool CanGetMoodBuff = false;
 
 protected:
 	virtual void BeginPlay() override;
@@ -212,7 +207,7 @@ private:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
 
-	float TempDelayTime;
+	TMap<EBuffType, float> BuffTempDelayTime;
 	//float isPeriodicAtack = false;
 
 public:
@@ -236,7 +231,7 @@ public:
 	void RemoveAllBuff();
 	/* 자신에게 TermType을 주기로 Duration만큼의 지속하는 BuffType의 버프를 부여합니다.*/
 	UFUNCTION(BlueprintCallable) 
-	void AcquireBuff(EBuffType BuffType, AActor* TargetActor, FCurEffectIndexSkillData SkillData);
+	void AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData SkillData);
 
 	void ElapseTurn();
 	void ElapseDeltaTime(float DeltaTime);
@@ -272,7 +267,7 @@ public:
 	void OperateBuffs_PerSecond(float DeltaSeconds);
 
 	UFUNCTION()
-	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
+	bool DelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
 
 	/*공격력 상승 버프를 적용합니다.*/
 	//UPROPERTY()
