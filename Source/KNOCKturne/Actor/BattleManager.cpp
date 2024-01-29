@@ -85,6 +85,7 @@ void ABattleManager::TurnChange() {
 
 		break;
 	case PeppySkillSelectingTurn:
+		ActorManagerSystem->PeppyActor->BuffComponent->CanGetMoodBuff = false;
 		SetLeftCurrentTurnTime(100);	// ��ų ����� ���� �ӽ� �� Ÿ�� ����
 		BP_UsePeppySkills();
 		CurrentTurnType = PeppySkillUsingTurn;

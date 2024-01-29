@@ -33,6 +33,12 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_ExhaustiveAdvice", BP_PS_ExhaustiveAdvice.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_PretendtoCry(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_PretendtoCry"));
 	IconSkillActorMap.Add("Icon_skill_PS_PretendtoCry", BP_PS_PretendtoCry.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_ConsolationMusic(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_ConsolationMusic"));
+	IconSkillActorMap.Add("Icon_skill_PS_ConsolationMusic", BP_PS_ConsolationMusic.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_Campfire(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_Campfire"));
+	IconSkillActorMap.Add("Icon_skill_PS_Campfire", BP_PS_Campfire.Class);
+	static ConstructorHelpers::FClassFinder<AActor> BP_PS_Starlight(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_Starlight"));
+	IconSkillActorMap.Add("Icon_skill_PS_Starlight", BP_PS_Starlight.Class);
 }
 
 void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
