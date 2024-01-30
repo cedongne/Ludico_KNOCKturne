@@ -257,7 +257,7 @@ bool UBattleTableManagerSystem::TryUseBossSkillProbabilistic(FBossSkillData Skil
 bool UBattleTableManagerSystem::TryUsePeppySkillSequential(FPeppySkillData SkillData, APeppySkillActor* RefActor) {
 	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SkillData.Cost);
 
-	int32 SkillTarget[2] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2 };
+	int32 SkillTarget[3] = { SkillData.SkillTarget_1, SkillData.SkillTarget_2, SkillData.SkillTarget_3 };
 
 	AActor* TargetActor;
 
