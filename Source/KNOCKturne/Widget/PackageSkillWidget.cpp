@@ -37,7 +37,7 @@ void UPackageSkillWidget::NativeConstruct() {
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
-	SpecialSkillTable->GetAllRows<FSpecialSkillData>("GetAllRows", SpecialSkillTableRows);
+	SpecialSkillTable->GetAllRows<FSpecialSkillTable>("GetAllRows", SpecialSkillTableRows);
 	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
 	SkillBuffStringTable->GetAllRows<FDialogueString>("GetAllRows", SkillBuffStringTableRows);
 
@@ -428,7 +428,7 @@ void UPackageSkillWidget::SetBeforeSelectedSkills()
 	}
 
 	if (BattleManagerSystem->FinalSpecialSkill != "") {
-		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillData>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon);
+		Selected_Specialty->Image_Icon->SetBrushFromTexture(SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon);
 		Selected_Specialty->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 		Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 
@@ -496,6 +496,7 @@ void UPackageSkillWidget::SaveSelectedSpecialty() {
 	if (BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname)) {
 		int specialtyidx = *BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname);
 		BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
+		NTLOG(Warning, TEXT("SpecialtyRow: %s"), *BattleManagerSystem->FinalSpecialSkill);
 	}
 	else {
 		NTLOG(Warning, TEXT("Cannot Find SpecialtyRow: %s"), *specialtyiconname);

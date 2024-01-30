@@ -24,7 +24,7 @@ USkillDescriptionComponent::USkillDescriptionComponent()
 	SkillBuffStringTable = DT_SKILLBUFFSTRINGTABLE.Object;
 
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
-	SpecialSkillTable->GetAllRows<FSpecialSkillData>("GetAllRows", SpecialSkillTableRows);
+	SpecialSkillTable->GetAllRows<FSpecialSkillTable>("GetAllRows", SpecialSkillTableRows);
 	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
 	SkillBuffStringTable->GetAllRows<FDialogueString>("GetAllRows", SkillBuffStringTableRows);
 }
@@ -144,9 +144,9 @@ FString USkillDescriptionComponent::SkillRedefineDescription(int RowNum) {
 FString USkillDescriptionComponent::SpecialtyGetSkillIndexByKeyword(int RowNum, FString Num) {
 	switch (FCString::Atoi(*Num)) {
 	case 0:
-		return SkillSpecialtyCheckValueN(SpecialSkillTableRows[RowNum]->Skill_Index, SpecialSkillTableRows[RowNum]->value1N);
+		return SkillSpecialtyCheckValueN(SpecialSkillTableRows[RowNum]->Skill_Index, SpecialSkillTableRows[RowNum]->Value1N);
 	case 1:
-		return SkillSpecialtyCheckValueM(SpecialSkillTableRows[RowNum]->Skill_Index, SpecialSkillTableRows[RowNum]->value1M);
+		return SkillSpecialtyCheckValueM(SpecialSkillTableRows[RowNum]->Skill_Index, SpecialSkillTableRows[RowNum]->Value1M);
 	case 2:
 		return FString::FromInt(PeppySkillTableRows[RowNum]->Value_1_T);
 	case 3:

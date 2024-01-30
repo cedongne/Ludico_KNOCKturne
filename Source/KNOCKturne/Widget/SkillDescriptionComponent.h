@@ -8,6 +8,7 @@
 #include "GameInstance/BattleTableManagerSystem.h"
 #include "GameInstance/DialogueManagerSystem.h"
 #include "Components/Button.h"
+#include <Component/SpecialSkillComponent.h>
 
 #include "SkillDescriptionComponent.generated.h"
 
@@ -22,7 +23,7 @@ protected:
 	class UDataTable* PeppySkillTable;
 	TArray<FPeppySkillData*> PeppySkillTableRows;
 	class UDataTable* SpecialSkillTable;
-	TArray<FSpecialSkillData*> SpecialSkillTableRows;
+	TArray<FSpecialSkillTable*> SpecialSkillTableRows;
 	class UDataTable* ItemTable;
 	TArray<FItemData*> ItemTableRows;
 	class UDataTable* SkillBuffStringTable;

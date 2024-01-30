@@ -14,6 +14,7 @@
 #include "GameMode/KNOCKturneGameState.h"
 #include "AlertModalWidget.h"
 #include "GameInstance/BattleManagerSystem.h"
+#include "Component/SpecialSkillComponent.h"
 
 #include "PackageSkillWidget.generated.h"
 
@@ -53,7 +54,7 @@ public:
 	class UDataTable* PeppySkillTable;
 	TArray<FPeppySkillData*> PeppySkillTableRows;
 	class UDataTable* SpecialSkillTable;
-	TArray<FSpecialSkillData*> SpecialSkillTableRows;
+	TArray<FSpecialSkillTable*> SpecialSkillTableRows;
 	class UDataTable* ItemTable;
 	TArray<FItemData*> ItemTableRows;
 	class UDataTable* SkillBuffStringTable;
