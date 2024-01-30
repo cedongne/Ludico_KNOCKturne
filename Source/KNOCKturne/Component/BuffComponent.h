@@ -80,7 +80,7 @@ public:
 		this->Value_T = Value_T;
 	}
 	
-	FBuffData(FString SourceId, FBuffTable* BuffTableData) {
+	/*FBuffData(FString SourceId, FBuffTable* BuffTableData) {
 		this->SourceId = SourceId;
 
 		bool isTurnType = false;
@@ -93,6 +93,25 @@ public:
 
 		this->BuffType = BuffTableData->BuffType;
 		this->BuffTermType = isTurnType ? EBuffTermType::Turn : EBuffTermType::Second;
+		this->Duration = BuffTableData->defaultT;
+		this->Value_N = BuffTableData->defaultN;
+		this->Value_M = BuffTableData->defaultM;
+		this->Value_T = BuffTableData->defaultT;
+	}*/
+
+	FBuffData(FString SourceId, FBuffTable* BuffTableData) {
+		this->SourceId = SourceId;
+
+		bool isSecondType = false;
+		for (auto Buff : BuffNamePerSecondStr) {
+			if (Buff == BuffTableData->BuffName) {
+				isSecondType = true;
+				break;
+			}
+		}
+
+		this->BuffType = BuffTableData->BuffType;
+		this->BuffTermType = isSecondType ? EBuffTermType::Second : EBuffTermType::Turn;
 		this->Duration = BuffTableData->defaultT;
 		this->Value_N = BuffTableData->defaultN;
 		this->Value_M = BuffTableData->defaultM;
@@ -114,7 +133,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 Value_T;
 
-	FBuffData* CreateBuffData(FString _SourceId, FBuffTable* BuffTableData) {
+	/*FBuffData* CreateBuffData(FString _SourceId, FBuffTable* BuffTableData) {
 		// TArray<EBuffType>의 Contains 메서드로 간단하게 구현할 수 있을 줄 알았는데, uenum이 == operator를 지원하지 않음.
 		// 해당 연산자 오버로딩을 하려 했지만, enum class 안에 메서드 구현도 불가능함. 
 		// 그래서 어쩔 수 없이 아래와 같이 배열 전체를 순회하며 uint32 타입으로의 강제 캐스팅을 통해 비교함.
@@ -127,6 +146,22 @@ public:
 		}
 
 		return new FBuffData(_SourceId, BuffTableData->BuffType, isTurnTypeBuff ? EBuffTermType::Turn : EBuffTermType::Second,
+			BuffTableData->defaultT, BuffTableData->defaultN, BuffTableData->defaultM, BuffTableData->defaultT);
+	}*/
+
+	FBuffData* CreateBuffData(FString _SourceId, FBuffTable* BuffTableData) {
+		// TArray<EBuffType>의 Contains 메서드로 간단하게 구현할 수 있을 줄 알았는데, uenum이 == operator를 지원하지 않음.
+		// 해당 연산자 오버로딩을 하려 했지만, enum class 안에 메서드 구현도 불가능함. 
+		// 그래서 어쩔 수 없이 아래와 같이 배열 전체를 순회하며 uint32 타입으로의 강제 캐스팅을 통해 비교함.
+		bool isSecondType = false;
+		for (auto Buff : BuffNamePerSecondStr) {
+			if (Buff == BuffTableData->BuffName) {
+				isSecondType = true;
+				break;
+			}
+		}
+
+		return new FBuffData(_SourceId, BuffTableData->BuffType, isSecondType ? EBuffTermType::Second : EBuffTermType::Turn,
 			BuffTableData->defaultT, BuffTableData->defaultN, BuffTableData->defaultM, BuffTableData->defaultT);
 	}
 
@@ -151,6 +186,14 @@ public:
 		EBuffType::Blind,
 		EBuffType::Confuse,
 		EBuffType::SpeedDecrease
+	};
+
+	TArray<FString> BuffNamePerSecondStr = {
+		"BF_PeriodicRecovery",
+		"BF_PeriodicAttack",
+		"BF_Blind",
+		"BF_Confuse",
+		"BF_SpeedDecrease"
 	};
 };
 
