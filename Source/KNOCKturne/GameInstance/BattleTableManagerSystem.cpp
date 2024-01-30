@@ -18,6 +18,7 @@ void UBattleTableManagerSystem::Initialize(FSubsystemCollectionBase& Collection)
 	Super::Initialize(Collection);
 
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 }
 
 UBattleTableManagerSystem::UBattleTableManagerSystem() {
@@ -358,6 +359,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else if (SkillData.SkillIndex == 16) {
 		BuffComponent->RemoveRandomPositiveBuff(SkillData.Value_N);
 	}
+	else if (SkillData.SkillIndex == 17) {
+		BuffComponent->RemoveRandomNegativeBuff(SkillData.Value_N);
+	}
 	/*
 	*	32 ���ݷ� ���: T�ϵ��� ����� ���ϴ� ���� �������� N��ŭ ����
 	*/
@@ -369,6 +373,12 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*/
 	else if (SkillData.SkillIndex == 34) {
 		BuffComponent->AcquireBuff(EBuffType::ReflexiveAttack, SkillData);
+	}
+	else if (SkillData.SkillIndex == 36) {
+		BuffComponent->AcquireBuff(EBuffType::PeriodicRecovery, SkillData);
+	}
+	else if (SkillData.SkillIndex == 39) {
+		BuffComponent->AcquireBuff(EBuffType::Shield, SkillData);
 	}
 	/*
 	*	52
@@ -533,4 +543,23 @@ FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexPeppySk
 	}
 
 	return ResultStatData;
+}
+
+FCurEffectIndexSkillData UBattleTableManagerSystem::TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable CurStatData)
+{
+	FCurEffectIndexSkillData* ResultStatData = new FCurEffectIndexSkillData();
+
+	ResultStatData->SetCurEffectIndexStatData(
+			BattleManagerSystem->FinalSpecialSkill,
+			CurStatData.Skill_Index,
+			CurStatData.Probability_1,
+			CurStatData.SpecialSkill_Target,
+			CurStatData.Value1N,
+			CurStatData.Value1M,
+			CurStatData.Value1T,
+			CurStatData.BuffCode,
+			CurStatData.EnergyCost
+	);
+
+	return *ResultStatData;
 }

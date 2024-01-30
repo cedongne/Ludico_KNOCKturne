@@ -491,12 +491,10 @@ void UPackageSkillWidget::SaveSelectedSpecialty() {
 	}
 	// 선택한 특수기 저장
 	FString specialtyiconname = Selected_Specialty->Image_Icon->Brush.GetResourceName().ToString();
-	NTLOG(Warning, TEXT("%s"), *specialtyiconname);
 
 	if (BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname)) {
 		int specialtyidx = *BattleManagerSystem->SpecialtyIconRowMap.Find(specialtyiconname);
 		BattleManagerSystem->FinalSpecialSkill = SpecialSkillTable->GetRowNames()[specialtyidx].ToString();
-		NTLOG(Warning, TEXT("SpecialtyRow: %s"), *BattleManagerSystem->FinalSpecialSkill);
 	}
 	else {
 		NTLOG(Warning, TEXT("Cannot Find SpecialtyRow: %s"), *specialtyiconname);

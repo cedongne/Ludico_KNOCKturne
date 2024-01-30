@@ -6,6 +6,7 @@
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Component/StatComponent.h"
+#include "Component/SpecialSkillComponent.h"
 #include "BattleTableManagerSystem.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FBattleTableInitDelegate);
@@ -312,6 +313,7 @@ public:
 
 	class UActorManagerSystem* ActorManagerSystem;
 	class ABattleManager* BattleManager;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 PeppySkillProbabilisticSequence;
@@ -355,6 +357,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);
+	UFUNCTION(BlueprintCallable)
+	FCurEffectIndexSkillData TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable CurStatData);
 
 private:
 	// ���� ������ ȿ���� �� ��° �ε��������� ���� �� ���� 

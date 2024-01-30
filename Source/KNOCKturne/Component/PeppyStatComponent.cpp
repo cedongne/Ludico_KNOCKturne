@@ -13,7 +13,6 @@ UPeppyStatComponent::UPeppyStatComponent()
 {
 	bWantsInitializeComponent = true;
 	PeppyActor = Cast<APeppy>(GetOwner());
-
 }
 
 
@@ -42,8 +41,13 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
-	if (CanBeDamaged) {
-		TryUpdateCurStatData(FStatType::EP, -Value);
+	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {
+		PeppyActor->BuffComponent->ReduceOneShield();
+	}
+	else {
+		if (CanBeDamaged) {
+			TryUpdateCurStatData(FStatType::EP, -Value);
+		}
 	}
 }
 

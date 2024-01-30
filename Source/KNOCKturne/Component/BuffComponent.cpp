@@ -22,7 +22,6 @@ void UBuffComponent::BeginPlay()
 	Super::BeginPlay();
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
 }
 
@@ -360,13 +359,23 @@ void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float De
 	FBuffData BuffData = HasPositiveBuffs_PerSecond[BuffType];
 
 	switch (BuffType) {
-	case EBuffType::PeriodicRecovery:
-		// 페피 위치가 M초 후에도 동일한지 확인 필요
+	case EBuffType::PeriodicRecovery: {
+		// 기존 페피 위치 저장
+		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+		FVector PrePeppyLocation;
+		if (BuffTempDelayTime[EBuffType::PeriodicRecovery] == 0) {
+			PrePeppyLocation = Peppy->GetActorLocation();
+		}
+		// 페피 위치가 M초 후에도 동일한지 확인
 		if (DelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
-			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
-			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+			FVector CurPeppyLocation = Peppy->GetActorLocation();
+			if (PrePeppyLocation == CurPeppyLocation) {
+				UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+				PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+			}
 		}
 		break;
+	}
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerSecond Found!"));
 	}
@@ -580,4 +589,21 @@ void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData 
 	BuffData.Value_N = BuffTableData->defaultN;
 	BuffData.Value_M = BuffTableData->defaultM;
 	BuffData.Value_T = BuffTableData->defaultT;
+}
+
+int UBuffComponent::GetShieldNum()
+{
+	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
+		return HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N;
+	}
+	else {
+		return 0;
+	}
+}
+
+void UBuffComponent::ReduceOneShield()
+{
+	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
+		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N--;
+	}
 }

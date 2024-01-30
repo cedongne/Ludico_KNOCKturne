@@ -27,7 +27,7 @@ enum class EBuffType : uint8 {
 	Revive				UMETA(DisplayName = "Revive"),
 	Mood				UMETA(DisplayName = "Mood"),
 	Warning				UMETA(DisplayName = "Warning"),
-	RecoveryEnergy		UMETA(DisplayName = "RecoveryEnergy"),
+	RecoveryEnergy		UMETA(DisplayName = "RecoveryEnergy")
 };
 
 UENUM(BlueprintType)
@@ -339,5 +339,10 @@ public:
 	//UFUNCTION(BlueprintCallable)
 	//void ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData);
 
+	UFUNCTION(BlueprintCallable)
 	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);
+	UFUNCTION(BlueprintCallable)
+	int GetShieldNum();
+	UFUNCTION(BlueprintCallable)
+	void ReduceOneShield();
 };
