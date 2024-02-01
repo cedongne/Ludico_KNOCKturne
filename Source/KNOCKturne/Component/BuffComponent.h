@@ -341,8 +341,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);
+	/*쉴드 개수 반환*/
 	UFUNCTION(BlueprintCallable)
 	int GetShieldNum();
+	/*쉴드 개수 -1*/
 	UFUNCTION(BlueprintCallable)
 	void ReduceOneShield();
+	/*혼란 버프 보유 여부 반환*/
+	UFUNCTION(BlueprintCallable)
+	bool HasConfuseBuff();
 };

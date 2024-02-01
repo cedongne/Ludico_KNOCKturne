@@ -607,3 +607,11 @@ void UBuffComponent::ReduceOneShield()
 		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N--;
 	}
 }
+
+bool UBuffComponent::HasConfuseBuff()
+{
+	if (HasNegativeBuffs_PerSecond.Contains(EBuffType::Confuse))
+		return true;
+	else
+		return false;
+}

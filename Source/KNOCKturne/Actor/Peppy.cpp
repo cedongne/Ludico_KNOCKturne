@@ -2,6 +2,7 @@
 
 #include "Component/PeppyStatComponent.h"
 #include "Component/BuffComponent.h"
+#include "Component/SpecialSkillComponent.h"
 #include "LevelScriptActor/HubWorldLevelScriptActor.h"
 
 APeppy::APeppy()
@@ -96,7 +97,11 @@ void APeppy::MoveForward(float Value) {
 				const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 				const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-				AddMovementInput(Direction, Value);
+
+				if (!BuffComponent->HasConfuseBuff())
+					AddMovementInput(Direction, Value);
+				else
+					AddMovementInput(-Direction, Value);
 			}
 		}
 	}
@@ -110,7 +115,11 @@ void APeppy::MoveRight(float Value) {
 				const FRotator YawRotation(0, Rotation.Yaw, 0);
 
 				const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-				AddMovementInput(Direction, Value);
+
+				if (!BuffComponent->HasConfuseBuff())
+					AddMovementInput(Direction, Value);
+				else
+					AddMovementInput(-Direction, Value);
 			}
 		}
 	}
