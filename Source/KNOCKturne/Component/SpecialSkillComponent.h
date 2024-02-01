@@ -80,7 +80,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool CheckCanUseSpecialSkill(float DeltaSeconds);
 	UFUNCTION(BlueprintCallable)
-	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
+	void ElapseTurn();
 	UFUNCTION(BlueprintCallable)
 	bool TryUseSpecialSkill();
 };

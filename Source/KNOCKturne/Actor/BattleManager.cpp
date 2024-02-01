@@ -101,6 +101,7 @@ void ABattleManager::TurnChange() {
 
 		ActorManagerSystem->BossActor->BuffComponent->ElapseTurn();
 		ActorManagerSystem->PeppyActor->BuffComponent->ElapseTurn();
+		ActorManagerSystem->PeppyActor->SpecialSkillComponent->ElapseTurn();
 		break;
 	}
 }

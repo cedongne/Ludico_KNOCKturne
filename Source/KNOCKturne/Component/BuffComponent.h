@@ -209,6 +209,8 @@ public:
 	TMap<EBuffType, AActor*> TargetOfBuff;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool CanGetMoodBuff = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 AdditionalEnergyByBuff = 0;
 
 protected:
 	virtual void BeginPlay() override;
@@ -350,4 +352,6 @@ public:
 	/*혼란 버프 보유 여부 반환*/
 	UFUNCTION(BlueprintCallable)
 	bool HasConfuseBuff();
+	UFUNCTION(BlueprintCallable)
+	bool TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffectIndexSkillData SkillData);
 };

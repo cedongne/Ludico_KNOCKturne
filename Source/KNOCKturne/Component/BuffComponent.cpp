@@ -235,6 +235,8 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 			break;
 		}
 	}
+
+	NTLOG(Warning, TEXT("Aquire Buff: [%s]"), *BuffTypeToStringMap[BuffType]);
 }
 
 void UBuffComponent::ElapseTurn() {
@@ -306,20 +308,12 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackIncrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
+		NTLOG(Warning, TEXT("AttackIncrease: AttackDamage +%d"), BuffData.Value_N);
 		break;
 	case EBuffType::EnergyDropIncrease:
-		StatComponent->TryUpdateCurStatData(FStatType::Energy, BuffData.Value_N);
+		AdditionalEnergyByBuff = BuffData.Value_N;
+		NTLOG(Warning, TEXT("EnergyDropIncrease: BossEnergyDrop +%d"), BuffData.Value_N);
 		break;
-	case EBuffType::Mood:
-		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
-		break;
-	case EBuffType::Shield:
-	{
-		// 쉴드 개수 확인 필요, 데미지 입을 때 쉴드 개수--필요
-		UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
-		PeppyStatComponent->CanBeDamaged = false;
-		break;
-	}
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -334,18 +328,11 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackIncrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
+		NTLOG(Warning, TEXT("End AttackIncrease: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	case EBuffType::EnergyDropIncrease:
-		StatComponent->TryUpdateCurStatData(FStatType::Energy, -BuffData.Value_N);
-		break;
-	case EBuffType::Shield:
-	{
-		UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
-		PeppyStatComponent->CanBeDamaged = true;
-		break;
-	}
-	case EBuffType::Mood:
-		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
+		AdditionalEnergyByBuff = 0;
+		NTLOG(Warning, TEXT("End EnergyDropIncrease: Energy -%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
@@ -355,7 +342,7 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float DeltaSeconds)
 {
 	AActor* TargetActor = TargetOfBuff[BuffType];
-	// UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	FBuffData BuffData = HasPositiveBuffs_PerSecond[BuffType];
 
 	switch (BuffType) {
@@ -372,6 +359,7 @@ void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float De
 			if (PrePeppyLocation == CurPeppyLocation) {
 				UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
 				PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+				NTLOG(Warning, TEXT("PeriodicRecovery: EP +%d"), BuffData.Value_N);
 			}
 		}
 		break;
@@ -396,6 +384,7 @@ void UBuffComponent::OperateNegativeBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackDecrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
+		NTLOG(Warning, TEXT("AttackDecrease: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerTurn Found!"));
@@ -405,7 +394,17 @@ void UBuffComponent::OperateNegativeBuffs_PerTurn(EBuffType BuffType)
 void UBuffComponent::EndNegativeBuffs_PerTurn(EBuffType BuffType)
 {
 	AActor* TargetActor = TargetOfBuff[BuffType];
+	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	FBuffData BuffData = HasNegativeBuffs_PerTurn[BuffType];
+
+	switch (BuffType) {
+	case EBuffType::AttackDecrease:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
+		NTLOG(Warning, TEXT("End AttackDecrease: AttackDamage +%d"), BuffData.Value_N);
+		break;
+	default:
+		NTLOG(Warning, TEXT("No NegativeBuffs_PerTurn Found!"));
+	}
 }
 
 void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float DeltaSeconds)
@@ -418,16 +417,15 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 	case EBuffType::PeriodicAttack:
 		if (DelayWithDeltaTime(EBuffType::PeriodicAttack, BuffData.Value_M, DeltaSeconds)) {
 			StatComponent->GetDamaged(BuffData.Value_N);
+			NTLOG(Warning, TEXT("PeriodicAttack: GetDamaged -%d"), BuffData.Value_N);
 		}
 		break;
 	case EBuffType::SpeedDecrease: {
 		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 		Peppy->GetCharacterMovement()->MaxWalkSpeed = Peppy->GetVelocity().Length() * (1 - BuffData.Value_N);
+		NTLOG(Warning, TEXT("SpeedDecrease"));
 		break;
 	}
-	case EBuffType::Confuse:
-
-		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerSecond Found!"));
 	}
@@ -442,11 +440,9 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 	case EBuffType::SpeedDecrease: {
 		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 		Peppy->GetCharacterMovement()->MaxWalkSpeed = (Peppy->GetVelocity().Length()) / 40 * 100;
+		NTLOG(Warning, TEXT("End SpeedDecrease"));
 		break;
 	}
-	case EBuffType::Confuse:
-		
-		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerSecond Found!"));
 	}
@@ -495,7 +491,6 @@ bool UBuffComponent::DelayWithDeltaTime(EBuffType BuffType, float DelayTime, flo
 		return true;
 	}
 	BuffTempDelayTime[BuffType] += DeltaSeconds;
-	NTLOG(Warning, TEXT("%d"), BuffTempDelayTime[BuffType]);
 	return false;
 }
 
@@ -612,6 +607,17 @@ bool UBuffComponent::HasConfuseBuff()
 {
 	if (HasNegativeBuffs_PerSecond.Contains(EBuffType::Confuse))
 		return true;
+	else
+		return false;
+}
+
+bool UBuffComponent::TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffectIndexSkillData SkillData)
+{
+	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Mood)) {
+		StatComponent->GetDamaged(SkillData.Value_N);
+		NTLOG(Warning, TEXT("Mood: GetDamaged +%d"), SkillData.Value_N);
+		return true;
+	}
 	else
 		return false;
 }

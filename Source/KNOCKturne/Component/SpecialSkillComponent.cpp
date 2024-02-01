@@ -48,17 +48,15 @@ void USpecialSkillComponent::CreateSpecialSkillData()
 bool USpecialSkillComponent::CheckCanUseSpecialSkill(float DeltaSeconds)
 {
 	bool IsCostEnough = SpecialSkillData->EnergyCost < ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy ? true : false;
-	bool IsCoolTimeEnd = DelayWithDeltaTime(SpecialSkillData->CoolTime, DeltaSeconds);
+	bool IsCoolTimeEnd = SpecialSkillData->CoolTime == 0;
 	return IsCostEnough && IsCoolTimeEnd;
 }
 
-bool USpecialSkillComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds) {
-	if (TempDelayTime > DelayTime) {
-
-		return true;
+void USpecialSkillComponent::ElapseTurn()
+{
+	if (SpecialSkillData->CoolTime > 0) {
+		SpecialSkillData->CoolTime--;
 	}
-	TempDelayTime += DeltaSeconds;
-	return false;
 }
 
 bool USpecialSkillComponent::TryUseSpecialSkill()

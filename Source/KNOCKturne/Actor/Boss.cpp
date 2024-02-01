@@ -35,12 +35,12 @@ void ABoss::SpawnBossSkill() {
 	BattleTableManagerSystem->BossSkillSpawnDataMap.GenerateKeyArray(BossSkillKeyArray);
 
 	// 첫 번째 스킬로 MixedFeeling, HeightenedLonging은 나오지 않도록 한다.
-	if (isFirstSkill) {
+	/*if (isFirstSkill) {
 		BossSkillKeyArray.Remove("MixedFeeling");
 		BossSkillKeyArray.Remove("HeightenedLonging");
 		isFirstSkill = false;
 		NTLOG(Warning, TEXT("MixedFeeling & HeightenedLonging Removed!"));
-	}
+	}*/
 
 	if (BossSkillKeyArray.Num() == 0) {
 		NTLOG(Error, TEXT("BossSkillSpawnDataMap loading is invlid!"));
@@ -50,8 +50,9 @@ void ABoss::SpawnBossSkill() {
 
 	auto SpawnActor = GetWorld()->SpawnActor(SpawnData.SkillObjectClass, &SpawnTransform);
 	auto SkillData = BattleTableManagerSystem->BossContactSkillTable->FindRow<FBossSkillData>(*(SpawnData.SkillObjectClass->GetName()), TEXT(""));
-	
-	for (int count = 0; count < SkillData->SprayEnergy; count++) {
+
+	int32 SprayEnergy = SkillData->SprayEnergy + BuffComponent->AdditionalEnergyByBuff;
+	for (int count = 0; count < SprayEnergy; count++) {
 		EnergySpawner->SpawnPooledObject();
 	}
 

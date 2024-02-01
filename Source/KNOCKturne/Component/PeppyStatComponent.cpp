@@ -43,6 +43,7 @@ void UPeppyStatComponent::SetDefaultStat() {
 void UPeppyStatComponent::GetDamaged(float Value) {
 	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {
 		PeppyActor->BuffComponent->ReduceOneShield();
+		NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
 	}
 	else {
 		if (CanBeDamaged) {

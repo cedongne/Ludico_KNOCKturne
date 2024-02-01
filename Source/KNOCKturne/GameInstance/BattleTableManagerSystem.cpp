@@ -103,18 +103,18 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);*/
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
-	/*AddBossSkillSpawnDataToMap(
+	);*/
+	AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	/*AddBossSkillSpawnDataToMap(
 		"GoBackMoment",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
@@ -341,6 +341,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*/
 	else if (SkillData.SkillIndex == 11) {
 		StatComponent->GetDamaged(SkillData.Value_N);
+		BuffComponent->TryOperateMoodBuff(StatComponent, SkillData);
 		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	else if (SkillData.SkillIndex == 12) {
@@ -376,6 +377,9 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	}
 	else if (SkillData.SkillIndex == 36) {
 		BuffComponent->AcquireBuff(EBuffType::PeriodicRecovery, SkillData);
+	}
+	else if (SkillData.SkillIndex == 37) {
+		BuffComponent->AcquireBuff(EBuffType::EnergyDropIncrease, SkillData);
 	}
 	else if (SkillData.SkillIndex == 39) {
 		BuffComponent->AcquireBuff(EBuffType::Shield, SkillData);
@@ -415,6 +419,8 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
 	}
+
+	
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {

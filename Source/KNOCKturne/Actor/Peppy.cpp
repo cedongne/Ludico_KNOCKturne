@@ -38,6 +38,7 @@ APeppy::APeppy()
 
 	StatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
 	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
+	SpecialSkillComponent = CreateDefaultSubobject<USpecialSkillComponent>(TEXT("SpecialSkillComponent"));
 
 	// Initialize variables
 	CanMove = true;
