@@ -29,6 +29,7 @@ void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	OperateBuffs_PerSecond(DeltaTime);
+	TryOperatePeriodicRecovery(DeltaTime);
 	ElapseDeltaTime(DeltaTime);
 }
 
@@ -37,6 +38,9 @@ bool UBuffComponent::RemoveBuff(EBuffType BuffType) {
 	HasPositiveBuffs_PerSecond.Remove(BuffType);
 	HasNegativeBuffs_PerTurn.Remove(BuffType);
 	HasNegativeBuffs_PerSecond.Remove(BuffType);*/
+
+	if (BuffTempDelayTime.Contains(BuffType))
+		BuffTempDelayTime[BuffType] = 0;
 
 	if (HasPositiveBuffs_PerTurn.Contains(BuffType)) {
 		EndPositiveBuffs_PerTurn(BuffType);
@@ -351,28 +355,11 @@ void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float De
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
 	FBuffData BuffData = HasPositiveBuffs_PerSecond[BuffType];
 
-	switch (BuffType) {
-	case EBuffType::PeriodicRecovery: {
-		// 기존 페피 위치 저장
-		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-		FVector PrePeppyLocation;
-		if (BuffTempDelayTime[EBuffType::PeriodicRecovery] == 0) {
-			PrePeppyLocation = Peppy->GetActorLocation();
-		}
-		// 페피 위치가 M초 후에도 동일한지 확인
-		if (DelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
-			FVector CurPeppyLocation = Peppy->GetActorLocation();
-			if (PrePeppyLocation == CurPeppyLocation) {
-				UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
-				PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
-				NTLOG(Warning, TEXT("PeriodicRecovery: EP +%d"), BuffData.Value_N);
-			}
-		}
-		break;
-	}
+	/*switch (BuffType) {
+
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerSecond Found!"));
-	}
+	}*/
 }
 
 void UBuffComponent::EndPositiveBuffs_PerSecond(EBuffType BuffType)
@@ -427,8 +414,7 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 		}
 		break;
 	case EBuffType::SpeedDecrease: {
-		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-		Peppy->GetCharacterMovement()->MaxWalkSpeed = Peppy->GetVelocity().Length() * (1 - BuffData.Value_N);
+		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed = ActorManagerSystem->PeppyActor->GetVelocity().Length() * (1 - BuffData.Value_N);
 		NTLOG(Warning, TEXT("SpeedDecrease"));
 		break;
 	}
@@ -444,8 +430,7 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 
 	switch (BuffType) {
 	case EBuffType::SpeedDecrease: {
-		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
-		Peppy->GetCharacterMovement()->MaxWalkSpeed = (Peppy->GetVelocity().Length()) / 40 * 100;
+		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed = (ActorManagerSystem->PeppyActor->GetVelocity().Length()) / 40 * 100;
 		NTLOG(Warning, TEXT("End SpeedDecrease"));
 		break;
 	}
@@ -454,18 +439,32 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 	}
 }
 
-//void UBuffComponent::OperateBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor)
-//{
-//	if (HasPositiveBuffs_PerTurn.Contains(BuffType)) {
-//		OperatePositiveBuffs_PerTurn(BuffData, BuffType, TargetActor);
-//	}
-//	else if (HasNegativeBuffs_PerTurn.Contains(BuffType)) {
-//		OperateNegativeBuffs_PerTurn(BuffData, BuffType, TargetActor);
-//	}
-//	else {
-//		NTLOG(Error, TEXT("New Acquired Buff_PerTurn is invalid!"));
-//	}
-//}
+void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
+{
+	if (!HasPositiveBuffs_PerTurn.Contains(EBuffType::PeriodicRecovery))
+		return;
+
+	AActor* TargetActor = TargetOfBuff[EBuffType::PeriodicRecovery];
+	FBuffData BuffData = HasPositiveBuffs_PerTurn[EBuffType::PeriodicRecovery];
+
+	if (!BuffTempDelayTime.Contains(EBuffType::PeriodicRecovery))
+		BuffTempDelayTime.Add(EBuffType::PeriodicRecovery, 0);
+
+	if (BuffTempDelayTime[EBuffType::PeriodicRecovery] == 0) {
+		PrePeppyLocation = ActorManagerSystem->PeppyActor->GetActorLocation();
+	}
+
+	// 페피 위치가 M초 후에도 동일한지 확인
+	if (DelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
+		FVector CurPeppyLocation = ActorManagerSystem->PeppyActor->GetActorLocation();
+
+		if (PrePeppyLocation == CurPeppyLocation) {
+			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+			NTLOG(Warning, TEXT("PeriodicRecovery: EP +%d"), BuffData.Value_N);
+		}
+	}
+}
 
 void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 {
@@ -500,85 +499,6 @@ bool UBuffComponent::DelayWithDeltaTime(EBuffType BuffType, float DelayTime, flo
 	return false;
 }
 
-//void UBuffComponent::TryAttackIncrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
-//{
-//	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
-//		AttackIncreaseTargetActor = TargetActor;
-//		UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-//		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, SkillData.Value_N);
-//	}
-//}
-//
-//void UBuffComponent::EndAttackIncrease(FCurEffectIndexSkillData SkillData)
-//{
-//	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackIncrease)) {
-//		UStatComponent* StatComponent = Cast<UStatComponent>(AttackIncreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-//		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -SkillData.Value_N);
-//	}
-//}
-//
-//void UBuffComponent::TryAttackDecrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
-//{
-//	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
-//		AttackDecreaseTargetActor = TargetActor;
-//		UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-//		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -SkillData.Value_N);
-//	}
-//}
-//
-//void UBuffComponent::EndAttackDecrease(FCurEffectIndexSkillData SkillData)
-//{
-//	if (HasNegativeBuffs_PerTurn.Contains(EBuffType::AttackDecrease)) {
-//		UStatComponent* StatComponent = Cast<UStatComponent>(AttackDecreaseTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-//		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, SkillData.Value_N);
-//	}
-//}
-//
-//void UBuffComponent::TryPeriodicAttack(AActor* TargetActor, FCurEffectIndexSkillData SkillData, float DeltaSeconds)
-//{
-//	if (HasNegativeBuffs_PerSecond.Contains(EBuffType::PeriodicAttack)) {
-//		UStatComponent* StatComponent = Cast<UStatComponent>(PeriodicAttackTargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-//		TempDelayTime += DeltaSeconds;
-//
-//		if (TempDelayTime >= SkillData.Value_M) {
-//			StatComponent->GetDamaged(SkillData.Value_N);
-//			TempDelayTime = 0;
-//		}
-//	}
-//}
-//
-//void UBuffComponent::OperateBuffs(AActor* TargetActor, FCurEffectIndexSkillData SkillData)
-//{
-//	TryAttackIncrease(TargetActor, SkillData);
-//	TryAttackDecrease(TargetActor, SkillData);
-//}
-//
-//void UBuffComponent::ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData)
-//{
-//	EndAttackIncrease(SkillData);
-//	EndAttackDecrease(SkillData);
-//}
-
-//bool UBuffComponent::TryUpdateCurBuffDataBySkillData(FString BuffID, FBuffDefaultType DefaultType, float Value) {
-//	FBuffData* BuffData = BuffTable->FindRow<FBuffData>(*BuffID, TEXT(""));
-//
-//	switch (DefaultType) {
-//	case FBuffDefaultType::Value_N:
-//		BuffData->Value_N = Value;
-//		break;
-//	case FBuffDefaultType::Value_M:
-//		BuffData->Value_M = Value;
-//		break;
-//	case FBuffDefaultType::Value_T:
-//		BuffData->Value_T = Value;
-//		break;
-//	default:
-//		NTLOG(Error, TEXT("BuffDefaultType is invalid!"));
-//		return false;
-//	}
-//	return true;
-//}
-
 void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT) {
 	FString BuffID = BuffTypeToStringMap[BuffType];
 	FBuffTable* BuffTableData = BuffTable->FindRow<FBuffTable>(*BuffID, TEXT(""));
@@ -605,7 +525,8 @@ int UBuffComponent::GetShieldNum()
 void UBuffComponent::ReduceOneShield()
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
-		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N--;
+		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N-- == 0)
+			RemoveBuff(EBuffType::Shield);
 	}
 }
 

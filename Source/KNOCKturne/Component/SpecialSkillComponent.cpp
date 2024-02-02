@@ -37,11 +37,9 @@ void USpecialSkillComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
 	{
-		NTLOG(Error, TEXT("specialSkill used"));
 		bool UseSpecialSkill = TryUseSpecialSkill();
 		if (UseSpecialSkill) {
 			SpecialSkillData->CoolTime = OriginalCoolTime;
-			NTLOG(Error, TEXT("%d"), SpecialSkillData->CoolTime);
 		}
 	}
 }

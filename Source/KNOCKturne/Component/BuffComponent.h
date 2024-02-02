@@ -177,11 +177,11 @@ public:
 		EBuffType::Revive,
 		EBuffType::Mood,
 		EBuffType::Warning,
-		EBuffType::RecoveryEnergy
+		EBuffType::RecoveryEnergy,
+		EBuffType::PeriodicRecovery
 	};
 
 	TArray<EBuffType> BuffListPerSecond = {
-		EBuffType::PeriodicRecovery,
 		EBuffType::PeriodicAttack,
 		EBuffType::Blind,
 		EBuffType::Confuse,
@@ -189,7 +189,6 @@ public:
 	};
 
 	TArray<FString> BuffNamePerSecondStr = {
-		"BF_PeriodicRecovery",
 		"BF_PeriodicAttack",
 		"BF_Blind",
 		"BF_Confuse",
@@ -253,7 +252,8 @@ private:
 	class UActorManagerSystem* ActorManagerSystem;
 
 	TMap<EBuffType, float> BuffTempDelayTime;
-	//float isPeriodicAtack = false;
+	/*휴식 회복 버프용: 2초 전 페피 위치*/
+	FVector PrePeppyLocation;
 
 public:
 	/* 자신에게 적용된 BuffTyp의 버프를 제거합니다.*/
@@ -309,40 +309,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EndNegativeBuffs_PerSecond(EBuffType BuffType);
 
-	/*UFUNCTION(BlueprintCallable)
-	void OperateBuffs_PerTurn(FBuffData BuffData, EBuffType BuffType, AActor* TargetActor);*/
+	/*휴식 회복 버프 작동*/
+	/*T턴동안 페피가 M초동안 가만히 있을 때마다 페피의 HP가 N만큼 회복*/
+	/*턴 단위 버프 중 유일하게 초를 기반으로 효과가 발동하는 버프이다. 따라서 예외적으로 작동 함수를 구현히였다.*/
+	UFUNCTION(BlueprintCallable)
+	void TryOperatePeriodicRecovery(float DeltaSeconds);
+
 	UFUNCTION(BlueprintCallable)
 	void OperateBuffs_PerSecond(float DeltaSeconds);
 
 	UFUNCTION()
 	bool DelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
-
-	/*공격력 상승 버프를 적용합니다.*/
-	//UPROPERTY()
-	//AActor* AttackIncreaseTargetActor;
-	//UFUNCTION(BlueprintCallable)
-	//void TryAttackIncrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
-	//UFUNCTION(BlueprintCallable)
-	//void EndAttackIncrease(FCurEffectIndexSkillData SkillData);
-	///*공격력 감소 버프를 적용합니다.*/
-	//UPROPERTY()
-	//AActor* AttackDecreaseTargetActor;
-	//UFUNCTION(BlueprintCallable)
-	//void TryAttackDecrease(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
-	//UFUNCTION(BlueprintCallable)
-	//void EndAttackDecrease(FCurEffectIndexSkillData SkillData);
-	///*지속 데미지 버프를 적용합니다.*/
-	//UPROPERTY()
-	//AActor* PeriodicAttackTargetActor;
-	//UFUNCTION()
-	//void TryPeriodicAttack(AActor* TargetActor, FCurEffectIndexSkillData SkillData, float DeltaTime);
-
-	///*현재 보유하고 있는 모든 버프를 적용합니다.*/
-	//UFUNCTION(BlueprintCallable)
-	//void OperateBuffs(AActor* TargetActor, FCurEffectIndexSkillData SkillData);
-	///*적용되는 값이 유동적으로 변하는 버프는 테이블 값을 적용 전으로 되돌립니다.*/
-	//UFUNCTION(BlueprintCallable)
-	//void ReturnBeforeBuffData(FCurEffectIndexSkillData SkillData);
 
 	UFUNCTION(BlueprintCallable)
 	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);
