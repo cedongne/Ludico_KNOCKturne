@@ -35,21 +35,44 @@ void USpecialSkillComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E)) {
-		TryUseSpecialSkill();
+	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
+	{
+		NTLOG(Error, TEXT("specialSkill used"));
+		bool UseSpecialSkill = TryUseSpecialSkill();
+		if (UseSpecialSkill) {
+			SpecialSkillData->CoolTime = OriginalCoolTime;
+			NTLOG(Error, TEXT("%d"), SpecialSkillData->CoolTime);
+		}
 	}
 }
 
 void USpecialSkillComponent::CreateSpecialSkillData()
 {
 	SpecialSkillData = SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT("Fail to load SpecialSkillData"));
+	OriginalCoolTime = SpecialSkillData->CoolTime;
+	SpecialSkillData->CoolTime = 0;
+}
+
+bool USpecialSkillComponent::IsSatisfyUseCondition()
+{
+	FString SpecialSkillName = *BattleManagerSystem->FinalSpecialSkill;
+
+	if (SpecialSkillName == "Skill_Special_Positivethinking") {
+		if (ActorManagerSystem->PeppyActor->BuffComponent->GetNegativeBuffNum() > 0)
+			return true;
+		else
+			return false;
+	}
+	else {
+		return true;
+	}
 }
 
 bool USpecialSkillComponent::CheckCanUseSpecialSkill(float DeltaSeconds)
 {
 	bool IsCostEnough = SpecialSkillData->EnergyCost < ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy ? true : false;
 	bool IsCoolTimeEnd = SpecialSkillData->CoolTime == 0;
-	return IsCostEnough && IsCoolTimeEnd;
+	return IsCostEnough && IsCoolTimeEnd && IsSatisfyUseCondition();
 }
 
 void USpecialSkillComponent::ElapseTurn()
@@ -81,7 +104,11 @@ bool USpecialSkillComponent::TryUseSpecialSkill()
 
 	auto CurSequenceEffectSkillData = BattleTableManagerSystem->TryGetCurEffectIndexSpecialSkillDataSet(*SpecialSkillData);
 	BattleTableManagerSystem->OperateSkillByIndex(0, TargetActor, CurSequenceEffectSkillData, nullptr);
-	TempDelayTime = 0;
 
 	return true;
+}
+
+int32 USpecialSkillComponent::GetCurSpecialSkillCoolTime()
+{
+	return SpecialSkillData->CoolTime;
 }

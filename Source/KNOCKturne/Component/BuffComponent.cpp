@@ -299,6 +299,12 @@ bool UBuffComponent::HasBuff(EBuffType BuffType) {
 		? true : false;
 }
 
+int32 UBuffComponent::GetNegativeBuffNum()
+{
+	int32 NegativeBuffNum = HasNegativeBuffs_PerTurn.Num() + HasNegativeBuffs_PerSecond.Num();
+	return NegativeBuffNum;
+}
+
 void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 {
 	AActor* TargetActor = TargetOfBuff[BuffType];

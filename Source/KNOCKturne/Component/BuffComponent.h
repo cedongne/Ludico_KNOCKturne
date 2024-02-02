@@ -287,6 +287,9 @@ public:
 	bool HasBuff(EBuffType BuffType);
 
 	UFUNCTION(BlueprintCallable)
+	int32 GetNegativeBuffNum();
+
+	UFUNCTION(BlueprintCallable)
 	void OperatePositiveBuffs_PerTurn(EBuffType BuffType);
 	UFUNCTION(BlueprintCallable)
 	void EndPositiveBuffs_PerTurn(EBuffType BuffType);

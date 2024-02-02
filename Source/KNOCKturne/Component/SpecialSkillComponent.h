@@ -7,16 +7,6 @@
 #include "Components/ActorComponent.h"
 #include "SpecialSkillComponent.generated.h"
 
-UENUM(BlueprintType)
-enum class ESpecialSkillType : uint8 {
-	Wakeup		UMETA(DisplayName = "Wakeup"),
-	Gatherenergy		UMETA(DisplayName = "Gatherenergy"),
-	Positivethinking	UMETA(DisplayName = "Positivethinking"),
-	Narrowescape		UMETA(DisplayName = "Narrowescape"),
-	Pretendnotsick	UMETA(DisplayName = "Pretendnotsick"),
-	Twolives		UMETA(DisplayName = "Twolives"),
-};
-
 USTRUCT(BlueprintType)
 struct FSpecialSkillTable : public FTableRowBase {
 	GENERATED_BODY()
@@ -70,17 +60,24 @@ private:
 
 	UPROPERTY()
 	class UDataTable* SpecialSkillTable;
+	UPROPERTY()
+	int32 OriginalCoolTime;
 
-	float TempDelayTime;
+public:
 
-public:	
 	UFUNCTION(BlueprintCallable)
 	void CreateSpecialSkillData();
 
+	/*특수기 사용 조건 만족 여부 반환*/
+	UFUNCTION(BlueprintCallable)
+	bool IsSatisfyUseCondition();
 	UFUNCTION(BlueprintCallable)
 	bool CheckCanUseSpecialSkill(float DeltaSeconds);
 	UFUNCTION(BlueprintCallable)
 	void ElapseTurn();
 	UFUNCTION(BlueprintCallable)
 	bool TryUseSpecialSkill();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurSpecialSkillCoolTime();
 };
