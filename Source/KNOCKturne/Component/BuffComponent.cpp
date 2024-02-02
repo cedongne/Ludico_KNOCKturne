@@ -266,6 +266,9 @@ void UBuffComponent::ElapseTurn() {
 }
 
 void UBuffComponent::ElapseDeltaTime(float DeltaTime) {
+	if (!DelayWithDeltaTime(1, DeltaTime))
+		return;
+
 	TArray<EBuffType> Keys;
 
 	HasPositiveBuffs_PerSecond.GetKeys(Keys);
@@ -283,7 +286,7 @@ void UBuffComponent::ElapseDeltaTime(float DeltaTime) {
 	for (auto& Key : Keys) {
 		HasNegativeBuffs_PerSecond[Key].Duration -= DeltaTime;
 
-		if (HasNegativeBuffs_PerSecond[Key].Duration-- == 0) {
+		if (HasNegativeBuffs_PerSecond[Key].Duration <= 0) {
 			if (RemoveBuff(Key)) {
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
 			}
@@ -408,14 +411,13 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 
 	switch (BuffType) {
 	case EBuffType::PeriodicAttack:
-		if (DelayWithDeltaTime(EBuffType::PeriodicAttack, BuffData.Value_M, DeltaSeconds)) {
+		if (BuffDelayWithDeltaTime(EBuffType::PeriodicAttack, BuffData.Value_M, DeltaSeconds)) {
 			StatComponent->GetDamaged(BuffData.Value_N);
 			NTLOG(Warning, TEXT("PeriodicAttack: GetDamaged -%d"), BuffData.Value_N);
 		}
 		break;
 	case EBuffType::SpeedDecrease: {
-		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed = ActorManagerSystem->PeppyActor->GetVelocity().Length() * (1 - BuffData.Value_N);
-		NTLOG(Warning, TEXT("SpeedDecrease"));
+		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 - BuffData.Value_N;
 		break;
 	}
 	default:
@@ -430,7 +432,7 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 
 	switch (BuffType) {
 	case EBuffType::SpeedDecrease: {
-		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed = (ActorManagerSystem->PeppyActor->GetVelocity().Length()) / 40 * 100;
+		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed /= 1 - BuffData.Value_N;
 		NTLOG(Warning, TEXT("End SpeedDecrease"));
 		break;
 	}
@@ -455,7 +457,7 @@ void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 	}
 
 	// 페피 위치가 M초 후에도 동일한지 확인
-	if (DelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
+	if (BuffDelayWithDeltaTime(EBuffType::PeriodicRecovery, BuffData.Value_M, DeltaSeconds)) {
 		FVector CurPeppyLocation = ActorManagerSystem->PeppyActor->GetActorLocation();
 
 		if (PrePeppyLocation == CurPeppyLocation) {
@@ -486,7 +488,7 @@ void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 	}
 }
 
-bool UBuffComponent::DelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds) {
+bool UBuffComponent::BuffDelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds) {
 	if (!BuffTempDelayTime.Contains(BuffType))
 		BuffTempDelayTime.Add(BuffType, 0);
 
@@ -496,6 +498,17 @@ bool UBuffComponent::DelayWithDeltaTime(EBuffType BuffType, float DelayTime, flo
 		return true;
 	}
 	BuffTempDelayTime[BuffType] += DeltaSeconds;
+	return false;
+}
+
+bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds)
+{
+	if (TempDelayTime > DelayTime) {
+		TempDelayTime = 0;
+
+		return true;
+	}
+	TempDelayTime += DeltaSeconds;
 	return false;
 }
 

@@ -70,7 +70,7 @@ struct FBuffData {
 public:
 	FBuffData() : SourceId("-1"), BuffType(0), BuffTermType(EBuffTermType::Turn), Duration(0), Value_N(0), Value_M(0), Value_T(0) {}
 
-	FBuffData(FString SourceId, int32 BuffType, EBuffTermType BuffDurationType, int32 Duration, int32 Value_N, int32 Value_M, int32 Value_T) {
+	FBuffData(FString SourceId, int32 BuffType, EBuffTermType BuffDurationType, int32 Duration, float Value_N, float Value_M, float Value_T) {
 		this->SourceId = SourceId;
 		this->BuffType = BuffType;
 		this->BuffTermType = BuffDurationType;
@@ -127,11 +127,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 Duration;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Value_N;
+	float Value_N;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Value_M;
+	float Value_M;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 Value_T;
+	float Value_T;
 
 	/*FBuffData* CreateBuffData(FString _SourceId, FBuffTable* BuffTableData) {
 		// TArray<EBuffType>의 Contains 메서드로 간단하게 구현할 수 있을 줄 알았는데, uenum이 == operator를 지원하지 않음.
@@ -254,6 +254,7 @@ private:
 	TMap<EBuffType, float> BuffTempDelayTime;
 	/*휴식 회복 버프용: 2초 전 페피 위치*/
 	FVector PrePeppyLocation;
+	float TempDelayTime;
 
 public:
 	/* 자신에게 적용된 BuffTyp의 버프를 제거합니다.*/
@@ -319,7 +320,9 @@ public:
 	void OperateBuffs_PerSecond(float DeltaSeconds);
 
 	UFUNCTION()
-	bool DelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
+	bool BuffDelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
+	UFUNCTION()
+	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
 
 	UFUNCTION(BlueprintCallable)
 	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);
