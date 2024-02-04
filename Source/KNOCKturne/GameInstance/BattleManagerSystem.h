@@ -115,6 +115,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<TSubclassOf<AActor>> SelectedSkillActorClassList;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<FString> SelectedSkillIconNameList;
+
 	// ������ �̸����� ��ų ���� ã��
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<AActor> FindSkillActor(FString IconName);

@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widget/PeppyTurnWidget.h"
@@ -197,9 +197,12 @@ void UPeppyTurnWidget::SetSkillActorList()
 			if (BattleManagerSystem->IconSkillActorMap.Contains(iconname)) {
 				if (UKismetSystemLibrary::IsValidClass(*(BattleManagerSystem->IconSkillActorMap[iconname]))) {
 					BattleManagerSystem->SelectedSkillActorClassList.Add(*BattleManagerSystem->IconSkillActorMap[iconname]);
+					BattleManagerSystem->SelectedSkillIconNameList.Add(iconname);
 				}
 			}
 		}
+		else
+			BattleManagerSystem->SelectedSkillIconNameList.Add("None");
 	}
 
 	if (SkillListFormRef->SkillHoverWidgetRef) {
