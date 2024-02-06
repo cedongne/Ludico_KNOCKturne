@@ -52,7 +52,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString BuffDescript;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString BuffIcon;
+	UTexture2D* BuffIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	float defaultN;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
@@ -196,7 +196,7 @@ public:
 	};
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UBuffComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -243,6 +243,34 @@ private:
 		{ EBuffType::Mood,				"Mood" },
 		{ EBuffType::Warning,			"Warning" },
 		{ EBuffType::RecoveryEnergy,	"RecoveryEnergy" }
+	};
+
+	const TMap<FString, int32> BuffIconNameToRowNumMap = {
+		{ "Icon_buff_DefenseIncrease", 0 },
+		{ "Icon_buff_AttackIncrease", 1 },
+		{ "Icon_buff_AvdIncrease", 2 },
+		{ "Icon_buff_ReflexiveAttack", 3 },
+		{ "Icon_buff_ReflexiveRecovery", 4 },
+		{ "Icon_buff_PeriodicRecovery", 5 },
+		{ "Icon_buff_EnergyDropIncrease", 6 },
+		{ "Icon_buff_SpeedIncrease", 7 },
+		{ "Icon_buff_DefenseDecrease", 8 },
+		{ "Icon_buff_AttackDecrease", 9 },
+		{ "Icon_buff_Stun", 10 },
+		{ "Icon_buff_PeriodicAttack", 11 },
+		{ "Icon_buff_RestrictRecovery", 12 },
+		{ "Icon_buff_Blind", 13 },
+		{ "Icon_buff_SpeedDecrease", 14 },
+		{ "Icon_buff_Confuse", 15 },
+		{ "Icon_buff_Seal", 16 },
+		{ "Icon_buff_Friction", 17 },
+		{ "Icon_buff_IntervalIncrease", 18 },
+		{ "Icon_buff_SpecialMpIncrease", 19 },
+		{ "Icon_buff_Shield", 20 },
+		{ "Icon_buff_Revive", 21 },
+		{ "Icon_buff_Mood", 22 },
+		{ "Icon_buff_Warning", 23 },
+		{ "Icon_buff_RecoveryEnergy", 24 },
 	};
 
 	UPROPERTY()
@@ -319,6 +347,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OperateBuffs_PerSecond(float DeltaSeconds);
 
+	UFUNCTION(BlueprintCallable)
+	FString BuffTypeToString(EBuffType BuffType);
+	UFUNCTION(BlueprintCallable)
+	int32 BuffIconNameToRowNum(FString BuffIconName);
 	UFUNCTION()
 	bool BuffDelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
 	UFUNCTION()
@@ -337,4 +369,20 @@ public:
 	bool HasConfuseBuff();
 	UFUNCTION(BlueprintCallable)
 	bool TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffectIndexSkillData SkillData);
+
+	/*버프 UI 갱신*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FString> HasBossBuff;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FString> HasPeppyBuff;
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateBossBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdatePeppyBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddBossBuffUI(EBuffType BuffType);
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddPeppyBuffUI(EBuffType BuffType);
+	UFUNCTION(BlueprintCallable)
+	void DeleteBuffUI(EBuffType BuffType);
 };

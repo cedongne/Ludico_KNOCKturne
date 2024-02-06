@@ -35,11 +35,14 @@ void USpecialSkillComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
-	{
-		bool UseSpecialSkill = TryUseSpecialSkill();
-		if (UseSpecialSkill) {
-			SpecialSkillData->CoolTime = OriginalCoolTime;
+	FString CurrentLevelName = GetWorld()->GetMapName();
+	if (CurrentLevelName == "UEDPIE_0_LV_Battle") {
+		if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
+		{
+			bool UseSpecialSkill = TryUseSpecialSkill();
+			if (UseSpecialSkill) {
+				SpecialSkillData->CoolTime = OriginalCoolTime;
+			}
 		}
 	}
 }

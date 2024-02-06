@@ -90,62 +90,62 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_SweptGarden.BP_SweptGarden_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"CleanUpIntruder1",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder1.BP_CleanUpIntruder1_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"CleanUpIntruder2",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder2.BP_CleanUpIntruder2_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	/*AddBossSkillSpawnDataToMap(
+	AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"GoBackMoment",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	 /*AddBossSkillSpawnDataToMap(
+	);
+	 AddBossSkillSpawnDataToMap(
 		"MixedFeeling",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_MixedFeeling.BP_MixedFeeling_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"BindPeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BindPeppy.BP_BindPeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);*/
-	/*AddBossSkillSpawnDataToMap(
+	AddBossSkillSpawnDataToMap(
 		"HeightenedLonging",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_HeightenedLonging.BP_HeightenedLonging_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	/*AddBossSkillSpawnDataToMap(
 		"BloodColoredFlower",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BloodColoredFlower.BP_BloodColoredFlower_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"ExtendedRoot",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ExtendedRoot.BP_ExtendedRoot_C"),
 		TempSpawnLocation,

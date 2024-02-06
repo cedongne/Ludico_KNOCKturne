@@ -66,6 +66,8 @@ bool UBuffComponent::RemoveBuff(EBuffType BuffType) {
 		NTLOG(Error, TEXT("Buff is not Removed!"));
 		return false;
 	}
+
+	DeleteBuffUI(BuffType);
 }
 
 void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
@@ -201,9 +203,11 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	AActor* TargetActor;
 	if (SkillData.SkillTarget == TARGET_PEPPY) {
 		TargetActor = ActorManagerSystem->PeppyActor;
+		AddPeppyBuffUI(BuffType);
 	}
 	else if (SkillData.SkillTarget == TARGET_BOSS) {
 		TargetActor = ActorManagerSystem->BossActor;
+		AddBossBuffUI(BuffType);
 	}
 	TargetOfBuff.Add(BuffType, TargetActor);
 
@@ -488,6 +492,20 @@ void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 	}
 }
 
+FString UBuffComponent::BuffTypeToString(EBuffType BuffType)
+{
+	if (!BuffTypeToStringMap.Contains(BuffType))
+		return "None";
+	return BuffTypeToStringMap[BuffType];
+}
+
+int32 UBuffComponent::BuffIconNameToRowNum(FString BuffIconName)
+{
+	if (!BuffIconNameToRowNumMap.Contains(BuffIconName))
+		return -1;
+	return BuffIconNameToRowNumMap[BuffIconName];
+}
+
 bool UBuffComponent::BuffDelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds) {
 	if (!BuffTempDelayTime.Contains(BuffType))
 		BuffTempDelayTime.Add(BuffType, 0);
@@ -560,4 +578,19 @@ bool UBuffComponent::TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffec
 	}
 	else
 		return false;
+}
+
+void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
+{
+	if (!TargetOfBuff[BuffType])
+		return;
+
+	if (TargetOfBuff[BuffType] == ActorManagerSystem->BossActor) {
+		HasBossBuff.Remove(BuffTypeToStringMap[BuffType]);
+		UpdateBossBuffUI();
+	}
+	else if (TargetOfBuff[BuffType] == ActorManagerSystem->PeppyActor) {
+		HasPeppyBuff.Remove(BuffTypeToStringMap[BuffType]);
+		UpdatePeppyBuffUI();
+	}
 }
