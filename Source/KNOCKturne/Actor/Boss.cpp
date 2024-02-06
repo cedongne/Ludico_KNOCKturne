@@ -50,6 +50,13 @@ void ABoss::SpawnBossSkill() {
 
 	auto SpawnActor = GetWorld()->SpawnActor(SpawnData.SkillObjectClass, &SpawnTransform);
 	auto SkillData = BattleTableManagerSystem->BossContactSkillTable->FindRow<FBossSkillData>(*(SpawnData.SkillObjectClass->GetName()), TEXT(""));
+	if (SkillData == nullptr) {
+		SkillData = BattleTableManagerSystem->BossNonContactSkillTable->FindRow<FBossSkillData>(*(SpawnData.SkillObjectClass->GetName()), TEXT(""));
+		if (SkillData == nullptr) {
+			NTLOG(Error, TEXT("Cannot Find SkillData From BossSkillTable!"));
+			return;
+		}
+	}
 
 	int32 SprayEnergy = SkillData->SprayEnergy + BuffComponent->AdditionalEnergyByBuff;
 	for (int count = 0; count < SprayEnergy; count++) {
