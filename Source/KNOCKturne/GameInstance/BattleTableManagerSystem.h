@@ -307,6 +307,16 @@ public:
 	class UDataTable* BossNonContactSkillTable;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* PeppySkillTable;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* SpecialSkillTable;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* ItemTable;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* SkillBuffStringTable;
+
+	TArray<FPeppySkillData*> PeppySkillTableRows;
+	TArray<FSpecialSkillTable*> SpecialSkillTableRows;
+	TArray<FItemData*> ItemTableRows;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "DataStructure")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;

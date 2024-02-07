@@ -206,7 +206,7 @@ void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UUserWidget* ba
 			SkillDescriptionComponent->SetSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);
 		}
 		else {
-			SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef, backgroundBtn);
+			SkillDescriptionComponent->SetHoverWidgetPos(SkillHoverWidgetRef->CanvasPanel, backgroundBtn);
 		}
 	}
 	else if (curWidget == PeppyTurnUIWidget) {
@@ -226,7 +226,7 @@ void USkillListFormWidget::CreateHoverWidget(int listhoveredNum, UUserWidget* ba
 			SkillDescriptionComponent->SetPeppyTurnSelectedSkillHoverPos(SkillHoverWidgetRef, backgroundBtn);
 		}
 		else {
-			SkillDescriptionComponent->SetPeppyTurnHoverWidgetPos(SkillHoverWidgetRef, backgroundBtn);
+			SkillDescriptionComponent->SetPeppyTurnHoverWidgetPos(SkillHoverWidgetRef->CanvasPanel, backgroundBtn);
 		}
 	}
 }

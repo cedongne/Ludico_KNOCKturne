@@ -42,11 +42,29 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_PEPPYSKILLTABLE.Succeeded());
 	PeppySkillTable = DT_PEPPYSKILLTABLE.Object;
 
+	FString SpecialSkilTablePath = TEXT("/Game/Assets/DataTable/SpecialSkillTable.SpecialSkillTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SPECIALSKILLTABLE(*SpecialSkilTablePath);
+	NTCHECK(DT_SPECIALSKILLTABLE.Succeeded());
+	SpecialSkillTable = DT_SPECIALSKILLTABLE.Object;
+
+	FString ItemTablePath = TEXT("/Game/Assets/DataTable/ItemTable.ItemTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_ITEMTABLE(*ItemTablePath);
+	NTCHECK(DT_ITEMTABLE.Succeeded());
+	ItemTable = DT_ITEMTABLE.Object;
+
+	FString SkillBuffStringTablePath = TEXT("/Game/Assets/DataTable/SkillBuffStringTable.SkillBuffStringTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SKILLBUFFSTRINGTABLE(*SkillBuffStringTablePath);
+	NTCHECK(DT_SKILLBUFFSTRINGTABLE.Succeeded());
+	SkillBuffStringTable = DT_SKILLBUFFSTRINGTABLE.Object;
+
 	FString PeppyStatDataPath = TEXT("/Game/Assets/DataTable/PeppyStatTable.PeppyStatTable");
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_PEPPYSTATDATATABLE(*PeppyStatDataPath);
 	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
 
+	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
+	SpecialSkillTable->GetAllRows<FSpecialSkillTable>("GetAllRows", SpecialSkillTableRows);
+	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
 	
 	SetBossSkillSpawnDataTable();
 	CurPeppySkillData.Add("BP_PS_Starlight_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Starlight_C"), TEXT("Fail to load PeppySkillData"))));

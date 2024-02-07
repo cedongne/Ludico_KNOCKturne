@@ -3,30 +3,35 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "Blueprint/UserWidget.h"
-#include "Components/Button.h"
-
-#include "ItemHoverWidget.generated.h"
+#include "Components/Image.h"
+#include "Components/TextBlock.h"
+#include "Components/RichTextBlock.h"
+#include "GameInstance/BattleTableManagerSystem.h"
+#include "GameInstance/BattleManagerSystem.h"
+#include "CommonSkillHoverWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API UItemHoverWidget : public UUserWidget
+class KNOCKTURNE_API UCommonSkillHoverWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	void NativeConstruct();
-
 protected:
-	TArray<UUserWidget*> PackageSkillWidgetArr;
+	virtual void NativePreConstruct();
+	virtual void NativeConstruct();
 
-public:
+	class UGameInstance* GameInstance;
+	class UBattleManagerSystem* BattleManagerSystem;
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox_selected;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
 
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CanvasPanel;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -42,19 +47,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_SkillName;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_Count;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class URichTextBlock* TextBlock_Description;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UPackageSkillWidget* PackageSkillWidget;
+	UFUNCTION()
+	virtual void SetHoverWidgetUI(int RowNum, bool IsSelected);
+	UFUNCTION()
+	virtual FString CheckValueN(int SkillIndex, float ValueN);
+	UFUNCTION()
+	virtual FString CheckValueM(int SkillIndex, float ValueM);
+	UFUNCTION()
+	virtual FString GetSkillIndexByKeyword(int RowNum, FString Num);
+	UFUNCTION()
+	virtual FString RedefineDescription(int RowNum);
 
 	UFUNCTION()
-	void OnClick_Button();
-	UFUNCTION()
-	int32 FindInteractionNum();
+	FString CheckProbability(float Probability);
 	UFUNCTION()
 	void Remove();
+	UFUNCTION()
+	void SetCheckBox();
 };

@@ -3,30 +3,35 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
-
-#include "ItemHoverWidget.generated.h"
+#include "Components/Image.h"
+#include "GameInstance/BattleManagerSystem.h"
+#include "CommonSkillCardWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API UItemHoverWidget : public UUserWidget
+class KNOCKTURNE_API UCommonSkillCardWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	void NativeConstruct();
 
 protected:
-	TArray<UUserWidget*> PackageSkillWidgetArr;
+	virtual void NativePreConstruct();
+	virtual void NativeConstruct();
 
-public:
+	UGameInstance* GameInstance;
+	class UBattleManagerSystem* BattleManagerSystem;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox_selected;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* icon_checkbox_numbering;
 
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CanvasPanel;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -41,20 +46,9 @@ public:
 	class UImage* Image_IconBackground;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_SkillName;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_Count;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class URichTextBlock* TextBlock_Description;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> PackageSkillWidgetClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UPackageSkillWidget* PackageSkillWidget;
-
-	UFUNCTION()
-	void OnClick_Button();
-	UFUNCTION()
-	int32 FindInteractionNum();
-	UFUNCTION()
-	void Remove();
+	virtual int32 GetCardSkillRow();
+	virtual void CreateSkillHoverWidget();
+	UFUNCTION(BlueprintCallable)
+	void SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget);
 };

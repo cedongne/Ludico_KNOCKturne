@@ -102,13 +102,13 @@ void USpecialtyListFormWidget::CreateHoverWidget(int hoveredNum, UButton* backgr
 	SpecialtyHoverWidgetRef->TextBlock_SkillName->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_SkillName->GetText());
 	SpecialtyHoverWidgetRef->TextBlock_Energy->SetText(PackageSkillWidget->SpecialtyListArr[hoveredNum]->TextBlock_Energy->GetText());
 	SpecialtyHoverWidgetRef->TextBlock_Description->SetText(FText::FromString(SkillDescriptionComponent->SpecialtyRedefineDescription(hoveredNum)));
-	SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef, (UUserWidget*)PackageSkillWidget->SpecialtyListArr[hoveredNum]->Button_Background);
+	SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef->CanvasPanel, (UUserWidget*)PackageSkillWidget->SpecialtyListArr[hoveredNum]->Button_Background);
 
 	if (isSelectedUI) {
 		SkillDescriptionComponent->SetSelectedSkillHoverPos(SpecialtyHoverWidgetRef, (UUserWidget*)backgroundBtn);
 	}
 	else {
-		SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef, (UUserWidget*)backgroundBtn);
+		SkillDescriptionComponent->SetHoverWidgetPos(SpecialtyHoverWidgetRef->CanvasPanel, (UUserWidget*)backgroundBtn);
 	}
 }
 

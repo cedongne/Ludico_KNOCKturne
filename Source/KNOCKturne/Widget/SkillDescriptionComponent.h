@@ -9,6 +9,7 @@
 #include "GameInstance/DialogueManagerSystem.h"
 #include "Components/Button.h"
 #include <Component/SpecialSkillComponent.h>
+#include "Components/CanvasPanel.h"
 
 #include "SkillDescriptionComponent.generated.h"
 
@@ -61,11 +62,11 @@ public:
 	FString ItemRedefineDescription(int RowNum);
 
 	UFUNCTION(Blueprintcallable)
-	void SetHoverWidgetPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn);
+	void SetHoverWidgetPos(UCanvasPanel* hoverwidget, UUserWidget* backgroundBtn);
 	UFUNCTION(Blueprintcallable)
 	void SetSelectedSkillHoverPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn);
 	UFUNCTION(Blueprintcallable)
-	void SetPeppyTurnHoverWidgetPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn);
+	void SetPeppyTurnHoverWidgetPos(UCanvasPanel* hoverwidget, UUserWidget* backgroundBtn);
 	UFUNCTION(Blueprintcallable)
 	void SetPeppyTurnSelectedSkillHoverPos(UUserWidget* hoverwidget, UUserWidget* backgroundBtn);
 
