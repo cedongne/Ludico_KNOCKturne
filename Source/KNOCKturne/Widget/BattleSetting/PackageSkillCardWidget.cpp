@@ -22,7 +22,7 @@ void UPackageSkillCardWidget::NativeConstruct()
 	}
 }
 
-int32 UPackageSkillCardWidget::GetCardSkillRow()
+int32 UPackageSkillCardWidget::GetCardSkillRowNum()
 {
 	return BattleManagerSystem->FindSkillRow(Image_Icon->Brush.GetResourceName().ToString());
 }
@@ -42,7 +42,7 @@ void UPackageSkillCardWidget::CreateSkillHoverWidget()
 			SkillCardHoverWidget->AddToViewport();
 			SkillCardHoverWidget->ForceLayoutPrepass();
 			SetHoverWidgetPos(SkillCardHoverWidget);
-			SkillCardHoverWidget->SetHoverWidgetUI(GetCardSkillRow(), isSelected);
+			SkillCardHoverWidget->SetHoverWidgetUI(GetCardSkillRowNum(), isSelected);
 		}
 	}
 }

@@ -4,15 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Widget/BattleSetting/CommonSkillHoverWidget.h"
-#include "Components/Button.h"
-#include "Components/Image.h"
-#include "PackageSkillHoverWidget.generated.h"
+#include "SpecialSkillHoverWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API UPackageSkillHoverWidget : public UCommonSkillHoverWidget
+class KNOCKTURNE_API USpecialSkillHoverWidget : public UCommonSkillHoverWidget
 {
 	GENERATED_BODY()
 protected:
@@ -24,8 +22,6 @@ public:
 	class UTextBlock* TextBlock_CoolTimeSec;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_Energy;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_Stance;
 
 	void SetHoverWidgetUI(int RowNum, bool IsSelected) override;
 	FString CheckValueN(int SkillIndex, float ValueN) override;

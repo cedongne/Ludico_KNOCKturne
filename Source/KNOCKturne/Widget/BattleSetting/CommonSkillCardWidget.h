@@ -47,7 +47,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_SkillName;
 
-	virtual int32 GetCardSkillRow();
+	virtual int32 GetCardSkillRowNum();
 	virtual void CreateSkillHoverWidget();
 	UFUNCTION(BlueprintCallable)
 	void SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget);

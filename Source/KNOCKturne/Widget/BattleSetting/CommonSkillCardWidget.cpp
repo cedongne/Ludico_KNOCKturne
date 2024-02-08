@@ -25,7 +25,7 @@ void UCommonSkillCardWidget::NativeConstruct() {
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 }
 
-int32 UCommonSkillCardWidget::GetCardSkillRow()
+int32 UCommonSkillCardWidget::GetCardSkillRowNum()
 {
 	NTLOG(Error, TEXT("Override the (GetCardSkillRow) function!"));
 	return 0;
@@ -34,18 +34,6 @@ int32 UCommonSkillCardWidget::GetCardSkillRow()
 void UCommonSkillCardWidget::CreateSkillHoverWidget()
 {
 	NTLOG(Error, TEXT("Override the (CreateHoverWidget) function!"));
-
-	/*UCommonSkillHoverWidget* CommonSkillHoverWidget;
-	if (CommonSkillHoverClass) {
-		CommonSkillHoverWidget = CreateWidget<UCommonSkillHoverWidget>(GetWorld(), CommonSkillHoverClass);
-		if (CommonSkillHoverWidget) {
-			CommonSkillHoverWidget->AddToViewport();
-		}
-	}
-
-	CommonSkillHoverWidget->ForceLayoutPrepass();
-	SetHoverWidgetPos(CommonSkillHoverWidget);
-	CommonSkillHoverWidget->SetHoverWidgetUI(GetCardSkillRow());*/
 }
 
 void UCommonSkillCardWidget::SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget)
