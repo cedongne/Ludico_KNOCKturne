@@ -28,4 +28,5 @@ public:
 	FString CheckValueM(int SkillIndex, float ValueM) override;
 	FString GetSkillIndexByKeyword(int RowNum, FString Num) override;
 	FString RedefineDescription(int RowNum) override;
+	void ClickButton() override;
 };

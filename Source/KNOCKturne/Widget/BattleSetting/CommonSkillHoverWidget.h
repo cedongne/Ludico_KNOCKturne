@@ -31,6 +31,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<UUserWidget*> AllPackageWidgetArr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PackageWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPackageWidget* PackageWidget;
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CanvasPanel;
@@ -59,11 +66,11 @@ public:
 	virtual FString GetSkillIndexByKeyword(int RowNum, FString Num);
 	UFUNCTION()
 	virtual FString RedefineDescription(int RowNum);
+	UFUNCTION()
+	virtual void ClickButton();
 
 	UFUNCTION()
 	FString CheckProbability(float Probability);
 	UFUNCTION()
 	void Remove();
-	UFUNCTION()
-	void SetCheckBox();
 };

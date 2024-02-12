@@ -3,6 +3,7 @@
 
 #include "Widget/BattleSetting/SpecialSkillHoverWidget.h"
 #include <GameInstance/DialogueManagerSystem.h>
+#include "PackageWidget.h"
 
 void USpecialSkillHoverWidget::NativePreConstruct()
 {
@@ -109,4 +110,14 @@ FString USpecialSkillHoverWidget::RedefineDescription(int RowNum)
 	}
 
 	return Redefined;
+}
+
+void USpecialSkillHoverWidget::ClickButton()
+{
+	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+		if (PackageWidget)
+			PackageWidget->SelectSpecialSkill(Image_Icon->Brush.GetResourceName().ToString());
+	}
 }

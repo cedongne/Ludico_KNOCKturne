@@ -5,6 +5,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "CommonSkillCardWidget.h"
+#include "PackageWidget.h"
 
 void UCommonSkillHoverWidget::NativePreConstruct()
 {
@@ -23,9 +24,16 @@ void UCommonSkillHoverWidget::NativeConstruct() {
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 
+	FString CurrentLevel = GetWorld()->GetMapName();
+	if (CurrentLevel == "UEDPIE_0_LV_HubWorld") {
+		// 보따리 위젯 참조
+		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPackageWidgetArr, PackageWidgetClass);
+		PackageWidget = (UPackageWidget*)AllPackageWidgetArr[0];
+	}
+
 	if (Button_Background) {
 		Button_Background->OnUnhovered.AddDynamic(this, &UCommonSkillHoverWidget::Remove);
-		Button_Background->OnClicked.AddDynamic(this, &UCommonSkillHoverWidget::SetCheckBox);
+		Button_Background->OnClicked.AddDynamic(this, &UCommonSkillHoverWidget::ClickButton);
 	}
 }
 
@@ -58,6 +66,11 @@ FString UCommonSkillHoverWidget::RedefineDescription(int RowNum)
 	return FString();
 }
 
+void UCommonSkillHoverWidget::ClickButton()
+{
+	NTLOG(Error, TEXT("Override the (RedefineDescription) function!"));
+}
+
 FString UCommonSkillHoverWidget::CheckProbability(float Probability)
 {
 	if (Probability != -1.0) {
@@ -71,12 +84,4 @@ FString UCommonSkillHoverWidget::CheckProbability(float Probability)
 void UCommonSkillHoverWidget::Remove()
 {
 	RemoveFromParent();
-}
-
-void UCommonSkillHoverWidget::SetCheckBox()
-{
-	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox")
-		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-	else
-		Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 }

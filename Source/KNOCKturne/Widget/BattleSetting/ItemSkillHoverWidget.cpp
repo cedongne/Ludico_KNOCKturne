@@ -3,6 +3,7 @@
 
 #include "Widget/BattleSetting/ItemSkillHoverWidget.h"
 #include <GameInstance/DialogueManagerSystem.h>
+#include "PackageWidget.h"
 
 void UItemSkillHoverWidget::NativePreConstruct()
 {
@@ -94,4 +95,25 @@ FString UItemSkillHoverWidget::RedefineDescription(int RowNum)
 	}
 
 	return Redefined;
+}
+
+void UItemSkillHoverWidget::ClickButton()
+{
+	int CurItemRowNum = BattleManagerSystem->FindItemRow(Image_Icon->Brush.GetResourceName().ToString());
+	int CurItemCount = KNOCKturneGameState->ItemCountList[CurItemRowNum];
+	if (CurItemCount == 0)
+		return;
+
+	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+		if (PackageWidget)
+			PackageWidget->SelectItem(Image_Icon->Brush.GetResourceName().ToString());
+	}
+	else {
+		Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+
+		if (PackageWidget)
+			PackageWidget->CancelItem(Image_Icon->Brush.GetResourceName().ToString());
+	}
 }

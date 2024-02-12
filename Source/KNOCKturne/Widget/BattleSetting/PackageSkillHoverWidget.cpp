@@ -3,6 +3,7 @@
 
 #include "Widget/BattleSetting/PackageSkillHoverWidget.h"
 #include <GameInstance/DialogueManagerSystem.h>
+#include "PackageWidget.h"
 
 void UPackageSkillHoverWidget::NativePreConstruct()
 {
@@ -137,5 +138,21 @@ FString UPackageSkillHoverWidget::RedefineDescription(int RowNum)
 	}
 
 	return Redefined;
+}
+
+void UPackageSkillHoverWidget::ClickButton()
+{
+	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
+		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+
+		if (PackageWidget)
+			PackageWidget->SelectSkill(Image_Icon->Brush.GetResourceName().ToString());
+	}
+	else {
+		Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+
+		if (PackageWidget)
+			PackageWidget->CancelSkill(Image_Icon->Brush.GetResourceName().ToString());
+	}
 }
 

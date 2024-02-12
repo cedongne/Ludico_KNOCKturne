@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Widget/BattleSetting/CommonSkillHoverWidget.h"
+#include "CommonSkillHoverWidget.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
 #include "PackageSkillHoverWidget.generated.h"
@@ -32,4 +32,5 @@ public:
 	FString CheckValueM(int SkillIndex, float ValueM) override;
 	FString GetSkillIndexByKeyword(int RowNum, FString Num) override;
 	FString RedefineDescription(int RowNum) override;
+	void ClickButton() override;
 };

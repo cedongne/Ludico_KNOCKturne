@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Widget/BattleSetting/CommonSkillCardWidget.h"
+#include "CommonSkillCardWidget.h"
 #include "PackageSkillCardWidget.generated.h"
 
 /**
