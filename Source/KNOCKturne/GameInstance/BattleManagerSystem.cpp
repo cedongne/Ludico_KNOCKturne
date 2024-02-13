@@ -10,9 +10,6 @@
 #include "Kismet/GameplayStatics.h"
 
 UBattleManagerSystem::UBattleManagerSystem() {
-
-	SelectedSkillCodeList.Init(-1, 8);
-
 	InitSkillIconRowMap();
 	InitSpecialtyIconRowMap();
 	InitItemIconRowMap();

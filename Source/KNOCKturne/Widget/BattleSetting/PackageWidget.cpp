@@ -2,7 +2,6 @@
 
 
 #include "PackageWidget.h"
-//#include "PackageSelectedUIWidget.h"
 #include "Widget/AlertModalWidget.h"
 #include <Kismet/GameplayStatics.h>
 #include "GameInstance/BattleTableManagerSystem.h"
@@ -44,7 +43,7 @@ void UPackageWidget::NativeConstruct()
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 
-	SelectedSkillIconRowMap.Empty();
+	SelectedSkillIconName.Empty();
 
 	// 특수기 UI 비저빌리티 설정
 	Selected_Specialty->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
@@ -57,7 +56,6 @@ void UPackageWidget::NativeConstruct()
 	CreateSkillList();
 	CreateSpecialtyList();
 	CreateItemList();
-	CreateSelectedSkillList();
 	// 선택한 스킬 칸 리스트 UI 생성
 	CreateSelectedSkillList();
 	// 이전 전투 세팅 기록이 있으면 불러온다
@@ -362,6 +360,7 @@ void UPackageWidget::ItemTabStyle(bool Clicked)
 void UPackageWidget::Exit()
 {
 	RemoveFromParent();
+	RemoveAllHoverWidgets();
 }
 
 void UPackageWidget::ResetSetting()
@@ -415,17 +414,20 @@ void UPackageWidget::ClickSettingDone()
 		SaveSelectedItem();
 
 		RemoveFromParent();
+		RemoveAllHoverWidgets();
 	}
 }
 
 void UPackageWidget::ClickAlertModalYes()
 {
 	AlertModalRef->RemoveFromParent();
+	BattleManagerSystem->SelectedSkillCodeList.Empty();
 	SaveSelectedSpecialty();
 	if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 		SaveSelectedItem();
 	}
 	RemoveFromParent();
+	RemoveAllHoverWidgets();
 }
 
 void UPackageWidget::ClickAlertModalNo()
@@ -436,13 +438,13 @@ void UPackageWidget::ClickAlertModalNo()
 
 void UPackageWidget::SaveSelectedSkill()
 {
+	BattleManagerSystem->SelectedSkillCodeList.Empty();
 	// 선택한 스킬 저장
 	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
 		if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 			FString Iconname = SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString();
 			if (BattleManagerSystem->SkillIconRowMap.Find(Iconname)) {
 				BattleManagerSystem->SelectedSkillCodeList.Add(BattleManagerSystem->SkillIconRowMap[Iconname]);
-
 			}
 			else {
 				NTLOG(Warning, TEXT("Cannot Find SkillRow: %s!"), *Iconname);
@@ -485,17 +487,12 @@ void UPackageWidget::SaveSelectedItem()
 void UPackageWidget::LoadBeforeSelectedSkills()
 {
 	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
-		if ((BattleManagerSystem->SelectedSkillCodeList[i] == -1 || BattleManagerSystem->SelectedSkillCodeList[i] == NULL) && BattleManagerSystem->SelectedSkillCodeList[i] != 0) {
-			break;
-		}
-		else {
-			SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[BattleManagerSystem->SelectedSkillCodeList[i]]->SkillIcon);
-			SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
-			SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
-			SelectedSkillIconRowMap.Add(SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString(), i);
+		SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[BattleManagerSystem->SelectedSkillCodeList[i]]->SkillIcon);
+		SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
+		SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
+		SelectedSkillIconName.Add(SelectedUIListArr[i]->Image_Icon->Brush.GetResourceName().ToString());
 
-			SkillListArr[BattleManagerSystem->SelectedSkillCodeList[i]]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-		}
+		SkillListArr[BattleManagerSystem->SelectedSkillCodeList[i]]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 	}
 
 	if (BattleManagerSystem->FinalSpecialSkill != "") {
@@ -539,7 +536,7 @@ void UPackageWidget::SelectSkill(FString IconName)
 		PlayAllSelectedSkillErrorAnim();
 		return;
 	}
-
+	
 	int TableRowNum = BattleManagerSystem->FindSkillRow(IconName);
 	SkillListArr[TableRowNum]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 
@@ -548,7 +545,7 @@ void UPackageWidget::SelectSkill(FString IconName)
 			SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 			SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
 			SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[TableRowNum]->SkillIcon);
-			SelectedSkillIconRowMap.Add(IconName, i);
+			SelectedSkillIconName.Add(IconName);
 			break;
 		}
 	}
@@ -558,20 +555,18 @@ void UPackageWidget::CancelSkill(FString IconName)
 {
 	int SkillListRowNum = BattleManagerSystem->FindSkillRow(IconName);
 	SkillListArr[SkillListRowNum]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
-	SelectedSkillIconRowMap.Remove(IconName);
+	SelectedSkillIconName.Remove(IconName);
 	UpdateSelectedSkillIcon();
 }
 
 void UPackageWidget::UpdateSelectedSkillIcon()
 {
-	TArray<int32> SelectedSkillRowArray;
-	SelectedSkillIconRowMap.GenerateValueArray(SelectedSkillRowArray);
-	
-	for (int i = 0; i < SelectedSkillIconRowMap.Num(); i++) {
-		SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[SelectedSkillRowArray[i]]->SkillIcon);
+	for (int i = 0; i < SelectedSkillIconName.Num(); i++) {
+		int RowNum = BattleManagerSystem->FindSkillRow(SelectedSkillIconName[i]);
+		SelectedUIListArr[i]->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[RowNum]->SkillIcon);
 	}
-	SelectedUIListArr[SelectedSkillIconRowMap.Num()]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
-	SelectedUIListArr[SelectedSkillIconRowMap.Num()]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
+	SelectedUIListArr[SelectedSkillIconName.Num()]->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
+	SelectedUIListArr[SelectedSkillIconName.Num()]->Button_Cancel->SetVisibility(ESlateVisibility::Hidden);
 }
 
 void UPackageWidget::SelectSpecialSkill(FString IconName)
@@ -596,6 +591,13 @@ void UPackageWidget::SelectItem(FString IconName)
 	if (KNOCKturneGameState->ItemCountList[TableRowNum] == 0)
 		return;
 
+	for (int i = 0; i < ItemListArr.Num(); i++) {
+		if (ItemListArr[i]->Image_CheckBox->Brush.GetResourceObject() == icon_checkbox_selected) {
+			ItemListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
+			break;
+		}
+	}
+
 	ItemListArr[TableRowNum]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 	Selected_Item->Image_Icon->SetBrushFromTexture(BattleTableManagerSystem->ItemTableRows[TableRowNum]->ItemIcon);
 	Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Visible);
@@ -604,7 +606,7 @@ void UPackageWidget::SelectItem(FString IconName)
 
 void UPackageWidget::CancelItem(FString IconName)
 {
-	int ItemListRowNum = BattleManagerSystem->FindSkillRow(IconName);
+	int ItemListRowNum = BattleManagerSystem->FindItemRow(IconName);
 	ItemListArr[ItemListRowNum]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 
 	Selected_Item->Image_Icon->SetVisibility(ESlateVisibility::Hidden);
@@ -615,5 +617,29 @@ void UPackageWidget::PlayAllSelectedSkillErrorAnim()
 {
 	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
 		SelectedUIListArr[i]->PlaySkillErrorAnim();
+	}
+}
+
+void UPackageWidget::RemoveAllHoverWidgets()
+{
+	TArray<UUserWidget*> SkillHoverWidgetArr;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, SkillHoverWidgetArr, PackageSkillHoverWidgetClass);
+	if (SkillHoverWidgetArr.Num() > 0) {
+		for (auto HoverWidget : SkillHoverWidgetArr)
+			HoverWidget->RemoveFromParent();
+	}
+
+	TArray<UUserWidget*> SpecialSkillHoverWidgetArr;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, SpecialSkillHoverWidgetArr, SpecialSkillHoverWidgetClass);
+	if (SpecialSkillHoverWidgetArr.Num() > 0) {
+		for (auto HoverWidget : SpecialSkillHoverWidgetArr)
+			HoverWidget->RemoveFromParent();
+	}
+
+	TArray<UUserWidget*> ItemHoverWidgetArr;;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, ItemHoverWidgetArr, ItemSkillHoverWidgetClass);
+	if (ItemHoverWidgetArr.Num() > 0) {
+		for (auto HoverWidget : ItemHoverWidgetArr)
+			HoverWidget->RemoveFromParent();
 	}
 }

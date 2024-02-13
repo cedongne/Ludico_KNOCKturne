@@ -27,7 +27,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TMap<FString, int32> SelectedSkillIconRowMap;
+	TArray<FString> SelectedSkillIconName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PackageSkillHoverWidgetClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> SpecialSkillHoverWidgetClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> ItemSkillHoverWidgetClass;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -158,4 +165,6 @@ public:
 	void CancelItem(FString IconName);
 	UFUNCTION()
 	void PlayAllSelectedSkillErrorAnim();
+	UFUNCTION()
+	void RemoveAllHoverWidgets();
 };

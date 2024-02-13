@@ -27,6 +27,12 @@ class KNOCKTURNE_API UPackageSelectedUIWidget : public UUserWidget
 
 protected:
 	TArray<UUserWidget*> PackageWidgetArr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PackageWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPackageWidget* PackageWidget;
+
+	class UCommonSkillHoverWidget* CurSkillHoverWidget;
 	UTexture2D* cancelimg;
 
 public:
@@ -46,11 +52,6 @@ public:
 	class UWidgetAnimation* SkillError;
 
 	ESelectedSkillType SelectedSkillType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> PackageWidgetClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UPackageWidget* PackageWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> SkillCardHoverWidgetClass;

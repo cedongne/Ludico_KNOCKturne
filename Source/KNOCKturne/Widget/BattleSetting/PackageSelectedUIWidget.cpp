@@ -38,14 +38,17 @@ void UPackageSelectedUIWidget::NativeConstruct() {
 	}
 	if (Button_Background) {
 		Button_Background->OnHovered.AddDynamic(this, &UPackageSelectedUIWidget::HoverBackgroundBtn);
+		//Button_Background->OnUnhovered.AddDynamic(this, &UPackageSelectedUIWidget::RemoveHoverWidget);
 	}
 }
 
 void UPackageSelectedUIWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
 	Super::NativeTick(Geometry, DeltaSeconds);
 
+	if (CurSkillHoverWidget && !IsHovered() && !CurSkillHoverWidget->IsHovered()) {
+		CurSkillHoverWidget->RemoveFromParent();
+	}
 }
-
 
 void UPackageSelectedUIWidget::SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget)
 {
@@ -57,7 +60,7 @@ void UPackageSelectedUIWidget::SetHoverWidgetPos(UCommonSkillHoverWidget* Common
 	FVector2D HoverWidgetSize = CommonSkillHoverWidget->CanvasPanel->GetDesiredSize();
 
 	FVector2D HoverWidgetPos;
-	HoverWidgetPos.X = SelectedUIViewportPos.X + SelectedUISize.X;
+	HoverWidgetPos.X = SelectedUIViewportPos.X + SelectedUISize.X- 1;
 	HoverWidgetPos.Y = SelectedUIViewportPos.Y - HoverWidgetSize.Y / 2 + SelectedUISize.Y / 2;
 	UWidgetLayoutLibrary::SlotAsCanvasSlot(CommonSkillHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
 }
@@ -67,30 +70,41 @@ void UPackageSelectedUIWidget::ClickCancelBtn()
 	switch (SelectedSkillType) {
 	case ESelectedSkillType::Skill:
 		CancelSelectedSkill();
+		break;
 	case ESelectedSkillType::Item:
 		CancelSelectedItem();
+		break;
 	}
 }
 
 void UPackageSelectedUIWidget::CancelSelectedSkill()
 {
 	PackageWidget->CancelSkill(Image_Icon->Brush.GetResourceName().ToString());
+	if (CurSkillHoverWidget)
+		CurSkillHoverWidget->RemoveFromParent();
 }
 
 void UPackageSelectedUIWidget::CancelSelectedItem()
 {
 	PackageWidget->CancelItem(Image_Icon->Brush.GetResourceName().ToString());
+	if (CurSkillHoverWidget)
+		CurSkillHoverWidget->RemoveFromParent();
 }
 
 void UPackageSelectedUIWidget::HoverBackgroundBtn()
 {
-	switch (SelectedSkillType) {
-	case ESelectedSkillType::Skill:
-		CreateSkillHoverWidget();
-	case ESelectedSkillType::SpecialSkill:
-		CreateSkillHoverWidget();
-	case ESelectedSkillType::Item:
-		CancelSelectedItem();
+	if (Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
+		switch (SelectedSkillType) {
+		case ESelectedSkillType::Skill:
+			CreateSkillHoverWidget();
+			break;
+		case ESelectedSkillType::SpecialSkill:
+			CreateSpecialSkillHoverWidget();
+			break;
+		case ESelectedSkillType::Item:
+			CreateItemHoverWidget();
+			break;
+		}
 	}
 }
 
@@ -106,6 +120,7 @@ void UPackageSelectedUIWidget::CreateSkillHoverWidget()
 			SkillCardHoverWidget->ForceLayoutPrepass();
 			SetHoverWidgetPos(SkillCardHoverWidget);
 			SkillCardHoverWidget->SetHoverWidgetUI(RowNum, true);
+			CurSkillHoverWidget = SkillCardHoverWidget;
 		}
 	}
 }
@@ -122,6 +137,7 @@ void UPackageSelectedUIWidget::CreateSpecialSkillHoverWidget()
 			SpecialSkillHoverWidget->ForceLayoutPrepass();
 			SetHoverWidgetPos(SpecialSkillHoverWidget);
 			SpecialSkillHoverWidget->SetHoverWidgetUI(RowNum, true);
+			CurSkillHoverWidget = SpecialSkillHoverWidget;
 		}
 	}
 }
@@ -138,6 +154,7 @@ void UPackageSelectedUIWidget::CreateItemHoverWidget()
 			ItemSkillHoverWidget->ForceLayoutPrepass();
 			SetHoverWidgetPos(ItemSkillHoverWidget);
 			ItemSkillHoverWidget->SetHoverWidgetUI(RowNum, true);
+			CurSkillHoverWidget = ItemSkillHoverWidget;
 		}
 	}
-}	
+}
