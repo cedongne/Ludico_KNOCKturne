@@ -150,7 +150,7 @@ public:
 	void LoadBeforeSelectedSkills();
 	/*스킬 선택*/
 	UFUNCTION()
-	void SelectSkill(FString IconName);
+	bool SelectSkill(FString IconName);
 	UFUNCTION()
 	void CancelSkill(FString IconName);
 	UFUNCTION()

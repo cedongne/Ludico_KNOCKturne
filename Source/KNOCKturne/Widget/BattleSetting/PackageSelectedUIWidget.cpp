@@ -38,7 +38,6 @@ void UPackageSelectedUIWidget::NativeConstruct() {
 	}
 	if (Button_Background) {
 		Button_Background->OnHovered.AddDynamic(this, &UPackageSelectedUIWidget::HoverBackgroundBtn);
-		//Button_Background->OnUnhovered.AddDynamic(this, &UPackageSelectedUIWidget::RemoveHoverWidget);
 	}
 }
 

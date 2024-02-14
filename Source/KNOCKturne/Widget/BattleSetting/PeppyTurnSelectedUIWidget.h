@@ -4,34 +4,23 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "PackageSelectedUIWidget.generated.h"
+#include "PeppyTurnSelectedUIWidget.generated.h"
 
 /**
  * 
  */
-UENUM(BlueprintType)
-enum class ESelectedSkillType : uint8 {
-	Skill	UMETA(DisplayName = "Skill"),
-	SpecialSkill	UMETA(DisplayName = "SpecialSkill"),
-	Item	UMETA(DisplayName = "Item")
-};
 UCLASS()
-class KNOCKTURNE_API UPackageSelectedUIWidget : public UUserWidget
+class KNOCKTURNE_API UPeppyTurnSelectedUIWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	void NativePreConstruct();
 	void NativeConstruct();
-	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 
 	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
-	TArray<UUserWidget*> PackageWidgetArr;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> PackageWidgetClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UPackageWidget* PackageWidget;
-
+	TArray<UUserWidget*> PeppyTurnWidgetArr;
 	class UCommonSkillHoverWidget* CurSkillHoverWidget;
 
 public:
@@ -40,41 +29,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UImage* Image_Icon;
+	class UPeppyTurnSelectedIconWidget* BP_PeppyTurnIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UImage* Image_NumBackground;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_SkillError;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UButton* Button_Background;
+	class UTextBlock* TextBlock_SelectNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Cancel;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UButton* Button_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
-	class UWidgetAnimation* SkillError;
+	class UWidgetAnimation* PeppyTurn_SkillError;
 
-	ESelectedSkillType SelectedSkillType;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPeppyTurnUIWidget* PeppyTurnWidget;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> SkillCardHoverWidgetClass;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> SpecialSkillCardHoverWidgetClass;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> ItemSkillCardHoverWidgetClass;
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintimplementableEvent)
 	void PlaySkillErrorAnim();
 	UFUNCTION()
 	void SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget);
 	UFUNCTION()
-	void ClickCancelBtn();
-	UFUNCTION()
 	void CancelSelectedSkill();
 	UFUNCTION()
-	void CancelSelectedItem();
-	UFUNCTION()
-	void HoverBackgroundBtn();
-	UFUNCTION()
 	void CreateSkillHoverWidget();
-	UFUNCTION()
-	void CreateSpecialSkillHoverWidget();
-	UFUNCTION()
-	void CreateItemHoverWidget();
 };

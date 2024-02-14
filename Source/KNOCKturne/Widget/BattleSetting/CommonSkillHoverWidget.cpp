@@ -6,6 +6,7 @@
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "CommonSkillCardWidget.h"
 #include "PackageWidget.h"
+#include "PeppyTurnUIWidget.h"
 
 void UCommonSkillHoverWidget::NativePreConstruct()
 {
@@ -29,6 +30,11 @@ void UCommonSkillHoverWidget::NativeConstruct() {
 		// 보따리 위젯 참조
 		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPackageWidgetArr, PackageWidgetClass);
 		PackageWidget = (UPackageWidget*)AllPackageWidgetArr[0];
+	}
+	else if (CurrentLevel == "UEDPIE_0_LV_Battle") {
+		// 페피턴 위젯 참조
+		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPeppyTurnWidgetArr, PeppyTurnWidgetClass);
+		PeppyTurnWidget = (UPeppyTurnUIWidget*)AllPeppyTurnWidgetArr[0];
 	}
 
 	if (Button_Background) {

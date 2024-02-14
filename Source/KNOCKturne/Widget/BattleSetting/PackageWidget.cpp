@@ -421,7 +421,7 @@ void UPackageWidget::ClickSettingDone()
 void UPackageWidget::ClickAlertModalYes()
 {
 	AlertModalRef->RemoveFromParent();
-	BattleManagerSystem->SelectedSkillCodeList.Empty();
+	SaveSelectedSkill();
 	SaveSelectedSpecialty();
 	if (Selected_Item->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 		SaveSelectedItem();
@@ -529,18 +529,18 @@ void UPackageWidget::LoadBeforeSelectedSkills()
 	}
 }
 
-void UPackageWidget::SelectSkill(FString IconName)
+bool UPackageWidget::SelectSkill(FString IconName)
 {
 	// 스킬 선택칸이 다 찼다면 에러 애니메이션 실행 후 함수 종료
 	if (SelectedUIListArr[SelectedUIListArr.Num() - 1]->Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 		PlayAllSelectedSkillErrorAnim();
-		return;
+		return false;
 	}
 	
 	int TableRowNum = BattleManagerSystem->FindSkillRow(IconName);
 	SkillListArr[TableRowNum]->Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
 
-	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
+	for (int i = 0; i < 8; i++) {
 		if (SelectedUIListArr[i]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
 			SelectedUIListArr[i]->Image_Icon->SetVisibility(ESlateVisibility::Visible);
 			SelectedUIListArr[i]->Button_Cancel->SetVisibility(ESlateVisibility::Visible);
@@ -549,6 +549,7 @@ void UPackageWidget::SelectSkill(FString IconName)
 			break;
 		}
 	}
+	return true;
 }
 
 void UPackageWidget::CancelSkill(FString IconName)

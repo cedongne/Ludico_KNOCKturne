@@ -143,10 +143,11 @@ FString UPackageSkillHoverWidget::RedefineDescription(int RowNum)
 void UPackageSkillHoverWidget::ClickButton()
 {
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
-		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
-
-		if (PackageWidget)
-			PackageWidget->SelectSkill(Image_Icon->Brush.GetResourceName().ToString());
+		if (PackageWidget) {
+			bool isSelectSkill = PackageWidget->SelectSkill(Image_Icon->Brush.GetResourceName().ToString());
+			if(isSelectSkill)
+				Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);
+		}
 	}
 	else {
 		Image_CheckBox->SetBrushFromTexture(icon_checkbox);

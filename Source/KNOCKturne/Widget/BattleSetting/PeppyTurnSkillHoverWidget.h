@@ -14,4 +14,24 @@ class KNOCKTURNE_API UPeppyTurnSkillHoverWidget : public UCommonSkillHoverWidget
 {
 	GENERATED_BODY()
 	
+protected:
+	void NativePreConstruct() override;
+	void NativeConstruct() override;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_CoolTimeSec;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Energy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Stance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* TextBlock_Num;
+
+	void SetHoverWidgetUI(int RowNum, bool IsSelected) override;
+	FString CheckValueN(int SkillIndex, float ValueN) override;
+	FString CheckValueM(int SkillIndex, float ValueM) override;
+	FString GetSkillIndexByKeyword(int RowNum, FString Num) override;
+	FString RedefineDescription(int RowNum) override;
+	void ClickButton() override;
 };

@@ -30,6 +30,8 @@ protected:
 	class UTexture2D* icon_checkbox_selected;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* icon_checkbox;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTexture2D* icon_checkbox_numbering;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<UUserWidget*> AllPackageWidgetArr;
@@ -37,6 +39,13 @@ protected:
 	TSubclassOf<UUserWidget> PackageWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UPackageWidget* PackageWidget;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<UUserWidget*> AllPeppyTurnWidgetArr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPeppyTurnUIWidget* PeppyTurnWidget;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))

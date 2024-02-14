@@ -53,6 +53,7 @@ public:
 
 	/*������-���� �� �غ�*/
 	// ������ ���������� ������ ��ų
+	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly)
 	TArray<int32> SelectedSkillCodeList;
 
 	// ������ ���������� ������ ��ų ����Ʈ ũ�� ����
@@ -132,6 +133,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 OverlappedIndex = -1;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isSkipPeppyTurn = false;
 
 
 	// �����ۺ� ����
