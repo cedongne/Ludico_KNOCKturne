@@ -51,18 +51,3 @@ void UPeppyTurnSkillCardWidget::CreateSkillHoverWidget()
 		}
 	}
 }
-
-void UPeppyTurnSkillCardWidget::SetPeppySkillHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget)
-{
-	FVector2D SkillCardPixelPos;
-	FVector2D SkillCardViewportPos;
-	USlateBlueprintLibrary::LocalToViewport(CanvasPanel, CanvasPanel->GetCachedGeometry(), FVector2D(0.0, 0.0), SkillCardPixelPos, SkillCardViewportPos);
-
-	FVector2D SkillCardSize = CanvasPanel->GetDesiredSize();
-	FVector2D HoverWidgetSize = CommonSkillHoverWidget->CanvasPanel->GetDesiredSize();
-
-	FVector2D HoverWidgetPos;
-	HoverWidgetPos.X = SkillCardViewportPos.X;
-	HoverWidgetPos.Y = SkillCardViewportPos.Y + HoverWidgetSize.Y / 2 - SkillCardSize.Y / 2;
-	UWidgetLayoutLibrary::SlotAsCanvasSlot(CommonSkillHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
-}

@@ -35,7 +35,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> SkillCardHoverWidgetClass;
-
-	UFUNCTION()
-	void SetPeppySkillHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget);
 };
