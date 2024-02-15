@@ -4,15 +4,17 @@
 
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
-
 #include "GameInstance/BattleTableManagerSystem.h"
 #include "Components/ActorComponent.h"
 #include "BuffComponent.generated.h"
 
 UENUM(BlueprintType)
 enum class EBuffType : uint8 {
+	DefenseIncrease		UMETA(DisplayName = "DefenseIncrease"),
 	AttackIncrease		UMETA(DisplayName = "AttackIncrease"),
+	AvdIncrease			UMETA(DisplayName = "AvdIncrease"),
 	ReflexiveAttack		UMETA(DisplayName = "ReflexiveAttack"),
+	ReflexiveRecovery	UMETA(DisplayName = "ReflexiveRecovery"),
 	PeriodicRecovery	UMETA(DisplayName = "PeriodicRecovery"),
 	AttackDecrease		UMETA(DisplayName = "AttackDecrease"),
 	EnergyDropIncrease	UMETA(DisplayName = "EnergyDropIncrease"),
@@ -27,7 +29,12 @@ enum class EBuffType : uint8 {
 	Revive				UMETA(DisplayName = "Revive"),
 	Mood				UMETA(DisplayName = "Mood"),
 	Warning				UMETA(DisplayName = "Warning"),
-	RecoveryEnergy		UMETA(DisplayName = "RecoveryEnergy")
+	RecoveryEnergy		UMETA(DisplayName = "RecoveryEnergy"),
+	SpeedIncrease		UMETA(DisplayName = "SpeedIncrease"),
+	DefenseDecrease		UMETA(DisplayName = "DefenseDecrease"),
+	Stun				UMETA(DisplayName = "Stun"),
+	RestrictRecovery	UMETA(DisplayName = "RestrictRecovery"),
+	Friction			UMETA(DisplayName = "Friction")
 };
 
 UENUM(BlueprintType)
@@ -166,8 +173,11 @@ public:
 	}
 
 	TArray<EBuffType> BuffListPerTurn = {
+		EBuffType::DefenseIncrease,
 		EBuffType::AttackIncrease,
+		EBuffType::AvdIncrease,
 		EBuffType::ReflexiveAttack,
+		EBuffType::ReflexiveRecovery,
 		EBuffType::EnergyDropIncrease,
 		EBuffType::AttackDecrease,
 		EBuffType::Seal,
@@ -178,14 +188,19 @@ public:
 		EBuffType::Mood,
 		EBuffType::Warning,
 		EBuffType::RecoveryEnergy,
-		EBuffType::PeriodicRecovery
+		EBuffType::PeriodicRecovery,
+		EBuffType::SpeedIncrease,
+		EBuffType::DefenseDecrease,
+		EBuffType::RestrictRecovery,
+		EBuffType::Friction
 	};
 
 	TArray<EBuffType> BuffListPerSecond = {
 		EBuffType::PeriodicAttack,
 		EBuffType::Blind,
 		EBuffType::Confuse,
-		EBuffType::SpeedDecrease
+		EBuffType::SpeedDecrease,
+		EBuffType::Stun
 	};
 
 	TArray<FString> BuffNamePerSecondStr = {
@@ -193,6 +208,7 @@ public:
 		"BF_Blind",
 		"BF_Confuse",
 		"BF_SpeedDecrease"
+		"BF_Stun"
 	};
 };
 
@@ -200,6 +216,7 @@ UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UBuffComponent : public UActorComponent
 {
 	GENERATED_BODY()
+	APeppy* Peppy;
 
 public:
 	UBuffComponent();
@@ -215,21 +232,15 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-		TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-		TMap<EBuffType, FBuffData> HasPositiveBuffs_PerSecond;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-		TMap<EBuffType, FBuffData> HasNegativeBuffs_PerTurn;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-		TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
-
 private:
 	const TMap<EBuffType, FString> BuffTypeToStringMap = {
+		{ EBuffType::DefenseIncrease,	"DefenseIncrease" },
 		{ EBuffType::AttackIncrease,	"AttackIncrease" },
+		{ EBuffType::AvdIncrease,		"AvdIncrease" },
 		{ EBuffType::ReflexiveAttack,	"ReflexiveAttack"},
+		{ EBuffType::ReflexiveRecovery,	"ReflexiveRecovery"},
 		{ EBuffType::PeriodicRecovery,	"PeriodicRecovery"},
-		{ EBuffType::EnergyDropIncrease,	"EnergyDropIncrease"},
+		{ EBuffType::EnergyDropIncrease,"EnergyDropIncrease"},
 		{ EBuffType::AttackDecrease,	"AttackDecrease" },
 		{ EBuffType::PeriodicAttack,	"PeriodicAttack"},
 		{ EBuffType::Blind,				"Blind" },
@@ -242,7 +253,11 @@ private:
 		{ EBuffType::Revive,			"Revive" },
 		{ EBuffType::Mood,				"Mood" },
 		{ EBuffType::Warning,			"Warning" },
-		{ EBuffType::RecoveryEnergy,	"RecoveryEnergy" }
+		{ EBuffType::SpeedIncrease,		"SpeedIncrease" },
+		{ EBuffType::DefenseDecrease,	"DefenseDecrease" },
+		{ EBuffType::Stun,				"Stun" },
+		{ EBuffType::RestrictRecovery,	"RestrictRecovery" },
+		{ EBuffType::Friction,			"Friction" }
 	};
 
 	const TMap<FString, int32> BuffIconNameToRowNumMap = {
@@ -285,6 +300,48 @@ private:
 	float TempDelayTime;
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FString, EBuffType> BuffIconNameToBuffTypeMap = {
+		{ "Icon_buff_DefenseIncrease", EBuffType::DefenseIncrease },
+		{ "Icon_buff_AttackIncrease", EBuffType::AttackIncrease },
+		{ "Icon_buff_AvdIncrease", EBuffType::AvdIncrease },
+		{ "Icon_buff_ReflexiveAttack", EBuffType::ReflexiveAttack },
+		{ "Icon_buff_ReflexiveRecovery", EBuffType::ReflexiveRecovery },
+		{ "Icon_buff_PeriodicRecovery", EBuffType::PeriodicAttack },
+		{ "Icon_buff_EnergyDropIncrease", EBuffType::EnergyDropIncrease },
+		{ "Icon_buff_SpeedIncrease", EBuffType::SpeedIncrease },
+		{ "Icon_buff_DefenseDecrease", EBuffType::DefenseDecrease },
+		{ "Icon_buff_AttackDecrease", EBuffType::AttackDecrease },
+		{ "Icon_buff_Stun", EBuffType::Stun },
+		{ "Icon_buff_PeriodicAttack", EBuffType::PeriodicAttack },
+		{ "Icon_buff_RestrictRecovery", EBuffType::RestrictRecovery },
+		{ "Icon_buff_Blind", EBuffType::Blind },
+		{ "Icon_buff_SpeedDecrease", EBuffType::SpeedDecrease },
+		{ "Icon_buff_Confuse", EBuffType::Confuse },
+		{ "Icon_buff_Seal", EBuffType::Seal },
+		{ "Icon_buff_Friction", EBuffType::Friction },
+		{ "Icon_buff_IntervalIncrease", EBuffType::IntervalIncrease },
+		{ "Icon_buff_SpecialMpIncrease", EBuffType::SpecialMpIncrease },
+		{ "Icon_buff_Shield", EBuffType::Shield },
+		{ "Icon_buff_Revive", EBuffType::Revive },
+		{ "Icon_buff_Mood", EBuffType::Mood },
+		{ "Icon_buff_Warning", EBuffType::Warning },
+		{ "Icon_buff_RecoveryEnergy", EBuffType::RecoveryEnergy },
+	};
+
+	TArray<FBuffTable*> BuffTableRows;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerSecond;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerTurn;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
+
+	UFUNCTION(BlueprintCallable)
+	bool IsPositiveBuff(EBuffType BuffType);
 	/* 자신에게 적용된 BuffTyp의 버프를 제거합니다.*/
 	UFUNCTION(BlueprintCallable)
 	bool RemoveBuff(EBuffType BuffType);
@@ -375,14 +432,6 @@ public:
 	TArray<FString> HasBossBuff;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FString> HasPeppyBuff;
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateBossBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdatePeppyBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
-	void AddBossBuffUI(EBuffType BuffType);
-	UFUNCTION(BlueprintImplementableEvent)
-	void AddPeppyBuffUI(EBuffType BuffType);
 	UFUNCTION(BlueprintCallable)
 	void DeleteBuffUI(EBuffType BuffType);
 };

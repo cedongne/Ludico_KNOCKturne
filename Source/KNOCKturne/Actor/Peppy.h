@@ -130,4 +130,13 @@ public:
 	ANPC* InteractingNpcActor;
 	UFUNCTION(BlueprintCallable)
 	void SetInteractingNpc();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateBossBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdatePeppyBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddBossBuffUI(EBuffType BuffType);
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddPeppyBuffUI(EBuffType BuffType);
 };

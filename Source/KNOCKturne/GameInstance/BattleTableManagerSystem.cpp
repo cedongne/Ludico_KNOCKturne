@@ -120,14 +120,14 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder2.BP_CleanUpIntruder2_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
+	);*/
 	AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,

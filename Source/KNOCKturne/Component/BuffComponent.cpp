@@ -15,6 +15,8 @@ UBuffComponent::UBuffComponent()
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
 	NTCHECK(DT_BuffTABLE.Succeeded());
 	BuffTable = DT_BuffTABLE.Object;
+
+	BuffTable->GetAllRows<FBuffTable>("Get all rows of BuffData", BuffTableRows);
 }
 
 void UBuffComponent::BeginPlay()
@@ -23,6 +25,7 @@ void UBuffComponent::BeginPlay()
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
 void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
@@ -31,6 +34,19 @@ void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	OperateBuffs_PerSecond(DeltaTime);
 	TryOperatePeriodicRecovery(DeltaTime);
 	ElapseDeltaTime(DeltaTime);
+}
+
+bool UBuffComponent::IsPositiveBuff(EBuffType BuffType)
+{
+	if (HasPositiveBuffs_PerTurn.Contains(BuffType)) {
+		return true;
+	}
+	else if (HasPositiveBuffs_PerSecond.Contains(BuffType)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool UBuffComponent::RemoveBuff(EBuffType BuffType) {
@@ -200,17 +216,6 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	FString SourceId = SkillData.SkillId;
 	auto buffData = new FBuffData(SourceId, acquiredBuff);
 
-	AActor* TargetActor;
-	if (SkillData.SkillTarget == TARGET_PEPPY) {
-		TargetActor = ActorManagerSystem->PeppyActor;
-		AddPeppyBuffUI(BuffType);
-	}
-	else if (SkillData.SkillTarget == TARGET_BOSS) {
-		TargetActor = ActorManagerSystem->BossActor;
-		AddBossBuffUI(BuffType);
-	}
-	TargetOfBuff.Add(BuffType, TargetActor);
-
 	if (acquiredBuff->BuffType == 0) {
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
@@ -244,6 +249,17 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 		}
 	}
 
+	AActor* TargetActor;
+	if (SkillData.SkillTarget == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+		Peppy->AddPeppyBuffUI(BuffType);
+	}
+	else if (SkillData.SkillTarget == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+		Peppy->AddBossBuffUI(BuffType);
+	}
+	TargetOfBuff.Add(BuffType, TargetActor);
+
 	NTLOG(Warning, TEXT("Aquire Buff: [%s]"), *BuffTypeToStringMap[BuffType]);
 }
 
@@ -254,6 +270,7 @@ void UBuffComponent::ElapseTurn() {
 	for (auto& Key : Keys) {
 		if (--HasPositiveBuffs_PerTurn[Key].Duration == 0) {
 			if (RemoveBuff(Key)) {
+				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
 			}
 		}
@@ -263,6 +280,7 @@ void UBuffComponent::ElapseTurn() {
 	for (auto& Key : Keys) {
 		if (--HasNegativeBuffs_PerTurn[Key].Duration == 0) {
 			if (RemoveBuff(Key)) {
+				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
 			}
 		}
@@ -587,10 +605,10 @@ void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
 
 	if (TargetOfBuff[BuffType] == ActorManagerSystem->BossActor) {
 		HasBossBuff.Remove(BuffTypeToStringMap[BuffType]);
-		UpdateBossBuffUI();
+		Peppy->UpdateBossBuffUI();
 	}
 	else if (TargetOfBuff[BuffType] == ActorManagerSystem->PeppyActor) {
 		HasPeppyBuff.Remove(BuffTypeToStringMap[BuffType]);
-		UpdatePeppyBuffUI();
+		Peppy->UpdatePeppyBuffUI();
 	}
 }
