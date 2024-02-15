@@ -23,6 +23,9 @@ class KNOCKTURNE_API UPeppyTurnSelectedIconWidget : public UUserWidget
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
 
 protected:
+	class UGameInstance* GameInstance;
+	class UBattleManagerSystem* BattleManagerSystem;
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	TArray<UUserWidget*> PeppyTurnWidgetArr;
 
 public:

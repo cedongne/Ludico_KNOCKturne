@@ -7,9 +7,15 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "PeppyTurnSkillCardWidget.h"
+#include "GameInstance/BattleManagerSystem.h"
+#include "GameInstance/BattleTableManagerSystem.h"
 
 void UPeppyTurnSelectedIconWidget::NativeConstruct()
 {
+	GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, PeppyTurnWidgetArr, PeppyTurnWidgetClass);
 	PeppyTurnWidget = (UPeppyTurnUIWidget*)PeppyTurnWidgetArr[0];
 }
@@ -30,13 +36,7 @@ FReply UPeppyTurnSelectedIconWidget::NativeOnMouseButtonDown(const FGeometry& In
 {
 	Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
 
-	for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
-		if (this->Image_SelectedSkillIcon->Brush.GetResourceName() ==
-			PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName()) {
-			PeppyTurnWidget->draggedIdx = i;
-			break;
-		}
-	}
+	PeppyTurnWidget->DraggedImgName = this->Image_SelectedSkillIcon->Brush.GetResourceName().ToString();
 
 	return UWidgetBlueprintLibrary::DetectDragIfPressed(InMouseEvent, this, EKeys::LeftMouseButton).NativeReply;
 }
@@ -61,12 +61,7 @@ bool UPeppyTurnSelectedIconWidget::NativeOnDragOver(const FGeometry& InGeometry,
 {
 	Super::NativeOnDragOver(InGeometry, DragDropEvent, InOperation);
 
-	for (int i = 0; i < PeppyTurnWidget->SelectedUIListArr.Num(); i++) {
-		if (this == PeppyTurnWidget->SelectedUIListArr[i]->BP_PeppyTurnIcon) {
-			PeppyTurnWidget->overlappedIdx = i;
-			break;
-		}
-	}
+	PeppyTurnWidget->OverlappedImgName = Image_SelectedSkillIcon->Brush.GetResourceName().ToString();
 
 	return false;
 }
@@ -84,34 +79,26 @@ bool UPeppyTurnSelectedIconWidget::NativeOnDrop(const FGeometry& InGeometry, con
 
 void UPeppyTurnSelectedIconWidget::SwapSkill()
 {
-	// 선택한 스킬 순서 변경
-	UTexture2D* DraggedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
-	UTexture2D* OverlappedImg = UWidgetBlueprintLibrary::GetBrushResourceAsTexture2D(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush);
-	int draggedSkillListNum = PeppyTurnWidget->IconNameRowMap[PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString()];
-	int overlappedSkillListNum = PeppyTurnWidget->IconNameRowMap[PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString()];
+	int SelectedSkillDraggedSequenceNum = PeppyTurnWidget->IconSequenceRowMap[PeppyTurnWidget->DraggedImgName];
+	int SelectedSkillOverlappedSequenceNum = PeppyTurnWidget->IconSequenceRowMap[PeppyTurnWidget->OverlappedImgName];
+	int DraggedSkillTableRowNum = BattleManagerSystem->FindSkillRow(PeppyTurnWidget->DraggedImgName);
+	int OverlappedSkillTableRowNum = BattleManagerSystem->FindSkillRow(PeppyTurnWidget->OverlappedImgName);
 
-	PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(OverlappedImg);
-	PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->SetBrushFromTexture(DraggedImg);
+	// 선택한 스킬 칸 아이콘 이미지 변경
+	PeppyTurnWidget->SelectedUIListArr[SelectedSkillDraggedSequenceNum - 1]->BP_PeppyTurnIcon->Image_SelectedSkillIcon
+		->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[OverlappedSkillTableRowNum]->SkillIcon);
+	PeppyTurnWidget->SelectedUIListArr[SelectedSkillOverlappedSequenceNum - 1]->BP_PeppyTurnIcon->Image_SelectedSkillIcon
+		->SetBrushFromTexture(BattleTableManagerSystem->PeppySkillTableRows[DraggedSkillTableRowNum]->SkillIcon);
 
-	FText draggedSelectNum = PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->TextBlock_SelectNum->GetText();
-	FText overlappedSelectNum = PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->TextBlock_SelectNum->GetText();
-	PeppyTurnWidget->IconSequenceRowMap.Remove(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString());
-	PeppyTurnWidget->IconSequenceRowMap.Remove(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString());
-	PeppyTurnWidget->IconSequenceRowMap.Add(
-		PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString(), PeppyTurnWidget->overlappedIdx + 1);
-	PeppyTurnWidget->IconSequenceRowMap.Add(
-		PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString(), PeppyTurnWidget->draggedIdx + 1);
+	// 스킬 카드 순서 번호 변경
+	int DraggedSkillCardNum = PeppyTurnWidget->IconNameRowMap[PeppyTurnWidget->DraggedImgName];
+	int OverlappedSkillCardNum = PeppyTurnWidget->IconNameRowMap[PeppyTurnWidget->OverlappedImgName];
 
-	PeppyTurnWidget->SkillListArr[draggedSkillListNum]->TextBlock_Num->SetText(overlappedSelectNum);
-	NTLOG(Error, TEXT("draggedSkillListNum %d"), draggedSkillListNum);
-	PeppyTurnWidget->SkillListArr[overlappedSkillListNum]->TextBlock_Num->SetText(draggedSelectNum);
-	NTLOG(Error, TEXT("overlappedSkillListNum %d"), overlappedSkillListNum);
-	PeppyTurnWidget->IconNameRowMap.Remove(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->draggedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString());
-	PeppyTurnWidget->IconNameRowMap.Remove(PeppyTurnWidget->SelectedUIListArr[PeppyTurnWidget->overlappedIdx]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString());
-	PeppyTurnWidget->IconNameRowMap.Add(
-		PeppyTurnWidget->SkillListArr[draggedSkillListNum]->Image_Icon->Brush.GetResourceName().ToString(), 
-		FCString::Atof(*(PeppyTurnWidget->SkillListArr[draggedSkillListNum]->TextBlock_Num->GetText().ToString())));
-	PeppyTurnWidget->IconNameRowMap.Add(
-		PeppyTurnWidget->SkillListArr[overlappedSkillListNum]->Image_Icon->Brush.GetResourceName().ToString(),
-		FCString::Atof(*(PeppyTurnWidget->SkillListArr[overlappedSkillListNum]->TextBlock_Num->GetText().ToString())));
+	PeppyTurnWidget->SkillListArr[DraggedSkillCardNum]->TextBlock_Num->SetText(FText::FromString(FString::FromInt(SelectedSkillOverlappedSequenceNum)));
+	PeppyTurnWidget->SkillListArr[OverlappedSkillCardNum]->TextBlock_Num->SetText(FText::FromString(FString::FromInt(SelectedSkillDraggedSequenceNum)));
+
+	PeppyTurnWidget->IconSequenceRowMap[PeppyTurnWidget->DraggedImgName];
+	PeppyTurnWidget->IconSequenceRowMap[PeppyTurnWidget->OverlappedImgName];
+	PeppyTurnWidget->IconSequenceRowMap.Add(PeppyTurnWidget->DraggedImgName, SelectedSkillOverlappedSequenceNum);
+	PeppyTurnWidget->IconSequenceRowMap.Add(PeppyTurnWidget->OverlappedImgName, SelectedSkillDraggedSequenceNum);
 }

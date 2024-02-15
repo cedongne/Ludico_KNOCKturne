@@ -73,9 +73,9 @@ public:
 	int32 TotalSelectedEnergyCost = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 draggedIdx;
+	FString DraggedImgName;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 overlappedIdx;
+	FString OverlappedImgName;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, int32>IconNameRowMap;

@@ -278,7 +278,7 @@ bool UPeppyTurnUIWidget::SelectSkill(FString IconName)
 {
 	bool isSelectSkill = false;
 	int TableRowNum = BattleManagerSystem->FindSkillRow(IconName);
-	int CurSequenceNum;
+	int CurSequenceNum = 0;
 
 	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
 		if (SelectedUIListArr[i]->BP_PeppyTurnIcon->GetVisibility() == ESlateVisibility::Hidden) {
