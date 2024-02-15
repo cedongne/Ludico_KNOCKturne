@@ -13,11 +13,9 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/GridPanel.h"
-#include "SkillDescriptionComponent.h"
 #include "ItemCardWidget.h"
 #include "AlertModalWidget.h"
 #include "DialogueWidget.h"
-
 #include "DreamFragmentWidget.generated.h"
 
 /**
@@ -33,15 +31,11 @@ class KNOCKTURNE_API UDreamFragmentWidget : public UUserWidget
 	void NativeConstruct();
 
 	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	int32 SelectedItemNum;
 
 protected:
-	class UDataTable* ItemTable;
-	TArray<FItemData*> ItemTableRows;
-	class UDataTable* SkillBuffStringTable;
-	TArray<FDialogueString*> SkillBuffStringTableRows;
 	TArray<int32> RndItemRowNumArr;
-	USkillDescriptionComponent* SkillDescriptionComponent;
 	TArray<UUserWidget*> DialogueWidgetArr;
 
 public:
@@ -85,4 +79,10 @@ public:
 	void SelectSound();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void CancelSound();
+
+	// 아이템 설명 재정의
+	FString CheckValueN(int SkillIndex, float ValueN);
+	FString CheckValueM(int SkillIndex, float ValueM);
+	FString GetSkillIndexByKeyword(int RowNum, FString Num);
+	FString RedefineDescription(int RowNum);
 };
