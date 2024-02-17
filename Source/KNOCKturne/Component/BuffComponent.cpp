@@ -348,9 +348,6 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 		AdditionalEnergyByBuff = BuffData.Value_N;
 		NTLOG(Warning, TEXT("EnergyDropIncrease: BossEnergyDrop +%d"), BuffData.Value_N);
 		break;
-	case EBuffType::Shield:
-		Peppy->HasShieldBuff = true;
-		NTLOG(Warning, TEXT("Shield: Get %d Shield"), BuffData.Value_N);
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -371,9 +368,6 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 		AdditionalEnergyByBuff = 0;
 		NTLOG(Warning, TEXT("End EnergyDropIncrease: Energy -%d"), BuffData.Value_N);
 		break;
-	case EBuffType::Shield:
-		Peppy->HasShieldBuff = false;
-		NTLOG(Warning, TEXT("End Shield"));
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
