@@ -215,6 +215,17 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	FString SourceId = SkillData.SkillId;
 	auto buffData = new FBuffData(SourceId, acquiredBuff);
 
+	AActor* TargetActor;
+	if (SkillData.SkillTarget == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+		Peppy->AddPeppyBuffUI(BuffType);
+	}
+	else if (SkillData.SkillTarget == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+		Peppy->AddBossBuffUI(BuffType);
+	}
+	TargetOfBuff.Add(BuffType, TargetActor);
+
 	if (acquiredBuff->BuffType == 0) {
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
@@ -247,17 +258,6 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 			break;
 		}
 	}
-
-	AActor* TargetActor;
-	if (SkillData.SkillTarget == TARGET_PEPPY) {
-		TargetActor = ActorManagerSystem->PeppyActor;
-		Peppy->AddPeppyBuffUI(BuffType);
-	}
-	else if (SkillData.SkillTarget == TARGET_BOSS) {
-		TargetActor = ActorManagerSystem->BossActor;
-		Peppy->AddBossBuffUI(BuffType);
-	}
-	TargetOfBuff.Add(BuffType, TargetActor);
 
 	NTLOG(Warning, TEXT("Aquire Buff: [%s]"), *BuffTypeToStringMap[BuffType]);
 }
@@ -348,6 +348,9 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 		AdditionalEnergyByBuff = BuffData.Value_N;
 		NTLOG(Warning, TEXT("EnergyDropIncrease: BossEnergyDrop +%d"), BuffData.Value_N);
 		break;
+	case EBuffType::Shield:
+		Peppy->HasShieldBuff = true;
+		NTLOG(Warning, TEXT("Shield: Get %d Shield"), BuffData.Value_N);
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -368,6 +371,9 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 		AdditionalEnergyByBuff = 0;
 		NTLOG(Warning, TEXT("End EnergyDropIncrease: Energy -%d"), BuffData.Value_N);
 		break;
+	case EBuffType::Shield:
+		Peppy->HasShieldBuff = false;
+		NTLOG(Warning, TEXT("End Shield"));
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -511,8 +517,6 @@ void UBuffComponent::OperateBuffs_PerSecond(float DeltaSeconds)
 
 FString UBuffComponent::BuffTypeToString(EBuffType BuffType)
 {
-	if (!BuffTypeToStringMap.Contains(BuffType))
-		return "None";
 	return BuffTypeToStringMap[BuffType];
 }
 

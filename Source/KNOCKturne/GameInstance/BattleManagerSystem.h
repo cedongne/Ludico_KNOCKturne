@@ -103,7 +103,7 @@ public:
 	TMap<FString, TSubclassOf<AActor>> IconSkillActorMap;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	FString FinalSpecialSkill = "Skill_Special_Wakeup"; // ���������� ������ Ư����
+	FString FinalSpecialSkill = "Skill_Special_Pretendnotsick"; // ���������� ������ Ư����
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FString FinalItem; // ���������� ������ ������

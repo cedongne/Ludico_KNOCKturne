@@ -131,6 +131,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetInteractingNpc();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool HasShieldBuff = false;
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateBossBuffUI();
 	UFUNCTION(BlueprintImplementableEvent)

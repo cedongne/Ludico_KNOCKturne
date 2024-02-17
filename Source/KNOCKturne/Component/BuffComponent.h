@@ -257,6 +257,7 @@ private:
 		{ EBuffType::DefenseDecrease,	"DefenseDecrease" },
 		{ EBuffType::Stun,				"Stun" },
 		{ EBuffType::RestrictRecovery,	"RestrictRecovery" },
+		{ EBuffType::RecoveryEnergy,	"RecoveryEnergy" },
 		{ EBuffType::Friction,			"Friction" }
 	};
 
@@ -329,8 +330,6 @@ public:
 		{ "Icon_buff_RecoveryEnergy", EBuffType::RecoveryEnergy },
 	};
 
-	TArray<FBuffTable*> BuffTableRows;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
 	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
@@ -339,6 +338,8 @@ public:
 	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerTurn;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
 	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
+
+	TArray<FBuffTable*> BuffTableRows;
 
 	UFUNCTION(BlueprintCallable)
 	bool IsPositiveBuff(EBuffType BuffType);

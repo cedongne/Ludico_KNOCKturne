@@ -41,15 +41,24 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
-	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {
-		PeppyActor->BuffComponent->ReduceOneShield();
-		NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
+	if (!PeppyActor->BuffComponent) {
+		NTLOG(Error, TEXT("PeppyStatType is invalid!"));
+	}
+	else
+		NTLOG(Error, TEXT("PeppyStatType is valid!"));
+
+	if (PeppyActor->HasShieldBuff) {
+		// PeppyActor->BuffComponent->ReduceOneShield();
+		//NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
 	}
 	else {
 		if (CanBeDamaged) {
 			TryUpdateCurStatData(FStatType::EP, -Value);
 		}
 	}
+	/*if (CanBeDamaged) {
+		TryUpdateCurStatData(FStatType::EP, -Value);
+	}*/
 }
 
 bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
