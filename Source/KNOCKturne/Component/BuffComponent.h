@@ -216,7 +216,7 @@ UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class KNOCKTURNE_API UBuffComponent : public UActorComponent
 {
 	GENERATED_BODY()
-	APeppy* Peppy;
+	class APeppy* Peppy;
 
 public:
 	UBuffComponent();
@@ -412,6 +412,8 @@ public:
 	bool BuffDelayWithDeltaTime(EBuffType BuffType, float DelayTime, float DeltaSeconds);
 	UFUNCTION()
 	bool DelayWithDeltaTime(float DelayTime, float DeltaSeconds);
+	UFUNCTION(BlueprintCallable)
+	FBuffData GetBuffData(EBuffType BuffType);
 
 	UFUNCTION(BlueprintCallable)
 	void TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT);

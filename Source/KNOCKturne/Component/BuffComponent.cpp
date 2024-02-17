@@ -15,8 +15,8 @@ UBuffComponent::UBuffComponent()
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
 	NTCHECK(DT_BuffTABLE.Succeeded());
 	BuffTable = DT_BuffTABLE.Object;
-
 	BuffTable->GetAllRows<FBuffTable>("Get all rows of BuffData", BuffTableRows);
+	Peppy = Cast<APeppy>(GetOwner());
 }
 
 void UBuffComponent::BeginPlay()
@@ -25,7 +25,6 @@ void UBuffComponent::BeginPlay()
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
-	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
 void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
@@ -546,6 +545,21 @@ bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds)
 	}
 	TempDelayTime += DeltaSeconds;
 	return false;
+}
+
+FBuffData UBuffComponent::GetBuffData(EBuffType BuffType)
+{
+	FBuffData BuffData;
+	if (HasPositiveBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerTurn[BuffType];
+	else if(HasPositiveBuffs_PerSecond.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerSecond[BuffType];
+	else if (HasNegativeBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasNegativeBuffs_PerTurn[BuffType];
+	else
+		BuffData = HasNegativeBuffs_PerSecond[BuffType];
+
+	return BuffData;
 }
 
 void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT) {

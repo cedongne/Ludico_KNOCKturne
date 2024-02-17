@@ -108,8 +108,8 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_SweptGarden.BP_SweptGarden_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
-	AddBossSkillSpawnDataToMap(
+	);*/
+	/*AddBossSkillSpawnDataToMap(
 		"CleanUpIntruder1",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder1.BP_CleanUpIntruder1_C"),
 		TempSpawnLocation,

@@ -42,11 +42,11 @@ void UPeppyTurnUIWidget::NativeConstruct()
 
 void UPeppyTurnUIWidget::CreateSkillList()
 {
-	BattleManagerSystem->SelectedSkillCodeList.Add(0);
+	/*BattleManagerSystem->SelectedSkillCodeList.Add(0);
 	BattleManagerSystem->SelectedSkillCodeList.Add(1);
 	BattleManagerSystem->SelectedSkillCodeList.Add(2);
 	BattleManagerSystem->SelectedSkillCodeList.Add(3);
-	BattleManagerSystem->SelectedSkillCodeList.Add(4);
+	BattleManagerSystem->SelectedSkillCodeList.Add(4);*/
 
 	int row = 0;
 	

@@ -26,19 +26,7 @@ void UBuffIconFormWidget::NativeConstruct()
 
 FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString Num)
 {
-	FBuffData BuffData;
-	if (ActorManagerSystem->PeppyActor->BuffComponent->HasPositiveBuffs_PerTurn.Contains(BuffType)) {
-		BuffData = ActorManagerSystem->PeppyActor->BuffComponent->HasPositiveBuffs_PerTurn[BuffType];
-	}
-	else if (ActorManagerSystem->PeppyActor->BuffComponent->HasPositiveBuffs_PerSecond.Contains(BuffType)) {
-		BuffData = ActorManagerSystem->PeppyActor->BuffComponent->HasPositiveBuffs_PerSecond[BuffType];
-	}
-	else if (ActorManagerSystem->PeppyActor->BuffComponent->HasNegativeBuffs_PerTurn.Contains(BuffType)) {
-		BuffData = ActorManagerSystem->PeppyActor->BuffComponent->HasNegativeBuffs_PerTurn[BuffType];
-	}
-	else if (ActorManagerSystem->PeppyActor->BuffComponent->HasNegativeBuffs_PerSecond.Contains(BuffType)) {
-		BuffData = ActorManagerSystem->PeppyActor->BuffComponent->HasNegativeBuffs_PerSecond[BuffType];
-	}
+	FBuffData BuffData = ActorManagerSystem->PeppyActor->BuffComponent->GetBuffData(BuffType);
 
 	switch (FCString::Atoi(*Num)) {
 	case 0:
