@@ -131,6 +131,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetInteractingNpc();
 
+	/*버프*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool HasShieldBuff = false;
 

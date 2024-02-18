@@ -7,7 +7,14 @@
 #include <GameInstance/DialogueManagerSystem.h>
 #include "Components/Image.h"
 #include "Components/Button.h"
+#include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
+#include "Components/RichTextBlock.h"
+#include "Components/TextBlock.h"
+#include "Components/ProgressBar.h"
 #include "BuffHoverWidget.h"
+#include <Blueprint/SlateBlueprintLibrary.h>
+#include <Blueprint/WidgetLayoutLibrary.h>
 
 void UBuffIconFormWidget::NativePreConstruct()
 {
@@ -17,10 +24,13 @@ void UBuffIconFormWidget::NativePreConstruct()
 	Button_Background = (UButton*)GetWidgetFromName(TEXT("Button_Background"));
 	Image_Background = (UImage*)GetWidgetFromName(TEXT("Image_Background"));
 	Image_Icon = (UImage*)GetWidgetFromName(TEXT("Image_Icon"));
+	ProgressBar_Term = (UProgressBar*)GetWidgetFromName(TEXT("ProgressBar_Term"));
 }
 
 void UBuffIconFormWidget::NativeConstruct()
 {
+	Super::NativeConstruct();
+
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
@@ -30,8 +40,22 @@ void UBuffIconFormWidget::NativeConstruct()
 	}
 }
 
+void UBuffIconFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds)
+{
+	Super::NativeTick(Geometry, DeltaSeconds);
+
+	if (CurBuffHoverWidget && !IsHovered() && !CurBuffHoverWidget->IsHovered()) {
+		CurBuffHoverWidget->RemoveFromParent();
+	}
+
+	SetProgressBarTerm();
+}
+
 FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString Num)
 {
+	if(!ActorManagerSystem->PeppyActor->BuffComponent->HasBuff(BuffType))
+		return "None";
+
 	FBuffData BuffData = ActorManagerSystem->PeppyActor->BuffComponent->GetBuffData(BuffType);
 
 	switch (FCString::Atoi(*Num)) {
@@ -83,4 +107,79 @@ FString UBuffIconFormWidget::RedefineDescription(int RowNum)
 	}
 
 	return Redefined;
+}
+
+void UBuffIconFormWidget::CreateHoverWidget()
+{
+	class UBuffHoverWidget* BuffHoverWidget;
+	if (BuffHoverWidgetClass) {
+		BuffHoverWidget = CreateWidget<UBuffHoverWidget>(GetWorld(), BuffHoverWidgetClass);
+		if (BuffHoverWidget) {
+			BuffHoverWidget->AddToViewport();
+			BuffHoverWidget->ForceLayoutPrepass();
+			SetHoverWidgetPos(BuffHoverWidget);
+			SetHoverWidgetUI(BuffHoverWidget);
+			SetHoverBackgroundAngle(BuffHoverWidget);
+			CurBuffHoverWidget = BuffHoverWidget;
+		}
+	}
+}
+
+void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
+{
+	int RowNum = ActorManagerSystem->PeppyActor->BuffComponent->BuffIconNameToRowNum(Image_Icon->Brush.GetResourceName().ToString());
+	FBuffTable* BuffTable = ActorManagerSystem->PeppyActor->BuffComponent->BuffTableRows[RowNum];
+	FString Name = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BuffTable->BuffName), TEXT(""))->KOR;
+
+	BuffHoverWidget->RichTextBlock_Description->SetText(FText::FromString(RedefineDescription(RowNum)));
+	BuffHoverWidget->TextBlock_Name->SetText(FText::FromString(Name));
+	BuffHoverWidget->Image_SkillIcon->SetBrushFromTexture(BuffTable->BuffIcon);
+
+	if (ActorManagerSystem->PeppyActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
+		BuffHoverWidget->SetVisibility(ESlateVisibility::Visible);
+		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType));
+		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
+
+	}
+	else {
+		BuffHoverWidget->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+void UBuffIconFormWidget::SetHoverWidgetPos(UBuffHoverWidget* BuffHoverWidget)
+{
+	FVector2D BuffIconPixelPos;
+	FVector2D BuffIconViewportPos;
+	USlateBlueprintLibrary::LocalToViewport(CanvasPanel, CanvasPanel->GetCachedGeometry(), FVector2D(0.0, 0.0), BuffIconPixelPos, BuffIconViewportPos);
+
+	FVector2D BuffIconSize = CanvasPanel->GetDesiredSize();
+	FVector2D HoverWidgetSize = BuffHoverWidget->CanvasPanel->GetDesiredSize();
+
+	FVector2D HoverWidgetPos;
+	HoverWidgetPos.X = BuffIconViewportPos.X - HoverWidgetSize.X / 2 + BuffIconSize.X / 2;
+	HoverWidgetPos.Y = BuffIconViewportPos.Y - (HoverWidgetSize.Y + 8);
+	UWidgetLayoutLibrary::SlotAsCanvasSlot(BuffHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
+}
+
+void UBuffIconFormWidget::SetHoverBackgroundAngle(UBuffHoverWidget* BuffHoverWidget)
+{
+	if (IsPeppyBuff)
+		return;
+
+	BuffHoverWidget->Image_Background->SetRenderTransformAngle(180);
+	UWidgetLayoutLibrary::SlotAsCanvasSlot(BuffHoverWidget->Image_Background)->SetPosition(FVector2D(-137, -110));
+	UWidgetLayoutLibrary::SlotAsCanvasSlot(BuffHoverWidget->Button_Background)->SetPosition(FVector2D(-137, -110));
+}
+
+void UBuffIconFormWidget::SetProgressBarTerm()
+{
+	float OriginalDuration;
+	float RemainTime = ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType);
+	if (ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
+		OriginalDuration = *ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType);
+		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
+		ProgressBar_Term->SetPercent(Percent);
+	}
+	else
+		NTLOG(Warning, TEXT("Can't SetProgressBarTerm!"));
 }

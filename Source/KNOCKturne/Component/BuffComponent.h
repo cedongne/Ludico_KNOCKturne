@@ -232,6 +232,15 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerSecond;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerTurn;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
+	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
+
 private:
 	const TMap<EBuffType, FString> BuffTypeToStringMap = {
 		{ EBuffType::DefenseIncrease,	"DefenseIncrease" },
@@ -330,16 +339,10 @@ public:
 		{ "Icon_buff_RecoveryEnergy", EBuffType::RecoveryEnergy },
 	};
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerTurn;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<EBuffType, FBuffData> HasPositiveBuffs_PerSecond;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerTurn;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
-	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
-
 	TArray<FBuffTable*> BuffTableRows;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<EBuffType, int32> OriginalDuration;
 
 	UFUNCTION(BlueprintCallable)
 	bool IsPositiveBuff(EBuffType BuffType);
@@ -437,4 +440,8 @@ public:
 	TArray<FString> HasPeppyBuff;
 	UFUNCTION(BlueprintCallable)
 	void DeleteBuffUI(EBuffType BuffType);
+	UFUNCTION(BlueprintCallable)
+	int32 GetRemainTime(EBuffType BuffType);
+	UFUNCTION(BlueprintCallable)
+	bool isTermTypeTurn(EBuffType BuffType);
 };

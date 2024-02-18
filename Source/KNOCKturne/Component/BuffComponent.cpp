@@ -81,8 +81,6 @@ bool UBuffComponent::RemoveBuff(EBuffType BuffType) {
 		NTLOG(Error, TEXT("Buff is not Removed!"));
 		return false;
 	}
-
-	DeleteBuffUI(BuffType);
 }
 
 void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
@@ -230,6 +228,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
 			HasPositiveBuffs_PerTurn.Add(BuffType, *buffData);
+			OriginalDuration.Add(BuffType, buffData->Duration);
 			TryUpdateBuffDataBySkillData(BuffType, HasPositiveBuffs_PerTurn[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			OperatePositiveBuffs_PerTurn(BuffType);
 			break;
@@ -258,6 +257,8 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 			break;
 		}
 	}
+
+	OriginalDuration.Add(BuffType, buffData->Duration);
 
 	NTLOG(Warning, TEXT("Aquire Buff: [%s]"), *BuffTypeToStringMap[BuffType]);
 }
@@ -298,6 +299,7 @@ void UBuffComponent::ElapseDeltaTime(float DeltaTime) {
 
 		if (HasPositiveBuffs_PerSecond[Key].Duration <= 0) {
 			if (RemoveBuff(Key)) {
+				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
 			}
 		}
@@ -309,6 +311,7 @@ void UBuffComponent::ElapseDeltaTime(float DeltaTime) {
 
 		if (HasNegativeBuffs_PerSecond[Key].Duration <= 0) {
 			if (RemoveBuff(Key)) {
+				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
 			}
 		}
@@ -548,6 +551,7 @@ bool UBuffComponent::DelayWithDeltaTime(float DelayTime, float DeltaSeconds)
 FBuffData UBuffComponent::GetBuffData(EBuffType BuffType)
 {
 	FBuffData BuffData;
+
 	if (HasPositiveBuffs_PerTurn.Contains(BuffType))
 		BuffData = HasPositiveBuffs_PerTurn[BuffType];
 	else if(HasPositiveBuffs_PerSecond.Contains(BuffType))
@@ -586,8 +590,10 @@ int UBuffComponent::GetShieldNum()
 void UBuffComponent::ReduceOneShield()
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
-		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N-- == 0)
+		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N-- == 0) {
 			RemoveBuff(EBuffType::Shield);
+			DeleteBuffUI(EBuffType::Shield);
+		}
 	}
 }
 
@@ -623,4 +629,45 @@ void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
 		HasPeppyBuff.Remove(BuffTypeToStringMap[BuffType]);
 		Peppy->UpdatePeppyBuffUI();
 	}
+}
+
+int32 UBuffComponent::GetRemainTime(EBuffType BuffType)
+{
+	if (!HasBuff(BuffType))
+		return 0;
+
+	FBuffData BuffData;
+	if (HasPositiveBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerTurn[BuffType];
+	else if (HasPositiveBuffs_PerSecond.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerSecond[BuffType];
+	else if (HasNegativeBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasNegativeBuffs_PerTurn[BuffType];
+	else
+		BuffData = HasNegativeBuffs_PerSecond[BuffType];
+
+	return BuffData.Duration;
+}
+
+bool UBuffComponent::isTermTypeTurn(EBuffType BuffType)
+{
+	if (!HasBuff(BuffType)) {
+		NTLOG(Error, TEXT("Can't Get TermType!"));
+		return true;
+	}
+
+	FBuffData BuffData;
+	if (HasPositiveBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerTurn[BuffType];
+	else if (HasPositiveBuffs_PerSecond.Contains(BuffType))
+		BuffData = HasPositiveBuffs_PerSecond[BuffType];
+	else if (HasNegativeBuffs_PerTurn.Contains(BuffType))
+		BuffData = HasNegativeBuffs_PerTurn[BuffType];
+	else
+		BuffData = HasNegativeBuffs_PerSecond[BuffType];
+
+	if (BuffData.BuffTermType == EBuffTermType::Turn)
+		return true;
+	else
+		return false;
 }

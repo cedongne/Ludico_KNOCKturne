@@ -16,9 +16,12 @@ class KNOCKTURNE_API UBuffIconFormWidget : public UUserWidget
 protected:
 	void NativePreConstruct();
 	void NativeConstruct();
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
+
+	class UBuffHoverWidget* CurBuffHoverWidget;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -29,12 +32,29 @@ public:
 	class UImage* Image_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_Icon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UProgressBar* ProgressBar_Term;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BuffHoverWidgetClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsPeppyBuff = true;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	EBuffType CurBuffType;
 
 	UFUNCTION(BlueprintCallable)
 	FString GetSkillIndexByKeyword(EBuffType BuffType, FString Num);
 	UFUNCTION(BlueprintCallable)
 	FString RedefineDescription(int RowNum);
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable)
 	void CreateHoverWidget();
+	UFUNCTION(BlueprintCallable)
+	void SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget);
+	UFUNCTION(BlueprintCallable)
+	void SetHoverWidgetPos(UBuffHoverWidget* BuffHoverWidget);
+	UFUNCTION(BlueprintCallable)
+	void  SetHoverBackgroundAngle(UBuffHoverWidget* BuffHoverWidget);
+	UFUNCTION(BlueprintCallable)
+	void SetProgressBarTerm();
 };
