@@ -92,6 +92,9 @@ void UPackageSelectedUIWidget::CancelSelectedItem()
 
 void UPackageSelectedUIWidget::HoverBackgroundBtn()
 {
+	if (Image_Background->GetVisibility() == ESlateVisibility::Hidden)
+		return;
+
 	if (Image_Icon->GetVisibility() == ESlateVisibility::Visible) {
 		switch (SelectedSkillType) {
 		case ESelectedSkillType::Skill:

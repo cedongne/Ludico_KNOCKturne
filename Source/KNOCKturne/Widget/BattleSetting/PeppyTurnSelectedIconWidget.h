@@ -14,6 +14,7 @@ UCLASS()
 class KNOCKTURNE_API UPeppyTurnSelectedIconWidget : public UUserWidget
 {
 	GENERATED_BODY()
+	void NativePreConstruct();
 	void NativeConstruct();
 	virtual void NativeOnDragEnter(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
 	virtual void NativeOnDragLeave(const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation);
@@ -31,6 +32,8 @@ protected:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_SelectedSkillIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UButton* Button_Background;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> PeppyTurnWidgetClass;

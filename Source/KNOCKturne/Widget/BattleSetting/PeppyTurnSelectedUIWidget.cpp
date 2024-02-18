@@ -23,7 +23,6 @@ void UPeppyTurnSelectedUIWidget::NativePreConstruct()
 	BP_PeppyTurnIcon = (UPeppyTurnSelectedIconWidget*)GetWidgetFromName(TEXT("BP_PeppyTurnIcon"));
 	Image_SkillError = (UImage*)GetWidgetFromName(TEXT("Image_SkillError"));
 	TextBlock_SelectNum = (UTextBlock*)GetWidgetFromName(TEXT("TextBlock_SelectNum"));
-	Button_Background = (UButton*)GetWidgetFromName(TEXT("Button_Background"));
 	Button_Cancel = (UButton*)GetWidgetFromName(TEXT("Button_Cancel"));
 }
 
@@ -40,16 +39,18 @@ void UPeppyTurnSelectedUIWidget::NativeConstruct()
 	if (Button_Cancel) {
 		Button_Cancel->OnClicked.AddDynamic(this, &UPeppyTurnSelectedUIWidget::CancelSelectedSkill);
 	}
-	if (Button_Background) {
-		Button_Background->OnHovered.AddDynamic(this, &UPeppyTurnSelectedUIWidget::CreateSkillHoverWidget);
-	}
 }
 
 void UPeppyTurnSelectedUIWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
 	Super::NativeTick(Geometry, DeltaSeconds);
 
+	if (CurSkillHoverWidget == NULL && BP_PeppyTurnIcon->IsHovered()) {
+		CreateSkillHoverWidget();
+	}
+
 	if (CurSkillHoverWidget && !IsHovered() && !CurSkillHoverWidget->IsHovered()) {
 		CurSkillHoverWidget->RemoveFromParent();
+		CurSkillHoverWidget = NULL;
 	}
 }
 
@@ -64,7 +65,7 @@ void UPeppyTurnSelectedUIWidget::SetHoverWidgetPos(UCommonSkillHoverWidget* Comm
 
 	FVector2D HoverWidgetPos;
 	HoverWidgetPos.X = SelectedUIViewportPos.X + SelectedUISize.X / 2 - HoverWidgetSize.X / 2;
-	HoverWidgetPos.Y = SelectedUIViewportPos.Y + SelectedUISize.Y;
+	HoverWidgetPos.Y = SelectedUIViewportPos.Y + SelectedUISize.Y - 5;
 	UWidgetLayoutLibrary::SlotAsCanvasSlot(CommonSkillHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
 }
 
@@ -77,6 +78,9 @@ void UPeppyTurnSelectedUIWidget::CancelSelectedSkill()
 
 void UPeppyTurnSelectedUIWidget::CreateSkillHoverWidget()
 {
+	if (BP_PeppyTurnIcon->GetVisibility() == ESlateVisibility::Hidden)
+		return;
+
 	int RowNum = BattleManagerSystem->FindSkillRow(BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString());
 
 	class UPeppyTurnSkillHoverWidget* SkillCardHoverWidget;

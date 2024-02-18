@@ -34,4 +34,7 @@ public:
 	FString GetSkillIndexByKeyword(EBuffType BuffType, FString Num);
 	UFUNCTION(BlueprintCallable)
 	FString RedefineDescription(int RowNum);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CreateHoverWidget();
 };

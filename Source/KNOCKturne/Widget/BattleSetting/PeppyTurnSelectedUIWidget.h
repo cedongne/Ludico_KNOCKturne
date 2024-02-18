@@ -38,8 +38,6 @@ public:
 	class UTextBlock* TextBlock_SelectNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Cancel;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UButton* Button_Background;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidgetAnim), Transient)
 	class UWidgetAnimation* PeppyTurn_SkillError;
 

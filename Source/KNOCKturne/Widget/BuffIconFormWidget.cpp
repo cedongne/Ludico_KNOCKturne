@@ -6,6 +6,8 @@
 #include "GameInstance/ActorManagerSystem.h"
 #include <GameInstance/DialogueManagerSystem.h>
 #include "Components/Image.h"
+#include "Components/Button.h"
+#include "BuffHoverWidget.h"
 
 void UBuffIconFormWidget::NativePreConstruct()
 {
@@ -22,6 +24,10 @@ void UBuffIconFormWidget::NativeConstruct()
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
+
+	if (Button_Background) {
+		Button_Background->OnHovered.AddDynamic(this, &UBuffIconFormWidget::CreateHoverWidget);
+	}
 }
 
 FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString Num)

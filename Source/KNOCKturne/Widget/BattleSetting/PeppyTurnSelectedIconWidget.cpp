@@ -10,6 +10,12 @@
 #include "GameInstance/BattleManagerSystem.h"
 #include "GameInstance/BattleTableManagerSystem.h"
 
+void UPeppyTurnSelectedIconWidget::NativePreConstruct()
+{
+	Image_SelectedSkillIcon = (UImage*)GetWidgetFromName(TEXT("Image_SelectedSkillIcon"));
+	Button_Background = (UButton*)GetWidgetFromName(TEXT("Button_Background"));
+}
+
 void UPeppyTurnSelectedIconWidget::NativeConstruct()
 {
 	GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
