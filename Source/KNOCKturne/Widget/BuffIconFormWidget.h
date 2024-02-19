@@ -21,8 +21,6 @@ protected:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
 
-	class UBuffHoverWidget* CurBuffHoverWidget;
-
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CanvasPanel;
@@ -35,6 +33,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UProgressBar* ProgressBar_Term;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UBuffHoverWidget* CurBuffHoverWidget;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> BuffHoverWidgetClass;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

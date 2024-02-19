@@ -33,7 +33,7 @@ int32 UCommonSkillCardWidget::GetCardSkillRowNum()
 
 void UCommonSkillCardWidget::CreateSkillHoverWidget()
 {
-	NTLOG(Error, TEXT("Override the (CreateHoverWidget) function!"));
+	NTLOG(Error, TEXT("Override the (CreateSkillHoverWidget) function!"));
 }
 
 void UCommonSkillCardWidget::SetHoverWidgetPos(UCommonSkillHoverWidget* CommonSkillHoverWidget)

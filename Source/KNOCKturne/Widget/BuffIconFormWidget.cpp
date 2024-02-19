@@ -142,7 +142,7 @@ void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
 
 	}
 	else {
-		BuffHoverWidget->SetVisibility(ESlateVisibility::Hidden);
+		BuffHoverWidget->TextBlock_RemainTurn->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 
