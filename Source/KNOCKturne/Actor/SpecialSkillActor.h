@@ -1,0 +1,82 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Engine/DataTable.h"
+#include "GameFramework/Actor.h"
+#include "SpecialSkillActor.generated.h"
+
+//USTRUCT(BlueprintType)
+//struct FSpecialSkillTable : public FTableRowBase {
+//	GENERATED_BODY()
+//
+//	FSpecialSkillTable() : Skill_Index(-1), Probability_1(0.0f), SpecialSkill_Target(-1), Value1N(0), Value1M(0), Value1T(0),
+//		BuffCode("-1"), EnergyCost(0), CoolTime(0), SpecialSkillIcon(nullptr), SpecialSkillDescript("-1") {}
+//
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	int32 Skill_Index;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	float Probability_1;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	int32 SpecialSkill_Target;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	float Value1N;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	float Value1M;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	int32 Value1T;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	FString BuffCode;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	int32 EnergyCost;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	int32 CoolTime;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	TObjectPtr<UTexture2D> SpecialSkillIcon;
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+//	FString SpecialSkillDescript;
+//};
+
+UCLASS()
+class KNOCKTURNE_API ASpecialSkillActor : public AActor
+{
+	GENERATED_BODY()
+	ASpecialSkillActor();
+
+protected:
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+	class APeppyController* PeppyController;
+	class UBattleManagerSystem* BattleManagerSystem;
+	class UBattleTableManagerSystem* BattleTableManagerSystem;
+	class UActorManagerSystem* ActorManagerSystem;
+	FSpecialSkillTable* SpecialSkillData;
+
+private:
+
+	UPROPERTY()
+	class UDataTable* SpecialSkillTable;
+	UPROPERTY()
+	int32 OriginalCoolTime;
+
+public:
+
+	UFUNCTION(BlueprintCallable)
+	void CreateSpecialSkillData();
+
+	/*특수기 사용 조건 만족 여부 반환*/
+	UFUNCTION(BlueprintCallable)
+	bool IsSatisfyUseCondition();
+	UFUNCTION(BlueprintCallable)
+	bool CheckCanUseSpecialSkill(float DeltaSeconds);
+	UFUNCTION(BlueprintCallable)
+	void ElapseTurn();
+	UFUNCTION(BlueprintCallable)
+	bool TryUseSpecialSkill();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurSpecialSkillCoolTime();
+
+};
