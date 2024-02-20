@@ -2,7 +2,6 @@
 
 #include "Component/PeppyStatComponent.h"
 #include "Component/BuffComponent.h"
-#include "Component/SpecialSkillComponent.h"
 #include "LevelScriptActor/HubWorldLevelScriptActor.h"
 
 APeppy::APeppy()
@@ -38,7 +37,6 @@ APeppy::APeppy()
 
 	StatComponent = CreateDefaultSubobject<UPeppyStatComponent>(TEXT("PeppyStatComponent"));
 	BuffComponent = CreateDefaultSubobject<UBuffComponent>(TEXT("BuffComponent"));
-	SpecialSkillComponent = CreateDefaultSubobject<USpecialSkillComponent>(TEXT("SpecialSkillComponent"));
 
 	// Initialize variables
 	CanMove = true;

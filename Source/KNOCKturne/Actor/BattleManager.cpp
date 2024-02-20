@@ -101,7 +101,8 @@ void ABattleManager::TurnChange() {
 
 		ActorManagerSystem->BossActor->BuffComponent->ElapseTurn();
 		ActorManagerSystem->PeppyActor->BuffComponent->ElapseTurn();
-		ActorManagerSystem->PeppyActor->SpecialSkillComponent->ElapseTurn();
+		ActorManagerSystem->SpecialSkillActor->ElapseTurn();
+		
 		break;
 	}
 }
@@ -176,6 +177,7 @@ void ABattleManager::Init() {
 	ActorManagerSystem->BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	ActorManagerSystem->PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	ActorManagerSystem->BattleManager = this;
+	ActorManagerSystem->SpecialSkillActor = GetWorld()->SpawnActor<ASpecialSkillActor>(SpecialSkillClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	BP_ActorInit();
 
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);

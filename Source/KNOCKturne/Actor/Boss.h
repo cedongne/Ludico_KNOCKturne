@@ -39,6 +39,12 @@ private:
 
 	FTimerHandle UseSkillTimerHandler;
 	bool isFirstSkill = true;
+
+	TArray<FString> BossSkillStance = {
+		"Default",
+		"Obsession",
+		"Longing"
+	};
 	
 public:
 	bool IsDie = false;

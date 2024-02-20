@@ -54,6 +54,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AActor> BossActorSubClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AActor> SpecialSkillClass;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
 	

@@ -6,7 +6,6 @@
 #include "Engine/DataTable.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Component/StatComponent.h"
-#include "Component/SpecialSkillComponent.h"
 #include "BattleTableManagerSystem.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FBattleTableInitDelegate);
@@ -264,6 +263,39 @@ struct FCurEffectIndexSkillData {
 };
 
 USTRUCT(BlueprintType)
+struct FSpecialSkillTable : public FTableRowBase {
+	GENERATED_BODY()
+
+	FSpecialSkillTable() : Skill_Index(-1), Probability_1(0.0f), SpecialSkill_Target(-1), Value1N(0), Value1M(0), Value1T(0),
+		BuffCode("-1"), EnergyCost(0), CoolTime(0), SpecialSkillIcon(nullptr), SpecialSkillDescript("-1"), SpecialSkillEffect("-1"){}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Skill_Index;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Probability_1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 SpecialSkill_Target;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value1N;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float Value1M;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 Value1T;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 EnergyCost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 CoolTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TObjectPtr<UTexture2D> SpecialSkillIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SpecialSkillDescript;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString SpecialSkillEffect;
+};
+
+USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase {
 	GENERATED_BODY()
 
@@ -289,6 +321,20 @@ struct FItemData : public FTableRowBase {
 	FString ItemEasterEgg;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	FString ItemEasterEgg_Character;
+};
+
+USTRUCT(BlueprintType)
+struct FBossStanceData : public FTableRowBase {
+	GENERATED_BODY()
+
+	FBossStanceData() : StanceID("-1"), StanceGroupCode("-1"), ResponseStanceID("-1") {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString StanceID;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString StanceGroupCode;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString ResponseStanceID;
 };
 
 UCLASS()
@@ -367,8 +413,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OperateSkillByIndex(int32 EffectSequence, AActor* TargetActor, FCurEffectIndexSkillData SkillData, class ACommonSkillActor* SkillActor);
-	UFUNCTION(BlueprintCallable)
-	FCurEffectIndexSkillData TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable CurStatData);
+
+	FCurEffectIndexSkillData* TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable* CurStatData);
 
 private:
 	// ���� ������ ȿ���� �� ��° �ε��������� ���� �� ���� 

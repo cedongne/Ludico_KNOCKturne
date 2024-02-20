@@ -569,21 +569,21 @@ FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexPeppySk
 	return ResultStatData;
 }
 
-FCurEffectIndexSkillData UBattleTableManagerSystem::TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable CurStatData)
+FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexSpecialSkillDataSet(FSpecialSkillTable* CurStatData)
 {
 	FCurEffectIndexSkillData* ResultStatData = new FCurEffectIndexSkillData();
 
 	ResultStatData->SetCurEffectIndexStatData(
 			BattleManagerSystem->FinalSpecialSkill,
-			CurStatData.Skill_Index,
-			CurStatData.Probability_1,
-			CurStatData.SpecialSkill_Target,
-			CurStatData.Value1N,
-			CurStatData.Value1M,
-			CurStatData.Value1T,
-			CurStatData.BuffCode,
-			CurStatData.EnergyCost
+			CurStatData->Skill_Index,
+			CurStatData->Probability_1,
+			CurStatData->SpecialSkill_Target,
+			CurStatData->Value1N,
+			CurStatData->Value1M,
+			CurStatData->Value1T,
+			CurStatData->BuffCode,
+			CurStatData->EnergyCost
 	);
 
-	return *ResultStatData;
+	return ResultStatData;
 }

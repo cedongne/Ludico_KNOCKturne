@@ -2,64 +2,115 @@
 
 
 #include "Actor/SpecialSkillActor.h"
+#include "GameInstance/BattleManagerSystem.h"
+#include "GameMode/PeppyController.h"
+#include "GameInstance/ActorManagerSystem.h"
 #include <Kismet/GameplayStatics.h>
 
-// Sets default values
+#define TARGET_PEPPY	0
+#define TARGET_BOSS		1
+
 ASpecialSkillActor::ASpecialSkillActor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	FString SpecialSkillTablePath = TEXT("/Game/Assets/DataTable/SpecialSkillTable.SpecialSkillTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SpecialSkillTABLE(*SpecialSkillTablePath);
+	NTCHECK(DT_SpecialSkillTABLE.Succeeded());
+	SpecialSkillTable = DT_SpecialSkillTABLE.Object;
 }
 
-// Called when the game starts or when spawned
 void ASpecialSkillActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	FString SpecialSkillTablePath = TEXT("/Game/Assets/DataTable/SpecialSkillTable.SpecialSkillTable");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SpecialSkillTABLE(*SpecialSkillTablePath);
-	SpecialSkillTable = DT_SpecialSkillTABLE.Object;
 
 	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+
+	CreateSpecialSkillData();
 }
 
-// Called every frame
 void ASpecialSkillActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
+	{
+		bool UseSpecialSkill = TryUseSpecialSkill();
+		if (UseSpecialSkill) {
+			SpawnEffect();
+			SpecialSkillData.CoolTime = OriginalCoolTime;
+		}
+	}
 }
 
 void ASpecialSkillActor::CreateSpecialSkillData()
 {
+	SpecialSkillData = *SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT("Fail to load SpecialSkillData"));
+	OriginalCoolTime = SpecialSkillData.CoolTime;
+	SpecialSkillData.CoolTime = 0;
 }
 
 bool ASpecialSkillActor::IsSatisfyUseCondition()
 {
-	return false;
+	FString SpecialSkillName = *BattleManagerSystem->FinalSpecialSkill;
+
+	if (SpecialSkillName == "Skill_Special_Positivethinking") {
+		if (ActorManagerSystem->PeppyActor->BuffComponent->GetNegativeBuffNum() > 0)
+			return true;
+		else
+			return false;
+	}
+	else {
+		return true;
+	}
 }
 
 bool ASpecialSkillActor::CheckCanUseSpecialSkill(float DeltaSeconds)
 {
-	return false;
+	bool IsCostEnough = SpecialSkillData.EnergyCost < ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy ? true : false;
+	bool IsCoolTimeEnd = SpecialSkillData.CoolTime == 0;
+	return IsCostEnough && IsCoolTimeEnd && IsSatisfyUseCondition();
 }
 
 void ASpecialSkillActor::ElapseTurn()
 {
+	if (SpecialSkillData.CoolTime > 0) {
+		SpecialSkillData.CoolTime--;
+	}
 }
 
 bool ASpecialSkillActor::TryUseSpecialSkill()
 {
-	return false;
+	if (FMath::FRand() > SpecialSkillData.Probability_1) {
+		return false;
+	}
+
+	ActorManagerSystem->PeppyActor->StatComponent->TryUpdateCurStatData(FStatType::Energy, -SpecialSkillData.EnergyCost);
+
+	AActor* TargetActor;
+	if (SpecialSkillData.SpecialSkill_Target == TARGET_PEPPY) {
+		TargetActor = ActorManagerSystem->PeppyActor;
+	}
+	else if (SpecialSkillData.SpecialSkill_Target == TARGET_BOSS) {
+		TargetActor = ActorManagerSystem->BossActor;
+	}
+	else {
+		NTLOG(Error, TEXT("Target set fail : SpecialSkillTarget is invalid value"));
+		return false;
+	}
+
+	auto CurSequenceEffectSkillData = BattleTableManagerSystem->TryGetCurEffectIndexSpecialSkillDataSet(&SpecialSkillData);
+	BattleTableManagerSystem->OperateSkillByIndex(0, TargetActor, *CurSequenceEffectSkillData, nullptr);
+
+	return true;
 }
 
 int32 ASpecialSkillActor::GetCurSpecialSkillCoolTime()
 {
-	return int32();
+	return SpecialSkillData.CoolTime;
 }
 
