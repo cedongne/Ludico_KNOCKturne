@@ -51,4 +51,9 @@ public:
 	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void BP_Die();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void PlayAttackMontage();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void PlayAttackedMontage();
 };

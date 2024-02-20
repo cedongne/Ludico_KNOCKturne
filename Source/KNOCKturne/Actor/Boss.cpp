@@ -63,6 +63,8 @@ void ABoss::SpawnBossSkill() {
 		EnergySpawner->SpawnPooledObject();
 	}
 
+	PlayAttackMontage();
+
 	float SkillLifeTime = SkillData->SkillCastTime + SkillData->SkillDelayTime;
 	NextSkillDelayTime = FMath::RandRange(StatComponent->CurStatData.BossMinDelay, StatComponent->CurStatData.BossMaxDelay) - 2 + SkillData->SkillDelayTime;
 	GetWorld()->GetTimerManager().SetTimer(

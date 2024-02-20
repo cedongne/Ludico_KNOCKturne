@@ -38,6 +38,7 @@ void UBossStatComponent::SetDefaultStat() {
 }
 
 void UBossStatComponent::GetDamaged(float Value) {
+	BossActor->PlayAttackedMontage();
 	TryUpdateCurStatData(FStatType::EP, -Value);
 }
 
