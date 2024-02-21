@@ -3,6 +3,8 @@
 
 #include "BuffComponent.h"
 #include "GameInstance/ActorManagerSystem.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
@@ -16,6 +18,17 @@ UBuffComponent::UBuffComponent()
 	NTCHECK(DT_BuffTABLE.Succeeded());
 	BuffTable = DT_BuffTABLE.Object;
 	BuffTable->GetAllRows<FBuffTable>("Get all rows of BuffData", BuffTableRows);
+
+	FString NS_PretendNotSick_2_Path = TEXT("/Game/Assets/Effects/SpecialSkillEffect/NS_PretendNotSick_2.NS_PretendNotSick_2");
+	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> DT_NS_PretendNotSick_2(*NS_PretendNotSick_2_Path);
+	NTCHECK(DT_NS_PretendNotSick_2.Succeeded());
+	NS_PretendNotSick_2 = DT_NS_PretendNotSick_2.Object;
+
+	FString NS_ShieldBreak_Path = TEXT("/Game/Assets/Effects/SpecialSkillEffect/NS_ShieldBreak.NS_ShieldBreak");
+	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> DT_NS_ShieldBreak(*NS_ShieldBreak_Path);
+	NTCHECK(DT_NS_ShieldBreak.Succeeded());
+	NS_ShieldBreak = DT_NS_ShieldBreak.Object;
+
 	Peppy = Cast<APeppy>(GetOwner());
 }
 
@@ -590,9 +603,14 @@ int UBuffComponent::GetShieldNum()
 void UBuffComponent::ReduceOneShield()
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
-		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N-- == 0) {
+		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N--;
+		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N == 0) {
+			ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_ShieldBreak, true);
 			RemoveBuff(EBuffType::Shield);
 			DeleteBuffUI(EBuffType::Shield);
+		}
+		else {
+			ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_PretendNotSick_2, true);
 		}
 	}
 }

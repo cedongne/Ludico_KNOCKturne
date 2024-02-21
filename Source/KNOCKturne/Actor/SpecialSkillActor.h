@@ -32,6 +32,8 @@ private:
 	int32 OriginalCoolTime;
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UNiagaraComponent* Effect;
 
 	UFUNCTION(BlueprintCallable)
 	void CreateSpecialSkillData();

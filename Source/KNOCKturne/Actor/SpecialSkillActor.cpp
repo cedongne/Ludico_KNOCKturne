@@ -6,6 +6,7 @@
 #include "GameMode/PeppyController.h"
 #include "GameInstance/ActorManagerSystem.h"
 #include <Kismet/GameplayStatics.h>
+#include "NiagaraComponent.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
@@ -18,6 +19,8 @@ ASpecialSkillActor::ASpecialSkillActor()
 	static ConstructorHelpers::FObjectFinder<UDataTable> DT_SpecialSkillTABLE(*SpecialSkillTablePath);
 	NTCHECK(DT_SpecialSkillTABLE.Succeeded());
 	SpecialSkillTable = DT_SpecialSkillTABLE.Object;
+
+	Effect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Effect"));
 }
 
 void ASpecialSkillActor::BeginPlay()

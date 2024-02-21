@@ -241,6 +241,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Has")
 	TMap<EBuffType, FBuffData> HasNegativeBuffs_PerSecond;
 
+	class UNiagaraSystem* NS_PretendNotSick_2;
+	class UNiagaraSystem* NS_ShieldBreak;
+
 private:
 	const TMap<EBuffType, FString> BuffTypeToStringMap = {
 		{ EBuffType::DefenseIncrease,	"DefenseIncrease" },

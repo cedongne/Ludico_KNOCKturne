@@ -121,19 +121,19 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);*/
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
-	/*AddBossSkillSpawnDataToMap(
+	);*/
+	AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"GoBackMoment",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
 		TempSpawnLocation,
@@ -151,12 +151,12 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TempSpawnLocation,
 		TempSpawnRotation
 	);*/
-	AddBossSkillSpawnDataToMap(
+	/*AddBossSkillSpawnDataToMap(
 		"HeightenedLonging",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_HeightenedLonging.BP_HeightenedLonging_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);
+	);*/
 	/*AddBossSkillSpawnDataToMap(
 		"BloodColoredFlower",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BloodColoredFlower.BP_BloodColoredFlower_C"),
