@@ -159,6 +159,17 @@ public:
 	int32 ReducedEP = 0;
 	void UpdateRoundInfo();
 
+	// 스탠스
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FString BossStanceID;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FString ResponseStanceID;
+
+	TArray<FString> BossStances = {
+		"Obsession",
+		"Longing"
+	};
+
 	// '아름다운 별빛' 사용 횟수
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 UseStarlightNum = 0;

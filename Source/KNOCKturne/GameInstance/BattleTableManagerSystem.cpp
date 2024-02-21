@@ -62,6 +62,11 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_PEPPYSTATDATATABLE.Succeeded());
 	PeppyStatDataTable = DT_PEPPYSTATDATATABLE.Object;
 
+	FString BossStanceDataPath = TEXT("/Game/Assets/DataTable/BossStanceTable.BossStanceTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BOSSSTANCEDATATABLE(*BossStanceDataPath);
+	NTCHECK(DT_BOSSSTANCEDATATABLE.Succeeded());
+	BossStanceTable = DT_BOSSSTANCEDATATABLE.Object;
+
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
 	SpecialSkillTable->GetAllRows<FSpecialSkillTable>("GetAllRows", SpecialSkillTableRows);
 	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
@@ -103,13 +108,13 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 	TempSpawnLocation.Push(FVector(755.0f, 771.0f, -86.0f));
 	TempSpawnRotation.Push(FRotator(0.0f, 270.0f, 0.0f));
 
-	/*AddBossSkillSpawnDataToMap(
+	AddBossSkillSpawnDataToMap(
 		"SweptGarden",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_SweptGarden.BP_SweptGarden_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"CleanUpIntruder1",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder1.BP_CleanUpIntruder1_C"),
 		TempSpawnLocation,
@@ -120,20 +125,20 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_CleanUpIntruder2.BP_CleanUpIntruder2_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"ThornOfLoveAndHatred",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ThornOfLoveAndHatred.BP_ThornOfLoveAndHatred_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	AddBossSkillSpawnDataToMap(
 		"ChasePeppy",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_ChasePeppy.BP_ChasePeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
 	);
-	/*AddBossSkillSpawnDataToMap(
+	AddBossSkillSpawnDataToMap(
 		"GoBackMoment",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_GoBackMoment.BP_GoBackMoment_C"),
 		TempSpawnLocation,
@@ -150,13 +155,13 @@ void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BindPeppy.BP_BindPeppy_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
-	/*AddBossSkillSpawnDataToMap(
+	);
+	AddBossSkillSpawnDataToMap(
 		"HeightenedLonging",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_HeightenedLonging.BP_HeightenedLonging_C"),
 		TempSpawnLocation,
 		TempSpawnRotation
-	);*/
+	);
 	/*AddBossSkillSpawnDataToMap(
 		"BloodColoredFlower",
 		TEXT("/Game/Blueprints/Skills/Boss/Ep1/SkillActor/BP_BloodColoredFlower.BP_BloodColoredFlower_C"),

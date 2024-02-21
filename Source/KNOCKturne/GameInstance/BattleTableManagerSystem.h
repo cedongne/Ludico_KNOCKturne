@@ -359,6 +359,8 @@ public:
 	class UDataTable* ItemTable;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* SkillBuffStringTable;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* BossStanceTable;
 
 	TArray<FPeppySkillData*> PeppySkillTableRows;
 	TArray<FSpecialSkillTable*> SpecialSkillTableRows;

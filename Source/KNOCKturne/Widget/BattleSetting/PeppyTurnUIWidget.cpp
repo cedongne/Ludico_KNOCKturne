@@ -46,7 +46,10 @@ void UPeppyTurnUIWidget::CreateSkillList()
 	BattleManagerSystem->SelectedSkillCodeList.Add(1);
 	BattleManagerSystem->SelectedSkillCodeList.Add(2);
 	BattleManagerSystem->SelectedSkillCodeList.Add(3);
-	BattleManagerSystem->SelectedSkillCodeList.Add(4);
+	BattleManagerSystem->SelectedSkillCodeList.Add(5);
+	BattleManagerSystem->SelectedSkillCodeList.Add(6);
+	BattleManagerSystem->SelectedSkillCodeList.Add(11);
+	BattleManagerSystem->SelectedSkillCodeList.Add(12);
 
 	int row = 0;
 	

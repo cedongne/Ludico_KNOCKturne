@@ -47,6 +47,7 @@ void ABattleManager::StartBossTurn() {
 	SetLeftCurrentTurnTime(ActorManagerSystem->BossActor->StatComponent->CurStatData.Turn);
 	ActorManagerSystem->BossActor->SpawnBossSkill();
 	BP_StartBossTurn();
+	SetBossAndResponseStance();
 
 	BattleManagerSystem->Round = 1;
 	BattleManagerSystem->LastRoundBossHpRatio = 100;
@@ -164,6 +165,13 @@ void ABattleManager::EndTurn() {
 void ABattleManager::EndBattle() {
 	SetActorTickEnabled(false);
 	TurnChange();
+}
+
+void ABattleManager::SetBossAndResponseStance()
+{
+	BattleManagerSystem->BossStanceID = BattleManagerSystem->BossStances[FMath::Rand() % BattleManagerSystem->BossStances.Num()];
+	BattleManagerSystem->ResponseStanceID = BattleTableManagerSystem->BossStanceTable->FindRow<FBossStanceData>(*("Stance_" + BattleManagerSystem->BossStanceID), TEXT(""))->ResponseStanceID;
+	NTLOG(Warning, TEXT("This Round Boss Stance: %s"), *BattleManagerSystem->BossStanceID);
 }
 
 void ABattleManager::Init() {

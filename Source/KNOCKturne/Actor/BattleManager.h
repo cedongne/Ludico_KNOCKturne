@@ -78,6 +78,8 @@ public:
 	void EndTurn();
 	UFUNCTION(BlueprintCallable)
 	void EndBattle();
+	UFUNCTION(BlueprintCallable)
+	void SetBossAndResponseStance();
 
 private:
 	class TArray<UBuffComponent*> HandledBuffComponents;

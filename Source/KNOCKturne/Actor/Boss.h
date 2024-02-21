@@ -36,23 +36,22 @@ protected:
 private:
 	TSubclassOf<AActor> BP_EnergySpawnerClass;
 	UBattleTableManagerSystem* BattleTableManagerSystem;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 	FTimerHandle UseSkillTimerHandler;
 	bool isFirstSkill = true;
 
-	TArray<FString> BossSkillStance = {
-		"Default",
-		"Obsession",
-		"Longing"
-	};
+	TMap<FString, int32> BossSkillNameCoolTimeMap;
 	
 public:
 	bool IsDie = false;
 
 	void SpawnBossSkillWhenStartBossTurn();
 	void ClearUseSkillTimer();
+	void ElapseCoolTime();
 
 	void SpawnBossSkill();
+	TArray<FString> GetSpawnableBossSkills(TArray<FString> BossSkillKeyArray, FString CurBossSkillStance);
 
 	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
