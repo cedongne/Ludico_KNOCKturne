@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float NextSkillDelayTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> DamageTextWidgetClass;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;

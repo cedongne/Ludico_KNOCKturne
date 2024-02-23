@@ -49,4 +49,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual bool TryUpdateCurStatData (FStatType StatType, float Value) override;
+
+	UFUNCTION(BlueprintCallable)
+	void CreateDamageText(float Value) override;
 };

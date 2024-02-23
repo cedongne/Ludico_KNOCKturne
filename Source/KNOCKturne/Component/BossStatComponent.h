@@ -44,4 +44,8 @@ public:
 	virtual bool TryUpdateCurStatData(FStatType StatType, float Value) override;
 
 	void SetDefaultStat();
+
+	UFUNCTION(BlueprintCallable)
+	void CreateDamageText(float Value) override;
+
 };

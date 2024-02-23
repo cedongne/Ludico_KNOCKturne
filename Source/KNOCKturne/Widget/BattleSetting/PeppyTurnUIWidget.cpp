@@ -30,6 +30,7 @@ void UPeppyTurnUIWidget::NativeConstruct()
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
+	BattleManagerSystem->SelectedSkillIconNameList.Empty();
 
 	CreateSkillList();
 	CreateSelectedSkillList();
@@ -88,6 +89,15 @@ void UPeppyTurnUIWidget::CreateSkillList()
 			}
 		}
 	}
+
+	BattleManagerSystem->SelectedSkillCodeList.Remove(0);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(1);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(2);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(3);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(5);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(6);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(11);
+	BattleManagerSystem->SelectedSkillCodeList.Remove(12);
 }
 
 void UPeppyTurnUIWidget::SetSkillUI(UPeppyTurnSkillCardWidget* PeppyTurnSkillCardWidget, int RowNum)

@@ -37,3 +37,8 @@ bool UStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 	NTLOG(Warning, TEXT("TryUpdateCurStatData() method must be override!"));
 	return false;
 }
+
+void UStatComponent::CreateDamageText(float Value)
+{
+	NTLOG(Warning, TEXT("CreateDamageText() method must be override!"));
+}

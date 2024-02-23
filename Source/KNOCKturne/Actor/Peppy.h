@@ -45,6 +45,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AActor* OverlappedActor;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> DamageTextWidgetClass;
+
 protected:
 	virtual void BeginPlay() override;
 

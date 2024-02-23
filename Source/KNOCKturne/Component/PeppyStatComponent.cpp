@@ -6,8 +6,12 @@
 #include "GameInstance/KNOCKturneGameInstance.h"
 #include "Actor/Peppy.h"
 #include "GameMode/NTBattleGameMode.h"
-
+#include "Widget/DamageTextWidget.h"
 #include "Kismet/GameplayStatics.h"
+#include <Blueprint/WidgetLayoutLibrary.h>
+#include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
+#include "Components/TextBlock.h"
 
 UPeppyStatComponent::UPeppyStatComponent()
 {
@@ -48,6 +52,7 @@ void UPeppyStatComponent::GetDamaged(float Value) {
 	else {
 		if (CanBeDamaged) {
 			TryUpdateCurStatData(FStatType::EP, -Value);
+			CreateDamageText(Value);
 		}
 	}
 }
@@ -73,4 +78,22 @@ bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) 
 		return false;
 	}
 	return true;
+}
+
+void UPeppyStatComponent::CreateDamageText(float Value)
+{
+	class UDamageTextWidget* DamageTextWidget;
+	FVector2D ScreenPos;
+	if (PeppyActor->DamageTextWidgetClass) {
+		DamageTextWidget = CreateWidget<UDamageTextWidget>(GetWorld(), PeppyActor->DamageTextWidgetClass);
+		if (DamageTextWidget) {
+			DamageTextWidget->AddToViewport();
+			UWidgetLayoutLibrary::ProjectWorldLocationToWidgetPosition(UGameplayStatics::GetPlayerController(this, 0), PeppyActor->GetActorLocation(), ScreenPos, false);
+			ScreenPos.X += 50;
+			ScreenPos.Y -= 50;
+			UWidgetLayoutLibrary::SlotAsCanvasSlot(DamageTextWidget->CanvasPanel)->SetPosition(ScreenPos);
+			DamageTextWidget->PlayAnimation(DamageTextWidget->DamageTextUp);
+			DamageTextWidget->TextBlock_Damage->SetText(FText::FromString(FString::FromInt(-Value)));
+		}
+	}
 }

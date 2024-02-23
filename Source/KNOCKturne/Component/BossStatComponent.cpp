@@ -6,6 +6,11 @@
 #include "GameInstance/KNOCKturneGameInstance.h"
 #include "Actor/Boss.h"
 #include "GameMode/NTBattleGameMode.h"
+#include <Blueprint/WidgetLayoutLibrary.h>
+#include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
+#include "Widget/DamageTextWidget.h"
+#include "Components/TextBlock.h"
 
 UBossStatComponent::UBossStatComponent()
 {
@@ -40,6 +45,7 @@ void UBossStatComponent::SetDefaultStat() {
 void UBossStatComponent::GetDamaged(float Value) {
 	BossActor->PlayAttackedMontage();
 	TryUpdateCurStatData(FStatType::EP, -Value);
+	CreateDamageText(Value);
 }
 
 bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
@@ -63,4 +69,22 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 		return false;
 	}
 	return true;
+}
+
+void UBossStatComponent::CreateDamageText(float Value)
+{
+	class UDamageTextWidget* DamageTextWidget;
+	FVector2D ScreenPos;
+	if (BossActor->DamageTextWidgetClass) {
+		DamageTextWidget = CreateWidget<UDamageTextWidget>(GetWorld(), BossActor->DamageTextWidgetClass);
+		if (DamageTextWidget) {
+			DamageTextWidget->AddToViewport();
+			UWidgetLayoutLibrary::ProjectWorldLocationToWidgetPosition(UGameplayStatics::GetPlayerController(this, 0), BossActor->GetActorLocation(), ScreenPos, false);
+			ScreenPos.X += 200;
+			ScreenPos.Y -= 900;
+			UWidgetLayoutLibrary::SlotAsCanvasSlot(DamageTextWidget->CanvasPanel)->SetPosition(ScreenPos);
+			DamageTextWidget->PlayAnimation(DamageTextWidget->DamageTextUp);
+			DamageTextWidget->TextBlock_Damage->SetText(FText::FromString(FString::FromInt(-Value)));
+		}
+	}
 }
