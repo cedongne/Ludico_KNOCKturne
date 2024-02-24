@@ -136,8 +136,4 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool HasShieldBuff = false;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdatePeppyBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
-	void AddPeppyBuffUI(EBuffType BuffType);
 };

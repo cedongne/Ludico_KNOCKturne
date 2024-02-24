@@ -207,7 +207,7 @@ public:
 		"BF_PeriodicAttack",
 		"BF_Blind",
 		"BF_Confuse",
-		"BF_SpeedDecrease"
+		"BF_SpeedDecrease",
 		"BF_Stun"
 	};
 };
@@ -306,6 +306,7 @@ private:
 
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
+	class ABattleManager* BattleManager;
 
 	TMap<EBuffType, float> BuffTempDelayTime;
 	/*휴식 회복 버프용: 2초 전 페피 위치*/

@@ -53,10 +53,17 @@ void UBuffIconFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSecon
 
 FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString Num)
 {
-	if(!ActorManagerSystem->PeppyActor->BuffComponent->HasBuff(BuffType))
+	FBuffData BuffData;
+	if (ActorManagerSystem->PeppyActor->BuffComponent->HasBuff(BuffType)) {
+		BuffData = ActorManagerSystem->PeppyActor->BuffComponent->GetBuffData(BuffType);
+	}
+	else if (ActorManagerSystem->BossActor->BuffComponent->HasBuff(BuffType)) {
+		BuffData = ActorManagerSystem->BossActor->BuffComponent->GetBuffData(BuffType);
+	}
+	else {
 		return "None";
+	}
 
-	FBuffData BuffData = ActorManagerSystem->PeppyActor->BuffComponent->GetBuffData(BuffType);
 	if(BuffType == EBuffType::SpeedDecrease)
 		return FString::SanitizeFloat(BuffData.Value_N);
 
@@ -167,7 +174,7 @@ void UBuffIconFormWidget::SetHoverWidgetPos(UBuffHoverWidget* BuffHoverWidget)
 		HoverWidgetPos.Y = BuffIconViewportPos.Y - (HoverWidgetSize.Y + 8);
 	}
 	else {
-		HoverWidgetPos.Y = BuffIconViewportPos.Y + (HoverWidgetSize.Y - 8);
+		HoverWidgetPos.Y = BuffIconViewportPos.Y + (HoverWidgetSize.Y / 2 - 8);
 	}
 	UWidgetLayoutLibrary::SlotAsCanvasSlot(BuffHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
 }

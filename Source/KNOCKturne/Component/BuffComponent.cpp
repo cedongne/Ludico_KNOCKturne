@@ -5,6 +5,7 @@
 #include "GameInstance/ActorManagerSystem.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Actor/BattleManager.h"
 
 #define TARGET_PEPPY	0
 #define TARGET_BOSS		1
@@ -38,6 +39,7 @@ void UBuffComponent::BeginPlay()
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
 }
 
 void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) {
@@ -226,11 +228,9 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	AActor* TargetActor;
 	if (SkillData.SkillTarget == TARGET_PEPPY) {
 		TargetActor = ActorManagerSystem->PeppyActor;
-		Peppy->AddPeppyBuffUI(BuffType);
 	}
 	else if (SkillData.SkillTarget == TARGET_BOSS) {
 		TargetActor = ActorManagerSystem->BossActor;
-		//ActorManagerSystem->BossActor->AddBossBuffUI(BuffType);
 	}
 	TargetOfBuff.Add(BuffType, TargetActor);
 
@@ -269,6 +269,13 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	}
 
 	OriginalDuration.Add(BuffType, buffData->Duration);
+
+	if (SkillData.SkillTarget == TARGET_PEPPY) {
+		BattleManager->AddPeppyBuffUI(BuffType);
+	}
+	else if (SkillData.SkillTarget == TARGET_BOSS) {
+		BattleManager->AddBossBuffUI(BuffType);
+	}
 
 	NTLOG(Warning, TEXT("Aquire Buff: [%s]"), *BuffTypeToStringMap[BuffType]);
 }
@@ -638,11 +645,11 @@ void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
 
 	if (TargetOfBuff[BuffType] == ActorManagerSystem->BossActor) {
 		HasBossBuff.Remove(BuffTypeToStringMap[BuffType]);
-		//ActorManagerSystem->BossActor->UpdateBossBuffUI();
+		BattleManager->UpdateBossBuffUI();
 	}
 	else if (TargetOfBuff[BuffType] == ActorManagerSystem->PeppyActor) {
 		HasPeppyBuff.Remove(BuffTypeToStringMap[BuffType]);
-		Peppy->UpdatePeppyBuffUI();
+		BattleManager->UpdatePeppyBuffUI();
 	}
 }
 

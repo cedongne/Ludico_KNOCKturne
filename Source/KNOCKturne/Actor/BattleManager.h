@@ -81,6 +81,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetBossAndResponseStance();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateBossBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddBossBuffUI(EBuffType BuffType);
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdatePeppyBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddPeppyBuffUI(EBuffType BuffType);
+
 private:
 	class TArray<UBuffComponent*> HandledBuffComponents;
 	void HandleBuffsEachTurns();

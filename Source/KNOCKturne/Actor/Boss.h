@@ -6,10 +6,9 @@
 #include "GameFramework/Actor.h"
 
 #include "Component/BossStatComponent.h"
-#include "Component/BuffComponent.h"
 #include "Component/KNOCKturneObjectPool.h"
 #include "GameInstance/BattleTableManagerSystem.h"
-
+#include "Component/BuffComponent.h"
 #include "Boss.generated.h"
 
 UCLASS()
@@ -60,10 +59,6 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void BP_Die();
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateBossBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
-	void AddBossBuffUI(EBuffType BuffType);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void PlayAttackMontage();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
