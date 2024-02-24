@@ -137,11 +137,7 @@ public:
 	bool HasShieldBuff = false;
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void UpdateBossBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
 	void UpdatePeppyBuffUI();
-	UFUNCTION(BlueprintImplementableEvent)
-	void AddBossBuffUI(EBuffType BuffType);
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddPeppyBuffUI(EBuffType BuffType);
 };

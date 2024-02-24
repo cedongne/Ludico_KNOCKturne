@@ -60,6 +60,10 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void BP_Die();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateBossBuffUI();
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddBossBuffUI(EBuffType BuffType);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void PlayAttackMontage();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

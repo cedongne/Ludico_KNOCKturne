@@ -50,10 +50,7 @@ void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 bool UBuffComponent::IsPositiveBuff(EBuffType BuffType)
 {
-	if (HasPositiveBuffs_PerTurn.Contains(BuffType)) {
-		return true;
-	}
-	else if (HasPositiveBuffs_PerSecond.Contains(BuffType)) {
+	if (HasPositiveBuffs_PerTurn.Contains(BuffType) || HasPositiveBuffs_PerSecond.Contains(BuffType)) {
 		return true;
 	}
 	else {
@@ -233,7 +230,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 	}
 	else if (SkillData.SkillTarget == TARGET_BOSS) {
 		TargetActor = ActorManagerSystem->BossActor;
-		Peppy->AddBossBuffUI(BuffType);
+		//ActorManagerSystem->BossActor->AddBossBuffUI(BuffType);
 	}
 	TargetOfBuff.Add(BuffType, TargetActor);
 
@@ -641,7 +638,7 @@ void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
 
 	if (TargetOfBuff[BuffType] == ActorManagerSystem->BossActor) {
 		HasBossBuff.Remove(BuffTypeToStringMap[BuffType]);
-		Peppy->UpdateBossBuffUI();
+		//ActorManagerSystem->BossActor->UpdateBossBuffUI();
 	}
 	else if (TargetOfBuff[BuffType] == ActorManagerSystem->PeppyActor) {
 		HasPeppyBuff.Remove(BuffTypeToStringMap[BuffType]);

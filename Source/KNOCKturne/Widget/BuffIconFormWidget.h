@@ -37,7 +37,7 @@ public:
 	class UBuffHoverWidget* CurBuffHoverWidget;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> BuffHoverWidgetClass;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (ExposeOnSpawn = true))
 	bool IsPeppyBuff = true;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	EBuffType CurBuffType;

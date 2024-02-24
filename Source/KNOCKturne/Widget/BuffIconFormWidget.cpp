@@ -57,6 +57,8 @@ FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString 
 		return "None";
 
 	FBuffData BuffData = ActorManagerSystem->PeppyActor->BuffComponent->GetBuffData(BuffType);
+	if(BuffType == EBuffType::SpeedDecrease)
+		return FString::SanitizeFloat(BuffData.Value_N);
 
 	switch (FCString::Atoi(*Num)) {
 	case 0:
@@ -135,11 +137,15 @@ void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
 	BuffHoverWidget->TextBlock_Name->SetText(FText::FromString(Name));
 	BuffHoverWidget->Image_SkillIcon->SetBrushFromTexture(BuffTable->BuffIcon);
 
-	if (ActorManagerSystem->PeppyActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
+	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
 		BuffHoverWidget->SetVisibility(ESlateVisibility::Visible);
 		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType));
 		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
-
+	}
+	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
+		BuffHoverWidget->SetVisibility(ESlateVisibility::Visible);
+		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->BossActor->BuffComponent->GetRemainTime(CurBuffType));
+		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
 	}
 	else {
 		BuffHoverWidget->TextBlock_RemainTurn->SetVisibility(ESlateVisibility::Hidden);
@@ -157,7 +163,12 @@ void UBuffIconFormWidget::SetHoverWidgetPos(UBuffHoverWidget* BuffHoverWidget)
 
 	FVector2D HoverWidgetPos;
 	HoverWidgetPos.X = BuffIconViewportPos.X - HoverWidgetSize.X / 2 + BuffIconSize.X / 2;
-	HoverWidgetPos.Y = BuffIconViewportPos.Y - (HoverWidgetSize.Y + 8);
+	if (IsPeppyBuff) {
+		HoverWidgetPos.Y = BuffIconViewportPos.Y - (HoverWidgetSize.Y + 8);
+	}
+	else {
+		HoverWidgetPos.Y = BuffIconViewportPos.Y + (HoverWidgetSize.Y - 8);
+	}
 	UWidgetLayoutLibrary::SlotAsCanvasSlot(BuffHoverWidget->CanvasPanel)->SetPosition(HoverWidgetPos);
 }
 
@@ -175,8 +186,13 @@ void UBuffIconFormWidget::SetProgressBarTerm()
 {
 	float OriginalDuration;
 	float RemainTime = ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType);
-	if (ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
+	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
 		OriginalDuration = *ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType);
+		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
+		ProgressBar_Term->SetPercent(Percent);
+	}
+	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
+		OriginalDuration = *ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType);
 		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
 		ProgressBar_Term->SetPercent(Percent);
 	}
