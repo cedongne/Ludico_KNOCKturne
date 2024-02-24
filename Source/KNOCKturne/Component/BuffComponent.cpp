@@ -278,7 +278,7 @@ void UBuffComponent::ElapseTurn() {
 	HasPositiveBuffs_PerTurn.GetKeys(Keys);
 
 	for (auto& Key : Keys) {
-		if (--HasPositiveBuffs_PerTurn[Key].Duration == 0) {
+		if (--HasPositiveBuffs_PerTurn[Key].Duration <= 0) {
 			if (RemoveBuff(Key)) {
 				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
@@ -288,7 +288,7 @@ void UBuffComponent::ElapseTurn() {
 
 	HasNegativeBuffs_PerTurn.GetKeys(Keys);
 	for (auto& Key : Keys) {
-		if (--HasNegativeBuffs_PerTurn[Key].Duration == 0) {
+		if (--HasNegativeBuffs_PerTurn[Key].Duration <= 0) {
 			if (RemoveBuff(Key)) {
 				DeleteBuffUI(Key);
 				NTLOG(Warning, TEXT("[%s] buff is expired."), *BuffTypeToStringMap[Key]);
