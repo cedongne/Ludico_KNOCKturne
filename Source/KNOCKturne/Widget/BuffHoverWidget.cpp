@@ -5,6 +5,7 @@
 
 void UBuffHoverWidget::NativePreConstruct()
 {
+	Super::NativePreConstruct();
 	CanvasPanel = (UCanvasPanel*)GetWidgetFromName(TEXT("CanvasPanel"));
 	Button_Background = (UButton*)GetWidgetFromName(TEXT("Button_Background"));
 	Image_Background = (UImage*)GetWidgetFromName(TEXT("Image_Background"));
@@ -15,6 +16,7 @@ void UBuffHoverWidget::NativePreConstruct()
 	RichTextBlock_Description = (URichTextBlock*)GetWidgetFromName(TEXT("RichTextBlock_Description"));
 }
 
-void UBuffHoverWidget::NativeConstruct()
+void UBuffHoverWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds)
 {
+	Super::NativeTick(Geometry, DeltaSeconds);
 }

@@ -14,7 +14,7 @@ class KNOCKTURNE_API UBuffHoverWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	virtual void NativePreConstruct();
-	virtual void NativeConstruct();
+	virtual void NativeTick(const FGeometry& Geometry, float DeltaSeconds) override;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))

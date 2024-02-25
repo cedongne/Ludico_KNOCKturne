@@ -44,8 +44,9 @@ void UBuffIconFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSecon
 {
 	Super::NativeTick(Geometry, DeltaSeconds);
 
-	if (CurBuffHoverWidget && !IsHovered() && !CurBuffHoverWidget->IsHovered()) {
+	if (CurBuffHoverWidget && !Button_Background->IsHovered() && !CurBuffHoverWidget->IsHovered()) {
 		CurBuffHoverWidget->RemoveFromParent();
+		CurBuffHoverWidget = nullptr;
 	}
 
 	SetProgressBarTerm();
@@ -120,6 +121,9 @@ FString UBuffIconFormWidget::RedefineDescription(int RowNum)
 
 void UBuffIconFormWidget::CreateHoverWidget()
 {
+	if (CurBuffHoverWidget != nullptr)
+		return;
+
 	class UBuffHoverWidget* BuffHoverWidget;
 	if (BuffHoverWidgetClass) {
 		BuffHoverWidget = CreateWidget<UBuffHoverWidget>(GetWorld(), BuffHoverWidgetClass);
@@ -145,12 +149,10 @@ void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
 	BuffHoverWidget->Image_SkillIcon->SetBrushFromTexture(BuffTable->BuffIcon);
 
 	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
-		BuffHoverWidget->SetVisibility(ESlateVisibility::Visible);
 		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType));
 		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
 	}
 	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
-		BuffHoverWidget->SetVisibility(ESlateVisibility::Visible);
 		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->BossActor->BuffComponent->GetRemainTime(CurBuffType));
 		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
 	}
