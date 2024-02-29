@@ -138,10 +138,18 @@ public:
 
 
 	// �����ۺ� ����
-
-	// �� �ϱ� �ر� �� - 1
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool GetDreamFragment = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isDreamDiaryUpdated = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isBattleFail = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool RightafterBattleClear = false;
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateDreamDiaryWhenGameOver();

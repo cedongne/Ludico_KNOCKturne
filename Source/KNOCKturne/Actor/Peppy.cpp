@@ -211,7 +211,6 @@ void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
 
 void APeppy::Die() {
 	IsDie = true;
-
 	BP_Die();
 }
 

@@ -124,7 +124,7 @@ void UDreamFragmentWidget::OnClicked_AlertModal_Yes() {
 	KNOCKturneGameState->ItemCountList[SelectedItemNum]++;
 	AlertModalRef->RemoveFromParent();
 	this->RemoveFromParent();
-	KNOCKturneGameState->DreamFragmentCount--;
+	BattleManagerSystem->DreamFragmentCount--;
 
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, DialogueWidgetArr, DialogueWidgetClass);
 	if (DialogueWidgetArr.Num() > 0) {

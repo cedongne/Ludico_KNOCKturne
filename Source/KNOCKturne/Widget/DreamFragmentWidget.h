@@ -32,6 +32,7 @@ class KNOCKTURNE_API UDreamFragmentWidget : public UUserWidget
 
 	AKNOCKturneGameState* KNOCKturneGameState;
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
+	class UBattleManagerSystem* BattleManagerSystem;
 	int32 SelectedItemNum;
 
 protected:

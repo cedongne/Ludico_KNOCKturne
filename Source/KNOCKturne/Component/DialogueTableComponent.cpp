@@ -4,7 +4,7 @@
 #include "DialogueTableComponent.h"
 #include "GameInstance/DialogueManagerSystem.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
-
+#include "GameInstance/BattleManagerSystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/GameInstance.h"
 #include <string>
@@ -31,7 +31,7 @@ void UDialogueTableComponent::BeginPlay() {
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	DialogueManager = GameInstance->GetSubsystem<UDialogueManagerSystem>();
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 }
 
 void UDialogueTableComponent::LoadDialogueTable(FString TableName) {
@@ -155,7 +155,7 @@ void UDialogueTableComponent::GetGiveFragmentRandomTalkIndexs(ANPC* InteractingN
 		}
 	}
 
-	KNOCKturneGameState->DreamFragmentCount++;
+	BattleManagerSystem->DreamFragmentCount++;
 	InteractingNpc->GiveFragment = true;
 }
 

@@ -4,6 +4,7 @@
 #include "DreamDiaryWidget.h"
 
 #include "GameInstance/KNOCKturneGameInstance.h"
+#include "GameInstance/BattleManagerSystem.h"
 #include "GameInstance/DialogueManagerSystem.h"
 #include "Component/DialogueTableComponent.h"
 
@@ -51,7 +52,7 @@ void UDreamDiaryWidget::NativeConstruct() {
 	Super::NativeConstruct();
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 
 	DreamDiaryTable->GetAllRows<FDreamDiaryData>("GetAllRows", DreamDiaryRows);
 
@@ -105,12 +106,12 @@ void UDreamDiaryWidget::SetWhetherToOpenDreamDiaryOrNot(bool isNextButton) {
 			Button_Back->SetVisibility(ESlateVisibility::Visible);
 		}
 
-		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 3) { // 다음 장 오른쪽 페이지 해금 여부
+		if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage + 3) { // 다음 장 오른쪽 페이지 해금 여부
 			SetCurrentOddPageToNextPage();
 			SetDreamDiaryContent(true, true);
 		}
 		else {
-			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage + 2) { // 다음 장 왼쪽 페이지 해금 여부
+			if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage + 2) { // 다음 장 왼쪽 페이지 해금 여부
 				SetCurrentOddPageToNextPage();
 				SetDreamDiaryContent(true, false);
 			}
@@ -122,12 +123,12 @@ void UDreamDiaryWidget::SetWhetherToOpenDreamDiaryOrNot(bool isNextButton) {
 		}
 	}
 	else {
-		if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 1) { // 이전 장 오른쪽 페이지 해금 여부
+		if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage - 1) { // 이전 장 오른쪽 페이지 해금 여부
 			SetCurrentOddPageToBackPage();
 			SetDreamDiaryContent(true, true);
 		}
 		else {
-			if (KNOCKturneGameState->DreamDiaryOpenRow >= CurrentOddPage - 2) { // 이전 장 왼족 페이지 해금 여부
+			if (BattleManagerSystem->DreamDiaryOpenRow >= CurrentOddPage - 2) { // 이전 장 왼족 페이지 해금 여부
 				SetCurrentOddPageToBackPage();
 				SetDreamDiaryContent(true, false);
 			}
@@ -192,12 +193,12 @@ void UDreamDiaryWidget::DefaultSetting() {
 	FString DreamDiaryFirstPageString = GetStringTable()->FindRow<FDialogueString>(FName(DreamDiaryRows[0]->DreamDiaryStringID), TEXT(""))->KOR;
 	RichTextBlock_Content_Even->SetText(FText::FromString(DreamDiaryFirstPageString));
 
-	for (int index = 0; index < KNOCKturneGameState->DreamDiaryOpenRow; index++) {
+	for (int index = 0; index < BattleManagerSystem->DreamDiaryOpenRow; index++) {
 		SetDreamcatcherPointUI(index);
 	}
 
-	if (KNOCKturneGameState->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
-		KNOCKturneGameState->DreamDiaryOpenRow = 3;
+	if (BattleManagerSystem->DreamDiaryOpenRow > DreamDiaryRows.Num() - 1) {
+		BattleManagerSystem->DreamDiaryOpenRow = 3;
 	}
 }
 
@@ -207,24 +208,27 @@ void UDreamDiaryWidget::SetDreamcatcherPointUI(int32 PointNum) {
 	{
 		Image_Point->SetBrushFromTexture(UI_diary_point_1_v2);
 		Image_Point_1->SetBrushFromTexture(UI_diary_point_2_v2);
+		break;
 	}
 	case 1:
 	{
 		Image_Point_2->SetBrushFromTexture(UI_diary_point_1_v2);
 		Image_Point_3->SetBrushFromTexture(UI_diary_point_2_v2);
+		break;
 	}
 	case 2:
 	{
 		Image_Point_4->SetBrushFromTexture(UI_diary_point_1_v2);
 		Image_Point_5->SetBrushFromTexture(UI_diary_point_2_v2);
+		break;
 	}
 	case 3:
 	{
 		Image_Point_6->SetBrushFromTexture(UI_diary_point_1_v2);
 		Image_Point_7->SetBrushFromTexture(UI_diary_point_2_v2);
 		Image_Dreamcatcher->SetBrushFromTexture(UI_diary_dreamcatcher_v2);
+		break;
 	}
-
 	}
 }
 

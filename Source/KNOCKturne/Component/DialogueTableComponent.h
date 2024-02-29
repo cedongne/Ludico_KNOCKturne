@@ -63,7 +63,7 @@ class KNOCKTURNE_API UDialogueTableComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 	TArray<FDialogueData*> DialogueRows;

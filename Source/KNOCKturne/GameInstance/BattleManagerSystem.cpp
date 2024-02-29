@@ -154,27 +154,26 @@ void UBattleManagerSystem::UpdateDreamDiaryWhenGameOver() {
 
 	if (DreamDiaryOpenRow < 3) {
 		DreamDiaryOpenRow += 1;
-		KNOCKturneGameState->isDreamDiaryUpdated = true;
+		isDreamDiaryUpdated = true;
 	}
 	else {
-		KNOCKturneGameState->isDreamDiaryUpdated = false;
+		isDreamDiaryUpdated = false;
 	}
 }
 
 void UBattleManagerSystem::UpdateDreamDiaryWhenGameClear() {
 	DreamDiaryOpenRow = 3;
+	isDreamDiaryUpdated = true;
 }
 
 void UBattleManagerSystem::GetDreamFragmentAfterBattle() {
 	if (ReducedEP >= 30) {
-		KNOCKturneGameState->DreamFragmentCount += 1;
-		KNOCKturneGameState->GetDreamFragment = true;
+		DreamFragmentCount += 1;
+		GetDreamFragment = true;
 	}
 	else {
 		NTLOG(Warning, TEXT("Did not satisfy the condition"));
 	}
-
-	NTLOG(Warning, TEXT("%d %d"), KNOCKturneGameState->DreamFragmentCount, KNOCKturneGameState->GetDreamFragment);
 }
 
 void UBattleManagerSystem::UpdateRoundInfo() {

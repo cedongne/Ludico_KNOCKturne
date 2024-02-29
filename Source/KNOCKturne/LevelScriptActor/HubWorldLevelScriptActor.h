@@ -27,7 +27,9 @@ class KNOCKTURNE_API AHubWorldLevelScriptActor : public AKNOCKturneLevelScriptAc
 	GENERATED_BODY()
 
 	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleManagerSystem* BattleManagerSystem;
 
+	TArray<UUserWidget*> AllDialogueWidgetArr;
 	
 public:
 	AHubWorldLevelScriptActor();
@@ -93,6 +95,10 @@ public:
 	TSubclassOf<UUserWidget> BP_BlinkClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UUserWidget* BP_BlinkRef;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_FadeInOutClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UUserWidget* BP_FadeInOut;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> BP_DreamFragmentClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -178,6 +184,12 @@ public:
 	void StartPrologueDialogueWithEventBinding();
 	UFUNCTION(Blueprintcallable)
 	void SkipPrologue();
+	UFUNCTION(Blueprintcallable)
+	void CreateLoadingWidget();
+	UFUNCTION(Blueprintcallable)
+	void SetHubworldBGMAndHUD();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayFadeInAnim();
 
 	// 사운드
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)

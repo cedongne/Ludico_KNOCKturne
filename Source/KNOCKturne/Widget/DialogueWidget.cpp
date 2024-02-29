@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "DialogueWidget.h"
@@ -37,7 +37,7 @@ void UDialogueWidget::NativeConstruct() {
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 
-	FString line = FString::Printf(TEXT("지금 %d개의 꿈조각을 가지고 있어. 관장자님께 꿈조각 해몽을 부탁드려볼까?"), KNOCKturneGameState->DreamFragmentCount);
+	FString line = FString::Printf(TEXT("지금 %d개의 꿈조각을 가지고 있어. 관장자님께 꿈조각 해몽을 부탁드려볼까?"), BattleManagerSystem->DreamFragmentCount);
 	TextBlock_Dialogue_Select_1->SetText(FText::FromString(line));
 }
 
@@ -266,14 +266,16 @@ FString UDialogueWidget::RedefineLine(FString OriginalStr) {
 
 	for (int idx = 0; idx < RedefinedLine.Len(); idx++) {
 		if (RedefinedLine[idx] == '{') {
-			ReplaceIndexNumbyKeyword(idx + 1);
+			FString tmp1 = RedefinedLine.Mid(0, idx + 1);
+			FString skillindex = GetSkillIndexByKeyword(RedefinedLine.Mid(idx + 1, 1));
+			FString tmp2 = RedefinedLine.Mid(idx + 2, RedefinedLine.Len() - (idx + 2));
+
+			RedefinedLine = (tmp1.Append(skillindex)).Append(tmp2);
 		}
 	}
 
-	int count = -1;
 	for (int index = 0; index < RedefinedLine.Len(); index++) {
 		if (RedefinedLine[index] == '{' || RedefinedLine[index] == '}') {
-			count++;
 			RedefinedLine.RemoveAt(index, 1);
 		}
 	}
@@ -330,7 +332,7 @@ void UDialogueWidget::InputEDuringTalking(UDialogueTableComponent* DialogueTable
 
 void UDialogueWidget::AfterBattleFailDirection(FDialogueData DataRow, UDialogueTableComponent* DialogueTableComponentVar) {
 	if (DataRow.Direction == "AfterBattleFail_Hubworld_DreamDiary") {
-		if (KNOCKturneGameState->isDreamDiaryUpdated) {
+		if (BattleManagerSystem->isDreamDiaryUpdated) {
 			DialogueTableComponentVar->SetBattleFailDiaryDialogueIndex();
 		}
 		else {
@@ -339,7 +341,7 @@ void UDialogueWidget::AfterBattleFailDirection(FDialogueData DataRow, UDialogueT
 	}
 	else {
 		if (DataRow.Direction == "AfterBattleFail_Hubworld_DreamFragment") {
-			if (KNOCKturneGameState->GetDreamFragment) {
+			if (BattleManagerSystem->GetDreamFragment) {
 				DialogueTableComponentVar->SetBattleFailFragmentDialogueIndex();
 			}
 			else {

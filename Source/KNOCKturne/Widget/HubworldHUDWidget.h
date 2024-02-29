@@ -19,11 +19,10 @@ class KNOCKTURNE_API UHubworldHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-	UHubworldHUDWidget(const FObjectInitializer& ObjectInitializer);
 	virtual void NativePreConstruct();
 	virtual void NativeConstruct();
 
-	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))

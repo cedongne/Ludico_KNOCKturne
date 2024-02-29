@@ -108,10 +108,8 @@ FString UBuffIconFormWidget::RedefineDescription(int RowNum)
 		}
 	}
 
-	int count = -1;
 	for (int index = 0; index < Redefined.Len(); index++) {
 		if (Redefined[index] == '{' || Redefined[index] == '}') {
-			count++;
 			Redefined.RemoveAt(index, 1);
 		}
 	}

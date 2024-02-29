@@ -3,11 +3,7 @@
 
 #include "HubworldHUDWidget.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
-
-UHubworldHUDWidget::UHubworldHUDWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
-}
+#include "GameInstance/BattleManagerSystem.h"
 
 void UHubworldHUDWidget::NativePreConstruct() {
 	Button_Diary = (UButton*)GetWidgetFromName(TEXT("Button_Diary"));
@@ -20,8 +16,15 @@ void UHubworldHUDWidget::NativePreConstruct() {
 }
 
 void UHubworldHUDWidget::NativeConstruct() {
+	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
+
 	if (Button_Diary) {
 		Button_Diary->OnClicked.AddDynamic(this, &UHubworldHUDWidget::OnClick_ButtonDiary);
+	}
+
+	if (BattleManagerSystem->isDreamDiaryUpdated) {
+		Image_DreamDiary_Updated->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 
@@ -35,6 +38,6 @@ void UHubworldHUDWidget::OnClick_ButtonDiary() {
 
 	if (Image_DreamDiary_Updated->GetVisibility() == ESlateVisibility::Visible) {
 		Image_DreamDiary_Updated->SetVisibility(ESlateVisibility::Hidden);
-		KNOCKturneGameState->isDreamDiaryUpdated = false;
+		BattleManagerSystem->isDreamDiaryUpdated = false;
 	}
 }

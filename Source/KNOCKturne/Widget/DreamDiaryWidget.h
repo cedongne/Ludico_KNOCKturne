@@ -26,7 +26,7 @@ class KNOCKTURNE_API UDreamDiaryWidget : public UUserWidget
 	void NativePreConstruct();
 	virtual void NativeConstruct();
 
-	AKNOCKturneGameState* KNOCKturneGameState;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 protected:
 

@@ -48,9 +48,6 @@ void ABattleManager::StartBossTurn() {
 	ActorManagerSystem->BossActor->SpawnBossSkill();
 	BP_StartBossTurn();
 	SetBossAndResponseStance();
-
-	BattleManagerSystem->Round = 1;
-	BattleManagerSystem->LastRoundBossHpRatio = 100;
 }
 
 /* �ش� �޼���� ���� �������Ʈ ��� �ʱ�ȭ ȣ�� Ÿ�̹� ���� ���� ���� ���� 1ȸ�� ���� �����մϴ�.������ Turn ���� ������ ���� C++ Ŭ���� �������� �̷�����ϴ�. */
