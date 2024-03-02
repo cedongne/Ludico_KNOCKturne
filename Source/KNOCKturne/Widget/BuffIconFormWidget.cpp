@@ -34,10 +34,6 @@ void UBuffIconFormWidget::NativeConstruct()
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
-
-	if (Button_Background) {
-		Button_Background->OnHovered.AddDynamic(this, &UBuffIconFormWidget::CreateHoverWidget);
-	}
 }
 
 void UBuffIconFormWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds)
