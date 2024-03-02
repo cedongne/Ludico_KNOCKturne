@@ -14,6 +14,7 @@ class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 {
 	GENERATED_BODY()
 	AKNOCKturneGameState();
+	class UBattleManagerSystem* BattleManagerSystem;
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
