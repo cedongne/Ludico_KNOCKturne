@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widget/BattleSetting/PeppyTurnUIWidget.h"
@@ -208,6 +208,7 @@ void UPeppyTurnUIWidget::ClickSkip()
 		}
 	}
 
+	AlertModalRef->TextBlock_Skip->SetText(FText::FromString(FString::Printf(TEXT("이대로 턴을 스킵하시겠습니까?"))));
 	AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Visible);
 	AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Hidden);
 	AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);
@@ -270,6 +271,7 @@ void UPeppyTurnUIWidget::ClickAttack()
 				}
 			}
 
+			AlertModalRef->TextBlock_Skip->SetText(FText::FromString(FString::Printf(TEXT("현재 아무 스킬도 선택되지 않은 상태입니다. \n이대로 턴을 스킵하시겠습니까?"))));
 			AlertModalRef->TextBlock_Skip->SetVisibility(ESlateVisibility::Visible);
 			AlertModalRef->TextBlock_ItemName->SetVisibility(ESlateVisibility::Hidden);
 			AlertModalRef->TextBlock_SelectOrNot->SetVisibility(ESlateVisibility::Hidden);

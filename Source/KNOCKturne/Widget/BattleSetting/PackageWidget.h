@@ -103,6 +103,24 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UAlertModalWidget* AlertModalRef;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> EnterBattleAlertModalClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UEnterBattleAlertModalWidget* EnterBattleAlertModalRef;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_FadeInOutClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UUserWidget* BP_FadeInOut;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<UUserWidget*> AllEnterBattleWidgetArr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> EnterBattleWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (ExposeOnSpawn = true))
+	bool IsEnterBattle;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()
@@ -134,11 +152,17 @@ public:
 	UFUNCTION()
 	void ResetSetting();
 	UFUNCTION()
-	void ClickSettingDone();
+	void NoSkillAlertAndSaveData();
+	UFUNCTION()
+	void EnterBattleAlert();
 	UFUNCTION()
 	void ClickAlertModalYes();
 	UFUNCTION()
 	void ClickAlertModalNo();
+	UFUNCTION()
+	void ClickEnterBattleAlertModalYes();
+	UFUNCTION()
+	void ClickEnterBattleAlertModalNo();
 	UFUNCTION()
 	void SaveSelectedSkill();
 	UFUNCTION()
@@ -167,4 +191,8 @@ public:
 	void PlayAllSelectedSkillErrorAnim();
 	UFUNCTION()
 	void RemoveAllHoverWidgets();
+	UFUNCTION()
+	void OpenBattleLevel();
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayFadeOutAnim();
 };

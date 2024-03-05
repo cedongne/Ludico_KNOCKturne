@@ -3,6 +3,7 @@
 
 #include "PackageWidget.h"
 #include "Widget/AlertModalWidget.h"
+#include "Widget/EnterBattleAlertModalWidget.h"
 #include <Kismet/GameplayStatics.h>
 #include "GameInstance/BattleTableManagerSystem.h"
 #include "GameInstance/BattleManagerSystem.h"
@@ -77,7 +78,12 @@ void UPackageWidget::NativeConstruct()
 		Button_Reset->OnClicked.AddDynamic(this, &UPackageWidget::ResetSetting);
 	}
 	if (Button_SettingDone) {
-		Button_SettingDone->OnClicked.AddDynamic(this, &UPackageWidget::ClickSettingDone);
+		if (!IsEnterBattle) {
+			Button_SettingDone->OnClicked.AddDynamic(this, &UPackageWidget::NoSkillAlertAndSaveData);
+		}
+		else {
+			Button_SettingDone->OnClicked.AddDynamic(this, &UPackageWidget::EnterBattleAlert);
+		}
 	}
 }
 
@@ -361,6 +367,11 @@ void UPackageWidget::Exit()
 {
 	RemoveFromParent();
 	RemoveAllHoverWidgets();
+
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEnterBattleWidgetArr, EnterBattleWidgetClass);
+	if (AllEnterBattleWidgetArr[0]) {
+		AllEnterBattleWidgetArr[0]->SetIsEnabled(true);
+	}
 }
 
 void UPackageWidget::ResetSetting()
@@ -386,7 +397,7 @@ void UPackageWidget::ResetSetting()
 	}
 }
 
-void UPackageWidget::ClickSettingDone()
+void UPackageWidget::NoSkillAlertAndSaveData()
 {
 	// 스킬을 하나도 선택하지 않았다면 경고창을 띄운다.
 	if (SelectedUIListArr[0]->Image_Icon->GetVisibility() == ESlateVisibility::Hidden) {
@@ -415,6 +426,26 @@ void UPackageWidget::ClickSettingDone()
 
 		RemoveFromParent();
 		RemoveAllHoverWidgets();
+
+		if (IsEnterBattle) {
+			OpenBattleLevel();
+		}
+	}
+}
+
+void UPackageWidget::EnterBattleAlert()
+{
+	SetIsEnabled(false);
+
+	if (EnterBattleAlertModalClass) {
+		EnterBattleAlertModalRef = CreateWidget<UEnterBattleAlertModalWidget>(GetWorld(), EnterBattleAlertModalClass);
+		if (EnterBattleAlertModalRef) {
+			EnterBattleAlertModalRef->AddToViewport();
+		}
+	}
+	if (EnterBattleAlertModalRef) {
+		EnterBattleAlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UPackageWidget::ClickEnterBattleAlertModalYes);
+		EnterBattleAlertModalRef->Button_No->OnClicked.AddDynamic(this, &UPackageWidget::ClickEnterBattleAlertModalNo);
 	}
 }
 
@@ -428,11 +459,27 @@ void UPackageWidget::ClickAlertModalYes()
 	}
 	RemoveFromParent();
 	RemoveAllHoverWidgets();
+
+	if (IsEnterBattle) {
+		OpenBattleLevel();
+	}
 }
 
 void UPackageWidget::ClickAlertModalNo()
 {
 	AlertModalRef->RemoveFromParent();
+	SetIsEnabled(true);
+}
+
+void UPackageWidget::ClickEnterBattleAlertModalYes()
+{
+	EnterBattleAlertModalRef->RemoveFromParent();
+	NoSkillAlertAndSaveData();
+}
+
+void UPackageWidget::ClickEnterBattleAlertModalNo()
+{
+	EnterBattleAlertModalRef->RemoveFromParent();
 	SetIsEnabled(true);
 }
 
@@ -643,4 +690,22 @@ void UPackageWidget::RemoveAllHoverWidgets()
 		for (auto HoverWidget : ItemHoverWidgetArr)
 			HoverWidget->RemoveFromParent();
 	}
+}
+
+void UPackageWidget::OpenBattleLevel()
+{
+	if (BP_FadeInOutClass) {
+		BP_FadeInOut = CreateWidget<UUserWidget>(GetWorld(), BP_FadeInOutClass);
+		if (BP_FadeInOut) {
+			BP_FadeInOut->AddToViewport();
+			PlayFadeOutAnim();
+		}
+	}
+
+	FTimerHandle FadeOutTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(FadeOutTimerHandle, FTimerDelegate::CreateLambda([&]()
+		{
+			UGameplayStatics::OpenLevel(this, "LV_Battle");
+			GetWorld()->GetTimerManager().ClearTimer(FadeOutTimerHandle);
+		}), 2, false);
 }
