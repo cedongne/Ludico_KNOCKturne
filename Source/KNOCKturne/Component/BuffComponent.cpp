@@ -238,7 +238,6 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 		switch (buffData->BuffTermType) {
 		case EBuffTermType::Turn:
 			HasPositiveBuffs_PerTurn.Add(BuffType, *buffData);
-			OriginalDuration.Add(BuffType, buffData->Duration);
 			TryUpdateBuffDataBySkillData(BuffType, HasPositiveBuffs_PerTurn[BuffType], SkillData.Value_N, SkillData.Value_M, SkillData.Value_T);
 			OperatePositiveBuffs_PerTurn(BuffType);
 			break;
@@ -368,6 +367,10 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 		AdditionalEnergyByBuff = BuffData.Value_N;
 		NTLOG(Warning, TEXT("EnergyDropIncrease: BossEnergyDrop +%d"), BuffData.Value_N);
 		break;
+	case EBuffType::Mood:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
+		NTLOG(Warning, TEXT("Mood: AttackDamage +%d"), BuffData.Value_N);
+		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
 	}
@@ -387,6 +390,10 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 	case EBuffType::EnergyDropIncrease:
 		AdditionalEnergyByBuff = 0;
 		NTLOG(Warning, TEXT("End EnergyDropIncrease: Energy -%d"), BuffData.Value_N);
+		break;
+	case EBuffType::Mood:
+		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
+		NTLOG(Warning, TEXT("End Mood: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
@@ -623,17 +630,6 @@ bool UBuffComponent::HasConfuseBuff()
 {
 	if (HasNegativeBuffs_PerSecond.Contains(EBuffType::Confuse))
 		return true;
-	else
-		return false;
-}
-
-bool UBuffComponent::TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffectIndexSkillData SkillData)
-{
-	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Mood)) {
-		StatComponent->GetDamaged(SkillData.Value_N);
-		NTLOG(Warning, TEXT("Mood: GetDamaged +%d"), SkillData.Value_N);
-		return true;
-	}
 	else
 		return false;
 }

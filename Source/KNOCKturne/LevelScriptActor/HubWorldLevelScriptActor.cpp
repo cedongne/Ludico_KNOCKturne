@@ -272,10 +272,9 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 
 				GetWorld()->GetTimerManager().ClearTimer(BlackWigetTimerHandle);
 			}), 2, false);
-		return;
 	}
 
-	if (BattleManagerSystem->RightafterBattleClear) {
+	else if (BattleManagerSystem->RightafterBattleClear) {
 		if (BP_BlackClass) {
 			BP_BlackRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlackClass);
 			if (BP_BlackRef) {

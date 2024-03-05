@@ -434,8 +434,6 @@ public:
 	/*혼란 버프 보유 여부 반환*/
 	UFUNCTION(BlueprintCallable)
 	bool HasConfuseBuff();
-	UFUNCTION(BlueprintCallable)
-	bool TryOperateMoodBuff(UStatComponent* StatComponent, FCurEffectIndexSkillData SkillData);
 
 	/*버프 UI 갱신*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

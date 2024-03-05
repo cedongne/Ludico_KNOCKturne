@@ -364,7 +364,6 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	*/
 	else if (SkillData.SkillIndex == 11) {
 		StatComponent->GetDamaged(SkillData.Value_N);
-		BuffComponent->TryOperateMoodBuff(StatComponent, SkillData);
 		NTLOG(Log, TEXT("[%s : SkillIndex 11] Attack damage %lf"), *SkillData.SkillId, SkillData.Value_N);
 	}
 	else if (SkillData.SkillIndex == 12) {
