@@ -139,6 +139,8 @@ public:
 
 	// �����ۺ� ����
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isPrologue = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;
@@ -150,6 +152,8 @@ public:
 	bool isBattleFail = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool RightafterBattleClear = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<int32> ItemCountList;
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateDreamDiaryWhenGameOver();

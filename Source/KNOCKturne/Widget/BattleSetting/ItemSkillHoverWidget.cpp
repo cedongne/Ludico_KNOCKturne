@@ -32,7 +32,7 @@ void UItemSkillHoverWidget::SetHoverWidgetUI(int RowNum, bool IsSelected)
 		Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 
 	Image_Icon->SetBrushFromTexture(ItemData->ItemIcon);
-	TextBlock_Count->SetText(FText::FromString(FString::FromInt(KNOCKturneGameState->ItemCountList[RowNum])));
+	TextBlock_Count->SetText(FText::FromString(FString::FromInt(BattleManagerSystem->ItemCountList[RowNum])));
 	TextBlock_SkillName->SetText(FText::FromString(NameStr));
 	TextBlock_Description->SetText(FText::FromString(RedefineDescription(RowNum)));
 }
@@ -98,7 +98,7 @@ FString UItemSkillHoverWidget::RedefineDescription(int RowNum)
 void UItemSkillHoverWidget::ClickButton()
 {
 	int CurItemRowNum = BattleManagerSystem->FindItemRow(Image_Icon->Brush.GetResourceName().ToString());
-	int CurItemCount = KNOCKturneGameState->ItemCountList[CurItemRowNum];
+	int CurItemCount = BattleManagerSystem->ItemCountList[CurItemRowNum];
 	if (CurItemCount == 0)
 		return;
 

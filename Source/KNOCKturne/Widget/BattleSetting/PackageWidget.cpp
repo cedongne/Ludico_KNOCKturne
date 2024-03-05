@@ -232,7 +232,7 @@ void UPackageWidget::SetItemUI(UItemSkillCardWidget* ItemListForm, int RowNum)
 	FString ItemName = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*ItemId.Append("_String")), TEXT(""))->KOR;
 	ItemListForm->TextBlock_SkillName->SetText(FText::FromString(ItemName));
 
-	FString Count = FString::FromInt(KNOCKturneGameState->ItemCountList[RowNum]);
+	FString Count = FString::FromInt(BattleManagerSystem->ItemCountList[RowNum]);
 	ItemListForm->TextBlock_Count->SetText(FText::FromString(Count));
 }
 
@@ -636,7 +636,7 @@ void UPackageWidget::SelectItem(FString IconName)
 {
 	int TableRowNum = BattleManagerSystem->FindItemRow(IconName);
 	
-	if (KNOCKturneGameState->ItemCountList[TableRowNum] == 0)
+	if (BattleManagerSystem->ItemCountList[TableRowNum] == 0)
 		return;
 
 	for (int i = 0; i < ItemListArr.Num(); i++) {
@@ -708,4 +708,6 @@ void UPackageWidget::OpenBattleLevel()
 			UGameplayStatics::OpenLevel(this, "LV_Battle");
 			GetWorld()->GetTimerManager().ClearTimer(FadeOutTimerHandle);
 		}), 2, false);
+
+	KNOCKturneGameState->SaveKNOCKturneData();
 }

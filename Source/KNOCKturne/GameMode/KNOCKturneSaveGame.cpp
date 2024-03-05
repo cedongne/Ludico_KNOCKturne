@@ -3,3 +3,6 @@
 
 #include "GameMode/KNOCKturneSaveGame.h"
 
+UKNOCKturneSaveGame::UKNOCKturneSaveGame()
+{
+}

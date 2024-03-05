@@ -47,7 +47,7 @@ void UDreamFragmentWidget::PickRandomItem() {
 	bool NotSatisfiedConditon = false;
 	int RndItemRowNum = rand() % 6;
 
-	if (KNOCKturneGameState->ItemCountList[RndItemRowNum] < BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
+	if (BattleManagerSystem->ItemCountList[RndItemRowNum] < BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
 		for (int i = 0; i < RndItemRowNumArr.Num(); i++) {
 			if (RndItemRowNum == RndItemRowNumArr[i]) {
 				PickRandomItem();
@@ -121,7 +121,7 @@ void UDreamFragmentWidget::Button_SelectOnClicked() {
 }
 
 void UDreamFragmentWidget::OnClicked_AlertModal_Yes() {
-	KNOCKturneGameState->ItemCountList[SelectedItemNum]++;
+	BattleManagerSystem->ItemCountList[SelectedItemNum]++;
 	AlertModalRef->RemoveFromParent();
 	this->RemoveFromParent();
 	BattleManagerSystem->DreamFragmentCount--;

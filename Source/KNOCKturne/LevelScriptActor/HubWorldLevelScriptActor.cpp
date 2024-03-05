@@ -146,7 +146,7 @@ void AHubWorldLevelScriptActor::AfterPrologueDirection() {
 }
 
 void AHubWorldLevelScriptActor::SetPeppyHiddenOrNot() {
-	if (!isPrologue || BattleManagerSystem->isBattleFail) {
+	if (!BattleManagerSystem->isPrologue || BattleManagerSystem->isBattleFail) {
 		Peppy->SetActorHiddenInGame(true);
 	}
 	// RightafterBattleClear == true 또는 아무것도 해당하지 않는 경우
@@ -178,7 +178,7 @@ void AHubWorldLevelScriptActor::CreateHubworldHUD() {
 }
 
 void AHubWorldLevelScriptActor::PrologueEnded() {
-	isPrologue = true;
+	BattleManagerSystem->isPrologue = true;
 	PeppyController->PrologueInProcess = false;
 
 	if (DialogueWidgetRef) {
@@ -225,7 +225,7 @@ void AHubWorldLevelScriptActor::EscKeyEvent() {
 }
 
 void AHubWorldLevelScriptActor::StartLevelByCondition() {
-	if(!isPrologue) {
+	if(!BattleManagerSystem->isPrologue) {
 		if (BP_BlackClass) {
 			BP_BlackRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlackClass);
 			if (BP_BlackRef) {
@@ -581,10 +581,12 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 
 			GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle2);
 		}), 4, false);
+
+	KNOCKturneGameState->SaveKNOCKturneData();
 }
 
 void AHubWorldLevelScriptActor::SkipPrologue() {
-	if (isPrologue == false && isSkip == false) {
+	if (BattleManagerSystem->isPrologue == false && isSkip == false) {
 		PrologueDialogueTableComponent->SetIsEndedDialogueRows(true);
 		isSkip = true;
 		PrologueEnded();

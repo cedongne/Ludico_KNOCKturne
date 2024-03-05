@@ -40,8 +40,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 MDSelection = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool isPrologue = true;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isSkip = false;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FRotator PrevCameraRotation;

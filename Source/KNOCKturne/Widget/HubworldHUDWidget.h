@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,6 +23,7 @@ class KNOCKTURNE_API UHubworldHUDWidget : public UUserWidget
 	virtual void NativeConstruct();
 
 	class UBattleManagerSystem* BattleManagerSystem;
+	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -41,11 +42,23 @@ protected:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_DreamDiary_Updated;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> DreamDiaryWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UDreamDiaryWidget* DreamDiaryWidgetRef;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> SaveExitAlertModalClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class USaveExitAlertModalWidget* SaveExitAlertModalRef;
+
 	UFUNCTION()
 	void OnClick_ButtonDiary();
+	UFUNCTION()
+	void ClickSave();
+	UFUNCTION()
+	void ClickSaveExitAlertModalYes();
+	UFUNCTION()
+	void ClickSaveExitAlertModalNo();
 };
