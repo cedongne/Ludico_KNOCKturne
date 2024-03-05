@@ -26,6 +26,7 @@ protected:
 
 private:
 	class UBattleTableManagerSystem* BattleTableManagerSystem = nullptr;
+	class UActorManagerSystem* ActorManagerSystem;
 
 	class ABoss* BossActor;
 

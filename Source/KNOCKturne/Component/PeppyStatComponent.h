@@ -34,6 +34,7 @@ private:
 
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
+	class UActorManagerSystem* ActorManagerSystem;
 
 	FPeppyStatData MinStatData;
 	FPeppyStatData MaxStatData;

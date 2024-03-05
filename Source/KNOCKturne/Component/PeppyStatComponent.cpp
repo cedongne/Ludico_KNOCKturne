@@ -38,6 +38,8 @@ void UPeppyStatComponent::SetDefaultStat() {
 	NTCHECK(BattleTableManagerSystem != nullptr);
 	BattleManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleManagerSystem>();
 	NTCHECK(BattleManagerSystem != nullptr);
+	ActorManagerSystem = KNOCKturneGameInstance->GetSubsystem<UActorManagerSystem>();
+	NTCHECK(ActorManagerSystem != nullptr);
 
 	CurStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Init");
 	MinStatData = BattleTableManagerSystem->GetPeppyStatDataOnTable("Min");
@@ -45,14 +47,16 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
+	float DamageValue = Value + ActorManagerSystem->BossActor->StatComponent->CurStatData.AttackDamage - this->CurStatData.DefenseDamage;
+
 	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {
 		PeppyActor->BuffComponent->ReduceOneShield();
 		NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
 	}
 	else {
 		if (CanBeDamaged) {
-			TryUpdateCurStatData(FStatType::EP, -Value);
-			CreateDamageText(Value);
+			TryUpdateCurStatData(FStatType::EP, -DamageValue);
+			CreateDamageText(DamageValue);
 		}
 	}
 }

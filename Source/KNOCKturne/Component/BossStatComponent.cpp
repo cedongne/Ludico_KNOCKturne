@@ -36,6 +36,8 @@ void UBossStatComponent::SetDefaultStat() {
 	NTCHECK(KNOCKturneGameInstance != nullptr);
 	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	NTCHECK(BattleTableManagerSystem != nullptr);
+	ActorManagerSystem = KNOCKturneGameInstance->GetSubsystem<UActorManagerSystem>();
+	NTCHECK(ActorManagerSystem != nullptr);
 
 	CurStatData = BattleTableManagerSystem->GetBossStatDataOnTable("Init");
 	MinStatData = BattleTableManagerSystem->GetBossStatDataOnTable("Min");
@@ -43,9 +45,11 @@ void UBossStatComponent::SetDefaultStat() {
 }
 
 void UBossStatComponent::GetDamaged(float Value) {
+	float DamageValue = Value + ActorManagerSystem->PeppyActor->StatComponent->CurStatData.AttackDamage - this->CurStatData.DefenseDamage;
+
 	BossActor->PlayAttackedMontage();
-	TryUpdateCurStatData(FStatType::EP, -Value);
-	CreateDamageText(Value);
+	TryUpdateCurStatData(FStatType::EP, -DamageValue);
+	CreateDamageText(DamageValue);
 }
 
 bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
