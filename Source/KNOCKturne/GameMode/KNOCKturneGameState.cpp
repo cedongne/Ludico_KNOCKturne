@@ -17,7 +17,7 @@ AKNOCKturneGameState::AKNOCKturneGameState() {
 	SaveSlotName = TEXT("KNOCKturne");
 }
 
-void AKNOCKturneGameState::InitKNOCKturneData(){
+void AKNOCKturneGameState::LoadKNOCKturneData(){
 	auto KNOCKturneSaveGame = Cast<UKNOCKturneSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, 0));
 	if (KNOCKturneSaveGame == nullptr) {
 		KNOCKturneSaveGame = GetMutableDefault<UKNOCKturneSaveGame>();

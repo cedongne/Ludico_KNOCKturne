@@ -38,7 +38,7 @@ public:
 	FString SaveSlotName;
 
 	UFUNCTION(BlueprintCallable)
-	void InitKNOCKturneData();
+	void LoadKNOCKturneData();
 	UFUNCTION(BlueprintCallable)
 	void SaveKNOCKturneData();
 
