@@ -5,4 +5,12 @@
 
 UKNOCKturneSaveGame::UKNOCKturneSaveGame()
 {
+	isPrologue = false;
+	DreamFragmentCount = 0;
+	DreamDiaryOpenRow = 0;
+	GetDreamFragment = false;
+	isDreamDiaryUpdated = false;
+	isBattleFail = false;
+	RightafterBattleClear = false;
+	ItemCountList.Init(0, 6);
 }

@@ -34,9 +34,6 @@ void AHubWorldLevelScriptActor::BeginPlay() {
 	PrologueDialogueTableComponent->LoadDialogueTable("Dialogue_Prologue");
 
 	StartLevelByCondition();
-
-
-	NTLOG(Warning, TEXT("DreamFragmentCount: %d"), KNOCKturneGameState->DreamFragmentCount);
 }
 
 void AHubWorldLevelScriptActor::Tick(float deltaTime) {

@@ -15,22 +15,23 @@ void AKNOCKturneGameState::HandleBeginPlay() {
 
 AKNOCKturneGameState::AKNOCKturneGameState() {
 	SaveSlotName = TEXT("KNOCKturne");
+	UserIndex = 0;
 }
 
 void AKNOCKturneGameState::LoadKNOCKturneData(){
-	auto KNOCKturneSaveGame = Cast<UKNOCKturneSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, 0));
+	UKNOCKturneSaveGame* KNOCKturneSaveGame = Cast<UKNOCKturneSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, UserIndex));
 	if (KNOCKturneSaveGame == nullptr) {
 		KNOCKturneSaveGame = GetMutableDefault<UKNOCKturneSaveGame>();
 	}
 
-	isPrologue = KNOCKturneSaveGame->isPrologue;
-	DreamFragmentCount = KNOCKturneSaveGame->DreamFragmentCount;
-	DreamDiaryOpenRow = KNOCKturneSaveGame->DreamDiaryOpenRow;
-	GetDreamFragment = KNOCKturneSaveGame->GetDreamFragment;
-	isDreamDiaryUpdated = KNOCKturneSaveGame->isDreamDiaryUpdated;
-	isBattleFail = KNOCKturneSaveGame->isBattleFail;
-	RightafterBattleClear = KNOCKturneSaveGame->RightafterBattleClear;
-	ItemCountList = KNOCKturneSaveGame->ItemCountList;
+	BattleManagerSystem->isPrologue = KNOCKturneSaveGame->isPrologue;
+	BattleManagerSystem->DreamFragmentCount = KNOCKturneSaveGame->DreamFragmentCount;
+	BattleManagerSystem->DreamDiaryOpenRow = KNOCKturneSaveGame->DreamDiaryOpenRow;
+	BattleManagerSystem->GetDreamFragment = KNOCKturneSaveGame->GetDreamFragment;
+	BattleManagerSystem->isDreamDiaryUpdated = KNOCKturneSaveGame->isDreamDiaryUpdated;
+	BattleManagerSystem->isBattleFail = KNOCKturneSaveGame->isBattleFail;
+	BattleManagerSystem->RightafterBattleClear = KNOCKturneSaveGame->RightafterBattleClear;
+	BattleManagerSystem->ItemCountList = KNOCKturneSaveGame->ItemCountList;
 }
 
 void AKNOCKturneGameState::SaveKNOCKturneData()
@@ -45,7 +46,7 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	NewKNOCKturneData->RightafterBattleClear = BattleManagerSystem->RightafterBattleClear;
 	NewKNOCKturneData->ItemCountList = BattleManagerSystem->ItemCountList;
 
-	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, 0)) {
+	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, UserIndex)) {
 		NTLOG(Error, TEXT("SaveGame Error!"));
 	}
 }

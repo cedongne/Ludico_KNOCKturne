@@ -18,24 +18,26 @@ class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 	class UBattleManagerSystem* BattleManagerSystem;
 
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	/*UPROPERTY(Transient)
 	bool isPrologue;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	int32 DreamFragmentCount;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	int32 DreamDiaryOpenRow;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	bool GetDreamFragment;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	bool isDreamDiaryUpdated;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	bool isBattleFail;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
 	bool RightafterBattleClear;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	TArray<int32> ItemCountList;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(Transient)
+	TArray<int32> ItemCountList;*/
+	UPROPERTY(Transient)
 	FString SaveSlotName;
+	UPROPERTY(Transient)
+	int32 UserIndex = 0;
 
 	UFUNCTION(BlueprintCallable)
 	void LoadKNOCKturneData();
