@@ -3,6 +3,7 @@
 
 #include "DreamM.h"
 #include "LevelScriptActor/HubWorldLevelScriptActor.h"
+#include <Blueprint/WidgetBlueprintLibrary.h>
 
 ADreamM::ADreamM()
 {
@@ -14,6 +15,7 @@ void ADreamM::BeginPlay()
 	Super::BeginPlay();
 	
 	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 }
 
 void ADreamM::SelectDialogue() {
@@ -38,8 +40,25 @@ void ADreamM::SelectDialogue() {
 }
 
 void ADreamM::DreamMStartTalk() {
+	// 관장자 상호작용 키와 엔딩 크레딧 제거 키가 E키로 동일하여 이를 방지하기 위함
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEndingCreditWidgetArr, BP_EndingCreditClass);
+	if (AllEndingCreditWidgetArr.Num() > 0) {
+		return;
+	}
+
 	if (Peppy->OverlappedActor == this) {
-		if (BeforeSelectingDialogue) {
+		Peppy->InteractionCameraMove(this);
+
+		if (BattleManagerSystem->RightafterBattleClear) {
+			if (DialogueWidgetClass) {
+				DialogueWidgetRef = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
+				if (DialogueWidgetRef) {
+					DialogueWidgetRef->AddToViewport();
+					DreamMEndCreditTalk();
+				}
+			}
+		}
+		else if (BeforeSelectingDialogue) {
 			SelectDialogue();
 		}
 		else {

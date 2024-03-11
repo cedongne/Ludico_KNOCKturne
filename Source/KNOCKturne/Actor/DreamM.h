@@ -16,6 +16,8 @@ UCLASS()
 class KNOCKTURNE_API ADreamM : public ANPC
 {
 	GENERATED_BODY()
+	class UBattleManagerSystem* BattleManagerSystem;
+	TArray<UUserWidget*> AllEndingCreditWidgetArr;
 
 public:
 	ADreamM();
@@ -29,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UInteractionPopupWidget* InteractionUI;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_EndingCreditClass;
+
 	UFUNCTION(BlueprintCallable)
 	void SelectDialogue();
 	UFUNCTION(BlueprintCallable)
@@ -41,6 +46,8 @@ public:
 	void DreamMDreamFragment();
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void SetPeppyName();
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void DreamMEndCreditTalk();
 
 protected:
 	virtual void BeginPlay() override;

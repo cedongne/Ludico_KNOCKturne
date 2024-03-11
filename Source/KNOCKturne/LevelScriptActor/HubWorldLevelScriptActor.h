@@ -109,6 +109,8 @@ public:
 	ULevelSequencePlayer* LevelSequencePlayer;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	ALevelSequenceActor* SequenceActor;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_EndingCreditClass;
 
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void BlackScreenOn();
@@ -167,11 +169,7 @@ public:
 	UFUNCTION(Blueprintcallable)
 	void StartDreamFragmentDialogue();
 	UFUNCTION(Blueprintcallable)
-	void DreamMDirectionTrue();
-	UFUNCTION(Blueprintcallable)
-	void StartAfterBattleDialogue();
-	UFUNCTION(Blueprintcallable)
-	void AfterBattleDialogueEnded();
+	void DreamMDreamFragmentDirectionTrue();
 	UFUNCTION(Blueprintcallable, BlueprintImplementableEvent)
 	void SetState(FName StateGroup, FName State);
 	UFUNCTION(Blueprintcallable)

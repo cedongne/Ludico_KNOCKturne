@@ -210,7 +210,10 @@ void AHubWorldLevelScriptActor::DefaultLocation() {
 }
 
 void AHubWorldLevelScriptActor::EscKeyEvent() {
-	if (BP_EscClass) {
+	TArray<UUserWidget*> AllEndingCreditWidgetArr;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEndingCreditWidgetArr, BP_EndingCreditClass);
+
+	if (AllEndingCreditWidgetArr.Num() == 0 && BP_EscClass) {
 		BP_EscRef = CreateWidget<UUserWidget>(GetWorld(), BP_EscClass);
 		if (BP_EscRef) {
 			BP_EscRef->AddToViewport();
@@ -468,11 +471,9 @@ void AHubWorldLevelScriptActor::AfterBattleFailHubworldDialogueEnded() {
 }
 
 void AHubWorldLevelScriptActor::TalkWithNpcEnded() {
-	if (DreamMActor->DialogueWidgetRef) {
-		DreamMActor->DialogueWidgetRef->RemoveFromParent();
-	}
-	if (DialogueWidgetRef) {
-		DialogueWidgetRef->RemoveFromParent();
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllDialogueWidgetArr, DialogueWidgetClass);
+	if (AllDialogueWidgetArr[0]) {
+		AllDialogueWidgetArr[0]->RemoveFromParent();
 	}
 	
 	CommonDialogueTableComponent->EmptyStartRandomNpcTalkArr();
@@ -487,7 +488,7 @@ void AHubWorldLevelScriptActor::StartDreamFragmentDialogue() {
 	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
 }
 
-void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
+void AHubWorldLevelScriptActor::DreamMDreamFragmentDirectionTrue() {
 	DialogueWidgetRef->isCameraMoving = true;
 
 	if (BP_DreamFragmentClass) {
@@ -499,19 +500,6 @@ void AHubWorldLevelScriptActor::DreamMDirectionTrue() {
 			NTLOG(Warning, TEXT("BP_DreamFragment creating is failed!"));
 		}
 	}
-}
-
-void AHubWorldLevelScriptActor::StartAfterBattleDialogue() {
-	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllDialogueWidgetArr, DialogueWidgetClass);
-	DialogueWidgetRef = (UDialogueWidget*)AllDialogueWidgetArr[0];
-	DialogueWidgetRef->RichTextBlock_Dialogue->SetVisibility(ESlateVisibility::Visible);
-	CommonDialogueTableComponent->SetDialogueIndexByGroupCode("EP1_AfterBattle_Hubworld");
-	DialogueWidgetRef->GetNextDialogueLine(CommonDialogueTableComponent);
-}
-
-void AHubWorldLevelScriptActor::AfterBattleDialogueEnded() {
-	TalkWithNpcEnded();
-	BattleManagerSystem->RightafterBattleClear = false;
 }
 
 void AHubWorldLevelScriptActor::PrologueEndedAfterFadeOut() {
