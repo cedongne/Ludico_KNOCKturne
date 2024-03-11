@@ -244,6 +244,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 
 				//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -90.0, -30.0));
 				Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(-120.0, -90.0, 0.0));
+				DreamMActor->SetActorRotation(FRotator(0.0, -90.0, 0.0));
 
 				if (BP_BlinkClass) {
 					BP_BlinkRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlinkClass);
