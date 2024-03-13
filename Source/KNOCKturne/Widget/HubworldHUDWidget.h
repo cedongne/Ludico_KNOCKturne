@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -49,16 +49,16 @@ public:
 	class UDreamDiaryWidget* DreamDiaryWidgetRef;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> SaveExitAlertModalClass;
+	TSubclassOf<UUserWidget> SaveAlertModalClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class USaveExitAlertModalWidget* SaveExitAlertModalRef;
+	class USaveAlertModalWidget* SaveAlertModalRef;
 
 	UFUNCTION()
 	void OnClick_ButtonDiary();
 	UFUNCTION()
 	void ClickSave();
 	UFUNCTION()
-	void ClickSaveExitAlertModalYes();
+	void ClickSaveAlertModalYes();
 	UFUNCTION()
-	void ClickSaveExitAlertModalNo();
+	void ClickSaveAlertModalNo();
 };

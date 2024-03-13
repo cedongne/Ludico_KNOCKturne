@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "SaveExitAlertModalWidget.generated.h"
+#include "SaveAlertModalWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class KNOCKTURNE_API USaveExitAlertModalWidget : public UUserWidget
+class KNOCKTURNE_API USaveAlertModalWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	void NativePreConstruct();
@@ -23,8 +23,6 @@ public:
 	class UButton* Button_Yes;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_No;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
-	class UTextBlock* TextBlock_SaveExit;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* TextBlock_Question;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))

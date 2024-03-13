@@ -1,10 +1,10 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "HubworldHUDWidget.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
 #include "GameInstance/BattleManagerSystem.h"
-#include "SaveExitAlertModalWidget.h"
+#include "SaveAlertModalWidget.h"
 
 void UHubworldHUDWidget::NativePreConstruct() {
 	Button_Diary = (UButton*)GetWidgetFromName(TEXT("Button_Diary"));
@@ -50,29 +50,29 @@ void UHubworldHUDWidget::OnClick_ButtonDiary() {
 
 void UHubworldHUDWidget::ClickSave()
 {
-	if (SaveExitAlertModalClass) {
-		SaveExitAlertModalRef = CreateWidget<USaveExitAlertModalWidget>(GetWorld(), SaveExitAlertModalClass);
-		if (SaveExitAlertModalRef) {
-			SaveExitAlertModalRef->AddToViewport();
+	if (SaveAlertModalClass) {
+		SaveAlertModalRef = CreateWidget<USaveAlertModalWidget>(GetWorld(), SaveAlertModalClass);
+		if (SaveAlertModalRef) {
+			SaveAlertModalRef->AddToViewport();
 
 			FDateTime CurrentDateTime = FDateTime::Now();
 			FString LastSaveTime = FString::Printf(TEXT("마지막 저장: %d년 %d월 %d일 %d시 %d분"), CurrentDateTime.GetYear(), CurrentDateTime.GetMonth(), CurrentDateTime.GetDay(), CurrentDateTime.GetHour(), CurrentDateTime.GetMinute());
-			SaveExitAlertModalRef->TextBlock_Warning->SetText(FText::FromString(LastSaveTime));
+			SaveAlertModalRef->TextBlock_Warning->SetText(FText::FromString(LastSaveTime));
 		}
 	}
-	if (SaveExitAlertModalRef) {
-		SaveExitAlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UHubworldHUDWidget::ClickSaveExitAlertModalYes);
-		SaveExitAlertModalRef->Button_No->OnClicked.AddDynamic(this, &UHubworldHUDWidget::ClickSaveExitAlertModalNo);
+	if (SaveAlertModalRef) {
+		SaveAlertModalRef->Button_Yes->OnClicked.AddDynamic(this, &UHubworldHUDWidget::ClickSaveAlertModalYes);
+		SaveAlertModalRef->Button_No->OnClicked.AddDynamic(this, &UHubworldHUDWidget::ClickSaveAlertModalNo);
 	}
 }
 
-void UHubworldHUDWidget::ClickSaveExitAlertModalYes()
+void UHubworldHUDWidget::ClickSaveAlertModalYes()
 {
 	KNOCKturneGameState->SaveKNOCKturneData();
-	SaveExitAlertModalRef->RemoveFromParent();
+	SaveAlertModalRef->RemoveFromParent();
 }
 
-void UHubworldHUDWidget::ClickSaveExitAlertModalNo()
+void UHubworldHUDWidget::ClickSaveAlertModalNo()
 {
-	SaveExitAlertModalRef->RemoveFromParent();
+	SaveAlertModalRef->RemoveFromParent();
 }
