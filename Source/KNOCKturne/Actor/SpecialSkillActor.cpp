@@ -40,7 +40,7 @@ void ASpecialSkillActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
+	if (CheckCanUseSpecialSkill(DeltaTime) && !IsCinematicPlaying && PeppyController->WasInputKeyJustPressed(EKeys::E))
 	{
 		bool UseSpecialSkill = TryUseSpecialSkill();
 		if (UseSpecialSkill) {

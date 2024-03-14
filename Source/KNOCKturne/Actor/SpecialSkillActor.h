@@ -34,6 +34,8 @@ private:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UNiagaraComponent* Effect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsCinematicPlaying = true;
 
 	UFUNCTION(BlueprintCallable)
 	void CreateSpecialSkillData();
