@@ -62,8 +62,6 @@ void ADreamM::DreamMStartTalk() {
 			SelectDialogue();
 		}
 		else {
-			Peppy->InteractionCameraMove(this);
-
 			if (InteractionUI->Image_interaction->Brush.GetResourceName() == "UI_hubworld_talk_v1") {
 				BeforeSelectingDialogue = false;
 				DreamMRandomTalk();

@@ -36,10 +36,6 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_Campfire", BP_PS_Campfire.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_Starlight(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_Starlight"));
 	IconSkillActorMap.Add("Icon_skill_PS_Starlight", BP_PS_Starlight.Class);
-
-	if (ItemCountList.Num() <= 0) {
-		ItemCountList.Init(0, 6);
-	}
 }
 
 void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {

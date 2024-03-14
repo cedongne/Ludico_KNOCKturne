@@ -23,6 +23,7 @@ void UDreamFragmentWidget::NativeConstruct() {
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 
 	if (Button_Select) {
 		Button_Select->OnClicked.AddDynamic(this, &UDreamFragmentWidget::Button_SelectOnClicked);
@@ -47,7 +48,8 @@ void UDreamFragmentWidget::PickRandomItem() {
 	bool NotSatisfiedConditon = false;
 	int RndItemRowNum = rand() % 6;
 
-	if (BattleManagerSystem->ItemCountList[RndItemRowNum] < BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
+	if (BattleManagerSystem->ItemCountList[RndItemRowNum] < 
+		BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
 		for (int i = 0; i < RndItemRowNumArr.Num(); i++) {
 			if (RndItemRowNum == RndItemRowNumArr[i]) {
 				PickRandomItem();

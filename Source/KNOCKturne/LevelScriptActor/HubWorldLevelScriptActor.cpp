@@ -276,23 +276,6 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 	}
 
 	else if (BattleManagerSystem->RightafterBattleClear) {
-		if (BP_BlackClass) {
-			BP_BlackRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlackClass);
-			if (BP_BlackRef) {
-				BP_BlackRef->AddToViewport();
-			}
-			else {
-				NTLOG(Warning, TEXT("BP_Black widget creating is failed!"));
-			}
-		}
-
-		GetWorld()->GetTimerManager().SetTimer(BlackWigetTimerHandle, FTimerDelegate::CreateLambda([&]()
-			{
-				BP_BlackRef->RemoveFromParent();
-
-				GetWorld()->GetTimerManager().ClearTimer(BlackWigetTimerHandle);
-			}), 1.5, false);
-
 		Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
 		/*LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
