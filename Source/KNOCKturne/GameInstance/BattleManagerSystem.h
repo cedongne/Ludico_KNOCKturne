@@ -141,7 +141,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool isPrologue = true;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 DreamFragmentCount = 1;
+	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -151,7 +151,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool isBattleFail = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool RightafterBattleClear = true;
+	bool RightafterBattleClear = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<int32> ItemCountList = { 0, 0, 0, 0, 0, 0 };
 
