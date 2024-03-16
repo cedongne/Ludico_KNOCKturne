@@ -141,6 +141,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool isPrologue = true;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isSkippedBeforeBattleSequence = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool CanSkipBeforeBattleSequence = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamDiaryOpenRow = 0;

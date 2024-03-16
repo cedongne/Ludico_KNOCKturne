@@ -21,6 +21,10 @@ public:
 	UPROPERTY()
 	bool isPrologue;
 	UPROPERTY()
+	bool isSkippedBeforeBattleSequence;
+	UPROPERTY()
+	bool CanSkipBeforeBattleSequence;
+	UPROPERTY()
 	int32 DreamFragmentCount;
 	UPROPERTY()
 	int32 DreamDiaryOpenRow;

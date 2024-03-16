@@ -25,6 +25,8 @@ void AKNOCKturneGameState::LoadKNOCKturneData(){
 	}
 
 	BattleManagerSystem->isPrologue = KNOCKturneSaveGame->isPrologue;
+	BattleManagerSystem->isSkippedBeforeBattleSequence = KNOCKturneSaveGame->isSkippedBeforeBattleSequence;
+	BattleManagerSystem->CanSkipBeforeBattleSequence = KNOCKturneSaveGame->CanSkipBeforeBattleSequence;
 	BattleManagerSystem->DreamFragmentCount = KNOCKturneSaveGame->DreamFragmentCount;
 	BattleManagerSystem->DreamDiaryOpenRow = KNOCKturneSaveGame->DreamDiaryOpenRow;
 	BattleManagerSystem->GetDreamFragment = KNOCKturneSaveGame->GetDreamFragment;
@@ -38,6 +40,8 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 {
 	UKNOCKturneSaveGame* NewKNOCKturneData = NewObject<UKNOCKturneSaveGame>();
 	NewKNOCKturneData->isPrologue = BattleManagerSystem->isPrologue;
+	NewKNOCKturneData->isSkippedBeforeBattleSequence = BattleManagerSystem->isSkippedBeforeBattleSequence;
+	NewKNOCKturneData->CanSkipBeforeBattleSequence = BattleManagerSystem->CanSkipBeforeBattleSequence;
 	NewKNOCKturneData->DreamFragmentCount = BattleManagerSystem->DreamFragmentCount;
 	NewKNOCKturneData->DreamDiaryOpenRow = BattleManagerSystem->DreamDiaryOpenRow;
 	NewKNOCKturneData->GetDreamFragment = BattleManagerSystem->GetDreamFragment;

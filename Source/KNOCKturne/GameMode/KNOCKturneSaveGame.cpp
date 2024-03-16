@@ -6,6 +6,8 @@
 UKNOCKturneSaveGame::UKNOCKturneSaveGame()
 {
 	isPrologue = false;
+	isSkippedBeforeBattleSequence = false;
+	CanSkipBeforeBattleSequence = false;
 	DreamFragmentCount = 0;
 	DreamDiaryOpenRow = 0;
 	GetDreamFragment = false;
