@@ -165,6 +165,10 @@ void APeppy::SlideAction() {
 			FVector Direction = FRotationMatrix(FRotator(0, RotateDegree.Yaw, 0)).GetUnitAxis(EAxis::X);
 			LaunchCharacter(Direction * SlidingSpeed, false, true);
 		}
+
+		// 눈썰매 아이템 사용
+		class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
+		BattleManager->RecoverEPRandomly();
 	}
 }
 

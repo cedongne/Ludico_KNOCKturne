@@ -83,6 +83,9 @@ void ABattleManager::TryUseItem()
 			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
 			BossStatComponent->TryUpdateMaxStatData(FStatType::EP, ItemData.value1N);
 		}
+		else if (ItemName == "Item_sled") {
+			isSledItem = true;
+		}
 		else {
 			NTLOG(Warning, TEXT("Can't Use This Item"));
 		}
@@ -104,6 +107,9 @@ void ABattleManager::EndItem()
 	else if (ItemName == "Item_fresh_sprout") {
 		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
 		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
+	}
+	else if (ItemName == "Item_sled") {
+		isSledItem = false;
 	}
 }
 
@@ -229,4 +235,17 @@ void ABattleManager::Init() {
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);
 	HandledBuffComponents.Add(ActorManagerSystem->PeppyActor->BuffComponent);
 	Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor())->LevelPlay();
+}
+
+void ABattleManager::RecoverEPRandomly()
+{
+	if (!isSledItem)
+		return;
+
+	auto Probability = FMath::FRand();
+
+	if (Probability <= ItemData.value1M) {
+		UStatComponent* PeppyStatComponent = Cast<UStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+		PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, ItemData.value1N);
+	}
 }

@@ -97,6 +97,11 @@ public:
 	/*아이템*/
 	FString ItemName;
 	FItemData ItemData;
+	bool isSledItem;
+
+	// 눈썰매
+	UFUNCTION(BlueprintCallable)
+	void RecoverEPRandomly();
 
 private:
 	class TArray<UBuffComponent*> HandledBuffComponents;
