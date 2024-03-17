@@ -3,6 +3,7 @@
 #include "Component/PeppyStatComponent.h"
 #include "Component/BuffComponent.h"
 #include "LevelScriptActor/HubWorldLevelScriptActor.h"
+#include "BattleManager.h"
 
 APeppy::APeppy()
 {
@@ -210,6 +211,9 @@ void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
 }
 
 void APeppy::Die() {
+	class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
+	BattleManager->EndItem();
+
 	IsDie = true;
 	BP_Die();
 }

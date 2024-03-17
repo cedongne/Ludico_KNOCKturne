@@ -59,11 +59,52 @@ void ABattleManager::BP_InitStartBattle() {
 	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
 	StartBossTurn();
+	TryUseItem();
 }
 
 void ABattleManager::StartPeppyTurn() {
 	SetLeftCurrentTurnTime(ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
+}
+
+void ABattleManager::TryUseItem()
+{
+	if (BattleManagerSystem->FinalItem != "") {
+		ItemName = BattleManagerSystem->FinalItem;
+		ItemData = *BattleTableManagerSystem->ItemTable->FindRow<FItemData>(FName(*ItemName), TEXT("Fail to load ItemData"));
+
+		if (ItemName == "Item_broken_cookie") {
+			ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 + ItemData.value1M;
+		}
+		else if (ItemName == "Item_king_confidential_document") {
+			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
+			BossStatComponent->TryUpdateMaxStatData(FStatType::EP, ItemData.value1N);
+		}
+		else if (ItemName == "Item_fresh_sprout") {
+
+		}
+		else {
+			NTLOG(Warning, TEXT("Can't Use This Item"));
+		}
+	}
+}
+
+void ABattleManager::EndItem()
+{
+	if (ItemName == "") {
+		return;
+	}
+
+	if (ItemName == "Item_broken_cookie") {
+		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed /= 1 + ItemData.value1M;
+	}
+	else if (ItemName == "Item_king_confidential_document") {
+		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
+		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
+	}
+	else if (ItemName == "Item_fresh_sprout") {
+
+	}
 }
 
 void ABattleManager::TurnChange() {

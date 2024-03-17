@@ -154,6 +154,9 @@ void ABoss::ElapseCoolTime()
 }
 
 void ABoss::Die() {
+	class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
+	BattleManager->EndItem();
+
 	IsDie = true;
 	BP_Die();
 }

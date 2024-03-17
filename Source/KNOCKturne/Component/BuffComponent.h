@@ -40,13 +40,13 @@ enum class EBuffType : uint8 {
 UENUM(BlueprintType)
 enum class EBuffTermType : uint8 {
 	Turn	UMETA(DisplayName = "Turn"),
-	Second	UMETA(DisplayName = "Second"),
+	Second	UMETA(DisplayName = "Second")
 };
 
 UENUM(BlueprintType)
 enum class EBuffPositivenessType : uint8 {
 	Positive	UMETA(DisplayName = "Positive"),
-	Negative	UMETA(DisplayName = "Negative"),
+	Negative	UMETA(DisplayName = "Negative")
 };
 
 USTRUCT()

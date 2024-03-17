@@ -38,6 +38,12 @@ bool UStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 	return false;
 }
 
+bool UStatComponent::TryUpdateMaxStatData(FStatType StatType, float Value)
+{
+	NTLOG(Warning, TEXT("TryUpdateMaxStatData() method must be override!"));
+	return false;
+}
+
 void UStatComponent::CreateDamageText(float Value)
 {
 	NTLOG(Warning, TEXT("CreateDamageText() method must be override!"));

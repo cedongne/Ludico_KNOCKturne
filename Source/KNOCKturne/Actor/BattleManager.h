@@ -42,6 +42,9 @@ public:
 	void StartBossTurn();
 	void StartPeppyTurn();
 
+	void TryUseItem();
+	void EndItem();
+
 	void TurnChange();
 
 	void RunTurnTimer(float DeltaTime);
@@ -101,6 +104,9 @@ protected:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
+
+	FString ItemName;
+	FItemData ItemData;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;

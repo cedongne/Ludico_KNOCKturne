@@ -47,5 +47,6 @@ public:
 
 	virtual void GetDamaged(float Value);
 	virtual bool TryUpdateCurStatData(FStatType StatType, float Value);
+	virtual bool TryUpdateMaxStatData(FStatType StatType, float Value);
 	virtual void CreateDamageText(float Value);
 };
