@@ -47,6 +47,10 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
+	if (PeppyActor->TryAvoidAttack() == true) {
+		return;
+	}
+
 	float DamageValue = Value + ActorManagerSystem->BossActor->StatComponent->CurStatData.AttackDamage - this->CurStatData.DefenseDamage;
 
 	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {

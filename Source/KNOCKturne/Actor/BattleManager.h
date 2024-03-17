@@ -84,6 +84,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetBossAndResponseStance();
 
+	/*버프 UI*/
 	UFUNCTION(BlueprintImplementableEvent)
 	void UpdateBossBuffUI();
 	UFUNCTION(BlueprintImplementableEvent)
@@ -92,6 +93,10 @@ public:
 	void UpdatePeppyBuffUI();
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddPeppyBuffUI(EBuffType BuffType);
+
+	/*아이템*/
+	FString ItemName;
+	FItemData ItemData;
 
 private:
 	class TArray<UBuffComponent*> HandledBuffComponents;
@@ -104,9 +109,6 @@ protected:
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
-
-	FString ItemName;
-	FItemData ItemData;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;

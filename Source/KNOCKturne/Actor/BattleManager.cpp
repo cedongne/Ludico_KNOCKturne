@@ -77,11 +77,11 @@ void ABattleManager::TryUseItem()
 			ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 + ItemData.value1M;
 		}
 		else if (ItemName == "Item_king_confidential_document") {
-			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-			BossStatComponent->TryUpdateMaxStatData(FStatType::EP, ItemData.value1N);
+			ActorManagerSystem->PeppyActor->CanAvoidAttack = true;
 		}
 		else if (ItemName == "Item_fresh_sprout") {
-
+			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
+			BossStatComponent->TryUpdateMaxStatData(FStatType::EP, ItemData.value1N);
 		}
 		else {
 			NTLOG(Warning, TEXT("Can't Use This Item"));
@@ -99,11 +99,11 @@ void ABattleManager::EndItem()
 		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed /= 1 + ItemData.value1M;
 	}
 	else if (ItemName == "Item_king_confidential_document") {
-		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
+		ActorManagerSystem->PeppyActor->CanAvoidAttack = false;
 	}
 	else if (ItemName == "Item_fresh_sprout") {
-
+		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
+		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
 	}
 }
 

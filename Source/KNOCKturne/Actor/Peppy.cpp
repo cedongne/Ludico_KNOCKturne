@@ -237,3 +237,21 @@ void APeppy::SetInteractingNpc() {
 		}
 	}
 }
+
+bool APeppy::TryAvoidAttack()
+{
+	if (CanAvoidAttack) {
+		class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
+		auto Probability = FMath::FRand();
+
+		if (Probability <= BattleManager->ItemData.value1M) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
