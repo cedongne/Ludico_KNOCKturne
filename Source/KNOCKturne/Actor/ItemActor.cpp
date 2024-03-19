@@ -38,22 +38,32 @@ void AItemActor::TryUseItem()
 
 		if (ItemName == "Item_broken_cookie") {
 			ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 + ItemData.value1M;
+			ReduceItem();
 		}
 		else if (ItemName == "Item_king_confidential_document") {
 			CanAvoidAttack = true;
+			ReduceItem();
 		}
 		else if (ItemName == "Item_fresh_sprout") {
 			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
 			BossStatComponent->TryUpdateCurStatData(FStatType::MaxEP, ItemData.value1N);
 			BossStatComponent->TryUpdateCurStatData(FStatType::EP, ItemData.value1N);
+			ReduceItem();
 		}
 		else if (ItemName == "Item_sled") {
 			isSledItem = true;
+			ReduceItem();
 		}
 		else {
 			NTLOG(Warning, TEXT("Can't Use This Item"));
 		}
 	}
+}
+
+void AItemActor::ReduceItem()
+{
+	int CurItemNum = BattleManagerSystem->FindItemRow(ItemData.ItemIcon->GetName());
+	BattleManagerSystem->ItemCountList[CurItemNum]--;
 }
 
 void AItemActor::EndItem()

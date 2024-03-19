@@ -28,6 +28,7 @@ protected:
 	bool isSledItem;
 
 	void TryUseItem();
+	void ReduceItem();
 
 public:	
 
