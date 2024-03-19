@@ -3,7 +3,7 @@
 #include "Component/PeppyStatComponent.h"
 #include "Component/BuffComponent.h"
 #include "LevelScriptActor/HubWorldLevelScriptActor.h"
-#include "BattleManager.h"
+#include "GameInstance/ActorManagerSystem.h"
 
 APeppy::APeppy()
 {
@@ -167,8 +167,8 @@ void APeppy::SlideAction() {
 		}
 
 		// 눈썰매 아이템 사용
-		class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
-		BattleManager->RecoverEPRandomly();
+		class UActorManagerSystem* ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+		ActorManagerSystem->ItemActor->RecoverEPRandomly();
 	}
 }
 
@@ -215,8 +215,8 @@ void APeppy::AddDamageBeforeStartTurn(FString EffectId, TArray<int32> Damages) {
 }
 
 void APeppy::Die() {
-	class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
-	BattleManager->EndItem();
+	class UActorManagerSystem* ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+	ActorManagerSystem->ItemActor->EndItem();
 
 	IsDie = true;
 	BP_Die();
@@ -242,20 +242,3 @@ void APeppy::SetInteractingNpc() {
 	}
 }
 
-bool APeppy::TryAvoidAttack()
-{
-	if (CanAvoidAttack) {
-		class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
-		auto Probability = FMath::FRand();
-
-		if (Probability <= BattleManager->ItemData.value1M) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else {
-		return false;
-	}
-}

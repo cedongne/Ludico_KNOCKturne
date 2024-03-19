@@ -135,11 +135,4 @@ public:
 	/*버프*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool HasShieldBuff = false;
-
-	/*아이템*/
-	/*국왕의 비밀문서*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	bool CanAvoidAttack = false;
-	UFUNCTION(BlueprintCallable)
-	bool TryAvoidAttack();
 };

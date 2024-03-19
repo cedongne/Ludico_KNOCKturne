@@ -43,8 +43,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual bool TryUpdateCurStatData(FStatType StatType, float Value) override;
-	UFUNCTION(BlueprintCallable)
-	virtual bool TryUpdateMaxStatData(FStatType StatType, float Value) override;
 
 	void SetDefaultStat();
 

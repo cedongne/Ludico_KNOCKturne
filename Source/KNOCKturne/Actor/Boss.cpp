@@ -1,6 +1,7 @@
 #include "Boss.h"
 #include "BossSkillActor.h"
 #include "GameInstance/KNOCKturneGameInstance.h"
+#include "GameInstance/ActorManagerSystem.h"
 
 ABoss::ABoss()
 {
@@ -154,8 +155,8 @@ void ABoss::ElapseCoolTime()
 }
 
 void ABoss::Die() {
-	class ABattleManager* BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
-	BattleManager->EndItem();
+	class UActorManagerSystem* ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
+	ActorManagerSystem->ItemActor->EndItem();
 
 	IsDie = true;
 	BP_Die();

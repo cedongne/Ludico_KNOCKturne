@@ -62,29 +62,13 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 			BossActor->IsDie = true;
 		}
 		break;
+	case FStatType::MaxEP:
+		CurStatData.MaxEP = FMath::Clamp<int32>(CurStatData.MaxEP + Value, 0, MaxStatData.MaxEP);
 	case FStatType::AttackDamage:
-		CurStatData.AttackDamage += Value;
+		CurStatData.AttackDamage = FMath::Clamp<int32>(CurStatData.AttackDamage + Value, 0, MaxStatData.AttackDamage);
 		break;
 	case FStatType::BossEnergyDrop:
-		CurStatData.BossEnergyDrop += Value;
-		break;
-	default:
-		NTLOG(Error, TEXT("BossStatType is invalid!"));
-		return false;
-	}
-	return true;
-}
-
-bool UBossStatComponent::TryUpdateMaxStatData(FStatType StatType, float Value)
-{
-	switch (StatType) {
-	case FStatType::EP:
-		MaxStatData.EP = FMath::Clamp<int32>(MaxStatData.EP + Value, 0, MaxStatData.MaxEP);
-		if (MaxStatData.EP <= 0) {
-			MaxStatData.EP = 0;
-			// ���� ���� �� Die ó���� �ϱ� ���� Flag�� �����ϰ� BattleManager�� TurnChange()���� ���� Die �޼��带 ȣ����.
-			BossActor->IsDie = true;
-		}
+		CurStatData.BossEnergyDrop = FMath::Clamp<int32>(CurStatData.BossEnergyDrop + Value, 0, MaxStatData.BossEnergyDrop);
 		break;
 	default:
 		NTLOG(Error, TEXT("BossStatType is invalid!"));

@@ -42,9 +42,6 @@ public:
 	void StartBossTurn();
 	void StartPeppyTurn();
 
-	void TryUseItem();
-	void EndItem();
-
 	void TurnChange();
 
 	void RunTurnTimer(float DeltaTime);
@@ -59,6 +56,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AActor> SpecialSkillClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AActor> ItemClass;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
@@ -93,15 +93,6 @@ public:
 	void UpdatePeppyBuffUI();
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddPeppyBuffUI(EBuffType BuffType);
-
-	/*아이템*/
-	FString ItemName;
-	FItemData ItemData;
-	bool isSledItem;
-
-	// 눈썰매
-	UFUNCTION(BlueprintCallable)
-	void RecoverEPRandomly();
 
 private:
 	class TArray<UBuffComponent*> HandledBuffComponents;

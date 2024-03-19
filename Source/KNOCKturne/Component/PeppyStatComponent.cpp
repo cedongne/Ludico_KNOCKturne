@@ -47,7 +47,7 @@ void UPeppyStatComponent::SetDefaultStat() {
 }
 
 void UPeppyStatComponent::GetDamaged(float Value) {
-	if (PeppyActor->TryAvoidAttack() == true) {
+	if (ActorManagerSystem->ItemActor->TryAvoidAttack() == true) {
 		return;
 	}
 

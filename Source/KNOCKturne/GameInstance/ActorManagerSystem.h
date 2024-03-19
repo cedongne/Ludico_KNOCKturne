@@ -7,6 +7,7 @@
 #include "Actor/Peppy.h"
 #include "Actor/BattleManager.h"
 #include "Actor/SpecialSkillActor.h"
+#include "Actor/ItemActor.h"
 
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "ActorManagerSystem.generated.h"
@@ -28,4 +29,6 @@ public:
 	ABattleManager* BattleManager = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	ASpecialSkillActor* SpecialSkillActor = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	AItemActor* ItemActor = nullptr;
 };

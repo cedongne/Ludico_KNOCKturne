@@ -59,7 +59,6 @@ void ABattleManager::BP_InitStartBattle() {
 	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
 	StartBossTurn();
-	TryUseItem();
 }
 
 void ABattleManager::StartPeppyTurn() {
@@ -67,51 +66,6 @@ void ABattleManager::StartPeppyTurn() {
 	BP_StartPeppyTurn();
 }
 
-void ABattleManager::TryUseItem()
-{
-	if (BattleManagerSystem->FinalItem != "") {
-		ItemName = BattleManagerSystem->FinalItem;
-		ItemData = *BattleTableManagerSystem->ItemTable->FindRow<FItemData>(FName(*ItemName), TEXT("Fail to load ItemData"));
-
-		if (ItemName == "Item_broken_cookie") {
-			ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 + ItemData.value1M;
-		}
-		else if (ItemName == "Item_king_confidential_document") {
-			ActorManagerSystem->PeppyActor->CanAvoidAttack = true;
-		}
-		else if (ItemName == "Item_fresh_sprout") {
-			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-			BossStatComponent->TryUpdateMaxStatData(FStatType::EP, ItemData.value1N);
-		}
-		else if (ItemName == "Item_sled") {
-			isSledItem = true;
-		}
-		else {
-			NTLOG(Warning, TEXT("Can't Use This Item"));
-		}
-	}
-}
-
-void ABattleManager::EndItem()
-{
-	if (ItemName == "") {
-		return;
-	}
-
-	if (ItemName == "Item_broken_cookie") {
-		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed /= 1 + ItemData.value1M;
-	}
-	else if (ItemName == "Item_king_confidential_document") {
-		ActorManagerSystem->PeppyActor->CanAvoidAttack = false;
-	}
-	else if (ItemName == "Item_fresh_sprout") {
-		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
-	}
-	else if (ItemName == "Item_sled") {
-		isSledItem = false;
-	}
-}
 
 void ABattleManager::TurnChange() {
 	for (auto SkillActor : SkillActorsOnField) {
@@ -230,22 +184,10 @@ void ABattleManager::Init() {
 	ActorManagerSystem->PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	ActorManagerSystem->BattleManager = this;
 	ActorManagerSystem->SpecialSkillActor = GetWorld()->SpawnActor<ASpecialSkillActor>(SpecialSkillClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
+	ActorManagerSystem->ItemActor = GetWorld()->SpawnActor<AItemActor>(ItemClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	BP_ActorInit();
 
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);
 	HandledBuffComponents.Add(ActorManagerSystem->PeppyActor->BuffComponent);
 	Cast<ABattleFieldLevelScriptActor>(GetWorld()->GetLevelScriptActor())->LevelPlay();
-}
-
-void ABattleManager::RecoverEPRandomly()
-{
-	if (!isSledItem)
-		return;
-
-	auto Probability = FMath::FRand();
-
-	if (Probability <= ItemData.value1M) {
-		UStatComponent* PeppyStatComponent = Cast<UStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
-		PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, ItemData.value1N);
-	}
 }
