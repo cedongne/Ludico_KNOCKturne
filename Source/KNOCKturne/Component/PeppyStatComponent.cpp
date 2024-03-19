@@ -59,6 +59,7 @@ void UPeppyStatComponent::GetDamaged(float Value) {
 	}
 	else {
 		if (CanBeDamaged) {
+			PeppyActor->HitVisualEffect();
 			TryUpdateCurStatData(FStatType::EP, -DamageValue);
 			CreateDamageText(DamageValue);
 		}
