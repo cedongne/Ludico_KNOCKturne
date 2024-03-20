@@ -24,8 +24,8 @@ void APeppySkillActor::LoadSkillDataFromDataTable() {
 	FString BlueprintClassName = GetClass()->GetFName().ToString();
 	SkillData = *(BattleTableManagerSystem->GetPeppySkillTable()->FindRow<FPeppySkillData>(*BlueprintClassName, TEXT("Fail to load PeppySkillData")));
 
-	if (BattleTableManagerSystem->GetCurPeppySkillData().Find(BlueprintClassName) != nullptr) {
-		SkillData.Cost = BattleTableManagerSystem->GetCurPeppySkillData()[BlueprintClassName].Cost;
+	if (BattleTableManagerSystem->GetPeppySkillData().Find(BlueprintClassName) != nullptr) {
+		SkillData.Cost = BattleTableManagerSystem->GetPeppySkillData()[BlueprintClassName].Cost;
 	}
 }
 

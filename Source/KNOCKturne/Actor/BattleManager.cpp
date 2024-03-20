@@ -58,6 +58,7 @@ void ABattleManager::BP_InitStartBattle() {
 	}
 	SetActorTickEnabled(true);
 	IsCalled_InitStartBossTurn = true;
+	ActorManagerSystem->PeppyActor->BuffComponent->UseStarlightNum = 0;
 	StartBossTurn();
 }
 

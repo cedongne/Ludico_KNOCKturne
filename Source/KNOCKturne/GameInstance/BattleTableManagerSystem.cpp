@@ -72,7 +72,21 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
 	
 	SetBossSkillSpawnDataTable();
-	CurPeppySkillData.Add("BP_PS_Starlight_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Starlight_C"), TEXT("Fail to load PeppySkillData"))));
+
+	PeppySkillData.Add("BP_PS_WithYou_C ", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_WithYou_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_ConsolationMusic_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_ConsolationMusic_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_Campfire_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Campfire_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_LetMeHug_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_LetMeHug_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_Starlight_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Starlight_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_CharmingVoice_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_CharmingVoice_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_RedEyes_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_RedEyes_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_AdviceforFreshStart_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AdviceforFreshStart_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_AngryScolding_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AngryScolding_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_ExhaustiveAdvice_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_ExhaustiveAdvice_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_NeedtoRecharge_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_NeedtoRecharge_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_PretendtoCry_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_PretendtoCry_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_EfficientEmpathy_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_EfficientEmpathy_C"), TEXT("Fail to load PeppySkillData"))));
+	PeppySkillData.Add("BP_PS_AmbiguousEmotion_C ", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AmbiguousEmotion_C"), TEXT("Fail to load PeppySkillData"))));
 }
 
 void UBattleTableManagerSystem::SetBossSkillSpawnDataTable() {
@@ -212,6 +226,19 @@ void UBattleTableManagerSystem::AddBossSkillSpawnDataToMap(FString SkillName, TC
 	BossSkillSpawnDataMap.Add(SkillName, FBossSkillSpawnData::SetBossSkillSpawnData(TempSkillObjectClass, TempSkillTransform));
 
 	NTLOG(Log, TEXT("[BossSkillSpawnData] %s is loaded!"), *SkillName);
+}
+
+TMap<FString, FPeppySkillData> UBattleTableManagerSystem::GetPeppySkillData()
+{
+	return PeppySkillData;
+}
+
+void UBattleTableManagerSystem::TryUpdatePeppySkillDataCost(FString BPClassName, float Value)
+{
+	if (PeppySkillData.Find(BPClassName) == nullptr)
+		return;
+
+	PeppySkillData[BPClassName].Cost += Value;
 }
 
 bool UBattleTableManagerSystem::TryUseBossSkillSequential(FBossSkillData SkillData, ABossSkillActor* RefActor) {
@@ -467,21 +494,8 @@ UDataTable* UBattleTableManagerSystem::GetPeppySkillTable() {
 	return PeppySkillTable;
 }
 
-TMap<FString, FPeppySkillData> UBattleTableManagerSystem::GetCurPeppySkillData()
-{
-	return CurPeppySkillData;
-}
-
 FName UBattleTableManagerSystem::GetCurrentBlueprintClassName() {
 	return *(GetClass()->GetFName().ToString());
-}
-
-void UBattleTableManagerSystem::TryUpdateCurSkillDataCost(FString BPClassName, float Value)
-{
-	if (CurPeppySkillData.Find(BPClassName) == nullptr)
-		return;
-
-	CurPeppySkillData[BPClassName].Cost += Value;
 }
 
 FCurEffectIndexSkillData* UBattleTableManagerSystem::TryGetCurEffectIndexBossSkillDataSet(int32 Sequence, FBossSkillData* CurStatData) {

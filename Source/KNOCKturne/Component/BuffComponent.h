@@ -227,6 +227,9 @@ public:
 	bool CanGetMoodBuff = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 AdditionalEnergyByBuff = 0;
+	/*'아름다운 별빛' 사용 횟수*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 UseStarlightNum = 0;
 
 protected:
 	virtual void BeginPlay() override;

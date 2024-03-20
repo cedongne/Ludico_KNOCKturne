@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widget/BattleSetting/PeppyTurnUIWidget.h"
@@ -43,6 +43,7 @@ void UPeppyTurnUIWidget::NativeConstruct()
 
 void UPeppyTurnUIWidget::CreateSkillList()
 {
+	// 지우기
 	BattleManagerSystem->SelectedSkillCodeList.Add(0);
 	BattleManagerSystem->SelectedSkillCodeList.Add(1);
 	BattleManagerSystem->SelectedSkillCodeList.Add(2);
@@ -90,6 +91,7 @@ void UPeppyTurnUIWidget::CreateSkillList()
 		}
 	}
 
+	// 지우기
 	BattleManagerSystem->SelectedSkillCodeList.Remove(0);
 	BattleManagerSystem->SelectedSkillCodeList.Remove(1);
 	BattleManagerSystem->SelectedSkillCodeList.Remove(2);
@@ -102,20 +104,24 @@ void UPeppyTurnUIWidget::CreateSkillList()
 
 void UPeppyTurnUIWidget::SetSkillUI(UPeppyTurnSkillCardWidget* PeppyTurnSkillCardWidget, int RowNum)
 {
-	UTexture2D* Icon = BattleTableManagerSystem->PeppySkillTableRows[RowNum]->SkillIcon;
+	TArray<FString> Keys;
+	BattleTableManagerSystem->PeppySkillData.GetKeys(Keys);
+	FString ClassName = Keys[RowNum];
+
+	UTexture2D* Icon = BattleTableManagerSystem->PeppySkillData[ClassName].SkillIcon;
 	PeppyTurnSkillCardWidget->Image_Icon->SetBrushFromTexture(Icon);
 
-	FString SkillId = *(BattleTableManagerSystem->PeppySkillTableRows[RowNum]->SkillId);
+	FString SkillId = BattleTableManagerSystem->PeppySkillData[ClassName].SkillId;
 	FString Name = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*SkillId.Append("_String")), TEXT(""))->KOR;
 	PeppyTurnSkillCardWidget->TextBlock_SkillName->SetText(FText::FromString(Name));
 
-	FString Stance = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*(BattleTableManagerSystem->PeppySkillTableRows[RowNum]->SkillStance)), TEXT(""))->KOR;
+	FString Stance = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*(BattleTableManagerSystem->PeppySkillData[ClassName].SkillStance)), TEXT(""))->KOR;
 	PeppyTurnSkillCardWidget->TextBlock_Stance->SetText(FText::FromString(Stance));
 
-	FString CoolTime = FString::FromInt(BattleTableManagerSystem->PeppySkillTableRows[RowNum]->SkillCoolTurn);
+	FString CoolTime = FString::FromInt(BattleTableManagerSystem->PeppySkillData[ClassName].SkillCoolTurn);
 	PeppyTurnSkillCardWidget->TextBlock_CoolTimeSec->SetText(FText::FromString(CoolTime));
 
-	FString Energy = FString::FromInt(BattleTableManagerSystem->PeppySkillTableRows[RowNum]->Cost);
+	FString Energy = FString::FromInt(BattleTableManagerSystem->PeppySkillData[ClassName].Cost);
 	PeppyTurnSkillCardWidget->TextBlock_Energy->SetText(FText::FromString(Energy));
 }
 

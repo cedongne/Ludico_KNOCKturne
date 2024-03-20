@@ -38,8 +38,6 @@ protected:
 	void InitSpecialtyIconRowMap();
 	// IconRowMap �ʱ�ȭ
 	void InitItemIconRowMap();
-	// IconSkillActorMap �ʱ�ȭ
-	void InitIconSkillActorMap();
 
 	// �Ƹ����� �����ľ�
 	TSubclassOf<AActor> AmbiguousEmotion_Ref;
@@ -185,8 +183,4 @@ public:
 		"Obsession",
 		"Longing"
 	};
-
-	// '아름다운 별빛' 사용 횟수
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 UseStarlightNum = 0;
 };

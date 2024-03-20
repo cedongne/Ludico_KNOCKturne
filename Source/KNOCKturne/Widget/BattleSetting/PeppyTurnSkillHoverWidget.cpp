@@ -24,15 +24,19 @@ void UPeppyTurnSkillHoverWidget::NativeConstruct()
 
 void UPeppyTurnSkillHoverWidget::SetHoverWidgetUI(int RowNum, bool IsSelected)
 {
-	FPeppySkillData* PeppySkillData = BattleTableManagerSystem->PeppySkillTableRows[RowNum];
-	FString StanceStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*PeppySkillData->SkillStance), TEXT(""))->KOR;
-	FString SkillId = PeppySkillData->SkillId;
-	FString NameStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*SkillId.Append("_String")), TEXT(""))->KOR;
-	FString DescriptionStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*PeppySkillData->SkillDescript), TEXT(""))->KOR;
+	TArray<FString> Keys;
+	BattleTableManagerSystem->PeppySkillData.GetKeys(Keys);
+	FString ClassName = Keys[RowNum];
 
-	Image_Icon->SetBrushFromTexture(PeppySkillData->SkillIcon);
-	TextBlock_CoolTimeSec->SetText(FText::FromString(FString::FromInt(PeppySkillData->SkillCoolTurn)));
-	TextBlock_Energy->SetText(FText::FromString(FString::FromInt(PeppySkillData->Cost)));
+	FPeppySkillData PeppySkillData = BattleTableManagerSystem->PeppySkillData[ClassName];
+	FString StanceStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(PeppySkillData.SkillStance), TEXT(""))->KOR;
+	FString SkillId = PeppySkillData.SkillId;
+	FString NameStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*SkillId.Append("_String")), TEXT(""))->KOR;
+	FString DescriptionStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(PeppySkillData.SkillDescript), TEXT(""))->KOR;
+
+	Image_Icon->SetBrushFromTexture(PeppySkillData.SkillIcon);
+	TextBlock_CoolTimeSec->SetText(FText::FromString(FString::FromInt(PeppySkillData.SkillCoolTurn)));
+	TextBlock_Energy->SetText(FText::FromString(FString::FromInt(PeppySkillData.Cost)));
 	TextBlock_Stance->SetText(FText::FromString(StanceStr));
 	TextBlock_SkillName->SetText(FText::FromString(NameStr));
 	TextBlock_Description->SetText(FText::FromString(RedefineDescription(RowNum)));
