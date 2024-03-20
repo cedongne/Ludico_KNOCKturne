@@ -143,11 +143,11 @@ void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
 	BuffHoverWidget->Image_SkillIcon->SetBrushFromTexture(BuffTable->BuffIcon);
 
 	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
-		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType));
+		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType));
 		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
 	}
 	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->isTermTypeTurn(CurBuffType)) {
-		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->BossActor->BuffComponent->GetRemainTime(CurBuffType));
+		FString RemainTurn = FString::Printf(TEXT("남은 턴: %d턴"), ActorManagerSystem->BossActor->BuffComponent->GetCurDuration(CurBuffType));
 		BuffHoverWidget->TextBlock_RemainTurn->SetText(FText::FromString(RemainTurn));
 	}
 	else {
@@ -188,14 +188,16 @@ void UBuffIconFormWidget::SetHoverBackgroundAngle(UBuffHoverWidget* BuffHoverWid
 void UBuffIconFormWidget::SetProgressBarTerm()
 {
 	float OriginalDuration;
-	float RemainTime = ActorManagerSystem->PeppyActor->BuffComponent->GetRemainTime(CurBuffType);
+	float RemainTime;
 	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
 		OriginalDuration = *ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType);
+		RemainTime = OriginalDuration - ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
 		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
 		ProgressBar_Term->SetPercent(Percent);
 	}
 	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
 		OriginalDuration = *ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType);
+		RemainTime = OriginalDuration - ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
 		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
 		ProgressBar_Term->SetPercent(Percent);
 	}

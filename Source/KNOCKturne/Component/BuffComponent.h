@@ -443,7 +443,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DeleteBuffUI(EBuffType BuffType);
 	UFUNCTION(BlueprintCallable)
-	int32 GetRemainTime(EBuffType BuffType);
+	int32 GetCurDuration(EBuffType BuffType);
 	UFUNCTION(BlueprintCallable)
 	bool isTermTypeTurn(EBuffType BuffType);
 };

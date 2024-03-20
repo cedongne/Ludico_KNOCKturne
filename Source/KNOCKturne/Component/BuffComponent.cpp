@@ -649,7 +649,7 @@ void UBuffComponent::DeleteBuffUI(EBuffType BuffType)
 	}
 }
 
-int32 UBuffComponent::GetRemainTime(EBuffType BuffType)
+int32 UBuffComponent::GetCurDuration(EBuffType BuffType)
 {
 	if (!HasBuff(BuffType))
 		return 0;
