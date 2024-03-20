@@ -183,18 +183,9 @@ void USpecialSkillIconWidget::SetCoolTimeText()
 
 	if (CoolTime == 0) {
 		TextBlock_Timer->SetVisibility(ESlateVisibility::Hidden);
-		bool CanUseSpecialSkill = ActorManagerSystem->SpecialSkillActor->IsSatisfyUseCondition();
-
-		if (CanUseSpecialSkill) {
-			Image_Opacity60->SetVisibility(ESlateVisibility::Hidden);
-			Image_Active->SetVisibility(ESlateVisibility::Visible);
-			TextBlock_SpecialtyKey->SetVisibility(ESlateVisibility::Visible);
-		}
-		else {
-			Image_Opacity60->SetVisibility(ESlateVisibility::Visible);
-			Image_Active->SetVisibility(ESlateVisibility::Hidden);
-			TextBlock_SpecialtyKey->SetVisibility(ESlateVisibility::Hidden);
-		}
+		Image_Opacity60->SetVisibility(ESlateVisibility::Hidden);
+		Image_Active->SetVisibility(ESlateVisibility::Visible);
+		TextBlock_SpecialtyKey->SetVisibility(ESlateVisibility::Visible);
 	}
 	else {
 		TextBlock_Timer->SetVisibility(ESlateVisibility::Visible);
