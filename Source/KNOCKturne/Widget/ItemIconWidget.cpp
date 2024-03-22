@@ -104,6 +104,10 @@ FString UItemIconWidget::RedefineDescription(int RowNum)
 
 void UItemIconWidget::CreateHoverWidget()
 {
+	if (BattleManagerSystem->FinalItem == "") {
+		return;
+	}
+
 	if (HUDItemHoverWidgetClass) {
 		HUDItemHoverWidget = CreateWidget<UHUDItemHoverWidget>(GetWorld(), HUDItemHoverWidgetClass);
 		if (HUDItemHoverWidget) {

@@ -17,6 +17,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+	class APeppy* Peppy;
 	class APeppyController* PeppyController;
 	class UBattleManagerSystem* BattleManagerSystem;
 	class UBattleTableManagerSystem* BattleTableManagerSystem;

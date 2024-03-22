@@ -230,6 +230,9 @@ public:
 	/*'아름다운 별빛' 사용 횟수*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 UseStarlightNum = 0;
+	/*'지속 회복' 회복 중*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isRecoveringEP = false;
 
 protected:
 	virtual void BeginPlay() override;
@@ -246,6 +249,8 @@ protected:
 
 	class UNiagaraSystem* NS_PretendNotSick_2;
 	class UNiagaraSystem* NS_ShieldBreak;
+	class UNiagaraSystem* NS_GatheringEnergy;
+	class UNiagaraSystem* NS_GatheringEnergy_2;
 
 private:
 	const TMap<EBuffType, FString> BuffTypeToStringMap = {
@@ -315,6 +320,8 @@ private:
 	/*휴식 회복 버프용: 2초 전 페피 위치*/
 	FVector PrePeppyLocation;
 	float TempDelayTime;
+	FTimerHandle EffectHandle;
+	bool isPeppyMove = false;
 
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

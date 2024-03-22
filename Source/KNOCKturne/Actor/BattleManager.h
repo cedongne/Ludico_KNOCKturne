@@ -62,6 +62,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool isPeppyTurn;
 	
 	UFUNCTION(BlueprintCallable)
 	void BP_InitStartBattle();

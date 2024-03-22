@@ -43,6 +43,7 @@ void ABattleManager::Tick(float DeltaTime)
 }
 
 void ABattleManager::StartBossTurn() {
+	isPeppyTurn = false;
 	ProcessDamageBeforeStartTurn();
 	SetLeftCurrentTurnTime(ActorManagerSystem->BossActor->StatComponent->CurStatData.Turn);
 	ActorManagerSystem->BossActor->SpawnBossSkill();
@@ -63,6 +64,7 @@ void ABattleManager::BP_InitStartBattle() {
 }
 
 void ABattleManager::StartPeppyTurn() {
+	isPeppyTurn = true;
 	SetLeftCurrentTurnTime(ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
 }

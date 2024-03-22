@@ -27,6 +27,7 @@ void ASpecialSkillActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
 	PeppyController = (APeppyController*)UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
@@ -40,12 +41,13 @@ void ASpecialSkillActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	SetActorLocation(Peppy->GetActorLocation());
+
 	if (CheckCanUseSpecialSkill(DeltaTime) && !IsCinematicPlaying && PeppyController->WasInputKeyJustPressed(EKeys::E))
 	{
 		bool UseSpecialSkill = TryUseSpecialSkill();
 		if (UseSpecialSkill) {
 			SpawnEffect();
-			SpecialSkillData.CoolTime = OriginalCoolTime;
 		}
 	}
 }
@@ -54,6 +56,7 @@ void ASpecialSkillActor::CreateSpecialSkillData()
 {
 	SpecialSkillData = *SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT("Fail to load SpecialSkillData"));
 	OriginalCoolTime = SpecialSkillData.CoolTime;
+	SpecialSkillData.CoolTime = 0;
 }
 
 //bool ASpecialSkillActor::IsSatisfyUseCondition()

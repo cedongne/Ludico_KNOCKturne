@@ -30,6 +30,16 @@ UBuffComponent::UBuffComponent()
 	NTCHECK(DT_NS_ShieldBreak.Succeeded());
 	NS_ShieldBreak = DT_NS_ShieldBreak.Object;
 
+	FString NS_GatheringEnergy_Path = TEXT("/Game/Assets/Effects/SpecialSkillEffect/NS_GatheringEnergy.NS_GatheringEnergy");
+	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> DT_NS_GatheringEnergy(*NS_GatheringEnergy_Path);
+	NTCHECK(DT_NS_GatheringEnergy.Succeeded());
+	NS_GatheringEnergy = DT_NS_GatheringEnergy.Object;
+
+	FString NS_GatheringEnergy_2_Path = TEXT("/Game/Assets/Effects/SpecialSkillEffect/NS_GatheringEnergy_2.NS_GatheringEnergy_2");
+	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> DT_NS_GatheringEnergy_2(*NS_GatheringEnergy_2_Path);
+	NTCHECK(DT_NS_GatheringEnergy_2.Succeeded());
+	NS_GatheringEnergy_2 = DT_NS_GatheringEnergy_2.Object;
+
 	Peppy = Cast<APeppy>(GetOwner());
 }
 
@@ -46,8 +56,8 @@ void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	OperateBuffs_PerSecond(DeltaTime);
-	TryOperatePeriodicRecovery(DeltaTime);
 	ElapseDeltaTime(DeltaTime);
+	TryOperatePeriodicRecovery(DeltaTime);
 }
 
 bool UBuffComponent::IsPositiveBuff(EBuffType BuffType)
@@ -491,8 +501,16 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 
 void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 {
-	if (!HasPositiveBuffs_PerTurn.Contains(EBuffType::PeriodicRecovery))
+	if (!HasPositiveBuffs_PerTurn.Contains(EBuffType::PeriodicRecovery) || BattleManager->isPeppyTurn || isRecoveringEP) {
 		return;
+	}
+
+	isPeppyMove = Peppy->GetMovementComponent()->Velocity.Size() > 0 ? true : false;
+	NTLOG(Warning, TEXT("%s"), isPeppyMove ? TEXT("true") : TEXT("false"));
+
+	if (isPeppyMove) {
+		return;
+	}
 
 	AActor* TargetActor = TargetOfBuff[EBuffType::PeriodicRecovery];
 	FBuffData BuffData = HasPositiveBuffs_PerTurn[EBuffType::PeriodicRecovery];
@@ -509,10 +527,22 @@ void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 		FVector CurPeppyLocation = ActorManagerSystem->PeppyActor->GetActorLocation();
 
 		if (PrePeppyLocation == CurPeppyLocation) {
+			isRecoveringEP = true;
 			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
 			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
+			ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_GatheringEnergy_2, true);
 			NTLOG(Warning, TEXT("PeriodicRecovery: EP +%d"), BuffData.Value_N);
+
+			GetWorld()->GetTimerManager().SetTimer(EffectHandle, FTimerDelegate::CreateLambda([&]()
+				{
+					isRecoveringEP = false;
+
+					GetWorld()->GetTimerManager().ClearTimer(EffectHandle);
+				}), 2.38, false);
 		}
+	}
+	else {
+		ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_GatheringEnergy, true);
 	}
 }
 
