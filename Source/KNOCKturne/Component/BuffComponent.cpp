@@ -509,7 +509,11 @@ void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 	NTLOG(Warning, TEXT("%s"), isPeppyMove ? TEXT("true") : TEXT("false"));
 
 	if (isPeppyMove) {
+		ActorManagerSystem->SpecialSkillActor->Effect->SetActive(false);
 		return;
+	}
+	else {
+		ActorManagerSystem->SpecialSkillActor->Effect->SetActive(true);
 	}
 
 	AActor* TargetActor = TargetOfBuff[EBuffType::PeriodicRecovery];
