@@ -49,6 +49,7 @@ void ABattleManager::StartBossTurn() {
 	ActorManagerSystem->BossActor->SpawnBossSkill();
 	BP_StartBossTurn();
 	SetBossAndResponseStance();
+	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600, 760.0f, -850.0f));
 }
 
 /* �ش� �޼���� ���� �������Ʈ ��� �ʱ�ȭ ȣ�� Ÿ�̹� ���� ���� ���� ���� 1ȸ�� ���� �����մϴ�.������ Turn ���� ������ ���� C++ Ŭ���� �������� �̷�����ϴ�. */
@@ -67,6 +68,7 @@ void ABattleManager::StartPeppyTurn() {
 	isPeppyTurn = true;
 	SetLeftCurrentTurnTime(ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
+	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600, 760.0f, -750.0f));
 }
 
 
