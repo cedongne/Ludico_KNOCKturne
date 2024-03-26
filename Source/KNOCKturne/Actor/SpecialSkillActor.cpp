@@ -56,7 +56,6 @@ void ASpecialSkillActor::CreateSpecialSkillData()
 {
 	SpecialSkillData = *SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT("Fail to load SpecialSkillData"));
 	OriginalCoolTime = SpecialSkillData.CoolTime;
-	SpecialSkillData.CoolTime = 0;
 }
 
 //bool ASpecialSkillActor::IsSatisfyUseCondition()
