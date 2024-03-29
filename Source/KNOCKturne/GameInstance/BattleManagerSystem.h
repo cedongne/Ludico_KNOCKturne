@@ -117,6 +117,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<FString> SelectedSkillIconNameList;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<FString> PeppySkillStanceList;
+
 	// ������ �̸����� ��ų ���� ã��
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<AActor> FindSkillActor(FString IconName);

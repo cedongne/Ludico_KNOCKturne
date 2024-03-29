@@ -49,7 +49,7 @@ void ABattleManager::StartBossTurn() {
 	ActorManagerSystem->BossActor->SpawnBossSkill();
 	BP_StartBossTurn();
 	SetBossAndResponseStance();
-	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600, 760.0f, -850.0f));
+	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600.0f, 760.0f, -850.0f));
 }
 
 /* �ش� �޼���� ���� �������Ʈ ��� �ʱ�ȭ ȣ�� Ÿ�̹� ���� ���� ���� ���� 1ȸ�� ���� �����մϴ�.������ Turn ���� ������ ���� C++ Ŭ���� �������� �̷�����ϴ�. */
@@ -68,7 +68,7 @@ void ABattleManager::StartPeppyTurn() {
 	isPeppyTurn = true;
 	SetLeftCurrentTurnTime(ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Turn);
 	BP_StartPeppyTurn();
-	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600, 760.0f, -750.0f));
+	ActorManagerSystem->BossActor->SetActorLocation(FVector(1600.0f, 760.0f, -750.0f));
 }
 
 
@@ -188,8 +188,9 @@ void ABattleManager::Init() {
 	ActorManagerSystem->BossActor = GetWorld()->SpawnActor<ABoss>(BossActorSubClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
 	ActorManagerSystem->PeppyActor = Cast<APeppy>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	ActorManagerSystem->BattleManager = this;
-	ActorManagerSystem->SpecialSkillActor = GetWorld()->SpawnActor<ASpecialSkillActor>(SpecialSkillClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
-	ActorManagerSystem->ItemActor = GetWorld()->SpawnActor<AItemActor>(ItemClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 90.0f, 0.0f));
+	ActorManagerSystem->SpecialSkillActor = GetWorld()->SpawnActor<ASpecialSkillActor>(SpecialSkillClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 0.0f, 0.0f));
+	ActorManagerSystem->ItemActor = GetWorld()->SpawnActor<AItemActor>(ItemClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 0.0f, 0.0f));
+	ActorManagerSystem->BossHitEffectActor = GetWorld()->SpawnActor<ABossHitEffectActor>(BossHitEffectClass, FVector(1600.0f, 760.0f, 0.0f), FRotator(0.0f, 0.0f, 0.0f));
 	BP_ActorInit();
 
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);

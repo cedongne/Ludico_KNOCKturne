@@ -36,7 +36,8 @@ private:
 public:
 	UPROPERTY(Transient, BlueprintReadOnly)
 	FBossStatData CurStatData;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool GetDamage = false;
 
 	UFUNCTION(BlueprintCallable)
 	void GetDamaged(float Value) override;

@@ -31,6 +31,7 @@ void UPeppyTurnUIWidget::NativeConstruct()
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
 	BattleManagerSystem->SelectedSkillIconNameList.Empty();
+	BattleManagerSystem->PeppySkillStanceList.Empty();
 
 	CreateSkillList();
 	CreateSelectedSkillList();
@@ -230,7 +231,11 @@ void UPeppyTurnUIWidget::SetSkillActorList()
 			if (BattleManagerSystem->IconSkillActorMap.Contains(iconname)) {
 				if (UKismetSystemLibrary::IsValidClass(*(BattleManagerSystem->IconSkillActorMap[iconname]))) {
 					BattleManagerSystem->SelectedSkillActorClassList.Add(*BattleManagerSystem->IconSkillActorMap[iconname]);
+					
+					int32 CurSkillRowNum = BattleManagerSystem->FindSkillRow(iconname);
+					FPeppySkillData* CurPeppySkillData = BattleTableManagerSystem->PeppySkillTableRows[CurSkillRowNum];
 					BattleManagerSystem->SelectedSkillIconNameList.Add(iconname);
+					BattleManagerSystem->PeppySkillStanceList.Add(CurPeppySkillData->SkillStance);
 				}
 			}
 		}

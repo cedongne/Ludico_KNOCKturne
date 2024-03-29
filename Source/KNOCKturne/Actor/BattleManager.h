@@ -60,6 +60,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AActor> ItemClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AActor> BossHitEffectClass;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FString, AActor*> SkillActorsOnField;
 

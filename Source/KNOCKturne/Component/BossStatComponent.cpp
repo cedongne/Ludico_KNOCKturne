@@ -45,6 +45,9 @@ void UBossStatComponent::SetDefaultStat() {
 }
 
 void UBossStatComponent::GetDamaged(float Value) {
+	if (Value > 0) {
+		GetDamage = true;
+	}
 	float DamageValue = Value + ActorManagerSystem->PeppyActor->StatComponent->CurStatData.AttackDamage - this->CurStatData.DefenseDamage;
 
 	BossActor->PlayAttackedMontage();

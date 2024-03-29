@@ -8,6 +8,7 @@
 #include "Actor/BattleManager.h"
 #include "Actor/SpecialSkillActor.h"
 #include "Actor/ItemActor.h"
+#include "Actor/BossHitEffectActor.h"
 
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "ActorManagerSystem.generated.h"
@@ -31,4 +32,6 @@ public:
 	ASpecialSkillActor* SpecialSkillActor = nullptr;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	AItemActor* ItemActor = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	ABossHitEffectActor* BossHitEffectActor = nullptr;
 };
