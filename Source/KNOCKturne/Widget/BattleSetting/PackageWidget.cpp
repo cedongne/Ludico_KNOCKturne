@@ -13,13 +13,19 @@
 #include "Components/UniformGridPanel.h"
 #include "Components/TextBlock.h"
 #include "Components/ScrollBox.h"
+#include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
 #include <GameInstance/DialogueManagerSystem.h>
 #include <Blueprint/WidgetBlueprintLibrary.h>
 #include "PackageSelectedUIWidget.h"
+#include <Blueprint/SlateBlueprintLibrary.h>
+#include <Blueprint/WidgetLayoutLibrary.h>
 
 void UPackageWidget::NativePreConstruct()
 {
 	Super::NativePreConstruct();
+
+	CanvasPanel = (UCanvasPanel*)GetWidgetFromName(TEXT("CanvasPanel"));
 	UniformGridPanel_Skill = (UUniformGridPanel*)GetWidgetFromName(TEXT("UniformGridPanel_Skill"));
 	UniformGridPanel_Specialty = (UUniformGridPanel*)GetWidgetFromName(TEXT("UniformGridPanel_Specialty"));
 	UniformGridPanel_Item = (UUniformGridPanel*)GetWidgetFromName(TEXT("UniformGridPanel_Item"));
@@ -57,6 +63,7 @@ void UPackageWidget::NativeConstruct()
 	CreateSkillList();
 	CreateSpecialtyList();
 	CreateItemList();
+	// SetSkillListsPos();
 	// 선택한 스킬 칸 리스트 UI 생성
 	CreateSelectedSkillList();
 	// 이전 전투 세팅 기록이 있으면 불러온다
@@ -87,11 +94,21 @@ void UPackageWidget::NativeConstruct()
 	}
 }
 
+void UPackageWidget::SetSkillListsPos()
+{
+	FVector2D SkillListPixelPos;
+	FVector2D SkillListViewportPos;
+	USlateBlueprintLibrary::LocalToViewport(UniformGridPanel_Skill, UniformGridPanel_Skill->GetCachedGeometry(), FVector2D(0.0, 0.0), SkillListPixelPos, SkillListViewportPos);
+
+	UWidgetLayoutLibrary::SlotAsCanvasSlot(UniformGridPanel_Specialty)->SetPosition(SkillListViewportPos);
+	UWidgetLayoutLibrary::SlotAsCanvasSlot(UniformGridPanel_Item)->SetPosition(SkillListViewportPos);
+}
+
 void UPackageWidget::CreateSkillList()
 {
 	int row = 0;
 
-	for (int i = 0; i < 14; i++) {
+	for (int i = 0; i < 10; i++) {
 		if (PackageSkillCardWidgetClass) {
 			UPackageSkillCardWidget* PackageSkillCardWidget = CreateWidget<UPackageSkillCardWidget>(GetWorld(), PackageSkillCardWidgetClass);
 			if (PackageSkillCardWidget) {
@@ -134,12 +151,17 @@ void UPackageWidget::CreateSpecialtyList()
 	int row = 0;
 
 	for (int i = 0; i < 8; i++) {
-		if (i == 5 || i == 7) {
+		if (i > 3) {
 			if (BP_BlankSpaceClass) {
 				UUserWidget* BP_BlankSpaceRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlankSpaceClass);
 				if (BP_BlankSpaceRef) {
-					UniformGridPanel_Specialty->AddChildToUniformGrid(BP_BlankSpaceRef, row, 1);
-					++row;
+					if (i % 2 == 1) {
+						UniformGridPanel_Specialty->AddChildToUniformGrid(BP_BlankSpaceRef, row, 1);
+						++row;
+					}
+					else {
+						UniformGridPanel_Specialty->AddChildToUniformGrid(BP_BlankSpaceRef, row, 0);
+					}
 				}
 			}
 		}
@@ -189,12 +211,17 @@ void UPackageWidget::CreateItemList()
 	int row = 0;
 
 	for (int i = 0; i < 8; i++) {
-		if (i == 5 || i == 7) {
+		if (i > 3) {
 			if (BP_BlankSpaceClass) {
 				UUserWidget* BP_BlankSpaceRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlankSpaceClass);
 				if (BP_BlankSpaceRef) {
-					UniformGridPanel_Item->AddChildToUniformGrid(BP_BlankSpaceRef, row, 1);
-					++row;
+					if (i % 2 == 1) {
+						UniformGridPanel_Item->AddChildToUniformGrid(BP_BlankSpaceRef, row, 1);
+						++row;
+					}
+					else {
+						UniformGridPanel_Item->AddChildToUniformGrid(BP_BlankSpaceRef, row, 0);
+					}
 				}
 			}
 		}
@@ -694,6 +721,12 @@ void UPackageWidget::RemoveAllHoverWidgets()
 
 void UPackageWidget::OpenBattleLevel()
 {
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEnterBattleWidgetArr, EnterBattleWidgetClass);
+	if (AllEnterBattleWidgetArr[0]) {
+		UUserWidget* EnterBattleWidget = AllEnterBattleWidgetArr[0];
+		EnterBattleWidget->RemoveFromParent();
+	}
+
 	if (BP_FadeInOutClass) {
 		BP_FadeInOut = CreateWidget<UUserWidget>(GetWorld(), BP_FadeInOutClass);
 		if (BP_FadeInOut) {

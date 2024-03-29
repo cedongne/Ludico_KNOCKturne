@@ -36,6 +36,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> ItemSkillHoverWidgetClass;
 
+	// 특수기, 아이템 리스트 위치 설정
+	UFUNCTION(BlueprintCallable)
+	void SetSkillListsPos();
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* UI_beforeBattle_skill_click;
@@ -50,6 +54,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* UI_beforeBattle_item_default;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
+	class UCanvasPanel* CanvasPanel;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UUniformGridPanel* UniformGridPanel_Skill;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))

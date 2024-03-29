@@ -20,8 +20,8 @@ UBattleManagerSystem::UBattleManagerSystem() {
 	IconSkillActorMap.Add("Icon_skill_PS_WithYou", BP_PS_WithYou.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_EfficientEmpathy(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_EfficientEmpathy"));
 	IconSkillActorMap.Add("Icon_skill_PS_EfficientEmpathy", BP_PS_EfficientEmpathy.Class);
-	static ConstructorHelpers::FClassFinder<AActor> BP_PS_LetMeHug(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_LetMeHug"));
-	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);
+	/*static ConstructorHelpers::FClassFinder<AActor> BP_PS_LetMeHug(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_LetMeHug"));
+	IconSkillActorMap.Add("Icon_skill_PS_LetMeHug", BP_PS_LetMeHug.Class);*/
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_CharmingVoice(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_CharmingVoice"));
 	IconSkillActorMap.Add("Icon_skill_PS_CharmingVoice", BP_PS_CharmingVoice.Class);
 	static ConstructorHelpers::FClassFinder<AActor> BP_PS_RedEyes(TEXT("/Game/Blueprints/Skills/Peppy/BP_PS_RedEyes"));
@@ -91,17 +91,17 @@ void UBattleManagerSystem::InitSkillIconRowMap() {
 	SkillIconRowMap.Add("Icon_skill_PS_WithYou", 0);
 	SkillIconRowMap.Add("Icon_skill_PS_ConsolationMusic", 1);
 	SkillIconRowMap.Add("Icon_skill_PS_Campfire", 2);
-	SkillIconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
-	SkillIconRowMap.Add("Icon_skill_PS_Starlight", 4);
-	SkillIconRowMap.Add("Icon_skill_PS_CharmingVoice", 5);
-	SkillIconRowMap.Add("Icon_skill_PS_RedEyes", 6);
-	SkillIconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
-	SkillIconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
-	SkillIconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 9);
-	SkillIconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
-	SkillIconRowMap.Add("Icon_skill_PS_PretendtoCry", 11);
-	SkillIconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 12);
-	SkillIconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 13);
+	// SkillIconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
+	SkillIconRowMap.Add("Icon_skill_PS_Starlight", 3);
+	SkillIconRowMap.Add("Icon_skill_PS_CharmingVoice", 4);
+	SkillIconRowMap.Add("Icon_skill_PS_RedEyes", 5);
+	// SkillIconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
+	// SkillIconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
+	SkillIconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 6);
+	// SkillIconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
+	SkillIconRowMap.Add("Icon_skill_PS_PretendtoCry", 7);
+	SkillIconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 8);
+	SkillIconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 9);
 }
 
 int32 UBattleManagerSystem::FindSkillRow(FString IconName) {
@@ -112,9 +112,9 @@ void UBattleManagerSystem::InitSpecialtyIconRowMap() {
 	SpecialtyIconRowMap.Add("Icon_skill_special_wakeup", 0);
 	SpecialtyIconRowMap.Add("Icon_skill_special_gatherenergy", 1);
 	SpecialtyIconRowMap.Add("Icon_skill_special_positivethinking", 2);
-	SpecialtyIconRowMap.Add("Icon_skill_special_narrowescape", 3);
-	SpecialtyIconRowMap.Add("Icon_skill_special_pretendnotsick", 4);
-	SpecialtyIconRowMap.Add("Icon_skill_special_twolives", 5);
+	// SpecialtyIconRowMap.Add("Icon_skill_special_narrowescape", 3);
+	SpecialtyIconRowMap.Add("Icon_skill_special_pretendnotsick", 3);
+	// SpecialtyIconRowMap.Add("Icon_skill_special_twolives", 5);
 }
 
 int32 UBattleManagerSystem::FindSpecialtyRow(FString IconName) {
@@ -126,16 +126,14 @@ void UBattleManagerSystem::InitItemIconRowMap() {
 	ItemIconRowMap.Add("Icon_Item_sled", 1);
 	ItemIconRowMap.Add("Icon_Item_king_confidential_document", 2);
 	ItemIconRowMap.Add("Icon_Item_fresh_sprout", 3);
-	ItemIconRowMap.Add("Icon_Item_energy_cube", 4);
-	ItemIconRowMap.Add("Icon_Item_eyedrop", 5);
+	// ItemIconRowMap.Add("Icon_Item_energy_cube", 4);
+	// ItemIconRowMap.Add("Icon_Item_eyedrop", 5);
 }
 
 int32 UBattleManagerSystem::FindItemRow(FString IconName) {
 	return *ItemIconRowMap.Find(IconName);
 }
 
-
-/*���� ��*/
 TSubclassOf<AActor> UBattleManagerSystem::FindSkillActor(FString IconName) {
 	if (IconSkillActorMap.Contains(IconName)) {
 		return *(IconSkillActorMap[IconName]);
@@ -150,9 +148,7 @@ void UBattleManagerSystem::AddSelectedSkillActorClassList(TSubclassOf<AActor> Sk
 }
 
 void UBattleManagerSystem::UpdateDreamDiaryWhenGameOver() {
-	// DreamDiaryOpenRow = FMath::Clamp((DreamDiaryOpenRow + 1), 0, 4);
-
-	if (DreamDiaryOpenRow < 3) {
+		if (DreamDiaryOpenRow < 3) {
 		DreamDiaryOpenRow += 1;
 		isDreamDiaryUpdated = true;
 	}

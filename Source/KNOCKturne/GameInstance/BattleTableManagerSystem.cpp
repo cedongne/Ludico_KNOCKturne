@@ -76,14 +76,14 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	PeppySkillData.Add("BP_PS_WithYou_C ", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_WithYou_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_ConsolationMusic_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_ConsolationMusic_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_Campfire_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Campfire_C"), TEXT("Fail to load PeppySkillData"))));
-	PeppySkillData.Add("BP_PS_LetMeHug_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_LetMeHug_C"), TEXT("Fail to load PeppySkillData"))));
+	// PeppySkillData.Add("BP_PS_LetMeHug_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_LetMeHug_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_Starlight_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_Starlight_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_CharmingVoice_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_CharmingVoice_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_RedEyes_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_RedEyes_C"), TEXT("Fail to load PeppySkillData"))));
-	PeppySkillData.Add("BP_PS_AdviceforFreshStart_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AdviceforFreshStart_C"), TEXT("Fail to load PeppySkillData"))));
-	PeppySkillData.Add("BP_PS_AngryScolding_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AngryScolding_C"), TEXT("Fail to load PeppySkillData"))));
+	// PeppySkillData.Add("BP_PS_AdviceforFreshStart_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AdviceforFreshStart_C"), TEXT("Fail to load PeppySkillData"))));
+	// PeppySkillData.Add("BP_PS_AngryScolding_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AngryScolding_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_ExhaustiveAdvice_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_ExhaustiveAdvice_C"), TEXT("Fail to load PeppySkillData"))));
-	PeppySkillData.Add("BP_PS_NeedtoRecharge_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_NeedtoRecharge_C"), TEXT("Fail to load PeppySkillData"))));
+	//PeppySkillData.Add("BP_PS_NeedtoRecharge_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_NeedtoRecharge_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_PretendtoCry_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_PretendtoCry_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_EfficientEmpathy_C", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_EfficientEmpathy_C"), TEXT("Fail to load PeppySkillData"))));
 	PeppySkillData.Add("BP_PS_AmbiguousEmotion_C ", *(GetPeppySkillTable()->FindRow<FPeppySkillData>(TEXT("BP_PS_AmbiguousEmotion_C"), TEXT("Fail to load PeppySkillData"))));
@@ -467,9 +467,7 @@ void UBattleTableManagerSystem::OperateSkillByIndex(int32 EffectSequence, AActor
 	}
 	else {
 		NTLOG(Error, TEXT("No Boss skill index %d"), SkillData.SkillIndex);
-	}
-
-	
+	}	
 }
 
 FPeppyStatData UBattleTableManagerSystem::GetPeppyStatDataOnTable(FString DataType) {
