@@ -190,7 +190,6 @@ void ABattleManager::Init() {
 	ActorManagerSystem->BattleManager = this;
 	ActorManagerSystem->SpecialSkillActor = GetWorld()->SpawnActor<ASpecialSkillActor>(SpecialSkillClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 0.0f, 0.0f));
 	ActorManagerSystem->ItemActor = GetWorld()->SpawnActor<AItemActor>(ItemClass, FVector(1600.0f, 760.0f, -850.0f), FRotator(0.0f, 0.0f, 0.0f));
-	ActorManagerSystem->BossHitEffectActor = GetWorld()->SpawnActor<ABossHitEffectActor>(BossHitEffectClass, FVector(1600.0f, 760.0f, 0.0f), FRotator(0.0f, 0.0f, 0.0f));
 	BP_ActorInit();
 
 	HandledBuffComponents.Add(ActorManagerSystem->BossActor->BuffComponent);
