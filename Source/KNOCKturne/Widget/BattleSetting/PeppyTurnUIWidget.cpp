@@ -30,6 +30,8 @@ void UPeppyTurnUIWidget::NativeConstruct()
 	BattleManagerSystem = GameInstance->GetSubsystem<UBattleManagerSystem>();
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
+
+	BattleManagerSystem->SelectedSkillActorClassList.Empty();
 	BattleManagerSystem->SelectedSkillIconNameList.Empty();
 	BattleManagerSystem->PeppySkillStanceList.Empty();
 
@@ -223,8 +225,6 @@ void UPeppyTurnUIWidget::ClickSkip()
 
 void UPeppyTurnUIWidget::SetSkillActorList()
 {
-	BattleManagerSystem->SelectedSkillActorClassList.Empty();
-
 	for (int i = 0; i < SelectedUIListArr.Num(); i++) {
 		if (SelectedUIListArr[i]->Button_Cancel->GetVisibility() == ESlateVisibility::Visible) {
 			FString iconname = SelectedUIListArr[i]->BP_PeppyTurnIcon->Image_SelectedSkillIcon->Brush.GetResourceName().ToString();
