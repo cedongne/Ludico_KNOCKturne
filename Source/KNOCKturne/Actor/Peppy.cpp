@@ -139,6 +139,10 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 void APeppy::SlideAction() {
+	if (GetWorld()->GetMapName() != "UEDPIE_0_LV_Battle") {
+		return;
+	}
+
 	NTLOG_S(Warning);
 	if (CanSlide) {
 		if (FollowTime <= ShortPressThreshold) {
