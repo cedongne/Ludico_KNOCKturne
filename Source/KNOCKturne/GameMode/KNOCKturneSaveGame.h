@@ -38,4 +38,12 @@ public:
 	bool RightafterBattleClear;
 	UPROPERTY()
 	TArray<int32> ItemCountList;
+	UPROPERTY()
+	int32 TryBattleCount;
+	UPROPERTY()
+	FTimespan TotalPlayTime;
+	UPROPERTY()
+	FTimespan BattleClearTime;
+	UPROPERTY()
+	bool isAfterCredit;
 };

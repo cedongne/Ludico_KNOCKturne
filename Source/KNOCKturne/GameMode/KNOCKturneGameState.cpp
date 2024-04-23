@@ -34,6 +34,10 @@ void AKNOCKturneGameState::LoadKNOCKturneData(){
 	BattleManagerSystem->isBattleFail = KNOCKturneSaveGame->isBattleFail;
 	BattleManagerSystem->RightafterBattleClear = KNOCKturneSaveGame->RightafterBattleClear;
 	BattleManagerSystem->ItemCountList = KNOCKturneSaveGame->ItemCountList;
+	BattleManagerSystem->TryBattleCount = KNOCKturneSaveGame->TryBattleCount;
+	BattleManagerSystem->TotalPlayTime = KNOCKturneSaveGame->TotalPlayTime;
+	BattleManagerSystem->BattleClearTime = KNOCKturneSaveGame->BattleClearTime;
+	BattleManagerSystem->isAfterCredit = KNOCKturneSaveGame->isAfterCredit;
 }
 
 void AKNOCKturneGameState::SaveKNOCKturneData()
@@ -49,6 +53,10 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	NewKNOCKturneData->isBattleFail = BattleManagerSystem->isBattleFail;
 	NewKNOCKturneData->RightafterBattleClear = BattleManagerSystem->RightafterBattleClear;
 	NewKNOCKturneData->ItemCountList = BattleManagerSystem->ItemCountList;
+	NewKNOCKturneData->TryBattleCount = BattleManagerSystem->TryBattleCount;
+	NewKNOCKturneData->TotalPlayTime = BattleManagerSystem->TotalPlayTime;
+	NewKNOCKturneData->BattleClearTime = BattleManagerSystem->BattleClearTime;
+	NewKNOCKturneData->isAfterCredit = BattleManagerSystem->isAfterCredit;
 
 	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, UserIndex)) {
 		NTLOG(Error, TEXT("SaveGame Error!"));

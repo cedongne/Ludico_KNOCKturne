@@ -186,4 +186,20 @@ public:
 		"Obsession",
 		"Longing"
 	};
+
+	// Credit - And You
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 TryBattleCount = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FDateTime StartPlayTime = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FTimespan TotalPlayTime = 0;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FDateTime StartBattleTime = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FTimespan BattleClearTime = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isAfterCredit = false;
 };

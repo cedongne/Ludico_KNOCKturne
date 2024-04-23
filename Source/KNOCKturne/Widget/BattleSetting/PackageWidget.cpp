@@ -556,6 +556,9 @@ void UPackageWidget::SaveSelectedItem()
 			NTLOG(Warning, TEXT("Cannot Find ItemRow: %s!"), *IconName);
 		}
 	}
+	else {
+		BattleManagerSystem->FinalItem = "";
+	}
 }
 
 void UPackageWidget::LoadBeforeSelectedSkills()
@@ -721,6 +724,8 @@ void UPackageWidget::RemoveAllHoverWidgets()
 
 void UPackageWidget::OpenBattleLevel()
 {
+	BattleManagerSystem->TryBattleCount++;
+
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEnterBattleWidgetArr, EnterBattleWidgetClass);
 	if (AllEnterBattleWidgetArr[0]) {
 		UUserWidget* EnterBattleWidget = AllEnterBattleWidgetArr[0];

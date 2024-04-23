@@ -275,7 +275,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			}), 2, false);
 	}
 
-	else if (BattleManagerSystem->RightafterBattleClear) {
+	else if (BattleManagerSystem->RightafterBattleClear || BattleManagerSystem->isAfterCredit) {
 		Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
 		/*LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
@@ -302,6 +302,9 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 		GetWorld()->GetTimerManager().SetTimer(CreateHUDTimerHandle, FTimerDelegate::CreateLambda([&]()
 			{
 				CreateHubworldHUD();
+				if (BattleManagerSystem->isAfterCredit == true) {
+					BattleManagerSystem->isAfterCredit = false;
+				}
 				GetWorld()->GetTimerManager().ClearTimer(CreateHUDTimerHandle);
 			}), 2, false);
 
@@ -339,6 +342,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 						UWidgetLayoutLibrary::RemoveAllWidgets(this);
 						CreateHubworldHUD();
 						BattleFailDialogueWithEventBinding();
+						BattleManagerSystem->isBattleFail = false;
 
 						GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
 					}), 3.44, false);

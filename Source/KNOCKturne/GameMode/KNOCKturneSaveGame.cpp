@@ -15,4 +15,8 @@ UKNOCKturneSaveGame::UKNOCKturneSaveGame()
 	isBattleFail = false;
 	RightafterBattleClear = false;
 	ItemCountList.Init(0, 6);
+	TryBattleCount = 0;
+	TotalPlayTime = 0;
+	BattleClearTime = 0;
+	isAfterCredit = false;
 }

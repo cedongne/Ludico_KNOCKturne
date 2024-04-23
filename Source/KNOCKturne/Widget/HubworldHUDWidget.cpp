@@ -68,6 +68,9 @@ void UHubworldHUDWidget::ClickSave()
 
 void UHubworldHUDWidget::ClickSaveAlertModalYes()
 {
+	FDateTime SaveTime = FDateTime::Now();
+	BattleManagerSystem->TotalPlayTime += SaveTime - BattleManagerSystem->StartPlayTime;
+
 	KNOCKturneGameState->SaveKNOCKturneData();
 	SaveAlertModalRef->RemoveFromParent();
 }
