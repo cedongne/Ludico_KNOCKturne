@@ -23,7 +23,6 @@ class KNOCKTURNE_API UAndYouWidget : public UUserWidget
 	void SetBattleClearTime();
 	void SetTryBattleCountText();
 	void SetSelectedSkills();
-	void SetSpecialSkillItemPos();
 	void SetPlayTime();
 
 public:

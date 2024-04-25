@@ -158,7 +158,7 @@ void ABoss::Die() {
 	class UActorManagerSystem* ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
 	ActorManagerSystem->ItemActor->EndItem();
 
-	BattleManagerSystem->BattleClearTime = BattleManagerSystem->StartBattleTime - FDateTime::Now();
+	BattleManagerSystem->BattleClearTime = FDateTime::Now() - BattleManagerSystem->StartBattleTime;
 
 	IsDie = true;
 	BP_Die();

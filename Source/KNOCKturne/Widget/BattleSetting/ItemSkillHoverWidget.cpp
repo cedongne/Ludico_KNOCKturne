@@ -99,7 +99,7 @@ void UItemSkillHoverWidget::ClickButton()
 {
 	int CurItemRowNum = BattleManagerSystem->FindItemRow(Image_Icon->Brush.GetResourceName().ToString());
 	int CurItemCount = BattleManagerSystem->ItemCountList[CurItemRowNum];
-	if (CurItemCount == 0)
+	if (CurItemCount <= 0)
 		return;
 
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {

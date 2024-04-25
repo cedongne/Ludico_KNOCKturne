@@ -61,4 +61,8 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, UserIndex)) {
 		NTLOG(Error, TEXT("SaveGame Error!"));
 	}
+
+	FDateTime SaveTime = FDateTime::Now();
+	BattleManagerSystem->TotalPlayTime += SaveTime - BattleManagerSystem->StartPlayTime;
+	BattleManagerSystem->StartPlayTime = FDateTime::Now();
 }

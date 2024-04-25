@@ -38,16 +38,6 @@ void UAndYouWidget::NativeConstruct()
 	SetTryBattleCountText();
 	SetSelectedSkills();
 	SetPlayTime();
-
-	/*테스트*/
-	BattleManagerSystem->SelectedSkillCodeList.Add(0);
-	BattleManagerSystem->SelectedSkillCodeList.Add(1);
-	BattleManagerSystem->SelectedSkillCodeList.Add(2);
-	BattleManagerSystem->SelectedSkillCodeList.Add(3);
-	BattleManagerSystem->SelectedSkillCodeList.Add(4);
-	BattleManagerSystem->FinalSpecialSkill = "Skill_Special_Pretendnotsick";
-	BattleManagerSystem->FinalItem = "Item_sled";
-	/*테스트*/
 }
 
 void UAndYouWidget::SetBattleClearTime()
@@ -85,7 +75,7 @@ void UAndYouWidget::SetTryBattleCountText()
 {
 	int TryBattle = BattleManagerSystem->TryBattleCount;
 	if (TryBattle < 10) {
-		FString TryBattleStr = "0" + TryBattle;
+		FString TryBattleStr = "0" + FString::FromInt(TryBattle);
 		TextBlock_TryBattleCount->SetText(FText::FromString(TryBattleStr));
 	}
 	else {
@@ -105,36 +95,32 @@ void UAndYouWidget::SetSelectedSkills()
 		SkillImg->SetVisibility(ESlateVisibility::Hidden);
 	}
 
-	UTexture2D* SpecialSkill = BattleTableManagerSystem->SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon;
-	Image_SpecialSkill->SetBrushFromTexture(SpecialSkill);
+	UTexture2D* SpecialSkillImg = BattleTableManagerSystem->SpecialSkillTable->FindRow<FSpecialSkillTable>(FName(*BattleManagerSystem->FinalSpecialSkill), TEXT(""))->SpecialSkillIcon;
+	if (BattleManagerSystem->SelectedSkillCodeList.Num() <= 4) {
+		UImage* SpecialSkill = (UImage*)UniformGridPanel_Skill->GetChildAt(4);
+		SpecialSkill->SetBrushFromTexture(SpecialSkillImg);
+		SpecialSkill->SetVisibility(ESlateVisibility::Visible);
 
-	if (BattleManagerSystem->FinalItem != "") {
-		UTexture2D* Item = BattleTableManagerSystem->ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon;
-		Image_Item->SetBrushFromTexture(Item);
-	}
-	else {
+		UImage* Item = (UImage*)UniformGridPanel_Skill->GetChildAt(5);
+		if (BattleManagerSystem->FinalItem != "") {
+			UTexture2D* ItemImg = BattleTableManagerSystem->ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon;
+			Item->SetBrushFromTexture(ItemImg);
+			Item->SetVisibility(ESlateVisibility::Visible);
+		}
+
+		Image_SpecialSkill->SetVisibility(ESlateVisibility::Hidden);
 		Image_Item->SetVisibility(ESlateVisibility::Hidden);
 	}
-
-	SetSpecialSkillItemPos();
-}
-
-void UAndYouWidget::SetSpecialSkillItemPos()
-{
-	if (BattleManagerSystem->SelectedSkillCodeList.Num() > 4) {
-		return;
+	else {
+		Image_SpecialSkill->SetBrushFromTexture(SpecialSkillImg);
+		if (BattleManagerSystem->FinalItem != "") {
+			UTexture2D* ItemImg = BattleTableManagerSystem->ItemTable->FindRow<FItemData>(FName(*BattleManagerSystem->FinalItem), TEXT(""))->ItemIcon;
+			Image_Item->SetBrushFromTexture(ItemImg);
+		}
+		else {
+			Image_Item->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
-
-	FVector2D SpecialSkillPixelPos;
-	FVector2D SpecialSkillViewportPos;
-	USlateBlueprintLibrary::LocalToViewport(UniformGridPanel_Skill->GetChildAt(4), UniformGridPanel_Skill->GetChildAt(4)->GetCachedGeometry(), FVector2D(0.0, 0.0), SpecialSkillPixelPos, SpecialSkillViewportPos);
-
-	FVector2D ItemPixelPos;
-	FVector2D ItemViewportPos;
-	USlateBlueprintLibrary::LocalToViewport(UniformGridPanel_Skill->GetChildAt(5), UniformGridPanel_Skill->GetChildAt(5)->GetCachedGeometry(), FVector2D(0.0, 0.0), ItemPixelPos, ItemViewportPos);
-	
-	UWidgetLayoutLibrary::SlotAsCanvasSlot(Image_SpecialSkill)->SetPosition(SpecialSkillPixelPos);
-	UWidgetLayoutLibrary::SlotAsCanvasSlot(Image_Item)->SetPosition(ItemPixelPos);
 }
 
 void UAndYouWidget::SetPlayTime()
