@@ -96,10 +96,11 @@ void ABattleManager::TurnChange() {
 		CurrentTurnType = PeppySkillUsingTurn;
 		break;
 	case PeppySkillUsingTurn:
-		ActorManagerSystem->BossActor->SpawnBossSkillWhenStartBossTurn();
 		if (ActorManagerSystem->BossActor->IsDie) {
 			Cast<ANTBattleGameMode>(UGameplayStatics::GetGameMode(GetWorld()))->GameClear();
+			break;
 		}
+		ActorManagerSystem->BossActor->SpawnBossSkillWhenStartBossTurn();
 		StartBossTurn();
 		CurrentTurnType = BossTurn;
 		BattleManagerSystem->UpdateRoundInfo();
