@@ -46,7 +46,7 @@ void ABoss::SpawnBossSkill() {
 	}
 
 	TArray<FString> CurBossStanceSkillArray = GetSpawnableBossSkills(BossSkillKeyArray, CurBossSkillStance);
-	/*for (auto Key : BossSkillKeyArray) {
+	for (auto Key : BossSkillKeyArray) {
 		FString SkillObjectClassName = BattleTableManagerSystem->BossSkillSpawnDataMap[Key].SkillObjectClass->GetName();
 		auto TempSkillData = BattleTableManagerSystem->BossContactSkillTable->FindRow<FBossSkillData>(*(SkillObjectClassName), TEXT(""));
 		if (TempSkillData == nullptr) {
@@ -56,7 +56,7 @@ void ABoss::SpawnBossSkill() {
 		if (TempSkillData->SkillStance == CurBossSkillStance && !BossSkillNameCoolTimeMap.Contains(TempSkillData->BossSkillID)) {
 			CurBossStanceSkillArray.Add(Key);
 		}
-	}*/
+	}
 
 	// 스탠스가 디폴트가 아닌 스킬을 시전해야 하는데, 모두 쿨타임이 지나지 않았을 때
 	if (CurBossStanceSkillArray.Num() == 0 && CurBossSkillStance != "Default") {
@@ -72,7 +72,7 @@ void ABoss::SpawnBossSkill() {
 	}*/
 
 	if (CurBossStanceSkillArray.Num() == 0) {
-		NTLOG(Error, TEXT("BossSkillSpawnDataMap loading is invlid!"));
+		NTLOG(Error, TEXT("BossSkillSpawnDataMap loading is invalid!"));
 	}
 	FBossSkillSpawnData SpawnData = BattleTableManagerSystem->BossSkillSpawnDataMap[CurBossStanceSkillArray[FMath::Rand() % CurBossStanceSkillArray.Num()]];
 	FTransform SpawnTransform = SpawnData.SkillTransform[FMath::Rand() % CurBossStanceSkillArray.Num()];
