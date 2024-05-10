@@ -14,6 +14,7 @@ class KNOCKTURNE_API UPackageSkillCardWidget : public UCommonSkillCardWidget
 {
 	GENERATED_BODY()
 
+
 protected:
 	void NativePreConstruct() override;
 	void NativeConstruct() override;
@@ -33,4 +34,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UUserWidget> SkillCardHoverWidgetClass;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> PackageWidgetClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UPackageWidget* PackageWidget;
 };

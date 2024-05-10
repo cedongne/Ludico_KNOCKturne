@@ -127,6 +127,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (ExposeOnSpawn = true))
 	bool IsEnterBattle;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool isScrolling = false;
+
 	UFUNCTION()
 	void CreateSkillList();
 	UFUNCTION()

@@ -2,7 +2,10 @@
 
 
 #include "Widget/BattleSetting/PackageSkillCardWidget.h"
+#include "GameMode/PeppyController.h"
+#include "PackageWidget.h"
 #include "PackageSkillHoverWidget.h"
+#include <Blueprint/WidgetBlueprintLibrary.h>
 
 void UPackageSkillCardWidget::NativePreConstruct()
 {
@@ -29,6 +32,16 @@ int32 UPackageSkillCardWidget::GetCardSkillRowNum()
 
 void UPackageSkillCardWidget::CreateSkillHoverWidget()
 {
+	TArray<UUserWidget*> AllPackageWidgetArr;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPackageWidgetArr, PackageWidgetClass);
+	if (AllPackageWidgetArr.Num() > 0) {
+		PackageWidget = (UPackageWidget*)AllPackageWidgetArr[0];
+
+		if (PackageWidget->isScrolling) {
+			return;
+		}
+	}
+
 	bool isSelected;
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox")
 		isSelected = false;
