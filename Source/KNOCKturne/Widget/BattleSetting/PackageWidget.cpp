@@ -396,7 +396,7 @@ void UPackageWidget::Exit()
 	RemoveAllHoverWidgets();
 
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEnterBattleWidgetArr, EnterBattleWidgetClass);
-	if (AllEnterBattleWidgetArr[0]) {
+	if (AllEnterBattleWidgetArr.Num() > 0) {
 		AllEnterBattleWidgetArr[0]->SetIsEnabled(true);
 	}
 }
@@ -725,6 +725,7 @@ void UPackageWidget::RemoveAllHoverWidgets()
 void UPackageWidget::OpenBattleLevel()
 {
 	BattleManagerSystem->TryBattleCount++;
+	SelectedUIListArr.Empty();
 
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllEnterBattleWidgetArr, EnterBattleWidgetClass);
 	if (AllEnterBattleWidgetArr[0]) {
