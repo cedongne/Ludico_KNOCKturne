@@ -82,7 +82,8 @@
 						<Action Name="" ID="{9068113C-4B07-475D-98D7-DCD93FD62DB9}" ShortID="15542853">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="2"/>
-								<Property Name="FadeTime" Type="Real64" Value="1"/>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
 								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
@@ -93,11 +94,12 @@
 						</Action>
 						<Action Name="" ID="{1F3026A7-C6F5-4549-9FA4-2DEBAEAD9785}" ShortID="151756858">
 							<PropertyList>
-								<Property Name="FadeTime" Type="Real64" Value="1"/>
+								<Property Name="Delay" Type="Real64" Value="3"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="BGM_Credit_75bpm4-4_L29M" ID="{69F0FFA0-1363-41AA-90FF-BA60AFC37C3E}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
+									<ObjectRef Name="Credit" ID="{E0F87836-4609-473E-9CF2-0051D11DC170}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
