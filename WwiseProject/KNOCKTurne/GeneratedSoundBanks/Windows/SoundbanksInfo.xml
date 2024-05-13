@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{542A2A72-8FC4-2F36-C78D-32D4AC8694F1}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{90EFCCA2-60AD-0B7A-B0A7-EB70CF2615B5}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -392,7 +392,7 @@
 						<MediaRef Id="142174096"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2319053217" Name="Credit_BGM" ObjectPath="\Events\MUS\Credit_BGM" GUID="{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}" DurationType="OneShot" DurationMin="36" DurationMax="36">
+				<Event Id="2319053217" Name="Credit_BGM" ObjectPath="\Events\MUS\Credit_BGM" GUID="{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="858183081"/>
 						<MediaRef Id="903571056"/>
@@ -600,5 +600,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{651AD629-7F26-E508-87BF-2DCBFA179677}</FileHash>
+	<FileHash>{4F5E38F9-D669-C021-5F03-52DA8A66C061}</FileHash>
 </SoundBanksInfo>

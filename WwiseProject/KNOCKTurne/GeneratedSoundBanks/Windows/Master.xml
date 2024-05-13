@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<SoundBanks>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{542A2A72-8FC4-2F36-C78D-32D4AC8694F1}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{90EFCCA2-60AD-0B7A-B0A7-EB70CF2615B5}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -317,7 +317,7 @@
 						<MediaRef Id="142174096"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="2319053217" Name="Credit_BGM" ObjectPath="\Events\MUS\Credit_BGM" GUID="{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}" DurationType="OneShot" DurationMin="36" DurationMax="36">
+				<Event Id="2319053217" Name="Credit_BGM" ObjectPath="\Events\MUS\Credit_BGM" GUID="{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="858183081"/>
 						<MediaRef Id="903571056"/>
@@ -525,5 +525,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{1F755032-27B0-A640-C18E-58B0F334887D}</FileHash>
+	<FileHash>{E354455F-467B-26DF-927B-2EC120C330FA}</FileHash>
 </SoundBanksInfo>

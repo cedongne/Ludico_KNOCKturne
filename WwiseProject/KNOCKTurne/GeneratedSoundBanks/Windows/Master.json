@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{542A2A72-8FC4-2F36-C78D-32D4AC8694F1}",
+    "Hash": "{90EFCCA2-60AD-0B7A-B0A7-EB70CF2615B5}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -672,9 +672,7 @@
       "Name": "Credit_BGM",
       "ObjectPath": "\\Events\\MUS\\Credit_BGM",
       "GUID": "{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}",
-      "DurationType": "OneShot",
-      "DurationMin": "36",
-      "DurationMax": "36",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "858183081"
@@ -1248,6 +1246,6 @@
     ]
    }
   ],
-  "FileHash": "{E8303C01-7F70-9BD2-E955-4D7B27017F9B}"
+  "FileHash": "{CCC1EBEB-58C8-046A-361C-72CCBDF7084A}"
  }
 }
