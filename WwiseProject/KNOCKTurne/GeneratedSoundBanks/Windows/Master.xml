@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<SoundBanks>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{95AE7AC4-1D39-4E6F-6815-1432CDB586BB}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{542A2A72-8FC4-2F36-C78D-32D4AC8694F1}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -142,10 +142,6 @@
 					<ShortName>BookPaperback_S08FO.177.wav</ShortName>
 					<CachePath>SFX/BookPaperback_S08FO.177_10C4C929.wem</CachePath>
 				</File>
-				<File Id="534625915" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>BGM_Credit_75bpm4-4_L29M.wav</ShortName>
-					<CachePath>SFX/BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem</CachePath>
-				</File>
 				<File Id="566353784" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BattleLast.wav</ShortName>
 					<CachePath>SFX/BattleLast_D79FB2B7.wem</CachePath>
@@ -221,6 +217,10 @@
 				<File Id="901777490" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>MGxSM_snap_dry_stick_and_leaf_11.wav</ShortName>
 					<CachePath>SFX/MGxSM_snap_dry_stick_and_leaf_11_10C4C929.wem</CachePath>
+				</File>
+				<File Id="903571056" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BGM_SomeWhere.wav</ShortName>
+					<CachePath>SFX/BGM_SomeWhere_D79FB2B7.wem</CachePath>
 				</File>
 				<File Id="903646689" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_Hover_Door.wav</ShortName>
@@ -315,6 +315,12 @@
 				<Event Id="1505888634" Name="CountDown" ObjectPath="\Events\Function\CountDown" GUID="{1B90EFDB-177B-4B80-852C-57AEE5071F38}" DurationType="OneShot" DurationMin="3" DurationMax="3">
 					<MediaRefs>
 						<MediaRef Id="142174096"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2319053217" Name="Credit_BGM" ObjectPath="\Events\MUS\Credit_BGM" GUID="{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}" DurationType="OneShot" DurationMin="36" DurationMax="36">
+					<MediaRefs>
+						<MediaRef Id="858183081"/>
+						<MediaRef Id="903571056"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="2419847841" Name="DeepBreath" ObjectPath="\Events\IntroCutScene\DeepBreath" GUID="{E8D32E34-4759-4CF8-A35F-BF54F0E01CED}" DurationType="OneShot" DurationMin="2.285737" DurationMax="2.285737">
@@ -519,5 +525,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{8D67EB5F-1341-7462-68A1-6217AB35E8A5}</FileHash>
+	<FileHash>{1F755032-27B0-A640-C18E-58B0F334887D}</FileHash>
 </SoundBanksInfo>

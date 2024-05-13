@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="Project" SchemaVersion="110" WwiseVersion="v2022.1.1" WwiseBuild="8100">
+<WwiseDocument Type="Project" SchemaVersion="110" WwiseVersion="v2022.1.9" WwiseBuild="8365">
 	<ProjectInfo>
 		<Project Name="KNOCKTurne" ID="{29DE7C1E-D597-435F-9500-D35F3AF9E99A}">
 			<Platforms>
@@ -29,7 +29,6 @@
 					</ValueList>
 				</Property>
 				<Property Name="LicenseKey" Type="string" Value="PHByb2plY3QgaWQ9IjEyOTEwIiBtYXNrPSJOU1ZJNzY5MSIgZW5jPSIwIj48bGlj ZW5zZSBpZD0iMSIgbmFtZT0iV3dpc2UiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iMTAi IGV4cGlyZXM9IjIwMjMtMDEtMzEiICAvPjxsaWNlbnNlIGlkPSIyMSIgbmFtZT0i TWFpbnRlbmFuY2UiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIw MjMtMDEtMzEiICAvPjxsaWNlbnNlIGlkPSI3MCIgbmFtZT0iSW5kaWUgTGljZW5z ZSIgdHlwZT0iMSIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAyMy0wMS0zMSIg IC8+PC9wcm9qZWN0Pg==|1kBDaWOEyv5Ykfp5umGywx42bbTyudwIUdf7aqfzbly re6lUtt1amtkPKmoJ2R5KDobn6uDiNLUK+hEmy9aknFwre/pD//6CnE8NXJda2A7 sMYWqwWbB0aR8SuOQdWKtInTdAUggvkIhhQs6Oe6V4ZAM7X6dlHY8uFuYMvzmaBu oTVd95aCKymEer67ycQ6ubOQTatBc8vab3NGZx+WZnvFt0l3OfKrJ1PPVOvzUTux ZAD/RLPbKxflyzFGM7K2UTqwJQM9/kbuQ5Dnfi2cuwLNr5i5c7Mm1Dt6WwN1xRlY Ua20j908+eJcbgqIK/nRISdIgEDphsv9L+gZYt1vdRg== "/>
-				<Property Name="RemoveUnusedGeneratedFiles" Type="bool" Value="True"/>
 				<Property Name="SoundBankHeaderFilePath" Type="string" Value="GeneratedSoundBanks"/>
 				<Property Name="SoundBankPaths" Type="string">
 					<ValueList>
@@ -919,6 +918,11 @@
 						<Property Name="LicenseKey" Type="string">
 							<ValueList>
 								<Value></Value>
+							</ValueList>
+						</Property>
+						<Property Name="LineEnding" Type="Uint16">
+							<ValueList>
+								<Value>0</Value>
 							</ValueList>
 						</Property>
 						<Property Name="MaxDangerousVirtualVoices" Type="Uint32">
@@ -12885,7 +12889,7 @@
 						</Property>
 					</PropertyList>
 				</SharedPropertyList>
-				<SharedPropertyList ClassName="" PluginType="3" CompanyID="0" PluginID="186">
+				<SharedPropertyList ClassName="Mastering Suite" PluginType="3" CompanyID="0" PluginID="186">
 					<PropertyList>
 						<Property Name="Color" Type="int16">
 							<ValueList>

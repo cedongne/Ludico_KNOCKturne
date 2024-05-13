@@ -179,6 +179,19 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="Door" ID="{047718FC-81AD-4EDE-BFDB-AE171F071135}" ShortID="189419139">
+							<PropertyList>
+								<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
+								<Property Name="MaxSoundPerInstance" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="UseMaxSoundPerInstance" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>

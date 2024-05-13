@@ -5,7 +5,7 @@
 			<ChildrenList>
 				<MusicSegment Name="BGM_Credit_75bpm4-4_L29M" ID="{69F0FFA0-1363-41AA-90FF-BA60AFC37C3E}" ShortID="243266201">
 					<PropertyList>
-						<Property Name="EndPosition" Type="Real64" Value="89600"/>
+						<Property Name="EndPosition" Type="Real64" Value="36000"/>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -23,11 +23,11 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="BGM_Credit_75bpm4-4_L29M" ID="{8723E4F8-6CBD-499E-BA49-CC14B620A634}">
+								<AudioFileSource Name="BGM_SomeWhere" ID="{24009124-3FB6-4766-B399-AB7CE20A6F48}">
 									<Language>SFX</Language>
-									<AudioFile>BGM_Credit_75bpm4-4_L29M.wav</AudioFile>
+									<AudioFile>BGM_SomeWhere.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="534625915"/>
+										<MediaID ID="903571056"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
@@ -48,13 +48,13 @@
 													<ObjectList Name="Clips">
 														<Reference>
 															<Local>
-																<MusicClip Name="BGM_Credit_75bpm4-4_L29M" ID="{82CE2302-2F17-4ECD-AB0E-2EFB583C8088}">
+																<MusicClip Name="BGM_SomeWhere" ID="{78A5D137-174A-4674-A109-7AB569F01372}">
 																	<PropertyList>
-																		<Property Name="EndTrimOffset" Type="Real64" Value="89600"/>
+																		<Property Name="EndTrimOffset" Type="Real64" Value="36000"/>
 																		<Property Name="FadeInMode" Type="int16" Value="0"/>
 																		<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																	</PropertyList>
-																	<AudioSourceRef Name="BGM_Credit_75bpm4-4_L29M" ID="{8723E4F8-6CBD-499E-BA49-CC14B620A634}"/>
+																	<AudioSourceRef Name="BGM_SomeWhere" ID="{24009124-3FB6-4766-B399-AB7CE20A6F48}"/>
 																</MusicClip>
 															</Local>
 														</Reference>
@@ -79,7 +79,7 @@
 									<MusicCue Name="Exit Cue" ID="{99A80DEB-B44D-48DC-8BA4-161C4E9135A6}">
 										<PropertyList>
 											<Property Name="CueType" Type="int16" Value="1"/>
-											<Property Name="TimeMs" Type="Real64" Value="89600"/>
+											<Property Name="TimeMs" Type="Real64" Value="36000"/>
 										</PropertyList>
 									</MusicCue>
 								</Local>

@@ -18,7 +18,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{6AAA72FC-08B0-A832-EBC0-232E4ED109CD}",
+    "Hash": "{B13CA147-E97A-9582-A05B-1FBE6F04EDB9}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -248,7 +248,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{95AE7AC4-1D39-4E6F-6815-1432CDB586BB}",
+    "Hash": "{542A2A72-8FC4-2F36-C78D-32D4AC8694F1}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -526,14 +526,6 @@
       "CachePath": "SFX/BookPaperback_S08FO.177_10C4C929.wem"
      },
      {
-      "Id": "534625915",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "BGM_Credit_75bpm4-4_L29M.wav",
-      "CachePath": "SFX/BGM_Credit_75bpm4-4_L29M_D79FB2B7.wem"
-     },
-     {
       "Id": "566353784",
       "Language": "SFX",
       "Streaming": "false",
@@ -684,6 +676,14 @@
       "Location": "Memory",
       "ShortName": "MGxSM_snap_dry_stick_and_leaf_11.wav",
       "CachePath": "SFX/MGxSM_snap_dry_stick_and_leaf_11_10C4C929.wem"
+     },
+     {
+      "Id": "903571056",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BGM_SomeWhere.wav",
+      "CachePath": "SFX/BGM_SomeWhere_D79FB2B7.wem"
      },
      {
       "Id": "903646689",
@@ -902,6 +902,23 @@
       "MediaRefs": [
        {
         "Id": "142174096"
+       }
+      ]
+     },
+     {
+      "Id": "2319053217",
+      "Name": "Credit_BGM",
+      "ObjectPath": "\\Events\\MUS\\Credit_BGM",
+      "GUID": "{55F77E4D-7B53-43EC-A0B3-B5D0ED92E97C}",
+      "DurationType": "OneShot",
+      "DurationMin": "36",
+      "DurationMax": "36",
+      "MediaRefs": [
+       {
+        "Id": "858183081"
+       },
+       {
+        "Id": "903571056"
        }
       ]
      },
@@ -1469,6 +1486,6 @@
     ]
    }
   ],
-  "FileHash": "{0971CA00-650F-EBEF-4B62-42CE45444B7B}"
+  "FileHash": "{76F0D7C3-5379-6FDC-6AB2-0263D70B91EA}"
  }
 }
