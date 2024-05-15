@@ -46,7 +46,7 @@ void UDreamFragmentWidget::NativeConstruct() {
 
 void UDreamFragmentWidget::PickRandomItem() {
 	bool NotSatisfiedConditon = false;
-	int RndItemRowNum = rand() % 6;
+	int RndItemRowNum = rand() % BattleTableManagerSystem->ItemTableRows.Num();
 
 	if (BattleManagerSystem->ItemCountList[RndItemRowNum] < 
 		BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
