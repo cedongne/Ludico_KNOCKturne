@@ -23,6 +23,7 @@ void ANTBattleGameMode::RestartPlayer(AController* NewPlayer) {
 	Super::RestartPlayer(NewPlayer);
 
 	BattleManager = GetWorld()->SpawnActor<ABattleManager>(BP_BattleManagerClass);
+	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
 }
 
 void ANTBattleGameMode::GameOver() {
@@ -49,4 +50,14 @@ void ANTBattleGameMode::SpawnHud() {
 void ANTBattleGameMode::EndBattle() {
 	ActorManagerSystem->PeppyActor->SetImmobile();
 	BattleManager->SetActorTickEnabled(false);
+	BattleManagerSystem->SelectedSkillCodeList.Empty();
+
+	TArray<AActor*> AllSpecialSkillActorArr;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), BP_SpecialSkillActorClass, AllSpecialSkillActorArr);
+
+	for (auto SpecialSkillActor : AllSpecialSkillActorArr) {
+		SpecialSkillActor->Destroy();
+	}
+
+	BattleManagerSystem->GetDreamFragmentAfterBattle();
 }

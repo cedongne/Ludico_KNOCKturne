@@ -27,6 +27,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BP")
 	class UUserWidget* BP_BattleHud;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<ASpecialSkillActor> BP_SpecialSkillActorClass;
+
 	void InitGame(const FString& MapName, const FString& Option, FString& ErrorMessage) override;
 	void RestartPlayer(AController* NewPlayer) override;
 
@@ -36,6 +39,7 @@ private:
 
 	class ABattleManager* BattleManager;
 	class UActorManagerSystem* ActorManagerSystem;
+	class UBattleManagerSystem* BattleManagerSystem;
 
 public:
 	UFUNCTION(BlueprintCallable)
