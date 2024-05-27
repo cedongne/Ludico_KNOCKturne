@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<SoundBanks>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{90EFCCA2-60AD-0B7A-B0A7-EB70CF2615B5}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{262B5653-F410-C315-2194-C91918454A33}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -58,6 +58,10 @@
 					<ShortName>SFX_UI_Select.wav</ShortName>
 					<CachePath>SFX/SFX_UI_Select_B744575A.wem</CachePath>
 				</File>
+				<File Id="207080211" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_MMO_Game_Magic_Designed_Armor_Cast_21.wav</ShortName>
+					<CachePath>SFX/ESM_MMO_Game_Magic_Designed_Armor_Cast_21_10C4C929.wem</CachePath>
+				</File>
 				<File Id="210552255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Skill_SweepGarden.wav</ShortName>
 					<CachePath>SFX/Skill_SweepGarden_8A703261.wem</CachePath>
@@ -65,6 +69,10 @@
 				<File Id="211861517" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>UI_Hover.wav</ShortName>
 					<CachePath>SFX/UI_Hover_8D153607.wem</CachePath>
+				</File>
+				<File Id="216141900" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1.wav</ShortName>
+					<CachePath>SFX/ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1_10C4C929.wem</CachePath>
 				</File>
 				<File Id="223719773" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Stone1.wav</ShortName>
@@ -106,6 +114,10 @@
 					<ShortName>UI_Hover.wav</ShortName>
 					<CachePath>SFX/UI_Hover_1AA38C9C.wem</CachePath>
 				</File>
+				<File Id="384867371" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_MU_Cinematic_FX_scifi_whoosh_suited_dark_tremolo_clanking_07.wav</ShortName>
+					<CachePath>SFX/ESM_MU_Cinematic_FX_scifi_whoosh_suited_dark_tremolo_clanking_07_10C4C929.wem</CachePath>
+				</File>
 				<File Id="388135562" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch.wav</ShortName>
 					<CachePath>SFX/ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem</CachePath>
@@ -129,6 +141,10 @@
 				<File Id="443133299" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>LNG_VocalBreath_Sigh_01.wav</ShortName>
 					<CachePath>SFX/LNG_VocalBreath_Sigh_01_10C4C929.wem</CachePath>
+				</File>
+				<File Id="453979306" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>086_FX_Long_-_DTFX2_Zenhiser.wav</ShortName>
+					<CachePath>SFX/086_FX_Long_-_DTFX2_Zenhiser_10C4C929.wem</CachePath>
 				</File>
 				<File Id="485043058" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>HotelRoomLamp_S08FO.1312.wav</ShortName>
@@ -173,6 +189,10 @@
 				<File Id="728677903" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>FF_TM_drawer_open_close_simple.wav</ShortName>
 					<CachePath>SFX/FF_TM_drawer_open_close_simple_8BA889A0.wem</CachePath>
+				</File>
+				<File Id="734152410" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</ShortName>
+					<CachePath>SFX/ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem</CachePath>
 				</File>
 				<File Id="742699319" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Water1.wav</ShortName>
@@ -254,6 +274,10 @@
 					<ShortName>BGM_Title_71bpm4-4.wav</ShortName>
 					<CachePath>SFX/BGM_Title_71bpm4-4_D79FB2B7.wem</CachePath>
 				</File>
+				<File Id="1064164571" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ESM_MMO_Game_Magic_Designed_Holy_Cast_04.wav</ShortName>
+					<CachePath>SFX/ESM_MMO_Game_Magic_Designed_Holy_Cast_04_10C4C929.wem</CachePath>
+				</File>
 			</Media>
 			<Events>
 				<Event Id="1116020140" Name="Battle_BGM" ObjectPath="\Events\MUS\Battle_BGM" GUID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}" DurationType="Infinite">
@@ -292,6 +316,21 @@
 				<Event Id="2306915075" Name="BattleDoor2" ObjectPath="\Events\Battle\BattleDoor2" GUID="{02F7B7C8-3867-42BB-BDAD-322112C6CD31}" DurationType="OneShot" DurationMin="2" DurationMax="2">
 					<MediaRefs>
 						<MediaRef Id="397593734"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1110175000" Name="BossDie" ObjectPath="\Events\Battle\BossDie" GUID="{C439A773-37B3-4FED-9F2A-6E684A9A534A}" DurationType="OneShot" DurationMin="4.700431" DurationMax="4.700431">
+					<MediaRefs>
+						<MediaRef Id="453979306"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="977925517" Name="BossHit" ObjectPath="\Events\Battle\BossHit" GUID="{A858ECC2-499A-454A-8B9D-C747C1D61D2C}" DurationType="OneShot" DurationMin="2.539875" DurationMax="2.539875">
+					<MediaRefs>
+						<MediaRef Id="384867371"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1931646578" Name="Campfire" ObjectPath="\Events\Battle\Campfire" GUID="{DB56ABBD-E370-4E80-8CFA-1C7F0BA5251D}" DurationType="OneShot" DurationMin="4.407833" DurationMax="4.407833">
+					<MediaRefs>
+						<MediaRef Id="734152410"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="1126058891" Name="CancleUI" ObjectPath="\Events\Function\CancleUI" GUID="{048AD721-7F3B-474D-8E85-D49B349CDF7A}" DurationType="OneShot" DurationMin="0.625" DurationMax="0.625">
@@ -443,6 +482,7 @@
 						<MediaRef Id="781396450"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3847480739" Name="MusicFO" ObjectPath="\Events\Function\MusicFO" GUID="{A3BB4777-2265-496E-ACBB-DD70CA45286C}" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="2981522829" Name="Notice" ObjectPath="\Events\Function\Notice" GUID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}" DurationType="OneShot" DurationMin="0.57536703" DurationMax="0.57536703">
 					<MediaRefs>
 						<MediaRef Id="999749974"/>
@@ -451,6 +491,11 @@
 				<Event Id="3685587509" Name="ObjectFind" ObjectPath="\Events\IntroCutScene\ObjectFind" GUID="{C713AAED-E762-4181-B591-F512D8595FD6}" DurationType="OneShot" DurationMin="4" DurationMax="4">
 					<MediaRefs>
 						<MediaRef Id="575546989"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="127552161" Name="PeppyDie" ObjectPath="\Events\Function\PeppyDie" GUID="{14A84712-B43A-45E0-9220-D51A583FE5D4}" DurationType="OneShot" DurationMin="0.84557813" DurationMax="0.84557813">
+					<MediaRefs>
+						<MediaRef Id="216141900"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="530906524" Name="PeppyHit" ObjectPath="\Events\Battle\PeppyHit" GUID="{72D96420-AD04-444C-9A29-E641F18D530C}" DurationType="OneShot" DurationMin="0.9190417" DurationMax="0.9190417">
@@ -466,6 +511,16 @@
 				<Event Id="632323847" Name="SelectUI" ObjectPath="\Events\Function\SelectUI" GUID="{17991763-5B7F-4F32-814D-24656FDF7D65}" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
 					<MediaRefs>
 						<MediaRef Id="193027794"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3064974266" Name="Special" ObjectPath="\Events\Battle\Special" GUID="{7C5FA09C-F905-4AAA-8043-E0F7626503A1}" DurationType="OneShot" DurationMin="1.6211979" DurationMax="1.6211979">
+					<MediaRefs>
+						<MediaRef Id="207080211"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1307264345" Name="Stance" ObjectPath="\Events\Battle\Stance" GUID="{30B1751E-159C-4AAB-90A1-D84739EC973D}" DurationType="OneShot" DurationMin="1.9584895" DurationMax="1.9584895">
+					<MediaRefs>
+						<MediaRef Id="1064164571"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3770884678" Name="StreetNoise" ObjectPath="\Events\IntroCutScene\StreetNoise" GUID="{82E835CF-CD1C-43B8-A543-3E6F08690043}" DurationType="OneShot" DurationMin="8.135171" DurationMax="8.135171">
@@ -504,7 +559,7 @@
 						<MediaRef Id="1062413066"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="362194202" Name="WithYou" ObjectPath="\Events\Battle\WithYou" GUID="{D8F42C19-B4B0-4981-8F03-66BE21B77997}" DurationType="OneShot" DurationMin="4.8645806" DurationMax="4.8645806">
+				<Event Id="362194202" Name="WithYou" ObjectPath="\Events\Battle\WithYou" GUID="{D8F42C19-B4B0-4981-8F03-66BE21B77997}" DurationType="OneShot" DurationMin="5.164581" DurationMax="5.164581">
 					<MediaRefs>
 						<MediaRef Id="292972715"/>
 						<MediaRef Id="304755768"/>
@@ -525,5 +580,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{E354455F-467B-26DF-927B-2EC120C330FA}</FileHash>
+	<FileHash>{A71ED312-5BE7-C732-F00E-F2944F2B8FAF}</FileHash>
 </SoundBanksInfo>

@@ -1040,9 +1040,14 @@
 						</BlendContainer>
 						<BlendContainer Name="WithYou" ID="{BB2E8EAE-CC98-487C-AAF0-CAB220F9E7CA}" ShortID="94879120">
 							<PropertyList>
+								<Property Name="InitialDelay" Type="Real64">
+									<ValueList>
+										<Value>0.3</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-8</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -1069,7 +1074,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-15</Value>
+												<Value>-4</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1125,6 +1130,132 @@
 								</Sound>
 							</ChildrenList>
 						</BlendContainer>
+						<Sound Name="Campfire" ID="{3AAA1C34-D2B8-4AFC-9D53-1D56183E0751}" ShortID="783521482">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>22</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}">
+									<Language>SFX</Language>
+									<AudioFile>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="734152410"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Stance" ID="{1818EACF-248B-4D88-9CD6-64B47BB18EB1}" ShortID="84544791">
+							<PropertyList>
+								<Property Name="InitialDelay" Type="Real64">
+									<ValueList>
+										<Value>0.5</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="ESM_MMO_Game_Magic_Designed_Holy_Cast_04" ID="{D413677E-BC64-4C33-876C-AB80F329767E}">
+									<Language>SFX</Language>
+									<AudioFile>ESM_MMO_Game_Magic_Designed_Holy_Cast_04.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1064164571"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="ESM_MMO_Game_Magic_Designed_Holy_Cast_04" ID="{D413677E-BC64-4C33-876C-AB80F329767E}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<BlendContainer Name="Special" ID="{8F647F80-9797-45EF-A939-CCBDBED9B780}" ShortID="816750612">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="ESM_MMO_Game_Magic_Designed_Armor_Cast_21" ID="{CB0C13B5-2246-4BA3-8A2E-C1185815E410}" ShortID="132105183">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-7</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_MMO_Game_Magic_Designed_Armor_Cast_21" ID="{0C78CF04-9B28-4B4E-AA7E-3C520CA3FEF2}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_MMO_Game_Magic_Designed_Armor_Cast_21.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="207080211"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_MMO_Game_Magic_Designed_Armor_Cast_21" ID="{0C78CF04-9B28-4B4E-AA7E-3C520CA3FEF2}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</BlendContainer>
+						<Sound Name="BossDie" ID="{1B8A25E8-118F-4CB7-A9CE-6FAA4A71AC7D}" ShortID="1064061884">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}">
+									<Language>SFX</Language>
+									<AudioFile>086_FX_Long_-_DTFX2_Zenhiser.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="453979306"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="UI" ID="{5872C092-AE86-4814-A9A9-6D38328AFCBA}" ShortID="685644386">

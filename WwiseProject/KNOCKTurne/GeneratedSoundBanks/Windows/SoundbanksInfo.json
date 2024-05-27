@@ -248,7 +248,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{90EFCCA2-60AD-0B7A-B0A7-EB70CF2615B5}",
+    "Hash": "{262B5653-F410-C315-2194-C91918454A33}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -358,6 +358,14 @@
       "CachePath": "SFX/SFX_UI_Select_B744575A.wem"
      },
      {
+      "Id": "207080211",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_MMO_Game_Magic_Designed_Armor_Cast_21.wav",
+      "CachePath": "SFX/ESM_MMO_Game_Magic_Designed_Armor_Cast_21_10C4C929.wem"
+     },
+     {
       "Id": "210552255",
       "Language": "SFX",
       "Streaming": "false",
@@ -372,6 +380,14 @@
       "Location": "Memory",
       "ShortName": "UI_Hover.wav",
       "CachePath": "SFX/UI_Hover_8D153607.wem"
+     },
+     {
+      "Id": "216141900",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1.wav",
+      "CachePath": "SFX/ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1_10C4C929.wem"
      },
      {
       "Id": "223719773",
@@ -454,6 +470,14 @@
       "CachePath": "SFX/UI_Hover_1AA38C9C.wem"
      },
      {
+      "Id": "384867371",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_MU_Cinematic_FX_scifi_whoosh_suited_dark_tremolo_clanking_07.wav",
+      "CachePath": "SFX/ESM_MU_Cinematic_FX_scifi_whoosh_suited_dark_tremolo_clanking_07_10C4C929.wem"
+     },
+     {
       "Id": "388135562",
       "Language": "SFX",
       "Streaming": "false",
@@ -500,6 +524,14 @@
       "Location": "Memory",
       "ShortName": "LNG_VocalBreath_Sigh_01.wav",
       "CachePath": "SFX/LNG_VocalBreath_Sigh_01_10C4C929.wem"
+     },
+     {
+      "Id": "453979306",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "086_FX_Long_-_DTFX2_Zenhiser.wav",
+      "CachePath": "SFX/086_FX_Long_-_DTFX2_Zenhiser_10C4C929.wem"
      },
      {
       "Id": "485043058",
@@ -588,6 +620,14 @@
       "Location": "Memory",
       "ShortName": "FF_TM_drawer_open_close_simple.wav",
       "CachePath": "SFX/FF_TM_drawer_open_close_simple_8BA889A0.wem"
+     },
+     {
+      "Id": "734152410",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav",
+      "CachePath": "SFX/ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem"
      },
      {
       "Id": "742699319",
@@ -748,6 +788,14 @@
       "Location": "Memory",
       "ShortName": "BGM_Title_71bpm4-4.wav",
       "CachePath": "SFX/BGM_Title_71bpm4-4_D79FB2B7.wem"
+     },
+     {
+      "Id": "1064164571",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_MMO_Game_Magic_Designed_Holy_Cast_04.wav",
+      "CachePath": "SFX/ESM_MMO_Game_Magic_Designed_Holy_Cast_04_10C4C929.wem"
      }
     ],
     "Events": [
@@ -837,6 +885,48 @@
       "MediaRefs": [
        {
         "Id": "397593734"
+       }
+      ]
+     },
+     {
+      "Id": "1110175000",
+      "Name": "BossDie",
+      "ObjectPath": "\\Events\\Battle\\BossDie",
+      "GUID": "{C439A773-37B3-4FED-9F2A-6E684A9A534A}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.700431",
+      "DurationMax": "4.700431",
+      "MediaRefs": [
+       {
+        "Id": "453979306"
+       }
+      ]
+     },
+     {
+      "Id": "977925517",
+      "Name": "BossHit",
+      "ObjectPath": "\\Events\\Battle\\BossHit",
+      "GUID": "{A858ECC2-499A-454A-8B9D-C747C1D61D2C}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.539875",
+      "DurationMax": "2.539875",
+      "MediaRefs": [
+       {
+        "Id": "384867371"
+       }
+      ]
+     },
+     {
+      "Id": "1931646578",
+      "Name": "Campfire",
+      "ObjectPath": "\\Events\\Battle\\Campfire",
+      "GUID": "{DB56ABBD-E370-4E80-8CFA-1C7F0BA5251D}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.407833",
+      "DurationMax": "4.407833",
+      "MediaRefs": [
+       {
+        "Id": "734152410"
        }
       ]
      },
@@ -1259,6 +1349,16 @@
       ]
      },
      {
+      "Id": "3847480739",
+      "Name": "MusicFO",
+      "ObjectPath": "\\Events\\Function\\MusicFO",
+      "GUID": "{A3BB4777-2265-496E-ACBB-DD70CA45286C}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2981522829",
       "Name": "Notice",
       "ObjectPath": "\\Events\\Function\\Notice",
@@ -1283,6 +1383,20 @@
       "MediaRefs": [
        {
         "Id": "575546989"
+       }
+      ]
+     },
+     {
+      "Id": "127552161",
+      "Name": "PeppyDie",
+      "ObjectPath": "\\Events\\Function\\PeppyDie",
+      "GUID": "{14A84712-B43A-45E0-9220-D51A583FE5D4}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.84557813",
+      "DurationMax": "0.84557813",
+      "MediaRefs": [
+       {
+        "Id": "216141900"
        }
       ]
      },
@@ -1325,6 +1439,34 @@
       "MediaRefs": [
        {
         "Id": "193027794"
+       }
+      ]
+     },
+     {
+      "Id": "3064974266",
+      "Name": "Special",
+      "ObjectPath": "\\Events\\Battle\\Special",
+      "GUID": "{7C5FA09C-F905-4AAA-8043-E0F7626503A1}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.6211979",
+      "DurationMax": "1.6211979",
+      "MediaRefs": [
+       {
+        "Id": "207080211"
+       }
+      ]
+     },
+     {
+      "Id": "1307264345",
+      "Name": "Stance",
+      "ObjectPath": "\\Events\\Battle\\Stance",
+      "GUID": "{30B1751E-159C-4AAB-90A1-D84739EC973D}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.9584895",
+      "DurationMax": "1.9584895",
+      "MediaRefs": [
+       {
+        "Id": "1064164571"
        }
       ]
      },
@@ -1434,8 +1576,8 @@
       "ObjectPath": "\\Events\\Battle\\WithYou",
       "GUID": "{D8F42C19-B4B0-4981-8F03-66BE21B77997}",
       "DurationType": "OneShot",
-      "DurationMin": "4.8645806",
-      "DurationMax": "4.8645806",
+      "DurationMin": "5.164581",
+      "DurationMax": "5.164581",
       "MediaRefs": [
        {
         "Id": "292972715"
@@ -1484,6 +1626,6 @@
     ]
    }
   ],
-  "FileHash": "{405B592C-4CEE-0005-4A4F-778AD81B32EA}"
+  "FileHash": "{05355A3B-E095-EDE3-4C65-306EF5F54A08}"
  }
 }

@@ -33,6 +33,7 @@
 						<ObjectRef Name="Foot Steps" ID="{8CDF7A82-8C9E-4519-9799-5C27EC1B7C14}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Title" ID="{2BA7669C-F470-456D-9970-BA6C6FDC2174}" WorkUnitID="{F91ED5D1-4205-4BE1-BDE7-B57FA90F472E}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HubWorld" ID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="PeppyDie" ID="{14A84712-B43A-45E0-9220-D51A583FE5D4}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UI_Hover_01" ID="{E9C31A62-152C-4615-9058-E5548CD940C2}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX" ID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Default Work Unit" ID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" WorkUnitID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" Origin="Manual" Filter="7"/>
@@ -54,6 +55,7 @@
 						<ObjectRef Name="FS_Snow" ID="{657CEC4F-CB00-4921-A27B-09560E379D46}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Notice" ID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="MusicFO" ID="{A3BB4777-2265-496E-ACBB-DD70CA45286C}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="DreamDiary" ID="{8EDC9439-0443-498C-92C5-39AC1C2460E0}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="BattleDoor" ID="{B7AC811E-757D-49E2-AE55-907EEE57B394}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="cancle" ID="{55685DA4-0CCC-4A35-88FD-862169CC2331}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
@@ -61,6 +63,7 @@
 						<ObjectRef Name="Actor-Mixer Hierarchy" ID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" WorkUnitID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Battle_GetEnergy" ID="{82A9A76A-F639-4A88-8E9C-37827A589430}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Peppy" ID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Stance" ID="{30B1751E-159C-4AAB-90A1-D84739EC973D}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Default Work Unit" ID="{3AF20CAC-13B9-4AD5-977A-DA867830F7AB}" WorkUnitID="{3AF20CAC-13B9-4AD5-977A-DA867830F7AB}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Snow" ID="{1784F97F-9850-4B0A-BD54-63E92FDDD0C8}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Wood" ID="{CDB304F6-B28E-4B57-BED1-F2FEE4E877F1}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
@@ -82,6 +85,7 @@
 						<ObjectRef Name="BattleDoor" ID="{C795C573-3F48-4DF8-BE06-7A2E6105E141}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HomeAmbi" ID="{0797BAAF-C465-4E55-A77C-69944ECA4624}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Grass" ID="{A34E29BB-4F44-4E68-B19A-CE2E6CB5815D}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Campfire" ID="{DB56ABBD-E370-4E80-8CFA-1C7F0BA5251D}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="GetEnergy" ID="{6E8F66B2-EB03-4F0A-8B49-E9AE45CCB6A2}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Hub_BGM" ID="{A5906D44-D623-4F22-A245-563EC4404512}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Stone" ID="{09E9ECE4-1CAB-4F32-A848-289FED4EF639}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>

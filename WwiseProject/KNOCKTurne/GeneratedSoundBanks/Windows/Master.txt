@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	83925039	FS_Grass			\SFX\FS_Grass	
+	127552161	PeppyDie			\Function\PeppyDie	
 	209214979	ThornOfLove			\Battle\ThornOfLove	
 	316150744	SweepGarden			\Battle\SweepGarden	
 	362194202	WithYou			\Battle\WithYou	
@@ -11,16 +12,20 @@ Event	ID	Name			Wwise Object Path	Notes
 	632323847	SelectUI			\Function\SelectUI	
 	826204714	LampOn2			\IntroCutScene\LampOn2	
 	834223070	FS_Stone			\SFX\FS_Stone	
+	977925517	BossHit			\Battle\BossHit	
+	1110175000	BossDie			\Battle\BossDie	
 	1116020140	Battle_BGM			\MUS\Battle_BGM	
 	1126058891	CancleUI			\Function\CancleUI	
 	1136739464	LampOn			\IntroCutScene\LampOn	
 	1199896708	Thorn			\Battle\Thorn	
 	1227874634	FootHold			\Battle\FootHold	
+	1307264345	Stance			\Battle\Stance	
 	1505888634	CountDown			\Function\CountDown	
 	1760998000	TextStop			\Function\TextStop	
 	1787057067	HubWorldAmbi			\HubWorld\HubWorldAmbi	
 	1809895686	FS_Snow			\SFX\FS_Snow	
 	1877847629	Door			\IntroCutScene\Door	
+	1931646578	Campfire			\Battle\Campfire	
 	2045484125	DoorHover			\HubWorld\DoorHover	
 	2194043091	CleanUp			\Battle\CleanUp	
 	2306915075	BattleDoor2			\Battle\BattleDoor2	
@@ -31,6 +36,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2844154539	BattleDoor			\Battle\BattleDoor	
 	2880424473	Hub_BGM			\MUS\Hub_BGM	
 	2981522829	Notice			\Function\Notice	
+	3064974266	Special			\Battle\Special	
 	3146275604	Emotion			\Battle\Emotion	
 	3616930680	FS_Wood			\SFX\FS_Wood	
 	3638457343	DoorClose			\IntroCutScene\DoorClose	
@@ -38,6 +44,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	3736921243	DreamDiary			\SFX\DreamDiary	
 	3755255244	CharmingVoice			\Battle\CharmingVoice	
 	3770884678	StreetNoise			\IntroCutScene\StreetNoise	
+	3847480739	MusicFO			\Function\MusicFO	
 	3933848069	HomeAmbi			\IntroCutScene\HomeAmbi	
 	4065426480	FS_Water			\SFX\FS_Water	
 	4212918798	Efficient			\Battle\Efficient	
@@ -96,8 +103,10 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	151749542	ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Fantasy_Game_Item_Collect_Magic_F_Spell_Cast_Instant_Hit_Wizard_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\EfficientEmpathy\ESM_Ancient_Game_Gas_Magic_Conjure_Poof_Fantasy_Tonal_Accent_Hit_Stab		481208
 	164875334	SFX_Text_Typing	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Text_Typing_43A4CF22.wem		\Actor-Mixer Hierarchy\Dialogue\SFX_Text_Typing		88296
 	193027794	Select	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_UI_Select_B744575A.wem		\Actor-Mixer Hierarchy\SFX\UI\Select		88296
+	207080211	ESM_MMO_Game_Magic_Designed_Armor_Cast_21	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_MMO_Game_Magic_Designed_Armor_Cast_21_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Special\ESM_MMO_Game_Magic_Designed_Armor_Cast_21		311364
 	210552255	Skill_SweepGarden	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Skill_SweepGarden_8A703261.wem		\Actor-Mixer Hierarchy\SFX\Battle\Skill_SweepGarden		220864
 	211861517	UI_Hover_01	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_8D153607.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_01		78836
+	216141900	Die	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Die		202360
 	223719773	SFX_PeppyWalk_Stone1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone1		71084
 	228758831	ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Fantasy_Game_Action_Rune_A_Accent_Medieval_Magic_Spell_Cast_7F874C9D.wem		\Actor-Mixer Hierarchy\SFX\Battle\EfficientEmpathy\ESM_Magic_Game_Aura_Twinkle_Fantasy_Cast_Craft_Mobile_App_Special_Touch_Pickup		413464
 	257835999	HomeAmbi	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BRS_Roomtone_House_Open_Lite_Birds-Fridge_28E5C713.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\HomeAmbi		3104860
@@ -108,12 +117,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	360611745	SFX_PeppyWalk_Stone2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone2		91232
 	366777513	FNF_RF_fx_muir_pebble_rinse	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FNF_RF_fx_muir_pebble_rinse_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\ClenUp\FNF_RF_fx_muir_pebble_rinse		180504
 	383708649	UI_Hover	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_1AA38C9C.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover		79776
+	384867371	BossHit	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_MU_Cinematic_FX_scifi_whoosh_suited_dark_tremolo_clanking_07_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossHit		487752
 	388135562	cancle	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Fantasy_Game_Inventory_Material_Stone_UI_1_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\cancle		120160
 	391750526	StreetNoise	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_CL_ambience_busy_london_streets_totenham_court_road_1991A03E.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\StreetNoise		1435140
 	397593734	BattleDoor2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor2		352896
 	416420098	SFX_PeppyWalk_Wood2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood2		48096
 	427230653	ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\ClenUp\ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty		751956
 	443133299	LNG_VocalBreath_Sigh_01	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\LNG_VocalBreath_Sigh_01_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\CharmingVoice\LNG_VocalBreath_Sigh_01		72858
+	453979306	BossDie	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\086_FX_Long_-_DTFX2_Zenhiser_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossDie		829252
 	485043058	LampOff	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_15108706.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff		38240
 	511898442	SFX_PeppyWalk_Grass2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass2		98904
 	515698632	DreamDiary	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BookPaperback_S08FO.177_10C4C929.wem		\Actor-Mixer Hierarchy\Dialogue\DreamDiary		128096
@@ -125,6 +136,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	638760269	SFX_PeppyWalk_Water2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water2		37336
 	727224766	Wind	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_Wind_239E1AED.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Wind		22472800
 	728677903	DoorClose	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_TM_drawer_open_close_simple_8BA889A0.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DoorClose		422128
+	734152410	Campfire	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Campfire		846464
 	742699319	SFX_PeppyWalk_Water1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water1		41230
 	781396450	LampOff2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_C08CDC50.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff2		126876
 	783667508	whitenoise	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\whitenoise_MSL_594EBFCF.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\whitenoise		1129056
@@ -145,4 +157,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	1035504761	PeppyTurnCount	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppyTurnCount		672844
 	1052600951	Jump	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Peppy_Jump2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Jump		88296
 	1062413066	BGM_Title_71bpm4-4	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_Title_71bpm4-4_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Title\BGM_Title_71bpm4-4\BGM_Title_71bpm4-4		23851364
+	1064164571	Stance	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_MMO_Game_Magic_Designed_Holy_Cast_04_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Stance		280124
 

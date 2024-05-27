@@ -135,6 +135,50 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Campfire" ID="{DB56ABBD-E370-4E80-8CFA-1C7F0BA5251D}">
+					<ChildrenList>
+						<Action Name="" ID="{29CF8166-BF54-4175-8DD7-E0D314A3E037}" ShortID="642324691">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Campfire" ID="{3AAA1C34-D2B8-4AFC-9D53-1D56183E0751}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stance" ID="{30B1751E-159C-4AAB-90A1-D84739EC973D}">
+					<ChildrenList>
+						<Action Name="" ID="{72CAB45B-075C-4FA9-BF98-28DB4233767F}" ShortID="603075468">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Stance" ID="{1818EACF-248B-4D88-9CD6-64B47BB18EB1}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Special" ID="{7C5FA09C-F905-4AAA-8043-E0F7626503A1}">
+					<ChildrenList>
+						<Action Name="" ID="{E3E8DE68-E373-4B5E-9CE1-12EBA43551EF}" ShortID="86726683">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Special" ID="{8F647F80-9797-45EF-A939-CCBDBED9B780}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="BossDie" ID="{C439A773-37B3-4FED-9F2A-6E684A9A534A}">
+					<ChildrenList>
+						<Action Name="" ID="{DD54453E-1F73-474D-A453-AD266C406E11}" ShortID="1026080817">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BossDie" ID="{1B8A25E8-118F-4CB7-A9CE-6FAA4A71AC7D}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

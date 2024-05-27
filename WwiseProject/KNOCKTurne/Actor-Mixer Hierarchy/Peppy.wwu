@@ -769,6 +769,40 @@
 						<ActiveSource Name="Peppy_Jump2" ID="{1207AFB7-997E-4BA9-AC02-761CFC850777}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
+				<Sound Name="Die" ID="{60039727-8AD2-4AF6-B316-8B05FF376282}" ShortID="916058032">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ValueList>
+								<Value>13</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>380</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1" ID="{4B901764-7236-4770-AFCE-6729B33E7F6D}">
+							<Language>SFX</Language>
+							<AudioFile>ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="216141900"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1" ID="{4B901764-7236-4770-AFCE-6729B33E7F6D}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

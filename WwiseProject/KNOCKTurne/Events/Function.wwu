@@ -118,6 +118,50 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="PeppyDie" ID="{14A84712-B43A-45E0-9220-D51A583FE5D4}">
+					<ChildrenList>
+						<Action Name="" ID="{D452D645-5F29-4F6B-A902-B27D9E6592EF}" ShortID="335222863">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Die" ID="{60039727-8AD2-4AF6-B316-8B05FF376282}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{E24DE71A-9271-445F-A06F-D0DD8E79D60A}" ShortID="180547661">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="Delay" Type="Real64" Value="1.5"/>
+								<Property Name="FadeTime" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList/>
+							<ChildrenList>
+								<EventActionException Name="" ID="{8880F675-D815-47BD-84DB-4AFE0D6D49F6}">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+								</EventActionException>
+							</ChildrenList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="MusicFO" ID="{A3BB4777-2265-496E-ACBB-DD70CA45286C}">
+					<ChildrenList>
+						<Action Name="" ID="{EC741806-2820-4777-BF54-8272F0818398}" ShortID="699752368">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+								<Property Name="FadeTime" Type="Real64" Value="2.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Music" ID="{40C489A2-EF75-4D2C-B839-C9BD0966EC68}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
