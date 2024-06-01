@@ -245,7 +245,6 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				OriginalRabbitTransform = RabbitActor->GetActorTransform();
 				OriginalDreamMTransform = DreamMActor->GetActorTransform();
 
-				//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -90.0, -30.0));
 				Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(-120.0, -90.0, 0.0));
 				DreamMActor->SetActorRotation(FRotator(0.0, -90.0, 0.0));
 
@@ -278,15 +277,6 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 	else if (BattleManagerSystem->RightafterBattleClear || BattleManagerSystem->isAfterCredit) {
 		Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
-		/*LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
-		if (LevelSequencePlayer)
-		{
-			LevelSequencePlayer->Play();
-		}
-		else
-		{
-			NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
-		}*/
 		if (BP_FadeInOutClass) {
 			BP_FadeInOut = CreateWidget<UUserWidget>(GetWorld(), BP_FadeInOutClass);
 			if (BP_FadeInOut) {
@@ -324,7 +314,6 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			{
 				UWidgetLayoutLibrary::RemoveAllWidgets(this);
 				OriginalCameraTransform = Peppy->Camera->GetComponentTransform();
-				//Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, 0.0, -30.0));
 				Peppy->Camera->SetWorldLocationAndRotation(FVector(883.0, 1083.0, 146.0), FRotator(0.0, -30.0, 0.0));
 
 				if (BP_BlinkClass) {
@@ -372,8 +361,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 				CreateHubworldHUD();
 
 				GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
-				//4초로 변경 필요
-			}), 0.1, false);
+			}), 4, false);
 	}
 
 	BindNpcTalk();
@@ -601,6 +589,5 @@ void AHubWorldLevelScriptActor::SetHubworldBGMAndHUD()
 			CreateHubworldHUD();
 
 			GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
-			//4초로 변경 필요
-		}), 0.1, false);
+		}), 4, false);
 }

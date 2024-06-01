@@ -6,13 +6,11 @@
 
 #include "GameInstance/KNOCKturneGameInstance.h"
 
-// Sets default values
 ACommonSkillActor::ACommonSkillActor()
 {
 
 }
 
-// Called when the game starts or when spawned
 void ACommonSkillActor::BeginPlay()
 {
 	Super::BeginPlay();

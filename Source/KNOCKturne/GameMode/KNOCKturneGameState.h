@@ -18,22 +18,6 @@ class KNOCKTURNE_API AKNOCKturneGameState : public AGameStateBase
 	class UBattleManagerSystem* BattleManagerSystem;
 
 public:
-	/*UPROPERTY(Transient)
-	bool isPrologue;
-	UPROPERTY(Transient)
-	int32 DreamFragmentCount;
-	UPROPERTY(Transient)
-	int32 DreamDiaryOpenRow;
-	UPROPERTY(Transient)
-	bool GetDreamFragment;
-	UPROPERTY(Transient)
-	bool isDreamDiaryUpdated;
-	UPROPERTY(Transient)
-	bool isBattleFail;
-	UPROPERTY(Transient)
-	bool RightafterBattleClear;
-	UPROPERTY(Transient)
-	TArray<int32> ItemCountList;*/
 	UPROPERTY(Transient)
 	FString SaveSlotName;
 	UPROPERTY(Transient)

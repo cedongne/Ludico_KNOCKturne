@@ -140,11 +140,11 @@ public:
 
 	// �����ۺ� ����
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool isPrologue = true;
+	bool isPrologue = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool isSkippedBeforeBattleSequence = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool CanSkipBeforeBattleSequence = true;
+	bool CanSkipBeforeBattleSequence = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 DreamFragmentCount = 0;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

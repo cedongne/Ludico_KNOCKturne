@@ -21,7 +21,6 @@ void UBossStatComponent::InitializeComponent() {
 
 }
 
-// Called when the game starts
 void UBossStatComponent::BeginPlay()
 {
 	Super::BeginPlay();

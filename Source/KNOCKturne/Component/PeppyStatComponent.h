@@ -17,13 +17,11 @@ class KNOCKTURNE_API UPeppyStatComponent : public UStatComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UPeppyStatComponent();
 
 	void SetDefaultStat();
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	virtual void InitializeComponent() override;

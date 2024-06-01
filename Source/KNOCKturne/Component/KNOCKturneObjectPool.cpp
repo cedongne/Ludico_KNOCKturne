@@ -1,16 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "KNOCKturneObjectPool.h"
 #include "Actor/PooledObject.h"
 
-// Sets default values
 UKNOCKturneObjectPool::UKNOCKturneObjectPool()
 {
 
 }
 
-// Called when the game starts or when spawned
 void UKNOCKturneObjectPool::BeginPlay()
 {
 	Super::BeginPlay();

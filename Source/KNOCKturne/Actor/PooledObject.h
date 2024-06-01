@@ -13,7 +13,6 @@ class KNOCKTURNE_API APooledObject : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	APooledObject();
 
 	FOnPooledObjectDespawn OnPooledObjectDespawn;

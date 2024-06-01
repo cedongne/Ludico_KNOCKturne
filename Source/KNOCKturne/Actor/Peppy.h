@@ -19,7 +19,6 @@ class KNOCKTURNE_API APeppy : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	APeppy();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)

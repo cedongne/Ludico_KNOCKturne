@@ -9,9 +9,6 @@
 
 #include "Lake.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class KNOCKTURNE_API ALake : public ANPC
 {

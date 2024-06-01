@@ -38,10 +38,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool TryAvoidAttack();
 
-	/*눈썰매*/
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	bool isSledItem;*/
-
 	UFUNCTION(BlueprintCallable)
 	void RecoverEPRandomly();
 	UFUNCTION(BlueprintCallable)

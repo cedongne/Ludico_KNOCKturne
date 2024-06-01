@@ -57,7 +57,6 @@ void APeppy::BeginPlay()
 	Super::BeginPlay();
 }
 
-// Called every frame
 void APeppy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

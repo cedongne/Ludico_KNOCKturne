@@ -71,11 +71,6 @@ bool UBuffComponent::IsPositiveBuff(EBuffType BuffType)
 }
 
 bool UBuffComponent::RemoveBuff(EBuffType BuffType) {
-	/*HasPositiveBuffs_PerTurn.Remove(BuffType);
-	HasPositiveBuffs_PerSecond.Remove(BuffType);
-	HasNegativeBuffs_PerTurn.Remove(BuffType);
-	HasNegativeBuffs_PerSecond.Remove(BuffType);*/
-
 	if (BuffTempDelayTime.Contains(BuffType))
 		BuffTempDelayTime[BuffType] = 0;
 
@@ -121,7 +116,6 @@ void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
 			for (auto Buff : HasPositiveBuffs_PerSecond) {
 				if (randIndex-- == 0) {
 					RemoveBuff(Buff.Key);
-					//HasPositiveBuffs_PerSecond.Remove(Buff.Key);
 					break;
 				}
 			}
@@ -130,7 +124,6 @@ void UBuffComponent::RemoveRandomPositiveBuff(int32 Num) {
 			for (auto Buff : HasPositiveBuffs_PerTurn) {
 				if (randIndex-- == 0) {
 					RemoveBuff(Buff.Key);
-					//HasPositiveBuffs_PerTurn.Remove(Buff.Key);
 					break;
 				}
 			}
@@ -154,7 +147,6 @@ void UBuffComponent::RemoveRandomNegativeBuff(int32 Num) {
 			for (auto Buff : HasNegativeBuffs_PerSecond) {
 				if (randIndex-- == 0) {
 					RemoveBuff(Buff.Key);
-					//HasNegativeBuffs_PerSecond.Remove(Buff.Key);
 					break;
 				}
 			}
@@ -163,7 +155,6 @@ void UBuffComponent::RemoveRandomNegativeBuff(int32 Num) {
 			for (auto Buff : HasNegativeBuffs_PerTurn) {
 				if (randIndex-- == 0) {
 					RemoveBuff(Buff.Key);
-					//HasNegativeBuffs_PerTurn.Remove(Buff.Key);
 					break;
 				}
 			}
@@ -185,9 +176,6 @@ void UBuffComponent::RemoveAllPositiveBuff() {
 	for (auto& Key : PerSecondKeys) {
 		RemoveBuff(Key);
 	}
-
-	/*HasPositiveBuffs_PerTurn.Empty();
-	HasPositiveBuffs_PerSecond.Empty();*/
 }
 
 void UBuffComponent::RemoveAllNegativeBuff() {
@@ -204,9 +192,6 @@ void UBuffComponent::RemoveAllNegativeBuff() {
 	for (auto& Key : PerSecondKeys) {
 		RemoveBuff(Key);
 	}
-
-	/*HasNegativeBuffs_PerTurn.Empty();
-	HasNegativeBuffs_PerSecond.Empty();*/
 }
 
 void UBuffComponent::RemoveAllBuff() {
@@ -412,9 +397,9 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 
 void UBuffComponent::OperatePositiveBuffs_PerSecond(EBuffType BuffType, float DeltaSeconds)
 {
-	AActor* TargetActor = TargetOfBuff[BuffType];
+	/*AActor* TargetActor = TargetOfBuff[BuffType];
 	UStatComponent* StatComponent = Cast<UStatComponent>(TargetActor->GetComponentByClass(UStatComponent::StaticClass()));
-	FBuffData BuffData = HasPositiveBuffs_PerSecond[BuffType];
+	FBuffData BuffData = HasPositiveBuffs_PerSecond[BuffType];*/
 
 	/*switch (BuffType) {
 

@@ -64,12 +64,12 @@ void ABoss::SpawnBossSkill() {
 	}
 
 	// 첫 번째 스킬로 MixedFeeling, HeightenedLonging은 나오지 않도록 한다.
-	/*if (isFirstSkill) {
+	if (isFirstSkill) {
 		CurBossStanceSkillArray.Remove("MixedFeeling");
 		CurBossStanceSkillArray.Remove("HeightenedLonging");
 		isFirstSkill = false;
 		NTLOG(Warning, TEXT("MixedFeeling & HeightenedLonging Removed!"));
-	}*/
+	}
 
 	if (CurBossStanceSkillArray.Num() == 0) {
 		NTLOG(Error, TEXT("BossSkillSpawnDataMap loading is invalid!"));

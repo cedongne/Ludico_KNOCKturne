@@ -46,16 +46,6 @@ void UPeppyTurnUIWidget::NativeConstruct()
 
 void UPeppyTurnUIWidget::CreateSkillList()
 {
-	// 지우기
-	BattleManagerSystem->SelectedSkillCodeList.Add(0);
-	BattleManagerSystem->SelectedSkillCodeList.Add(1);
-	BattleManagerSystem->SelectedSkillCodeList.Add(2);
-	BattleManagerSystem->SelectedSkillCodeList.Add(3);
-	BattleManagerSystem->SelectedSkillCodeList.Add(4);
-	BattleManagerSystem->SelectedSkillCodeList.Add(5);
-	BattleManagerSystem->SelectedSkillCodeList.Add(6);
-	BattleManagerSystem->SelectedSkillCodeList.Add(7);
-
 	int row = 0;
 	
 	for (int i = 0; i < BattleManagerSystem->SelectedSkillCodeList.Num(); i++) {
@@ -93,16 +83,6 @@ void UPeppyTurnUIWidget::CreateSkillList()
 			}
 		}
 	}
-
-	// 지우기
-	BattleManagerSystem->SelectedSkillCodeList.Remove(0);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(1);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(2);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(3);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(4);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(5);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(6);
-	BattleManagerSystem->SelectedSkillCodeList.Remove(7);
 }
 
 void UPeppyTurnUIWidget::SetSkillUI(UPeppyTurnSkillCardWidget* PeppyTurnSkillCardWidget, int RowNum)

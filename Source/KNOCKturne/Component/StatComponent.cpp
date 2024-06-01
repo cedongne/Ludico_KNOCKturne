@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 #include "StatComponent.h"
 #include "GameMode/NTBattleGameMode.h"
 
@@ -6,7 +5,6 @@ UStatComponent::UStatComponent()
 {
 }
 
-// Called when the game starts
 void UStatComponent::BeginPlay()
 {
 	Super::BeginPlay();

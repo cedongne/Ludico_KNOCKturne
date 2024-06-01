@@ -35,7 +35,6 @@ class KNOCKTURNE_API ABossSkillActor : public ACommonSkillActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent* AttackRange;
 public:	
-	// Sets default values for this actor's properties
 	ABossSkillActor();
 
 private:

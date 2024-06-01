@@ -91,14 +91,10 @@ void UBattleManagerSystem::InitSkillIconRowMap() {
 	SkillIconRowMap.Add("Icon_skill_PS_WithYou", 0);
 	SkillIconRowMap.Add("Icon_skill_PS_ConsolationMusic", 1);
 	SkillIconRowMap.Add("Icon_skill_PS_Campfire", 2);
-	// SkillIconRowMap.Add("Icon_skill_PS_LetMeHug", 3);
 	SkillIconRowMap.Add("Icon_skill_PS_Starlight", 3);
 	SkillIconRowMap.Add("Icon_skill_PS_CharmingVoice", 4);
 	SkillIconRowMap.Add("Icon_skill_PS_RedEyes", 5);
-	// SkillIconRowMap.Add("Icon_skill_PS_AdviceforFreshStart", 7);
-	// SkillIconRowMap.Add("Icon_skill_PS_AngryScolding", 8);
 	SkillIconRowMap.Add("Icon_skill_PS_ExhaustiveAdvice", 6);
-	// SkillIconRowMap.Add("Icon_skill_PS_NeedtoRecharge", 10);
 	SkillIconRowMap.Add("Icon_skill_PS_PretendtoCry", 7);
 	SkillIconRowMap.Add("Icon_skill_PS_EfficientEmpathy", 8);
 	SkillIconRowMap.Add("Icon_skill_PS_AmbiguousEmotion", 9);
@@ -112,9 +108,7 @@ void UBattleManagerSystem::InitSpecialtyIconRowMap() {
 	SpecialtyIconRowMap.Add("Icon_skill_special_wakeup", 0);
 	SpecialtyIconRowMap.Add("Icon_skill_special_gatherenergy", 1);
 	SpecialtyIconRowMap.Add("Icon_skill_special_positivethinking", 2);
-	// SpecialtyIconRowMap.Add("Icon_skill_special_narrowescape", 3);
 	SpecialtyIconRowMap.Add("Icon_skill_special_pretendnotsick", 3);
-	// SpecialtyIconRowMap.Add("Icon_skill_special_twolives", 5);
 }
 
 int32 UBattleManagerSystem::FindSpecialtyRow(FString IconName) {
@@ -126,8 +120,6 @@ void UBattleManagerSystem::InitItemIconRowMap() {
 	ItemIconRowMap.Add("Icon_Item_sled", 1);
 	ItemIconRowMap.Add("Icon_Item_king_confidential_document", 2);
 	ItemIconRowMap.Add("Icon_Item_fresh_sprout", 3);
-	// ItemIconRowMap.Add("Icon_Item_energy_cube", 4);
-	// ItemIconRowMap.Add("Icon_Item_eyedrop", 5);
 }
 
 int32 UBattleManagerSystem::FindItemRow(FString IconName) {

@@ -3,14 +3,12 @@
 
 #include "PeppySkillComponent.h"
 
-// Sets default values for this component's properties
 UPeppySkillComponent::UPeppySkillComponent()
 {
 	SkillTableIndex = 0;
 }
 
 
-// Called when the game starts
 void UPeppySkillComponent::BeginPlay()
 {
 	Super::BeginPlay();

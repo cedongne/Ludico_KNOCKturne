@@ -41,9 +41,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CreateSpecialSkillData();
 
-	/*특수기 사용 조건 만족 여부 반환*/
-	/*UFUNCTION(BlueprintCallable)
-	bool IsSatisfyUseCondition();*/
 	UFUNCTION(BlueprintCallable)
 	bool CheckCanUseSpecialSkill(float DeltaSeconds);
 	UFUNCTION(BlueprintCallable)

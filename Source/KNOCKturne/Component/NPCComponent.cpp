@@ -4,7 +4,6 @@
 #include "NPCComponent.h"
 #include "Blueprint/UserWidget.h"
 
-// Sets default values for this component's properties
 UNPCComponent::UNPCComponent()
 {
 
@@ -13,7 +12,6 @@ UNPCComponent::UNPCComponent()
 }
 
 
-// Called when the game starts
 void UNPCComponent::BeginPlay()
 {
 	Super::BeginPlay();

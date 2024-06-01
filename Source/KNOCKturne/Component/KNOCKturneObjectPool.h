@@ -12,7 +12,6 @@ class KNOCKTURNE_API UKNOCKturneObjectPool : public UActorComponent
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	UKNOCKturneObjectPool();
 
 	UFUNCTION(BlueprintCallable, Category = "ObjectPool")
@@ -32,7 +31,6 @@ public:
 	float PooledObjectLifeSpan = 0.0f;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

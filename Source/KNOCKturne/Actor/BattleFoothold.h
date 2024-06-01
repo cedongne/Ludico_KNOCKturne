@@ -15,11 +15,9 @@ class KNOCKTURNE_API ABattleFoothold : public APooledObject
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	ABattleFoothold();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:

@@ -15,14 +15,12 @@ class KNOCKTURNE_API UPeppySkillComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UPeppySkillComponent();
 
 private:
 	int32 SkillTableIndex;
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	class UGameInstance* GameInstance;
