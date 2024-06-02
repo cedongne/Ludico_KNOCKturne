@@ -3,6 +3,7 @@
 
 #include "BuffComponent.h"
 #include "GameInstance/ActorManagerSystem.h"
+#include "GameInstance/BattleTableManagerSystem.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Actor/BattleManager.h"
@@ -13,12 +14,6 @@
 UBuffComponent::UBuffComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
-	FString BuffTablePath = TEXT("/Game/Assets/DataTable/BuffTable.BuffTable");
-	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
-	NTCHECK(DT_BuffTABLE.Succeeded());
-	BuffTable = DT_BuffTABLE.Object;
-	BuffTable->GetAllRows<FBuffTable>("Get all rows of BuffData", BuffTableRows);
 
 	FString NS_PretendNotSick_2_Path = TEXT("/Game/Assets/Effects/SpecialSkillEffect/NS_PretendNotSick_2.NS_PretendNotSick_2");
 	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> DT_NS_PretendNotSick_2(*NS_PretendNotSick_2_Path);
@@ -48,6 +43,7 @@ void UBuffComponent::BeginPlay()
 	Super::BeginPlay();
 
 	UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	ActorManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UActorManagerSystem>();
 	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
 }
@@ -206,7 +202,7 @@ void UBuffComponent::AcquireBuff(EBuffType BuffType, FCurEffectIndexSkillData Sk
 		return;
 	}
 
-	auto acquiredBuff = BuffTable->FindRow<FBuffTable>(FName(*buffTypeStr), TEXT(""));
+	auto acquiredBuff = BattleTableManagerSystem->BuffTable->FindRow<FBuffTable>(FName(*buffTypeStr), TEXT(""));
 	if (acquiredBuff == nullptr) {
 		NTLOG(Error, TEXT("Buff acquiration is failed!"));
 		return;
@@ -609,7 +605,7 @@ FBuffData UBuffComponent::GetBuffData(EBuffType BuffType)
 
 void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData BuffData, float ValueN, float ValueM, float ValueT) {
 	FString BuffID = BuffTypeToStringMap[BuffType];
-	FBuffTable* BuffTableData = BuffTable->FindRow<FBuffTable>(*BuffID, TEXT(""));
+	FBuffTable* BuffTableData = BattleTableManagerSystem->BuffTable->FindRow<FBuffTable>(*BuffID, TEXT(""));
 
 	BuffTableData->defaultN = ValueN;
 	BuffTableData->defaultM = ValueM;

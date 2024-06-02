@@ -4,7 +4,6 @@
 
 #include "KNOCKturne.h"
 #include "Engine/DataTable.h"
-#include "GameInstance/BattleTableManagerSystem.h"
 #include "Components/ActorComponent.h"
 #include "BuffComponent.generated.h"
 
@@ -47,27 +46,6 @@ UENUM(BlueprintType)
 enum class EBuffPositivenessType : uint8 {
 	Positive	UMETA(DisplayName = "Positive"),
 	Negative	UMETA(DisplayName = "Negative")
-};
-
-USTRUCT()
-struct FBuffTable : public FTableRowBase {
-	GENERATED_BODY()
-
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	int32 BuffType;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString BuffDescript;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	UTexture2D* BuffIcon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	float defaultN;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	float defaultM;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	float defaultT;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
-	FString BuffName;
 };
 
 USTRUCT(BlueprintType)
@@ -274,9 +252,6 @@ private:
 		{ "Icon_buff_RecoveryEnergy", 24 },
 	};
 
-	UPROPERTY()
-	class UDataTable* BuffTable;
-
 	class UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UActorManagerSystem* ActorManagerSystem;
 	class ABattleManager* BattleManager;
@@ -317,8 +292,6 @@ public:
 		{ "Icon_buff_Warning", EBuffType::Warning },
 		{ "Icon_buff_RecoveryEnergy", EBuffType::RecoveryEnergy },
 	};
-
-	TArray<FBuffTable*> BuffTableRows;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<EBuffType, int32> OriginalDuration;

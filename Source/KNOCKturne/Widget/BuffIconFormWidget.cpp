@@ -78,7 +78,7 @@ FString UBuffIconFormWidget::GetSkillIndexByKeyword(EBuffType BuffType, FString 
 
 FString UBuffIconFormWidget::RedefineDescription(int RowNum)
 {
-	FString rowname = ActorManagerSystem->PeppyActor->BuffComponent->BuffTableRows[RowNum]->BuffDescript;
+	FString rowname = BattleTableManagerSystem->BuffTableRows[RowNum]->BuffDescript;
 	FString OriginalStr = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
 	FString Redefined = OriginalStr;
 	int32 StartIdx = 0;
@@ -135,7 +135,7 @@ void UBuffIconFormWidget::CreateHoverWidget()
 void UBuffIconFormWidget::SetHoverWidgetUI(UBuffHoverWidget* BuffHoverWidget)
 {
 	int RowNum = ActorManagerSystem->PeppyActor->BuffComponent->BuffIconNameToRowNum(Image_Icon->Brush.GetResourceName().ToString());
-	FBuffTable* BuffTable = ActorManagerSystem->PeppyActor->BuffComponent->BuffTableRows[RowNum];
+	FBuffTable* BuffTable = BattleTableManagerSystem->BuffTableRows[RowNum];
 	FString Name = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BuffTable->BuffName), TEXT(""))->KOR;
 
 	BuffHoverWidget->RichTextBlock_Description->SetText(FText::FromString(RedefineDescription(RowNum)));

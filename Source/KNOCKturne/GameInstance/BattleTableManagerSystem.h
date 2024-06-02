@@ -337,6 +337,27 @@ struct FBossStanceData : public FTableRowBase {
 	FString ResponseStanceID;
 };
 
+USTRUCT()
+struct FBuffTable : public FTableRowBase {
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	int32 BuffType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffDescript;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	UTexture2D* BuffIcon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float defaultN;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float defaultM;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	float defaultT;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	FString BuffName;
+};
+
 UCLASS()
 class KNOCKTURNE_API UBattleTableManagerSystem : public UGameInstanceSubsystem
 {
@@ -361,10 +382,13 @@ public:
 	class UDataTable* SkillBuffStringTable;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
 	class UDataTable* BossStanceTable;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Table")
+	class UDataTable* BuffTable;
 
 	TArray<FPeppySkillData*> PeppySkillTableRows;
 	TArray<FSpecialSkillTable*> SpecialSkillTableRows;
 	TArray<FItemData*> ItemTableRows;
+	TArray<FBuffTable*> BuffTableRows;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "DataStructure")
 	TMap<FString, FBossSkillSpawnData> BossSkillSpawnDataMap;

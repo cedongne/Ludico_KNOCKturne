@@ -67,9 +67,15 @@ UBattleTableManagerSystem::UBattleTableManagerSystem() {
 	NTCHECK(DT_BOSSSTANCEDATATABLE.Succeeded());
 	BossStanceTable = DT_BOSSSTANCEDATATABLE.Object;
 
+	FString BuffTablePath = TEXT("/Game/Assets/DataTable/BuffTable.BuffTable");
+	static ConstructorHelpers::FObjectFinder<UDataTable> DT_BuffTABLE(*BuffTablePath);
+	NTCHECK(DT_BuffTABLE.Succeeded());
+	BuffTable = DT_BuffTABLE.Object;
+
 	PeppySkillTable->GetAllRows<FPeppySkillData>("GetAllRows", PeppySkillTableRows);
 	SpecialSkillTable->GetAllRows<FSpecialSkillTable>("GetAllRows", SpecialSkillTableRows);
 	ItemTable->GetAllRows<FItemData>("GetAllRows", ItemTableRows);
+	BuffTable->GetAllRows<FBuffTable>("Get all rows of BuffData", BuffTableRows);
 	
 	SetBossSkillSpawnDataTable();
 
