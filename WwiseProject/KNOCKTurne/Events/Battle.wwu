@@ -179,6 +179,28 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="BossHit" ID="{A858ECC2-499A-454A-8B9D-C747C1D61D2C}">
+					<ChildrenList>
+						<Action Name="" ID="{3EDD32A3-6EBF-4A12-AE3A-12AF36B41A09}" ShortID="1066893257">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BossHit" ID="{070738DE-2FF0-4EB8-9B79-A65BABD82EC3}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="AfterSequence" ID="{5C693C96-F43B-4EC0-8F6D-13BE302E677D}">
+					<ChildrenList>
+						<Action Name="" ID="{D6FFA6DA-6AAC-4F37-83EF-40AFECCE0B80}" ShortID="867608491">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="AfterBattleSequence" ID="{406176A7-DE63-4D76-ABD6-36AEEF806190}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -248,7 +248,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{262B5653-F410-C315-2194-C91918454A33}",
+    "Hash": "{547F4CFB-1B7E-26C6-EA94-F6BAE382FD45}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -590,6 +590,14 @@
       "CachePath": "SFX/BattleDoor_10C4C929.wem"
      },
      {
+      "Id": "610091307",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AfterSequence-02.wav",
+      "CachePath": "SFX/AfterSequence-02_10C4C929.wem"
+     },
+     {
       "Id": "618711237",
       "Language": "SFX",
       "Streaming": "false",
@@ -799,6 +807,20 @@
      }
     ],
     "Events": [
+     {
+      "Id": "3253394138",
+      "Name": "AfterSequence",
+      "ObjectPath": "\\Events\\Battle\\AfterSequence",
+      "GUID": "{5C693C96-F43B-4EC0-8F6D-13BE302E677D}",
+      "DurationType": "OneShot",
+      "DurationMin": "88.56007",
+      "DurationMax": "88.56007",
+      "MediaRefs": [
+       {
+        "Id": "610091307"
+       }
+      ]
+     },
      {
       "Id": "1116020140",
       "Name": "Battle_BGM",
@@ -1626,6 +1648,6 @@
     ]
    }
   ],
-  "FileHash": "{05355A3B-E095-EDE3-4C65-306EF5F54A08}"
+  "FileHash": "{B1B43225-34BE-0EC0-E6CD-CD1383501C9F}"
  }
 }

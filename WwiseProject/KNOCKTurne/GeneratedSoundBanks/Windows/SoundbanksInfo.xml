@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{262B5653-F410-C315-2194-C91918454A33}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{547F4CFB-1B7E-26C6-EA94-F6BAE382FD45}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -249,6 +249,10 @@
 					<ShortName>BattleDoor.wav</ShortName>
 					<CachePath>SFX/BattleDoor_10C4C929.wem</CachePath>
 				</File>
+				<File Id="610091307" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>AfterSequence-02.wav</ShortName>
+					<CachePath>SFX/AfterSequence-02_10C4C929.wem</CachePath>
+				</File>
 				<File Id="618711237" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1.wav</ShortName>
 					<CachePath>SFX/ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1_10C4C929.wem</CachePath>
@@ -355,6 +359,11 @@
 				</File>
 			</Media>
 			<Events>
+				<Event Id="3253394138" Name="AfterSequence" ObjectPath="\Events\Battle\AfterSequence" GUID="{5C693C96-F43B-4EC0-8F6D-13BE302E677D}" DurationType="OneShot" DurationMin="88.56007" DurationMax="88.56007">
+					<MediaRefs>
+						<MediaRef Id="610091307"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="1116020140" Name="Battle_BGM" ObjectPath="\Events\MUS\Battle_BGM" GUID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}" DurationType="Infinite">
 					<SwitchContainers>
 						<SwitchContainer>
@@ -655,5 +664,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{9B9CC94F-F72C-881F-0980-1B289D34D851}</FileHash>
+	<FileHash>{EBAC5B7B-E1B1-0AE1-02D4-A4997761F6F5}</FileHash>
 </SoundBanksInfo>
