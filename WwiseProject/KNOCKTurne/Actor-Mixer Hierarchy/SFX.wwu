@@ -388,23 +388,16 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="AfterSequence-01" ID="{A746DB85-C7B5-4441-A0E5-9ABFB840D8AF}">
+								<AudioFileSource Name="AfterSequence-03" ID="{4C50AC6A-3FAD-42D7-BE37-950E5A39F01D}">
 									<Language>SFX</Language>
-									<AudioFile>AfterSequence-01.wav</AudioFile>
+									<AudioFile>AfterSequence-03.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="81221506"/>
-									</MediaIDList>
-								</AudioFileSource>
-								<AudioFileSource Name="AfterSequence-02" ID="{4240D7C4-9DEA-4FCD-9DAD-6BB762B8E0F8}">
-									<Language>SFX</Language>
-									<AudioFile>AfterSequence-02.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="610091307"/>
+										<MediaID ID="978765173"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="AfterSequence-02" ID="{4240D7C4-9DEA-4FCD-9DAD-6BB762B8E0F8}" Platform="Linked"/>
+								<ActiveSource Name="AfterSequence-03" ID="{4C50AC6A-3FAD-42D7-BE37-950E5A39F01D}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
@@ -524,42 +517,6 @@
 							</ChildrenList>
 							<ActiveSourceList>
 								<ActiveSource Name="OSS_LS1_137_FX_LOOP_AMBIANCE_CLOCK" ID="{6862A168-62DA-4957-A248-EF278D4044AF}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="Skill_SweepGarden" ID="{26B38E6D-4934-497C-A058-79E1E1A38BF0}" ShortID="719756520">
-							<PropertyList>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-8</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="Skill_SweepGarden" ID="{D97C2F2C-C07B-4426-813B-C30996846741}">
-									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.150606060606061"/>
-										<Property Name="FadeOutDuration" Type="Real64" Value="0.125151515151515"/>
-										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-										<Property Name="TrimBegin" Type="Real64" Value="0.156969696969697"/>
-										<Property Name="TrimEnd" Type="Real64" Value="1.40848484848485"/>
-									</PropertyList>
-									<Language>SFX</Language>
-									<AudioFile>Skill_SweepGarden.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="210552255"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="Skill_SweepGarden" ID="{D97C2F2C-C07B-4426-813B-C30996846741}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="Foothold" ID="{A32F36E9-6ED1-4EF6-A8C4-F0C8BB59DB58}" ShortID="899176542">
@@ -1181,6 +1138,28 @@
 										</Sound>
 									</ChildrenList>
 								</BlendContainer>
+								<Sound Name="BS_HeightenedLonging" ID="{64C6FFDC-61B7-41C0-97C9-4201FAAA9BF1}" ShortID="462301563">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="BS_HeightenedLonging" ID="{15013EC7-28E7-4C79-96D3-C5CC2897E9CC}">
+											<Language>SFX</Language>
+											<AudioFile>BS_HeightenedLonging.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="429070457"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="BS_HeightenedLonging" ID="{15013EC7-28E7-4C79-96D3-C5CC2897E9CC}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<ActorMixer Name="BossSkill" ID="{6E8B250D-CC8C-4BB6-B269-5286B2E28F2F}" ShortID="431154939">
@@ -1197,7 +1176,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-15</Value>
+												<Value>-9</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1353,6 +1332,189 @@
 										</Sound>
 									</ChildrenList>
 								</BlendContainer>
+								<Sound Name="Skill_SweepGarden" ID="{26B38E6D-4934-497C-A058-79E1E1A38BF0}" ShortID="719756520">
+									<PropertyList>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="IsLoopingInfinite" Type="bool" Value="False"/>
+										<Property Name="LoopCount" Type="int32" Value="3"/>
+										<Property Name="Lowpass" Type="int16">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{B57A9A80-8CCF-4DB1-ADA5-4BD6141228CF}">
+														<PropertyList>
+															<Property Name="Max" Type="Real64" Value="63"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="MakeUpGain" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E9D9B549-98D1-4C01-8D3A-A250E16C22AD}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-210</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{AE7231C0-F6CA-4939-8E4A-5A53B0B12E1D}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Skill_SweepGarden" ID="{D97C2F2C-C07B-4426-813B-C30996846741}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.150606060606061"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.125151515151515"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.156969696969697"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.40848484848485"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Skill_SweepGarden.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="210552255"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Skill_SweepGarden" ID="{D97C2F2C-C07B-4426-813B-C30996846741}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Boss_Attack1" ID="{F1395D69-8759-4283-AEC1-AE8DBF354E4D}" ShortID="262072438">
+									<PropertyList>
+										<Property Name="Lowpass" Type="int16">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{4A5C5A16-0BB2-4EF2-A038-9973146491F7}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="MakeUpGain" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{14A29BB8-5023-4969-B38D-70A68BEC90E0}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="3"/>
+															<Property Name="Min" Type="Real64" Value="-1"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{1C6A6012-37F4-4129-AFD4-72C5B579A871}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Boss_Attack1" ID="{C1A2AE5E-1E43-4007-AE95-DBE76CF9EF8C}">
+											<Language>SFX</Language>
+											<AudioFile>Boss_Attack1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="741169033"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Boss_Attack1" ID="{C1A2AE5E-1E43-4007-AE95-DBE76CF9EF8C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Boss_Attack2" ID="{5F3B2E70-B650-4183-A71D-256E81CEF075}" ShortID="247529235">
+									<PropertyList>
+										<Property Name="MakeUpGain" Type="Real64">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{4FED9940-08A9-46A9-A759-6B8C8EA22B4C}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{FA635BBC-3166-458D-8864-070171F8F8C7}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-1</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Boss_Attack2" ID="{7340BC73-2A0A-4723-9339-BB2E0E8E9D84}">
+											<Language>SFX</Language>
+											<AudioFile>Boss_Attack2.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="11226262"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Boss_Attack2" ID="{7340BC73-2A0A-4723-9339-BB2E0E8E9D84}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 					</ChildrenList>

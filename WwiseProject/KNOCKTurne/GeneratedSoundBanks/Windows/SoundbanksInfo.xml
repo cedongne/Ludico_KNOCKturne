@@ -76,11 +76,15 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{547F4CFB-1B7E-26C6-EA94-F6BAE382FD45}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{652090D7-B5E2-A1FD-1B06-3B65C1CAAA33}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
 			<Media>
+				<File Id="11226262" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Boss_Attack2.wav</ShortName>
+					<CachePath>SFX/Boss_Attack2_10C4C929.wem</CachePath>
+				</File>
 				<File Id="21977701" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>lft2_fx_one_shot_sonar.wav</ShortName>
 					<CachePath>SFX/lft2_fx_one_shot_sonar_CA4C3EB8.wem</CachePath>
@@ -139,7 +143,7 @@
 				</File>
 				<File Id="210552255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Skill_SweepGarden.wav</ShortName>
-					<CachePath>SFX/Skill_SweepGarden_8A703261.wem</CachePath>
+					<CachePath>SFX/Skill_SweepGarden_BA3E2C1F.wem</CachePath>
 				</File>
 				<File Id="211861517" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>UI_Hover.wav</ShortName>
@@ -213,6 +217,10 @@
 					<ShortName>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</ShortName>
 					<CachePath>SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem</CachePath>
 				</File>
+				<File Id="429070457" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BS_HeightenedLonging.wav</ShortName>
+					<CachePath>SFX/BS_HeightenedLonging_10C4C929.wem</CachePath>
+				</File>
 				<File Id="443133299" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>LNG_VocalBreath_Sigh_01.wav</ShortName>
 					<CachePath>SFX/LNG_VocalBreath_Sigh_01_10C4C929.wem</CachePath>
@@ -249,10 +257,6 @@
 					<ShortName>BattleDoor.wav</ShortName>
 					<CachePath>SFX/BattleDoor_10C4C929.wem</CachePath>
 				</File>
-				<File Id="610091307" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>AfterSequence-02.wav</ShortName>
-					<CachePath>SFX/AfterSequence-02_10C4C929.wem</CachePath>
-				</File>
 				<File Id="618711237" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1.wav</ShortName>
 					<CachePath>SFX/ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1_10C4C929.wem</CachePath>
@@ -272,6 +276,10 @@
 				<File Id="734152410" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</ShortName>
 					<CachePath>SFX/ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem</CachePath>
+				</File>
+				<File Id="741169033" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Boss_Attack1.wav</ShortName>
+					<CachePath>SFX/Boss_Attack1_10C4C929.wem</CachePath>
 				</File>
 				<File Id="742699319" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Water1.wav</ShortName>
@@ -325,6 +333,10 @@
 					<ShortName>SFX_Hover_Door.wav</ShortName>
 					<CachePath>SFX/SFX_Hover_Door_10C4C929.wem</CachePath>
 				</File>
+				<File Id="978765173" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>AfterSequence-03.wav</ShortName>
+					<CachePath>SFX/AfterSequence-03_10C4C929.wem</CachePath>
+				</File>
 				<File Id="999749974" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic.wav</ShortName>
 					<CachePath>SFX/ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem</CachePath>
@@ -359,9 +371,9 @@
 				</File>
 			</Media>
 			<Events>
-				<Event Id="3253394138" Name="AfterSequence" ObjectPath="\Events\Battle\AfterSequence" GUID="{5C693C96-F43B-4EC0-8F6D-13BE302E677D}" DurationType="OneShot" DurationMin="88.56007" DurationMax="88.56007">
+				<Event Id="3253394138" Name="AfterSequence" ObjectPath="\Events\Battle\AfterSequence" GUID="{5C693C96-F43B-4EC0-8F6D-13BE302E677D}" DurationType="OneShot" DurationMin="37.069687" DurationMax="37.069687">
 					<MediaRefs>
-						<MediaRef Id="610091307"/>
+						<MediaRef Id="978765173"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="1116020140" Name="Battle_BGM" ObjectPath="\Events\MUS\Battle_BGM" GUID="{2FCCAAF8-CE48-46EE-8460-BCF7E3E9922A}" DurationType="Infinite">
@@ -410,6 +422,11 @@
 				<Event Id="977925517" Name="BossHit" ObjectPath="\Events\Battle\BossHit" GUID="{A858ECC2-499A-454A-8B9D-C747C1D61D2C}" DurationType="OneShot" DurationMin="2.539875" DurationMax="2.539875">
 					<MediaRefs>
 						<MediaRef Id="384867371"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1370484586" Name="BS_HeightenedLonging" ObjectPath="\Events\Battle\BS_HeightenedLonging" GUID="{BB4D4F03-86AA-44E7-8FC4-089652EF7260}" DurationType="OneShot" DurationMin="4.991229" DurationMax="4.991229">
+					<MediaRefs>
+						<MediaRef Id="429070457"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="1931646578" Name="Campfire" ObjectPath="\Events\Battle\Campfire" GUID="{DB56ABBD-E370-4E80-8CFA-1C7F0BA5251D}" DurationType="OneShot" DurationMin="4.407833" DurationMax="4.407833">
@@ -592,6 +609,16 @@
 						<MediaRef Id="1052600951"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="4230280485" Name="Play_Boss_Attack1" ObjectPath="\Events\Battle\Play_Boss_Attack1" GUID="{5F5DD7BA-AAC9-4784-9448-1E5CB22730B1}" DurationType="OneShot" DurationMin="3.9507825" DurationMax="4.698299">
+					<MediaRefs>
+						<MediaRef Id="741169033"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4230280486" Name="Play_Boss_Attack2" ObjectPath="\Events\Battle\Play_Boss_Attack2" GUID="{6FBB8ECE-C9C3-4AEF-BA5F-924ED8DFC93F}" DurationType="OneShot" DurationMin="1.1697084" DurationMax="1.1697084">
+					<MediaRefs>
+						<MediaRef Id="11226262"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="632323847" Name="SelectUI" ObjectPath="\Events\Function\SelectUI" GUID="{17991763-5B7F-4F32-814D-24656FDF7D65}" DurationType="OneShot" DurationMin="0.5" DurationMax="0.5">
 					<MediaRefs>
 						<MediaRef Id="193027794"/>
@@ -612,7 +639,7 @@
 						<MediaRef Id="391750526"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="316150744" Name="SweepGarden" ObjectPath="\Events\Battle\SweepGarden" GUID="{958EB58C-C88A-44AD-9D36-254C6C6F2A94}" DurationType="OneShot" DurationMin="1.2515152" DurationMax="1.2515152">
+				<Event Id="316150744" Name="SweepGarden" ObjectPath="\Events\Battle\SweepGarden" GUID="{958EB58C-C88A-44AD-9D36-254C6C6F2A94}" DurationType="OneShot" DurationMin="4.238748" DurationMax="4.757834">
 					<MediaRefs>
 						<MediaRef Id="210552255"/>
 					</MediaRefs>
@@ -664,5 +691,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{EBAC5B7B-E1B1-0AE1-02D4-A4997761F6F5}</FileHash>
+	<FileHash>{30D44765-20E7-9A44-F12C-26CEE61E3544}</FileHash>
 </SoundBanksInfo>

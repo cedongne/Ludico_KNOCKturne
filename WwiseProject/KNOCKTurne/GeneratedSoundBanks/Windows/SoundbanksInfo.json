@@ -248,11 +248,19 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{547F4CFB-1B7E-26C6-EA94-F6BAE382FD45}",
+    "Hash": "{652090D7-B5E2-A1FD-1B06-3B65C1CAAA33}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
     "Media": [
+     {
+      "Id": "11226262",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Boss_Attack2.wav",
+      "CachePath": "SFX/Boss_Attack2_10C4C929.wem"
+     },
      {
       "Id": "21977701",
       "Language": "SFX",
@@ -371,7 +379,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Skill_SweepGarden.wav",
-      "CachePath": "SFX/Skill_SweepGarden_8A703261.wem"
+      "CachePath": "SFX/Skill_SweepGarden_BA3E2C1F.wem"
      },
      {
       "Id": "211861517",
@@ -518,6 +526,14 @@
       "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem"
      },
      {
+      "Id": "429070457",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BS_HeightenedLonging.wav",
+      "CachePath": "SFX/BS_HeightenedLonging_10C4C929.wem"
+     },
+     {
       "Id": "443133299",
       "Language": "SFX",
       "Streaming": "false",
@@ -590,14 +606,6 @@
       "CachePath": "SFX/BattleDoor_10C4C929.wem"
      },
      {
-      "Id": "610091307",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "AfterSequence-02.wav",
-      "CachePath": "SFX/AfterSequence-02_10C4C929.wem"
-     },
-     {
       "Id": "618711237",
       "Language": "SFX",
       "Streaming": "false",
@@ -636,6 +644,14 @@
       "Location": "Memory",
       "ShortName": "ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav",
       "CachePath": "SFX/ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem"
+     },
+     {
+      "Id": "741169033",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Boss_Attack1.wav",
+      "CachePath": "SFX/Boss_Attack1_10C4C929.wem"
      },
      {
       "Id": "742699319",
@@ -742,6 +758,14 @@
       "CachePath": "SFX/SFX_Hover_Door_10C4C929.wem"
      },
      {
+      "Id": "978765173",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AfterSequence-03.wav",
+      "CachePath": "SFX/AfterSequence-03_10C4C929.wem"
+     },
+     {
       "Id": "999749974",
       "Language": "SFX",
       "Streaming": "false",
@@ -813,11 +837,11 @@
       "ObjectPath": "\\Events\\Battle\\AfterSequence",
       "GUID": "{5C693C96-F43B-4EC0-8F6D-13BE302E677D}",
       "DurationType": "OneShot",
-      "DurationMin": "88.56007",
-      "DurationMax": "88.56007",
+      "DurationMin": "37.069687",
+      "DurationMax": "37.069687",
       "MediaRefs": [
        {
-        "Id": "610091307"
+        "Id": "978765173"
        }
       ]
      },
@@ -935,6 +959,20 @@
       "MediaRefs": [
        {
         "Id": "384867371"
+       }
+      ]
+     },
+     {
+      "Id": "1370484586",
+      "Name": "BS_HeightenedLonging",
+      "ObjectPath": "\\Events\\Battle\\BS_HeightenedLonging",
+      "GUID": "{BB4D4F03-86AA-44E7-8FC4-089652EF7260}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.991229",
+      "DurationMax": "4.991229",
+      "MediaRefs": [
+       {
+        "Id": "429070457"
        }
       ]
      },
@@ -1451,6 +1489,34 @@
       ]
      },
      {
+      "Id": "4230280485",
+      "Name": "Play_Boss_Attack1",
+      "ObjectPath": "\\Events\\Battle\\Play_Boss_Attack1",
+      "GUID": "{5F5DD7BA-AAC9-4784-9448-1E5CB22730B1}",
+      "DurationType": "OneShot",
+      "DurationMin": "3.9507825",
+      "DurationMax": "4.698299",
+      "MediaRefs": [
+       {
+        "Id": "741169033"
+       }
+      ]
+     },
+     {
+      "Id": "4230280486",
+      "Name": "Play_Boss_Attack2",
+      "ObjectPath": "\\Events\\Battle\\Play_Boss_Attack2",
+      "GUID": "{6FBB8ECE-C9C3-4AEF-BA5F-924ED8DFC93F}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1697084",
+      "DurationMax": "1.1697084",
+      "MediaRefs": [
+       {
+        "Id": "11226262"
+       }
+      ]
+     },
+     {
       "Id": "632323847",
       "Name": "SelectUI",
       "ObjectPath": "\\Events\\Function\\SelectUI",
@@ -1512,8 +1578,8 @@
       "ObjectPath": "\\Events\\Battle\\SweepGarden",
       "GUID": "{958EB58C-C88A-44AD-9D36-254C6C6F2A94}",
       "DurationType": "OneShot",
-      "DurationMin": "1.2515152",
-      "DurationMax": "1.2515152",
+      "DurationMin": "4.238748",
+      "DurationMax": "4.757834",
       "MediaRefs": [
        {
         "Id": "210552255"
@@ -1648,6 +1714,6 @@
     ]
    }
   ],
-  "FileHash": "{B1B43225-34BE-0EC0-E6CD-CD1383501C9F}"
+  "FileHash": "{B5C6E827-8FCA-D278-331E-646F1AD8FC7B}"
  }
 }

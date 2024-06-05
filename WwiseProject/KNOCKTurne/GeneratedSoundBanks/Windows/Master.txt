@@ -20,6 +20,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1199896708	Thorn			\Battle\Thorn	
 	1227874634	FootHold			\Battle\FootHold	
 	1307264345	Stance			\Battle\Stance	
+	1370484586	BS_HeightenedLonging			\Battle\BS_HeightenedLonging	
 	1505888634	CountDown			\Function\CountDown	
 	1760998000	TextStop			\Function\TextStop	
 	1787057067	HubWorldAmbi			\HubWorld\HubWorldAmbi	
@@ -49,6 +50,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	3933848069	HomeAmbi			\IntroCutScene\HomeAmbi	
 	4065426480	FS_Water			\SFX\FS_Water	
 	4212918798	Efficient			\Battle\Efficient	
+	4230280485	Play_Boss_Attack1			\Battle\Play_Boss_Attack1	
+	4230280486	Play_Boss_Attack2			\Battle\Play_Boss_Attack2	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	2675729146	BattleState			\Default Work Unit\BattleState	
@@ -91,6 +94,7 @@ Trigger	ID	Name			Wwise Object Path	Notes
 	2642173709	BattleStart			\Default Work Unit\BattleStart	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	11226262	Boss_Attack2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Boss_Attack2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossSkill\Boss_Attack2		224680
 	21977701	Foothold	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\lft2_fx_one_shot_sonar_CA4C3EB8.wem		\Actor-Mixer Hierarchy\SFX\Battle\Foothold		417576
 	26675951	SFX_PeppyWalk_Snow1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow1		87492
 	49505542	SFX_PeppyWalk_Grass1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Grass1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Grass\SFX_PeppyWalk_Grass1		44844
@@ -105,7 +109,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	164875334	SFX_Text_Typing	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Text_Typing_43A4CF22.wem		\Actor-Mixer Hierarchy\Dialogue\SFX_Text_Typing		88296
 	193027794	Select	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_UI_Select_B744575A.wem		\Actor-Mixer Hierarchy\SFX\UI\Select		88296
 	207080211	ESM_MMO_Game_Magic_Designed_Armor_Cast_21	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_MMO_Game_Magic_Designed_Armor_Cast_21_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Special\ESM_MMO_Game_Magic_Designed_Armor_Cast_21		311364
-	210552255	Skill_SweepGarden	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Skill_SweepGarden_8A703261.wem		\Actor-Mixer Hierarchy\SFX\Battle\Skill_SweepGarden		220864
+	210552255	Skill_SweepGarden	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Skill_SweepGarden_BA3E2C1F.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossSkill\Skill_SweepGarden		220864
 	211861517	UI_Hover_01	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\UI_Hover_8D153607.wem		\Actor-Mixer Hierarchy\SFX\UI\Hover\UI_Hover_01		78836
 	216141900	Die	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Explainer_Video_One_Shot_Foley_Cloth_Rag_Throw_1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Die		202360
 	223719773	SFX_PeppyWalk_Stone1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Stone1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Stone\SFX_PeppyWalk_Stone1		71084
@@ -124,6 +128,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	397593734	BattleDoor2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor2		352896
 	416420098	SFX_PeppyWalk_Wood2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Wood2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Wood\SFX_PeppyWalk_Wood2		48096
 	427230653	ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossSkill\ClenUp\ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty		751956
+	429070457	BS_HeightenedLonging	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BS_HeightenedLonging_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppySkill\BS_HeightenedLonging		958412
 	443133299	LNG_VocalBreath_Sigh_01	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\LNG_VocalBreath_Sigh_01_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppySkill\CharmingVoice\LNG_VocalBreath_Sigh_01		72858
 	453979306	BossDie	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\086_FX_Long_-_DTFX2_Zenhiser_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossDie		829252
 	485043058	LampOff	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_15108706.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff		38240
@@ -133,12 +138,12 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	571000522	MO_US_atmosphere_echolocation_C	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\MO_US_atmosphere_echolocation_C_5A157BE7.wem		\Actor-Mixer Hierarchy\SFX\Battle\PeppySkill\Emotion\MO_US_atmosphere_echolocation_C		473096
 	575546989	ObjectFind	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ObjectFind2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\ObjectFind		705696
 	604532544	BattleDoor	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BattleDoor_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\BattleDoor		352896
-	610091307	AfterBattleSequence	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\AfterSequence-02_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\AfterBattleSequence		17003628
 	618711237	Battle_GetEnergy	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Empire_Game_Collect_Magic_Coin_Twinkle_1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Battle_GetEnergy		562460
 	638760269	SFX_PeppyWalk_Water2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water2_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water2		37336
 	727224766	Wind	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_Wind_239E1AED.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Wind		22472800
 	728677903	DoorClose	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\FF_TM_drawer_open_close_simple_8BA889A0.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\DoorClose		422128
 	734152410	Campfire	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\Campfire		846464
+	741169033	Boss_Attack1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Boss_Attack1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossSkill\Boss_Attack1		803752
 	742699319	SFX_PeppyWalk_Water1	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Water1_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Water\SFX_PeppyWalk_Water1		41230
 	781396450	LampOff2	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\HotelRoomLamp_S08FO.1312_C08CDC50.wem		\Actor-Mixer Hierarchy\SFX\IntroCutScene\LampOff2		126876
 	783667508	whitenoise	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\whitenoise_MSL_594EBFCF.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\whitenoise		1129056
@@ -152,6 +157,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	901777490	MGxSM_snap_dry_stick_and_leaf_11	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\MGxSM_snap_dry_stick_and_leaf_11_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Battle\BossSkill\Skill_Thorn\MGxSM_snap_dry_stick_and_leaf_11		76612
 	903571056	BGM_Credit_75bpm4-4_L29M	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\BGM_SomeWhere_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Credit\BGM_Credit_75bpm4-4_L29M\BGM_Credit_75bpm4-4_L29M		6350496
 	903646689	HubWorld_DoorHover	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_Hover_Door_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\HubWorld_DoorHover		210016
+	978765173	AfterBattleSequence	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\AfterSequence-03_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sequence\AfterBattleSequence		7117476
 	999749974	Notice	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\ESM_Deep_UI_Sound_2_Glitch_Software_Particle_Processed_Beep_Chrip_Electronic_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\UI\Notice		114084
 	1015440715	SFX_PeppyWalk_Snow3	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\SFX_PeppyWalk_Snow3_10C4C929.wem		\Actor-Mixer Hierarchy\Peppy\Foot Steps\FS_Snow\SFX_PeppyWalk_Snow3		95020
 	1017381714	Texture	D:\Git\Ludico_KNOCKturne\WwiseProject\KNOCKTurne\.cache\Windows\SFX\Ambi_HerbWorld_LeavesTallGrassWind_10C4C929.wem		\Actor-Mixer Hierarchy\Ambi\HubWorld\Texture		18700384

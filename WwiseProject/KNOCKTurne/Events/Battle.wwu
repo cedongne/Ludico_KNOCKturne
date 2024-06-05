@@ -201,6 +201,39 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="BS_HeightenedLonging" ID="{BB4D4F03-86AA-44E7-8FC4-089652EF7260}">
+					<ChildrenList>
+						<Action Name="" ID="{AA8AEBB6-EE20-40BC-B8C5-5018C88CF9BD}" ShortID="831236986">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BS_HeightenedLonging" ID="{64C6FFDC-61B7-41C0-97C9-4201FAAA9BF1}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Boss_Attack1" ID="{5F5DD7BA-AAC9-4784-9448-1E5CB22730B1}">
+					<ChildrenList>
+						<Action Name="" ID="{646F9C1D-E955-4C59-B731-CCFD3EA11F7C}" ShortID="870623534">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Boss_Attack1" ID="{F1395D69-8759-4283-AEC1-AE8DBF354E4D}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Boss_Attack2" ID="{6FBB8ECE-C9C3-4AEF-BA5F-924ED8DFC93F}">
+					<ChildrenList>
+						<Action Name="" ID="{C107BF17-376D-4747-A96A-E518451418EA}" ShortID="382704937">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Boss_Attack2" ID="{5F3B2E70-B650-4183-A71D-256E81CEF075}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
