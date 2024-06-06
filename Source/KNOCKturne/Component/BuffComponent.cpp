@@ -685,7 +685,7 @@ int32 UBuffComponent::GetCurDuration(EBuffType BuffType)
 bool UBuffComponent::isTermTypeTurn(EBuffType BuffType)
 {
 	if (!HasBuff(BuffType)) {
-		NTLOG(Error, TEXT("Can't Get TermType!"));
+		NTLOG(Warning, TEXT("Can't Get TermType!"));
 		return true;
 	}
 

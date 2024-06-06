@@ -138,7 +138,7 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 void APeppy::SlideAction() {
-	if (GetWorld()->GetMapName() != "UEDPIE_0_LV_Battle") {
+	if (GetWorld()->GetMapName() != "UEDPIE_0_LV_Battle" || GetWorld()->GetMapName() != "LV_Battle") {
 		return;
 	}
 
@@ -227,8 +227,9 @@ void APeppy::Die() {
 
 void APeppy::SetInteractingNpc() {
 	FString OverlappedActorStr = UKismetSystemLibrary::GetDisplayName(OverlappedActor);
+	FString CurrentLevel = GetWorld()->GetMapName();
 
-	if (GetWorld()->GetMapName() == "UEDPIE_0_LV_HubWorld") {
+	if (CurrentLevel == "UEDPIE_0_LV_HubWorld" || CurrentLevel == "LV_HubWorld") {
 		HubWorldLevelScriptActor = Cast<AHubWorldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
 		if (OverlappedActorStr == "BP_DreamM") {
 			InteractingNpcGroupcode = "DreamM";

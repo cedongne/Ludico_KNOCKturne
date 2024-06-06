@@ -20,6 +20,7 @@
 #include "PackageSelectedUIWidget.h"
 #include <Blueprint/SlateBlueprintLibrary.h>
 #include <Blueprint/WidgetLayoutLibrary.h>
+#include <Actor/Peppy.h>
 
 void UPackageWidget::NativePreConstruct()
 {
@@ -399,6 +400,9 @@ void UPackageWidget::Exit()
 	if (AllEnterBattleWidgetArr.Num() > 0) {
 		AllEnterBattleWidgetArr[0]->SetIsEnabled(true);
 	}
+
+	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+	Peppy->SetMobile();
 }
 
 void UPackageWidget::ResetSetting()
@@ -454,6 +458,9 @@ void UPackageWidget::NoSkillAlertAndSaveData()
 		RemoveFromParent();
 		RemoveAllHoverWidgets();
 
+		APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+		Peppy->SetMobile();
+
 		if (IsEnterBattle) {
 			OpenBattleLevel();
 		}
@@ -486,6 +493,9 @@ void UPackageWidget::ClickAlertModalYes()
 	}
 	RemoveFromParent();
 	RemoveAllHoverWidgets();
+
+	APeppy* Peppy = Cast<APeppy>(UGameplayStatics::GetPlayerPawn(this, 0));
+	Peppy->SetMobile();
 
 	if (IsEnterBattle) {
 		OpenBattleLevel();
@@ -747,6 +757,4 @@ void UPackageWidget::OpenBattleLevel()
 			UGameplayStatics::OpenLevel(this, "LV_Battle");
 			GetWorld()->GetTimerManager().ClearTimer(FadeOutTimerHandle);
 		}), 2, false);
-
-	KNOCKturneGameState->SaveKNOCKturneData();
 }

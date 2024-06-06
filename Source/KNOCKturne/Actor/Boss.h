@@ -47,6 +47,7 @@ private:
 	
 public:
 	bool IsDie = false;
+	bool CanSpawnSkill = true;
 
 	void SpawnBossSkillWhenStartBossTurn();
 	void ClearUseSkillTimer();

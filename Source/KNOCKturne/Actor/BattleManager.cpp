@@ -90,6 +90,7 @@ void ABattleManager::TurnChange() {
 
 		break;
 	case PeppySkillSelectingTurn:
+		ActorManagerSystem->BossActor->CanSpawnSkill = false;
 		ActorManagerSystem->PeppyActor->BuffComponent->CanGetMoodBuff = false;
 		SetLeftCurrentTurnTime(100);	// ��ų ����� ���� �ӽ� �� Ÿ�� ����
 		BP_UsePeppySkills();
@@ -105,6 +106,7 @@ void ABattleManager::TurnChange() {
 		CurrentTurnType = BossTurn;
 		BattleManagerSystem->UpdateRoundInfo();
 
+		ActorManagerSystem->BossActor->CanSpawnSkill = true;
 		ActorManagerSystem->BossActor->BuffComponent->ElapseTurn();
 		ActorManagerSystem->PeppyActor->BuffComponent->ElapseTurn();
 		ActorManagerSystem->SpecialSkillActor->ElapseTurn();

@@ -51,6 +51,8 @@ void ANTBattleGameMode::EndBattle() {
 	ActorManagerSystem->PeppyActor->SetImmobile();
 	BattleManager->SetActorTickEnabled(false);
 	BattleManagerSystem->SelectedSkillCodeList.Empty();
+	BattleManagerSystem->FinalSpecialSkill = "";
+	BattleManagerSystem->FinalItem = "";
 
 	TArray<AActor*> AllSpecialSkillActorArr;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), BP_SpecialSkillActorClass, AllSpecialSkillActorArr);
@@ -60,4 +62,7 @@ void ANTBattleGameMode::EndBattle() {
 	}
 
 	BattleManagerSystem->GetDreamFragmentAfterBattle();
+
+	AKNOCKturneGameState* KNOCKturneGameState = Cast<AKNOCKturneGameState>(UGameplayStatics::GetGameState(GetWorld()));
+	KNOCKturneGameState->SaveKNOCKturneData();
 }

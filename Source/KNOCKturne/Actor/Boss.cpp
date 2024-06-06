@@ -33,6 +33,10 @@ void ABoss::PostInitializeComponents() {
 
 // ���� �ϵ��� �ֱ������� ��ų�� ����.
 void ABoss::SpawnBossSkill() {
+	if (!CanSpawnSkill) {
+		return;
+	}
+
 	TArray<FString> BossSkillKeyArray;
 	BattleTableManagerSystem->BossSkillSpawnDataMap.GenerateKeyArray(BossSkillKeyArray);
 

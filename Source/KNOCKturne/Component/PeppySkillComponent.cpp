@@ -30,11 +30,11 @@ void UPeppySkillComponent::LoadGameInstances() {
 void UPeppySkillComponent::LoadCanUsePeppySkillList() {
 	FString CurrentLevelName = GetWorld()->GetMapName();
 	AddCanUsePeppySkillWithLevelName("Tutorial");
-	if (CurrentLevelName == "UEDPIE_0_LV_Tutorial") {
+	if (CurrentLevelName == "UEDPIE_0_LV_Tutorial" || CurrentLevelName == "LV_Tutorial") {
 		return;
 	}
 	AddCanUsePeppySkillWithLevelName("Episode1");
-	if (CurrentLevelName == "UEDPIE_0_LV_Battle") {
+	if (CurrentLevelName == "UEDPIE_0_LV_Battle" || CurrentLevelName == "LV_Battle") {
 		return;
 	}
 }
