@@ -66,6 +66,7 @@ bool UBossStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) {
 		break;
 	case FStatType::MaxEP:
 		CurStatData.MaxEP = FMath::Clamp<int32>(CurStatData.MaxEP + Value, 0, MaxStatData.MaxEP);
+		break;
 	case FStatType::AttackDamage:
 		CurStatData.AttackDamage = FMath::Clamp<int32>(CurStatData.AttackDamage + Value, 0, MaxStatData.AttackDamage);
 		break;

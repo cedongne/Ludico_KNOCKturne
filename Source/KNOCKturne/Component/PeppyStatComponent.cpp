@@ -76,6 +76,9 @@ bool UPeppyStatComponent::TryUpdateCurStatData(FStatType StatType, float Value) 
 			BattleGameMode->GameOver();
 		}
 		break;
+	case FStatType::MaxEP:
+		CurStatData.MaxEP = FMath::Clamp<int32>(CurStatData.MaxEP + Value, 0, MaxStatData.MaxEP);
+		break;
 	case FStatType::Energy:
 		CurStatData.Energy = FMath::Clamp<int32>(CurStatData.Energy + Value, 0, CurStatData.MaxEnergy);
 		break;

@@ -271,7 +271,7 @@ public:
 		{ "Icon_buff_AvdIncrease", EBuffType::AvdIncrease },
 		{ "Icon_buff_ReflexiveAttack", EBuffType::ReflexiveAttack },
 		{ "Icon_buff_ReflexiveRecovery", EBuffType::ReflexiveRecovery },
-		{ "Icon_buff_PeriodicRecovery", EBuffType::PeriodicAttack },
+		{ "Icon_buff_PeriodicRecovery", EBuffType::PeriodicRecovery },
 		{ "Icon_buff_EnergyDropIncrease", EBuffType::EnergyDropIncrease },
 		{ "Icon_buff_SpeedIncrease", EBuffType::SpeedIncrease },
 		{ "Icon_buff_DefenseDecrease", EBuffType::DefenseDecrease },

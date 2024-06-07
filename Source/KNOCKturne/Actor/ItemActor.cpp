@@ -45,9 +45,9 @@ void AItemActor::TryUseItem()
 			ReduceItem();
 		}
 		else if (ItemName == "Item_fresh_sprout") {
-			UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-			BossStatComponent->TryUpdateCurStatData(FStatType::MaxEP, ItemData.value1N);
-			BossStatComponent->TryUpdateCurStatData(FStatType::EP, ItemData.value1N);
+			UStatComponent* PeppyStatComponent = Cast<UStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+			PeppyStatComponent->TryUpdateCurStatData(FStatType::MaxEP, ItemData.value1N);
+			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, ItemData.value1N);
 			ReduceItem();
 		}
 		else if (ItemName == "Item_sled") {
@@ -79,9 +79,9 @@ void AItemActor::EndItem()
 		CanAvoidAttack = false;
 	}
 	else if (ItemName == "Item_fresh_sprout") {
-		UStatComponent* BossStatComponent = Cast<UStatComponent>(ActorManagerSystem->BossActor->GetComponentByClass(UStatComponent::StaticClass()));
-		BossStatComponent->TryUpdateCurStatData(FStatType::MaxEP, -ItemData.value1N);
-		BossStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
+		UStatComponent* PeppyStatComponent = Cast<UStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
+		PeppyStatComponent->TryUpdateCurStatData(FStatType::MaxEP, -ItemData.value1N);
+		PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, -ItemData.value1N);
 	}
 	else if (ItemName == "Item_sled") {
 		isSledItem = false;
