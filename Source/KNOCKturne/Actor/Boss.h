@@ -47,7 +47,6 @@ private:
 	
 public:
 	bool IsDie = false;
-	bool CanSpawnSkill = true;
 
 	void SpawnBossSkillWhenStartBossTurn();
 	void ClearUseSkillTimer();
@@ -55,6 +54,8 @@ public:
 
 	void SpawnBossSkill();
 	TArray<FString> GetSpawnableBossSkills(TArray<FString> BossSkillKeyArray, FString CurBossSkillStance);
+
+	void PauseAndClearUseSkillTimer();
 
 	void Die();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

@@ -33,10 +33,6 @@ void ABoss::PostInitializeComponents() {
 
 // ���� �ϵ��� �ֱ������� ��ų�� ����.
 void ABoss::SpawnBossSkill() {
-	if (!CanSpawnSkill) {
-		return;
-	}
-
 	TArray<FString> BossSkillKeyArray;
 	BattleTableManagerSystem->BossSkillSpawnDataMap.GenerateKeyArray(BossSkillKeyArray);
 
@@ -131,6 +127,12 @@ TArray<FString> ABoss::GetSpawnableBossSkills(TArray<FString> BossSkillKeyArray,
 	}
 
 	return CurBossStanceSkillArray;
+}
+
+void ABoss::PauseAndClearUseSkillTimer()
+{
+	GetWorld()->GetTimerManager().PauseTimer(UseSkillTimerHandler);
+	ClearUseSkillTimer();
 }
 
 /*���� ���� ���۵� �� ���� ����̸� ������ ��ų�� ����.*/
