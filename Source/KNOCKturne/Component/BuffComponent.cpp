@@ -352,15 +352,12 @@ void UBuffComponent::OperatePositiveBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackIncrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
-		NTLOG(Warning, TEXT("AttackIncrease: AttackDamage +%d"), BuffData.Value_N);
 		break;
 	case EBuffType::EnergyDropIncrease:
 		AdditionalEnergyByBuff = BuffData.Value_N;
-		NTLOG(Warning, TEXT("EnergyDropIncrease: BossEnergyDrop +%d"), BuffData.Value_N);
 		break;
 	case EBuffType::Mood:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
-		NTLOG(Warning, TEXT("Mood: AttackDamage +%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
@@ -376,15 +373,12 @@ void UBuffComponent::EndPositiveBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackIncrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
-		NTLOG(Warning, TEXT("End AttackIncrease: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	case EBuffType::EnergyDropIncrease:
 		AdditionalEnergyByBuff = 0;
-		NTLOG(Warning, TEXT("End EnergyDropIncrease: Energy -%d"), BuffData.Value_N);
 		break;
 	case EBuffType::Mood:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
-		NTLOG(Warning, TEXT("End Mood: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No PositiveBuffs_PerTurn Found!"));
@@ -419,7 +413,6 @@ void UBuffComponent::OperateNegativeBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackDecrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, -BuffData.Value_N);
-		NTLOG(Warning, TEXT("AttackDecrease: AttackDamage -%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerTurn Found!"));
@@ -435,7 +428,6 @@ void UBuffComponent::EndNegativeBuffs_PerTurn(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::AttackDecrease:
 		StatComponent->TryUpdateCurStatData(FStatType::AttackDamage, BuffData.Value_N);
-		NTLOG(Warning, TEXT("End AttackDecrease: AttackDamage +%d"), BuffData.Value_N);
 		break;
 	default:
 		NTLOG(Warning, TEXT("No NegativeBuffs_PerTurn Found!"));
@@ -452,10 +444,10 @@ void UBuffComponent::OperateNegativeBuffs_PerSecond(EBuffType BuffType, float De
 	case EBuffType::PeriodicAttack:
 		if (BuffDelayWithDeltaTime(EBuffType::PeriodicAttack, BuffData.Value_M, DeltaSeconds)) {
 			StatComponent->GetDamaged(BuffData.Value_N);
-			NTLOG(Warning, TEXT("PeriodicAttack: GetDamaged -%d"), BuffData.Value_N);
 		}
 		break;
 	case EBuffType::SpeedDecrease: {
+		NTLOG(Warning, TEXT("start Speeddecrease: %f"), ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed);
 		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed *= 1 - BuffData.Value_N;
 		break;
 	}
@@ -472,7 +464,7 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 	switch (BuffType) {
 	case EBuffType::SpeedDecrease: {
 		ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed /= 1 - BuffData.Value_N;
-		NTLOG(Warning, TEXT("End SpeedDecrease"));
+		NTLOG(Warning, TEXT("End Speeddecrease: %f"), ActorManagerSystem->PeppyActor->GetCharacterMovement()->MaxWalkSpeed);
 		break;
 	}
 	default:
@@ -482,14 +474,13 @@ void UBuffComponent::EndNegativeBuffs_PerSecond(EBuffType BuffType)
 
 void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 {
-	if (!HasPositiveBuffs_PerTurn.Contains(EBuffType::PeriodicRecovery) || BattleManager->isPeppyTurn || isRecoveringEP) {
+	if (!HasPositiveBuffs_PerTurn.Contains(EBuffType::PeriodicRecovery) || isRecoveringEP) {
 		return;
 	}
 
 	isPeppyMove = Peppy->GetMovementComponent()->Velocity.Size() > 0 ? true : false;
-	NTLOG(Warning, TEXT("%s"), isPeppyMove ? TEXT("true") : TEXT("false"));
 
-	if (isPeppyMove) {
+	if (isPeppyMove || BattleManager->isPeppyTurn) {
 		ActorManagerSystem->SpecialSkillActor->Effect->SetActive(false);
 		return;
 	}
@@ -516,7 +507,6 @@ void UBuffComponent::TryOperatePeriodicRecovery(float DeltaSeconds)
 			UPeppyStatComponent* PeppyStatComponent = Cast<UPeppyStatComponent>(ActorManagerSystem->PeppyActor->GetComponentByClass(UStatComponent::StaticClass()));
 			PeppyStatComponent->TryUpdateCurStatData(FStatType::EP, BuffData.Value_N);
 			ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_GatheringEnergy_2, true);
-			NTLOG(Warning, TEXT("PeriodicRecovery: EP +%d"), BuffData.Value_N);
 
 			GetWorld()->GetTimerManager().SetTimer(EffectHandle, FTimerDelegate::CreateLambda([&]()
 				{
@@ -619,7 +609,7 @@ void UBuffComponent::TryUpdateBuffDataBySkillData(EBuffType BuffType, FBuffData 
 int UBuffComponent::GetShieldNum()
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
-		return HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N;
+		return HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_T;
 	}
 	else {
 		return 0;
@@ -629,8 +619,8 @@ int UBuffComponent::GetShieldNum()
 void UBuffComponent::ReduceOneShield()
 {
 	if (HasPositiveBuffs_PerTurn.Contains(EBuffType::Shield)) {
-		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N--;
-		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_N == 0) {
+		HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_T--;
+		if (HasPositiveBuffs_PerTurn[EBuffType::Shield].Value_T == 0) {
 			ActorManagerSystem->SpecialSkillActor->Effect->SetAsset(NS_ShieldBreak, true);
 			RemoveBuff(EBuffType::Shield);
 			DeleteBuffUI(EBuffType::Shield);

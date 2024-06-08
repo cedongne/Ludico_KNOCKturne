@@ -39,10 +39,10 @@ private:
 	TSubclassOf<AActor> BP_EnergySpawnerClass;
 	UBattleTableManagerSystem* BattleTableManagerSystem;
 	class UBattleManagerSystem* BattleManagerSystem;
+	class ABattleManager* BattleManager;
 
 	FTimerHandle UseSkillTimerHandler;
 	bool isFirstSkill = true;
-
 	TMap<FString, int32> BossSkillNameCoolTimeMap;
 	
 public:

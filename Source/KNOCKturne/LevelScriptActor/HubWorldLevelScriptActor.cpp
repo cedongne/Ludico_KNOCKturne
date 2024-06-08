@@ -346,6 +346,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			{
 				UWidgetLayoutLibrary::RemoveAllWidgets(this);
 				HubBGM();
+				Peppy->CanMove = true;
 
 				if (BP_FadeInOutClass) {
 					BP_FadeInOut = CreateWidget<UUserWidget>(GetWorld(), BP_FadeInOutClass);
@@ -522,6 +523,7 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 			LoadingSound2();
 			DefaultLocation();
 			LoadingWidgetRef->RemoveFromParent();
+			Peppy->CanMove = true;
 
 			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
 			if (LevelSequencePlayer)
@@ -567,27 +569,4 @@ void AHubWorldLevelScriptActor::CreateLoadingWidget()
 	}
 
 	LoadingWidgetRef->LoadingText = CommonDialogueTableComponent->RandomLoadingText();
-}
-
-void AHubWorldLevelScriptActor::SetHubworldBGMAndHUD()
-{
-	GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
-		{
-			UWidgetLayoutLibrary::RemoveAllWidgets(this);
-			HubBGM();
-
-			LevelSequencePlayer = ULevelSequencePlayer::CreateLevelSequencePlayer(GetWorld(), FadeIn, FMovieSceneSequencePlaybackSettings(), SequenceActor);
-			if (LevelSequencePlayer)
-			{
-				LevelSequencePlayer->Play();
-			}
-			else
-			{
-				NTLOG(Warning, TEXT("Unable to create FadeIn level sequence player!"));
-			}
-
-			CreateHubworldHUD();
-
-			GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
-		}), 4, false);
 }

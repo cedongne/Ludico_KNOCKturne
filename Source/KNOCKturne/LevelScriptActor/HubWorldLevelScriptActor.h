@@ -182,8 +182,6 @@ public:
 	void SkipPrologue();
 	UFUNCTION(Blueprintcallable)
 	void CreateLoadingWidget();
-	UFUNCTION(Blueprintcallable)
-	void SetHubworldBGMAndHUD();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayFadeInAnim();
 

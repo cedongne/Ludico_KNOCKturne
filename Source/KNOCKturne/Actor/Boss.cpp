@@ -21,6 +21,7 @@ void ABoss::BeginPlay()
 	auto KNOCKturneGameInstance = Cast<UKNOCKturneGameInstance>(GetGameInstance());
 	BattleTableManagerSystem = KNOCKturneGameInstance->GetSubsystem<UBattleTableManagerSystem>();
 	BattleManagerSystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UBattleManagerSystem>();
+	BattleManager = Cast<ABattleManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABattleManager::StaticClass()));
 
 	EnergySpawner = Cast<UKNOCKturneObjectPool>(GetWorld()->SpawnActor<AActor>(BP_EnergySpawnerClass)->GetComponentByClass(UKNOCKturneObjectPool::StaticClass()));
 }
@@ -33,6 +34,10 @@ void ABoss::PostInitializeComponents() {
 
 // ���� �ϵ��� �ֱ������� ��ų�� ����.
 void ABoss::SpawnBossSkill() {
+	if (BattleManager->isPeppyTurn) {
+		return;
+	}
+
 	TArray<FString> BossSkillKeyArray;
 	BattleTableManagerSystem->BossSkillSpawnDataMap.GenerateKeyArray(BossSkillKeyArray);
 

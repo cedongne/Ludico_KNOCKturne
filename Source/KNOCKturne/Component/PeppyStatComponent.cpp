@@ -53,9 +53,10 @@ void UPeppyStatComponent::GetDamaged(float Value) {
 
 	float DamageValue = Value + ActorManagerSystem->BossActor->StatComponent->CurStatData.AttackDamage - this->CurStatData.DefenseDamage;
 
+	NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
 	if (PeppyActor->BuffComponent->GetShieldNum() > 0) {
 		PeppyActor->BuffComponent->ReduceOneShield();
-		NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
+		// NTLOG(Warning, TEXT("Shield: Remained Shield Num %d"), PeppyActor->BuffComponent->GetShieldNum());
 	}
 	else {
 		if (CanBeDamaged) {

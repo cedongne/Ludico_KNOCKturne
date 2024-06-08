@@ -188,17 +188,17 @@ void UBuffIconFormWidget::SetHoverBackgroundAngle(UBuffHoverWidget* BuffHoverWid
 void UBuffIconFormWidget::SetProgressBarTerm()
 {
 	float OriginalDuration;
-	float RemainTime;
+	float CurDuration;
 	if (IsPeppyBuff && ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
 		OriginalDuration = *ActorManagerSystem->PeppyActor->BuffComponent->OriginalDuration.Find(CurBuffType);
-		RemainTime = OriginalDuration - ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
-		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
+		CurDuration = ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
+		float Percent = (OriginalDuration - CurDuration) / OriginalDuration;
 		ProgressBar_Term->SetPercent(Percent);
 	}
 	else if (!IsPeppyBuff && ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType)) {
 		OriginalDuration = *ActorManagerSystem->BossActor->BuffComponent->OriginalDuration.Find(CurBuffType);
-		RemainTime = OriginalDuration - ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
-		float Percent = (OriginalDuration - RemainTime) / OriginalDuration;
+		CurDuration = ActorManagerSystem->PeppyActor->BuffComponent->GetCurDuration(CurBuffType);
+		float Percent = (OriginalDuration - CurDuration) / OriginalDuration;
 		ProgressBar_Term->SetPercent(Percent);
 	}
 	else
