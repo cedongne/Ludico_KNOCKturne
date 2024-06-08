@@ -274,7 +274,7 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 			}), 2, false);
 	}
 
-	else if (BattleManagerSystem->RightafterBattleClear || BattleManagerSystem->isAfterCredit) {
+	else if ((BattleManagerSystem->RightafterBattleClear || BattleManagerSystem->isAfterCredit) && BattleManagerSystem->PreLevelName != "LV_Intro") {
 		Peppy->SetActorLocation(FVector(1233.0, 843.0, 146.0));
 
 		if (BP_FadeInOutClass) {

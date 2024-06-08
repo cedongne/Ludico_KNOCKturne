@@ -20,6 +20,10 @@ public:
 
 	class ABattleManager* BattleManager;
 
+	// 허브월드 이동 직전 레벨 이름
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString PreLevelName;
+
 	void LoadGameState(AGameStateBase* GameState);
 protected:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
