@@ -684,14 +684,9 @@
 				</BlendContainer>
 				<Sound Name="Hit" ID="{86184AE6-50DE-4199-9FF7-90C623DC3A2C}" ShortID="824873559">
 					<PropertyList>
-						<Property Name="Highpass" Type="int16">
-							<ValueList>
-								<Value>60</Value>
-							</ValueList>
-						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
-								<Value>-14</Value>
+								<Value>-10</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
@@ -704,23 +699,16 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<AudioFileSource Name="ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie" ID="{9C84BBCB-4448-41AD-9E9A-9359BF57FA62}">
+						<AudioFileSource Name="Peppy_hit" ID="{CC6553CA-EA5C-4E7B-BE69-5BBB2ADA1711}">
 							<Language>SFX</Language>
-							<AudioFile>ESM_Soundalike_Head_Smash_Cinematic_Hit_Punch_Body_Shot_Horror_Movie.wav</AudioFile>
+							<AudioFile>Peppy_hit.wav</AudioFile>
 							<MediaIDList>
-								<MediaID ID="667706857"/>
-							</MediaIDList>
-						</AudioFileSource>
-						<AudioFileSource Name="ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch" ID="{C6661488-676A-42CF-AFA0-7CC1D8FDD003}">
-							<Language>SFX</Language>
-							<AudioFile>ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="126380491"/>
+								<MediaID ID="347146791"/>
 							</MediaIDList>
 						</AudioFileSource>
 					</ChildrenList>
 					<ActiveSourceList>
-						<ActiveSource Name="ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch" ID="{C6661488-676A-42CF-AFA0-7CC1D8FDD003}" Platform="Linked"/>
+						<ActiveSource Name="Peppy_hit" ID="{CC6553CA-EA5C-4E7B-BE69-5BBB2ADA1711}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
 				<Sound Name="Jump" ID="{20B95C68-166E-4211-B1CA-5E8A6AED7F01}" ShortID="671592235">

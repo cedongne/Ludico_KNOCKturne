@@ -248,7 +248,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{652090D7-B5E2-A1FD-1B06-3B65C1CAAA33}",
+    "Hash": "{4909E350-03D0-4815-3CCE-350C56AA43F4}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -276,6 +276,14 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Snow1.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Snow1_10C4C929.wem"
+     },
+     {
+      "Id": "40213972",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Boss_BindPeppy.wav",
+      "CachePath": "SFX/Boss_BindPeppy_10C4C929.wem"
      },
      {
       "Id": "49505542",
@@ -310,6 +318,14 @@
       "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_5C8C7093.wem"
      },
      {
+      "Id": "88320802",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "AfterBattle.wav",
+      "CachePath": "SFX/AfterBattle_10C4C929.wem"
+     },
+     {
       "Id": "94944749",
       "Language": "SFX",
       "Streaming": "false",
@@ -326,20 +342,20 @@
       "CachePath": "SFX/SFX_PeppyWalk_Snow2_10C4C929.wem"
      },
      {
-      "Id": "126380491",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch.wav",
-      "CachePath": "SFX/ESM_Fantasy_Game_UI_Arcane_Select_Spell_Cast_Click_Switch_Lever_Latch_10C4C929.wem"
-     },
-     {
       "Id": "142174096",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer.wav",
       "CachePath": "SFX/ESM_Countdown2_10sec_Clock_Synth_Electronic_Timer_7EFA1628.wem"
+     },
+     {
+      "Id": "146713899",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_Wind_Loop_Rocky_Mountian_Cave_Dark_Steady_Medium_Bass_2_Cold_Winter.wav",
+      "CachePath": "SFX/ESM_Wind_Loop_Rocky_Mountian_Cave_Dark_Steady_Medium_Bass_2_Cold_Winter_10C4C929.wem"
      },
      {
       "Id": "151749542",
@@ -446,6 +462,14 @@
       "CachePath": "SFX/SFX_PeppyWalk_Grass3_10C4C929.wem"
      },
      {
+      "Id": "347146791",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Peppy_hit.wav",
+      "CachePath": "SFX/Peppy_hit_10C4C929.wem"
+     },
+     {
       "Id": "355218299",
       "Language": "SFX",
       "Streaming": "false",
@@ -523,7 +547,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav",
-      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_10C4C929.wem"
+      "CachePath": "SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_8042C50F.wem"
      },
      {
       "Id": "429070457",
@@ -532,6 +556,14 @@
       "Location": "Memory",
       "ShortName": "BS_HeightenedLonging.wav",
       "CachePath": "SFX/BS_HeightenedLonging_10C4C929.wem"
+     },
+     {
+      "Id": "434427159",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ESM_MMO_Game_Magic_Designed_Dark_Cast_17.wav",
+      "CachePath": "SFX/ESM_MMO_Game_Magic_Designed_Dark_Cast_17_10C4C929.wem"
      },
      {
       "Id": "443133299",
@@ -651,7 +683,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Boss_Attack1.wav",
-      "CachePath": "SFX/Boss_Attack1_10C4C929.wem"
+      "CachePath": "SFX/Boss_Attack1_481EC0CD.wem"
      },
      {
       "Id": "742699319",
@@ -694,12 +726,28 @@
       "CachePath": "SFX/UI_Hover_9BFAFC11.wem"
      },
      {
+      "Id": "820018636",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Boss_GoBackMoment.wav",
+      "CachePath": "SFX/Boss_GoBackMoment_10C4C929.wem"
+     },
+     {
       "Id": "821593072",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "DoorClose_BW.61261.wav",
       "CachePath": "SFX/DoorClose_BW.61261_D79A3DCF.wem"
+     },
+     {
+      "Id": "848105836",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "RARE_percussion_tibet_bells_shot.wav",
+      "CachePath": "SFX/RARE_percussion_tibet_bells_shot_4B6A55F2.wem"
      },
      {
       "Id": "858183081",
@@ -716,6 +764,14 @@
       "Location": "Memory",
       "ShortName": "SFX_PeppyWalk_Wood1.wav",
       "CachePath": "SFX/SFX_PeppyWalk_Wood1_10C4C929.wem"
+     },
+     {
+      "Id": "868341828",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Peppy_PretendtoCry.wav",
+      "CachePath": "SFX/Peppy_PretendtoCry_10C4C929.wem"
      },
      {
       "Id": "870395132",
@@ -756,14 +812,6 @@
       "Location": "Memory",
       "ShortName": "SFX_Hover_Door.wav",
       "CachePath": "SFX/SFX_Hover_Door_10C4C929.wem"
-     },
-     {
-      "Id": "978765173",
-      "Language": "SFX",
-      "Streaming": "false",
-      "Location": "Memory",
-      "ShortName": "AfterSequence-03.wav",
-      "CachePath": "SFX/AfterSequence-03_10C4C929.wem"
      },
      {
       "Id": "999749974",
@@ -837,11 +885,11 @@
       "ObjectPath": "\\Events\\Battle\\AfterSequence",
       "GUID": "{5C693C96-F43B-4EC0-8F6D-13BE302E677D}",
       "DurationType": "OneShot",
-      "DurationMin": "37.069687",
-      "DurationMax": "37.069687",
+      "DurationMin": "37.078667",
+      "DurationMax": "37.078667",
       "MediaRefs": [
        {
-        "Id": "978765173"
+        "Id": "88320802"
        }
       ]
      },
@@ -1027,8 +1075,8 @@
       "ObjectPath": "\\Events\\Battle\\CleanUp",
       "GUID": "{C9C1B35A-D296-426B-87B6-24071082E7F8}",
       "DurationType": "OneShot",
-      "DurationMin": "3.915948",
-      "DurationMax": "3.915948",
+      "DurationMin": "4.8031955",
+      "DurationMax": "4.8031955",
       "MediaRefs": [
        {
         "Id": "355218299"
@@ -1466,11 +1514,11 @@
       "ObjectPath": "\\Events\\Battle\\PeppyHit",
       "GUID": "{72D96420-AD04-444C-9A29-E641F18D530C}",
       "DurationType": "OneShot",
-      "DurationMin": "0.9190417",
-      "DurationMax": "0.9190417",
+      "DurationMin": "0.49116668",
+      "DurationMax": "0.49116668",
       "MediaRefs": [
        {
-        "Id": "126380491"
+        "Id": "347146791"
        }
       ]
      },
@@ -1489,13 +1537,27 @@
       ]
      },
      {
+      "Id": "2805826863",
+      "Name": "Play_Battle_Ambie",
+      "ObjectPath": "\\Events\\Battle\\Play_Battle_Ambie",
+      "GUID": "{232FE31A-7AE6-4644-9900-E9B1DD9113D7}",
+      "DurationType": "OneShot",
+      "DurationMin": "58",
+      "DurationMax": "58",
+      "MediaRefs": [
+       {
+        "Id": "146713899"
+       }
+      ]
+     },
+     {
       "Id": "4230280485",
       "Name": "Play_Boss_Attack1",
       "ObjectPath": "\\Events\\Battle\\Play_Boss_Attack1",
       "GUID": "{5F5DD7BA-AAC9-4784-9448-1E5CB22730B1}",
       "DurationType": "OneShot",
-      "DurationMin": "3.9507825",
-      "DurationMax": "4.698299",
+      "DurationMin": "1.5730127",
+      "DurationMax": "1.8706381",
       "MediaRefs": [
        {
         "Id": "741169033"
@@ -1508,11 +1570,81 @@
       "ObjectPath": "\\Events\\Battle\\Play_Boss_Attack2",
       "GUID": "{6FBB8ECE-C9C3-4AEF-BA5F-924ED8DFC93F}",
       "DurationType": "OneShot",
-      "DurationMin": "1.1697084",
-      "DurationMax": "1.1697084",
+      "DurationMin": "1.0420917",
+      "DurationMax": "1.3129532",
       "MediaRefs": [
        {
         "Id": "11226262"
+       }
+      ]
+     },
+     {
+      "Id": "190740433",
+      "Name": "Play_Boss_BindPeppy",
+      "ObjectPath": "\\Events\\Battle\\Play_Boss_BindPeppy",
+      "GUID": "{D2C49DA8-0B19-4952-B3D3-F9F5477DAF7F}",
+      "DurationType": "OneShot",
+      "DurationMin": "5.1975",
+      "DurationMax": "5.1975",
+      "MediaRefs": [
+       {
+        "Id": "40213972"
+       }
+      ]
+     },
+     {
+      "Id": "1322931291",
+      "Name": "Play_Boss_ExtendedRoot",
+      "ObjectPath": "\\Events\\Battle\\Play_Boss_ExtendedRoot",
+      "GUID": "{894490BA-56F4-4691-9584-BBBA797FB1A7}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.9037113",
+      "DurationMax": "2.9037113",
+      "MediaRefs": [
+       {
+        "Id": "434427159"
+       }
+      ]
+     },
+     {
+      "Id": "1487530543",
+      "Name": "Play_Boss_GoBackMoment",
+      "ObjectPath": "\\Events\\Battle\\Play_Boss_GoBackMoment",
+      "GUID": "{81BAF202-5380-4A85-BB00-1383343651CE}",
+      "DurationType": "OneShot",
+      "DurationMin": "8.121083",
+      "DurationMax": "8.121083",
+      "MediaRefs": [
+       {
+        "Id": "820018636"
+       }
+      ]
+     },
+     {
+      "Id": "2492371002",
+      "Name": "Play_Peppy_PretendtoCry",
+      "ObjectPath": "\\Events\\Battle\\Play_Peppy_PretendtoCry",
+      "GUID": "{3A45349E-D333-4971-ADEE-D62DC2BD7CD3}",
+      "DurationType": "OneShot",
+      "DurationMin": "4.950979",
+      "DurationMax": "4.950979",
+      "MediaRefs": [
+       {
+        "Id": "868341828"
+       }
+      ]
+     },
+     {
+      "Id": "3218917271",
+      "Name": "Play_TurnChange",
+      "ObjectPath": "\\Events\\Battle\\Play_TurnChange",
+      "GUID": "{504786CF-A21A-4DE2-9215-A1E66912CF11}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.259569",
+      "DurationMax": "2.259569",
+      "MediaRefs": [
+       {
+        "Id": "848105836"
        }
       ]
      },
@@ -1578,8 +1710,8 @@
       "ObjectPath": "\\Events\\Battle\\SweepGarden",
       "GUID": "{958EB58C-C88A-44AD-9D36-254C6C6F2A94}",
       "DurationType": "OneShot",
-      "DurationMin": "4.238748",
-      "DurationMax": "4.757834",
+      "DurationMin": "5.238748",
+      "DurationMax": "5.757834",
       "MediaRefs": [
        {
         "Id": "210552255"
@@ -1714,6 +1846,6 @@
     ]
    }
   ],
-  "FileHash": "{B5C6E827-8FCA-D278-331E-646F1AD8FC7B}"
+  "FileHash": "{868DC642-0BA0-CA34-3FD2-4E0CCA575C8F}"
  }
 }

@@ -5,8 +5,12 @@
 			<ChildrenList>
 				<MusicPlaylistContainer Name="Hub" ID="{6FE72110-32FF-4FE9-8142-03FA0C3B3375}" ShortID="541785256">
 					<PropertyList>
-						<Property Name="3DSpatialization" Type="int16" Value="1"/>
 						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="MakeUpGain" Type="Real64">
+							<ValueList>
+								<Value>-3</Value>
+							</ValueList>
+						</Property>
 						<Property Name="TimeSignatureUpper" Type="int16" Value="3"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
@@ -274,6 +278,11 @@
 				<MusicSwitchContainer Name="Battle" ID="{1DC35B4B-4863-42B2-821E-ED1A2A32FA3D}" ShortID="225833002">
 					<PropertyList>
 						<Property Name="GridOffsetPreset" Type="int16" Value="1"/>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-1</Value>
+							</ValueList>
+						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">

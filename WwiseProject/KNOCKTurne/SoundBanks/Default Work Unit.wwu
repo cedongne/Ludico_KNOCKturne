@@ -38,7 +38,9 @@
 						<ObjectRef Name="PeppyDie" ID="{14A84712-B43A-45E0-9220-D51A583FE5D4}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="UI_Hover_01" ID="{E9C31A62-152C-4615-9058-E5548CD940C2}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX" ID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Battle_Ambie" ID="{232FE31A-7AE6-4644-9900-E9B1DD9113D7}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Default Work Unit" ID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" WorkUnitID="{6037CBF8-7D93-4666-865C-A97AFA1D8624}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Boss_ExtendedRoot" ID="{894490BA-56F4-4691-9584-BBBA797FB1A7}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Dialogue" ID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" WorkUnitID="{54BAF5FD-DD16-46A7-8CC0-78E41837A7E8}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Ambi" ID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}" WorkUnitID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="MUS" ID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
@@ -57,13 +59,16 @@
 						<ObjectRef Name="Efficient" ID="{03EF2582-E71C-491B-BB92-57B3C037DD49}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Snow" ID="{657CEC4F-CB00-4921-A27B-09560E379D46}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Select" ID="{687D251F-1A3E-4938-9639-3D9FBD5C1578}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Boss_BindPeppy" ID="{D2C49DA8-0B19-4952-B3D3-F9F5477DAF7F}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Notice" ID="{761749AC-0295-4954-88AB-1D9B7BCA8FE1}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="MusicFO" ID="{A3BB4777-2265-496E-ACBB-DD70CA45286C}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Peppy_PretendtoCry" ID="{3A45349E-D333-4971-ADEE-D62DC2BD7CD3}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="DreamDiary" ID="{8EDC9439-0443-498C-92C5-39AC1C2460E0}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="BattleDoor" ID="{B7AC811E-757D-49E2-AE55-907EEE57B394}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="cancle" ID="{55685DA4-0CCC-4A35-88FD-862169CC2331}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="SFX_PeppyWalk_Grass1" ID="{17DF8C1E-89BE-4A3D-ADA1-4861A35FE52B}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Actor-Mixer Hierarchy" ID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" WorkUnitID="{5EA7BBF8-64C0-4A50-8821-A07E8BE21D68}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Boss_GoBackMoment" ID="{81BAF202-5380-4A85-BB00-1383343651CE}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Battle_GetEnergy" ID="{82A9A76A-F639-4A88-8E9C-37827A589430}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Peppy" ID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" WorkUnitID="{0498A4FE-BAAD-4A91-A649-E10F7EE1913A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Special" ID="{7C5FA09C-F905-4AAA-8043-E0F7626503A1}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
@@ -86,6 +91,7 @@
 						<ObjectRef Name="Default Work Unit" ID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" WorkUnitID="{449038C7-AAF9-4D73-8575-07E21B4E73ED}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Title_BGM" ID="{4AE354BB-D32F-4D94-B7E8-AE4CE3201965}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="IntroCutSceneStart" ID="{39C5D52C-C9E8-4DE0-BA6C-A490FD9065D4}" WorkUnitID="{B9B8E945-C316-46E2-8926-44B6EA65DAD0}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_TurnChange" ID="{504786CF-A21A-4DE2-9215-A1E66912CF11}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="TextStop" ID="{C3180D15-7C85-4DE8-B28E-989133C215EA}" WorkUnitID="{5B0ECC91-1893-415C-8215-AF9EC652104D}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="BattleDoor" ID="{C795C573-3F48-4DF8-BE06-7A2E6105E141}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="HomeAmbi" ID="{0797BAAF-C465-4E55-A77C-69944ECA4624}" WorkUnitID="{D46DAC05-60A8-4160-A723-30C7E3408C94}" Origin="Manual" Filter="7"/>

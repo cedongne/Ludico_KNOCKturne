@@ -234,6 +234,78 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_TurnChange" ID="{504786CF-A21A-4DE2-9215-A1E66912CF11}">
+					<ChildrenList>
+						<Action Name="" ID="{07E8CBD6-B78A-459C-8FAC-26C506F427FB}" ShortID="766027250">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="TurnChange" ID="{611775D6-7F13-4FAD-957D-4049BDBFBDC6}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Boss_GoBackMoment" ID="{81BAF202-5380-4A85-BB00-1383343651CE}">
+					<ChildrenList>
+						<Action Name="" ID="{3D4D85DE-2B56-4E9F-8953-C948347D44A7}" ShortID="592057283">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Boss_GoBackMoment" ID="{FFE004EA-AC3A-4009-B87A-C2CD9FDEBFE6}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Battle_Ambie" ID="{232FE31A-7AE6-4644-9900-E9B1DD9113D7}">
+					<ChildrenList>
+						<Action Name="" ID="{A1CD128F-62DC-43A7-A0F1-8D33E9AA205E}" ShortID="41006830">
+							<PropertyList>
+								<Property Name="FadeTime" Type="Real64" Value="2.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Battle_Ambie" ID="{0882096D-F03F-405E-ADDA-24957E761AEB}" WorkUnitID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Boss_ExtendedRoot" ID="{894490BA-56F4-4691-9584-BBBA797FB1A7}">
+					<ChildrenList>
+						<Action Name="" ID="{FEDD27CF-00ED-4D4F-813F-2A1B62B18CDC}" ShortID="206521147">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Boss_ExtendedRoot" ID="{57E1BC15-EFE8-4EF0-8EB0-D4FDF359E24F}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Peppy_PretendtoCry" ID="{3A45349E-D333-4971-ADEE-D62DC2BD7CD3}">
+					<ChildrenList>
+						<Action Name="" ID="{29714F32-B424-4D00-8BF5-E2042F448E57}" ShortID="947377229">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Peppy_PretendtoCry" ID="{F889B545-687E-4C2C-AE15-27D88C0EFF69}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Boss_BindPeppy" ID="{D2C49DA8-0B19-4952-B3D3-F9F5477DAF7F}">
+					<ChildrenList>
+						<Action Name="" ID="{29AAF85E-0976-4D7E-AA27-582D4729AE19}" ShortID="183047712">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Boss_BindPeppy" ID="{DF2E3D4B-6B33-4786-B690-E188F0B292F6}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

@@ -35,6 +35,9 @@
 					</ActiveSourceList>
 				</Sound>
 				<ActorMixer Name="IntroCutScene" ID="{9D8D71CD-3659-4590-AB9F-9AFF2C8A5962}" ShortID="508851919">
+					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -304,6 +307,9 @@
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="Sequence" ID="{FA5A02FC-989E-4275-B5DA-9CCE26598435}" ShortID="343435062">
+					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -388,21 +394,24 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="AfterSequence-03" ID="{4C50AC6A-3FAD-42D7-BE37-950E5A39F01D}">
+								<AudioFileSource Name="AfterBattle" ID="{79F4402A-4ED8-4C20-9A41-27BA22217B27}">
 									<Language>SFX</Language>
-									<AudioFile>AfterSequence-03.wav</AudioFile>
+									<AudioFile>AfterBattle.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="978765173"/>
+										<MediaID ID="88320802"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ActiveSourceList>
-								<ActiveSource Name="AfterSequence-03" ID="{4C50AC6A-3FAD-42D7-BE37-950E5A39F01D}" Platform="Linked"/>
+								<ActiveSource Name="AfterBattle" ID="{79F4402A-4ED8-4C20-9A41-27BA22217B27}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="Battle" ID="{66E54567-1E4F-4541-87C8-5AAD75C9E8A8}" ShortID="1052091068">
+					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1160,6 +1169,28 @@
 										<ActiveSource Name="BS_HeightenedLonging" ID="{15013EC7-28E7-4C79-96D3-C5CC2897E9CC}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Peppy_PretendtoCry" ID="{F889B545-687E-4C2C-AE15-27D88C0EFF69}" ShortID="480397344">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Peppy_PretendtoCry" ID="{C503BC51-961A-407C-A117-F29BD52341DE}">
+											<Language>SFX</Language>
+											<AudioFile>Peppy_PretendtoCry.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="868341828"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Peppy_PretendtoCry" ID="{C503BC51-961A-407C-A117-F29BD52341DE}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<ActorMixer Name="BossSkill" ID="{6E8B250D-CC8C-4BB6-B269-5286B2E28F2F}" ShortID="431154939">
@@ -1176,7 +1207,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-9</Value>
+												<Value>-17</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1190,6 +1221,9 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="ESM_Dusty_Debris_Short_Ground_Fall_Organic_Foley_Sound_Design_Post_Production_Nature_Elemental_Mud_Stone" ID="{E76B3614-E9BC-4C3E-B037-6BB781CFAD87}" ShortID="330753915">
+											<PropertyList>
+												<Property Name="IsLoopingInfinite" Type="bool" Value="False"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1234,6 +1268,10 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{2F48B178-63B6-4D94-BA13-C797B0C42386}" ShortID="349183688">
+											<PropertyList>
+												<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+												<Property Name="IsLoopingInfinite" Type="bool" Value="False"/>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1244,6 +1282,13 @@
 											</ReferenceList>
 											<ChildrenList>
 												<AudioFileSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{8E5EF6AD-31B5-4644-99A5-32A14EBF2C33}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0361790172679278"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0430702586522953"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.403137620985482"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.80473524343745"/>
+													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</AudioFile>
 													<MediaIDList>
@@ -1411,6 +1456,11 @@
 								</Sound>
 								<Sound Name="Boss_Attack1" ID="{F1395D69-8759-4283-AEC1-AE8DBF354E4D}" ShortID="262072438">
 									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>22</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Lowpass" Type="int16">
 											<ModifierList>
 												<ModifierInfo>
@@ -1455,6 +1505,12 @@
 									</ReferenceList>
 									<ChildrenList>
 										<AudioFileSource Name="Boss_Attack1" ID="{C1A2AE5E-1E43-4007-AE95-DBE76CF9EF8C}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.66654907244464"/>
+												<Property Name="FadeOutShape" Type="int16" Value="6"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.66654907244464"/>
+											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>Boss_Attack1.wav</AudioFile>
 											<MediaIDList>
@@ -1515,11 +1571,131 @@
 										<ActiveSource Name="Boss_Attack2" ID="{7340BC73-2A0A-4723-9339-BB2E0E8E9D84}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Boss_GoBackMoment" ID="{FFE004EA-AC3A-4009-B87A-C2CD9FDEBFE6}" ShortID="500345370">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Boss_GoBackMoment" ID="{A6AB3D29-1715-434C-A753-75A47F656B68}">
+											<Language>SFX</Language>
+											<AudioFile>Boss_GoBackMoment.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="820018636"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Boss_GoBackMoment" ID="{A6AB3D29-1715-434C-A753-75A47F656B68}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Boss_ExtendedRoot" ID="{57E1BC15-EFE8-4EF0-8EB0-D4FDF359E24F}" ShortID="734037535">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>13</Value>
+											</ValueList>
+										</Property>
+										<Property Name="InitialDelay" Type="Real64">
+											<ValueList>
+												<Value>1</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>1040</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-11</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_MMO_Game_Magic_Designed_Dark_Cast_17" ID="{827374FF-F644-4D42-809C-6EFD7161DE36}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_MMO_Game_Magic_Designed_Dark_Cast_17.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="434427159"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_MMO_Game_Magic_Designed_Dark_Cast_17" ID="{827374FF-F644-4D42-809C-6EFD7161DE36}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Boss_BindPeppy" ID="{DF2E3D4B-6B33-4786-B690-E188F0B292F6}" ShortID="418591189">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Boss_BindPeppy" ID="{A86A5321-31C1-4E0A-A983-9D8B9C6307D3}">
+											<Language>SFX</Language>
+											<AudioFile>Boss_BindPeppy.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="40213972"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Boss_BindPeppy" ID="{A86A5321-31C1-4E0A-A983-9D8B9C6307D3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
+						<Sound Name="TurnChange" ID="{611775D6-7F13-4FAD-957D-4049BDBFBDC6}" ShortID="858656244">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="RARE_percussion_tibet_bells_shot" ID="{654DE6CB-1552-4132-9049-84E353C0D7CB}">
+									<PropertyList>
+										<Property Name="FadeInShape" Type="int16" Value="8"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="2.25956885173779"/>
+										<Property Name="FadeOutShape" Type="int16" Value="2"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimEnd" Type="Real64" Value="2.25956885173779"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>RARE_percussion_tibet_bells_shot.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="848105836"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="RARE_percussion_tibet_bells_shot" ID="{654DE6CB-1552-4132-9049-84E353C0D7CB}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="UI" ID="{5872C092-AE86-4814-A9A9-6D38328AFCBA}" ShortID="685644386">
+					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>

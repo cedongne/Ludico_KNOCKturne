@@ -120,6 +120,47 @@
 						</Sound>
 					</ChildrenList>
 				</BlendContainer>
+				<Sound Name="Battle_Ambie" ID="{0882096D-F03F-405E-ADDA-24957E761AEB}" ShortID="241419579">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ValueList>
+								<Value>31</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-8</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="ESM_Wind_Loop_Distant_Air_Steady_1" ID="{CB813DD0-8745-4E53-BF9F-3B85F30A1603}">
+							<Language>SFX</Language>
+							<AudioFile>ESM_Wind_Loop_Distant_Air_Steady_1.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="333382716"/>
+							</MediaIDList>
+						</AudioFileSource>
+						<AudioFileSource Name="ESM_Wind_Loop_Rocky_Mountian_Cave_Dark_Steady_Medium_Bass_2_Cold_Winter" ID="{C2FAE84E-7783-4AFA-B981-99101027521B}">
+							<Language>SFX</Language>
+							<AudioFile>ESM_Wind_Loop_Rocky_Mountian_Cave_Dark_Steady_Medium_Bass_2_Cold_Winter.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="146713899"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="ESM_Wind_Loop_Rocky_Mountian_Cave_Dark_Steady_Medium_Bass_2_Cold_Winter" ID="{C2FAE84E-7783-4AFA-B981-99101027521B}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>
