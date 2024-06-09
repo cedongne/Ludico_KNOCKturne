@@ -494,18 +494,22 @@ void AHubWorldLevelScriptActor::PrologueEndedAfterFadeOut() {
 		GetWorld()->GetTimerManager().SetTimer(LoadingTimerHandle, FTimerDelegate::CreateLambda([&]()
 			{
 				LoadingSound1();
-				StartLoadingAfterPrologue();
+				KNOCKturneGameState->SaveKNOCKturneData();
+				UGameplayStatics::OpenLevel(this, "LV_HubWorld");
 
 				GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle);
 			}), 7, false);
 	}
 	else {
-		StartLoadingAfterPrologue();
+		UWidgetLayoutLibrary::RemoveAllWidgets(this);
+		GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
+		KNOCKturneGameState->SaveKNOCKturneData();
+		UGameplayStatics::OpenLevel(this, "LV_HubWorld");
 	}
 }
 
 void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
-	if (LoadingWidgetClass) {
+	/*if (LoadingWidgetClass) {
 		LoadingWidgetRef = CreateWidget<ULoadingWidget>(GetWorld(), LoadingWidgetClass);
 		if (LoadingWidgetRef) {
 			LoadingWidgetRef->AddToViewport();
@@ -543,9 +547,7 @@ void AHubWorldLevelScriptActor::StartLoadingAfterPrologue() {
 				}), 2, false);
 
 			GetWorld()->GetTimerManager().ClearTimer(LoadingTimerHandle2);
-		}), 4, false);
-
-	KNOCKturneGameState->SaveKNOCKturneData();
+		}), 4, false);*/
 }
 
 void AHubWorldLevelScriptActor::SkipPrologue() {
