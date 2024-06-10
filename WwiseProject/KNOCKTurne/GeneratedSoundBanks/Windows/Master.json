@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{10C2C57A-464F-32BE-F8AC-3CCF257D4A1C}",
+    "Hash": "{8AFF031C-A9EE-1684-061E-61255415EA62}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -437,7 +437,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "BRS_Door_Wood_Cheap_Close_Creak_4.wav",
-      "CachePath": "SFX/BRS_Door_Wood_Cheap_Close_Creak_4_1A42C9A1.wem"
+      "CachePath": "SFX/BRS_Door_Wood_Cheap_Close_Creak_4_76995C90.wem"
      },
      {
       "Id": "734152410",
@@ -517,7 +517,7 @@
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "RARE_percussion_tibet_bells_shot.wav",
-      "CachePath": "SFX/RARE_percussion_tibet_bells_shot_981A4E0E.wem"
+      "CachePath": "SFX/RARE_percussion_tibet_bells_shot_116113D6.wem"
      },
      {
       "Id": "858183081",
@@ -1630,6 +1630,6 @@
     ]
    }
   ],
-  "FileHash": "{E0BDC0BC-70B5-8E56-1364-287CB365CBD4}"
+  "FileHash": "{4C6689F8-F69E-9A8E-5EAC-2831CFC9B0D6}"
  }
 }

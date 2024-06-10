@@ -1978,6 +1978,13 @@
 					</ChildrenList>
 				</ActorMixer>
 				<Sound Name="HubWorld_DoorClose" ID="{87D6B99F-384B-4083-99F0-6B2D51097D96}" ShortID="742489511">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-11</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>

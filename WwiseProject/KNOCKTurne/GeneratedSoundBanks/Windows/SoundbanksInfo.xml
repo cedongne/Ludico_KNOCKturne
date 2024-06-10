@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{10C2C57A-464F-32BE-F8AC-3CCF257D4A1C}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{8AFF031C-A9EE-1684-061E-61255415EA62}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -291,7 +291,7 @@
 				</File>
 				<File Id="731066038" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BRS_Door_Wood_Cheap_Close_Creak_4.wav</ShortName>
-					<CachePath>SFX/BRS_Door_Wood_Cheap_Close_Creak_4_1A42C9A1.wem</CachePath>
+					<CachePath>SFX/BRS_Door_Wood_Cheap_Close_Creak_4_76995C90.wem</CachePath>
 				</File>
 				<File Id="734152410" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</ShortName>
@@ -331,7 +331,7 @@
 				</File>
 				<File Id="848105836" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>RARE_percussion_tibet_bells_shot.wav</ShortName>
-					<CachePath>SFX/RARE_percussion_tibet_bells_shot_981A4E0E.wem</CachePath>
+					<CachePath>SFX/RARE_percussion_tibet_bells_shot_116113D6.wem</CachePath>
 				</File>
 				<File Id="858183081" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BGM_HubWorld_120bpm3-4.wav</ShortName>
@@ -754,5 +754,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{6106CAE6-E608-44FF-F284-FDA42233468A}</FileHash>
+	<FileHash>{CE4E414D-C51C-4817-3C78-C0AE00635098}</FileHash>
 </SoundBanksInfo>
