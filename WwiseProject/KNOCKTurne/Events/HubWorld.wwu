@@ -29,6 +29,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_HubWorld_DoorClose" ID="{9F319105-21BE-4880-8E33-0183F546C4A8}">
+					<ChildrenList>
+						<Action Name="" ID="{48A5A393-69D0-4070-9389-7A54821392E9}" ShortID="1068889793">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="HubWorld_DoorClose" ID="{87D6B99F-384B-4083-99F0-6B2D51097D96}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

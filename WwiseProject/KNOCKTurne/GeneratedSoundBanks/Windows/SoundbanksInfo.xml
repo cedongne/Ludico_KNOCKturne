@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{4909E350-03D0-4815-3CCE-350C56AA43F4}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{10C2C57A-464F-32BE-F8AC-3CCF257D4A1C}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -227,7 +227,7 @@
 				</File>
 				<File Id="427230653" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</ShortName>
-					<CachePath>SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_8042C50F.wem</CachePath>
+					<CachePath>SFX/ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty_0C079FEC.wem</CachePath>
 				</File>
 				<File Id="429070457" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BS_HeightenedLonging.wav</ShortName>
@@ -289,13 +289,17 @@
 					<ShortName>FF_TM_drawer_open_close_simple.wav</ShortName>
 					<CachePath>SFX/FF_TM_drawer_open_close_simple_8BA889A0.wem</CachePath>
 				</File>
+				<File Id="731066038" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>BRS_Door_Wood_Cheap_Close_Creak_4.wav</ShortName>
+					<CachePath>SFX/BRS_Door_Wood_Cheap_Close_Creak_4_1A42C9A1.wem</CachePath>
+				</File>
 				<File Id="734152410" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</ShortName>
 					<CachePath>SFX/ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1_10C4C929.wem</CachePath>
 				</File>
 				<File Id="741169033" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Boss_Attack1.wav</ShortName>
-					<CachePath>SFX/Boss_Attack1_481EC0CD.wem</CachePath>
+					<CachePath>SFX/Boss_Attack1_82BDE531.wem</CachePath>
 				</File>
 				<File Id="742699319" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_PeppyWalk_Water1.wav</ShortName>
@@ -327,7 +331,7 @@
 				</File>
 				<File Id="848105836" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>RARE_percussion_tibet_bells_shot.wav</ShortName>
-					<CachePath>SFX/RARE_percussion_tibet_bells_shot_4B6A55F2.wem</CachePath>
+					<CachePath>SFX/RARE_percussion_tibet_bells_shot_981A4E0E.wem</CachePath>
 				</File>
 				<File Id="858183081" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>BGM_HubWorld_120bpm3-4.wav</ShortName>
@@ -663,12 +667,17 @@
 						<MediaRef Id="820018636"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="810541160" Name="Play_HubWorld_DoorClose" ObjectPath="\Events\HubWorld\Play_HubWorld_DoorClose" GUID="{9F319105-21BE-4880-8E33-0183F546C4A8}" DurationType="OneShot" DurationMin="2.1941326" DurationMax="2.1941326">
+					<MediaRefs>
+						<MediaRef Id="731066038"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2492371002" Name="Play_Peppy_PretendtoCry" ObjectPath="\Events\Battle\Play_Peppy_PretendtoCry" GUID="{3A45349E-D333-4971-ADEE-D62DC2BD7CD3}" DurationType="OneShot" DurationMin="4.950979" DurationMax="4.950979">
 					<MediaRefs>
 						<MediaRef Id="868341828"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3218917271" Name="Play_TurnChange" ObjectPath="\Events\Battle\Play_TurnChange" GUID="{504786CF-A21A-4DE2-9215-A1E66912CF11}" DurationType="OneShot" DurationMin="2.259569" DurationMax="2.259569">
+				<Event Id="3218917271" Name="Play_TurnChange" ObjectPath="\Events\Battle\Play_TurnChange" GUID="{504786CF-A21A-4DE2-9215-A1E66912CF11}" DurationType="OneShot" DurationMin="1.1619436" DurationMax="1.1619436">
 					<MediaRefs>
 						<MediaRef Id="848105836"/>
 					</MediaRefs>
@@ -745,5 +754,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{41B46BBC-B28A-5987-A935-4A37E90FD286}</FileHash>
+	<FileHash>{6106CAE6-E608-44FF-F284-FDA42233468A}</FileHash>
 </SoundBanksInfo>

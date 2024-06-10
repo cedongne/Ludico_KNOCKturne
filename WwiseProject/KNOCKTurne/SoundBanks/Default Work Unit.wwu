@@ -53,6 +53,7 @@
 						<ObjectRef Name="CharmingVoice" ID="{F50D849D-2805-47FF-8B87-DACE410819E0}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="WithYou" ID="{BB2E8EAE-CC98-487C-AAF0-CAB220F9E7CA}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Events" ID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" WorkUnitID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_HubWorld_DoorClose" ID="{9F319105-21BE-4880-8E33-0183F546C4A8}" WorkUnitID="{63B3A8AD-9BE7-4596-BB9E-3DB1ADEC961B}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Battle" ID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" WorkUnitID="{40BA4DF5-88E8-4888-9082-B4BFEA556E6C}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="FS_Water" ID="{2B66B87B-9F0C-4896-BD66-703D22486212}" WorkUnitID="{1AB7A3D5-AEEB-4642-BCBB-64703693BDF1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Hover" ID="{2775D0BD-C729-48A1-8694-888FAB5CC628}" WorkUnitID="{35C9706F-BDF7-4CD9-83AB-EB11728E38BC}" Origin="Manual" Filter="7"/>
