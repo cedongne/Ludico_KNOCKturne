@@ -46,4 +46,10 @@ public:
 	FTimespan BattleClearTime;
 	UPROPERTY()
 	bool isAfterCredit;
+	UPROPERTY()
+	TArray<int32> SelectedSkillCodeList;
+	UPROPERTY()
+	FString FinalSpecialSkill;
+	UPROPERTY()
+	FString FinalItem;
 };

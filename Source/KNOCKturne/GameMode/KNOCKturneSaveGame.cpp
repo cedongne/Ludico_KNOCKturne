@@ -19,4 +19,7 @@ UKNOCKturneSaveGame::UKNOCKturneSaveGame()
 	TotalPlayTime = 0;
 	BattleClearTime = 0;
 	isAfterCredit = false;
+	SelectedSkillCodeList.Init(0, 8);
+	FinalSpecialSkill = "";
+	FinalItem = "";
 }

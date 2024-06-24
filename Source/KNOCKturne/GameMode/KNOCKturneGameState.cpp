@@ -38,6 +38,9 @@ void AKNOCKturneGameState::LoadKNOCKturneData(){
 	BattleManagerSystem->TotalPlayTime = KNOCKturneSaveGame->TotalPlayTime;
 	BattleManagerSystem->BattleClearTime = KNOCKturneSaveGame->BattleClearTime;
 	BattleManagerSystem->isAfterCredit = KNOCKturneSaveGame->isAfterCredit;
+	BattleManagerSystem->SelectedSkillCodeList = KNOCKturneSaveGame->SelectedSkillCodeList;
+	BattleManagerSystem->FinalSpecialSkill = KNOCKturneSaveGame->FinalSpecialSkill;
+	BattleManagerSystem->FinalItem = KNOCKturneSaveGame->FinalItem;
 }
 
 void AKNOCKturneGameState::SaveKNOCKturneData()
@@ -57,6 +60,9 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	NewKNOCKturneData->TotalPlayTime = BattleManagerSystem->TotalPlayTime;
 	NewKNOCKturneData->BattleClearTime = BattleManagerSystem->BattleClearTime;
 	NewKNOCKturneData->isAfterCredit = BattleManagerSystem->isAfterCredit;
+	NewKNOCKturneData->SelectedSkillCodeList = BattleManagerSystem->SelectedSkillCodeList;
+	NewKNOCKturneData->FinalSpecialSkill = BattleManagerSystem->FinalSpecialSkill;
+	NewKNOCKturneData->FinalItem = BattleManagerSystem->FinalItem;
 
 	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, UserIndex)) {
 		NTLOG(Error, TEXT("SaveGame Error!"));
