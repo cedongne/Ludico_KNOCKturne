@@ -36,11 +36,7 @@
 							</CustomState>
 							<CustomState>
 								<StateRef Name="OnLoading" ID="{9B2B7D31-B131-44E9-92DF-2B2ECA4E708E}"/>
-								<CustomState Name="" ID="{8BF987A9-5F3B-4044-BD32-DB26F1090EF7}" ShortID="1009662523">
-									<PropertyList>
-										<Property Name="BusVolume" Type="Real64" Value="-108"/>
-									</PropertyList>
-								</CustomState>
+								<CustomState Name="" ID="{8BF987A9-5F3B-4044-BD32-DB26F1090EF7}" ShortID="1009662523"/>
 							</CustomState>
 							<CustomState>
 								<StateRef Name="On" ID="{F89AAEE6-E375-4980-9966-D1C680034F8B}"/>

@@ -5,6 +5,8 @@
 			<ChildrenList>
 				<Sound Name="SFX_Text_Typing" ID="{B4C5A893-E7AD-4298-8984-91F1F0D78C59}" ShortID="24057330">
 					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="MakeUpGain" Type="Real64">
 							<ValueList>
 								<Value>9</Value>
@@ -32,12 +34,16 @@
 							</MediaIDList>
 						</AudioFileSource>
 					</ChildrenList>
+					<PositioningInfo>
+						<Position Name="" ID="{94A33776-8001-456A-84DF-18DE8733FCD7}"/>
+					</PositioningInfo>
 					<ActiveSourceList>
 						<ActiveSource Name="SFX_Text_Typing" ID="{C361CF8F-4457-4A3F-AB7B-07C4722B5B09}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
 				<Sound Name="DreamDiary" ID="{B46B847C-FBE6-4272-82E5-D210D64CC37E}" ShortID="316189965">
 					<PropertyList>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>-12</Value>

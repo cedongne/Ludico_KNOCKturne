@@ -27,7 +27,6 @@ State	ID	Name	State Group			Notes
 Custom State	ID	Name	State Group	Owner		Notes
 	618595066	Mute	MusicMute	\Master-Mixer Hierarchy\Default Work Unit\Music		
 	704804129	Mute	SFXMute	\Master-Mixer Hierarchy\Default Work Unit\SFX		
-	1009662523	OnLoading	Loading	\Master-Mixer Hierarchy\Default Work Unit\Music		
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	1235576194	SetMusicVolume			\Default Work Unit\SetMusicVolume	
