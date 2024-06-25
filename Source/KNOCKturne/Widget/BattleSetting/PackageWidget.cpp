@@ -675,9 +675,6 @@ void UPackageWidget::SelectSpecialSkill(FString IconName)
 void UPackageWidget::SelectItem(FString IconName)
 {
 	int TableRowNum = BattleManagerSystem->FindItemRow(IconName);
-	
-	if (BattleManagerSystem->ItemCountList[TableRowNum] == 0)
-		return;
 
 	for (int i = 0; i < ItemListArr.Num(); i++) {
 		if (ItemListArr[i]->Image_CheckBox->Brush.GetResourceObject() == icon_checkbox_selected) {

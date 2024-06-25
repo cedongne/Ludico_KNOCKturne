@@ -4,6 +4,7 @@
 #include "Widget/BattleSetting/ItemSkillHoverWidget.h"
 #include <GameInstance/DialogueManagerSystem.h>
 #include "PackageWidget.h"
+#include "PackageSelectedUIWidget.h"
 
 void UItemSkillHoverWidget::NativePreConstruct()
 {
@@ -99,8 +100,10 @@ void UItemSkillHoverWidget::ClickButton()
 {
 	int CurItemRowNum = BattleManagerSystem->FindItemRow(Image_Icon->Brush.GetResourceName().ToString());
 	int CurItemCount = BattleManagerSystem->ItemCountList[CurItemRowNum];
-	if (CurItemCount <= 0)
+	if (CurItemCount <= 0) {
+		PackageWidget->Selected_Item->PlaySkillErrorAnim();
 		return;
+	}
 
 	if (Image_CheckBox->Brush.GetResourceName() == "icon_checkbox") {
 		Image_CheckBox->SetBrushFromTexture(icon_checkbox_selected);

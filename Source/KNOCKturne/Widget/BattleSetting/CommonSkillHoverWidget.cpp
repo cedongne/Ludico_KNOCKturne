@@ -74,7 +74,7 @@ FString UCommonSkillHoverWidget::RedefineDescription(int RowNum)
 
 void UCommonSkillHoverWidget::ClickButton()
 {
-	NTLOG(Error, TEXT("Override the (RedefineDescription) function!"));
+	NTLOG(Error, TEXT("Override the (ClickButton) function!"));
 }
 
 FString UCommonSkillHoverWidget::CheckProbability(float Probability)
