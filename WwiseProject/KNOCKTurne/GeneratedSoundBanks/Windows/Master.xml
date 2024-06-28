@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<SoundBanks>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{7AB24357-28BB-936A-FB12-5AE2A2270E89}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{F939CD98-70BE-1CFE-B7B1-9646CF815A86}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -514,7 +514,7 @@
 						<MediaRef Id="858183081"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1787057067" Name="HubWorldAmbi" ObjectPath="\Events\HubWorld\HubWorldAmbi" GUID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" DurationType="OneShot" DurationMin="117.045334" DurationMax="117.045334">
+				<Event Id="1787057067" Name="HubWorldAmbi" ObjectPath="\Events\HubWorld\HubWorldAmbi" GUID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="727224766"/>
 						<MediaRef Id="783667508"/>
@@ -679,5 +679,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{6C9E3E1C-4B73-43C8-7147-5D048CDDA599}</FileHash>
+	<FileHash>{15ABC4AA-B13E-EE23-5AF3-41912B6AD8C7}</FileHash>
 </SoundBanksInfo>

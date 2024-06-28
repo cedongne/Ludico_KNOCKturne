@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{7AB24357-28BB-936A-FB12-5AE2A2270E89}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{F939CD98-70BE-1CFE-B7B1-9646CF815A86}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -589,7 +589,7 @@
 						<MediaRef Id="858183081"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1787057067" Name="HubWorldAmbi" ObjectPath="\Events\HubWorld\HubWorldAmbi" GUID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" DurationType="OneShot" DurationMin="117.045334" DurationMax="117.045334">
+				<Event Id="1787057067" Name="HubWorldAmbi" ObjectPath="\Events\HubWorld\HubWorldAmbi" GUID="{CAB614EC-84F7-4019-8861-E7412F4B998C}" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="727224766"/>
 						<MediaRef Id="783667508"/>
@@ -754,5 +754,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{89ECCE58-6925-1173-09DB-FAD5073D67C0}</FileHash>
+	<FileHash>{2EE0FA82-A4A1-7292-E162-BD4A1071DE27}</FileHash>
 </SoundBanksInfo>

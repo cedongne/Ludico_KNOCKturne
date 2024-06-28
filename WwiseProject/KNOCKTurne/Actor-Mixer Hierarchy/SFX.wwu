@@ -5,6 +5,8 @@
 			<ChildrenList>
 				<Sound Name="HubWorld_DoorHover" ID="{3BECB364-1ABB-43D1-9373-8CDCDC550914}" ShortID="853799132">
 					<PropertyList>
+						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="LoopCount" Type="int32">
 							<ModifierList>
 								<ModifierInfo>
@@ -1994,6 +1996,7 @@
 				</ActorMixer>
 				<Sound Name="HubWorld_DoorClose" ID="{87D6B99F-384B-4083-99F0-6B2D51097D96}" ShortID="742489511">
 					<PropertyList>
+						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>-11</Value>

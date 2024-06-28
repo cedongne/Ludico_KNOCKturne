@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{71993BAB-C057-4F90-AA57-45708EBAAEF4}",
     "Language": "SFX",
-    "Hash": "{7AB24357-28BB-936A-FB12-5AE2A2270E89}",
+    "Hash": "{F939CD98-70BE-1CFE-B7B1-9646CF815A86}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Master",
     "ShortName": "Master",
     "Path": "Master.bnk",
@@ -1168,9 +1168,7 @@
       "Name": "HubWorldAmbi",
       "ObjectPath": "\\Events\\HubWorld\\HubWorldAmbi",
       "GUID": "{CAB614EC-84F7-4019-8861-E7412F4B998C}",
-      "DurationType": "OneShot",
-      "DurationMin": "117.045334",
-      "DurationMax": "117.045334",
+      "DurationType": "Infinite",
       "MediaRefs": [
        {
         "Id": "727224766"
@@ -1630,6 +1628,6 @@
     ]
    }
   ],
-  "FileHash": "{D3426BE0-2A3C-D940-CD33-1F59E948044B}"
+  "FileHash": "{542EA366-78F3-EE57-8F55-912C55271CFF}"
  }
 }

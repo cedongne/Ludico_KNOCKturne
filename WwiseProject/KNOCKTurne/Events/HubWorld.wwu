@@ -23,7 +23,7 @@
 						<Action Name="" ID="{E1610DCB-6CF4-44E8-BD65-E38028BB9DB4}" ShortID="1050749257">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="HubWorld" ID="{5122F733-2971-4C77-A07B-7FEC9B479188}" WorkUnitID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}"/>
+									<ObjectRef Name="HubWorldAmbi" ID="{6FCE0BB6-21FF-4847-BD5D-735A75871BDD}" WorkUnitID="{58EB69D2-6B1B-46DC-ADDC-4F05AD87485B}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

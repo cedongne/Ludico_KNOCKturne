@@ -290,11 +290,6 @@
 				<MusicSwitchContainer Name="Battle" ID="{1DC35B4B-4863-42B2-821E-ED1A2A32FA3D}" ShortID="225833002">
 					<PropertyList>
 						<Property Name="GridOffsetPreset" Type="int16" Value="1"/>
-						<Property Name="Volume" Type="Real64">
-							<ValueList>
-								<Value>-1</Value>
-							</ValueList>
-						</Property>
 					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -437,6 +432,13 @@
 							</Playlist>
 						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="Is" ID="{CA0FA9EE-5BD0-42DF-964B-37187D29509B}" ShortID="517401064">
+							<PropertyList>
+								<Property Name="MakeUpGain" Type="Real64">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
