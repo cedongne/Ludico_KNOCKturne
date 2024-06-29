@@ -36,7 +36,7 @@ class KNOCKTURNE_API UDreamFragmentWidget : public UUserWidget
 	int32 SelectedItemNum;
 
 protected:
-	TArray<int32> RndItemRowNumArr;
+	TSet<int32> RndItemRowNumSet;
 	TArray<UUserWidget*> DialogueWidgetArr;
 
 public:

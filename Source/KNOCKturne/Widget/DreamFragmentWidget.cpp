@@ -39,58 +39,53 @@ void UDreamFragmentWidget::NativeConstruct() {
 		}
 	}
 
-	RndItemRowNumArr.Empty();
+	RndItemRowNumSet.Empty();
 	PickRandomItem();
 	SetItemCardUI();
 }
 
 void UDreamFragmentWidget::PickRandomItem() {
-	bool NotSatisfiedConditon = false;
 	int RndItemRowNum = rand() % BattleTableManagerSystem->ItemTableRows.Num();
 
 	if (BattleManagerSystem->ItemCountList[RndItemRowNum] < 
 		BattleTableManagerSystem->ItemTableRows[RndItemRowNum]->MaxCount) {
-		for (int i = 0; i < RndItemRowNumArr.Num(); i++) {
-			if (RndItemRowNum == RndItemRowNumArr[i]) {
-				PickRandomItem();
-				break;
-			}
-		}
+		RndItemRowNumSet.Add(RndItemRowNum);
 	}
 	else {
 		PickRandomItem();
 	}
 
-	RndItemRowNumArr.Add(RndItemRowNum);
-
-	if (RndItemRowNumArr.Num() < 3) {
+	if (RndItemRowNumSet.Num() < 3) {
 		PickRandomItem();
 	}
 }
 
 void UDreamFragmentWidget::SetItemCardUI() {
-	for (int i = 0; i < 3; i++) {
-		UTexture2D* icon = BattleTableManagerSystem->ItemTableRows[RndItemRowNumArr[i]]->ItemIcon;
-		ItemCardArr[i]->Image_Icon->SetBrushFromTexture(icon);
+	int CurItemCardIdx = 0;
 
-		FString rowname = BattleTableManagerSystem->ItemTable->GetRowNames()[RndItemRowNumArr[i]].ToString().Append("_String");
+	for (auto& RndItemRowElem : RndItemRowNumSet) {
+		UTexture2D* icon = BattleTableManagerSystem->ItemTableRows[RndItemRowElem]->ItemIcon;
+		ItemCardArr[CurItemCardIdx]->Image_Icon->SetBrushFromTexture(icon);
+
+		FString rowname = BattleTableManagerSystem->ItemTable->GetRowNames()[RndItemRowElem].ToString().Append("_String");
 		FString name = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*rowname), TEXT(""))->KOR;
-		ItemCardArr[i]->TextBlock_Name->SetText(FText::FromString(name));
+		ItemCardArr[CurItemCardIdx]->TextBlock_Name->SetText(FText::FromString(name));
 
-		FString description = RedefineDescription(RndItemRowNumArr[i]);
-		ItemCardArr[i]->RichTextBlock_Description->SetText(FText::FromString(description));
+		FString description = RedefineDescription(RndItemRowElem);
+		ItemCardArr[CurItemCardIdx]->RichTextBlock_Description->SetText(FText::FromString(description));
 
-		FString easteregg = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BattleTableManagerSystem->ItemTableRows[RndItemRowNumArr[i]]->ItemEasterEgg), TEXT(""))->KOR;
-		ItemCardArr[i]->TextBlock_Easteregg->SetText(FText::FromString(easteregg));
+		FString easteregg = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BattleTableManagerSystem->ItemTableRows[RndItemRowElem]->ItemEasterEgg), TEXT(""))->KOR;
+		ItemCardArr[CurItemCardIdx]->TextBlock_Easteregg->SetText(FText::FromString(easteregg));
 
 		FString eastereggcharacter;
-		if (BattleTableManagerSystem->ItemTableRows[RndItemRowNumArr[i]]->ItemEasterEgg_Character != "-1") {
-			eastereggcharacter = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BattleTableManagerSystem->ItemTableRows[RndItemRowNumArr[i]]->ItemEasterEgg_Character), TEXT(""))->KOR;
+		if (BattleTableManagerSystem->ItemTableRows[RndItemRowElem]->ItemEasterEgg_Character != "-1") {
+			eastereggcharacter = BattleTableManagerSystem->SkillBuffStringTable->FindRow<FDialogueString>(FName(*BattleTableManagerSystem->ItemTableRows[RndItemRowElem]->ItemEasterEgg_Character), TEXT(""))->KOR;
 		}
 		else {
 			eastereggcharacter = "";
 		}
-		ItemCardArr[i]->RichTextBlock_EastereggCharacter->SetText(FText::FromString(eastereggcharacter));
+		ItemCardArr[CurItemCardIdx]->RichTextBlock_EastereggCharacter->SetText(FText::FromString(eastereggcharacter));
+		CurItemCardIdx++;
 	}
 }
 
@@ -104,11 +99,14 @@ void UDreamFragmentWidget::Button_SelectOnClicked() {
 	}
 
 	FText selcteditemtext;
-	for (int i = 0; i < 3; i++) {
-		if (ItemCardArr[i]->Image_SubBackground->Brush.GetResourceName().ToString() == "UI_DreamFragments_SubBackgrund_Selected") {
-			selcteditemtext = ItemCardArr[i]->TextBlock_Name->GetText();
-			SelectedItemNum = RndItemRowNumArr[i];
+	int CurItemCardIdx = 0;
+
+	for (auto& RndItemRowElem : RndItemRowNumSet) {
+		if (ItemCardArr[CurItemCardIdx]->Image_SubBackground->Brush.GetResourceName().ToString() == "UI_DreamFragments_SubBackgrund_Selected") {
+			selcteditemtext = ItemCardArr[CurItemCardIdx]->TextBlock_Name->GetText();
+			SelectedItemNum = RndItemRowElem;
 		}
+		CurItemCardIdx++;
 	}
 
 	AlertModalRef->TextBlock_ItemName->SetText(selcteditemtext);
