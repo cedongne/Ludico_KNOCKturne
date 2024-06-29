@@ -173,6 +173,13 @@ void UBattleManagerSystem::UpdateRoundInfo() {
 	NTLOG(Warning, TEXT("%d %d"), Round, LastRoundBossHpRatio);
 }
 
+void UBattleManagerSystem::ClearRoundInfo()
+{
+	Round = 1;
+	LastRoundBossHpRatio = 100;
+	ReducedEP = 0;
+}
+
 void UBattleManagerSystem::LoadBattleTableManagerSystem() {
 	if (BattleTableManagerSystem == nullptr) {
 		UGameInstance* GameInstance = Cast<UGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
