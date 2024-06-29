@@ -135,6 +135,10 @@ void UPeppyTurnUIWidget::ResetSetting()
 		SkillListArr[i]->Image_CheckBox->SetBrushFromTexture(icon_checkbox);
 		SkillListArr[i]->TextBlock_Num->SetVisibility(ESlateVisibility::Hidden);
 	}
+
+	TotalSelectedEnergyCost = 0;
+	TextBlock_Energy->SetText(FText::FromString(FString::FromInt(TotalSelectedEnergyCost)));
+	SetEnergyWarningText();
 }
 
 void UPeppyTurnUIWidget::ClickAlertModalYes()

@@ -173,7 +173,7 @@ public:
 
 	// Round ���� �׸�
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 Round = 0;
+	int32 Round = 1;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 LastRoundBossHpRatio = 100;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
