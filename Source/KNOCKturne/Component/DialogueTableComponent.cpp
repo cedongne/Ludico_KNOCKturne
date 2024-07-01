@@ -82,17 +82,28 @@ int UDialogueTableComponent::GetRowSize() {
 }
 
 void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString InteractingNpcGroupcode) {
-	if (InteractingNpc->GiveFragment == false && InteractingNpc->TalkCount != 0 && InteractingNpc->TalkCount != 3) {
+	int32* NormalTalkCount = BattleManagerSystem->NpcNormalTalkCount.Find(InteractingNpcGroupcode);
+
+	if (*BattleManagerSystem->isNpcGiveDreamFragment.Find(InteractingNpcGroupcode) == true) { // 해당 NPC와의 대화를 통해 꿈조각을 지급받은 내역이 있는 경우
+		GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
+	}
+	else if (*NormalTalkCount == 0) {
+		GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
+	}
+	else if (*NormalTalkCount >= 3) {
+		GetGiveFragmentRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
+	}
+	else {
 		int GiveFragmentPro = 0;
 		int Probability = rand() % 100 + 1;
 
-		if (InteractingNpc->TalkCount == 1) {
+		if (*NormalTalkCount == 1) {
 			GiveFragmentPro = 30;
 		}
-		else if (InteractingNpc->TalkCount == 2) {
+		else if (*NormalTalkCount == 2) {
 			GiveFragmentPro = 50;
 		}
-		
+
 		if (GiveFragmentPro >= Probability) {
 			GetGiveFragmentRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
 		}
@@ -100,12 +111,7 @@ void UDialogueTableComponent::SetRandomTalkIndex(ANPC* InteractingNpc, FString I
 			GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
 		}
 	}
-	else if (InteractingNpc->TalkCount == 3) {
-		GetGiveFragmentRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
-	}
-	else {
-		GetNormalRandomTalkIndexs(InteractingNpc, InteractingNpcGroupcode);
-	}
+
 
 	if (!StartRandomNpcTalk.IsEmpty())
 	{
@@ -139,7 +145,10 @@ void UDialogueTableComponent::GetNormalRandomTalkIndexs(ANPC* InteractingNpc, FS
 	}
 	NTLOG(Warning, TEXT("NpcGroupcode: %s"), *InteractingNpcGroupcode);
 
-	InteractingNpc->TalkCount++;
+	int32* NormalTalkCount = BattleManagerSystem->NpcNormalTalkCount.Find(InteractingNpcGroupcode);
+	if (*NormalTalkCount < 3) {
+		BattleManagerSystem->NpcNormalTalkCount.Add(InteractingNpcGroupcode, ++*NormalTalkCount);
+	}
 }
 
 void UDialogueTableComponent::GetGiveFragmentRandomTalkIndexs(ANPC* InteractingNpc, FString InteractingNpcGroupcode) {
@@ -156,7 +165,7 @@ void UDialogueTableComponent::GetGiveFragmentRandomTalkIndexs(ANPC* InteractingN
 	}
 
 	BattleManagerSystem->DreamFragmentCount++;
-	InteractingNpc->GiveFragment = true;
+	BattleManagerSystem->isNpcGiveDreamFragment.Add(InteractingNpcGroupcode, true); // 중복된 키로 입력하면 Value만 변경됨
 }
 
 void UDialogueTableComponent::EmptyStartRandomNpcTalkArr() {

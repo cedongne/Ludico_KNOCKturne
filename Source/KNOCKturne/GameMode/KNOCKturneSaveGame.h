@@ -52,4 +52,8 @@ public:
 	FString FinalSpecialSkill;
 	UPROPERTY()
 	FString FinalItem;
+	UPROPERTY()
+	TMap<FString, bool> isNpcGiveDreamFragment;
+	UPROPERTY()
+	TMap<FString, int32> NpcNormalTalkCount;
 };

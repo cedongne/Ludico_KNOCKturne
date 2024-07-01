@@ -44,6 +44,14 @@ void UBattleManagerSystem::Initialize(FSubsystemCollectionBase& Collection) {
 	auto GameInstance = UGameplayStatics::GetGameInstance(GetWorld());
 	ActorManagerSystem = GameInstance->GetSubsystem<UActorManagerSystem>();
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
+
+	isNpcGiveDreamFragment.Add("DreamM", false);
+	isNpcGiveDreamFragment.Add("Rabbit", false);
+	isNpcGiveDreamFragment.Add("Lake", false);
+
+	NpcNormalTalkCount.Add("DreamM", 0);
+	NpcNormalTalkCount.Add("Rabbit", 0);
+	NpcNormalTalkCount.Add("Lake", 0);
 }
 
 void UBattleManagerSystem::SetTimerUnvisibleHitArea() {

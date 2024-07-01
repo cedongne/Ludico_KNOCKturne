@@ -41,6 +41,8 @@ void AKNOCKturneGameState::LoadKNOCKturneData(){
 	BattleManagerSystem->SelectedSkillCodeList = KNOCKturneSaveGame->SelectedSkillCodeList;
 	BattleManagerSystem->FinalSpecialSkill = KNOCKturneSaveGame->FinalSpecialSkill;
 	BattleManagerSystem->FinalItem = KNOCKturneSaveGame->FinalItem;
+	BattleManagerSystem->isNpcGiveDreamFragment = KNOCKturneSaveGame->isNpcGiveDreamFragment;
+	BattleManagerSystem->NpcNormalTalkCount = KNOCKturneSaveGame->NpcNormalTalkCount;
 }
 
 void AKNOCKturneGameState::SaveKNOCKturneData()
@@ -63,6 +65,8 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	NewKNOCKturneData->SelectedSkillCodeList = BattleManagerSystem->SelectedSkillCodeList;
 	NewKNOCKturneData->FinalSpecialSkill = BattleManagerSystem->FinalSpecialSkill;
 	NewKNOCKturneData->FinalItem = BattleManagerSystem->FinalItem;
+	NewKNOCKturneData->isNpcGiveDreamFragment = BattleManagerSystem->isNpcGiveDreamFragment;
+	NewKNOCKturneData->NpcNormalTalkCount = BattleManagerSystem->NpcNormalTalkCount;
 
 	if (!UGameplayStatics::SaveGameToSlot(NewKNOCKturneData, SaveSlotName, UserIndex)) {
 		NTLOG(Error, TEXT("SaveGame Error!"));

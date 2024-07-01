@@ -163,6 +163,10 @@ public:
 	bool RightafterBattleClear = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TArray<int32> ItemCountList = { 0, 0, 0, 0, 0, 0 };
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TMap<FString, bool> isNpcGiveDreamFragment;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TMap<FString, int32> NpcNormalTalkCount;
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateDreamDiaryWhenGameOver();
