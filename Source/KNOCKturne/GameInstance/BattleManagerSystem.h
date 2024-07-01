@@ -180,6 +180,9 @@ public:
 	int32 ReducedEP = 0;
 	void UpdateRoundInfo();
 
+	UFUNCTION(BlueprintCallable)
+	void ClearRoundInfo();
+
 	// 스탠스
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FString BossStanceID;

@@ -138,7 +138,8 @@ void APeppy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 void APeppy::SlideAction() {
-	if (GetWorld()->GetMapName() != "UEDPIE_0_LV_Battle" || GetWorld()->GetMapName() != "LV_Battle") {
+	FString CurrentLevel = GetWorld()->GetMapName();
+	if ((CurrentLevel == "UEDPIE_0_LV_Battle" || CurrentLevel == "LV_Battle") == false) {
 		return;
 	}
 
