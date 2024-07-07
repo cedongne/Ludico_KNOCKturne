@@ -169,7 +169,7 @@ void AHubWorldLevelScriptActor::CreateHubworldHUD() {
 	if (HubworldHUDClass) {
 		HubworldHUDRef = CreateWidget<UHubworldHUDWidget>(GetWorld(), HubworldHUDClass);
 		if (HubworldHUDRef) {
-			HubworldHUDRef->AddToViewport();
+			HubworldHUDRef->AddToPlayerScreen();
 		}
 	}
 }
