@@ -232,15 +232,15 @@ void APeppy::SetInteractingNpc() {
 
 	if (CurrentLevel == "UEDPIE_0_LV_HubWorld" || CurrentLevel == "LV_HubWorld") {
 		HubWorldLevelScriptActor = Cast<AHubWorldLevelScriptActor>(GetWorld()->GetLevelScriptActor());
-		if (OverlappedActorStr == "BP_DreamM") {
+		if (OverlappedActorStr.Contains("DreamM")) {
 			InteractingNpcGroupcode = "DreamM";
 			InteractingNpcActor = HubWorldLevelScriptActor->DreamMActor;
 		}
-		else if (OverlappedActorStr == "BP_RabbitNPC") {
+		else if (OverlappedActorStr.Contains("Rabbit")) {
 			InteractingNpcGroupcode = "Rabbit";
 			InteractingNpcActor = HubWorldLevelScriptActor->RabbitActor;
 		}
-		else if (OverlappedActorStr == "BP_Lake") {
+		else if (OverlappedActorStr.Contains("Lake")) {
 			InteractingNpcGroupcode = "Lake";
 			InteractingNpcActor = HubWorldLevelScriptActor->LakeActor;
 		}
