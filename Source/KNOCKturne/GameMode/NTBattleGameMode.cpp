@@ -50,9 +50,9 @@ void ANTBattleGameMode::SpawnHud() {
 void ANTBattleGameMode::EndBattle() {
 	ActorManagerSystem->PeppyActor->SetImmobile();
 	BattleManager->SetActorTickEnabled(false);
-	BattleManagerSystem->SelectedSkillCodeList.Empty();
+	/*BattleManagerSystem->SelectedSkillCodeList.Empty();
 	BattleManagerSystem->FinalSpecialSkill = "";
-	BattleManagerSystem->FinalItem = "";
+	BattleManagerSystem->FinalItem = "";*/
 
 	TArray<AActor*> AllSpecialSkillActorArr;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), BP_SpecialSkillActorClass, AllSpecialSkillActorArr);
