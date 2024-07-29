@@ -1755,7 +1755,7 @@
 							<PropertyList>
 								<Property Name="MakeUpGain" Type="Real64">
 									<ValueList>
-										<Value>10</Value>
+										<Value>8</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
