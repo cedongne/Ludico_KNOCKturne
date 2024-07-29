@@ -76,7 +76,7 @@
 				</SwitchGroup>
 			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{F939CD98-70BE-1CFE-B7B1-9646CF815A86}">
+		<SoundBank Id="4056684167" Type="User" GUID="{71993BAB-C057-4F90-AA57-45708EBAAEF4}" Language="SFX" Hash="{F4095527-9BD5-4866-4D3E-C101194E7491}">
 			<ObjectPath>\SoundBanks\Default Work Unit\Master</ObjectPath>
 			<ShortName>Master</ShortName>
 			<Path>Master.bnk</Path>
@@ -754,5 +754,5 @@
 			</Triggers>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{2EE0FA82-A4A1-7292-E162-BD4A1071DE27}</FileHash>
+	<FileHash>{B024AFA2-A962-02E5-5DFE-F6182A39F732}</FileHash>
 </SoundBanksInfo>
