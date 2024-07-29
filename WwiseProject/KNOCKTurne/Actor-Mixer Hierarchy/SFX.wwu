@@ -437,9 +437,14 @@
 										</ModifierInfo>
 									</ModifierList>
 								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>30</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-26</Value>
+										<Value>-20</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -569,79 +574,6 @@
 								<ActiveSource Name="lft2_fx_one_shot_sonar" ID="{5DD0E1A5-F007-498B-98C4-FAADAA4F15C3}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
-						<Sound Name="ThornOfLove" ID="{B702A4D0-4DAA-4A7E-A2E9-CBE24F453AA7}" ShortID="945355160">
-							<PropertyList>
-								<Property Name="Pitch" Type="int32">
-									<ValueList>
-										<Value>-350</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-16</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{64526CA5-DEBF-4D8C-8B05-6E479B45E349}">
-									<PropertyList>
-										<Property Name="FadeOutDuration" Type="Real64" Value="1.44782294533639"/>
-										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-										<Property Name="TrimEnd" Type="Real64" Value="2.80942318425076"/>
-									</PropertyList>
-									<Language>SFX</Language>
-									<AudioFile>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="87478675"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{64526CA5-DEBF-4D8C-8B05-6E479B45E349}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="Campfire" ID="{3AAA1C34-D2B8-4AFC-9D53-1D56183E0751}" ShortID="783521482">
-							<PropertyList>
-								<Property Name="Highpass" Type="int16">
-									<ValueList>
-										<Value>22</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-3</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}">
-									<Language>SFX</Language>
-									<AudioFile>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="734152410"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 						<Sound Name="Stance" ID="{1818EACF-248B-4D88-9CD6-64B47BB18EB1}" ShortID="84544791">
 							<PropertyList>
 								<Property Name="InitialDelay" Type="Real64">
@@ -651,7 +583,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-6</Value>
+										<Value>-10</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -677,6 +609,13 @@
 							</ActiveSourceList>
 						</Sound>
 						<BlendContainer Name="Special" ID="{8F647F80-9797-45EF-A939-CCBDBED9B780}" ShortID="816750612">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -717,35 +656,6 @@
 								</Sound>
 							</ChildrenList>
 						</BlendContainer>
-						<Sound Name="BossDie" ID="{1B8A25E8-118F-4CB7-A9CE-6FAA4A71AC7D}" ShortID="1064061884">
-							<PropertyList>
-								<Property Name="Volume" Type="Real64">
-									<ValueList>
-										<Value>-9</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}">
-									<Language>SFX</Language>
-									<AudioFile>086_FX_Long_-_DTFX2_Zenhiser.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="453979306"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ActiveSourceList>
-								<ActiveSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
 						<Sound Name="BossHit" ID="{070738DE-2FF0-4EB8-9B79-A65BABD82EC3}" ShortID="274884975">
 							<PropertyList>
 								<Property Name="Lowpass" Type="int16">
@@ -791,13 +701,6 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="CharmingVoice" ID="{4464E0DD-226C-4AFE-ADFA-27B709009DDF}" ShortID="577378039">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-5</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -882,7 +785,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-12</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -993,7 +896,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-15</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1069,9 +972,14 @@
 												<Value>0.3</Value>
 											</ValueList>
 										</Property>
+										<Property Name="MakeUpGain" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-3</Value>
+												<Value>1</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1177,6 +1085,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="Peppy_PretendtoCry" ID="{F889B545-687E-4C2C-AE15-27D88C0EFF69}" ShortID="480397344">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1198,6 +1113,41 @@
 										<ActiveSource Name="Peppy_PretendtoCry" ID="{C503BC51-961A-407C-A117-F29BD52341DE}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Campfire" ID="{3AAA1C34-D2B8-4AFC-9D53-1D56183E0751}" ShortID="783521482">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>22</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}">
+											<Language>SFX</Language>
+											<AudioFile>ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="734152410"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_Christmas_Transition_Magic_Fire_Shimmer_Reveal_Deep_Bass_Whoosh_1" ID="{3D2AB093-BE70-4AFE-BE0D-FC41DB7DB07B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<ActorMixer Name="BossSkill" ID="{6E8B250D-CC8C-4BB6-B269-5286B2E28F2F}" ShortID="431154939">
@@ -1214,7 +1164,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-17</Value>
+												<Value>-10</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1313,7 +1263,7 @@
 									<PropertyList>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-17</Value>
+												<Value>-5</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1553,7 +1503,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-1</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1619,7 +1569,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-11</Value>
+												<Value>-8</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -1645,6 +1595,13 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="Boss_BindPeppy" ID="{DF2E3D4B-6B33-4786-B690-E188F0B292F6}" ShortID="418591189">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-4</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1664,6 +1621,76 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="Boss_BindPeppy" ID="{A86A5321-31C1-4E0A-A983-9D8B9C6307D3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="BossDie" ID="{1B8A25E8-118F-4CB7-A9CE-6FAA4A71AC7D}" ShortID="1064061884">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-9</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}">
+											<Language>SFX</Language>
+											<AudioFile>086_FX_Long_-_DTFX2_Zenhiser.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="453979306"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="086_FX_Long_-_DTFX2_Zenhiser" ID="{4CB6E3D2-6484-4752-9467-7A61472B5480}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="ThornOfLove" ID="{B702A4D0-4DAA-4A7E-A2E9-CBE24F453AA7}" ShortID="945355160">
+									<PropertyList>
+										<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-350</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-10</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="SFX" ID="{D67F5D45-98F0-46DE-BA2F-8D8D13E20728}" WorkUnitID="{BA1A8CFA-D5B8-48EA-9BB8-D8820A4E3F65}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{64526CA5-DEBF-4D8C-8B05-6E479B45E349}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="1.44782294533639"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="2.80942318425076"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="87478675"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ESM_Pile_of_Dirt_and_Rubble_Debris_2_Rubble_Shovel_Grave_Collapse_Dusty" ID="{64526CA5-DEBF-4D8C-8B05-6E479B45E349}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -1725,6 +1752,13 @@
 					</ReferenceList>
 					<ChildrenList>
 						<RandomSequenceContainer Name="Hover" ID="{2775D0BD-C729-48A1-8694-888FAB5CC628}" ShortID="470277640">
+							<PropertyList>
+								<Property Name="MakeUpGain" Type="Real64">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{0ACB9961-8984-458D-9337-D7A9A372B289}"/>
@@ -1913,7 +1947,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-17</Value>
+										<Value>-12</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>

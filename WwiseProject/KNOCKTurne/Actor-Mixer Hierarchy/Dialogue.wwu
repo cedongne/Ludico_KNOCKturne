@@ -6,10 +6,21 @@
 				<Sound Name="SFX_Text_Typing" ID="{B4C5A893-E7AD-4298-8984-91F1F0D78C59}" ShortID="24057330">
 					<PropertyList>
 						<Property Name="EnableAttenuation" Type="bool" Value="False"/>
+						<Property Name="IsGlobalLimit" Type="int16" Value="1"/>
 						<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
 						<Property Name="MakeUpGain" Type="Real64">
 							<ValueList>
 								<Value>9</Value>
+							</ValueList>
+						</Property>
+						<Property Name="MaxSoundPerInstance" Type="int16">
+							<ValueList>
+								<Value>1</Value>
+							</ValueList>
+						</Property>
+						<Property Name="UseMaxSoundPerInstance" Type="bool">
+							<ValueList>
+								<Value>True</Value>
 							</ValueList>
 						</Property>
 					</PropertyList>
