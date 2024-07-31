@@ -196,6 +196,7 @@ void AHubWorldLevelScriptActor::PrologueEnded() {
 	GetWorld()->GetTimerManager().SetTimer(LvSequenceTimerHandle, FTimerDelegate::CreateLambda([&]()
 		{
 			PrologueEndedAfterFadeOut();
+			Peppy->CanMove = true;
 
 			GetWorld()->GetTimerManager().ClearTimer(LvSequenceTimerHandle);
 		}), 2, false);
@@ -226,6 +227,8 @@ void AHubWorldLevelScriptActor::EscKeyEvent() {
 
 void AHubWorldLevelScriptActor::StartLevelByCondition() {
 	if(!BattleManagerSystem->isPrologue) {
+		Peppy->CanMove = false;
+
 		if (BP_BlackClass) {
 			BP_BlackRef = CreateWidget<UUserWidget>(GetWorld(), BP_BlackClass);
 			if (BP_BlackRef) {
