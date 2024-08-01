@@ -28,13 +28,13 @@ void UPeppySkillComponent::LoadGameInstances() {
 }
 
 void UPeppySkillComponent::LoadCanUsePeppySkillList() {
-	FString CurrentLevelName = GetWorld()->GetMapName();
+	FString CurrentLevel = GetWorld()->GetMapName();
 	AddCanUsePeppySkillWithLevelName("Tutorial");
-	if (CurrentLevelName == "UEDPIE_0_LV_Tutorial" || CurrentLevelName == "LV_Tutorial") {
+	if (CurrentLevel.Contains("LV_Tutorial")) {
 		return;
 	}
 	AddCanUsePeppySkillWithLevelName("Episode1");
-	if (CurrentLevelName == "UEDPIE_0_LV_Battle" || CurrentLevelName == "LV_Battle") {
+	if (CurrentLevel.Contains("LV_Battle")) {
 		return;
 	}
 }

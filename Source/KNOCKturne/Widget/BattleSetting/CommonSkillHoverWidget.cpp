@@ -26,12 +26,12 @@ void UCommonSkillHoverWidget::NativeConstruct() {
 	BattleTableManagerSystem = GameInstance->GetSubsystem<UBattleTableManagerSystem>();
 
 	FString CurrentLevel = GetWorld()->GetMapName();
-	if (CurrentLevel == "UEDPIE_0_LV_HubWorld" || CurrentLevel == "LV_HubWorld") {
+	if (CurrentLevel.Contains("LV_HubWorld")) {
 		// 보따리 위젯 참조
 		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPackageWidgetArr, PackageWidgetClass);
 		PackageWidget = (UPackageWidget*)AllPackageWidgetArr[0];
 	}
-	else if (CurrentLevel == "UEDPIE_0_LV_Battle" || CurrentLevel == "LV_Battle") {
+	else if (CurrentLevel.Contains("LV_Battle")) {
 		// 페피턴 위젯 참조
 		UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllPeppyTurnWidgetArr, PeppyTurnWidgetClass);
 		PeppyTurnWidget = (UPeppyTurnUIWidget*)AllPeppyTurnWidgetArr[0];

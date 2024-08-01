@@ -415,8 +415,10 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 void AHubWorldLevelScriptActor::RandomTalk() {
 	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 
-	if(DreamMActor->DialogueWidgetRef){
-		DialogueWidgetRef = DreamMActor->DialogueWidgetRef;
+	TArray<UUserWidget*> AllDialogueWidgetArr;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllDialogueWidgetArr, DialogueWidgetClass);
+	if (AllDialogueWidgetArr.Num() > 0) {
+		DialogueWidgetRef = (UDialogueWidget*)AllDialogueWidgetArr[0];
 	}
 	if (DialogueWidgetRef == nullptr || DialogueWidgetRef->IsInViewport() == false) {
 		if (DialogueWidgetClass) {
