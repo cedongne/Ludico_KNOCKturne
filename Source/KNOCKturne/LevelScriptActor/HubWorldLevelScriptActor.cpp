@@ -5,6 +5,7 @@
 #include "Engine/GameInstance.h"
 #include "Actor/Peppy.h"
 #include <Blueprint/WidgetBlueprintLibrary.h>
+#include "Widget/DialogueWidget.h"
 
 AHubWorldLevelScriptActor::AHubWorldLevelScriptActor() {
 	PrimaryActorTick.bCanEverTick = true;
@@ -415,7 +416,6 @@ void AHubWorldLevelScriptActor::AfterBattleFailDirection(FDialogueData DialogueD
 void AHubWorldLevelScriptActor::RandomTalk() {
 	CommonDialogueTableComponent->SetIsEndedDialogueRows(false);
 
-	TArray<UUserWidget*> AllDialogueWidgetArr;
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(this, AllDialogueWidgetArr, DialogueWidgetClass);
 	if (AllDialogueWidgetArr.Num() > 0) {
 		DialogueWidgetRef = (UDialogueWidget*)AllDialogueWidgetArr[0];
