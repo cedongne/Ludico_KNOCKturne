@@ -41,13 +41,13 @@ void ASpecialSkillActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (IsCinematicPlaying) {
+	if (!CanUseSpecialSkill) {
 		return;
 	}
 	
 	SetActorLocation(Peppy->GetActorLocation());
 
-	if (CheckCanUseSpecialSkill(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
+	if (CheckSpecialSkillConditon(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
 	{
 		bool UseSpecialSkill = TryUseSpecialSkill();
 		if (UseSpecialSkill) {
@@ -62,7 +62,7 @@ void ASpecialSkillActor::CreateSpecialSkillData()
 	OriginalCoolTime = SpecialSkillData.CoolTime;
 }
 
-bool ASpecialSkillActor::CheckCanUseSpecialSkill(float DeltaSeconds)
+bool ASpecialSkillActor::CheckSpecialSkillConditon(float DeltaSeconds)
 {
 	bool IsCostEnough = SpecialSkillData.EnergyCost < ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy ? true : false;
 	bool IsCoolTimeEnd = SpecialSkillData.CoolTime == 0;
