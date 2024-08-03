@@ -42,11 +42,13 @@ public:
 	void CreateSpecialSkillData();
 
 	UFUNCTION(BlueprintCallable)
-	bool CheckSpecialSkillConditon(float DeltaSeconds);
+	bool CheckSpecialSkillConditon();
 	UFUNCTION(BlueprintCallable)
 	void ElapseTurn();
 	UFUNCTION(BlueprintCallable)
 	bool TryUseSpecialSkill();
+	UFUNCTION(BlueprintCallable)
+	void TryOperateSpecialSkillEffect();
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetCurSpecialSkillCoolTime();

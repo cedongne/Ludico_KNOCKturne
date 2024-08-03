@@ -40,20 +40,8 @@ void ASpecialSkillActor::BeginPlay()
 void ASpecialSkillActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (!CanUseSpecialSkill) {
-		return;
-	}
 	
 	SetActorLocation(Peppy->GetActorLocation());
-
-	if (CheckSpecialSkillConditon(DeltaTime) && PeppyController->WasInputKeyJustPressed(EKeys::E))
-	{
-		bool UseSpecialSkill = TryUseSpecialSkill();
-		if (UseSpecialSkill) {
-			SpawnEffect();
-		}
-	}
 }
 
 void ASpecialSkillActor::CreateSpecialSkillData()
@@ -62,11 +50,15 @@ void ASpecialSkillActor::CreateSpecialSkillData()
 	OriginalCoolTime = SpecialSkillData.CoolTime;
 }
 
-bool ASpecialSkillActor::CheckSpecialSkillConditon(float DeltaSeconds)
+bool ASpecialSkillActor::CheckSpecialSkillConditon()
 {
+	if (!CanUseSpecialSkill) {
+		return false;
+	}
+
 	bool IsCostEnough = SpecialSkillData.EnergyCost < ActorManagerSystem->PeppyActor->StatComponent->CurStatData.Energy ? true : false;
 	bool IsCoolTimeEnd = SpecialSkillData.CoolTime == 0;
-	return IsCostEnough && IsCoolTimeEnd; //&& IsSatisfyUseCondition();
+	return IsCostEnough && IsCoolTimeEnd;
 }
 
 void ASpecialSkillActor::ElapseTurn()
@@ -100,6 +92,17 @@ bool ASpecialSkillActor::TryUseSpecialSkill()
 	BattleTableManagerSystem->OperateSkillByIndex(0, TargetActor, *CurSequenceEffectSkillData, nullptr);
 
 	return true;
+}
+
+void ASpecialSkillActor::TryOperateSpecialSkillEffect()
+{
+	if (CheckSpecialSkillConditon())
+	{
+		bool UseSpecialSkill = TryUseSpecialSkill();
+		if (UseSpecialSkill) {
+			SpawnEffect();
+		}
+	}
 }
 
 int32 ASpecialSkillActor::GetCurSpecialSkillCoolTime()
