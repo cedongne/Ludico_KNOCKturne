@@ -77,7 +77,7 @@ DerivedDataCache/*
 Content/Assets
 
 # wwise
-WwiseProject/KNOCKTurne/GeneratedSoundBanks/Windows/*
+WwiseProject/*
 
 #Package
 Package/*
