@@ -102,6 +102,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UUserWidget* BP_DreamFragmentRef;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> BP_SkipClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UUserWidget* BP_Skip;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	ULevelSequence* FadeIn;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	ULevelSequence* Hubworld_Cabin;

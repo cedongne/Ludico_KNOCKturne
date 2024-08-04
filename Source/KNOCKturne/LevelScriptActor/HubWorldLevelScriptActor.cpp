@@ -262,9 +262,19 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 					}
 				}
 
+				if (BP_SkipClass) {
+					BP_Skip = CreateWidget<UUserWidget>(GetWorld(), BP_SkipClass);
+					if (BP_Skip) {
+						BP_Skip->AddToViewport();
+					}
+					else {
+						NTLOG(Warning, TEXT("BP_Skip widget creating is failed!"));
+					}
+				}
+
 				GetWorld()->GetTimerManager().SetTimer(BlinkTimerHandle, FTimerDelegate::CreateLambda([&]()
 					{
-						UWidgetLayoutLibrary::RemoveAllWidgets(this);
+						BP_BlinkRef->RemoveFromParent();
 
 						if (!isSkip) { // 대사 시작 전 스킵 시 프롤로그 시작X
 							StartPrologueDialogueWithEventBinding();
