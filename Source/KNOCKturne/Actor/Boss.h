@@ -21,7 +21,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UBossStatComponent* StatComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Buff)
 	class UBuffComponent* BuffComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UKNOCKturneObjectPool* EnergySpawner;

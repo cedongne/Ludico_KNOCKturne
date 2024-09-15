@@ -30,7 +30,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
 	class UPeppyStatComponent* StatComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Buff)
 	class UBuffComponent* BuffComponent;
 	
 	// Time Threshold to know if it was a short press

@@ -280,6 +280,8 @@ void AHubWorldLevelScriptActor::StartLevelByCondition() {
 							StartPrologueDialogueWithEventBinding();
 						}
 						CreateHubworldHUD();
+						HubworldHUDRef->Button_Diary->SetIsEnabled(false);
+						HubworldHUDRef->Button_Save->SetIsEnabled(false);
 
 						GetWorld()->GetTimerManager().ClearTimer(BlinkTimerHandle);
 					}), 3.44, false);

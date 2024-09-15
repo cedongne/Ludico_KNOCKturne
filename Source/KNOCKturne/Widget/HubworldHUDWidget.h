@@ -26,6 +26,8 @@ class KNOCKTURNE_API UHubworldHUDWidget : public UUserWidget
 	AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
+	
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button_Diary;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -38,8 +40,7 @@ protected:
 	class UImage* Image_DiaryText;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_SaveText;
-	
-public:
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	class UImage* Image_DreamDiary_Updated;
 

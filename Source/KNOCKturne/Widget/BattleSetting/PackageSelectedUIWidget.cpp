@@ -44,10 +44,9 @@ void UPackageSelectedUIWidget::NativeConstruct() {
 void UPackageSelectedUIWidget::NativeTick(const FGeometry& Geometry, float DeltaSeconds) {
 	Super::NativeTick(Geometry, DeltaSeconds);
 
-	if (CurSkillHoverWidget && !IsHovered()) {
-		if (!CurSkillHoverWidget->IsHovered()) {
-			CurSkillHoverWidget->RemoveFromParent();
-		}
+	if (CurSkillHoverWidget && !IsHovered() && !CurSkillHoverWidget->IsHovered()) {
+		CurSkillHoverWidget->RemoveFromParent();
+		CurSkillHoverWidget = NULL;
 	}
 }
 
