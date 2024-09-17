@@ -25,6 +25,7 @@ void UIntroNavMenu2Widget::NativeConstruct()
 	if (Button_Continue) {
 		Button_Continue->OnClicked.AddDynamic(this, &UIntroNavMenu2Widget::ClickContinue);
 	}
+	InactiveContinue();
 }
 
 void UIntroNavMenu2Widget::ClickContinue()
@@ -45,4 +46,11 @@ void UIntroNavMenu2Widget::ClickContinue()
 			UGameplayStatics::OpenLevel(this, "LV_HubWorld");
 			GetWorld()->GetTimerManager().ClearTimer(CreateHUDTimerHandle);
 		}), 2, false);
+}
+
+void UIntroNavMenu2Widget::InactiveContinue()
+{
+	if (!KNOCKturneGameState->IsSaveDataExist()) {
+		Button_Continue->SetIsEnabled(false);
+	}
 }

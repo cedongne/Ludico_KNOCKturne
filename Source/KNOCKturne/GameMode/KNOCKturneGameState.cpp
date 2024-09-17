@@ -76,3 +76,14 @@ void AKNOCKturneGameState::SaveKNOCKturneData()
 	BattleManagerSystem->TotalPlayTime += SaveTime - BattleManagerSystem->StartPlayTime;
 	BattleManagerSystem->StartPlayTime = FDateTime::Now();
 }
+
+bool AKNOCKturneGameState::IsSaveDataExist()
+{
+	UKNOCKturneSaveGame* KNOCKturneSaveGame = Cast<UKNOCKturneSaveGame>(UGameplayStatics::LoadGameFromSlot(SaveSlotName, UserIndex));
+	if (KNOCKturneSaveGame == nullptr) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}

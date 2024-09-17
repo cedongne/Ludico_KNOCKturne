@@ -27,6 +27,8 @@ public:
 	void LoadKNOCKturneData();
 	UFUNCTION(BlueprintCallable)
 	void SaveKNOCKturneData();
+	UFUNCTION(BlueprintCallable)
+	bool IsSaveDataExist();
 
 protected:
 	void HandleBeginPlay() override;

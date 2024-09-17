@@ -16,7 +16,7 @@ class KNOCKTURNE_API UIntroNavMenu2Widget : public UUserWidget
 	virtual void NativePreConstruct();
 	virtual void NativeConstruct();
 
-	AKNOCKturneGameState* KNOCKturneGameState;
+	class AKNOCKturneGameState* KNOCKturneGameState;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
@@ -34,6 +34,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ClickContinue();
+	UFUNCTION(BlueprintCallable)
+	void InactiveContinue();
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayFadeOutAnim();
 };
